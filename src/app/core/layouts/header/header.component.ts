@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { AfterContentChecked, ChangeDetectorRef, Component } from '@angular/core';
 import { PREVIOUS_PAGE_ICON } from '../../constant/icon';
-import { GpHubTranslateService } from '../../services/translate.service';
+import { Language } from '../../enum/language.enum';
+import { TranslateService } from '@ngx-translate/core';
+import { MenuItem } from '../../elements/menu/menu.interface';
 
 /**
  * @title Header Component
@@ -12,17 +14,42 @@ import { GpHubTranslateService } from '../../services/translate.service';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class HeaderComponent {
+export class HeaderComponent implements AfterContentChecked {
   /**
    * @description The previous page icon
    * @type {string}
    */
   protected readonly previousPageIcon = PREVIOUS_PAGE_ICON;
+  
+  /**
+   * @description The languages menu items
+   * @type {MenuItem[]}
+   */
+  protected readonly languagesMenuItems: MenuItem[] = Object.values(Language).map(lang => (
+    {
+      caption$: this.translate.get("global.language."+lang),
+      action: () => {
+        localStorage.setItem("lang", lang);
+        this.translate.use(lang);
+        this.translate.setDefaultLang(lang);
+      }
+    }
+    ));
 
   /**
      * @constructor
-     * @param {GpHubTranslateService} translate The translate service
+     * @param {TranslateService} translate The translate service
+     * @param {ChangeDetectorRef} changeDetectorRef The change detector reference
      */
-  constructor(private readonly translate: GpHubTranslateService) {
-  }
+  constructor(
+    private readonly translate: TranslateService, 
+    private readonly changeDetectorRef: ChangeDetectorRef
+  ) {}
+
+  /**
+   * @inheritdoc
+   */
+  ngAfterContentChecked() {
+    this.changeDetectorRef.detectChanges();
+ }
 }

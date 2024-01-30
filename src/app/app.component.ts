@@ -1,7 +1,5 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { CoreModule } from './core/core.module';
-import { TranslateService } from '@ngx-translate/core';
+import { Component } from "@angular/core";
+import { TranslateService } from "@ngx-translate/core";
 
 /**
  * @title Application Component
@@ -9,11 +7,14 @@ import { TranslateService } from '@ngx-translate/core';
  * @description This is the basic component of the application
  */
 @Component({
-    selector: 'app-root',
-    standalone: true,
-    templateUrl: './app.component.html',
-    styleUrl: './app.component.scss',
-    imports: [CoreModule, RouterOutlet]
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {
+  constructor(private readonly translate: TranslateService) {
+    const langAttribute = document.documentElement.lang || navigator.language;
+    console.log(localStorage.getItem("lang") || langAttribute)
+    translate.use(localStorage.getItem("lang") || langAttribute);
+  }
 }

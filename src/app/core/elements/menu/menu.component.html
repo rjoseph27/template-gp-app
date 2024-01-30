@@ -1,0 +1,5 @@
+<mat-menu #menu="matMenu">
+    <button *ngFor="let menuItem of menuItems" mat-menu-item (click)="menuItem.action()">
+        <span>{{ menuItem.caption$ | async }}</span>
+    </button>
+</mat-menu>

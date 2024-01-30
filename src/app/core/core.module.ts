@@ -4,16 +4,17 @@ import { LAYOUTS_COMPONENTS } from './layouts/components';
 import { ELEMENTS_COMPONENTS } from './elements/components';
 import { MatIconModule } from '@angular/material/icon'; 
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { GpHubTranslateService } from './services/translate.service';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
 
 /**
  * @constant
  * @type {any[]}
  * @description The list of all the core components.
  */
-const lists = [...LAYOUTS_COMPONENTS,...ELEMENTS_COMPONENTS]
+const lists = [...LAYOUTS_COMPONENTS, ...ELEMENTS_COMPONENTS]
 
 /**
  * @module CoreModule
@@ -25,19 +26,27 @@ const lists = [...LAYOUTS_COMPONENTS,...ELEMENTS_COMPONENTS]
     MatIconModule,
     CommonModule,
     HttpClientModule,
-        TranslateModule.forRoot({
-            loader: {
-                provide: TranslateLoader,
-                useFactory: HttpLoaderFactory,
-                deps: [HttpClient]
-            }
-        })
+    MatButtonModule,
+    MatMenuModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
   ],
-  providers: [GpHubTranslateService],
+  providers: [TranslateService],
   exports: [...lists]
 })
 export class CoreModule { }
 
+/**
+ * @function HttpLoaderFactory
+ * @description Factory function for creating a new instance of TranslateHttpLoader.
+ * @param {HttpClient} http - The HttpClient instance to be used by the TranslateHttpLoader.
+ * @returns {TranslateHttpLoader} A new instance of TranslateHttpLoader.
+ */
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
 }
