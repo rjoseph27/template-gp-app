@@ -1,0 +1,30 @@
+<div class="content">
+    <div>
+    <div class="title">
+        <gh-title [title]="title"></gh-title>
+    </div>
+    <div class="input-email input-field">
+        <gh-text-field 
+            [label]="'global.login.email.label' | translate" 
+            [placeholder]="'global.login.email.placeholder' | translate"
+            [name]="'email'"
+        ></gh-text-field>
+    </div>
+    <div class="input-password input-field">
+        <gh-password-field 
+            [label]="'global.login.password.label' | translate" 
+            [placeholder]="'global.login.password.placeholder' | translate"
+            [name]="'password'"
+        ></gh-password-field>
+    </div>
+    <div class="forgot">
+        <span>{{ 'global.login.forgot' | translate }}</span>
+    </div>
+    <div class="login">
+        <button class="gp-button">{{ 'global.login.login' | translate }}</button>
+    </div>
+    <div class="register">
+        <span>{{ 'global.login.login' | translate }}</span>
+    </div>
+    </div>
+</div>

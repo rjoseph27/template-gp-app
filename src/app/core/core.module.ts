@@ -8,6 +8,8 @@ import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-transla
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 /**
  * @constant
@@ -28,6 +30,8 @@ const lists = [...LAYOUTS_COMPONENTS, ...ELEMENTS_COMPONENTS]
     HttpClientModule,
     MatButtonModule,
     MatMenuModule,
+    MatFormFieldModule, 
+    MatInputModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

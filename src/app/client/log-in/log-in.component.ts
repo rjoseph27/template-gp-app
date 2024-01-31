@@ -1,4 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, } from '@angular/core';
+
+/**
+ * @constant
+ * @description The title of the application
+ */
+const ACCOUNT_PAGE_TITLE = 'account';
 
 /**
  * @title Log In Component
@@ -8,6 +14,12 @@ import { Component, Input } from '@angular/core';
 @Component({
   selector: 'client-log-in',
   templateUrl: './log-in.component.html',
+  styleUrl: './log-in.component.scss'
 })
 export class ClientLogInComponent {
+  /**
+   * @description The title of the page
+   * @type {string}
+   */
+  protected readonly pageTitle = ACCOUNT_PAGE_TITLE;
 }

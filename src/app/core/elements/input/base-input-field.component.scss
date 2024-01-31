@@ -1,0 +1,19 @@
+@import '../../../../styles';
+
+:host {
+    width:100%;
+}
+
+.input {
+    border:2px solid #{$gray-color};
+    padding:0.7em;
+    border-radius: 5px;
+    font-size:1em;
+    width: 100%;
+    margin: 0;
+}
+
+.section label {
+    color: $secondary-color;
+    font-weight: $semi-bold;
+}

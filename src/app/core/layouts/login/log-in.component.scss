@@ -1,0 +1,38 @@
+@import '../../../../styles.scss';
+
+.content {
+    display: flex;
+    justify-content: center;
+    margin-top: 5em;
+    height: 70%;;
+}
+
+.title {
+    margin-bottom: 4em;
+}
+
+.input-field, .register {
+    display: flex;
+    justify-content: center;
+}
+
+.input-email, .login {
+    margin:2em 0;
+}
+
+.forgot {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 0.5em;
+}
+
+.login {
+    button {
+        width: 100%;
+    }
+}
+
+.register, .forgot {
+    color: $secondary-color;
+    font-weight: $semi-bold;
+}

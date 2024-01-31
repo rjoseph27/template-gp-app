@@ -1,8 +1,9 @@
 import { AfterContentChecked, ChangeDetectorRef, Component } from '@angular/core';
-import { PREVIOUS_PAGE_ICON } from '../../constant/icon';
+import { PREVIOUS_PAGE_ICON } from '../../constants/icon';
 import { Language } from '../../enum/language.enum';
 import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from '../../elements/menu/menu.interface';
+import { APPLICATION_NAME } from '../../constants/application';
 
 /**
  * @title Header Component
@@ -20,6 +21,12 @@ export class GhHeaderComponent implements AfterContentChecked {
    * @type {string}
    */
   protected readonly previousPageIcon = PREVIOUS_PAGE_ICON;
+
+  /**
+   * @description The application name
+   * @type {string}
+   */
+  protected readonly applicationName = APPLICATION_NAME;
   
   /**
    * @description The languages menu items

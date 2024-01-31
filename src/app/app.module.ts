@@ -4,6 +4,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations"; 
 import { CoreModule } from "./core/core.module";
 import { AppRoutingModule } from "./app-routing.module";
+import { ClientModule } from "./client/client.module";
 
 /**
  * @module AppModule
@@ -15,7 +16,8 @@ import { AppRoutingModule } from "./app-routing.module";
             AppRoutingModule,
             BrowserModule,
             BrowserAnimationsModule,
-            CoreModule 
+            CoreModule,
+            ClientModule
         ],
         providers: [],
         bootstrap: [AppComponent]
