@@ -10,11 +10,11 @@ import { MenuItem } from '../../elements/menu/menu.interface';
  * @description The header component for the application
  */
 @Component({
-  selector: 'app-header',
+  selector: 'gh-header',
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class HeaderComponent implements AfterContentChecked {
+export class GhHeaderComponent implements AfterContentChecked {
   /**
    * @description The previous page icon
    * @type {string}

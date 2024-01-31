@@ -1,11 +1,11 @@
 <div class="content">
-    <div><gp-hub-icon [name]="previousPageIcon"></gp-hub-icon></div>
+    <div><gh-icon [name]="previousPageIcon"></gh-icon></div>
     <div class="gp-hub-font">GP HUB</div>
     <div class="language_button">
         <button mat-button [matMenuTriggerFor]="menu.matMenu">{{ "global.language.title" | translate }}</button>
     </div>
 </div>
 
-<gp-hub-menu #menu [menuItems]="languagesMenuItems"></gp-hub-menu>
+<gh-menu #menu [menuItems]="languagesMenuItems"></gh-menu>
 
 

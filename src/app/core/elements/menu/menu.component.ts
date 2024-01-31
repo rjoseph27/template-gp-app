@@ -4,15 +4,15 @@ import { MenuItem } from './menu.interface';
 
 /**
  * @title Menu Component
- * @component GpHubMenuComponent 
+ * @component GhMenuComponent 
  * @description The menu component that will be use throughout the application
  */
 @Component({
-  selector: 'gp-hub-menu',
+  selector: 'gh-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss']
 })
-export class GpHubMenuComponent {
+export class GhMenuComponent {
   /**
    * @description The reference to the menu.
    * @type {MatMenu}

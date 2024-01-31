@@ -14,7 +14,6 @@ import { TranslateService } from "@ngx-translate/core";
 export class AppComponent {
   constructor(private readonly translate: TranslateService) {
     const langAttribute = document.documentElement.lang || navigator.language;
-    console.log(localStorage.getItem("lang") || langAttribute)
     translate.use(localStorage.getItem("lang") || langAttribute);
   }
 }

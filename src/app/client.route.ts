@@ -1,0 +1,19 @@
+import { GhRoute } from "./core/objects/route";
+
+/**
+ * @class ClientRoutes
+ * @description The routes for the client module
+ */
+export class ClientRoutes {
+    /**
+     * @description The route to enter the client module
+     * @type {GhRoute}
+     */
+    static readonly client: GhRoute = new GhRoute('client');
+
+    /**
+     * @description The login route
+     * @type {GhRoute}
+     */
+    static readonly login: GhRoute = new GhRoute('login', ClientRoutes.client);
+}
