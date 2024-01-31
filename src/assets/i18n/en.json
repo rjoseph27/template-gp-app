@@ -4,6 +4,18 @@
             "title":"Language",
             "en":"English",
             "fr":"Français"
+        },
+        "login": {
+            "email": {
+                "label": "Email",
+                "placeholder": "Enter your email"
+            },
+            "password": {
+                "label": "Password",
+                "placeholder": "Enter your password"
+            },
+            "forgot": "Forgot your password?",
+            "login": "Access my Account"
         }
     }
 }
