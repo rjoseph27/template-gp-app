@@ -17,3 +17,19 @@
     color: $secondary-color;
     font-weight: $semi-bold;
 }
+
+.error-input {
+    border-color: #{$error-color};
+}
+
+.hide-input {
+    visibility: hidden;
+}
+
+.error-message {
+    color: #{$error-color};
+    font-size: 0.8em;
+    margin: 0;
+    padding: 0;
+    margin-top: 0.5em;
+}

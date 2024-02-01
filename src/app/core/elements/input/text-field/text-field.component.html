@@ -2,5 +2,15 @@
     <label [for]="name">{{ label }}</label>
 </div>
 <div class="section">
-    <input type="text" [id]="name" class="input" [placeholder]="placeholder">
+    <input 
+        type="text" 
+        [id]="name" 
+        class="input"
+        [ngClass]="{'error-input': errorMessage}" 
+        [placeholder]="placeholder" 
+        [ngModel]="value"
+        [maxlength]="maxLength"
+        (ngModelChange)="valueChange.emit($event)"
+    >
+    <div class="error-message" [ngClass]="{'hide-input': !errorMessage}" >{{ errorMessage | translate }}</div>
 </div>

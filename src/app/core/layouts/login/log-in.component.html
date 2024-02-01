@@ -1,30 +1,42 @@
+<form [formGroup]="loginForm" (ngSubmit)="login()">
 <div class="content">
     <div>
     <div class="title">
         <gh-title [title]="title"></gh-title>
     </div>
     <div class="input-email input-field">
-        <gh-text-field 
+        <gh-text-field
             [label]="'global.login.email.label' | translate" 
             [placeholder]="'global.login.email.placeholder' | translate"
-            [name]="'email'"
+            [name]="emailField"
+            [value]="loginForm.get(emailField).value"
+            (valueChange)="loginForm.get(emailField).setValue($event)"
+            [errorMessage]="emailErrorMessage$ | async"
         ></gh-text-field>
     </div>
     <div class="input-password input-field">
-        <gh-password-field 
+        <gh-password-field
             [label]="'global.login.password.label' | translate" 
             [placeholder]="'global.login.password.placeholder' | translate"
-            [name]="'password'"
+            [name]="passwordField"
+            [value]="loginForm.get(passwordField).value"
+            (valueChange)="loginForm.get(passwordField).setValue($event)"
+            [errorMessage]="passwordErrorMessage$ | async"
         ></gh-password-field>
     </div>
     <div class="forgot">
         <span>{{ 'global.login.forgot' | translate }}</span>
     </div>
     <div class="login">
-        <button class="gp-button">{{ 'global.login.login' | translate }}</button>
+        <button 
+            type="submit" 
+            class="gp-button" 
+            [disabled]="!loginForm.valid"
+        >{{ 'global.login.login' | translate }}</button>
     </div>
-    <div class="register">
-        <span>{{ 'global.login.login' | translate }}</span>
+    <div *ngIf="canRegister" class="register">
+        <span>{{ 'global.login.register' | translate }}</span>
     </div>
     </div>
 </div>
+</form>
