@@ -19,11 +19,11 @@
             "register": "Create a new account",
             "errors": {
                 "email": {
-                    "required": "Email is required",
-                    "email": "Email is not valid"
+                    "required": "Enter your email",
+                    "email": "This is not a valid email"
                 },
                 "password": {
-                    "required": "Password is required"
+                    "required": "Enter your password"
                 }
             }
         }
