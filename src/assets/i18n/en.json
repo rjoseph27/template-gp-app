@@ -15,7 +15,17 @@
                 "placeholder": "Enter your password"
             },
             "forgot": "Forgot your password?",
-            "login": "Access my Account"
+            "login": "Access my Account",
+            "register": "Create a new account",
+            "errors": {
+                "email": {
+                    "required": "Email is required",
+                    "email": "Email is not valid"
+                },
+                "password": {
+                    "required": "Password is required"
+                }
+            }
         }
     }
 }
