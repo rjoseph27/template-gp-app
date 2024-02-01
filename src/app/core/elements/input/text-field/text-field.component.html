@@ -3,14 +3,18 @@
 </div>
 <div class="section">
     <input 
+        #input="ngModel"
         type="text" 
-        [id]="name" 
+        [id]="name"
         class="input"
-        [ngClass]="{'error-input': errorMessage}" 
+        [ngClass]="{'error-input': errorMessage && (input.dirty || input.touched)}" 
         [placeholder]="placeholder" 
         [ngModel]="value"
         [maxlength]="maxLength"
         (ngModelChange)="valueChange.emit($event)"
     >
-    <div class="error-message" [ngClass]="{'hide-input': !errorMessage}" >{{ errorMessage | translate }}</div>
+    <div
+        [ngClass]="{'hide-error': !errorMessage && !(input.dirty || input.touched)}" 
+        class="error-message" 
+        >{{ errorMessage | translate }}</div>
 </div>

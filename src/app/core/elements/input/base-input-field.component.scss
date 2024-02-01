@@ -22,12 +22,13 @@
     border-color: #{$error-color};
 }
 
-.hide-input {
+.hide-error {
     visibility: hidden;
 }
 
 .error-message {
     color: #{$error-color};
+    min-height: 2em;
     font-size: 0.8em;
     margin: 0;
     padding: 0;
