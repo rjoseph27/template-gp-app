@@ -1,4 +1,4 @@
-import { GhRoute } from "./core/objects/route";
+import { GhRoute } from "./misc/classes/route";
 
 /**
  * @class ClientRoutes

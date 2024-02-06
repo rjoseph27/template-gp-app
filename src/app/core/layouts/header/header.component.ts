@@ -1,9 +1,9 @@
 import { AfterContentChecked, ChangeDetectorRef, Component } from '@angular/core';
-import { PREVIOUS_PAGE_ICON } from '../../constants/icon';
-import { Language } from '../../enum/language.enum';
+import { PREVIOUS_PAGE_ICON } from '../../../misc/constants/icon';
+import { Language } from '../../../misc/enums/language.enum';
 import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from '../../elements/menu/menu.interface';
-import { APPLICATION_NAME } from '../../constants/application';
+import { APPLICATION_NAME } from '../../../misc/constants/application';
 
 /**
  * @title Header Component

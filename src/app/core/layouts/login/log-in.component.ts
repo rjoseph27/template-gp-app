@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { APPLICATION_NAME } from '../../constants/application';
+import { APPLICATION_NAME } from '../../../misc/constants/application';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { tap } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
-import { EMAIL_VALIDATION, REQUIRED_VALIDATION } from '../../constants/validations';
+import { EMAIL_VALIDATION, REQUIRED_VALIDATION } from '../../../misc/constants/validations';
 
 /**
  * @title Login Component

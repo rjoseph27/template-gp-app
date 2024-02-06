@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { BaseInputFieldComponent } from '../base-input-field.component';
-import { HIDE_PASSWORD, SHOW_PASSWORD } from '../../../constants/icon';
+import { HIDE_PASSWORD, SHOW_PASSWORD } from '../../../../misc/constants/icon';
 import { BehaviorSubject } from 'rxjs';
 
 /**
