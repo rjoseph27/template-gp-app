@@ -32,7 +32,7 @@ export abstract class BaseServiceApi {
      * @param body  The body of the request
      * @returns an observable of the response
      */
-    protected postRequest<T>(action: string, body: T): Observable<T> {
+    protected postRequest<T>(action: string, body: any): Observable<T> {
         return this.httpClient.post<T>(`${this.baseUrl}/${this.apiName}/${action}`, body);
     }
 }

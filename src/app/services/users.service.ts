@@ -1,5 +1,4 @@
 import { Injectable, inject } from '@angular/core';
-import * as bcrypt from 'bcryptjs'
 import { Credentials, UsersServiceApi } from '../api/users.service.api';
 
 
@@ -16,9 +15,6 @@ export class UsersService {
   * @returns {void}
   */
   login(credentials: Credentials) {
-    bcrypt.hash(credentials.password, 10, async (err, hash) => {
-      const test = await this.usersServiceApi.connect({email: credentials.email, password: hash});
-      console.log(test)
-    });
+    this.usersServiceApi.connect({email: credentials.email, password: credentials.password}).then(x => localStorage.setItem('token', x.token));
    }
 }
