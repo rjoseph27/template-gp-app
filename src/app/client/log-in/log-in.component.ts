@@ -1,6 +1,7 @@
-import { Component, } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { BehaviorSubject } from 'rxjs';
+import { Component, inject, } from '@angular/core';
+import { UsersService } from '../../services/users.service';
+import { Credentials } from '../../api/users.service.api';
+
 
 /**
  * @constant
@@ -24,4 +25,18 @@ export class ClientLogInComponent {
    * @type {string}
    */
   protected readonly pageTitle = ACCOUNT_PAGE_TITLE;
+
+  /**
+   * @description The users service
+   * @type {UsersService}
+   */
+  private readonly usersService: UsersService = inject(UsersService);
+
+  /**
+   * @description Logs the user in
+   * @param credentials The credentials of the user
+   */
+  protected login(credentials: Credentials) {
+    this.usersService.login(credentials);
+  }
 }

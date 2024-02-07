@@ -1,4 +1,4 @@
-import { AfterContentChecked, ChangeDetectorRef, Component } from '@angular/core';
+import { AfterContentChecked, ChangeDetectorRef, Component, inject } from '@angular/core';
 import { PREVIOUS_PAGE_ICON } from '../../../misc/constants/icon';
 import { Language } from '../../../misc/enums/language.enum';
 import { TranslateService } from '@ngx-translate/core';
@@ -16,6 +16,18 @@ import { APPLICATION_NAME } from '../../../misc/constants/application';
   styleUrl: './header.component.scss'
 })
 export class GhHeaderComponent implements AfterContentChecked {
+  /**
+   * @description The translate service
+   * @type {TranslateService}
+   */
+  private readonly translate: TranslateService = inject(TranslateService)
+
+  /**
+   * @description The change detector reference
+   * @type {ChangeDetectorRef}
+   */
+  private readonly changeDetectorRef: ChangeDetectorRef = inject(ChangeDetectorRef)
+
   /**
    * @description The previous page icon
    * @type {string}
@@ -42,16 +54,6 @@ export class GhHeaderComponent implements AfterContentChecked {
       }
     }
     ));
-
-  /**
-     * @constructor
-     * @param {TranslateService} translate The translate service
-     * @param {ChangeDetectorRef} changeDetectorRef The change detector reference
-     */
-  constructor(
-    private readonly translate: TranslateService, 
-    private readonly changeDetectorRef: ChangeDetectorRef
-  ) {}
 
   /**
    * @inheritdoc

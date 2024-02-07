@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { tap } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 import { EMAIL_VALIDATION, REQUIRED_VALIDATION } from '../../../misc/constants/validations';
+import { Credentials } from '../../../api/users.service.api';
 
 /**
  * @title Login Component
@@ -69,6 +70,12 @@ export class GhLoginComponent implements OnInit{
    * @type {Observable<string>}
    */
   protected readonly passwordErrorMessage$ = this._passwordErrorMessage$.asObservable();
+
+  /**
+   * @description The credentials event emitter
+   * @type {EventEmitter<Credentials>}
+   */
+  @Output() credentials: EventEmitter<Credentials> = new EventEmitter<Credentials>();
   
   /**
    * @description The login form
@@ -115,5 +122,7 @@ export class GhLoginComponent implements OnInit{
    * @description The login event emitter
    * @type {EventEmitter<void>}
    */
-  login(): void {}
+  protected login(): void {
+    this.credentials.emit(this.loginForm.value);
+  }
 }
