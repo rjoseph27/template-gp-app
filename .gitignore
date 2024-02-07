@@ -8,6 +8,7 @@
 
 # Node
 /node_modules
+/src/.git
 npm-debug.log
 yarn-error.log
 

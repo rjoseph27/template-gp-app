@@ -1,1 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
+$primary-color: #5996f7;
+$secondary-color: darken($primary-color, 20%);
+$gray-color: #b0b0b0;
+$error-color: #ff0000;
+$semi-bold: 500;
+$bold: 700;
+
+@font-face {
+    font-family: 'gp-hub-font';
+    src: url('./assets/font/rantera.otf') format('opentype'),
+}
+
+.gp-button {
+    background-color: darken($primary-color, 30%);;
+    color: #fff;
+    border-width: 0px;
+    font-size: 1em;
+    padding:0.7em;
+    border-radius:25px;
+}
+
+.gp-hub-font {
+    font-family: 'gp-hub-font', sans-serif;
+}
+
+body {
+    background-color: $primary-color;
+    margin: 0;
+    font-family: helvetica;
+}
+
+html, body { height: 100%; }
+
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
