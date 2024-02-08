@@ -1,3 +1,5 @@
+import { ButtonLoadingDirective } from "../../misc/directive/button-loading.directive";
+import { ButtonLoadingComponent } from "./button-loading/button-loading.component";
 import { GhIconComponent } from "./icon/icon.component";
 import { GhPasswordFieldComponent } from "./input/password-field/password-field.component";
 import { GhTextFieldComponent } from "./input/text-field/text-field.component";
@@ -14,5 +16,7 @@ export const ELEMENTS_COMPONENTS = [
     GhMenuComponent, 
     GhTitleComponent, 
     GhTextFieldComponent,
-    GhPasswordFieldComponent
+    GhPasswordFieldComponent,
+    ButtonLoadingComponent,
+    ButtonLoadingDirective
 ]

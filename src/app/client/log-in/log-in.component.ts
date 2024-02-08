@@ -1,6 +1,8 @@
-import { Component, inject, } from '@angular/core';
+import { Component, OnInit, inject, } from '@angular/core';
 import { UsersService } from '../../services/users.service';
 import { Credentials } from '../../api/users.service.api';
+import { CurrentFormService } from '../../services/current-form.service';
+import { tap } from 'rxjs/operators';
 
 /**
  * @constant
@@ -16,9 +18,10 @@ const ACCOUNT_PAGE_TITLE = 'account';
 @Component({
   selector: 'client-log-in',
   templateUrl: './log-in.component.html',
-  styleUrl: './log-in.component.scss'
+  styleUrl: './log-in.component.scss',
+  providers: [CurrentFormService]
 })
-export class ClientLogInComponent {
+export class ClientLogInComponent implements OnInit {
   /**
    * @description The title of the page
    * @type {string}
@@ -26,16 +29,28 @@ export class ClientLogInComponent {
   protected readonly pageTitle = ACCOUNT_PAGE_TITLE;
 
   /**
+   * @description The current form service
+   * @type {CurrentFormService}
+   */
+  private readonly currentFormService: CurrentFormService = inject(CurrentFormService);
+
+  /**
    * @description The users service
    * @type {UsersService}
    */
   private readonly usersService: UsersService = inject(UsersService);
 
-  /**
-   * @description Logs the user in
-   * @param credentials The credentials of the user
-   */
-  protected login(credentials: Credentials) {
-    this.usersService.login(credentials);
+  /** @inheritdoc */
+  ngOnInit(): void {
+    this.currentFormService.submitting$.pipe(
+      tap((loading) => {
+        if(loading) {
+          this.usersService.login(this.currentFormService.currentForm.value).then(() => {
+            this.currentFormService.submitting = false;
+          });
+        }
+
+      })
+    ).subscribe()
   }
 }

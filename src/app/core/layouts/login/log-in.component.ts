@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
 import { APPLICATION_NAME } from '../../../misc/constants/application';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { tap } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 import { EMAIL_VALIDATION, REQUIRED_VALIDATION } from '../../../misc/constants/validations';
-import { Credentials } from '../../../api/users.service.api';
+import { ConnectStatus, Credentials } from '../../../api/users.service.api';
+import { CurrentFormService } from '../../../services/current-form.service';
 
 /**
  * @title Login Component
@@ -22,6 +23,18 @@ export class GhLoginComponent implements OnInit{
    * @type {string}
    */
   @Input() title: string;
+
+  /**
+   * @description The current form service
+   * @type {CurrentFormService}
+   */
+  private readonly currentFormService: CurrentFormService = inject(CurrentFormService);
+
+  /**
+   * @description An observable of the loading state
+   * @type {Observable<boolean>}
+   */
+  protected readonly loading$ = this.currentFormService.submitting$;
 
   /**
    * @description a boolean value to determine if the user can register
@@ -70,26 +83,24 @@ export class GhLoginComponent implements OnInit{
    * @type {Observable<string>}
    */
   protected readonly passwordErrorMessage$ = this._passwordErrorMessage$.asObservable();
-
-  /**
-   * @description The credentials event emitter
-   * @type {EventEmitter<Credentials>}
-   */
-  @Output() credentials: EventEmitter<Credentials> = new EventEmitter<Credentials>();
   
   /**
    * @description The login form
    * @type {FormGroup}
    */
-  protected readonly loginForm: FormGroup = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required]),
-  });
+  protected get loginForm(): FormGroup {
+    return this.currentFormService.currentForm;
+  }
 
   /**
    * @inheritdoc
    */
   ngOnInit() {
+    this.currentFormService.currentForm = new FormGroup({
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required]),
+    });
+
     this.loginForm.valueChanges.pipe(
       tap(() => {
         if(this.loginForm.get(this.emailField).errors?.[EMAIL_VALIDATION])
@@ -123,10 +134,8 @@ export class GhLoginComponent implements OnInit{
    * @type {EventEmitter<void>}
    */
   protected login(): void {
-    this.credentials.emit(this.loginForm.value);
     this.loginForm.get(this.passwordField).reset();
-    this.loginForm.get(this.passwordField).markAsPristine();
-    this.loginForm.get(this.passwordField).markAsUntouched();
     this._passwordErrorMessage$.next(undefined);
+    this.currentFormService.submitting = true;
   }
 }

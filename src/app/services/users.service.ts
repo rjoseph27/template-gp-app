@@ -23,21 +23,22 @@ export class UsersService {
 
   /** 
   * @description Logs the user in
-  * @returns {void}
+  * @returns {Promise<boolean>}
   */
-  login(credentials: Credentials) {
-    this.usersServiceApi.connect({email: credentials.email, password: credentials.password}).then(msg => {
+  login(credentials: Credentials): Promise<boolean> {
+    return this.usersServiceApi.connect({email: credentials.email, password: credentials.password}).then(msg => {
       if(msg.message === ConnectStatus.LOGIN_SUCCESSFUL) {
         localStorage.setItem('token', msg.token);
         // TODO redirect to the main page
       }
-      
+      return true;
     }).catch((e) => {
       if(e.error.message === ConnectStatus.WRONG_CREDENTIALS) {
         this.notificationService.errorNotification('global.login.errors.login.wrongCredentials');
       } else {
         this.notificationService.errorNotification('global.login.errors.login.internalServerError');
       }
+      return false;
     });
    }
 }

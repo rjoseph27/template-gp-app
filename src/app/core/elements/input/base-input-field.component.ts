@@ -47,5 +47,5 @@ export abstract class BaseInputFieldComponent {
      * @description An event emitter that emits the value of the input field
      * @type {string}
      */
-    @Output() valueChange = new EventEmitter<string>();    
+    @Output() valueChange = new EventEmitter<string>();
 }

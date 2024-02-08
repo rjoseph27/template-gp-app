@@ -28,7 +28,8 @@
         <span>{{ 'global.login.forgot' | translate }}</span>
     </div>
     <div class="login">
-        <button 
+        <button
+            [buttonLoading]="loading$ | async" 
             type="submit" 
             class="gp-button" 
             [disabled]="!loginForm.valid"
