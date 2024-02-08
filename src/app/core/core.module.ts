@@ -11,6 +11,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 /**
  * @constant
@@ -35,6 +36,7 @@ const lists = [...LAYOUTS_COMPONENTS, ...ELEMENTS_COMPONENTS]
     MatInputModule,
     ReactiveFormsModule,
     FormsModule,
+    MatSnackBarModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

@@ -39,6 +39,27 @@ export interface ConnectResponse {
 }
 
 /**
+ * @enum
+ * @description The status of the connection
+ */
+export enum ConnectStatus {
+    /**
+     * @description The wrong credentials has been inserted.
+     */
+    WRONG_CREDENTIALS = 'WRONG_CREDENTIALS',
+
+    /**
+     * @description The right credentials has been inserted.
+     */
+    LOGIN_SUCCESSFUL = 'LOGIN_SUCCESSFUL',
+
+    /**
+     * @description Internal server error.
+     */
+    INTERNAL_SERVER_ERROR = 'INTERNAL_SERVER_ERROR'
+}
+
+/**
  * @class UsersServiceApi
  * @description The users service api
  */
@@ -50,7 +71,7 @@ export class UsersServiceApi extends BaseServiceApi {
     /**
      * @description A method that log in the user.
      * @param credentials The credentials of the user
-     * @returns TODO return a jwt token
+     * @returns A promise of the response
      */
     connect(credentials: Credentials): Promise<ConnectResponse> {
         return firstValue(this.postRequest<ConnectResponse>('login', credentials));

@@ -2,7 +2,6 @@ import { Component, inject, } from '@angular/core';
 import { UsersService } from '../../services/users.service';
 import { Credentials } from '../../api/users.service.api';
 
-
 /**
  * @constant
  * @description The title of the application

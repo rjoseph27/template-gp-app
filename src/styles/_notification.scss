@@ -1,0 +1,22 @@
+@import '_variables';
+
+@mixin error-notification-color {
+    color: $error-color !important;
+  }
+
+::ng-deep mat-snack-bar-container{
+    top: 50px !important;
+    position: relative !important;
+}
+
+::ng-deep .error-notification .mdc-snackbar__surface {
+    background-color:$secondary-error-color !important;
+}
+
+::ng-deep .error-notification .mat-mdc-button {
+    @include error-notification-color;
+}
+
+::ng-deep .error-notification .mdc-snackbar__label {
+    @include error-notification-color;
+}

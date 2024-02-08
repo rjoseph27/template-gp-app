@@ -8,22 +8,23 @@ import { ClientModule } from "./client/client.module";
 import { UsersService } from "./services/users.service";
 import { HttpClientModule } from "@angular/common/http";
 import { UsersServiceApi } from "./api/users.service.api";
+import { NotificationService } from "./services/notification.service";
 
 /**
  * @module AppModule
  * @description This is the root module of the application
  */
 @NgModule({
-        declarations: [AppComponent],
-        imports: [
-            AppRoutingModule,
-            BrowserModule,
-            BrowserAnimationsModule,
-            HttpClientModule,
-            CoreModule,
-            ClientModule
-        ],
-        providers: [UsersService, UsersServiceApi],
-        bootstrap: [AppComponent]
-    })
-    export class AppModule {}
+    declarations: [AppComponent],
+    imports: [
+        AppRoutingModule,
+        BrowserModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        CoreModule,
+        ClientModule
+    ],
+    providers: [UsersService, UsersServiceApi, NotificationService],
+    bootstrap: [AppComponent]
+})
+export class AppModule {}

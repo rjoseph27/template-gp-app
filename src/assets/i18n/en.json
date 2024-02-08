@@ -24,6 +24,10 @@
                 },
                 "password": {
                     "required": "Enter your password"
+                },
+                "login": {
+                    "wrongCredentials": "Wrong email or password",
+                    "internalServerError": "An error occured, please try again later"
                 }
             }
         }

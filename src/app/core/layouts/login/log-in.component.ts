@@ -124,5 +124,9 @@ export class GhLoginComponent implements OnInit{
    */
   protected login(): void {
     this.credentials.emit(this.loginForm.value);
+    this.loginForm.get(this.passwordField).reset();
+    this.loginForm.get(this.passwordField).markAsPristine();
+    this.loginForm.get(this.passwordField).markAsUntouched();
+    this._passwordErrorMessage$.next(undefined);
   }
 }
