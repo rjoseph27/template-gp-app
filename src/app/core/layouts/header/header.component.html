@@ -1,6 +1,15 @@
 <div class="content">
-    <div><gh-icon [name]="previousPageIcon"></gh-icon></div>
-    <div class="gp-hub-font"> {{ applicationName }}</div>
+    <div>
+        <a
+        *ngIf="!(hidePreviousPageButton())" 
+        (click)="navigateToPreviousPage()"
+        >
+            <gh-icon [name]="previousPageIcon"></gh-icon>
+        </a>
+    </div>
+    <div class="gp-hub-font"> 
+        <a (click)="redirectToMainPage()">{{ applicationName }}</a>
+    </div>
     <div class="language_button">
         <button mat-button [matMenuTriggerFor]="menu.matMenu">{{ "global.language.title" | translate }}</button>
     </div>

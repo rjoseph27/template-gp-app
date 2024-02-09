@@ -1,4 +1,4 @@
-@import '../../../../styles.scss';
+@import '../../../../../styles.scss';
 
 .content {
     display: flex;
@@ -35,4 +35,5 @@
 .register, .forgot {
     color: $secondary-color;
     font-weight: $semi-bold;
+    cursor:pointer;
 }

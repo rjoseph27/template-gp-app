@@ -1,0 +1,43 @@
+<form>
+<div class="content">
+    <div>
+    <div class="title">
+        <gh-title [title]="title"></gh-title>
+    </div>
+    <div>
+        <div class="sub-title">{{ 'global.signup.credentials.title' | translate }}</div>
+        <div class="section">
+            <gh-text-field
+            [label]="'global.credentials.email.label' | translate" 
+            [placeholder]="'global.credentials.email.placeholder' | translate"
+            [name]="emailField"
+            [value]="signupForm.get(emailField).value"
+            (valueChange)="signupForm.get(emailField).setValue($event)"
+            [errorMessage]="emailErrorMessage$ | async"
+        ></gh-text-field>
+        </div>
+        <div class="section">
+            <gh-password-field
+            [label]="'global.credentials.password.label' | translate" 
+            [placeholder]="'global.credentials.password.placeholder' | translate"
+            [name]="passwordField"
+            [value]="signupForm.get(passwordField).value"
+            (valueChange)="signupForm.get(passwordField).setValue($event)"
+            [errorMessage]="passwordErrorMessage$ | async"
+        ></gh-password-field>
+        </div>
+        <div class="section">
+            <gh-password-field
+            [label]="'global.credentials.confirmPassword.label' | translate" 
+            [placeholder]="'global.credentials.confirmPassword.placeholder' | translate"
+            [name]="confirmPasswordField"
+            [value]="signupForm.get(confirmPasswordField).value"
+            (valueChange)="signupForm.get(confirmPasswordField).setValue($event)"
+            [errorMessage]="confirmPasswordErrorMessage$ | async"
+            [showRequirements]="true"
+        ></gh-password-field>
+        </div>
+    </div>
+</div>
+</div>
+</form>

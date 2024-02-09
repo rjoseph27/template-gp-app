@@ -4,6 +4,7 @@ import { Language } from '../../../misc/enums/language.enum';
 import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from '../../elements/menu/menu.interface';
 import { APPLICATION_NAME } from '../../../misc/constants/application';
+import { NavigationService } from '../../../services/navigation.service';
 
 /**
  * @title Header Component
@@ -20,8 +21,32 @@ export class GhHeaderComponent implements AfterContentChecked {
    * @description The translate service
    * @type {TranslateService}
    */
-  private readonly translate: TranslateService = inject(TranslateService)
+  private readonly translateService: TranslateService = inject(TranslateService)
 
+  /**
+   * @description The navigation service
+   * @type {NavigationService}
+   */
+  private readonly navigationService: NavigationService = inject(NavigationService);
+
+  /**
+   * @description Navigates to the previous page
+   * @returns {void}
+   */
+  protected readonly navigateToPreviousPage = () => this.navigationService.goToPreviousPage();
+
+  /**
+   * @description Hides the previous page button
+   * @returns {void}
+   */
+  protected readonly hidePreviousPageButton = () => this.navigationService.hidePreviousIcon()
+
+  /**
+   * @description Redirects to the main page
+   * @returns {void}
+   */
+  protected readonly redirectToMainPage = () => this.navigationService.redirectToMainPage();
+  
   /**
    * @description The change detector reference
    * @type {ChangeDetectorRef}
@@ -46,11 +71,11 @@ export class GhHeaderComponent implements AfterContentChecked {
    */
   protected readonly languagesMenuItems: MenuItem[] = Object.values(Language).map(lang => (
     {
-      caption$: this.translate.get("global.language."+lang),
+      caption$: this.translateService.get("global.language."+lang),
       action: () => {
         localStorage.setItem("lang", lang);
-        this.translate.use(lang);
-        this.translate.setDefaultLang(lang);
+        this.translateService.use(lang);
+        this.translateService.setDefaultLang(lang);
       }
     }
     ));

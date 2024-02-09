@@ -1,21 +1,21 @@
-import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
-import { APPLICATION_NAME } from '../../../misc/constants/application';
+import { Component, Input, OnInit, inject } from '@angular/core';
+import { APPLICATION_NAME } from '../../../../misc/constants/application';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { tap } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
-import { EMAIL_VALIDATION, REQUIRED_VALIDATION } from '../../../misc/constants/validations';
-import { ConnectStatus, Credentials } from '../../../api/users.service.api';
-import { CurrentFormService } from '../../../services/current-form.service';
+import { EMAIL_VALIDATION, REQUIRED_VALIDATION } from '../../../../misc/constants/validations';
+import { CurrentFormService } from '../../../../services/current-form.service';
+import { Router } from '@angular/router';
 
 /**
- * @title Login Component
+ * @title Log in Component
  * @component GhLoginComponent 
- * @description The base login component for the application
+ * @description The base log in component for the application
  */
 @Component({
-  selector: 'gh-login',
+  selector: 'gh-log-in',
   templateUrl: './log-in.component.html',
-  styleUrl: './log-in.component.scss'
+  styleUrls: ['./log-in.component.scss']
 })
 export class GhLoginComponent implements OnInit{
   /**
@@ -23,6 +23,12 @@ export class GhLoginComponent implements OnInit{
    * @type {string}
    */
   @Input() title: string;
+
+  /**
+   * @description The url of the sign up page
+   * @type {string}
+   */
+  @Input() signUpUrl: string;
 
   /**
    * @description The current form service
@@ -61,6 +67,12 @@ export class GhLoginComponent implements OnInit{
   protected readonly passwordField: string = 'password';
 
   /**
+   * @description The angular router service.
+   * @type {Router}
+   */
+  private router: Router = inject(Router);
+
+  /**
    * @description The backing field for the email error message.
    * @type {BehaviorSubject<string>}
    */
@@ -85,7 +97,7 @@ export class GhLoginComponent implements OnInit{
   protected readonly passwordErrorMessage$ = this._passwordErrorMessage$.asObservable();
   
   /**
-   * @description The login form
+   * @description The log in form
    * @type {FormGroup}
    */
   protected get loginForm(): FormGroup {
@@ -105,17 +117,17 @@ export class GhLoginComponent implements OnInit{
       tap(() => {
         if(this.loginForm.get(this.emailField).errors?.[EMAIL_VALIDATION])
         {
-          this._emailErrorMessage$.next("global.login.errors.email.email");
+          this._emailErrorMessage$.next("global.credentials.errors.email.email");
         }
 
         if(this.loginForm.get(this.emailField).errors?.[REQUIRED_VALIDATION])
         {
-          this._emailErrorMessage$.next("global.login.errors.email.required");
+          this._emailErrorMessage$.next("global.credentials.errors.email.required");
         }
 
         if(this.loginForm.get(this.passwordField).errors?.[REQUIRED_VALIDATION])
         {
-          this._passwordErrorMessage$.next("global.login.errors.password.required");
+          this._passwordErrorMessage$.next("global.credentials.errors.password.required");
         }
 
         if(!this.loginForm.get(this.emailField).errors) {
@@ -137,5 +149,13 @@ export class GhLoginComponent implements OnInit{
     this.loginForm.get(this.passwordField).reset();
     this._passwordErrorMessage$.next(undefined);
     this.currentFormService.submitting = true;
+  }
+
+  /**
+   * @description Redirects the user to the sign up page
+   * @returns {void}
+   */
+  redirectToSignUpUrl(): void {
+    this.router.navigate([this.signUpUrl]);
   }
 }

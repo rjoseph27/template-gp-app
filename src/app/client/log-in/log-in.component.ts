@@ -1,12 +1,12 @@
 import { Component, OnInit, inject, } from '@angular/core';
 import { UsersService } from '../../services/users.service';
-import { Credentials } from '../../api/users.service.api';
 import { CurrentFormService } from '../../services/current-form.service';
 import { tap } from 'rxjs/operators';
+import { ClientRoutes } from '../../client.route';
 
 /**
  * @constant
- * @description The title of the application
+ * @description The title of the log in page
  */
 const ACCOUNT_PAGE_TITLE = 'account';
 
@@ -18,7 +18,6 @@ const ACCOUNT_PAGE_TITLE = 'account';
 @Component({
   selector: 'client-log-in',
   templateUrl: './log-in.component.html',
-  styleUrl: './log-in.component.scss',
   providers: [CurrentFormService]
 })
 export class ClientLogInComponent implements OnInit {
@@ -33,6 +32,13 @@ export class ClientLogInComponent implements OnInit {
    * @type {CurrentFormService}
    */
   private readonly currentFormService: CurrentFormService = inject(CurrentFormService);
+
+  /**
+   * @description The url of the sign up page
+   */
+  protected get signUpUrl(): string {
+    return ClientRoutes.signup.fullPath();
+  }
 
   /**
    * @description The users service

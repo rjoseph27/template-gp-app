@@ -14,7 +14,7 @@
         (ngModelChange)="valueChange.emit($event)"
     >
     <div
-        [ngClass]="{'hide-error': !errorMessage && !(input.dirty || input.touched)}" 
+        *ngIf="errorMessage && (input.dirty || input.touched)"
         class="error-message" 
         >{{ errorMessage | translate }}</div>
 </div>

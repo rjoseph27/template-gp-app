@@ -5,18 +5,27 @@
             "en":"English",
             "fr":"Français"
         },
-        "login": {
+        "credentials": {
             "email": {
                 "label": "Email",
                 "placeholder": "Enter your email"
             },
             "password": {
                 "label": "Password",
-                "placeholder": "Enter your password"
+                "placeholder": "Enter your password",
+                "passwordRequirement": {
+                    "title": "The password need to contain:",
+                    "length": "At least 8 characters",
+                    "lowercase": "At least 1 lowercase letter",
+                    "uppercase": "At least 1 uppercase letter",
+                    "number": "At least 1 number",
+                    "special": "At least 1 special character"
+                }
             },
-            "forgot": "Forgot your password?",
-            "login": "Access my Account",
-            "register": "Create a new account",
+            "confirmPassword": {
+                "label": "Confirm your password",
+                "placeholder": "Confirm your password"
+            },
             "errors": {
                 "email": {
                     "required": "Enter your email",
@@ -24,11 +33,23 @@
                 },
                 "password": {
                     "required": "Enter your password"
-                },
+                }
+            }
+        },
+        "login": {
+            "forgot": "Forgot your password?",
+            "login": "Access my Account",
+            "register": "Create a new account",
+            "errors": {
                 "login": {
                     "wrongCredentials": "Wrong email or password",
                     "internalServerError": "An error occured, please try again later"
                 }
+            }
+        },
+        "signup": {
+            "credentials": {
+                "title": "Credentials"
             }
         }
     }

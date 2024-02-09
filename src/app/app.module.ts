@@ -9,6 +9,7 @@ import { UsersService } from "./services/users.service";
 import { HttpClientModule } from "@angular/common/http";
 import { UsersServiceApi } from "./api/users.service.api";
 import { NotificationService } from "./services/notification.service";
+import { NavigationService } from "./services/navigation.service";
 
 /**
  * @module AppModule
@@ -24,7 +25,7 @@ import { NotificationService } from "./services/notification.service";
         CoreModule,
         ClientModule
     ],
-    providers: [UsersService, UsersServiceApi, NotificationService],
+    providers: [UsersService, UsersServiceApi, NotificationService, NavigationService],
     bootstrap: [AppComponent]
 })
 export class AppModule {}

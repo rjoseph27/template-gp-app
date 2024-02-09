@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { BaseInputFieldComponent } from '../base-input-field.component';
 import { HIDE_PASSWORD, SHOW_PASSWORD } from '../../../../misc/constants/icon';
 import { BehaviorSubject } from 'rxjs';
@@ -25,6 +25,12 @@ export class GhPasswordFieldComponent extends BaseInputFieldComponent {
    * @type {string}
    */
   protected readonly passwordHidden = HIDE_PASSWORD;
+
+  /**
+   * @description A boolean that determines if the password requirements should be shown
+   * @type {boolean}
+   */
+  @Input() showRequirements: boolean = false;
 
   /**
    * @description The backing field for the password visibility state

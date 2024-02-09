@@ -6,8 +6,8 @@
     </div>
     <div class="input-email input-field">
         <gh-text-field
-            [label]="'global.login.email.label' | translate" 
-            [placeholder]="'global.login.email.placeholder' | translate"
+            [label]="'global.credentials.email.label' | translate" 
+            [placeholder]="'global.credentials.email.placeholder' | translate"
             [name]="emailField"
             [value]="loginForm.get(emailField).value"
             (valueChange)="loginForm.get(emailField).setValue($event)"
@@ -16,8 +16,8 @@
     </div>
     <div class="input-password input-field">
         <gh-password-field
-            [label]="'global.login.password.label' | translate" 
-            [placeholder]="'global.login.password.placeholder' | translate"
+            [label]="'global.credentials.password.label' | translate" 
+            [placeholder]="'global.credentials.password.placeholder' | translate"
             [name]="passwordField"
             [value]="loginForm.get(passwordField).value"
             (valueChange)="loginForm.get(passwordField).setValue($event)"
@@ -35,7 +35,7 @@
             [disabled]="!loginForm.valid"
         >{{ 'global.login.login' | translate }}</button>
     </div>
-    <div *ngIf="canRegister" class="register">
+    <div *ngIf="canRegister" class="register" (click)="redirectToSignUpUrl()">
         <span>{{ 'global.login.register' | translate }}</span>
     </div>
     </div>

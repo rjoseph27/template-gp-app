@@ -12,8 +12,14 @@ export class ClientRoutes {
     static readonly client: GhRoute = new GhRoute('client');
 
     /**
-     * @description The login route
+     * @description The log in route
      * @type {GhRoute}
      */
     static readonly login: GhRoute = new GhRoute('login', ClientRoutes.client);
+
+    /**
+     * @description The sign up route
+     * @type {GhRoute}
+     */
+    static readonly signup: GhRoute = new GhRoute('signup', ClientRoutes.client);
 }

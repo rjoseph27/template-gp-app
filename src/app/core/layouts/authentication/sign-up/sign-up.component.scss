@@ -1,0 +1,21 @@
+@import '../../../../../styles/variables';
+
+.content {
+    display: flex;
+    justify-content: center;
+    margin-top: 3em;
+}
+
+.title {
+    margin-bottom: 3em;
+}
+
+.sub-title {
+    color: $secondary-color;
+    font-weight: $semi-bold;
+    font-size: 1.3em;
+}
+
+.section {
+    margin:1em 0;
+}

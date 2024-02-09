@@ -17,4 +17,16 @@ export class GhRoute {
     toString() {
         return this.segment;
     }
+
+    /**
+     * @description Returns the full path of the route
+     * @returns {string} The full path of the route
+     */
+    fullPath(): string {
+        if (this.parentRoute) {
+            return this.parentRoute.fullPath() + '/' + this.segment;
+        } else {
+            return this.segment;
+        }
+    }
 }
