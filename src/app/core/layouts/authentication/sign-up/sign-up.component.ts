@@ -7,7 +7,7 @@ import { EMAIL_VALIDATION, REQUIRED_VALIDATION } from '../../../../misc/constant
 import { ConnectStatus, Credentials } from '../../../../api/users.service.api';
 import { CurrentFormService } from '../../../../services/current-form.service';
 import { Router } from '@angular/router';
-import { passwordMatchValidator } from '../../../../misc/validation/confirm-password.validation';
+import { PASSWORD_MISMATCH_VALIDATION, passwordMatchValidator } from '../../../../misc/validation/confirm-password.validation';
 import { LIST_OF_PASSWORD_VALIDATION_ERRORS, passwordValidator } from '../../../../misc/validation/password.validator';
 
 /**
@@ -55,6 +55,15 @@ export class GhSignUpComponent implements OnInit{
   ]);
 
   /**
+   * @description The error messages of the confirm password field
+   * @type {Map<string, string>}
+   */
+  protected readonly confirmPasswordErrorCaptions = new Map<string, string>([
+    [REQUIRED_VALIDATION, "global.credentials.errors.confirmPassword.required"],
+    [PASSWORD_MISMATCH_VALIDATION, "global.credentials.errors.confirmPassword.mismatch"]
+  ]);
+
+  /**
    * @description The error messages of the password field
    * @type {Map<string, string>}
    */
@@ -80,7 +89,7 @@ export class GhSignUpComponent implements OnInit{
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, passwordValidator]),
       confirmPassword: new FormControl('', [Validators.required])
-    }, {validators: passwordMatchValidator});
+    }, { validators: passwordMatchValidator });
   }
 
   /**
