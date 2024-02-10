@@ -1,4 +1,4 @@
-@import '../../../../styles';
+@import '../../../../styles/variables';
 
 :host {
     width:100%;
@@ -21,10 +21,6 @@
 
 .error-input {
     border-color: #{$error-color};
-}
-
-.hide-error {
-    visibility: hidden;
 }
 
 .error-message {

@@ -22,6 +22,12 @@ export abstract class BaseInputFieldComponent {
     protected readonly errorMessage$ = this._errorMessages$.asObservable();
 
     /**
+     * @description backing field for errorValidations$
+     * @type {BehaviorSubject<ValidationErrors>}
+     */
+    private readonly _errorValidations$ = new BehaviorSubject<ValidationErrors>(undefined);
+
+    /**
      * @description The label of the input field
      * @type {string}
      */
@@ -62,6 +68,7 @@ export abstract class BaseInputFieldComponent {
      */
     @Input() set errors(value: ValidationErrors)
     {
+        console.log(value);
         this._errorMessages$.next(undefined)
         if(this.errorCaptions && value) {
             const lists = Array.from(this.errorCaptions);
@@ -71,6 +78,10 @@ export abstract class BaseInputFieldComponent {
                 this._errorMessages$.next(errorMap[1]);
             }
         }
+        this._errorValidations$.next(value);
+    }
+    get errors(): ValidationErrors {
+        return this._errorValidations$.value;
     }
 
     /**

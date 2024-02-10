@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { BaseInputFieldComponent } from '../base-input-field.component';
 import { HIDE_PASSWORD, SHOW_PASSWORD } from '../../../../misc/constants/icon';
 import { BehaviorSubject } from 'rxjs';
+import { EIGHTCHARACTERS_VALIDATION, HASNOTLOWERCASE_VALIDATION, HASNOTNUMBER_VALIDATION, HASNOTSPECIALCHARACTER_VALIDATION, HASNOTUPPERCASE_VALIDATION } from '../../../../misc/validation/password.validator';
 
 /**
  * @title Password Field Component
@@ -25,6 +26,36 @@ export class GhPasswordFieldComponent extends BaseInputFieldComponent {
    * @type {string}
    */
   protected readonly passwordHidden = HIDE_PASSWORD;
+
+  /**
+   * @description The error type for the password field when the password has less than 8 characters.
+   * @type {string}
+   */
+  protected readonly hasNotEightCharacters = EIGHTCHARACTERS_VALIDATION;
+
+  /**
+   * @description The error type for the password field when the password has no lowercase characters.
+   * @type {string}
+   */
+  protected readonly hasNotLowerCase = HASNOTLOWERCASE_VALIDATION;
+
+  /**
+   * @description The error type for the password field when the password has no uppercase characters.
+   * @type {string}
+   */
+  protected readonly hasNotUpperCase = HASNOTUPPERCASE_VALIDATION;
+
+  /**
+   * @description The error type for the password field when the password has no number characters.
+   * @type {string}
+   */
+  protected readonly hasNotNumber = HASNOTNUMBER_VALIDATION;
+
+  /**
+   * @description The error type for the password field when the password has no special characters.
+   * @type {string}
+   */
+  protected readonly hasNotSpecialCharacter = HASNOTSPECIALCHARACTER_VALIDATION;
 
   /**
    * @description A boolean that determines if the password requirements should be shown
