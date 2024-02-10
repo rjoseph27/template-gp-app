@@ -11,7 +11,8 @@
             [name]="emailField"
             [value]="loginForm.get(emailField).value"
             (valueChange)="loginForm.get(emailField).setValue($event)"
-            [errorMessage]="emailErrorMessage$ | async"
+            [errors]="loginForm.get(emailField).errors"
+            [errorCaptions]="emailErrorCaptions"
         ></gh-text-field>
     </div>
     <div class="input-password input-field">
@@ -21,7 +22,8 @@
             [name]="passwordField"
             [value]="loginForm.get(passwordField).value"
             (valueChange)="loginForm.get(passwordField).setValue($event)"
-            [errorMessage]="passwordErrorMessage$ | async"
+            [errors]="loginForm.get(passwordField).errors"
+            [errorCaptions]="passwordErrorCaptions"
         ></gh-password-field>
     </div>
     <div class="forgot">

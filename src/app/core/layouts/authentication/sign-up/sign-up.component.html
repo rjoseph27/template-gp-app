@@ -13,7 +13,8 @@
             [name]="emailField"
             [value]="signupForm.get(emailField).value"
             (valueChange)="signupForm.get(emailField).setValue($event)"
-            [errorMessage]="emailErrorMessage$ | async"
+            [errors]="signupForm.get(emailField).errors"
+            [errorCaptions]="emailErrorCaptions"
         ></gh-text-field>
         </div>
         <div class="section">
@@ -23,7 +24,9 @@
             [name]="passwordField"
             [value]="signupForm.get(passwordField).value"
             (valueChange)="signupForm.get(passwordField).setValue($event)"
-            [errorMessage]="passwordErrorMessage$ | async"
+            [showRequirements]="true"
+            [errors]="signupForm.get(passwordField).errors"
+            [errorCaptions]="passwordErrorCaptions"
         ></gh-password-field>
         </div>
         <div class="section">
@@ -33,8 +36,6 @@
             [name]="confirmPasswordField"
             [value]="signupForm.get(confirmPasswordField).value"
             (valueChange)="signupForm.get(confirmPasswordField).setValue($event)"
-            [errorMessage]="confirmPasswordErrorMessage$ | async"
-            [showRequirements]="true"
         ></gh-password-field>
         </div>
     </div>

@@ -1,4 +1,6 @@
 import { Directive, EventEmitter, Input, Output } from "@angular/core";
+import { ValidationErrors } from "@angular/forms";
+import { BehaviorSubject } from "rxjs";
 
 /**
  * @abstract
@@ -7,6 +9,18 @@ import { Directive, EventEmitter, Input, Output } from "@angular/core";
  */
 @Directive()
 export abstract class BaseInputFieldComponent {
+    /**
+     * @description backing field for errorMessage$
+     * @type {BehaviorSubject<string>}
+     */
+    private readonly _errorMessages$ = new BehaviorSubject<string>(undefined);
+
+    /**
+     * @description An observable that emits the error message of the input field
+     * @type {Observable<string>}
+     */
+    protected readonly errorMessage$ = this._errorMessages$.asObservable();
+
     /**
      * @description The label of the input field
      * @type {string}
@@ -38,10 +52,26 @@ export abstract class BaseInputFieldComponent {
     @Input() maxLength: number;
 
     /**
-     * @description The error message of the input field
-     * @type {string}
+     * @decription The error captions of the input field.
+     * @type {Map<string, string>}
      */
-    @Input() errorMessage: string;
+    @Input() errorCaptions: Map<string, string>;
+
+    /**
+     * @description The error messages of the input field
+     */
+    @Input() set errors(value: ValidationErrors)
+    {
+        this._errorMessages$.next(undefined)
+        if(this.errorCaptions && value) {
+            const lists = Array.from(this.errorCaptions);
+            const errorMap = lists.find(e => value[e[0]]);
+            if(errorMap)
+            {
+                this._errorMessages$.next(errorMap[1]);
+            }
+        }
+    }
 
     /**
      * @description An event emitter that emits the value of the input field

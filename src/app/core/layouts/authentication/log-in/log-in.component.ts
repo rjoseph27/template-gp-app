@@ -71,30 +71,6 @@ export class GhLoginComponent implements OnInit{
    * @type {Router}
    */
   private router: Router = inject(Router);
-
-  /**
-   * @description The backing field for the email error message.
-   * @type {BehaviorSubject<string>}
-   */
-  private readonly _emailErrorMessage$ = new BehaviorSubject<string>(undefined);
-
-  /**
-   * @description The backing field for the password error message.
-   * @type {BehaviorSubject<string>}
-   */
-  private readonly _passwordErrorMessage$ = new BehaviorSubject<string>(undefined);
-
-  /**
-   * @description An observable of the email error message
-   * @type {Observable<string>}
-   */
-  protected readonly emailErrorMessage$ = this._emailErrorMessage$.asObservable();
-
-  /**
-   * @description An observable of the password error message
-   * @type {Observable<string>}
-   */
-  protected readonly passwordErrorMessage$ = this._passwordErrorMessage$.asObservable();
   
   /**
    * @description The log in form
@@ -105,6 +81,23 @@ export class GhLoginComponent implements OnInit{
   }
 
   /**
+   * @description The error messages of the email field
+   * @type {Map<string, string>}
+   */
+  protected readonly emailErrorCaptions = new Map<string, string>([
+    [EMAIL_VALIDATION, "global.credentials.errors.email.email"],
+    [REQUIRED_VALIDATION, "global.credentials.errors.email.required"]
+  ]);
+
+  /**
+   * @description The error messages of the password field
+   * @type {Map<string, string>}
+   */
+  protected readonly passwordErrorCaptions = new Map<string, string>([
+    [REQUIRED_VALIDATION, "global.credentials.errors.password.required"],
+  ]);
+
+  /**
    * @inheritdoc
    */
   ngOnInit() {
@@ -112,33 +105,6 @@ export class GhLoginComponent implements OnInit{
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required]),
     });
-
-    this.loginForm.valueChanges.pipe(
-      tap(() => {
-        if(this.loginForm.get(this.emailField).errors?.[EMAIL_VALIDATION])
-        {
-          this._emailErrorMessage$.next("global.credentials.errors.email.email");
-        }
-
-        if(this.loginForm.get(this.emailField).errors?.[REQUIRED_VALIDATION])
-        {
-          this._emailErrorMessage$.next("global.credentials.errors.email.required");
-        }
-
-        if(this.loginForm.get(this.passwordField).errors?.[REQUIRED_VALIDATION])
-        {
-          this._passwordErrorMessage$.next("global.credentials.errors.password.required");
-        }
-
-        if(!this.loginForm.get(this.emailField).errors) {
-          this._emailErrorMessage$.next(undefined);
-        }
-
-        if(!this.loginForm.get(this.passwordField).errors) {
-          this._passwordErrorMessage$.next(undefined);
-        }
-      })
-    ).subscribe();
   } 
   
   /**
@@ -147,7 +113,6 @@ export class GhLoginComponent implements OnInit{
    */
   protected login(): void {
     this.loginForm.get(this.passwordField).reset();
-    this._passwordErrorMessage$.next(undefined);
     this.currentFormService.submitting = true;
   }
 

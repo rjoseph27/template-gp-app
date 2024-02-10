@@ -8,7 +8,7 @@ import { ConnectStatus, Credentials } from '../../../../api/users.service.api';
 import { CurrentFormService } from '../../../../services/current-form.service';
 import { Router } from '@angular/router';
 import { passwordMatchValidator } from '../../../../misc/validation/confirm-password.validation';
-import { passwordValidator } from '../../../../misc/validation/password.validator';
+import { LIST_OF_PASSWORD_VALIDATION_ERRORS, passwordValidator } from '../../../../misc/validation/password.validator';
 
 /**
  * @title Sign Up Component
@@ -39,35 +39,26 @@ export class GhSignUpComponent implements OnInit{
    */
   protected readonly passwordField: string = 'password';
 
+  /**
+   * @description The name of the confirm password field
+   * @type {string}
+   */
   protected readonly confirmPasswordField: string = 'confirmPassword';
 
   /**
-   * @description The backing field for the email error message.
-   * @type {BehaviorSubject<string>}
+   * @description The error messages of the email field
+   * @type {Map<string, string>}
    */
-  private readonly _emailErrorMessage$ = new BehaviorSubject<string>(undefined);
+  protected readonly emailErrorCaptions = new Map<string, string>([
+    [EMAIL_VALIDATION, "global.credentials.errors.email.email"],
+    [REQUIRED_VALIDATION, "global.credentials.errors.email.required"]
+  ]);
 
   /**
-   * @description The backing field for the password error message.
-   * @type {BehaviorSubject<string>}
+   * @description The error messages of the password field
+   * @type {Map<string, string>}
    */
-  private readonly _passwordErrorMessage$ = new BehaviorSubject<string>(undefined);
-  
-  private readonly _confirmPasswordErrorMessage$ = new BehaviorSubject<string>(undefined);
-
-  /**
-   * @description An observable of the email error message
-   * @type {Observable<string>}
-   */
-  protected readonly emailErrorMessage$ = this._emailErrorMessage$.asObservable();
-
-  /**
-   * @description An observable of the password error message
-   * @type {Observable<string>}
-   */
-  protected readonly passwordErrorMessage$ = this._passwordErrorMessage$.asObservable();
-
-  protected readonly confirmPasswordErrorMessage$ = this._confirmPasswordErrorMessage$.asObservable();
+  protected readonly passwordErrorCaptions = new Map<string, string>(this.generatesPasswordValidations());
 
   /**
    * @description The current form service
@@ -90,5 +81,15 @@ export class GhSignUpComponent implements OnInit{
       password: new FormControl('', [Validators.required, passwordValidator]),
       confirmPassword: new FormControl('', [Validators.required])
     }, {validators: passwordMatchValidator});
+  }
+
+  /**
+   * @description Generates the password validations for the sign up form
+   * @returns {Array<[string, string]>}
+   */
+  private generatesPasswordValidations(): Array<[string, string]> {
+    const validations = LIST_OF_PASSWORD_VALIDATION_ERRORS.map((error) => [error, 'global.credentials.errors.password.invalid']);
+    validations.unshift([REQUIRED_VALIDATION, 'global.credentials.errors.password.required']);
+    return <Array<[string, string]>>validations;
   }
 }

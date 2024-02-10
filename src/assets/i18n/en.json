@@ -32,7 +32,8 @@
                     "email": "This is not a valid email"
                 },
                 "password": {
-                    "required": "Enter your password"
+                    "required": "Enter your password",
+                    "invalid": "This is not a valid password"
                 }
             }
         },
