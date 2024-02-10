@@ -55,6 +55,35 @@
         "signup": {
             "credentials": {
                 "title": "Credentials"
+            },
+            "accountDetails": {
+                "title": "Account details",
+                "firstName": {
+                    "label": "First name",
+                    "placeholder": "Enter your first name"
+                },
+                "lastName": {
+                    "label": "Last name",
+                    "placeholder": "Enter your last name"
+                },
+                "dateOfBirth": {
+                    "label": "Date of birth",
+                    "placeholder": "Enter your date of birth"
+                },
+                "errors": {
+                    "firstName": {
+                        "required": "Enter your first name",
+                        "invalid": "This is not a valid first name"
+                    },
+                    "lastName": {
+                        "required": "Enter your last name",
+                        "invalid": "This is not a valid last name"
+                    },
+                    "dateOfBirth": {
+                        "required": "Enter your date of birth",
+                        "invalid": "This is not a valid date of birth"
+                    }
+                }
             }
         }
     }

@@ -1,0 +1,29 @@
+<div class="section">
+    <label [for]="name">{{ label }}</label>
+</div>
+<div class="section">
+    <div class="input-with-icon">
+        <gh-text-field 
+        [name]="name"
+        [placeholder]="placeholder" 
+        [value]="dateValue?.toString()"
+        (valueChange)="emitValue($event)"
+        [externalError]="!!(errorMessage$ | async)"
+        ></gh-text-field>
+        <button type="button" class="input-suffix">
+            <gh-icon [name]="calendarIcon" (click)="showCalendar()"></gh-icon>
+        </button>
+    </div>
+    <div
+        *ngIf="(errorMessage$ | async)"
+        class="error-message" 
+        >{{ (errorMessage$ | async) | translate }}</div>
+    <input 
+        #input 
+        type="date" 
+        class="hidden"
+        [max]="inputMaxDate"
+        (change)="onDateChange($event)"
+    >
+    
+</div>

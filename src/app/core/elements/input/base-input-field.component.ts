@@ -8,7 +8,7 @@ import { BehaviorSubject } from "rxjs";
  * @description The base input field component that provides common properties for all input field components.
  */
 @Directive()
-export abstract class BaseInputFieldComponent {
+export abstract class BaseInputFieldComponent<T> {
     /**
      * @description backing field for errorMessage$
      * @type {BehaviorSubject<string>}
@@ -85,7 +85,7 @@ export abstract class BaseInputFieldComponent {
 
     /**
      * @description An event emitter that emits the value of the input field
-     * @type {string}
+     * @type {T}
      */
-    @Output() valueChange = new EventEmitter<string>();
+    @Output() valueChange = new EventEmitter<T>();
 }

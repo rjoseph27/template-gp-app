@@ -7,7 +7,7 @@
         type="text" 
         [id]="name"
         class="input"
-        [ngClass]="{'error-input': (errorMessage$ | async) && (input.dirty || input.touched)}" 
+        [ngClass]="{'error-input': ((errorMessage$ | async) && (input.dirty || input.touched)) || externalError}" 
         [placeholder]="placeholder" 
         [ngModel]="value"
         [maxlength]="maxLength"

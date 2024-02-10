@@ -31,3 +31,17 @@
     padding: 0;
     margin-top: 0.5em;
 }
+
+.input-with-icon {
+    position: relative;
+  }
+    
+.input-suffix {
+    position: absolute;
+    right: -0.2em;
+    top: 50% + 5;
+    transform: translateY(-50%);
+    cursor: pointer;
+    background-color: transparent;
+    border-width: 0px;
+}

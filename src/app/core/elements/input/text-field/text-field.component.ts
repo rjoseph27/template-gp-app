@@ -11,4 +11,10 @@ import { BaseInputFieldComponent } from '../base-input-field.component';
   templateUrl: './text-field.component.html',
   styleUrls: ['./../base-input-field.component.scss']
 })
-export class GhTextFieldComponent extends BaseInputFieldComponent {}
+export class GhTextFieldComponent extends BaseInputFieldComponent<string> {
+  /**
+   * @description A boolean value that determines if the input field has an error or not.
+   * @type {boolean} 
+   */
+  @Input() externalError = false
+}

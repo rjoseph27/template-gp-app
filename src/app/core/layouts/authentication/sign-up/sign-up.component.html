@@ -41,6 +41,43 @@
         ></gh-password-field>
         </div>
     </div>
+    <div>
+        <div class="sub-title">{{ 'global.signup.accountDetails.title' | translate }}</div>
+        <div class="section">
+            <gh-text-field
+            [label]="'global.signup.accountDetails.firstName.label' | translate" 
+            [placeholder]="'global.signup.accountDetails.firstName.placeholder' | translate"
+            [name]="firstNameField"
+            [value]="signupForm.get(firstNameField).value"
+            (valueChange)="signupForm.get(firstNameField).setValue($event)"
+            [errors]="signupForm.get(firstNameField).errors"
+            [errorCaptions]="firstNameErrorCaptions"
+            ></gh-text-field>
+        </div>
+        <div class="section">
+            <gh-text-field
+            [label]="'global.signup.accountDetails.lastName.label' | translate" 
+            [placeholder]="'global.signup.accountDetails.lastName.placeholder' | translate"
+            [name]="lastNameField"
+            [value]="signupForm.get(lastNameField).value"
+            (valueChange)="signupForm.get(lastNameField).setValue($event)"
+            [errors]="signupForm.get(lastNameField).errors"
+            [errorCaptions]="lastNameErrorCaptions"
+            ></gh-text-field>
+        </div>
+        <div class="section">
+            <gh-date-field
+            [label]="'global.signup.accountDetails.dateOfBirth.label' | translate" 
+            [placeholder]="'global.signup.accountDetails.dateOfBirth.placeholder' | translate"
+            [name]="dateOfBirthField"
+            [value]="signupForm.get(dateOfBirthField).value"
+            (valueChange)="signupForm.get(dateOfBirthField).setValue($event)"
+            [errors]="signupForm.get(dateOfBirthField).errors"
+            [maxDate]="maxDate"
+            [errorCaptions]="dateOfBirthErrorCaptions"
+            ></gh-date-field>
+        </div>
+    </div>
 </div>
 </div>
 </form>

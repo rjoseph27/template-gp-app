@@ -1,14 +1,13 @@
-import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
-import { APPLICATION_NAME } from '../../../../misc/constants/application';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { tap } from 'rxjs/operators';
-import { BehaviorSubject } from 'rxjs';
 import { EMAIL_VALIDATION, REQUIRED_VALIDATION } from '../../../../misc/constants/validations';
-import { ConnectStatus, Credentials } from '../../../../api/users.service.api';
 import { CurrentFormService } from '../../../../services/current-form.service';
-import { Router } from '@angular/router';
 import { PASSWORD_MISMATCH_VALIDATION, passwordMatchValidator } from '../../../../misc/validation/confirm-password.validation';
 import { LIST_OF_PASSWORD_VALIDATION_ERRORS, passwordValidator } from '../../../../misc/validation/password.validator';
+import { INVALID_NAME_VALIDATION, nameValidator } from '../../../../misc/validation/name.validator';
+import { DateUtil } from '../../../../misc/util/date.util';
+import { LEGAL_AGE } from '../../../../misc/constants/application';
+import { MINIMUM_AGE_VALIDATION, minimumAgeValidator } from '../../../../misc/validation/minimum-age.validator';
 
 /**
  * @title Sign Up Component
@@ -46,6 +45,24 @@ export class GhSignUpComponent implements OnInit{
   protected readonly confirmPasswordField: string = 'confirmPassword';
 
   /**
+   * @description The name of the first name field
+   * @type {string}
+   */
+  protected readonly firstNameField: string = 'firstName';
+
+  /**
+   * @description The name of the last name field
+   * @type {string}
+   */
+  protected readonly lastNameField: string = 'lastName';
+
+  /**
+   * @description The name of the date of birth field
+   * @type {string}
+   */
+  protected readonly dateOfBirthField: string = 'dateOfBirth';
+
+  /**
    * @description The error messages of the email field
    * @type {Map<string, string>}
    */
@@ -64,6 +81,29 @@ export class GhSignUpComponent implements OnInit{
   ]);
 
   /**
+   * @description The error messages of the first name field
+   * @type {Map<string, string>}
+   */
+  protected readonly firstNameErrorCaptions = new Map<string, string>([
+    [REQUIRED_VALIDATION, "global.signup.accountDetails.errors.firstName.required"],
+    [INVALID_NAME_VALIDATION, "global.signup.accountDetails.errors.firstName.invalid"]
+  ]);
+
+  /**
+   * @description The error messages of the last name field
+   * @type {Map<string, string>}
+   */
+  protected readonly lastNameErrorCaptions = new Map<string, string>([
+    [REQUIRED_VALIDATION, "global.signup.accountDetails.errors.lastName.required"],
+    [INVALID_NAME_VALIDATION, "global.signup.accountDetails.errors.lastName.invalid"]
+  ]);
+
+  protected readonly dateOfBirthErrorCaptions = new Map<string, string>([
+    [REQUIRED_VALIDATION, "global.signup.accountDetails.errors.dateOfBirth.required"],
+    [MINIMUM_AGE_VALIDATION, "global.signup.accountDetails.errors.dateOfBirth.invalid"]
+  ]);
+
+  /**
    * @description The error messages of the password field
    * @type {Map<string, string>}
    */
@@ -74,6 +114,12 @@ export class GhSignUpComponent implements OnInit{
    * @type {CurrentFormService}
    */
   private readonly currentFormService: CurrentFormService = inject(CurrentFormService);
+
+  /**
+   * @description The minimum date for the date of birth field
+   * @type {Date}
+   */
+  protected readonly maxDate = DateUtil.subtractYearsFromDate(DateUtil.today(), LEGAL_AGE);
 
   /**
    * @description The sign up form
@@ -88,7 +134,10 @@ export class GhSignUpComponent implements OnInit{
     this.currentFormService.currentForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, passwordValidator]),
-      confirmPassword: new FormControl('', [Validators.required])
+      confirmPassword: new FormControl('', [Validators.required]),
+      firstName: new FormControl('', [Validators.required, nameValidator]),
+      lastName: new FormControl('', [Validators.required, nameValidator]),
+      dateOfBirth: new FormControl('', [Validators.required, minimumAgeValidator])
     }, { validators: passwordMatchValidator });
   }
 

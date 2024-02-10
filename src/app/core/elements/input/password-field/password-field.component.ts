@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { BaseInputFieldComponent } from '../base-input-field.component';
-import { HIDE_PASSWORD, SHOW_PASSWORD } from '../../../../misc/constants/icon';
+import { HIDE_PASSWORD_ICON, SHOW_PASSWORD_ICON } from '../../../../misc/constants/icon';
 import { BehaviorSubject } from 'rxjs';
 import { EIGHTCHARACTERS_VALIDATION, HASNOTLOWERCASE_VALIDATION, HASNOTNUMBER_VALIDATION, HASNOTSPECIALCHARACTER_VALIDATION, HASNOTUPPERCASE_VALIDATION } from '../../../../misc/validation/password.validator';
 
@@ -14,18 +14,18 @@ import { EIGHTCHARACTERS_VALIDATION, HASNOTLOWERCASE_VALIDATION, HASNOTNUMBER_VA
   templateUrl: './password-field.component.html',
   styleUrls: ['./password-field.component.scss', './../base-input-field.component.scss']
 })
-export class GhPasswordFieldComponent extends BaseInputFieldComponent {
+export class GhPasswordFieldComponent extends BaseInputFieldComponent<string> {
   /**
    * @description The password visibility icon
    * @type {string}
    */
-  protected readonly passwordVisibility = SHOW_PASSWORD;
+  protected readonly passwordVisibility = SHOW_PASSWORD_ICON;
 
   /**
    * @description The password hidden icon
    * @type {string}
    */
-  protected readonly passwordHidden = HIDE_PASSWORD;
+  protected readonly passwordHidden = HIDE_PASSWORD_ICON;
 
   /**
    * @description The error type for the password field when the password has less than 8 characters.
