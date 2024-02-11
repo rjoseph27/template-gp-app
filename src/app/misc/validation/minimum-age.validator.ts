@@ -17,12 +17,9 @@ export const minimumAgeValidator: ValidatorFn = (control: AbstractControl): { [k
     return null; // If no value is provided, return null
   }
 
-  // Parse the input value to a Date object
-  const inputValue = new Date(control.value);
-
   // Calculate the date 16 years ago from today
   const minimumDate = DateUtil.subtractYearsFromDate(new Date(), LEGAL_AGE);
-  const isValid = inputValue <= minimumDate
+  const isValid = control.value.date <= minimumDate
 
   return isValid ? null : { minimumAge: { value: control.value } };
 };

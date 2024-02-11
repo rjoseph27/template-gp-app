@@ -8,6 +8,7 @@ import { INVALID_NAME_VALIDATION, nameValidator } from '../../../../misc/validat
 import { DateUtil } from '../../../../misc/util/date.util';
 import { LEGAL_AGE } from '../../../../misc/constants/application';
 import { MINIMUM_AGE_VALIDATION, minimumAgeValidator } from '../../../../misc/validation/minimum-age.validator';
+import { INVALID_DATE_FORMAT_VALIDATION, dateFormatValidator } from '../../../../misc/validation/date-format.validator';
 
 /**
  * @title Sign Up Component
@@ -100,7 +101,8 @@ export class GhSignUpComponent implements OnInit{
 
   protected readonly dateOfBirthErrorCaptions = new Map<string, string>([
     [REQUIRED_VALIDATION, "global.signup.accountDetails.errors.dateOfBirth.required"],
-    [MINIMUM_AGE_VALIDATION, "global.signup.accountDetails.errors.dateOfBirth.invalid"]
+    [MINIMUM_AGE_VALIDATION, "global.signup.accountDetails.errors.dateOfBirth.invalid"],
+    [INVALID_DATE_FORMAT_VALIDATION, "global.signup.accountDetails.errors.dateOfBirth.invalidFormat"]
   ]);
 
   /**
@@ -137,7 +139,7 @@ export class GhSignUpComponent implements OnInit{
       confirmPassword: new FormControl('', [Validators.required]),
       firstName: new FormControl('', [Validators.required, nameValidator]),
       lastName: new FormControl('', [Validators.required, nameValidator]),
-      dateOfBirth: new FormControl('', [Validators.required, minimumAgeValidator])
+      dateOfBirth: new FormControl('', [Validators.required, minimumAgeValidator, dateFormatValidator])
     }, { validators: passwordMatchValidator });
   }
 

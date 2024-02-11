@@ -1,4 +1,22 @@
 /**
+ * @interface DateFromDatePicker
+ * @description An interface for the date from the date picker
+ */
+export interface DateFromDatePicker {
+    /**
+     * @description The date
+     * @type {Date}
+     */
+    date: Date,
+    
+    /**
+     * @description The date string
+     * @type {string}
+     */
+    dateString: string,
+}
+
+/**
  * @class DateUtil
  * @description A utility class for date operations
  */

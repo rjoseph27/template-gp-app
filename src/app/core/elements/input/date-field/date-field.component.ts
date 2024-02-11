@@ -1,14 +1,14 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { BaseInputFieldComponent } from '../base-input-field.component';
 import { CALENDAR_ICON } from '../../../../misc/constants/icon';
-import { DateUtil } from '../../../../misc/util/date.util';
+import { DateFromDatePicker, DateUtil } from '../../../../misc/util/date.util';
 
 @Component({
   selector: 'gh-date-field',
   templateUrl: './date-field.component.html',
   styleUrls: ['./date-field.component.scss', './../base-input-field.component.scss']
 })
-export class GhDateFieldComponent extends BaseInputFieldComponent<Date> {
+export class GhDateFieldComponent extends BaseInputFieldComponent<DateFromDatePicker> {
   /**
    * @description A reference to the input element.
    * @type {ElementRef}
@@ -54,10 +54,20 @@ export class GhDateFieldComponent extends BaseInputFieldComponent<Date> {
    */
   protected onDateChange(event: Event) {
     this.dateValue = new Date((event.target as HTMLInputElement).value).toISOString().split('T')[0];
-    this.valueChange.emit(new Date(this.dateValue))
+    this.valueChange.emit({
+      date: new Date(this.dateValue),
+      dateString: this.dateValue
+    })
   }
 
-  protected emitValue(event: string) {
-    this.valueChange.emit(new Date(event));
+  /**
+   * @description A method that emits the value of the date
+   * @type {void}
+   */
+  protected emitValue(event: string): void {
+    this.valueChange.emit({
+      date: new Date(event),
+      dateString: event
+    })
   }
 }
