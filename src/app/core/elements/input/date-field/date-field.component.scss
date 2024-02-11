@@ -1,5 +1,13 @@
 @import '../../../../../styles/variables';
 
-.hidden {
+.calendar-close {
+  display: none;
+}
+
+.calender-open {
+  display: block;
+}
+
+input[type="date"] {
   visibility: collapse;
 }

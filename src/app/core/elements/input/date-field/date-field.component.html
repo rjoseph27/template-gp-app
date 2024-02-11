@@ -19,11 +19,10 @@
         class="error-message" 
         >{{ (errorMessage$ | async) | translate }}</div>
     <input 
+        [ngClass]="{'calendar-close': !(isCalendarOpen$ | async),'calendar-open': (isCalendarOpen$ | async)}"
         #input 
         type="date" 
-        class="hidden"
         [max]="inputMaxDate"
         (change)="onDateChange($event)"
     >
-    
 </div>

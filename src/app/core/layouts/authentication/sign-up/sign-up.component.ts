@@ -9,6 +9,8 @@ import { DateUtil } from '../../../../misc/util/date.util';
 import { LEGAL_AGE } from '../../../../misc/constants/application';
 import { MINIMUM_AGE_VALIDATION, minimumAgeValidator } from '../../../../misc/validation/minimum-age.validator';
 import { INVALID_DATE_FORMAT_VALIDATION, dateFormatValidator } from '../../../../misc/validation/date-format.validator';
+import { Genders } from '../../../../misc/enums/genders.enum';
+import { SelectFieldOption, SelectOptionUtil } from '../../../../misc/util/select-option.util';
 
 /**
  * @title Sign Up Component
@@ -64,6 +66,12 @@ export class GhSignUpComponent implements OnInit{
   protected readonly dateOfBirthField: string = 'dateOfBirth';
 
   /**
+   * @description The name of the gender field
+   * @type {string}
+   */
+  protected readonly genderField: string = 'gender';
+
+  /**
    * @description The error messages of the email field
    * @type {Map<string, string>}
    */
@@ -99,10 +107,22 @@ export class GhSignUpComponent implements OnInit{
     [INVALID_NAME_VALIDATION, "global.signup.accountDetails.errors.lastName.invalid"]
   ]);
 
+  /**
+   * @description The error messages of the date of birth field
+   * @type {Map<string, string>}
+   */
   protected readonly dateOfBirthErrorCaptions = new Map<string, string>([
     [REQUIRED_VALIDATION, "global.signup.accountDetails.errors.dateOfBirth.required"],
     [MINIMUM_AGE_VALIDATION, "global.signup.accountDetails.errors.dateOfBirth.invalid"],
     [INVALID_DATE_FORMAT_VALIDATION, "global.signup.accountDetails.errors.dateOfBirth.invalidFormat"]
+  ]);
+
+  /**
+   * @description The error messages of the
+   * @type {Map<string, string>}
+   */
+  protected readonly genderErrorCaptions = new Map<string, string>([
+    [REQUIRED_VALIDATION, "global.signup.accountDetails.errors.gender.required"],
   ]);
 
   /**
@@ -124,6 +144,12 @@ export class GhSignUpComponent implements OnInit{
   protected readonly maxDate = DateUtil.subtractYearsFromDate(DateUtil.today(), LEGAL_AGE);
 
   /**
+   * @description The options of gender
+   * @type {SelectFieldOption[]}
+   */
+  protected readonly genderOptions: SelectFieldOption[] = SelectOptionUtil.enumToSelectOptions(Genders);
+
+  /**
    * @description The sign up form
    * @type {FormGroup}
    */
@@ -139,7 +165,8 @@ export class GhSignUpComponent implements OnInit{
       confirmPassword: new FormControl('', [Validators.required]),
       firstName: new FormControl('', [Validators.required, nameValidator]),
       lastName: new FormControl('', [Validators.required, nameValidator]),
-      dateOfBirth: new FormControl('', [Validators.required, minimumAgeValidator, dateFormatValidator])
+      dateOfBirth: new FormControl('', [Validators.required, minimumAgeValidator, dateFormatValidator]),
+      gender: new FormControl('', [Validators.required])
     }, { validators: passwordMatchValidator });
   }
 

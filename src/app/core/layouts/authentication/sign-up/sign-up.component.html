@@ -77,6 +77,18 @@
             [errorCaptions]="dateOfBirthErrorCaptions"
             ></gh-date-field>
         </div>
+        <div class="section">
+            <gh-select-field
+            [label]="'global.signup.accountDetails.gender.label' | translate" 
+            [placeholder]="'global.signup.accountDetails.gender.placeholder' | translate"
+            [name]="genderField"
+            [value]="signupForm.get(genderField).value"
+            (valueChange)="signupForm.get(genderField).setValue($event)"
+            [errors]="signupForm.get(genderField).errors"
+            [errorCaptions]="genderErrorCaptions"
+            [options]="genderOptions"
+            ></gh-select-field>
+        </div>
     </div>
 </div>
 </div>

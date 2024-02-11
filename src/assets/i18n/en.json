@@ -70,6 +70,14 @@
                     "label": "Date of birth",
                     "placeholder": "Enter your date of birth"
                 },
+                "gender": {
+                    "label": "Gender",
+                    "placeholder": "Select your gender",
+                    "options": {
+                        "Male": "Male",
+                        "Female": "Female"
+                    }
+                },
                 "errors": {
                     "firstName": {
                         "required": "Enter your first name",
@@ -83,9 +91,18 @@
                         "required": "Enter your date of birth",
                         "invalid": "This is not a valid date of birth",
                         "invalidFormat": "The date of birth must be in the format YYYY-MM-DD"
+                    },
+                    "gender": {
+                        "required": "Select your gender"
                     }
                 }
             }
+        }
+    },
+    "enums": {
+        "Genders": {
+            "Male":"Male",
+            "Female":"Female"
         }
     }
 }

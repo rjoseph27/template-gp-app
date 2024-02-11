@@ -2,13 +2,30 @@ import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { BaseInputFieldComponent } from '../base-input-field.component';
 import { CALENDAR_ICON } from '../../../../misc/constants/icon';
 import { DateFromDatePicker, DateUtil } from '../../../../misc/util/date.util';
+import { BehaviorSubject } from 'rxjs';
 
+/**
+ * @component GhDateFieldComponent
+ * @description The date field component that will be use throughout the application
+ */
 @Component({
   selector: 'gh-date-field',
   templateUrl: './date-field.component.html',
   styleUrls: ['./date-field.component.scss', './../base-input-field.component.scss']
 })
 export class GhDateFieldComponent extends BaseInputFieldComponent<DateFromDatePicker> {
+  /**
+   * @description Backing field for isCalendarOpen$
+   * @type {BehaviorSubject<boolean>}
+   */
+  private readonly _isCalendarOpen$ = new BehaviorSubject<boolean>(false);
+
+  /**
+   * @description An observable that indicates if the calendar is open
+   * @type {Observable<boolean>}
+   */
+  protected readonly isCalendarOpen$ = this._isCalendarOpen$.asObservable();
+  
   /**
    * @description A reference to the input element.
    * @type {ElementRef}
@@ -45,7 +62,8 @@ export class GhDateFieldComponent extends BaseInputFieldComponent<DateFromDatePi
    * @type {void}
    */
   protected showCalendar(): void {
-    this.input.nativeElement.showPicker();
+    this._isCalendarOpen$.next(true);
+    setTimeout(() => this.input.nativeElement.showPicker(), 0);
   }
 
   /**
@@ -58,6 +76,7 @@ export class GhDateFieldComponent extends BaseInputFieldComponent<DateFromDatePi
       date: new Date(this.dateValue),
       dateString: this.dateValue
     })
+    this._isCalendarOpen$.next(false);
   }
 
   /**
@@ -69,5 +88,6 @@ export class GhDateFieldComponent extends BaseInputFieldComponent<DateFromDatePi
       date: new Date(event),
       dateString: event
     })
+    this._isCalendarOpen$.next(false);
   }
 }

@@ -1,0 +1,21 @@
+<div class="section">
+    <label [for]="name">{{ label }}</label>
+</div>
+<div class="section">
+    <select
+     #input="ngModel"
+     class="input"
+     [ngClass]="{'error-input': ((errorMessage$ | async) && (input.dirty || input.touched))}"
+     [id]="name"
+     [ngModel]="value"
+     (ngModelChange)="valueChange.emit($event)"
+     (blur)="onInputBlur()"
+     >
+        <option [value]="undefined" disabled selected>{{ placeholder }}</option>
+        <option *ngFor="let option of options" [value]="option.value">{{ option.label }}</option>
+    </select>
+    <div 
+        *ngIf="(errorMessage$ | async) && (input.dirty || input.touched)"
+        class="error-message">{{ (errorMessage$ | async) | translate }}
+    </div>
+</div>
