@@ -1,6 +1,29 @@
 import { Component, Input } from '@angular/core';
 import { BaseInputFieldComponent } from '../base-input-field.component';
-import { SelectFieldOption } from '../../../../misc/util/select-option.util';
+
+/**
+ * @interface SelectFieldOption
+ * @description An interface for the select field option
+ */
+export interface SelectFieldOption {
+  /**
+   * @description The label of the select option
+   * @type {string}
+   */
+  label: string;
+
+  /**
+   * @description The value of the select option
+   * @type {string}
+   */
+  value: string;
+
+  /**
+   * @description The prefix of the select option
+   * @type {string}
+   */
+  prefix?: string;
+}
 
 @Component({
   selector: 'gh-select-field',
@@ -12,7 +35,7 @@ export class GhSelectFieldComponent extends BaseInputFieldComponent<string> {
    * @description The options of the select field
    * @type {SelectFieldOption[]}
    */
-  @Input() options: SelectFieldOption[]
+  @Input() options: SelectFieldOption[];
 
   /**
    * @description This methods ensure that the value is set to the default if the value is not set

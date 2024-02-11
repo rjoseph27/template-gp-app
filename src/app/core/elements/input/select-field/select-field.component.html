@@ -11,8 +11,8 @@
      (ngModelChange)="valueChange.emit($event)"
      (blur)="onInputBlur()"
      >
-        <option [value]="undefined" disabled selected>{{ placeholder }}</option>
-        <option *ngFor="let option of options" [value]="option.value">{{ option.label }}</option>
+        <option [value]="undefined" disabled selected>{{ placeholder | translate }}</option>
+        <option *ngFor="let option of options" [value]="option.value">{{ option.prefix ? option.prefix+" " : '' }}{{ option.label | translate }}</option>
     </select>
     <div 
         *ngIf="(errorMessage$ | async) && (input.dirty || input.touched)"

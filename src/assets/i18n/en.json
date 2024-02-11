@@ -78,6 +78,10 @@
                         "Female": "Female"
                     }
                 },
+                "country": {
+                    "label": "Country of residency",
+                    "placeholder": "Select your country"
+                },
                 "errors": {
                     "firstName": {
                         "required": "Enter your first name",
@@ -94,6 +98,9 @@
                     },
                     "gender": {
                         "required": "Select your gender"
+                    },
+                    "country": {
+                        "required": "Select your country of residency"
                     }
                 }
             }
@@ -103,6 +110,10 @@
         "Genders": {
             "Male":"Male",
             "Female":"Female"
+        },
+        "Country": {
+            "Canada": "Canada",
+            "Senegal": "Senegal"
         }
     }
 }

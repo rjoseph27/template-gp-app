@@ -10,7 +10,10 @@ import { LEGAL_AGE } from '../../../../misc/constants/application';
 import { MINIMUM_AGE_VALIDATION, minimumAgeValidator } from '../../../../misc/validation/minimum-age.validator';
 import { INVALID_DATE_FORMAT_VALIDATION, dateFormatValidator } from '../../../../misc/validation/date-format.validator';
 import { Genders } from '../../../../misc/enums/genders.enum';
-import { SelectFieldOption, SelectOptionUtil } from '../../../../misc/util/select-option.util';
+import { SelectFieldOption } from '../../../elements/input/select-field/select-field.component';
+import { EnumUtil } from '../../../../misc/util/enum.util';
+import { COUNTRY_INFO_LIST, CountryInfo } from '../../../../misc/constants/countries';
+import { Country } from '../../../../misc/enums/country.enum';
 
 /**
  * @title Sign Up Component
@@ -72,6 +75,12 @@ export class GhSignUpComponent implements OnInit{
   protected readonly genderField: string = 'gender';
 
   /**
+   * @description The name of the country field
+   * @type {string}
+   */
+  protected readonly countryField: string = 'country';
+
+  /**
    * @description The error messages of the email field
    * @type {Map<string, string>}
    */
@@ -118,11 +127,19 @@ export class GhSignUpComponent implements OnInit{
   ]);
 
   /**
-   * @description The error messages of the
+   * @description The error messages for the gender field
    * @type {Map<string, string>}
    */
   protected readonly genderErrorCaptions = new Map<string, string>([
     [REQUIRED_VALIDATION, "global.signup.accountDetails.errors.gender.required"],
+  ]);
+
+  /**
+   * @description The error messages for the country field
+   * @type {Map<string, string>}
+   */
+  protected readonly countryErrorCaptions = new Map<string, string>([
+    [REQUIRED_VALIDATION, "global.signup.accountDetails.errors.country.required"],
   ]);
 
   /**
@@ -147,7 +164,17 @@ export class GhSignUpComponent implements OnInit{
    * @description The options of gender
    * @type {SelectFieldOption[]}
    */
-  protected readonly genderOptions: SelectFieldOption[] = SelectOptionUtil.enumToSelectOptions(Genders);
+  protected readonly genderOptions: SelectFieldOption[] = EnumUtil.enumToSelectOptions(Genders,"Genders");
+
+  /**
+   * @description The options of the country
+   * @type {SelectFieldOption[]}
+   */
+  protected readonly countryOptions: SelectFieldOption[] = COUNTRY_INFO_LIST.map((country: CountryInfo) => 
+  ({value: country.name,
+    label: EnumUtil.EnumTranslationKey(Country, EnumUtil.getKeyByValue(Country, country.name), "Country"),
+    prefix: country.flag
+  }))
 
   /**
    * @description The sign up form
@@ -166,7 +193,8 @@ export class GhSignUpComponent implements OnInit{
       firstName: new FormControl('', [Validators.required, nameValidator]),
       lastName: new FormControl('', [Validators.required, nameValidator]),
       dateOfBirth: new FormControl('', [Validators.required, minimumAgeValidator, dateFormatValidator]),
-      gender: new FormControl('', [Validators.required])
+      gender: new FormControl('', [Validators.required]),
+      country: new FormControl('', [Validators.required])
     }, { validators: passwordMatchValidator });
   }
 

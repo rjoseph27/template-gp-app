@@ -22,5 +22,5 @@ export const ELEMENTS_COMPONENTS = [
     ButtonLoadingComponent,
     ButtonLoadingDirective,
     GhDateFieldComponent,
-    GhSelectFieldComponent
+    GhSelectFieldComponent,
 ]

@@ -68,7 +68,6 @@ export abstract class BaseInputFieldComponent<T> {
      */
     @Input() set errors(value: ValidationErrors)
     {
-        console.log(value);
         this._errorMessages$.next(undefined)
         if(this.errorCaptions && value) {
             const lists = Array.from(this.errorCaptions);
