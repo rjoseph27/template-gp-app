@@ -12,6 +12,7 @@
         [ngModel]="value"
         [maxlength]="maxLength"
         (ngModelChange)="valueChange.emit($event)"
+        [disabled]="disabled"
     >
     <div
         *ngIf="(errorMessage$ | async) && (input.dirty || input.touched)"

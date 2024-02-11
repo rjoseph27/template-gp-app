@@ -101,6 +101,19 @@
             [options]="countryOptions"
             ></gh-select-field>
         </div>
+        <div class="section">
+            <gh-phone-field
+            [label]="'global.signup.accountDetails.phoneNumber.label' | translate" 
+            [placeholder]="'global.signup.accountDetails.phoneNumber.placeholder' | translate"
+            [name]="phoneNumberField"
+            (formattedValueChange)="signupForm.get(phoneNumberField).setValue($event)"
+            [maxLength]="currentCountryInfo(signupForm.get(countryField).value)?.phone.length"
+            [errors]="signupForm.get(phoneNumberField).errors"
+            [errorCaptions]="countryErrorCaptions"
+            [disabled]="!(signupForm.get(countryField).value)"
+            [phoneInfo]="currentCountryInfo(signupForm.get(countryField).value)?.phone"
+            ></gh-phone-field>
+        </div>
     </div>
 </div>
 </div>

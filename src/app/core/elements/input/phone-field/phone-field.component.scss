@@ -1,0 +1,15 @@
+.input-phone {
+ max-height: 3em;
+}
+
+.input {
+  border:2px solid red;
+  border-width: 0px; 
+}
+
+.fix-position
+{
+  position:relative;
+  top:-2.8em;
+  pointer-events: none;
+}

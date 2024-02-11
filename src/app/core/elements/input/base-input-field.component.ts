@@ -88,4 +88,10 @@ export abstract class BaseInputFieldComponent<T> {
      * @type {T}
      */
     @Output() valueChange = new EventEmitter<T>();
+
+    /**
+     * @description A boolean that indicates if the input field is disabled.
+     * @type {boolean}
+     */
+    @Input() disabled = false;
 }

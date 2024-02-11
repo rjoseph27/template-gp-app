@@ -14,6 +14,7 @@ import { SelectFieldOption } from '../../../elements/input/select-field/select-f
 import { EnumUtil } from '../../../../misc/util/enum.util';
 import { COUNTRY_INFO_LIST, CountryInfo } from '../../../../misc/constants/countries';
 import { Country } from '../../../../misc/enums/country.enum';
+import { tap } from 'rxjs';
 
 /**
  * @title Sign Up Component
@@ -79,6 +80,12 @@ export class GhSignUpComponent implements OnInit{
    * @type {string}
    */
   protected readonly countryField: string = 'country';
+
+  /**
+   * @description The name for the phone number field
+   * @type {string}
+   */
+  protected readonly phoneNumberField: string = 'phoneNumber';
 
   /**
    * @description The error messages of the email field
@@ -194,7 +201,8 @@ export class GhSignUpComponent implements OnInit{
       lastName: new FormControl('', [Validators.required, nameValidator]),
       dateOfBirth: new FormControl('', [Validators.required, minimumAgeValidator, dateFormatValidator]),
       gender: new FormControl('', [Validators.required]),
-      country: new FormControl('', [Validators.required])
+      country: new FormControl('', [Validators.required]),
+      phoneNumber: new FormControl('', [Validators.required])
     }, { validators: passwordMatchValidator });
   }
 
@@ -206,5 +214,14 @@ export class GhSignUpComponent implements OnInit{
     const validations = LIST_OF_PASSWORD_VALIDATION_ERRORS.map((error) => [error, 'global.credentials.errors.password.invalid']);
     validations.unshift([REQUIRED_VALIDATION, 'global.credentials.errors.password.required']);
     return <Array<[string, string]>>validations;
+  }
+
+  /**
+   * @description Gets the current country info
+   * @param country The country name
+   * @returns The country info
+   */
+  protected currentCountryInfo(country: string): CountryInfo {
+    return COUNTRY_INFO_LIST.find((c) => c.name === country);
   }
 }

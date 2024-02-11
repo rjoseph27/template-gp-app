@@ -15,7 +15,33 @@ export interface CountryInfo {
      * @type {string}
      */
     flag: string;
+
+    phone: PhoneInfo,
 } 
+
+/**
+ * @interface PhoneInfo
+ * @description An interface for the phone info
+ */
+export interface PhoneInfo {
+    /**
+     * @description The code of the country
+     * @type {string}
+     */
+    code: string;
+
+    /**
+     * @description The length of the phone number
+     * @type {number}
+     */
+    length: number;
+
+    /**
+     * @description The format of the phone number
+     * @type {string}
+     */
+    phoneFormat: string;
+}
 
 /**
  * @constant 
@@ -24,10 +50,20 @@ export interface CountryInfo {
 export const COUNTRY_INFO_LIST: CountryInfo[] = [
     {
         name: Country.CA,
-        flag: '🇨🇦'  
+        flag: '🇨🇦',
+        phone: {
+            code: '+1',
+            length: 10,
+            phoneFormat: '(___) ___-____'
+        }  
     },
     {
         name: Country.SN,
-        flag: '🇸🇳'  
+        flag: '🇸🇳',
+        phone: {
+            code: '+221',
+            length: 9,
+            phoneFormat: '__ ___ __ __'
+        }  
     }
 ]
