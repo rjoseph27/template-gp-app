@@ -1,6 +1,5 @@
-import { Injectable, inject } from '@angular/core';
-import { firstValue } from '../misc/function/firstValue';
-import { BaseServiceApi } from './base.service.api'; 
+import { Country } from "../../misc/enums/country.enum";
+import { Genders } from "../../misc/enums/genders.enum";
 
 /**
  * @interface
@@ -39,6 +38,59 @@ export interface ConnectResponse {
 }
 
 /**
+ * @interface
+ * @description The interface to create a user
+ */
+export interface CreateUser {
+    /**
+     * @description The email of the user
+     * @type {string}
+     */
+    email: string;
+
+    /**
+     * @description The password of the user
+     * @type {string}
+     */
+    password: string,
+
+    /**
+     * @description The first name of the user
+     * @type {string}
+     */
+    firstName: string,
+
+    /**
+     * @description The last name of the user
+     * @type {string}
+     */
+    lastName: string,
+
+    /**
+     * @description The date of birth of the user
+     * @type {Date}
+     */
+    dateOfBirth: Date,
+
+    /**
+     * @description The gender of the user
+     */
+    gender: Genders,
+
+    /**
+     * @description The country of the user
+     * @type {Country}
+     */
+    country: Country,
+
+    /**
+     * @description The phone number of the user
+     * @type {string}
+     */
+    phoneNumber: string
+}
+
+/**
  * @enum
  * @description The status of the connection
  */
@@ -57,23 +109,4 @@ export enum ConnectStatus {
      * @description Internal server error.
      */
     INTERNAL_SERVER_ERROR = 'INTERNAL_SERVER_ERROR'
-}
-
-/**
- * @class UsersServiceApi
- * @description The users service api
- */
-@Injectable()
-export class UsersServiceApi extends BaseServiceApi {
-    /** @inheritdoc */
-    override apiName: string = 'users'; 
-
-    /**
-     * @description A method that log in the user.
-     * @param credentials The credentials of the user
-     * @returns A promise of the response
-     */
-    connect(credentials: Credentials): Promise<ConnectResponse> {
-        return firstValue(this.postRequest<ConnectResponse>('login', credentials));
-    }
 }

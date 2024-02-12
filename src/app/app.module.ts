@@ -7,7 +7,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { ClientModule } from "./client/client.module";
 import { UsersService } from "./services/users.service";
 import { HttpClientModule } from "@angular/common/http";
-import { UsersServiceApi } from "./api/users.service.api";
+import { UsersServiceApi } from "./api/users/users.service.api";
 import { NotificationService } from "./services/notification.service";
 import { NavigationService } from "./services/navigation.service";
 

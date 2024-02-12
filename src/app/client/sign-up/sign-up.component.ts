@@ -31,6 +31,18 @@ export class ClientSignUpComponent implements OnInit {
   private readonly translateService = inject(TranslateService);
 
   /**
+   * @description The current form service
+   * @type {CurrentFormService}
+   */
+  private readonly currentFormService: CurrentFormService = inject(CurrentFormService);
+
+  /**
+   * @description The users service
+   * @type {UsersService}
+   */
+  private readonly usersService: UsersService = inject(UsersService);
+
+  /**
    * @description The log in url
    * @type {string}
    */
@@ -51,5 +63,15 @@ export class ClientSignUpComponent implements OnInit {
 
   /** @inheritdoc */
   ngOnInit(): void {
+    this.currentFormService.submitting$.pipe(
+      tap((loading) => {
+        if(loading) {
+          this.usersService.create(this.currentFormService.currentForm.value).then(() => {
+            this.currentFormService.submitting = false;
+          });
+        }
+
+      })
+    ).subscribe()
   }
 }

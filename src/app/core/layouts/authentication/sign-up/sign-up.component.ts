@@ -301,4 +301,12 @@ export class GhSignUpComponent implements OnInit{
       maxHeight: '95vh',
     });
   }
+
+  /**
+   * @description The sign up event emitter
+   * @type {EventEmitter<void>}
+   */
+  protected signUp(): void {
+    this.currentFormService.submitting = true;
+  }
 }

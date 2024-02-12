@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
-import { ConnectStatus, Credentials, UsersServiceApi } from '../api/users.service.api';
 import { NotificationService } from './notification.service';
+import { ConnectStatus, CreateUser, Credentials } from '../api/users/users.type';
+import { UsersServiceApi } from '../api/users/users.service.api';
 
 
 /**
@@ -23,6 +24,7 @@ export class UsersService {
 
   /** 
   * @description Logs the user in
+  * @param credentials The credentials of the user
   * @returns {Promise<boolean>}
   */
   login(credentials: Credentials): Promise<boolean> {
@@ -38,6 +40,18 @@ export class UsersService {
       } else {
         this.notificationService.errorNotification('global.login.errors.login.internalServerError');
       }
+      return false;
+    });
+   }
+
+   /**
+    * @description Creates a new user
+    * @param newUser The new user to create
+    * @returns {Promise<boolean>}
+    */
+   create(newUser: CreateUser): Promise<boolean> {
+    return this.usersServiceApi.createUser(newUser).then(msg => {
+      console.log(msg)
       return false;
     });
    }
