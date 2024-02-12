@@ -4,6 +4,7 @@ import { CurrentFormService } from '../../services/current-form.service';
 import { combineLatest, map, tap } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { StringUtil } from '../../misc/util/string.util';
+import { ClientRoutes } from '../../client.route';
 
 /**
  * @constant
@@ -28,6 +29,14 @@ export class ClientSignUpComponent implements OnInit {
    * @type {TranslateService}
    */
   private readonly translateService = inject(TranslateService);
+
+  /**
+   * @description The log in url
+   * @type {string}
+   */
+  protected get logInUrl(): string {
+    return ClientRoutes.login.fullPath();
+  }
   
   /**
    * @description An observable for the terms and conditions caption.

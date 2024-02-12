@@ -118,7 +118,8 @@
                         "required": "You must accept the terms and conditions"
                     }
                 }
-            }
+            },
+            "alreadyHaveAccount": "Already have an account?"
         }
     },
     "enums": {

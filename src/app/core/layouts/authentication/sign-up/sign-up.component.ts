@@ -16,6 +16,7 @@ import { COUNTRY_INFO_LIST, CountryInfo } from '../../../../misc/constants/count
 import { Country } from '../../../../misc/enums/country.enum';
 import { Observable, tap } from 'rxjs';
 import { INVALID_PHONE_NUMBER_VALIDATION, phoneNumberValidator } from '../../../../misc/validation/phone.validation';
+import { Router } from '@angular/router';
 
 /**
  * @title Sign Up Component
@@ -33,6 +34,12 @@ export class GhSignUpComponent implements OnInit{
    * @type {string}
    */
   @Input() title: string;
+
+  /**
+   * @description The url of the log in page
+   * @type {string}
+   */
+  @Input() logInUrl: string;
 
   /**
    * @description The name of the email field
@@ -93,6 +100,12 @@ export class GhSignUpComponent implements OnInit{
    * @type {string}
    */
   protected readonly termsAndConditionsField: string = 'termsAndConditions';
+
+  /**
+   * @description The angular router service.
+   * @type {Router}
+   */
+  private router: Router = inject(Router);
 
   /**
    * @description The error messages of the email field
@@ -260,5 +273,13 @@ export class GhSignUpComponent implements OnInit{
    */
   protected currentCountryInfo(country: string): CountryInfo {
     return COUNTRY_INFO_LIST.find((c) => c.name === country);
+  }
+
+  /**
+   * @description Redirects the user to the log in page
+   * @returns {void}
+   */
+  redirectToLogInUrl(): void {
+    this.router.navigate([this.logInUrl]);
   }
 }

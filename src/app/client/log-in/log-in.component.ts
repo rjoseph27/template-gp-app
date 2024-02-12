@@ -35,6 +35,7 @@ export class ClientLogInComponent implements OnInit {
 
   /**
    * @description The url of the sign up page
+   * @type {string}
    */
   protected get signUpUrl(): string {
     return ClientRoutes.signup.fullPath();

@@ -138,6 +138,11 @@
             [disabled]="!signupForm.valid"
         >{{ 'global.login.login' | translate }}</button>
     </div>
+    <div class="already-have-account">
+        <div class="gp-link" (click)="redirectToLogInUrl()">
+            <span>{{ 'global.signup.alreadyHaveAccount' | translate }}</span>
+        </div>
+    </div>
 </div>
 </div>
 </form>
