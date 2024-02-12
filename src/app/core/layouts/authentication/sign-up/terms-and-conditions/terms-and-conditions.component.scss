@@ -1,0 +1,33 @@
+@import '../../../../../../styles/variables';
+
+:host {
+    overflow: scroll;
+}
+
+.section {
+    margin:1em;
+}
+
+.close-section {
+    display: flex;
+    justify-content:right;
+    button {
+        color: $primary-color;
+        font-weight: $bold;
+        font-size:1.5em;
+        background-color: transparent;
+        border-width: 0px;
+    }
+}
+
+.title-section, .button-section {
+    display: flex;
+    justify-content:center;
+}
+
+.button-section {
+    margin:2em 0em 1em 0em;
+    button {
+        width: 100%;
+    }
+}

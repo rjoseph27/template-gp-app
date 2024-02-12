@@ -14,9 +14,10 @@ import { SelectFieldOption } from '../../../elements/input/select-field/select-f
 import { EnumUtil } from '../../../../misc/util/enum.util';
 import { COUNTRY_INFO_LIST, CountryInfo } from '../../../../misc/constants/countries';
 import { Country } from '../../../../misc/enums/country.enum';
-import { Observable, tap } from 'rxjs';
 import { INVALID_PHONE_NUMBER_VALIDATION, phoneNumberValidator } from '../../../../misc/validation/phone.validation';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { GhTermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
 
 /**
  * @title Sign Up Component
@@ -240,6 +241,12 @@ export class GhSignUpComponent implements OnInit{
    */
   protected readonly loading$ = this.currentFormService.submitting$;
 
+  /**
+   * @description The dialog service
+   * @type {MatDialog}
+   */
+  private readonly dialog: MatDialog = inject(MatDialog);
+
   /** @inheritdoc */
   ngOnInit(): void {
     this.currentFormService.currentForm = new FormGroup({
@@ -279,7 +286,19 @@ export class GhSignUpComponent implements OnInit{
    * @description Redirects the user to the log in page
    * @returns {void}
    */
-  redirectToLogInUrl(): void {
+  protected redirectToLogInUrl(): void {
     this.router.navigate([this.logInUrl]);
+  }
+
+  /**
+   * @description Opens the terms and conditions modal
+   * @returns {void}
+   */
+  protected openTermsAndConditionsModal(): void {
+    const dialogRef = this.dialog.open(GhTermsAndConditionsComponent, {
+      width: '80%',
+      maxWidth: '600px',
+      maxHeight: '95vh',
+    });
   }
 }

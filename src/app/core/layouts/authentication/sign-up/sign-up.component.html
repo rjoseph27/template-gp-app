@@ -126,7 +126,7 @@
     >
         <ng-template #termsAndConditionsTemplate>
             <span class="terms-and-condtions">
-                {{ termsAndConditionsCaption?.[0]  }} <span class="link"> {{ termsAndConditionsCaption?.[1] }}</span>
+                {{ termsAndConditionsCaption?.[0]  }} <span class="link" (click)="openTermsAndConditionsModal()"> {{ termsAndConditionsCaption?.[1] }}</span>
             </span>
         </ng-template>
     </gh-checkbox>

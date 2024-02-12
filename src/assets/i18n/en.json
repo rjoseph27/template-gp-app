@@ -119,7 +119,50 @@
                     }
                 }
             },
-            "alreadyHaveAccount": "Already have an account?"
+            "alreadyHaveAccount": "Already have an account?",
+            "termsAndConditions": {
+                "title": "GP Hub Conditions and Terms",
+                "read": "I have read the terms and conditions",
+                "content": {
+                    "descriptions": "These terms and conditions (\"Terms\") govern your use of the GP Hub platform and services (\"Services\") provided by GP Hub (\"Company\"). By accessing or using the Services, you agree to be bound by these Terms. If you do not agree to these Terms, you may not use the Services.",
+                    "platformDescription": {
+                        "title": "Platform Description",
+                        "content": "GP Hub is a platform that facilitates the sharing of luggage space by connecting travelers (\"Shippers\") who have extra space in their luggage with individuals or businesses (\"Senders\") who need items shipped to various destinations around the world."
+                    },
+                    "userAccounts": {
+                        "title": "User Accounts",
+                        "content": "To use certain features of the Services, you may be required to create an account. You agree to provide accurate and complete information when creating your account and to update your information promptly as needed. You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account."
+                    },
+                    "shipments": {
+                        "title": "Shipments",
+                        "content": "a. Shippers may post details about available luggage space, including destination, travel dates, and any restrictions or preferences. b. Senders may request to ship items with Shippers who have available space that matches their needs. c. Shippers and Senders are responsible for arranging shipment details, including pickup, delivery, and any fees or costs associated with the shipment. d. Company does not guarantee the availability, accuracy, or quality of the Services or any shipments arranged through the platform."
+                    },
+                    "userResponsibilities": {
+                        "title": "User Responsibilities",
+                        "content": "a. Shippers and Senders agree to comply with all applicable laws and regulations when using the Services. b. Shippers and Senders are solely responsible for the contents of their luggage and shipments, including ensuring that items comply with all legal requirements and restrictions. c. Users agree not to use the Services for illegal, fraudulent, or unauthorized purposes, or in a manner that violates these Terms or the rights of others."
+                    },
+                    "disclaimers": {
+                        "title": "Disclaimers",
+                        "content": "a. Company provides the Services on an \"as is\" and \"as available\" basis, without warranties of any kind, express or implied. b. Company disclaims all liability for any damages or losses arising from your use of the Services, including but not limited to indirect, incidental, special, or consequential damages."
+                    },
+                    "indemnification": {
+                        "title": "Indemnification",
+                        "content": "You agree to indemnify and hold Company harmless from any claims, losses, damages, liabilities, and expenses (including attorneys' fees) arising out of or related to your use of the Services or violation of these Terms."
+                    },
+                    "modificationOfTerms": {
+                        "title": "Modification of Terms",
+                        "content": "Company reserves the right to modify or update these Terms at any time without prior notice. Your continued use of the Services after any such changes constitutes your acceptance of the modified Terms."
+                    },
+                    "governingLawAndDisputeResolution": {
+                        "title": "Governing Law and Dispute Resolution",
+                        "content": "These Terms shall be governed by and construed in accordance with the laws of [Jurisdiction]. Any disputes arising out of or relating to these Terms or the Services shall be resolved exclusively in the courts of [Jurisdiction]."
+                    },
+                    "contactUs": {
+                        "title": " Contact Us",
+                        "content": "If you have any questions or concerns about these Terms or the Services, please contact us at [contact email or address]."
+                    }
+                }
+            }
         }
     },
     "enums": {
