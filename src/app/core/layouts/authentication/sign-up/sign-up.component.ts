@@ -15,6 +15,7 @@ import { EnumUtil } from '../../../../misc/util/enum.util';
 import { COUNTRY_INFO_LIST, CountryInfo } from '../../../../misc/constants/countries';
 import { Country } from '../../../../misc/enums/country.enum';
 import { tap } from 'rxjs';
+import { INVALID_PHONE_NUMBER_VALIDATION, phoneNumberValidator } from '../../../../misc/validation/phone.validation';
 
 /**
  * @title Sign Up Component
@@ -146,7 +147,8 @@ export class GhSignUpComponent implements OnInit{
    * @type {Map<string, string>}
    */
   protected readonly countryErrorCaptions = new Map<string, string>([
-    [REQUIRED_VALIDATION, "global.signup.accountDetails.errors.country.required"],
+    [REQUIRED_VALIDATION, "global.signup.accountDetails.errors.phoneNumber.required"],
+    [INVALID_PHONE_NUMBER_VALIDATION, 'global.signup.accountDetails.errors.phoneNumber.invalid']
   ]);
 
   /**
@@ -202,7 +204,7 @@ export class GhSignUpComponent implements OnInit{
       dateOfBirth: new FormControl('', [Validators.required, minimumAgeValidator, dateFormatValidator]),
       gender: new FormControl('', [Validators.required]),
       country: new FormControl('', [Validators.required]),
-      phoneNumber: new FormControl('', [Validators.required])
+      phoneNumber: new FormControl('', [Validators.required, phoneNumberValidator])
     }, { validators: passwordMatchValidator });
   }
 

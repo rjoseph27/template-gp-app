@@ -105,6 +105,10 @@
                     },
                     "country": {
                         "required": "Select your country of residency"
+                    },
+                    "phoneNumber": {
+                        "required": "Enter your phone number",
+                        "invalid": "This is not a valid phone number"
                     }
                 }
             }

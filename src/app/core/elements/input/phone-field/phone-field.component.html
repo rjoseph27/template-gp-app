@@ -2,18 +2,14 @@
     <label [for]="name">{{ label }}</label>
 </div>
 <div class="section input-phone">
-    <div 
-        *ngIf="(errorMessage$ | async) && (input.dirty || input.touched)"
-        class="error-message">{{ (errorMessage$ | async) | translate }}
-    </div>
     <gh-text-field
+        #textField
         [name]="name"
         [placeholder]="placeholder"
         [value]="this.value$ | async"
         (valueChange)="emitValue($event)"
         [disabled]="disabled"
         [maxLength]="maxLength"
-        [ngClass]="{'error-input': ((errorMessage$ | async) && (input.dirty || input.touched))}"
         ></gh-text-field>
     <div class="fix-position">
     <input
@@ -21,10 +17,11 @@
         class="input"
         type="text" 
         [ngModel]="formattedValue"
+        [ngClass]="{'error-input': ((errorMessage$ | async) && textField.inputTouchedAndDirty)}"
         readonly
     >
     <div 
-        *ngIf="(errorMessage$ | async) && (input.dirty || input.touched)"
+        *ngIf="(errorMessage$ | async) && textField.inputTouchedAndDirty"
         class="error-message">{{ (errorMessage$ | async) | translate }}
     </div>
     </div>

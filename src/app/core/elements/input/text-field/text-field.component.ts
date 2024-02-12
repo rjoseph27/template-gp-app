@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { BaseInputFieldComponent } from '../base-input-field.component';
+import { NgModel } from '@angular/forms';
 
 /**
  * @title Text Field Component
@@ -17,4 +18,19 @@ export class GhTextFieldComponent extends BaseInputFieldComponent<string> {
    * @type {boolean} 
    */
   @Input() externalError = false
+
+  /**
+   * @description The input field
+   * @type {NgModel}
+   */
+  @ViewChild('input') input: NgModel;
+
+  /**
+   * @description A boolean value that determines if the input field is touched and dirty
+   * @type {boolean}
+   */
+  get inputTouchedAndDirty(): boolean
+  {
+      return this.input.touched && this.input.dirty;
+  }
 }

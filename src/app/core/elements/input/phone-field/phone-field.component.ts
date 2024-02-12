@@ -1,7 +1,8 @@
-import { AfterContentChecked, AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
+import { AfterContentChecked, AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild, inject } from '@angular/core';
 import { BaseInputFieldComponent } from '../base-input-field.component';
 import { PhoneInfo } from '../../../../misc/constants/countries';
 import { BehaviorSubject, Subject, tap } from 'rxjs';
+import { GhTextFieldComponent } from '../text-field/text-field.component';
 
 /**
  * @class GhPhoneFieldComponent
@@ -18,6 +19,12 @@ export class GhPhoneFieldComponent extends BaseInputFieldComponent<string> {
    * @type {BehaviorSubject<string>}
    */
   private readonly _value$ = new BehaviorSubject<string>(undefined);
+
+  /**
+   * @description The text field
+   * @type {GhTextFieldComponent}
+   */
+  @ViewChild('textField') input: GhTextFieldComponent;
 
   /**
    * @description An observable that emits the value of the input field
