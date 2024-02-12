@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, inject } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { EMAIL_VALIDATION, REQUIRED_VALIDATION } from '../../../../misc/constants/validations';
 import { CurrentFormService } from '../../../../services/current-form.service';
@@ -14,7 +14,7 @@ import { SelectFieldOption } from '../../../elements/input/select-field/select-f
 import { EnumUtil } from '../../../../misc/util/enum.util';
 import { COUNTRY_INFO_LIST, CountryInfo } from '../../../../misc/constants/countries';
 import { Country } from '../../../../misc/enums/country.enum';
-import { tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { INVALID_PHONE_NUMBER_VALIDATION, phoneNumberValidator } from '../../../../misc/validation/phone.validation';
 
 /**
@@ -89,6 +89,12 @@ export class GhSignUpComponent implements OnInit{
   protected readonly phoneNumberField: string = 'phoneNumber';
 
   /**
+   * @description The name for the terms and conditions field
+   * @type {string}
+   */
+  protected readonly termsAndConditionsField: string = 'termsAndConditions';
+
+  /**
    * @description The error messages of the email field
    * @type {Map<string, string>}
    */
@@ -147,8 +153,24 @@ export class GhSignUpComponent implements OnInit{
    * @type {Map<string, string>}
    */
   protected readonly countryErrorCaptions = new Map<string, string>([
+    [REQUIRED_VALIDATION, "global.signup.accountDetails.errors.country.required"],
+  ]);
+
+  /**
+   * @description The error messages for the phone field
+   * @type {Map<string, string>}
+   */
+  protected readonly phoneNumberErrorCaptions = new Map<string, string>([
     [REQUIRED_VALIDATION, "global.signup.accountDetails.errors.phoneNumber.required"],
     [INVALID_PHONE_NUMBER_VALIDATION, 'global.signup.accountDetails.errors.phoneNumber.invalid']
+  ]);
+
+  /**
+   * @description The error messages for the terms and conditons
+   * @type {Map<string, string>}
+   */
+  protected readonly termsAndConditionsErrorCaptions = new Map<string, string>([
+    [REQUIRED_VALIDATION, "global.signup.accountDetails.errors.termsAndConditions.required"]
   ]);
 
   /**
@@ -193,6 +215,18 @@ export class GhSignUpComponent implements OnInit{
     return this.currentFormService.currentForm;
   }
 
+  /**
+   * @description The observable of the terms and conditions caption
+   * @type {Observable<string>}
+   */
+  @Input() termsAndConditionsCaption: string[];
+
+  /**
+   * @description An observable of the loading state
+   * @type {Observable<boolean>}
+   */
+  protected readonly loading$ = this.currentFormService.submitting$;
+
   /** @inheritdoc */
   ngOnInit(): void {
     this.currentFormService.currentForm = new FormGroup({
@@ -204,7 +238,8 @@ export class GhSignUpComponent implements OnInit{
       dateOfBirth: new FormControl('', [Validators.required, minimumAgeValidator, dateFormatValidator]),
       gender: new FormControl('', [Validators.required]),
       country: new FormControl('', [Validators.required]),
-      phoneNumber: new FormControl('', [Validators.required, phoneNumberValidator])
+      phoneNumber: new FormControl('', [Validators.required, phoneNumberValidator]),
+      termsAndConditions: new FormControl('', [Validators.requiredTrue]),
     }, { validators: passwordMatchValidator });
   }
 

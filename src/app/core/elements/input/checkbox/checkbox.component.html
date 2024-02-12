@@ -1,0 +1,18 @@
+
+<input
+    #input="ngModel" 
+    type="checkbox" 
+    [id]="name" 
+    [ngClass]="{'error-input': ((errorMessage$ | async) && (input.dirty || input.touched))}"
+    [(ngModel)]="value"
+    (ngModelChange)="valueChange.emit($event)"
+    [disabled]="disabled"
+> 
+<label><ng-container *ngTemplateOutlet="caption"></ng-container></label>
+<div
+    *ngIf="(errorMessage$ | async) && (input.dirty || input.touched)"
+    class="error-message" 
+    >{{ (errorMessage$ | async) | translate }}
+</div>
+
+

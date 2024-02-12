@@ -24,10 +24,20 @@
     font-family: 'gp-hub-font', sans-serif;
 }
 
+.gp-divider {
+    border-width: 2px;
+}
+
 body {
     background-color: $primary-color;
     margin: 0;
     font-family: helvetica;
+}
+
+.gp-link {
+    color: $secondary-color;
+    font-weight: $semi-bold;
+    cursor:pointer;
 }
 
 html, body { height: 100%; }

@@ -26,7 +26,7 @@
             [errorCaptions]="passwordErrorCaptions"
         ></gh-password-field>
     </div>
-    <div class="forgot">
+    <div class="forgot gp-link">
         <span>{{ 'global.login.forgot' | translate }}</span>
     </div>
     <div class="login">
@@ -37,7 +37,7 @@
             [disabled]="!loginForm.valid"
         >{{ 'global.login.login' | translate }}</button>
     </div>
-    <div *ngIf="canRegister" class="register" (click)="redirectToSignUpUrl()">
+    <div *ngIf="canRegister" class="register gp-link" (click)="redirectToSignUpUrl()">
         <span>{{ 'global.login.register' | translate }}</span>
     </div>
     </div>

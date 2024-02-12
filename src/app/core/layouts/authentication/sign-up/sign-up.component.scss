@@ -4,7 +4,7 @@
     display: flex;
     justify-content: center;
     margin-top: 3em;
-    padding-bottom: 3em;
+    padding: 0 1.5em 3em 1.5em;
 }
 
 .title {
@@ -19,4 +19,18 @@
 
 .section {
     margin:1em 0;
+}
+
+.sign-up {
+    margin-top:1em;
+    button {
+        width: 100%;
+    }
+}
+
+.terms-and-condtions {
+    font-weight: $bold;
+    .link {
+        text-decoration: underline;
+    }
 }

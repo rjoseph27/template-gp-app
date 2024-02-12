@@ -109,11 +109,34 @@
             (formattedValueChange)="signupForm.get(phoneNumberField).setValue($event)"
             [maxLength]="currentCountryInfo(signupForm.get(countryField).value)?.phone.length"
             [errors]="signupForm.get(phoneNumberField).errors"
-            [errorCaptions]="countryErrorCaptions"
+            [errorCaptions]="phoneNumberErrorCaptions"
             [disabled]="!(signupForm.get(countryField).value)"
             [phoneInfo]="currentCountryInfo(signupForm.get(countryField).value)?.phone"
             ></gh-phone-field>
         </div>
+    </div>
+    <hr class="gp-divider">
+    <gh-checkbox 
+        [caption]="termsAndConditionsTemplate"
+        [name]="termsAndConditionsField" 
+        [errorCaptions]="termsAndConditionsErrorCaptions"
+        [errors]="signupForm.get(termsAndConditionsField).errors"
+        [value]="signupForm.get(termsAndConditionsField).value"
+        (valueChange)="signupForm.get(termsAndConditionsField).setValue($event)"
+    >
+        <ng-template #termsAndConditionsTemplate>
+            <span class="terms-and-condtions">
+                {{ termsAndConditionsCaption?.[0]  }} <span class="link"> {{ termsAndConditionsCaption?.[1] }}</span>
+            </span>
+        </ng-template>
+    </gh-checkbox>
+    <div class="sign-up">
+        <button
+            [buttonLoading]="loading$ | async" 
+            type="submit" 
+            class="gp-button" 
+            [disabled]="!signupForm.valid"
+        >{{ 'global.login.login' | translate }}</button>
     </div>
 </div>
 </div>

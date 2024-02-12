@@ -12,7 +12,7 @@ export const INVALID_PHONE_NUMBER_VALIDATION = 'invalidPhoneNumber';
  */
 export const phoneNumberValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
     const value: string = control.value;
-    const regex = /[a-zA-Z_!@#$%^&*+=\-\\[\]{};':"|,.<>?]/g;
+    const regex = /[a-zA-Z_!@#$%^&*=\\\[\]{};':"|,.<>?]/g;
     
     if (value && regex.test(value)) {
         return { invalidPhoneNumber: true };
