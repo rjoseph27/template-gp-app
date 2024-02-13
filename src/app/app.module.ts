@@ -11,6 +11,7 @@ import { UsersServiceApi } from "./api/users/users.service.api";
 import { NotificationService } from "./services/notification.service";
 import { NavigationService } from "./services/navigation.service";
 import { EmailTakenValidator } from "./misc/validation/email-taken.validation";
+import { PhoneNumberTakenValidator } from "./misc/validation/phone-number-taken.validator";
 
 /**
  * @module AppModule
@@ -26,7 +27,14 @@ import { EmailTakenValidator } from "./misc/validation/email-taken.validation";
         CoreModule,
         ClientModule
     ],
-    providers: [UsersService, UsersServiceApi, NotificationService, NavigationService, EmailTakenValidator],
+    providers: [
+        UsersService, 
+        UsersServiceApi, 
+        NotificationService, 
+        NavigationService, 
+        EmailTakenValidator,
+        PhoneNumberTakenValidator
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {}

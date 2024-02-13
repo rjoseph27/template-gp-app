@@ -113,7 +113,8 @@
                     },
                     "phoneNumber": {
                         "required": "Enter your phone number",
-                        "invalid": "This is not a valid phone number"
+                        "invalid": "This is not a valid phone number",
+                        "taken": "This phone number is already taken"
                     },
                     "termsAndConditions": {
                         "required": "You must accept the terms and conditions"

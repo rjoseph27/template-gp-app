@@ -71,4 +71,18 @@ export class UsersService {
       return false;
     });
    }
+
+   /**
+    * @description Checks if the phone number is taken
+    * @param phoneNumber The phone number to check
+    * @returns {Promise<boolean>}
+    */
+   isPhoneNumberTaken(phoneNumber: string): Promise<boolean> {
+    return this.usersServiceApi.isPhoneNumberTaken(phoneNumber).then(msg => {
+      if(msg.message === UniqueValue.TAKEN) {
+        return true;
+      }
+      return false;
+    });
+   }
 }

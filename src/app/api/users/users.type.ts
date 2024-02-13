@@ -122,9 +122,3 @@ export enum UniqueValue {
      */
     NOT_TAKEN = 'NOT_TAKEN'
 }
-
-/**
- * @constant
- * @description The time to wait before making a request to the server
- */
-export const DEBOUNCE_TIME = debounceTime(2000);

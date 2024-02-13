@@ -19,6 +19,7 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { GhTermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
 import { EMAIL_TAKEN_VALIDATOR, EmailTakenValidator } from '../../../../misc/validation/email-taken.validation';
+import { PHONE_NUMBER_TAKEN_VALIDATOR, PhoneNumberTakenValidator } from '../../../../misc/validation/phone-number-taken.validator';
 
 /**
  * @title Sign Up Component
@@ -178,7 +179,8 @@ export class GhSignUpComponent implements OnInit{
    */
   protected readonly phoneNumberErrorCaptions = new Map<string, string>([
     [REQUIRED_VALIDATION, "global.signup.accountDetails.errors.phoneNumber.required"],
-    [INVALID_PHONE_NUMBER_VALIDATION, 'global.signup.accountDetails.errors.phoneNumber.invalid']
+    [INVALID_PHONE_NUMBER_VALIDATION, 'global.signup.accountDetails.errors.phoneNumber.invalid'],
+    [PHONE_NUMBER_TAKEN_VALIDATOR, "global.signup.accountDetails.errors.phoneNumber.taken"]
   ]);
 
   /**
@@ -255,6 +257,12 @@ export class GhSignUpComponent implements OnInit{
    */
   private readonly emailTakenValidator = inject(EmailTakenValidator)
 
+  /**
+   * @description The phone number taken validator
+   * @type {PhoneNumberTakenValidator}
+   */
+  private readonly phoneNumberTakenValidator = inject(PhoneNumberTakenValidator)
+  
   /** @inheritdoc */
   ngOnInit(): void {
     this.currentFormService.currentForm = new FormGroup({
@@ -268,7 +276,11 @@ export class GhSignUpComponent implements OnInit{
       country: new FormControl('', [Validators.required]),
       phoneNumber: new FormControl('', [Validators.required, phoneNumberValidator]),
       termsAndConditions: new FormControl('', [Validators.requiredTrue]),
-    }, { validators: [passwordMatchValidator, this.emailTakenValidator.validate.bind(this.emailTakenValidator)] });
+    }, { validators: [
+        passwordMatchValidator, 
+        this.emailTakenValidator.validate.bind(this.emailTakenValidator),
+        this.phoneNumberTakenValidator.validate.bind(this.phoneNumberTakenValidator)
+      ] });
   }
 
   /**

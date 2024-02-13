@@ -11,6 +11,12 @@ export interface ApiResponse {
 }
 
 /**
+ * @constant
+ * @description The time to wait before making a request to the server
+ */
+export const DEBOUNCE_TIME = 2000;
+
+/**
  * @abstract
  * @class BaseService
  * @description The base service that provides common properties for all the api.

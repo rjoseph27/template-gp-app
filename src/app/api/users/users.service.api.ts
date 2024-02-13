@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { firstValue } from '../../misc/function/firstValue';
-import { ApiResponse, BaseServiceApi } from '../base.service.api'; 
+import { ApiResponse, BaseServiceApi, DEBOUNCE_TIME } from '../base.service.api'; 
 import { ConnectResponse, CreateUser, Credentials } from './users.type';
 import { Observable, debounceTime, delay } from 'rxjs';
 
@@ -32,7 +32,21 @@ export class UsersServiceApi extends BaseServiceApi {
         return firstValue(this.postRequest<ApiResponse>('create', newUser));
     }
 
+    /**
+     * @description A method that checks if the email is taken
+     * @param email The email to check
+     * @returns {Promise<ApiResponse>}
+     */
     isEmailTaken(email: string): Promise<ApiResponse> {
-        return firstValue(this.postRequest<ApiResponse>('email-taken', { email: email }).pipe(debounceTime(2000)));
+        return firstValue(this.postRequest<ApiResponse>('email-taken', { email: email }).pipe(debounceTime(DEBOUNCE_TIME)));
+    }
+
+    /**
+     * @description A method that checks if the phone number is taken
+     * @param phoneNumber The phone number to check
+     * @returns {Promise<ApiResponse>}
+     */
+    isPhoneNumberTaken(phoneNumber: string): Promise<ApiResponse> {
+        return firstValue(this.postRequest<ApiResponse>('phone-number-taken', { phoneNumber: phoneNumber }).pipe(debounceTime(DEBOUNCE_TIME)));
     }
 }
