@@ -10,7 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EmailValidator, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 
@@ -47,7 +47,9 @@ const lists = [...LAYOUTS_COMPONENTS, ...ELEMENTS_COMPONENTS]
       }
     }),
   ],
-  providers: [TranslateService],
+  providers: [
+    TranslateService,
+  ],
   exports: [...lists]
 })
 export class CoreModule { }

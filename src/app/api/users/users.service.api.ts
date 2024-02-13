@@ -1,7 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { firstValue } from '../../misc/function/firstValue';
-import { BaseServiceApi } from '../base.service.api'; 
+import { ApiResponse, BaseServiceApi } from '../base.service.api'; 
 import { ConnectResponse, CreateUser, Credentials } from './users.type';
+import { Observable, debounceTime, delay } from 'rxjs';
 
 
 /**
@@ -27,7 +28,11 @@ export class UsersServiceApi extends BaseServiceApi {
      * @param newUser The user to create
      * @returns A promise of the response
      */
-    createUser(newUser: CreateUser): Promise<ConnectResponse> {
-        return firstValue(this.postRequest<ConnectResponse>('create', newUser));
+    createUser(newUser: CreateUser): Promise<ApiResponse> {
+        return firstValue(this.postRequest<ApiResponse>('create', newUser));
+    }
+
+    isEmailTaken(email: string): Promise<ApiResponse> {
+        return firstValue(this.postRequest<ApiResponse>('email-taken', { email: email }).pipe(debounceTime(2000)));
     }
 }

@@ -2,6 +2,14 @@ import { HttpClient } from "@angular/common/http";
 import { inject } from "@angular/core";
 import { Observable } from "rxjs";
 
+export interface ApiResponse {
+    /**
+     * @description The message of the response
+     * @type {string}
+     */
+    message: string;
+}
+
 /**
  * @abstract
  * @class BaseService

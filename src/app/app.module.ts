@@ -10,6 +10,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { UsersServiceApi } from "./api/users/users.service.api";
 import { NotificationService } from "./services/notification.service";
 import { NavigationService } from "./services/navigation.service";
+import { EmailTakenValidator } from "./misc/validation/email-taken.validation";
 
 /**
  * @module AppModule
@@ -25,7 +26,7 @@ import { NavigationService } from "./services/navigation.service";
         CoreModule,
         ClientModule
     ],
-    providers: [UsersService, UsersServiceApi, NotificationService, NavigationService],
+    providers: [UsersService, UsersServiceApi, NotificationService, NavigationService, EmailTakenValidator],
     bootstrap: [AppComponent]
 })
 export class AppModule {}

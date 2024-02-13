@@ -1,5 +1,7 @@
+import { debounceTime } from "rxjs/operators";
 import { Country } from "../../misc/enums/country.enum";
 import { Genders } from "../../misc/enums/genders.enum";
+import { ApiResponse } from "../base.service.api";
 
 /**
  * @interface
@@ -23,13 +25,7 @@ export interface Credentials {
  * @interface
  * @description The response of the connect method
  */
-export interface ConnectResponse {
-    /**
-     * @description The message of the response
-     * @type {string}
-     */
-    message: string;
-
+export interface ConnectResponse extends ApiResponse {
     /**
      * @description The token of the response
      * @type {string}
@@ -110,3 +106,25 @@ export enum ConnectStatus {
      */
     INTERNAL_SERVER_ERROR = 'INTERNAL_SERVER_ERROR'
 }
+
+/**
+ * @enum
+ * @description The status of the item that should be unique
+ */
+export enum UniqueValue {
+    /**
+     * @description The value is already taken.
+     */
+    TAKEN = 'TAKEN',
+
+    /**
+     * @description The value is not taken.
+     */
+    NOT_TAKEN = 'NOT_TAKEN'
+}
+
+/**
+ * @constant
+ * @description The time to wait before making a request to the server
+ */
+export const DEBOUNCE_TIME = debounceTime(2000);

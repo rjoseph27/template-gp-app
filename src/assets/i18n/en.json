@@ -29,7 +29,8 @@
             "errors": {
                 "email": {
                     "required": "Enter your email",
-                    "email": "This is not a valid email"
+                    "email": "This is not a valid email",
+                    "taken": "This email is already taken"
                 },
                 "password": {
                     "required": "Enter your password",

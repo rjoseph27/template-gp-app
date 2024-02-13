@@ -18,6 +18,7 @@ import { INVALID_PHONE_NUMBER_VALIDATION, phoneNumberValidator } from '../../../
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { GhTermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
+import { EMAIL_TAKEN_VALIDATOR, EmailTakenValidator } from '../../../../misc/validation/email-taken.validation';
 
 /**
  * @title Sign Up Component
@@ -114,7 +115,8 @@ export class GhSignUpComponent implements OnInit{
    */
   protected readonly emailErrorCaptions = new Map<string, string>([
     [EMAIL_VALIDATION, "global.credentials.errors.email.email"],
-    [REQUIRED_VALIDATION, "global.credentials.errors.email.required"]
+    [REQUIRED_VALIDATION, "global.credentials.errors.email.required"],
+    [EMAIL_TAKEN_VALIDATOR, "global.credentials.errors.email.taken"]
   ]);
 
   /**
@@ -247,6 +249,12 @@ export class GhSignUpComponent implements OnInit{
    */
   private readonly dialog: MatDialog = inject(MatDialog);
 
+  /**
+   * @description The email taken validator
+   * @type {EmailTakenValidator}
+   */
+  private readonly emailTakenValidator = inject(EmailTakenValidator)
+
   /** @inheritdoc */
   ngOnInit(): void {
     this.currentFormService.currentForm = new FormGroup({
@@ -260,7 +268,7 @@ export class GhSignUpComponent implements OnInit{
       country: new FormControl('', [Validators.required]),
       phoneNumber: new FormControl('', [Validators.required, phoneNumberValidator]),
       termsAndConditions: new FormControl('', [Validators.requiredTrue]),
-    }, { validators: passwordMatchValidator });
+    }, { validators: [passwordMatchValidator, this.emailTakenValidator.validate.bind(this.emailTakenValidator)] });
   }
 
   /**
