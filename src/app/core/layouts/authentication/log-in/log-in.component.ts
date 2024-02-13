@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
 import { APPLICATION_NAME } from '../../../../misc/constants/application';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { tap } from 'rxjs/operators';
+import { filter, tap } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 import { EMAIL_VALIDATION, REQUIRED_VALIDATION } from '../../../../misc/constants/validations';
 import { CurrentFormService } from '../../../../services/current-form.service';
@@ -105,6 +105,11 @@ export class GhLoginComponent implements OnInit{
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required]),
     });
+
+    this.currentFormService.submitting$.pipe(
+      filter(loading => !loading),
+      tap(() => this.loginForm.get(this.passwordField).reset()
+    )).subscribe();
   } 
   
   /**
@@ -112,7 +117,6 @@ export class GhLoginComponent implements OnInit{
    * @type {EventEmitter<void>}
    */
   protected login(): void {
-    this.loginForm.get(this.passwordField).reset();
     this.currentFormService.submitting = true;
   }
 
