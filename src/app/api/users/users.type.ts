@@ -2,6 +2,7 @@ import { debounceTime } from "rxjs/operators";
 import { Country } from "../../misc/enums/country.enum";
 import { Genders } from "../../misc/enums/genders.enum";
 import { ApiResponse } from "../base.service.api";
+import { Language } from "../../misc/enums/language.enum";
 
 /**
  * @interface
@@ -84,6 +85,12 @@ export interface CreateUser {
      * @type {string}
      */
     phoneNumber: string
+
+    /**
+     * @description The language of the user
+     * @type {Language}
+     */
+    language: Language
 }
 
 /**

@@ -23,8 +23,10 @@
     "@ngx-translate/core": "^15.0.0",
     "@ngx-translate/http-loader": "^8.0.0",
     "bcryptjs": "^2.4.3",
+    "flag-icon-css": "^4.1.7",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
+    "twemoji": "^14.0.2",
     "zone.js": "~0.14.3"
   },
   "devDependencies": {

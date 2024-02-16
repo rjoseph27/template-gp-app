@@ -122,6 +122,7 @@
                 }
             },
             "alreadyHaveAccount": "Already have an account?",
+            "signup": "Create my account",
             "termsAndConditions": {
                 "title": "GP Hub Conditions and Terms",
                 "read": "I have read the terms and conditions",

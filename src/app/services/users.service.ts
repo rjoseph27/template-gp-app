@@ -4,6 +4,8 @@ import { ConnectStatus, CreateUser, Credentials, UniqueValue } from '../api/user
 import { UsersServiceApi } from '../api/users/users.service.api';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
+import { Language } from '../misc/enums/language.enum';
 
 
 /**
@@ -23,6 +25,12 @@ export class UsersService {
    * @type {NotificationService}
    */
   private readonly notificationService: NotificationService = inject(NotificationService);
+
+  /**
+   * @description The translate service
+   * @type {TranslateService}
+   */
+  private readonly translateService: TranslateService = inject(TranslateService);
 
   /** 
   * @description Logs the user in
@@ -52,6 +60,7 @@ export class UsersService {
     * @returns {Promise<boolean>}
     */
    create(newUser: CreateUser): Promise<boolean> {
+    newUser.language = Language[this.translateService.currentLang.toUpperCase() as keyof typeof Language];
     return this.usersServiceApi.createUser(newUser).then(msg => {
       console.log(msg)
       return false;
