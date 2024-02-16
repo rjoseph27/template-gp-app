@@ -166,6 +166,21 @@
                     }
                 }
             }
+        },
+        "emailActivation": {
+            "emailActivated": {
+                "title": "Email Activated",
+                "content": "Your email has been successfully activated. You can now login to your account."
+            },
+            "emailAlreadyActivated": {
+                "title": "Email Already Activated",
+                "content": "Your email has already been activated. You can now login to your account."
+            },
+            "error": {
+                "title": "We couldn't process your resquest",
+                "content": "An error occured while activating your email. Please try again later."
+            },
+            "continue": "Continue to login"
         }
     },
     "enums": {

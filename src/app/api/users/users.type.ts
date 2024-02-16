@@ -129,3 +129,29 @@ export enum UniqueValue {
      */
     NOT_TAKEN = 'NOT_TAKEN'
 }
+
+/**
+ * @enum
+ * @description The response of the email activation request
+ */
+export enum EmailActivationRequestResponse {
+    /**
+     * @description The email has already been activated.
+     */
+    EMAIL_ALREADY_ACTIVATED = 'EMAIL_ALREADY_ACTIVATED',
+
+    /**
+     * @description The email has been activated.
+     */
+    EMAIL_ACTIVATED = 'EMAIL_ACTIVATED',
+
+    /**
+     * @description The email is invalid.
+     */
+    INVALID_EMAIL = 'INVALID_EMAIL',
+
+    /**
+     * @description The id is invalid.
+     */
+    INVALID_ID = 'INVALID_ID'
+}

@@ -12,6 +12,7 @@ import { NotificationService } from "./services/notification.service";
 import { NavigationService } from "./services/navigation.service";
 import { EmailTakenValidator } from "./misc/validation/email-taken.validation";
 import { PhoneNumberTakenValidator } from "./misc/validation/phone-number-taken.validator";
+import { EmailActivationResolver } from "./core/layouts/authentication/email-activation/email-activation.resolver";
 
 /**
  * @module AppModule
@@ -33,7 +34,8 @@ import { PhoneNumberTakenValidator } from "./misc/validation/phone-number-taken.
         NotificationService, 
         NavigationService, 
         EmailTakenValidator,
-        PhoneNumberTakenValidator
+        PhoneNumberTakenValidator,
+        EmailActivationResolver
     ],
     bootstrap: [AppComponent]
 })

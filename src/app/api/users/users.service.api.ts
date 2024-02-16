@@ -49,4 +49,13 @@ export class UsersServiceApi extends BaseServiceApi {
     isPhoneNumberTaken(phoneNumber: string): Promise<ApiResponse> {
         return firstValue(this.postRequest<ApiResponse>('phone-number-taken', { phoneNumber: phoneNumber }).pipe(debounceTime(DEBOUNCE_TIME)));
     }
+
+    /**
+     * @description A method that activates the email
+     * @param id The id of the email activation resquest
+     * @returns {Promise<ApiResponse>}
+     */
+    activateEmail(id: string): Promise<ApiResponse> {
+        return firstValue(this.postRequest<ApiResponse>('activate-email', { id: id }))
+    }
 }

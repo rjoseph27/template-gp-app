@@ -1,0 +1,13 @@
+.content {
+    margin-top: 5em;
+}
+
+.title, .footer, .message {
+    display: flex;
+    justify-content: center;
+    margin: 1em;
+}
+
+.message {
+    text-align: justify;
+}
