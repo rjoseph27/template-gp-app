@@ -13,6 +13,7 @@ import { NavigationService } from "./services/navigation.service";
 import { EmailTakenValidator } from "./misc/validation/email-taken.validation";
 import { PhoneNumberTakenValidator } from "./misc/validation/phone-number-taken.validator";
 import { EmailActivationResolver } from "./core/layouts/authentication/email-activation/email-activation.resolver";
+import { LoadingService } from "./services/loading.service";
 
 /**
  * @module AppModule
@@ -35,7 +36,8 @@ import { EmailActivationResolver } from "./core/layouts/authentication/email-act
         NavigationService, 
         EmailTakenValidator,
         PhoneNumberTakenValidator,
-        EmailActivationResolver
+        EmailActivationResolver,
+        LoadingService
     ],
     bootstrap: [AppComponent]
 })

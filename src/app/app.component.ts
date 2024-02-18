@@ -1,5 +1,6 @@
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
+import { LoadingService } from "./services/loading.service";
 
 /**
  * @title Application Component
@@ -12,6 +13,12 @@ import { TranslateService } from "@ngx-translate/core";
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
+  /**
+   * @description The loading service
+   * @returns {LoadingService}
+   */
+  protected readonly loadingService: LoadingService = inject(LoadingService);
+
   /**
    * @constructor
    * @param translate The translate service
