@@ -39,7 +39,8 @@
                 "confirmPassword": {
                     "required": "Confirm your password",
                     "mismatch": "The passwords do not match"
-                }
+                },
+                "serverError": "An error occured, please try again later"
             }
         },
         "login": {
@@ -118,8 +119,7 @@
                     },
                     "termsAndConditions": {
                         "required": "You must accept the terms and conditions"
-                    }, 
-                    "serverError": "An error occured, please try again later"
+                    }
                 }
             },
             "alreadyHaveAccount": "Already have an account?",
@@ -186,7 +186,14 @@
         "forgotPassword" : {
             "title": "Forgot your password?",
             "content": "If you have forgotten your password, please enter the email address you registered your account. A reset password will be send to you by email.",
-            "send": "Send me the link"
+            "send": "Send me the link",
+            "errors": {
+                "notFound": "This email is not associated with any account"
+            },
+            "success": {
+                "content": "An email has been sent to you with a link to reset your password.",
+                "note": "Note: The link will expire in 24 hours."
+            }
         }
     },
     "enums": {

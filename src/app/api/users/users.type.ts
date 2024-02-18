@@ -211,3 +211,24 @@ export enum SignUpResponse {
      */
     MAIL_SERVER_ERROR = 'MAIL_SERVER_ERROR'
 }
+
+/**
+ * @enum
+ * @description The response of the forgot password request
+ */
+export enum ForgotPasswordRequestResponse {
+    /**
+     * @description The email has been sent
+     */
+    EMAIL_SENT = 'EMAIL_SENT',
+
+    /**
+     * @description The email is not found
+     */
+    EMAIL_NOT_FOUND = 'EMAIL_NOT_FOUND',
+
+    /**
+     * @description The password reset mail has not been sent
+     */
+    MAIL_SERVER_ERROR = 'MAIL_SERVER_ERROR'
+}

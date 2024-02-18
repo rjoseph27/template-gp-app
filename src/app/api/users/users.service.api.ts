@@ -58,4 +58,14 @@ export class UsersServiceApi extends BaseServiceApi {
     activateEmail(id: string): Promise<ApiResponse> {
         return firstValue(this.postRequest<ApiResponse>('activate-email', { id: id }))
     }
+
+
+    /**
+     * @description A method that requests a password reset
+     * @param email The email of the user
+     * @returns {Promise<ApiResponse>}
+     */
+    forgotPasswordRequest(email: string): Promise<ApiResponse> {
+        return firstValue(this.postRequest<ApiResponse>('forgot-password', { email: email }))
+    }
 }

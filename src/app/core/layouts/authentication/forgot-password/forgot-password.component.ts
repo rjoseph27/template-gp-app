@@ -2,7 +2,10 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CurrentFormService } from '../../../../services/current-form.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { EMAIL_VALIDATION, REQUIRED_VALIDATION } from '../../../../misc/constants/validations';
-import { Router } from '@angular/router';
+import { UsersService } from '../../../../services/users.service';
+import { ForgotPasswordRequestResponse } from '../../../../api/users/users.type';
+import { NotificationService } from '../../../../services/notification.service';
+import { BehaviorSubject } from 'rxjs';
 
 /**
  * @class GhForgotPasswordComponent
@@ -20,6 +23,30 @@ export class GhForgotPasswordComponent implements OnInit{
    * @type {CurrentFormService}
    */
   private readonly currentFormService: CurrentFormService = inject(CurrentFormService);
+
+  /**
+   * @description backing field for the request state
+   * @type {BehaviorSubject<ForgotPasswordRequestResponse>}
+   */
+  private readonly _requestState$ = new BehaviorSubject<ForgotPasswordRequestResponse>(undefined);
+
+  /**
+   * @description An observable of the request state
+   * @type {Observable<ForgotPasswordRequestResponse>}
+   */
+  protected readonly requestState$ = this._requestState$.asObservable();
+
+  /**
+   * @description The notification service
+   * @type {NotificationService}
+   */
+  private readonly notificationService: NotificationService = inject(NotificationService);
+
+  /**
+   * @description The users service
+   * @type {UsersService}
+   */
+  private readonly usersService: UsersService = inject(UsersService);
 
   /**
    * @description The title of the forgot password component
@@ -62,6 +89,16 @@ export class GhForgotPasswordComponent implements OnInit{
    */
   protected sendReinitializationLink(): void {
     this.currentFormService.submitting = true;
+    this.usersService.forgotPasswordRequest(this.forgotPasswordForm.get(this.emailField).value).then(res => {
+      if(res === ForgotPasswordRequestResponse.MAIL_SERVER_ERROR) {
+        this.notificationService.errorNotification('global.credentials.errors.serverError');
+      } else if(res === ForgotPasswordRequestResponse.EMAIL_NOT_FOUND) {
+        this.notificationService.errorNotification('global.forgotPassword.errors.notFound');
+      } else {
+        this._requestState$.next(res);
+      }
+      this.currentFormService.submitting = false;
+    })
   }
 
   /** @inheritdoc */

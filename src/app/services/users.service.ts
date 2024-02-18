@@ -1,13 +1,11 @@
 import { Injectable, inject } from '@angular/core';
 import { NotificationService } from './notification.service';
-import { ConnectStatus, CreateUser, Credentials, EmailActivationRequestResponse, SignUpResponse, UniqueValue } from '../api/users/users.type';
+import { ConnectStatus, CreateUser, Credentials, EmailActivationRequestResponse, ForgotPasswordRequestResponse, SignUpResponse, UniqueValue } from '../api/users/users.type';
 import { UsersServiceApi } from '../api/users/users.service.api';
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { Language } from '../misc/enums/language.enum';
-import { ApiResponse } from '../api/base.service.api';
 import { NavigationService } from './navigation.service';
+
 
 
 /**
@@ -74,7 +72,7 @@ export class UsersService {
         this.navigationService.redirectToMainPage();
         return true;
       }
-      this.notificationService.errorNotification('global.signup.accountDetails.errors.serverError');
+      this.notificationService.errorNotification('global.credentials.errors.serverError');
       return false;
     });
    }
@@ -114,5 +112,14 @@ export class UsersService {
     */
    activateEmail(id: string): Promise<EmailActivationRequestResponse> {
     return this.usersServiceApi.activateEmail(id).then(msg => EmailActivationRequestResponse[msg.message as keyof typeof EmailActivationRequestResponse]);
+  }
+
+  /**
+   * @description Requests a password reset
+   * @param email The email of the user
+   * @returns {Promise<ForgotPasswordRequestResponse>}
+   */
+  forgotPasswordRequest(email: string): Promise<ForgotPasswordRequestResponse> {
+    return this.usersServiceApi.forgotPasswordRequest(email).then(msg => ForgotPasswordRequestResponse[msg.message as keyof typeof ForgotPasswordRequestResponse]);
   }
 }
