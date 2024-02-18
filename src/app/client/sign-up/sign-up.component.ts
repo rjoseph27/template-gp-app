@@ -12,6 +12,10 @@ import { ClientRoutes } from '../../client.route';
  */
 const NEW_ACCOUNT_PAGE_TITLE = 'new account';
 
+/**
+ * @class ClientSignUpComponent
+ * @description The sign up page for the users of the application.
+ */
 @Component({
   selector: 'client-sign-up',
   templateUrl: './sign-up.component.html',

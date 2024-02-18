@@ -1,12 +1,13 @@
 import { Injectable, inject } from '@angular/core';
 import { NotificationService } from './notification.service';
-import { ConnectStatus, CreateUser, Credentials, EmailActivationRequestResponse, UniqueValue } from '../api/users/users.type';
+import { ConnectStatus, CreateUser, Credentials, EmailActivationRequestResponse, SignUpResponse, UniqueValue } from '../api/users/users.type';
 import { UsersServiceApi } from '../api/users/users.service.api';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { Language } from '../misc/enums/language.enum';
 import { ApiResponse } from '../api/base.service.api';
+import { NavigationService } from './navigation.service';
 
 
 /**
@@ -32,6 +33,12 @@ export class UsersService {
    * @type {TranslateService}
    */
   private readonly translateService: TranslateService = inject(TranslateService);
+
+  /**
+   * @description The navigation service
+   * @type {NavigationService}
+   */
+  private readonly navigationService: NavigationService = inject(NavigationService)
 
   /** 
   * @description Logs the user in
@@ -63,7 +70,11 @@ export class UsersService {
    create(newUser: CreateUser): Promise<boolean> {
     newUser.language = Language[this.translateService.currentLang.toUpperCase() as keyof typeof Language];
     return this.usersServiceApi.createUser(newUser).then(msg => {
-      console.log(msg)
+      if(msg.message === SignUpResponse.USER_CREATED) {
+        this.navigationService.redirectToMainPage();
+        return true;
+      }
+      this.notificationService.errorNotification('global.signup.accountDetails.errors.serverError');
       return false;
     });
    }

@@ -155,3 +155,59 @@ export enum EmailActivationRequestResponse {
      */
     INVALID_ID = 'INVALID_ID'
 }
+
+/**
+ * @enum
+ * @description The response of the sign up request
+ */
+export enum SignUpResponse {
+    /**
+     * @description The user has been created.
+     */
+    USER_CREATED = 'USER_CREATED',
+
+    /**
+     * @description The email is invalid.
+     */
+    INVALID_EMAIL = 'INVALID_EMAIL',
+
+    /**
+     * @description The password is invalid.
+     */
+    INVALID_PASSWORD = 'INVALID_PASSWORD',
+
+    /**
+     * @description The first name is invalid.
+     */
+    INVALID_FIRSTNAME = 'INVALID_FIRSTNAME',
+
+    /**
+     * @description The last name is invalid.
+     */
+    INVALID_LASTNAME = 'INVALID_LASTNAME',
+
+    /**
+     * @description The date of birth is invalid.
+     */
+    INVALID_DATE_OF_BIRTH = 'INVALID_DATE_OF_BIRTH',
+
+    /**
+     * @description No gender has been selected.
+     */
+    NO_GENDER = 'NO_GENDER',
+
+    /**
+     * @description No country has been selected.
+     */
+    NO_COUNTRY = 'NO_COUNTRY',
+
+    /**
+     * @description The phone number is invalid.
+     */
+    INVALID_PHONE_NUMBER = 'INVALID_PHONE_NUMBER',
+
+    /**
+     * @description The activation email has not been sent
+     */
+    MAIL_SERVER_ERROR = 'MAIL_SERVER_ERROR'
+}

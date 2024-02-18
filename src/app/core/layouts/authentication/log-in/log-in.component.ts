@@ -2,10 +2,10 @@ import { Component, Input, OnInit, inject } from '@angular/core';
 import { APPLICATION_NAME } from '../../../../misc/constants/application';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { filter, tap } from 'rxjs/operators';
-import { BehaviorSubject } from 'rxjs';
 import { EMAIL_VALIDATION, REQUIRED_VALIDATION } from '../../../../misc/constants/validations';
 import { CurrentFormService } from '../../../../services/current-form.service';
 import { Router } from '@angular/router';
+import { GlobalRoutes } from '../../../../global.route';
 
 /**
  * @title Log in Component
@@ -70,7 +70,7 @@ export class GhLoginComponent implements OnInit{
    * @description The angular router service.
    * @type {Router}
    */
-  private router: Router = inject(Router);
+  private readonly router: Router = inject(Router);
   
   /**
    * @description The log in form
@@ -114,10 +114,18 @@ export class GhLoginComponent implements OnInit{
   
   /**
    * @description The login event emitter
-   * @type {EventEmitter<void>}
+   * @type {void}
    */
   protected login(): void {
     this.currentFormService.submitting = true;
+  }
+
+  /**
+   * @description Redirects the user to the forgot password page
+   * @returns {void}
+   */
+  protected redirectToForgotPassword(): void {
+    this.router.navigate([GlobalRoutes.forgotPassword.fullPath()]);
   }
 
   /**

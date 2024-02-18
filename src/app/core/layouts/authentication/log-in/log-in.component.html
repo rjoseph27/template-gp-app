@@ -27,7 +27,7 @@
         ></gh-password-field>
     </div>
     <div class="forgot gp-link">
-        <span>{{ 'global.login.forgot' | translate }}</span>
+        <span (click)="redirectToForgotPassword()">{{ 'global.login.forgot' | translate }}</span>
     </div>
     <div class="login">
         <button

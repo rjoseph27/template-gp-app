@@ -5,6 +5,7 @@ import { GhTermsAndConditionsComponent } from "./authentication/sign-up/terms-an
 import { GhEmailActivationComponent } from "./authentication/email-activation/email-activation.component";
 import { GhMessageComponent } from "./message/message.component";
 import { GhLoaderComponent } from "./loader/loader.component";
+import { GhForgotPasswordComponent } from "./authentication/forgot-password/forgot-password.component";
 
 /**
  * @constant
@@ -18,5 +19,6 @@ export const LAYOUTS_COMPONENTS = [
     GhTermsAndConditionsComponent,
     GhEmailActivationComponent,
     GhMessageComponent,
-    GhLoaderComponent
+    GhLoaderComponent,
+    GhForgotPasswordComponent
 ]

@@ -118,7 +118,8 @@
                     },
                     "termsAndConditions": {
                         "required": "You must accept the terms and conditions"
-                    }
+                    }, 
+                    "serverError": "An error occured, please try again later"
                 }
             },
             "alreadyHaveAccount": "Already have an account?",
@@ -181,6 +182,11 @@
                 "content": "An error occured while activating your email. Please try again later."
             },
             "continue": "Continue to login"
+        },
+        "forgotPassword" : {
+            "title": "Forgot your password?",
+            "content": "If you have forgotten your password, please enter the email address you registered your account. A reset password will be send to you by email.",
+            "send": "Send me the link"
         }
     },
     "enums": {

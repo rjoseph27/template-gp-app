@@ -21,6 +21,10 @@ export class NotificationService {
     */
     private readonly snackBar: MatSnackBar = inject(MatSnackBar);
 
+    /**
+     * @description The translate service
+     * @type {TranslateService}
+     */
     private readonly translateService: TranslateService = inject(TranslateService);
 
     /**
