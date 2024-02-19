@@ -194,6 +194,11 @@
                 "content": "An email has been sent to you with a link to reset your password.",
                 "note": "Note: The link will expire in 24 hours."
             }
+        },
+        "resetPassword": {
+            "title": "Reset your password",
+            "content": "Please enter your new password",
+            "send": "Send the request"
         }
     },
     "enums": {

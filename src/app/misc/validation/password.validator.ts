@@ -1,4 +1,5 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { REQUIRED_VALIDATION } from '../constants/validations';
 
 /**
  * @constant
@@ -34,7 +35,23 @@ export const HASNOTSPECIALCHARACTER_VALIDATION = 'hasNotSpecialCharacter';
  * @constant
  * @description The list of password validation errors
  */
-export const LIST_OF_PASSWORD_VALIDATION_ERRORS = [EIGHTCHARACTERS_VALIDATION, HASNOTLOWERCASE_VALIDATION, HASNOTUPPERCASE_VALIDATION, HASNOTNUMBER_VALIDATION, HASNOTSPECIALCHARACTER_VALIDATION];
+const LIST_OF_PASSWORD_VALIDATION_ERRORS = [EIGHTCHARACTERS_VALIDATION, HASNOTLOWERCASE_VALIDATION, HASNOTUPPERCASE_VALIDATION, HASNOTNUMBER_VALIDATION, HASNOTSPECIALCHARACTER_VALIDATION];
+
+ /**
+   * @description Generates the password validations
+   * @returns {Array<[string, string]>}
+   */
+function generatesPasswordValidations(): Array<[string, string]> {
+    const validations = LIST_OF_PASSWORD_VALIDATION_ERRORS.map((error) => [error, 'global.credentials.errors.password.invalid']);
+    validations.unshift([REQUIRED_VALIDATION, 'global.credentials.errors.password.required']);
+    return <Array<[string, string]>>validations;
+  }
+
+/**
+ * @constant
+ * @description The error messages for the password field
+ */
+export const INVALID_PASSWORD_ERROR_MESSAGES =  new Map<string, string>(generatesPasswordValidations())
 
 /**
  * @constant

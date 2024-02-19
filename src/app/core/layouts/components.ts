@@ -6,6 +6,8 @@ import { GhEmailActivationComponent } from "./authentication/email-activation/em
 import { GhMessageComponent } from "./message/message.component";
 import { GhLoaderComponent } from "./loader/loader.component";
 import { GhForgotPasswordComponent } from "./authentication/forgot-password/forgot-password.component";
+import { GhResetPasswordComponent } from "./authentication/reset-password/reset-password.component";
+import { GhResetPasswordForgotPasswordComponent } from "./authentication/forgot-password/reset-password/reset-password.component";
 
 /**
  * @constant
@@ -20,5 +22,7 @@ export const LAYOUTS_COMPONENTS = [
     GhEmailActivationComponent,
     GhMessageComponent,
     GhLoaderComponent,
-    GhForgotPasswordComponent
+    GhForgotPasswordComponent,
+    GhResetPasswordComponent,
+    GhResetPasswordForgotPasswordComponent
 ]

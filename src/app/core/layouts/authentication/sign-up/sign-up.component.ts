@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { EMAIL_VALIDATION, REQUIRED_VALIDATION } from '../../../../misc/constants/validations';
 import { CurrentFormService } from '../../../../services/current-form.service';
 import { PASSWORD_MISMATCH_VALIDATION, passwordMatchValidator } from '../../../../misc/validation/confirm-password.validation';
-import { LIST_OF_PASSWORD_VALIDATION_ERRORS, passwordValidator } from '../../../../misc/validation/password.validator';
+import { INVALID_PASSWORD_ERROR_MESSAGES, passwordValidator } from '../../../../misc/validation/password.validator';
 import { INVALID_NAME_VALIDATION, nameValidator } from '../../../../misc/validation/name.validator';
 import { DateUtil } from '../../../../misc/util/date.util';
 import { LEGAL_AGE } from '../../../../misc/constants/application';
@@ -195,7 +195,7 @@ export class GhSignUpComponent implements OnInit{
    * @description The error messages of the password field
    * @type {Map<string, string>}
    */
-  protected readonly passwordErrorCaptions = new Map<string, string>(this.generatesPasswordValidations());
+  protected readonly passwordErrorCaptions = INVALID_PASSWORD_ERROR_MESSAGES;
 
   /**
    * @description The current form service
@@ -281,16 +281,6 @@ export class GhSignUpComponent implements OnInit{
         this.emailTakenValidator.validate.bind(this.emailTakenValidator),
         this.phoneNumberTakenValidator.validate.bind(this.phoneNumberTakenValidator)
       ] });
-  }
-
-  /**
-   * @description Generates the password validations for the sign up form
-   * @returns {Array<[string, string]>}
-   */
-  private generatesPasswordValidations(): Array<[string, string]> {
-    const validations = LIST_OF_PASSWORD_VALIDATION_ERRORS.map((error) => [error, 'global.credentials.errors.password.invalid']);
-    validations.unshift([REQUIRED_VALIDATION, 'global.credentials.errors.password.required']);
-    return <Array<[string, string]>>validations;
   }
 
   /**
