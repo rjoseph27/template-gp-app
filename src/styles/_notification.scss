@@ -20,3 +20,20 @@
 ::ng-deep .error-notification .mdc-snackbar__label {
     @include error-notification-color;
 }
+
+@mixin success-notification-color {
+    color: $secondary-success-color !important;
+  }
+
+
+::ng-deep .success-notification .mdc-snackbar__surface {
+    background-color: $success-color !important;
+}
+
+::ng-deep .success-notification .mat-mdc-button {
+    @include success-notification-color;
+}
+
+::ng-deep .success-notification .mdc-snackbar__label {
+    @include success-notification-color;
+}

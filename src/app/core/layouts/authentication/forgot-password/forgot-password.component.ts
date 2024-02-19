@@ -91,7 +91,7 @@ export class GhForgotPasswordComponent implements OnInit{
     this.currentFormService.submitting = true;
     this.usersService.forgotPasswordRequest(this.forgotPasswordForm.get(this.emailField).value).then(res => {
       if(res === ForgotPasswordRequestResponse.MAIL_SERVER_ERROR) {
-        this.notificationService.errorNotification('global.credentials.errors.serverError');
+        this.notificationService.errorNotification('global.errors.serverError');
       } else if(res === ForgotPasswordRequestResponse.EMAIL_NOT_FOUND) {
         this.notificationService.errorNotification('global.forgotPassword.errors.notFound');
       } else {

@@ -232,3 +232,107 @@ export enum ForgotPasswordRequestResponse {
      */
     MAIL_SERVER_ERROR = 'MAIL_SERVER_ERROR'
 }
+
+/**
+ * @interface
+ * @description The reset password request
+ */
+export interface ResetPassword {
+    /**
+     * @description The id of the reset password request
+     * @type {string}
+     */
+    id: string;
+
+    /**
+     * @description The new password
+     * @type {string}
+     */
+    password: string;
+
+    /**
+     * @description The id of the user that requests the reset
+     * @type {string}
+     */
+    userId: string
+}
+
+/**
+ * @enum
+ * @description The response of the reset password get request
+ */
+export enum ResetPasswordGetRequestResponse {
+    /**
+     * @description The link is valid
+     * @type {string}
+     */
+    VALID_LINK = 'VALID_LINK',
+
+    /**
+     * @description The link is expired
+     * @type {string}
+     */
+    LINK_EXPIRED = 'LINK_EXPIRED',
+
+    /**
+     * @description The link is invalid
+     * @type {string}
+     */
+    INVALID_LINK = 'INVALID_LINK'
+}
+
+/**
+ * @interface
+ * @description The response of the reset password get request
+ */
+export interface ResetPasswordGetRequest {
+    /**
+     * @description The response of the request
+     * @type {ResetPasswordGetRequestResponse}
+     */
+    requestResponse: ResetPasswordGetRequestResponse,
+
+    /**
+     * @description The id of the user that requests the reset
+     * @type {string}
+     */
+    userId: string   
+}
+
+export interface ResetPasswordGetRequestApiResponse extends ApiResponse {
+    /**
+     * @description The id of the user that requests the reset
+     * @type {string}
+     */
+    userId: string
+}
+
+/**
+ * @enum
+ * @description The response of the reset password request
+ */
+export enum ResetPasswordResponse {
+    /**
+     * @description The password is invalid
+     * @type {string}
+     */
+    INVALID_PASSWORD = 'INVALID_PASSWORD',
+
+    /**
+     * @description There is an internal server error
+     * @type {string}
+     */
+    INTERNAL_SERVER_ERROR = 'INTERNAL_SERVER_ERROR',
+
+    /**
+     * @description The password has already been used
+     * @type {string}
+     */
+    ALREADY_USED_PASSWORD = 'ALREADY_USED_PASSWORD',
+
+    /**
+     * @description The password has been successfully modified
+     * @type {string}
+     */
+    PASSWORD_SUCCESSFULLY_MODIFIED = 'PASSWORD_SUCCESSFULLY_MODIFIED'
+}

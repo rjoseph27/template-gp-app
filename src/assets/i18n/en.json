@@ -39,8 +39,7 @@
                 "confirmPassword": {
                     "required": "Confirm your password",
                     "mismatch": "The passwords do not match"
-                },
-                "serverError": "An error occured, please try again later"
+                }
             }
         },
         "login": {
@@ -49,8 +48,7 @@
             "register": "Create a new account",
             "errors": {
                 "login": {
-                    "wrongCredentials": "Wrong email or password",
-                    "internalServerError": "An error occured, please try again later"
+                    "wrongCredentials": "Wrong email or password"
                 }
             }
         },
@@ -198,7 +196,15 @@
         "resetPassword": {
             "title": "Reset your password",
             "content": "Please enter your new password",
-            "send": "Send the request"
+            "send": "Send the request",
+            "success": "Your password has been successfully reset. You can now login to your account.",
+            "errors": { 
+                "expired": "The reset password link has expired",
+                "alreadyUsed": "Please, chose a password that you have not used before"
+            }
+        },
+        "errors": {
+            "serverError": "An error occured, please try again later"
         }
     },
     "enums": {

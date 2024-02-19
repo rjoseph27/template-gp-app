@@ -1,26 +1,12 @@
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/router";
-import { UsersService } from "../../../../services/users.service";
-import { inject } from "@angular/core";
 import { EmailActivationRequestResponse } from "../../../../api/users/users.type";
-import { LoadingService } from "../../../../services/loading.service";
+import { BaseAuthenticationResolver } from "../base-auth-resolver";
 
 /**
  * @class emailActivationResolver
  * @description The email activation resolver
  */
-export class EmailActivationResolver implements Resolve<string> {
-  /**
-   * @description The users service
-   * @type {UsersService}
-   */
-  private readonly usersService: UsersService = inject(UsersService);
-
-  /**
-   * @description The loading service
-   * @returns {LoadingService}
-   */
-  private readonly loadingService: LoadingService = inject(LoadingService)
-
+export class EmailActivationResolver extends BaseAuthenticationResolver implements Resolve<string> {
   /** @inheritdoc */
   async resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<string> {
     this.loadingService.startLoading();

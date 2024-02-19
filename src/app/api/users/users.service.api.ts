@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { firstValue } from '../../misc/function/firstValue';
 import { ApiResponse, BaseServiceApi, DEBOUNCE_TIME } from '../base.service.api'; 
-import { ConnectResponse, CreateUser, Credentials } from './users.type';
+import { ConnectResponse, CreateUser, Credentials, ResetPassword, ResetPasswordGetRequestApiResponse } from './users.type';
 import { Observable, debounceTime, delay } from 'rxjs';
 
 
@@ -68,4 +68,22 @@ export class UsersServiceApi extends BaseServiceApi {
     forgotPasswordRequest(email: string): Promise<ApiResponse> {
         return firstValue(this.postRequest<ApiResponse>('forgot-password', { email: email }))
     }
-}
+
+    /**
+     * @description A method to get the reset password request
+     * @param id The id of the reset password request
+     * @returns {Promise<ApiResponse>}
+     */
+    getResetPassword(id: string): Promise<ResetPasswordGetRequestApiResponse> {
+        return firstValue(this.getRequest<ResetPasswordGetRequestApiResponse>('reset-password', id));
+    }
+
+    /**
+     * @description A method to reset the password
+     * @param resetPassword The reset password request
+     * @returns {Promise<ApiResponse>}
+     */
+    resetPassword(resetPassword: ResetPassword): Promise<ApiResponse> {
+        return firstValue(this.postRequest<ApiResponse>('reset-password', resetPassword))
+    }
+} 

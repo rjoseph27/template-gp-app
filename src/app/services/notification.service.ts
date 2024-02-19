@@ -40,6 +40,18 @@ export class NotificationService {
     }
 
     /**
+     * @description Shows a success notification
+     * @param message The message of the notification
+     */
+    successNotification(message: string) {
+        const config: MatSnackBarConfig = {
+            panelClass: ['success-notification'],
+        };
+
+        this.showNotification(message, config);
+    }
+
+    /**
      * @description Shows a notification
      * @param message The message of the notification
      * @param config the configuration of the notification

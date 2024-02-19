@@ -14,4 +14,9 @@ export class GlobalRoutes {
      * @description The forgot password route
      */
     static readonly forgotPassword = new GhRoute('forgot-password');
+
+    /**
+     * @description The reset password route
+     */
+    static readonly resetPassword = new GhRoute('reset-password/:id');
 }

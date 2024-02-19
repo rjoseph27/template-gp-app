@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { NotificationService } from './notification.service';
-import { ConnectStatus, CreateUser, Credentials, EmailActivationRequestResponse, ForgotPasswordRequestResponse, SignUpResponse, UniqueValue } from '../api/users/users.type';
+import { ConnectStatus, CreateUser, Credentials, EmailActivationRequestResponse, ForgotPasswordRequestResponse, ResetPassword, ResetPasswordGetRequest, ResetPasswordGetRequestResponse, ResetPasswordResponse, SignUpResponse, UniqueValue } from '../api/users/users.type';
 import { UsersServiceApi } from '../api/users/users.service.api';
 import { TranslateService } from '@ngx-translate/core';
 import { Language } from '../misc/enums/language.enum';
@@ -72,7 +72,7 @@ export class UsersService {
         this.navigationService.redirectToMainPage();
         return true;
       }
-      this.notificationService.errorNotification('global.credentials.errors.serverError');
+      this.notificationService.errorNotification('global.errors.serverError');
       return false;
     });
    }
@@ -121,5 +121,26 @@ export class UsersService {
    */
   forgotPasswordRequest(email: string): Promise<ForgotPasswordRequestResponse> {
     return this.usersServiceApi.forgotPasswordRequest(email).then(msg => ForgotPasswordRequestResponse[msg.message as keyof typeof ForgotPasswordRequestResponse]);
+  }
+
+  /**
+   * @description Gets the reset password request
+   * @param id The id of the reset password request
+   * @returns {Promise<ResetPasswordGetRequest>}
+   */
+  getResetPassword(id: string): Promise<ResetPasswordGetRequest> {
+    return this.usersServiceApi.getResetPassword(id).then(msg => ({
+      requestResponse: ResetPasswordGetRequestResponse[msg.message as keyof typeof ResetPasswordGetRequestResponse],
+      userId: msg.userId
+    }));
+  }
+
+  /**
+   * @description Resets the password
+   * @param resetPassword The reset password request
+   * @returns {Promise<ResetPasswordResponse>}
+   */
+  resetPassword(resetPassword: ResetPassword): Promise<ResetPasswordResponse> {
+    return this.usersServiceApi.resetPassword(resetPassword).then(msg => ResetPasswordResponse[msg.message as keyof typeof ResetPasswordResponse]);
   }
 }

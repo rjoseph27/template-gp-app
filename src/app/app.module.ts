@@ -14,6 +14,7 @@ import { EmailTakenValidator } from "./misc/validation/email-taken.validation";
 import { PhoneNumberTakenValidator } from "./misc/validation/phone-number-taken.validator";
 import { EmailActivationResolver } from "./core/layouts/authentication/email-activation/email-activation.resolver";
 import { LoadingService } from "./services/loading.service";
+import { ResetPasswordResolver } from "./core/layouts/authentication/forgot-password/reset-password/reset-password.resolver";
 
 /**
  * @module AppModule
@@ -37,7 +38,8 @@ import { LoadingService } from "./services/loading.service";
         EmailTakenValidator,
         PhoneNumberTakenValidator,
         EmailActivationResolver,
-        LoadingService
+        LoadingService,
+        ResetPasswordResolver
     ],
     bootstrap: [AppComponent]
 })
