@@ -31,7 +31,13 @@ export interface ConnectResponse extends ApiResponse {
      * @description The token of the response
      * @type {string}
      */
-    token?: string;
+    token: string;
+
+    /**
+     * @description The id of the user
+     * @type {string}
+     */
+    userId: string;
 }
 
 /**

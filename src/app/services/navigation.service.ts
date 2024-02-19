@@ -50,6 +50,17 @@ export class NavigationService {
     // TODO add entreprise main page
   }
 
+  redirectToApplication(): void {
+    if(this.router.url[0] === ClientRoutes.client.segment)
+    {
+        this.router.navigate([ClientRoutes.main.fullPath()]);
+    } else {
+        this.router.navigate([ClientRoutes.main.fullPath()]);
+    }
+
+    // TODO add entreprise main page
+  }
+
   /**
    * @description Determines whether the previous icon should be hidden
    * @returns {boolean}

@@ -5,6 +5,7 @@ import { UsersServiceApi } from '../api/users/users.service.api';
 import { TranslateService } from '@ngx-translate/core';
 import { Language } from '../misc/enums/language.enum';
 import { NavigationService } from './navigation.service';
+import { ClientRoutes } from '../client.route';
 
 
 
@@ -39,6 +40,14 @@ export class UsersService {
   private readonly navigationService: NavigationService = inject(NavigationService)
 
   /** 
+   * @description Gets the current user id
+   * @returns {string}
+  */
+  get currentUserId(): string {
+    return localStorage.getItem('userId');
+  }
+
+  /** 
   * @description Logs the user in
   * @param credentials The credentials of the user
   * @returns {Promise<boolean>}
@@ -47,7 +56,8 @@ export class UsersService {
     return this.usersServiceApi.connect({email: credentials.email, password: credentials.password}).then(msg => {
       if(msg.message === ConnectStatus.LOGIN_SUCCESSFUL) {
         localStorage.setItem('token', msg.token);
-        // TODO redirect to the main page
+        localStorage.setItem('userId', msg.userId);
+        this.navigationService.redirectToApplication();
       }
       return true;
     }).catch((e) => {

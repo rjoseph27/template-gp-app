@@ -22,4 +22,10 @@ export class ClientRoutes {
      * @type {GhRoute}
      */
     static readonly signup: GhRoute = new GhRoute('signup', ClientRoutes.client);
+
+    /**
+     * @description The main page route
+     * @type {GhRoute}
+     */
+    static readonly main: GhRoute = new GhRoute('app', ClientRoutes.client);
 }

@@ -4,6 +4,9 @@ import { ClientLogInComponent } from './log-in/log-in.component';
 import { CoreModule } from "../core/core.module";
 import { ReactiveFormsModule } from '@angular/forms';
 import { ClientSignUpComponent } from './sign-up/sign-up.component';
+import { RouterModule } from '@angular/router';
+import { ClientMainComponent } from './main/main.component';
+import { ClientRouteModule } from './client-routing.module';
 
 
 /**
@@ -11,11 +14,12 @@ import { ClientSignUpComponent } from './sign-up/sign-up.component';
  * @description The client module
  */
 @NgModule({
-    declarations: [ClientLogInComponent, ClientSignUpComponent],
+    declarations: [ClientLogInComponent, ClientSignUpComponent, ClientMainComponent],
     imports: [
         CommonModule,
         ReactiveFormsModule,
-        CoreModule
+        CoreModule,
+        ClientRouteModule
     ],
 })
 export class ClientModule { }

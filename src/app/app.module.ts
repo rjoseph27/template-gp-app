@@ -15,6 +15,8 @@ import { PhoneNumberTakenValidator } from "./misc/validation/phone-number-taken.
 import { EmailActivationResolver } from "./core/layouts/authentication/email-activation/email-activation.resolver";
 import { LoadingService } from "./services/loading.service";
 import { ResetPasswordResolver } from "./core/layouts/authentication/forgot-password/reset-password/reset-password.resolver";
+import { LoggedInGuard } from "./misc/guard/logged-in.guard";
+import { LoggedOutGuard } from "./misc/guard/logged-out.guard";
 
 /**
  * @module AppModule
@@ -39,7 +41,9 @@ import { ResetPasswordResolver } from "./core/layouts/authentication/forgot-pass
         PhoneNumberTakenValidator,
         EmailActivationResolver,
         LoadingService,
-        ResetPasswordResolver
+        ResetPasswordResolver,
+        LoggedInGuard,
+        LoggedOutGuard
     ],
     bootstrap: [AppComponent]
 })
