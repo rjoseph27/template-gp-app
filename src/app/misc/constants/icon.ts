@@ -8,6 +8,13 @@
 export const PREVIOUS_PAGE_ICON: string = "arrow_back_ios";
 
 /**
+ * @constant
+ * @type {string}
+ * @description The icon for the next page navigation.
+ */
+export const NEXT_PAGE_ICON: string = "arrow_forward_ios";
+
+/**
  * @constant   
  * @type {string}
  * @description The icon to show the password.
