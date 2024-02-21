@@ -3,8 +3,10 @@
 .header
 {
     background-color: $primary-color;
-    position: relative;
-    top:-25px;
+}
+
+::ng-deep .app-content {
+    padding-top: 0 !important;
 }
 
 .module {

@@ -5,6 +5,10 @@
             "en":"English",
             "fr":"Français"
         },
+        "userType": {
+            "client": "Client",
+            "gp": "GP"
+        },
         "credentials": {
             "email": {
                 "label": "Email",

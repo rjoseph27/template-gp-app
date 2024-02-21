@@ -1,3 +1,10 @@
 <gh-main>
-    {{ userFullName$ | async }}
+    <div class="header-content">
+        <div>
+            {{ userFullName$ | async }}
+        </div>
+        <div>
+            {{ 'global.userType.client' | translate }}
+        </div>
+    </div>
 </gh-main>

@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { map, tap } from 'rxjs';
+import { BehaviorSubject, map, tap } from 'rxjs';
+import { UserType } from '../user-type.enum';
 
 /**
  * @component ClientMainComponent
@@ -9,8 +10,15 @@ import { map, tap } from 'rxjs';
 @Component({
   selector: 'client-main',
   templateUrl: './main.component.html',
+  styleUrls: ['./main.component.scss'],
 })
 export class ClientMainComponent {
+  /**
+   * @description Backing field for the user type
+   * @type {BehaviorSubject<UserType>}
+   */
+  private readonly _userType$ = new BehaviorSubject<UserType>(UserType.Client);
+
   /**
    * @description The activated route service
    * @type {ActivatedRoute}

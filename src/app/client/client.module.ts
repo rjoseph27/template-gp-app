@@ -8,6 +8,9 @@ import { RouterModule } from '@angular/router';
 import { ClientMainComponent } from './main/main.component';
 import { ClientRouteModule } from './client-routing.module';
 import { MainPageResolver } from './main/main.resolver';
+import { HttpClient } from '@angular/common/http';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 
 /**
@@ -20,10 +23,27 @@ import { MainPageResolver } from './main/main.resolver';
         CommonModule,
         ReactiveFormsModule,
         CoreModule,
-        ClientRouteModule
+        ClientRouteModule,
+        TranslateModule.forChild({
+            loader: {
+              provide: TranslateLoader,
+              useFactory: HttpLoaderFactory,
+              deps: [HttpClient]
+            }
+        })
     ],
     providers: [
         MainPageResolver
     ]
 })
 export class ClientModule { }
+
+/**
+ * @function HttpLoaderFactory
+ * @description Factory function for creating a new instance of TranslateHttpLoader.
+ * @param {HttpClient} http - The HttpClient instance to be used by the TranslateHttpLoader.
+ * @returns {TranslateHttpLoader} A new instance of TranslateHttpLoader.
+ */
+function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+    return new TranslateHttpLoader(http, '/assets/i18n/client/', '.json');
+  }

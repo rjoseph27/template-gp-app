@@ -6,7 +6,7 @@ import { CoreModule } from "./core/core.module";
 import { AppRoutingModule } from "./app-routing.module";
 import { ClientModule } from "./client/client.module";
 import { UsersService } from "./services/users.service";
-import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from "@angular/common/http";
 import { UsersServiceApi } from "./api/users/users.service.api";
 import { NotificationService } from "./services/notification.service";
 import { NavigationService } from "./services/navigation.service";
@@ -18,6 +18,8 @@ import { ResetPasswordResolver } from "./core/layouts/authentication/forgot-pass
 import { LoggedInGuard } from "./misc/guard/logged-in.guard";
 import { LoggedOutGuard } from "./misc/guard/logged-out.guard";
 import { AuthInterceptor } from "./services/auth.interceptor";
+import { TranslateLoader, TranslateModule, TranslateService } from "@ngx-translate/core";
+import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 
 /**
  * @module AppModule
@@ -31,7 +33,14 @@ import { AuthInterceptor } from "./services/auth.interceptor";
         BrowserAnimationsModule,
         HttpClientModule,
         CoreModule,
-        ClientModule
+        ClientModule,
+        TranslateModule.forRoot({
+            loader: {
+              provide: TranslateLoader,
+              useFactory: HttpLoaderFactory,
+              deps: [HttpClient]
+            }
+          }),
     ],
     providers: [
         UsersService, 
@@ -45,8 +54,19 @@ import { AuthInterceptor } from "./services/auth.interceptor";
         ResetPasswordResolver,
         LoggedInGuard,
         LoggedOutGuard,
-        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+        TranslateService,
+        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     ],
     bootstrap: [AppComponent]
 })
 export class AppModule {}
+
+/**
+ * @function HttpLoaderFactory
+ * @description Factory function for creating a new instance of TranslateHttpLoader.
+ * @param {HttpClient} http - The HttpClient instance to be used by the TranslateHttpLoader.
+ * @returns {TranslateHttpLoader} A new instance of TranslateHttpLoader.
+ */
+function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+    return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
+  }
