@@ -6,7 +6,7 @@ import { CoreModule } from "./core/core.module";
 import { AppRoutingModule } from "./app-routing.module";
 import { ClientModule } from "./client/client.module";
 import { UsersService } from "./services/users.service";
-import { HttpClientModule } from "@angular/common/http";
+import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { UsersServiceApi } from "./api/users/users.service.api";
 import { NotificationService } from "./services/notification.service";
 import { NavigationService } from "./services/navigation.service";
@@ -17,6 +17,7 @@ import { LoadingService } from "./services/loading.service";
 import { ResetPasswordResolver } from "./core/layouts/authentication/forgot-password/reset-password/reset-password.resolver";
 import { LoggedInGuard } from "./misc/guard/logged-in.guard";
 import { LoggedOutGuard } from "./misc/guard/logged-out.guard";
+import { AuthInterceptor } from "./services/auth.interceptor";
 
 /**
  * @module AppModule
@@ -43,7 +44,8 @@ import { LoggedOutGuard } from "./misc/guard/logged-out.guard";
         LoadingService,
         ResetPasswordResolver,
         LoggedInGuard,
-        LoggedOutGuard
+        LoggedOutGuard,
+        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
     ],
     bootstrap: [AppComponent]
 })

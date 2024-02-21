@@ -1,11 +1,12 @@
 import { Injectable, inject } from '@angular/core';
 import { NotificationService } from './notification.service';
-import { ConnectStatus, CreateUser, Credentials, EmailActivationRequestResponse, ForgotPasswordRequestResponse, ResetPassword, ResetPasswordGetRequest, ResetPasswordGetRequestResponse, ResetPasswordResponse, SignUpResponse, UniqueValue } from '../api/users/users.type';
+import { ConnectStatus, CreateUser, Credentials, EmailActivationRequestResponse, ForgotPasswordRequestResponse, ResetPassword, ResetPasswordGetRequest, ResetPasswordGetRequestResponse, ResetPasswordResponse, SignUpResponse, UniqueValue, UserInfo } from '../api/users/users.type';
 import { UsersServiceApi } from '../api/users/users.service.api';
 import { TranslateService } from '@ngx-translate/core';
 import { Language } from '../misc/enums/language.enum';
 import { NavigationService } from './navigation.service';
 import { ClientRoutes } from '../client.route';
+import { TOKEN_LOCAL_STORAGE_KEY, USER_ID_LOCAL_STORAGE_KEY } from '../misc/constants/local-storage';
 
 
 
@@ -44,7 +45,15 @@ export class UsersService {
    * @returns {string}
   */
   get currentUserId(): string {
-    return localStorage.getItem('userId');
+    return localStorage.getItem(USER_ID_LOCAL_STORAGE_KEY);
+  }
+
+  /**
+   * @description Gets the current token
+   * @returns {string}
+   */
+  get currentToken(): string {
+    return localStorage.getItem(TOKEN_LOCAL_STORAGE_KEY);
   }
 
   /** 
@@ -55,8 +64,8 @@ export class UsersService {
   login(credentials: Credentials): Promise<boolean> {
     return this.usersServiceApi.connect({email: credentials.email, password: credentials.password}).then(msg => {
       if(msg.message === ConnectStatus.LOGIN_SUCCESSFUL) {
-        localStorage.setItem('token', msg.token);
-        localStorage.setItem('userId', msg.userId);
+        localStorage.setItem(TOKEN_LOCAL_STORAGE_KEY, msg.token);
+        localStorage.setItem(USER_ID_LOCAL_STORAGE_KEY, msg.userId);
         this.navigationService.redirectToApplication();
       }
       return true;
@@ -152,5 +161,14 @@ export class UsersService {
    */
   resetPassword(resetPassword: ResetPassword): Promise<ResetPasswordResponse> {
     return this.usersServiceApi.resetPassword(resetPassword).then(msg => ResetPasswordResponse[msg.message as keyof typeof ResetPasswordResponse]);
+  }
+
+  /**
+   * @description Gets the user info
+   * @param userId The id of the user
+   * @returns {Promise<UserInfo>}
+   */
+  getUserInfo(userId: string): Promise<UserInfo> {
+    return this.usersServiceApi.getUserInfo(userId).then(msg => msg.userInfo);
   }
 }

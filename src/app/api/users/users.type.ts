@@ -342,3 +342,46 @@ export enum ResetPasswordResponse {
      */
     PASSWORD_SUCCESSFULLY_MODIFIED = 'PASSWORD_SUCCESSFULLY_MODIFIED'
 }
+
+export interface UserInfoApiResponse extends ApiResponse {
+    /**
+     * @description The user info
+     * @type {UserInfo}
+     */
+    userInfo?: UserInfo
+}
+
+/**
+ * @interface
+ * @description The user info
+ */
+export interface UserInfo {
+    /**
+     * @description The first name of the user
+     * @type {string}
+     */
+    firstName: string,
+
+    /**
+     * @description The last name of the user
+     * @type {string}
+     */
+    lastName: string,
+}
+
+/**
+ * @enum
+ * @description The response of the token
+ */
+export enum TokenError {
+    /**
+     * @description No token has been provided
+     * @type {string}
+     */
+    NO_TOKEN_PROVIDED = 'NO_TOKEN_PROVIDED',
+
+    /**
+     * @description The token is invalid
+     */
+    INVALID_TOKEN = 'INVALID_TOKEN'
+}

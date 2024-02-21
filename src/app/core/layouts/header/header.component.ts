@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from '../../elements/menu/menu.interface';
 import { APPLICATION_NAME } from '../../../misc/constants/application';
 import { NavigationService } from '../../../services/navigation.service';
+import { LANGUAGE_LOCAL_STORAGE_KEY } from '../../../misc/constants/local-storage';
 
 /**
  * @title Header Component
@@ -73,7 +74,7 @@ export class GhHeaderComponent implements AfterContentChecked {
     {
       caption$: this.translateService.get("global.language."+lang),
       action: () => {
-        localStorage.setItem("lang", lang);
+        localStorage.setItem(LANGUAGE_LOCAL_STORAGE_KEY, lang);
         this.translateService.use(lang);
         this.translateService.setDefaultLang(lang);
       }

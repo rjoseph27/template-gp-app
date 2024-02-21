@@ -1,6 +1,7 @@
 import { Component, inject } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { LoadingService } from "./services/loading.service";
+import { LANGUAGE_LOCAL_STORAGE_KEY } from "./misc/constants/local-storage";
 
 /**
  * @title Application Component
@@ -20,11 +21,16 @@ export class AppComponent {
   protected readonly loadingService: LoadingService = inject(LoadingService);
 
   /**
-   * @constructor
-   * @param translate The translate service
+   * @description The translate service
+   * @type {TranslateService}
    */
-  constructor(private readonly translate: TranslateService) {
+  private readonly translate: TranslateService = inject(TranslateService);
+
+  /**
+   * @constructor
+   */
+  constructor() {
     const langAttribute = document.documentElement.lang || navigator.language;
-    this.translate.use(localStorage.getItem("lang") || langAttribute);
+    this.translate.use(localStorage.getItem(LANGUAGE_LOCAL_STORAGE_KEY) || langAttribute);
   }
 }

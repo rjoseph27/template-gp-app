@@ -7,6 +7,7 @@ import { ClientSignUpComponent } from './sign-up/sign-up.component';
 import { RouterModule } from '@angular/router';
 import { ClientMainComponent } from './main/main.component';
 import { ClientRouteModule } from './client-routing.module';
+import { MainPageResolver } from './main/main.resolver';
 
 
 /**
@@ -21,5 +22,8 @@ import { ClientRouteModule } from './client-routing.module';
         CoreModule,
         ClientRouteModule
     ],
+    providers: [
+        MainPageResolver
+    ]
 })
 export class ClientModule { }

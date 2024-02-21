@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { firstValue } from '../../misc/function/firstValue';
 import { ApiResponse, BaseServiceApi, DEBOUNCE_TIME } from '../base.service.api'; 
-import { ConnectResponse, CreateUser, Credentials, ResetPassword, ResetPasswordGetRequestApiResponse } from './users.type';
+import { ConnectResponse, CreateUser, Credentials, ResetPassword, ResetPasswordGetRequestApiResponse, UserInfo, UserInfoApiResponse } from './users.type';
 import { Observable, debounceTime, delay } from 'rxjs';
 
 
@@ -85,5 +85,14 @@ export class UsersServiceApi extends BaseServiceApi {
      */
     resetPassword(resetPassword: ResetPassword): Promise<ApiResponse> {
         return firstValue(this.postRequest<ApiResponse>('reset-password', resetPassword))
+    }
+
+    /**
+     * @description A method to get the user info
+     * @param id The id of the user
+     * @returns {Promise<UserInfo>}
+     */
+    getUserInfo(id: string): Promise<UserInfoApiResponse> {
+        return firstValue(this.getRequest<ApiResponse>('info', id));
     }
 } 

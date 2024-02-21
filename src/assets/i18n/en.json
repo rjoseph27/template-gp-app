@@ -204,7 +204,8 @@
             }
         },
         "errors": {
-            "serverError": "An error occured, please try again later"
+            "serverError": "An error occured, please try again later",
+            "logAgain": "Please login again"
         }
     },
     "enums": {
