@@ -2,7 +2,7 @@
     <ng-content></ng-content>
 </div>
 <div class="content">
-    <div class="module" *ngFor="let module of modules;" (click)="module.action">
+    <div class="module" *ngFor="let module of modules;" (click)="module.action()">
         <div class="module-content">
         <div class="title">
             <div class="icon">

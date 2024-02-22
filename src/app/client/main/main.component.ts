@@ -4,6 +4,8 @@ import { BehaviorSubject, map, tap } from 'rxjs';
 import { UserType } from '../user-type.enum';
 import { GhModule } from '../../core/layouts/main/main.component';
 import { ALERTS_ICON, HELP_ICON, LOG_OUT_ICON, MAKE_A_DROP_ICON, MAKE_A_REQUEST_ICON, ORDERS_ICON, REQUESTS_ICON, SETTING_ICON } from './icon';
+import { TOKEN_LOCAL_STORAGE_KEY, USER_ID_LOCAL_STORAGE_KEY } from '../../misc/constants/local-storage';
+import { NavigationService } from '../../services/navigation.service';
 
 /**
  * @component ClientMainComponent
@@ -56,6 +58,12 @@ export class ClientMainComponent {
    * @type {Observable<string>}
    */
   protected readonly userFullName$ = this.userInfo$.pipe(map(userInfo => userInfo.firstName + ' ' + userInfo.lastName));
+
+  /**
+   * @description The navigation service
+   * @type {NavigationService}
+   */
+  private readonly navigationService: NavigationService = inject(NavigationService);
   
   /**
    * @description The common modules for the application
@@ -75,7 +83,11 @@ export class ClientMainComponent {
     {
       label: "moduleList.global.logOut",
       icon: LOG_OUT_ICON,
-      action: () => {}
+      action: () => {
+        localStorage.removeItem(TOKEN_LOCAL_STORAGE_KEY);
+        localStorage.removeItem(USER_ID_LOCAL_STORAGE_KEY);
+        this.navigationService.redirectToMainPage();
+      }
     },
   ]
 
