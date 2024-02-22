@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { NotificationService } from './notification.service';
-import { ConnectStatus, CreateUser, Credentials, EmailActivationRequestResponse, ForgotPasswordRequestResponse, ResetPassword, ResetPasswordGetRequest, ResetPasswordGetRequestResponse, ResetPasswordResponse, SignUpResponse, UniqueValue, UserInfo } from '../api/users/users.type';
+import { ConnectStatus, CreateUser, Credentials, EmailActivationRequestResponse, ForgotPasswordRequestResponse, ResetPassword, ResetPasswordGetRequest, ResetPasswordGetRequestResponse, ResetPasswordResponse, SignUpResponse, UniqueValue, UpdateLanguage, UpdateLanguageResponse, UserInfo } from '../api/users/users.type';
 import { UsersServiceApi } from '../api/users/users.service.api';
 import { TranslateService } from '@ngx-translate/core';
 import { Language } from '../misc/enums/language.enum';
@@ -187,5 +187,19 @@ export class UsersService {
       lastName: msg.userInfo["lastName"],
       language: Language[msg.userInfo["language"].toUpperCase() as keyof typeof Language],
     }});
+  }
+
+  /**
+   * @description Updates the user language
+   * @param updateLanguage The update language request
+   * @returns {Promise<boolean>}
+   */
+  updateUserLanguage(updateLanguage: UpdateLanguage): Promise<boolean> {
+    return this.usersServiceApi.updateUserLanguage(updateLanguage).then(msg => {
+      if(msg.message === UpdateLanguageResponse.LANGUAGE_UPDATED) {
+        return true;
+      }
+      return false;
+    });
   }
 }

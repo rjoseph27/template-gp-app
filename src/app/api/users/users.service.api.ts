@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { firstValue } from '../../misc/function/firstValue';
 import { ApiResponse, BaseServiceApi, DEBOUNCE_TIME } from '../base.service.api'; 
-import { ConnectResponse, CreateUser, Credentials, ResetPassword, ResetPasswordGetRequestApiResponse, UserInfo, UserInfoApiResponse } from './users.type';
+import { ConnectResponse, CreateUser, Credentials, ResetPassword, ResetPasswordGetRequestApiResponse, UpdateLanguage, UserInfo, UserInfoApiResponse } from './users.type';
 import { Observable, debounceTime, delay } from 'rxjs';
 
 
@@ -94,5 +94,14 @@ export class UsersServiceApi extends BaseServiceApi {
      */
     getUserInfo(id: string): Promise<UserInfoApiResponse> {
         return firstValue(this.getRequest<ApiResponse>('info', id));
+    }
+
+    /**
+     * @description A method to update the user language
+     * @param updateLanguage The update language request
+     * @returns {Promise<ApiResponse>}
+     */
+    updateUserLanguage(updateLanguage: UpdateLanguage): Promise<ApiResponse> {
+        return firstValue(this.postRequest<ApiResponse>('update-language', updateLanguage));
     }
 } 

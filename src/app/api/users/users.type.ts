@@ -390,3 +390,37 @@ export enum TokenError {
      */
     INVALID_TOKEN = 'INVALID_TOKEN'
 }
+
+/**
+ * @interface
+ * @description The update language interface
+ */
+export interface UpdateLanguage {
+    /**
+     * @description The id of the user
+     * @type {string}
+     */
+    userId: string,
+
+    /**
+     * @description The language of the user
+     * @type {Language}
+     */
+    language: Language
+}
+
+/**
+ * @enum
+ * @description The response of the update language request
+ */
+export enum UpdateLanguageResponse {
+    /**
+     * @description The language has been updated
+     */
+    LANGUAGE_UPDATED = 'LANGUAGE_UPDATED',
+
+    /**
+     * @description There is an internal server error
+     */
+    INTERNAL_SERVER_ERROR = 'INTERNAL_SERVER_ERROR'
+}

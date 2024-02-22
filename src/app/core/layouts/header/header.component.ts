@@ -6,6 +6,7 @@ import { MenuItem } from '../../elements/menu/menu.interface';
 import { APPLICATION_NAME } from '../../../misc/constants/application';
 import { NavigationService } from '../../../services/navigation.service';
 import { LANGUAGE_LOCAL_STORAGE_KEY } from '../../../misc/constants/local-storage';
+import { UsersService } from '../../../services/users.service';
 
 /**
  * @title Header Component
@@ -29,6 +30,12 @@ export class GhHeaderComponent implements AfterContentChecked {
    * @type {NavigationService}
    */
   private readonly navigationService: NavigationService = inject(NavigationService);
+
+  /**
+  * @description The users service
+  * @type {UsersService}
+  */
+  private readonly userService: UsersService = inject(UsersService);
 
   /**
    * @description Navigates to the previous page
@@ -77,6 +84,10 @@ export class GhHeaderComponent implements AfterContentChecked {
         localStorage.setItem(LANGUAGE_LOCAL_STORAGE_KEY, lang);
         this.translateService.use(lang);
         this.translateService.setDefaultLang(lang);
+        if(this.userService.currentUserId)
+        {
+          this.userService.updateUserLanguage({userId: this.userService.currentUserId, language: lang});
+        }
       }
     }
     ));
