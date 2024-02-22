@@ -20,12 +20,6 @@ export class AuthInterceptor implements HttpInterceptor {
   private readonly userService: UsersService = inject(UsersService);
 
   /**
-   * @description The navigation service
-   * @type {NavigationService}
-   */
-  private readonly navigationService: NavigationService = inject(NavigationService);
-
-  /**
    * @description The notification service
    * @type {NotificationService}
    */
@@ -48,9 +42,7 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(tap((event) => {
       if (event instanceof HttpResponse) {
         if(TokenError[event.body.message as keyof typeof TokenError]) {
-        localStorage.removeItem(TOKEN_LOCAL_STORAGE_KEY);
-        localStorage.removeItem(USER_ID_LOCAL_STORAGE_KEY);
-        this.navigationService.redirectToMainPage();
+        this.userService.logout()
         this.notificationService.errorNotification('global.errors.logAgain');
       }
     }

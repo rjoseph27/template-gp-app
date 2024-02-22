@@ -1,16 +1,16 @@
 import { Injectable, inject } from "@angular/core";
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/router";
-import { UserInfo } from "../../api/users/users.type";
-import { UsersService } from "../../services/users.service";
-import { LoadingService } from "../../services/loading.service";
+import { UserInfo } from "../api/users/users.type";
+import { UsersService } from "../services/users.service";
+import { LoadingService } from "../services/loading.service";
 import { TranslateService } from "@ngx-translate/core";
 
 /**
- * @class MainPageResolver
- * @description The main page resolver
+ * @class ClientApplicationResolver
+ * @description The resolver for the client application.
  */
 @Injectable()
-export class MainPageResolver implements Resolve<UserInfo> {
+export class ClientApplicationResolver implements Resolve<UserInfo> {
   /**
   * @description The users service
   * @type {UsersService}

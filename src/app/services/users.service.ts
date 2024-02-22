@@ -56,6 +56,17 @@ export class UsersService {
     return localStorage.getItem(TOKEN_LOCAL_STORAGE_KEY);
   }
 
+  /**
+   * @description Logs the user out
+   * @returns {void}
+   */
+  logout(): void {
+    localStorage.removeItem(TOKEN_LOCAL_STORAGE_KEY);
+    localStorage.removeItem(USER_ID_LOCAL_STORAGE_KEY);
+    this.navigationService.redirectToMainPage();
+    this.navigationService.clearHistory();
+  }
+
   /** 
   * @description Logs the user in
   * @param credentials The credentials of the user
@@ -67,6 +78,7 @@ export class UsersService {
         localStorage.setItem(TOKEN_LOCAL_STORAGE_KEY, msg.token);
         localStorage.setItem(USER_ID_LOCAL_STORAGE_KEY, msg.userId);
         this.navigationService.redirectToApplication();
+        this.navigationService.clearHistory();
       }
       return true;
     }).catch((e) => {

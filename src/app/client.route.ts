@@ -28,4 +28,10 @@ export class ClientRoutes {
      * @type {GhRoute}
      */
     static readonly main: GhRoute = new GhRoute('app', ClientRoutes.client);
+
+    /**
+     * @description The make request route
+     * @type {GhRoute}
+     */
+    static readonly makeRequest: GhRoute = new GhRoute('make-request', ClientRoutes.main);
 }

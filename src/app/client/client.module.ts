@@ -7,10 +7,11 @@ import { ClientSignUpComponent } from './sign-up/sign-up.component';
 import { RouterModule } from '@angular/router';
 import { ClientMainComponent } from './main/main.component';
 import { ClientRouteModule } from './client-routing.module';
-import { MainPageResolver } from './main/main.resolver';
+import { ClientApplicationResolver } from './application.resolver';
 import { HttpClient } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { ClientMakeRequestComponent } from './make-request/make-request.component';
 
 
 /**
@@ -18,7 +19,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
  * @description The client module
  */
 @NgModule({
-    declarations: [ClientLogInComponent, ClientSignUpComponent, ClientMainComponent],
+    declarations: [ClientLogInComponent, ClientSignUpComponent, ClientMainComponent, ClientMakeRequestComponent],
     imports: [
         CommonModule,
         ReactiveFormsModule,
@@ -35,7 +36,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
         })
     ],
     providers: [
-        MainPageResolver
+        ClientApplicationResolver
     ]
 })
 export class ClientModule { }

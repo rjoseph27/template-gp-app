@@ -61,6 +61,10 @@ export class NavigationService {
     // TODO add entreprise main page
   }
 
+  clearHistory(): void {
+    this.history.length = 0;
+  }
+
   /**
    * @description Determines whether the previous icon should be hidden
    * @returns {boolean}

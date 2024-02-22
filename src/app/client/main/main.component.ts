@@ -1,11 +1,13 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, map, tap } from 'rxjs';
 import { UserType } from '../user-type.enum';
 import { GhModule } from '../../core/layouts/main/main.component';
 import { ALERTS_ICON, HELP_ICON, LOG_OUT_ICON, MAKE_A_DROP_ICON, MAKE_A_REQUEST_ICON, ORDERS_ICON, REQUESTS_ICON, SETTING_ICON } from './icon';
 import { TOKEN_LOCAL_STORAGE_KEY, USER_ID_LOCAL_STORAGE_KEY } from '../../misc/constants/local-storage';
 import { NavigationService } from '../../services/navigation.service';
+import { UsersService } from '../../services/users.service';
+import { ClientRoutes } from '../../client.route';
 
 /**
  * @component ClientMainComponent
@@ -60,10 +62,16 @@ export class ClientMainComponent {
   protected readonly userFullName$ = this.userInfo$.pipe(map(userInfo => userInfo.firstName + ' ' + userInfo.lastName));
 
   /**
-   * @description The navigation service
-   * @type {NavigationService}
+   * @description The angular router service.
+   * @type {Router}
    */
-  private readonly navigationService: NavigationService = inject(NavigationService);
+  private readonly router: Router = inject(Router);
+
+  /**
+  * @description The users service
+  * @type {UsersService}
+  */
+  private readonly userService: UsersService = inject(UsersService);
   
   /**
    * @description The common modules for the application
@@ -84,9 +92,7 @@ export class ClientMainComponent {
       label: "moduleList.global.logOut",
       icon: LOG_OUT_ICON,
       action: () => {
-        localStorage.removeItem(TOKEN_LOCAL_STORAGE_KEY);
-        localStorage.removeItem(USER_ID_LOCAL_STORAGE_KEY);
-        this.navigationService.redirectToMainPage();
+        this.userService.logout();
       }
     },
   ]
@@ -99,7 +105,9 @@ export class ClientMainComponent {
     {
       label: "moduleList.client.makeARequest",
       icon: MAKE_A_REQUEST_ICON,
-      action: () => {}
+      action: () => {
+        this.router.navigate([ClientRoutes.makeRequest.fullPath()]);
+      }
     },
     {
       label: "moduleList.client.requests",
