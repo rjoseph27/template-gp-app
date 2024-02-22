@@ -1,1 +1,23 @@
-{}
+{
+    "userType": {
+        "client": "Client",
+        "gp": "GP"
+    },
+    "moduleList": {
+        "global": {
+            "logOut": "Log Out",
+            "settings": "My Settings",
+            "help": "Help"
+        },
+        "client": {
+            "makeARequest": "Make a Request",
+            "requests": "My request",
+            "alerts": "My Alerts"
+        },
+        "gp": {
+            "reportDrop": "Report a Drop",
+            "drop": "My Drops",
+            "orders": "My Orders"
+        }
+    }
+}

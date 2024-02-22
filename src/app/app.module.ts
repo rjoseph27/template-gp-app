@@ -39,7 +39,7 @@ import { TranslateHttpLoader } from "@ngx-translate/http-loader";
               provide: TranslateLoader,
               useFactory: HttpLoaderFactory,
               deps: [HttpClient]
-            }
+            },
           }),
     ],
     providers: [
@@ -68,5 +68,5 @@ export class AppModule {}
  * @returns {TranslateHttpLoader} A new instance of TranslateHttpLoader.
  */
 function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
-    return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
+    return new TranslateHttpLoader(http);
   }

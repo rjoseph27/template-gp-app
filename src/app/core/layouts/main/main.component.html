@@ -2,15 +2,15 @@
     <ng-content></ng-content>
 </div>
 <div class="content">
-    <div class="module">
+    <div class="module" *ngFor="let module of modules;" (click)="module.action">
         <div class="module-content">
         <div class="title">
             <div class="icon">
-                <gh-icon [name]="'calendar_month'"></gh-icon>
+                <gh-icon [name]="module.icon"></gh-icon>
             </div>
         </div>
         <div class="module-name">
-            Make a Request
+            {{ module.label | translate }}
         </div>
         <div class="next-button">
             <gh-icon [name]="nextPageIcon"></gh-icon>

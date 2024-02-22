@@ -3,6 +3,7 @@ import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/r
 import { UserInfo } from "../../api/users/users.type";
 import { UsersService } from "../../services/users.service";
 import { LoadingService } from "../../services/loading.service";
+import { TranslateService } from "@ngx-translate/core";
 
 /**
  * @class MainPageResolver
@@ -22,6 +23,12 @@ export class MainPageResolver implements Resolve<UserInfo> {
    */
   protected readonly loadingService: LoadingService = inject(LoadingService)
 
+  /**
+   * @description The translate service
+   * @type {TranslateService}
+   */
+  private readonly translateService: TranslateService = inject(TranslateService);
+
   /** @inheritdoc */
   async resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<UserInfo> {
       if(this.userService.currentUserId) {
@@ -29,6 +36,7 @@ export class MainPageResolver implements Resolve<UserInfo> {
             const userInfo = await this.userService.getUserInfo(this.userService.currentUserId);
             this.loadingService.endLoading();
             if(userInfo) {
+                this.translateService.use(userInfo.language);
                 return userInfo;
             }
         }

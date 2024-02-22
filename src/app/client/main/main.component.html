@@ -1,10 +1,10 @@
-<gh-main>
+<gh-main [modules]="modules$ | async">
     <div class="header-content">
         <div>
             {{ userFullName$ | async }}
         </div>
         <div>
-            {{ 'global.userType.client' | translate }}
+            <gh-toggle [label]="currentUserTypeTranslationKey$ | async" (valueChange)="switchMode($event)"></gh-toggle>
         </div>
     </div>
 </gh-main>

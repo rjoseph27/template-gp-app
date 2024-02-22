@@ -1,7 +1,6 @@
-import { debounceTime } from "rxjs/operators";
 import { Country } from "../../misc/enums/country.enum";
 import { Genders } from "../../misc/enums/genders.enum";
-import { ApiResponse } from "../base.service.api";
+import { ApiResponse, StringKeys } from "../base.service.api";
 import { Language } from "../../misc/enums/language.enum";
 
 /**
@@ -348,7 +347,7 @@ export interface UserInfoApiResponse extends ApiResponse {
      * @description The user info
      * @type {UserInfo}
      */
-    userInfo?: UserInfo
+    userInfo?: StringKeys<UserInfo>
 }
 
 /**
@@ -367,6 +366,12 @@ export interface UserInfo {
      * @type {string}
      */
     lastName: string,
+
+    /**
+     * @description The date of birth of the user
+     * @type {Date}
+     */
+    language: Language
 }
 
 /**

@@ -5,6 +5,8 @@ import { combineLatest, map, tap } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { StringUtil } from '../../misc/util/string.util';
 import { ClientRoutes } from '../../client.route';
+import { Language } from '../../misc/enums/language.enum';
+import { CreateUser } from '../../api/users/users.type';
 
 /**
  * @constant
@@ -70,7 +72,9 @@ export class ClientSignUpComponent implements OnInit {
     this.currentFormService.submitting$.pipe(
       tap((loading) => {
         if(loading) {
-          this.usersService.create(this.currentFormService.currentForm.value).then(() => {
+          const createUser: CreateUser = this.currentFormService.currentForm.value;
+          createUser.language = Language[this.translateService.currentLang as keyof typeof Language];
+          this.usersService.create(createUser).then(() => {
             this.currentFormService.submitting = false;
           });
         }

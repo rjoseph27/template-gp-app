@@ -169,6 +169,11 @@ export class UsersService {
    * @returns {Promise<UserInfo>}
    */
   getUserInfo(userId: string): Promise<UserInfo> {
-    return this.usersServiceApi.getUserInfo(userId).then(msg => msg.userInfo);
+    return this.usersServiceApi.getUserInfo(userId).then(msg => {
+      return <UserInfo>{
+      firstName: msg.userInfo["firstName"],
+      lastName: msg.userInfo["lastName"],
+      language: Language[msg.userInfo["language"].toUpperCase() as keyof typeof Language],
+    }});
   }
 }

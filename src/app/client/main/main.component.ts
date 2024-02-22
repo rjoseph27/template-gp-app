@@ -2,6 +2,8 @@ import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, map, tap } from 'rxjs';
 import { UserType } from '../user-type.enum';
+import { GhModule } from '../../core/layouts/main/main.component';
+import { ALERTS_ICON, HELP_ICON, LOG_OUT_ICON, MAKE_A_DROP_ICON, MAKE_A_REQUEST_ICON, ORDERS_ICON, REQUESTS_ICON, SETTING_ICON } from './icon';
 
 /**
  * @component ClientMainComponent
@@ -20,6 +22,18 @@ export class ClientMainComponent {
   private readonly _userType$ = new BehaviorSubject<UserType>(UserType.Client);
 
   /**
+   * @description An observable for the user type
+   * @type {Observable<UserType>}
+   */
+  private readonly userType$ = this._userType$.asObservable();
+
+  /**
+   * @description An observable of the current user type translation key
+   * @type {Observable<string>}
+   */
+  protected readonly currentUserTypeTranslationKey$ = this.userType$.pipe(map(userType => 'userType.' + userType));
+
+  /**
    * @description The activated route service
    * @type {ActivatedRoute}
    */
@@ -32,8 +46,95 @@ export class ClientMainComponent {
   private readonly userInfo$ = this.route.data.pipe(map(data => data['userInfo']));
 
   /**
+   * @description An observable for the modules
+   * @type {Observable<GhModule[]>}
+   */
+  protected readonly modules$ = this.userType$.pipe(map(userType => userType === UserType.Client ? this.clientModules : this.gpModules));
+
+  /**
    * @description An observable for the user full name
    * @type {Observable<string>}
    */
   protected readonly userFullName$ = this.userInfo$.pipe(map(userInfo => userInfo.firstName + ' ' + userInfo.lastName));
+  
+  /**
+   * @description The common modules for the application
+   * @type {GhModule[]}
+   */
+  private readonly commonModules: GhModule[] = [
+    {
+      label: "moduleList.global.settings",
+      icon: SETTING_ICON,
+      action: () => {}
+    },
+    {
+      label: "moduleList.global.help",
+      icon: HELP_ICON,
+      action: () => {}
+    },
+    {
+      label: "moduleList.global.logOut",
+      icon: LOG_OUT_ICON,
+      action: () => {}
+    },
+  ]
+
+  /**
+   * @description The client modules for the application
+   * @type {GhModule[]}
+   */
+  private readonly clientModules: GhModule[] = [
+    {
+      label: "moduleList.client.makeARequest",
+      icon: MAKE_A_REQUEST_ICON,
+      action: () => {}
+    },
+    {
+      label: "moduleList.client.requests",
+      icon: REQUESTS_ICON,
+      action: () => {}
+    },
+    {
+      label: "moduleList.client.alerts",
+      icon: ALERTS_ICON,
+      action: () => {}
+    },
+    ...this.commonModules
+  ]
+
+  /**
+   * @description The GP modules for the application
+   * @type {GhModule[]}
+   */
+  private readonly gpModules: GhModule[] = [
+    {
+      label: "moduleList.gp.reportDrop",
+      icon: MAKE_A_DROP_ICON,
+      action: () => {}
+    },
+    {
+      label: "moduleList.gp.drop",
+      icon: REQUESTS_ICON,
+      action: () => {}
+    },
+    {
+      label: "moduleList.gp.orders",
+      icon: ORDERS_ICON,
+      action: () => {}
+    },
+    ...this.commonModules
+  ]
+
+  /**
+   * @description A method that switch the user mode
+   * @param value A boolean that is indicating the user mode is GP or not
+   * @returns {void}
+   */
+  protected switchMode(value: boolean): void {
+    if(!value) {
+      this._userType$.next(UserType.Client);
+    } else {
+      this._userType$.next(UserType.GP);
+    }
+  }
 }

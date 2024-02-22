@@ -11,6 +11,13 @@ export interface ApiResponse {
 }
 
 /**
+ * @description Transform the keys of an object to string
+ */
+export type StringKeys<T> = {
+    [K in keyof T as string]: T[K];
+};
+
+/**
  * @constant
  * @description The time to wait before making a request to the server
  */

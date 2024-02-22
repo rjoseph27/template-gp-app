@@ -14,6 +14,13 @@
     padding: 1em;
     font-size: 1.5em;
 
+    .icon {
+        ::ng-deep .gh-icon-content {
+            color: $secondary-color;
+            font-size: 1.5em;
+        }
+    }
+
     .module-content {
         width: 100%;
         display: flex;
@@ -28,12 +35,17 @@
 }
 
 @media (min-width: 768px) {
+    .content {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
     .module {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 250px;
-        height:250px;
+        min-width: 250px;
+        min-height:250px;
         margin: 1em;
         background-color: $primary-color;
         border-width: 0;
@@ -49,13 +61,10 @@
             .icon {
                 display: flex;
                 justify-content: center;
-                ::ng-deep mat-icon {
-                    width:5em;
-                    height:5em;
+                ::ng-deep .gh-icon-content {
+                    font-size: 5em;
+                    color: #fff;
                 }
-                ::ng-deep *::before {
-                    font-size:5em;
-                } 
             }
         }
 
