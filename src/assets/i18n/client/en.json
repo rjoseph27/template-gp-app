@@ -19,7 +19,9 @@
             "sendItems": {
                 "title": "Send items",
                 "content" : {
-                    "title": "Send items"
+                    "userCountry": {
+                        "title": "From"
+                    }
                 }
             },
             "orders": {

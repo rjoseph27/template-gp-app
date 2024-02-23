@@ -1,0 +1,16 @@
+<form [formGroup]="sendItemsForm">
+    <div class="content">
+        <div class="section">
+            <gh-select-field
+            [label]="'moduleList.client.sendItems.content.userCountry.title' | translate" 
+            [placeholder]="'global.signup.accountDetails.country.placeholder' | translate"
+            [name]="userCountryField"
+            [value]="sendItemsForm.get(userCountryField).value"
+            (valueChange)="sendItemsForm.get(userCountryField).setValue($event)"
+            [errors]="sendItemsForm.get(userCountryField).errors"
+            [errorCaptions]="userCountryErrorCaptions"
+            [options]="userCountryOptions"
+            ></gh-select-field>
+        </div>
+    </div>
+</form>

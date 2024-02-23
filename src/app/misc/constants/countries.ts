@@ -1,4 +1,5 @@
 import { Country } from "../enums/country.enum";
+import { EnumUtil } from "../util/enum.util";
 
 /**
  * @interface CountryInfo
@@ -67,3 +68,13 @@ export const COUNTRY_INFO_LIST: CountryInfo[] = [
         }  
     }
 ]
+
+/**
+ * @constant
+ * @description The country selection options
+ */
+export const COUNTRY_SELECTION_OPTIONS = COUNTRY_INFO_LIST.map((country: CountryInfo) => 
+  ({value: country.name,
+    label: EnumUtil.EnumTranslationKey(Country, EnumUtil.getKeyByValue(Country, country.name), "Country"),
+    prefix: country.flag
+  }))

@@ -12,7 +12,7 @@ import { INVALID_DATE_FORMAT_VALIDATION, dateFormatValidator } from '../../../..
 import { Genders } from '../../../../misc/enums/genders.enum';
 import { SelectFieldOption } from '../../../elements/input/select-field/select-field.component';
 import { EnumUtil } from '../../../../misc/util/enum.util';
-import { COUNTRY_INFO_LIST, CountryInfo } from '../../../../misc/constants/countries';
+import { COUNTRY_INFO_LIST, COUNTRY_SELECTION_OPTIONS, CountryInfo } from '../../../../misc/constants/countries';
 import { Country } from '../../../../misc/enums/country.enum';
 import { INVALID_PHONE_NUMBER_VALIDATION, phoneNumberValidator } from '../../../../misc/validation/phone.validation';
 import { Router } from '@angular/router';
@@ -219,11 +219,7 @@ export class GhSignUpComponent implements OnInit{
    * @description The options of the country
    * @type {SelectFieldOption[]}
    */
-  protected readonly countryOptions: SelectFieldOption[] = COUNTRY_INFO_LIST.map((country: CountryInfo) => 
-  ({value: country.name,
-    label: EnumUtil.EnumTranslationKey(Country, EnumUtil.getKeyByValue(Country, country.name), "Country"),
-    prefix: country.flag
-  }))
+  protected readonly countryOptions: SelectFieldOption[] = COUNTRY_SELECTION_OPTIONS
 
   /**
    * @description The sign up form

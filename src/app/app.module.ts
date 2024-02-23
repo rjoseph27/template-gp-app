@@ -21,6 +21,7 @@ import { AuthInterceptor } from "./services/auth.interceptor";
 import { TranslateLoader, TranslateModule, TranslateService } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { GlobalTranslateService } from "./services/global-translate.service";
+import { ToRootTranslationHandler } from "./services/to-root-translation.handler";
 
 /**
  * @module AppModule
@@ -58,6 +59,7 @@ import { GlobalTranslateService } from "./services/global-translate.service";
         TranslateService,
         GlobalTranslateService,
         { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+        ToRootTranslationHandler
     ],
     bootstrap: [AppComponent]
 })

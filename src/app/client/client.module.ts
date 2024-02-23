@@ -8,11 +8,12 @@ import { ClientMainComponent } from './main/main.component';
 import { ClientRouteModule } from './client-routing.module';
 import { ClientApplicationResolver } from './application.resolver';
 import { HttpClient } from '@angular/common/http';
-import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
+import { MissingTranslationHandler, TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ClientSendItemsComponent } from './request/send-items/send-items.component';
 import { GlobalTranslateService } from '../services/global-translate.service';
-import { tap } from 'rxjs/operators';
+import { filter, tap } from 'rxjs/operators';
+import { ToRootTranslationHandler } from '../services/to-root-translation.handler';
 
 
 /**
@@ -32,13 +33,18 @@ import { tap } from 'rxjs/operators';
               useFactory: HttpLoaderFactory,
               deps: [HttpClient],
             },
-            isolate: true,
             extend: true,
+            isolate: true,
+            missingTranslationHandler: {
+                provide: MissingTranslationHandler,
+                useClass: ToRootTranslationHandler
+              }
         })
     ],
     providers: [
         ClientApplicationResolver,
         TranslateService,
+        
     ]
 })
 export class ClientModule {
@@ -49,9 +55,8 @@ export class ClientModule {
      */
     constructor(globalTranslateService: GlobalTranslateService, translateService: TranslateService){
         globalTranslateService.currentLanguage$.pipe(
-            tap(lang =>{
-                translateService.use(lang);
-            })
+            filter(lang => !!lang),
+            tap(lang => translateService.use(lang))
         ).subscribe()
     
     }

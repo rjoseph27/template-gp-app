@@ -8,6 +8,7 @@ import { CurrentFormService } from "../../../services/current-form.service";
 @Component({
   selector: 'client-send-items',
   templateUrl: './send-items.component.html',
+  styleUrls: ['../request.scss'],
   providers: [CurrentFormService]
 })
 export class ClientSendItemsComponent {
