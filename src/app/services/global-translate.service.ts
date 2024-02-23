@@ -11,12 +11,6 @@ import { BehaviorSubject } from "rxjs";
 @Injectable()
 export class GlobalTranslateService {
   /**
-   * @description The translate service
-   * @type {TranslateService}
-   */
-  private readonly translateService: TranslateService = inject(TranslateService);
-
-  /**
    * @description Backing field for the current language
    */
   private readonly _currentLanguage$ = new BehaviorSubject<Language>(undefined);
@@ -33,7 +27,6 @@ export class GlobalTranslateService {
    */
   changeLanguage(language: Language): void {
     localStorage.setItem(LANGUAGE_LOCAL_STORAGE_KEY, language);
-    this.translateService.setDefaultLang(language);
     this._currentLanguage$.next(language);
     // NOTE: If the language doen't change in the UI, please update the json files in the assets/i18n folder.
   }

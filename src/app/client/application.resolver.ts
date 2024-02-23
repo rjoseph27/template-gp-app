@@ -4,6 +4,7 @@ import { UserInfo } from "../api/users/users.type";
 import { UsersService } from "../services/users.service";
 import { LoadingService } from "../services/loading.service";
 import { TranslateService } from "@ngx-translate/core";
+import { GlobalTranslateService } from "../services/global-translate.service";
 
 /**
  * @class ClientApplicationResolver
@@ -24,10 +25,10 @@ export class ClientApplicationResolver implements Resolve<UserInfo> {
   protected readonly loadingService: LoadingService = inject(LoadingService)
 
   /**
-   * @description The translate service
-   * @type {TranslateService}
+   * @description The global translate service
+   * @type {GlobalTranslateService}
    */
-  private readonly translateService: TranslateService = inject(TranslateService);
+  private readonly globalTranslateService: GlobalTranslateService = inject(GlobalTranslateService);
 
   /** @inheritdoc */
   async resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<UserInfo> {
@@ -36,7 +37,7 @@ export class ClientApplicationResolver implements Resolve<UserInfo> {
             const userInfo = await this.userService.getUserInfo(this.userService.currentUserId);
             this.loadingService.endLoading();
             if(userInfo) {
-                this.translateService.use(userInfo.language);
+                this.globalTranslateService.changeLanguage(userInfo.language);
                 return userInfo;
             }
         }
