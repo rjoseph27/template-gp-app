@@ -10,7 +10,7 @@ import { ClientApplicationResolver } from './application.resolver';
 import { HttpClient } from '@angular/common/http';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { ClientMakeRequestComponent } from './make-request/make-request.component';
+import { ClientSendItemsComponent } from './request/send-items/send-items.component';
 import { GlobalTranslateService } from '../services/global-translate.service';
 import { tap } from 'rxjs/operators';
 
@@ -20,7 +20,7 @@ import { tap } from 'rxjs/operators';
  * @description The client module
  */
 @NgModule({
-    declarations: [ClientLogInComponent, ClientSignUpComponent, ClientMainComponent, ClientMakeRequestComponent],
+    declarations: [ClientLogInComponent, ClientSignUpComponent, ClientMainComponent, ClientSendItemsComponent],
     imports: [
         CommonModule,
         ReactiveFormsModule,

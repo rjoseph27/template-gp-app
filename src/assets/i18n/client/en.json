@@ -5,19 +5,40 @@
     },
     "moduleList": {
         "global": {
-            "logOut": "Log Out",
-            "settings": "My Settings",
-            "help": "Help"
+            "logOut": {
+                "title":"Log Out"
+            },
+            "settings":  {
+                "title": "My Settings"
+            },
+            "help": {
+                "title": "Help"
+            }
         },
         "client": {
-            "makeARequest": "Send items",
-            "requests": "My orders",
-            "alerts": "My Alerts"
+            "sendItems": {
+                "title": "Send items",
+                "content" : {
+                    "title": "Send items"
+                }
+            },
+            "orders": {
+                "title": "My orders"
+            },
+            "alerts": {
+                "title": "My Alerts"
+            }
         },
         "gp": {
-            "reportDrop": "Report a Trip",
-            "drop": "My trips",
-            "orders": "My Orders"
+            "reportTrip": {
+                "title": "Report a Trip"
+            },
+            "trip": {
+                "title": "My Trips"
+            },
+            "orders": {
+                "title": "My Orders"
+            }
         }
     }
 }

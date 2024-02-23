@@ -1,8 +1,8 @@
 /**
  * @constant
- * @description The icon to be used for the make a request module
+ * @description The icon to be used for the send items module
  */
-export const MAKE_A_REQUEST_ICON = 'package';
+export const SEND_ITEMS_ICON = 'package';
 
 /**
  * @constant
@@ -36,9 +36,9 @@ export const HELP_ICON = 'help'
 
 /**
  * @constant
- * @description The icon to be used for the flights mode module
+ * @description The icon to be used for the report a trip module
  */
-export const MAKE_A_DROP_ICON = 'flightsmode'
+export const REPORT_TRIP_ICON = 'flightsmode'
 
 /**
  * @constant

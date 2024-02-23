@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, map } from 'rxjs';
 import { UserType } from '../user-type.enum';
 import { GhModule } from '../../core/layouts/main/main.component';
-import { ALERTS_ICON, HELP_ICON, LOG_OUT_ICON, MAKE_A_DROP_ICON, MAKE_A_REQUEST_ICON, ORDERS_ICON, REQUESTS_ICON, SETTING_ICON } from './icon';
+import { ALERTS_ICON, HELP_ICON, LOG_OUT_ICON, REPORT_TRIP_ICON, SEND_ITEMS_ICON, ORDERS_ICON, REQUESTS_ICON, SETTING_ICON } from './icon';
 import { UsersService } from '../../services/users.service';
 import { ClientRoutes } from '../../client.route';
 
@@ -77,17 +77,17 @@ export class ClientMainComponent {
    */
   private readonly commonModules: GhModule[] = [
     {
-      label: "moduleList.global.settings",
+      label: "moduleList.global.settings.title",
       icon: SETTING_ICON,
       action: () => {}
     },
     {
-      label: "moduleList.global.help",
+      label: "moduleList.global.help.title",
       icon: HELP_ICON,
       action: () => {}
     },
     {
-      label: "moduleList.global.logOut",
+      label: "moduleList.global.logOut.title",
       icon: LOG_OUT_ICON,
       action: () => {
         this.userService.logout();
@@ -101,19 +101,19 @@ export class ClientMainComponent {
    */
   private readonly clientModules: GhModule[] = [
     {
-      label: "moduleList.client.makeARequest",
-      icon: MAKE_A_REQUEST_ICON,
+      label: "moduleList.client.sendItems.title",
+      icon: SEND_ITEMS_ICON,
       action: () => {
-        this.router.navigate([ClientRoutes.makeRequest.fullPath()]);
+        this.router.navigate([ClientRoutes.sendItems.fullPath()]);
       }
     },
     {
-      label: "moduleList.client.requests",
+      label: "moduleList.client.orders.title",
       icon: REQUESTS_ICON,
       action: () => {}
     },
     {
-      label: "moduleList.client.alerts",
+      label: "moduleList.client.alerts.title",
       icon: ALERTS_ICON,
       action: () => {}
     },
@@ -126,17 +126,17 @@ export class ClientMainComponent {
    */
   private readonly gpModules: GhModule[] = [
     {
-      label: "moduleList.gp.reportDrop",
-      icon: MAKE_A_DROP_ICON,
+      label: "moduleList.gp.reportTrip.title",
+      icon: REPORT_TRIP_ICON,
       action: () => {}
     },
     {
-      label: "moduleList.gp.drop",
+      label: "moduleList.gp.trip.title",
       icon: REQUESTS_ICON,
       action: () => {}
     },
     {
-      label: "moduleList.gp.orders",
+      label: "moduleList.gp.orders.title",
       icon: ORDERS_ICON,
       action: () => {}
     },

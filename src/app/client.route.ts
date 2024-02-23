@@ -30,8 +30,8 @@ export class ClientRoutes {
     static readonly main: GhRoute = new GhRoute('app', ClientRoutes.client);
 
     /**
-     * @description The make request route
+     * @description The send items route
      * @type {GhRoute}
      */
-    static readonly makeRequest: GhRoute = new GhRoute('make-request', ClientRoutes.main);
+    static readonly sendItems: GhRoute = new GhRoute('send-items', ClientRoutes.main);
 }
