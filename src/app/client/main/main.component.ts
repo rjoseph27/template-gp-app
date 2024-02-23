@@ -1,11 +1,9 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, map, tap } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
 import { UserType } from '../user-type.enum';
 import { GhModule } from '../../core/layouts/main/main.component';
 import { ALERTS_ICON, HELP_ICON, LOG_OUT_ICON, MAKE_A_DROP_ICON, MAKE_A_REQUEST_ICON, ORDERS_ICON, REQUESTS_ICON, SETTING_ICON } from './icon';
-import { TOKEN_LOCAL_STORAGE_KEY, USER_ID_LOCAL_STORAGE_KEY } from '../../misc/constants/local-storage';
-import { NavigationService } from '../../services/navigation.service';
 import { UsersService } from '../../services/users.service';
 import { ClientRoutes } from '../../client.route';
 

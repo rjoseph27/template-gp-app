@@ -7,6 +7,7 @@ import { APPLICATION_NAME } from '../../../misc/constants/application';
 import { NavigationService } from '../../../services/navigation.service';
 import { LANGUAGE_LOCAL_STORAGE_KEY } from '../../../misc/constants/local-storage';
 import { UsersService } from '../../../services/users.service';
+import { GlobalTranslateService } from '../../../services/global-translate.service';
 
 /**
  * @title Header Component
@@ -24,6 +25,12 @@ export class GhHeaderComponent implements AfterContentChecked {
    * @type {TranslateService}
    */
   private readonly translateService: TranslateService = inject(TranslateService)
+
+  /**
+   * @description The global translate service
+   * @type {GlobalTranslateService}
+   */
+  private readonly globalTranslateService: GlobalTranslateService = inject(GlobalTranslateService);
 
   /**
    * @description The navigation service
@@ -81,9 +88,7 @@ export class GhHeaderComponent implements AfterContentChecked {
     {
       caption$: this.translateService.get("global.language."+lang),
       action: () => {
-        localStorage.setItem(LANGUAGE_LOCAL_STORAGE_KEY, lang);
-        this.translateService.use(lang);
-        this.translateService.setDefaultLang(lang);
+        this.globalTranslateService.changeLanguage(lang)
         if(this.userService.currentUserId)
         {
           this.userService.updateUserLanguage({userId: this.userService.currentUserId, language: lang});

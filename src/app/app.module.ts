@@ -20,6 +20,7 @@ import { LoggedOutGuard } from "./misc/guard/logged-out.guard";
 import { AuthInterceptor } from "./services/auth.interceptor";
 import { TranslateLoader, TranslateModule, TranslateService } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
+import { GlobalTranslateService } from "./services/global-translate.service";
 
 /**
  * @module AppModule
@@ -55,6 +56,7 @@ import { TranslateHttpLoader } from "@ngx-translate/http-loader";
         LoggedInGuard,
         LoggedOutGuard,
         TranslateService,
+        GlobalTranslateService,
         { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     ],
     bootstrap: [AppComponent]

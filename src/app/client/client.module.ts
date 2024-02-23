@@ -4,14 +4,15 @@ import { ClientLogInComponent } from './log-in/log-in.component';
 import { CoreModule } from "../core/core.module";
 import { ReactiveFormsModule } from '@angular/forms';
 import { ClientSignUpComponent } from './sign-up/sign-up.component';
-import { RouterModule } from '@angular/router';
 import { ClientMainComponent } from './main/main.component';
 import { ClientRouteModule } from './client-routing.module';
 import { ClientApplicationResolver } from './application.resolver';
 import { HttpClient } from '@angular/common/http';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ClientMakeRequestComponent } from './make-request/make-request.component';
+import { GlobalTranslateService } from '../services/global-translate.service';
+import { tap } from 'rxjs/operators';
 
 
 /**
@@ -36,10 +37,25 @@ import { ClientMakeRequestComponent } from './make-request/make-request.componen
         })
     ],
     providers: [
-        ClientApplicationResolver
+        ClientApplicationResolver,
+        TranslateService,
     ]
 })
-export class ClientModule { }
+export class ClientModule {
+    /**
+     * @constructor
+     * @param globalTranslateService The global translate service
+     * @param translateService The translate service
+     */
+    constructor(globalTranslateService: GlobalTranslateService, translateService: TranslateService){
+        globalTranslateService.currentLanguage$.pipe(
+            tap(lang =>{
+                translateService.use(lang);
+            })
+        ).subscribe()
+    
+    }
+ }
 
 /**
  * @function HttpLoaderFactory

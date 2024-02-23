@@ -5,7 +5,6 @@ import { UsersServiceApi } from '../api/users/users.service.api';
 import { TranslateService } from '@ngx-translate/core';
 import { Language } from '../misc/enums/language.enum';
 import { NavigationService } from './navigation.service';
-import { ClientRoutes } from '../client.route';
 import { TOKEN_LOCAL_STORAGE_KEY, USER_ID_LOCAL_STORAGE_KEY } from '../misc/constants/local-storage';
 
 

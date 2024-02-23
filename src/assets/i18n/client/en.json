@@ -10,13 +10,13 @@
             "help": "Help"
         },
         "client": {
-            "makeARequest": "Make a Request",
-            "requests": "My request",
+            "makeARequest": "Send items",
+            "requests": "My orders",
             "alerts": "My Alerts"
         },
         "gp": {
-            "reportDrop": "Report a Drop",
-            "drop": "My Drops",
+            "reportDrop": "Report a Trip",
+            "drop": "My trips",
             "orders": "My Orders"
         }
     }
