@@ -1,9 +1,16 @@
-import { Component, OnInit, inject } from "@angular/core";
+import { Component, Input, OnInit, inject } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { CurrentFormService } from "../../../../services/current-form.service";
 import { SelectFieldOption } from "../../../elements/input/select-field/select-field.component";
-import { COUNTRY_SELECTION_OPTIONS } from "../../../../misc/constants/countries";
 import { REQUIRED_VALIDATION } from "../../../../misc/constants/validations";
+import { COUNTRY_SELECTION_OPTIONS, CountryInfo } from "../../../../misc/constants/countries/countries.type";
+import { BehaviorSubject, Observable, map } from "rxjs";
+import { Country } from "../../../../misc/enums/country.enum";
+import { ActivatedRoute } from "@angular/router";
+import { COUNTRY_INFO_LIST } from "../../../../misc/constants/countries/countries";
+import { EnumUtil } from "../../../../misc/util/enum.util";
+import { INVALID_NAME_VALIDATION, nameValidator } from "../../../../misc/validation/name.validator";
+import { INVALID_PHONE_NUMBER_VALIDATION, phoneNumberValidator } from "../../../../misc/validation/phone.validation";
 
 /**
  * @class GhSendItemsComponent
@@ -20,24 +27,156 @@ export class GhSendItemsComponent implements OnInit {
    * @type {CurrentFormService}
    */
   private readonly currentFormService: CurrentFormService = inject(CurrentFormService);
+ 
+  /**
+   * @description The country of the user
+   * @type {Country}
+   */
+  @Input() set userCountry(value: Country) {
+    this._userCountry$.next(value);
+  } 
+  get userCountry(): Country {
+    return this._userCountry$.value;
+  }
+
+  /**
+   * @description backing field for the user country
+   * @type {BehaviorSubject<Country>}
+   */
+  private readonly _userCountry$ = new BehaviorSubject<Country>(undefined);
+
+  /**
+   * @description An observable of the user country
+   * @type {Observable<Country>}
+   */
+  protected readonly userCountry$: Observable<Country> = this._userCountry$.asObservable();
+
+  /**
+   * @description backing field for the destination country
+   * @type {BehaviorSubject<Country>}
+   */
+  private readonly _destinationCountry$ = new BehaviorSubject<Country>(undefined);
+
+  /**
+   * @description An observable of the destination country
+   * @type {Observable<Country>}
+   */
+  protected readonly destinationCountry$: Observable<Country> = this._destinationCountry$.asObservable();
 
   /**
    * @description The name of the user country field.
+   * @type {string}
    */
   protected readonly userCountryField = 'userCountry';
+
+  /**
+   * @description The name of the user region field
+   * @type {string}
+   */
+  protected readonly userRegionField = 'userRegion';
+
+  /**
+   * @description The name of the destination country field.
+   * @type {string}
+   */
+  protected readonly destinationCountryField = 'destinationCountry';
+
+  /**
+   * @description The name of the destination region field
+   * @type {string}
+   */
+  protected readonly destinationRegionField = 'destinationRegion';
+
+  /**
+   * @description The name of the consignee full name field
+   * @type {string}
+   */
+  protected readonly consigneeFullNameField = 'consigneeFullName';
+
+  /**
+   * @description The name of the consignee address field
+   * @type {string}
+   */
+  protected readonly consigneeAddressField = 'consigneeAddress';
+
+  /**
+   * @description The name of the consignee phone number field
+   * @type {string}
+   */
+  protected readonly consigneePhoneNumberField = 'consigneePhoneNumber';
+
+  /**
+   * @description An observable of the loading state
+   * @type {Observable<boolean>}
+   */
+  protected readonly loading$ = this.currentFormService.submitting$;
 
   /**
    * @description The options of the country
    * @type {SelectFieldOption[]}
    */
-  protected readonly userCountryOptions: SelectFieldOption[] = COUNTRY_SELECTION_OPTIONS
+  protected readonly userCountryOptions: SelectFieldOption[] = COUNTRY_SELECTION_OPTIONS;
+
+  /**
+   * @description The options of the user region
+   * @type {Observable<SelectFieldOption[]>}
+   */
+  protected readonly userRegionOptions$: Observable<SelectFieldOption[]> = this.userCountry$.pipe(
+    map(country => COUNTRY_INFO_LIST.find(x => x.name === country)?.regions.map(key => ({
+    value: key,
+    label: key,
+  }))));
+
+  /**
+   * @description The options of the destination region
+   * @type {Observable<SelectFieldOption[]>}
+   */
+  protected readonly destinationRegionOptions$: Observable<SelectFieldOption[]> = this.destinationCountry$.pipe(
+    map(country => COUNTRY_INFO_LIST.find(x => x.name === country)?.regions.map(key => ({
+    value: key,
+    label: key,
+  }))));
 
   /**
    * @description The error messages for the country field
    * @type {Map<string, string>}
    */
-  protected readonly userCountryErrorCaptions = new Map<string, string>([
-    [REQUIRED_VALIDATION, "global.signup.accountDetails.errors.country.required"],
+  protected readonly countryErrorCaptions = new Map<string, string>([
+    [REQUIRED_VALIDATION, "moduleList.client.sendItems.content.location.country.errors.required"],
+  ]);
+
+  /**
+   * @description The error messages for the region field
+   * @type {Map<string, string>}
+   */
+  protected readonly regionErrorCaptions = new Map<string, string>([
+    [REQUIRED_VALIDATION, "moduleList.client.sendItems.content.location.region.errors.required"],
+  ]);
+
+  /**
+   * @description The error messages for the region field
+   * @type {Map<string, string>}
+   */
+  protected readonly consigneeFullNameErrorCaptions = new Map<string, string>([
+    [REQUIRED_VALIDATION, "moduleList.client.sendItems.content.shippingInformation.consigneeFullName.errors.required"],
+    [INVALID_NAME_VALIDATION, "moduleList.client.sendItems.content.shippingInformation.consigneeFullName.errors.invalid"]
+  ]);
+
+  /**
+   * @description The error messages for the region field
+   * @type {Map<string, string>}
+   */
+  protected readonly consigneeAddressErrorCaptions = new Map<string, string>([
+    [REQUIRED_VALIDATION, "moduleList.client.sendItems.content.shippingInformation.consigneeAddress.errors.required"],
+  ]);
+
+  /**
+   * @description The error messages for the consignee phone number field
+   * @type {Map<string, string>}
+   */
+  protected readonly consigneePhoneNumberErrorCaptions = new Map<string, string>([
+    [REQUIRED_VALIDATION, "moduleList.client.sendItems.content.shippingInformation.consigneePhoneNumber.errors.required"],
+    [INVALID_PHONE_NUMBER_VALIDATION, "moduleList.client.sendItems.content.shippingInformation.consigneePhoneNumber.errors.invalid"],
   ]);
   
   /**
@@ -51,7 +190,42 @@ export class GhSendItemsComponent implements OnInit {
   /** @inheritdoc */
   ngOnInit(): void {
     this.currentFormService.currentForm = new FormGroup({
-      userCountry: new FormControl('', [Validators.required]),
+      userCountry: new FormControl(this.userCountry, [Validators.required]),
+      userRegion: new FormControl(undefined, [Validators.required]),
+      destinationCountry: new FormControl(undefined, [Validators.required]),
+      destinationRegion: new FormControl(undefined, [Validators.required]),
+      consigneeFullName: new FormControl('', [Validators.required, nameValidator]),
+      consigneeAddress: new FormControl('', [Validators.required]),
+      consigneePhoneNumber: new FormControl('', [Validators.required, phoneNumberValidator]),
     });
+  }
+
+  /**
+   * @description Updates the user country
+   * @param value The new value of the user country
+   * @returns {void}
+   */
+  protected updateUserCountry(value: string): void {
+    this._userCountry$.next(value as Country);
+    this.sendItemsForm.get(this.userCountryField).setValue(value)
+  }
+
+  /**
+   * @description Gets the current country info
+   * @param country The country name
+   * @returns The country info
+   */
+  protected currentCountryInfo(country: string): CountryInfo {
+    return COUNTRY_INFO_LIST.find((c) => c.name === country);
+  }
+
+  /**
+   * @description Updates the destination country
+   * @param value The new value of the destination country
+   * @returns {void}
+   */
+  protected destinationUserCountry(value: string): void {
+    this._destinationCountry$.next(value as Country);
+    this.sendItemsForm.get(this.destinationCountryField).setValue(value)
   }
 }

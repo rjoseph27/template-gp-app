@@ -10,6 +10,7 @@
      [ngModel]="value"
      (ngModelChange)="valueChange.emit($event)"
      (blur)="onInputBlur()"
+     [disabled]="disabled"
      >
         <option [value]="undefined" disabled selected>{{ placeholder | translate }}</option>
         <option *ngFor="let option of options" [value]="option.value">{{ option.prefix ? option.prefix+" " : '' }}{{ option.label | translate }}</option>

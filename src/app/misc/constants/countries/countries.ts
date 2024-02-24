@@ -1,0 +1,33 @@
+import { Country } from "../../enums/country.enum";
+import { CountryInfo } from "./countries.type";
+import { CanadaRegions } from "./regions/canada";
+import { SenegalRegions } from "./regions/senegal";
+
+/**
+ * @constant 
+ * @description The list of country info
+ */
+export const COUNTRY_INFO_LIST: CountryInfo[] = [
+    {
+        name: Country.CA,
+        flag: '🇨🇦',
+        phone: {
+            code: '+1',
+            length: 10,
+            phoneFormat: '(___) ___-____'
+        },
+        regions: Object.keys(CanadaRegions).map((key) => CanadaRegions[key as keyof typeof CanadaRegions])
+    },
+    {
+        name: Country.SN,
+        flag: '🇸🇳',
+        phone: {
+            code: '+221',
+            length: 9,
+            phoneFormat: '__ ___ __ __'
+        },
+        regions: Object.keys(SenegalRegions).map((key) => SenegalRegions[key as keyof typeof SenegalRegions])
+    }
+]
+
+

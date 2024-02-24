@@ -12,7 +12,7 @@ import { INVALID_DATE_FORMAT_VALIDATION, dateFormatValidator } from '../../../..
 import { Genders } from '../../../../misc/enums/genders.enum';
 import { SelectFieldOption } from '../../../elements/input/select-field/select-field.component';
 import { EnumUtil } from '../../../../misc/util/enum.util';
-import { COUNTRY_INFO_LIST, COUNTRY_SELECTION_OPTIONS, CountryInfo } from '../../../../misc/constants/countries';
+import { COUNTRY_INFO_LIST } from '../../../../misc/constants/countries/countries';
 import { Country } from '../../../../misc/enums/country.enum';
 import { INVALID_PHONE_NUMBER_VALIDATION, phoneNumberValidator } from '../../../../misc/validation/phone.validation';
 import { Router } from '@angular/router';
@@ -20,6 +20,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { GhTermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
 import { EMAIL_TAKEN_VALIDATOR, EmailTakenValidator } from '../../../../misc/validation/email-taken.validation';
 import { PHONE_NUMBER_TAKEN_VALIDATOR, PhoneNumberTakenValidator } from '../../../../misc/validation/phone-number-taken.validator';
+import { COUNTRY_SELECTION_OPTIONS, CountryInfo } from '../../../../misc/constants/countries/countries.type';
 
 /**
  * @title Sign Up Component

@@ -1,5 +1,6 @@
-import { Country } from "../enums/country.enum";
-import { EnumUtil } from "../util/enum.util";
+import { Country } from "../../enums/country.enum";
+import { EnumUtil } from "../../util/enum.util";
+import { COUNTRY_INFO_LIST } from "./countries";
 
 /**
  * @interface CountryInfo
@@ -17,7 +18,17 @@ export interface CountryInfo {
      */
     flag: string;
 
+    /**
+     * @description The phone info of the country
+     * @type {PhoneInfo}
+     */
     phone: PhoneInfo,
+
+    /**
+     * @description The regions of the country
+     * @type {any[]}
+     */
+    regions: any[]
 } 
 
 /**
@@ -43,31 +54,6 @@ export interface PhoneInfo {
      */
     phoneFormat: string;
 }
-
-/**
- * @constant 
- * @description The list of country info
- */
-export const COUNTRY_INFO_LIST: CountryInfo[] = [
-    {
-        name: Country.CA,
-        flag: '🇨🇦',
-        phone: {
-            code: '+1',
-            length: 10,
-            phoneFormat: '(___) ___-____'
-        }  
-    },
-    {
-        name: Country.SN,
-        flag: '🇸🇳',
-        phone: {
-            code: '+221',
-            length: 9,
-            phoneFormat: '__ ___ __ __'
-        }  
-    }
-]
 
 /**
  * @constant

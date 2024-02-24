@@ -1,8 +1,8 @@
-import { AfterContentChecked, AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild, inject } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild, inject } from '@angular/core';
 import { BaseInputFieldComponent } from '../base-input-field.component';
-import { PhoneInfo } from '../../../../misc/constants/countries';
 import { BehaviorSubject, Subject, tap } from 'rxjs';
 import { GhTextFieldComponent } from '../text-field/text-field.component';
+import { PhoneInfo } from '../../../../misc/constants/countries/countries.type';
 
 /**
  * @class GhPhoneFieldComponent

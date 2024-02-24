@@ -371,7 +371,13 @@ export interface UserInfo {
      * @description The date of birth of the user
      * @type {Date}
      */
-    language: Language
+    language: Language,
+
+    /**
+     * @description The country of the user
+     * @type {Country}
+     */
+    country: Country
 }
 
 /**

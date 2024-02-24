@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Language } from '../misc/enums/language.enum';
 import { NavigationService } from './navigation.service';
 import { TOKEN_LOCAL_STORAGE_KEY, USER_ID_LOCAL_STORAGE_KEY } from '../misc/constants/local-storage';
+import { Country } from '../misc/enums/country.enum';
 
 
 
@@ -185,6 +186,7 @@ export class UsersService {
       firstName: msg.userInfo["firstName"],
       lastName: msg.userInfo["lastName"],
       language: Language[msg.userInfo["language"].toUpperCase() as keyof typeof Language],
+      country: msg.userInfo["country"] as Country
     }});
   }
 

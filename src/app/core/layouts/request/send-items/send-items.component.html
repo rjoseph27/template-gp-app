@@ -1,16 +1,113 @@
 <form [formGroup]="sendItemsForm">
-    <div class="content">
+    <div class="group">
         <div class="section">
-            <gh-select-field
-            [label]="'moduleList.client.sendItems.content.userCountry.title' | translate" 
-            [placeholder]="'global.signup.accountDetails.country.placeholder' | translate"
-            [name]="userCountryField"
-            [value]="sendItemsForm.get(userCountryField).value"
-            (valueChange)="sendItemsForm.get(userCountryField).setValue($event)"
-            [errors]="sendItemsForm.get(userCountryField).errors"
-            [errorCaptions]="userCountryErrorCaptions"
-            [options]="userCountryOptions"
-            ></gh-select-field>
+            <div class="sub-section">
+                <gh-select-field
+                [label]="'moduleList.client.sendItems.content.location.from' | translate" 
+                [placeholder]="'moduleList.client.sendItems.content.location.country.placeholder' | translate"
+                [name]="userCountryField"
+                [value]="sendItemsForm.get(userCountryField).value"
+                (valueChange)="updateUserCountry($event)"
+                [errors]="sendItemsForm.get(userCountryField).errors"
+                [errorCaptions]="countryErrorCaptions"
+                [options]="userCountryOptions"
+                ></gh-select-field>
+            </div>
+            <div class="sub-section">
+                <gh-select-field
+                [placeholder]="'moduleList.client.sendItems.content.location.region.placeholder' | translate"
+                [name]="userRegionField"
+                [value]="sendItemsForm.get(userRegionField).value"
+                (valueChange)="sendItemsForm.get(userRegionField).setValue($event)"
+                [errors]="sendItemsForm.get(userRegionField).errors"
+                [errorCaptions]="regionErrorCaptions"
+                [options]="userRegionOptions$ | async"
+                ></gh-select-field>
+            </div>
+        </div>
+        <div class="section">
+            <div class="sub-section">
+                <gh-select-field
+                [label]="'moduleList.client.sendItems.content.location.to' | translate" 
+                [placeholder]="'moduleList.client.sendItems.content.location.country.placeholder' | translate"
+                [name]="destinationCountryField"
+                [value]="sendItemsForm.get(destinationCountryField).value"
+                (valueChange)="destinationUserCountry($event)"
+                [errors]="sendItemsForm.get(destinationCountryField).errors"
+                [errorCaptions]="countryErrorCaptions"
+                [options]="userCountryOptions"
+                ></gh-select-field>
+            </div>
+            <div class="sub-section">
+                <gh-select-field
+                [placeholder]="'moduleList.client.sendItems.content.location.region.placeholder' | translate"
+                [name]="destinationRegionField"
+                [value]="sendItemsForm.get(destinationRegionField).value"
+                (valueChange)="sendItemsForm.get(destinationRegionField).setValue($event)"
+                [errors]="sendItemsForm.get(destinationRegionField).errors"
+                [errorCaptions]="regionErrorCaptions"
+                [options]="destinationRegionOptions$ | async"
+                [disabled]="!sendItemsForm.get(destinationCountryField).value"
+                ></gh-select-field>
+            </div>
         </div>
     </div>
+    <hr class="gp-divider">
+    <div class="group">
+        <div class="title">
+            {{ 'moduleList.client.sendItems.content.shippingInformation.title' | translate }}
+        </div>
+        <div class="section">
+            <div class="section">
+                <gh-text-field
+                [label]="'moduleList.client.sendItems.content.shippingInformation.consigneeFullName.label' | translate" 
+                [placeholder]="'moduleList.client.sendItems.content.shippingInformation.consigneeFullName.placeholder' | translate"
+                [name]="consigneeFullNameField"
+                [value]="sendItemsForm.get(consigneeFullNameField).value"
+                (valueChange)="sendItemsForm.get(consigneeFullNameField).setValue($event)"
+                [errors]="sendItemsForm.get(consigneeFullNameField).errors"
+                [errorCaptions]="consigneeFullNameErrorCaptions"
+                ></gh-text-field>
+            </div>
+            <div class="section">
+                <gh-text-field
+                [label]="'moduleList.client.sendItems.content.shippingInformation.consigneeAddress.label' | translate" 
+                [placeholder]="'moduleList.client.sendItems.content.shippingInformation.consigneeAddress.placeholder' | translate"
+                [name]="consigneeAddressField"
+                [value]="sendItemsForm.get(consigneeAddressField).value"
+                (valueChange)="sendItemsForm.get(consigneeAddressField).setValue($event)"
+                [errors]="sendItemsForm.get(consigneeAddressField).errors"
+                [errorCaptions]="consigneeAddressErrorCaptions"
+                ></gh-text-field>
+            </div>
+            <div class="section">
+                <gh-phone-field
+                [label]="'moduleList.client.sendItems.content.shippingInformation.consigneePhoneNumber.label' | translate" 
+                [placeholder]="'moduleList.client.sendItems.content.shippingInformation.consigneePhoneNumber.placeholder' | translate"
+                [name]="consigneePhoneNumberField"
+                (formattedValueChange)="sendItemsForm.get(consigneePhoneNumberField).setValue($event)"
+                [maxLength]="currentCountryInfo(sendItemsForm.get(destinationCountryField).value)?.phone.length"
+                [errors]="sendItemsForm.get(consigneePhoneNumberField).errors"
+                [errorCaptions]="consigneePhoneNumberErrorCaptions"
+                [disabled]="!(sendItemsForm.get(destinationCountryField).value)"
+                [phoneInfo]="currentCountryInfo(sendItemsForm.get(destinationCountryField).value)?.phone"
+            ></gh-phone-field>
+            </div>
+        </div>
+    </div>
+    <hr class="gp-divider">
+    <div class="group">
+        <div class="title">
+            {{ 'moduleList.client.sendItems.content.itemInformation.title' | translate }}
+        </div>
+    </div>
+    <div class="send-request">
+        <button
+            [buttonLoading]="loading$ | async" 
+            type="submit" 
+            class="gp-button" 
+            [disabled]="!sendItemsForm.valid"
+        >{{ 'moduleList.client.sendItems.content.send' | translate }}</button>
+    </div>
+
 </form>

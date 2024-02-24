@@ -19,9 +19,52 @@
             "sendItems": {
                 "title": "Send items",
                 "content" : {
-                    "userCountry": {
-                        "title": "From"
-                    }
+                    "location": {
+                        "from": "From",
+                        "to": "To",
+                        "country": {
+                            "placeholder": "Select country",
+                            "errors": {
+                                "required": "Please select a country"
+                            }
+                        },
+                        "region": {
+                            "placeholder": "Select region",
+                            "errors": {
+                                "required": "Please select a region"
+                            }
+                        }
+                    },
+                    "shippingInformation": {
+                        "title": "Shipping Information",
+                         "consigneeFullName": {
+                            "label": "Consignee Full Name",
+                            "placeholder": "Enter consignee full name",
+                            "errors": {
+                                "required": "Please enter consignee full name",
+                                "invalid": "Please enter a valid name"
+                            }
+                        },
+                        "consigneeAddress": {
+                            "label": "Consignee Address",
+                            "placeholder": "Enter consignee address, city and zip code",
+                            "errors": {
+                                "required": "Please enter consignee address"
+                            }
+                        },
+                        "consigneePhoneNumber": {
+                            "label": "Consignee Phone",
+                            "placeholder": "Enter consignee phone",
+                            "errors": {
+                                "required": "Please enter consignee phone",
+                                "invalid": "Please enter a valid phone number"
+                            }
+                        }
+                    },
+                    "itemInformation": {
+                        "title": "Item Information"
+                    },
+                    "send": "Send the Request"
                 }
             },
             "orders": {
