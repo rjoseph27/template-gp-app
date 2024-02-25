@@ -47,9 +47,9 @@ export abstract class BaseInputFieldComponent<T> {
 
     /**
      * @description The value of the input field
-     * @type {string}
+     * @type {T}
      */
-    @Input() value: string;
+    @Input() value: T;
 
     /**
      * @description The type of the input field

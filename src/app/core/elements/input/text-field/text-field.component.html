@@ -17,5 +17,6 @@
     <div
         *ngIf="(errorMessage$ | async) && (input.dirty || input.touched)"
         class="error-message" 
-        >{{ (errorMessage$ | async) | translate }}</div>
+        >{{ (errorMessage$ | async) | translate }}
+    </div>
 </div>

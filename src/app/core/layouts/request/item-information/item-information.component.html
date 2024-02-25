@@ -1,7 +1,14 @@
 <div class="content">
     <div class="section-item-information">
         <div>
-            <gh-upload-image [label]="'Upload the photo of your item'"></gh-upload-image>
+            <gh-upload-image 
+                [label]="'moduleList.client.sendItems.content.itemInformation.uploadPhoto.label'"
+                [name]="imageField"
+                [value]="itemInformationForm.get(imageField).value"
+                (valueChange)="itemInformationForm.get(imageField).setValue($event)"
+                [errors]="itemInformationForm.get(imageField).errors"
+                [errorCaptions]="imageErrorCaptions"
+            ></gh-upload-image>
         </div>
         <div>
             name<br>category

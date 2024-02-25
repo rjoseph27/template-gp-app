@@ -64,9 +64,11 @@
                     "itemInformation": {
                         "title": "Item Information",
                         "uploadPhoto": {
-                            "label": "Upload Photo",
+                            "label": "Upload the photo of your item",
                             "errors": {
-                                "required": "Please upload a photo"
+                                "required": "Please upload a photo",
+                                "format": "Please enter a .jpg, .jpeg or .png file",
+                                "size": "Please enter a file with a size less than 25KB"
                             }
                         }
                     },

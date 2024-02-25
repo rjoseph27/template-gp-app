@@ -37,3 +37,9 @@
 input[type="file"] {
   display: none;
 }
+
+.error-message {
+  max-width: 7em;
+  line-height: 1;
+  text-align: justify;
+}

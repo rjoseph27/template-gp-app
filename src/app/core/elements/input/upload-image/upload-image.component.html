@@ -1,7 +1,7 @@
 <div 
     class="content" 
     [ngStyle]="{'background-image': 'url(' + (selectedImage$ | async) + ')'}"
-    [ngClass]="{'content-with-image': (selectedImage$ | async)}"
+    [ngClass]="{'content-with-image': (selectedImage$ | async), 'error-input': ((errorMessage$ | async) && (inputTouched$ | async))}"
     (click)="openFileExplorer()"
 >
         <div *ngIf="!(selectedImage$ | async)">
@@ -11,4 +11,15 @@
             <div class="label">{{ label | translate }}</div>
         </div>
 </div>
-<input #input type="file" accept=".jpg, .jpeg, .png" (change)="onFileSelected($event)">
+<div *ngIf="(errorMessage$ | async) && (inputTouched$ | async)" class="error-message" >
+    {{ (errorMessage$ | async) | translate }}
+</div>
+<input 
+    #input
+    [id]="name"
+    type="file" 
+    accept=".jpg, .jpeg, .png"
+    (change)="onFileSelected($event)"
+>
+
+    
