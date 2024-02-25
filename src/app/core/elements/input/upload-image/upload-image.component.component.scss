@@ -1,0 +1,39 @@
+@import '../../../../../styles/variables';
+
+.content {
+  background-color: $gray-color;
+  padding: 0.25em;
+  max-width: 7em;
+  max-height: 7em;
+  min-width: 7em;
+  min-height: 7em;
+  cursor: pointer;
+  border: 1px solid #000;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: center;
+
+  .label {
+    text-align: center;
+    font-size: 0.8em;
+    line-height: 1;
+  }
+
+  .icon {
+    display: flex;
+    justify-content: center;
+    ::ng-deep .gh-icon-content {
+      color: #fff;
+      font-size: 5em;
+    }
+  }
+}
+
+.content-with-image {
+  background-color: #fff;
+}
+
+input[type="file"] {
+  display: none;
+}

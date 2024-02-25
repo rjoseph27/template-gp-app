@@ -34,3 +34,10 @@ export const HIDE_PASSWORD_ICON: string = "visibility_off";
  * @description The icon for the next page navigation.
  */
 export const CALENDAR_ICON: string = "calendar_month";
+
+/**
+ * @constant
+ * @type {string}
+ * @description The icon for the upload icon.
+ */
+export const UPLOAD_ICON: string = "upload";

@@ -62,7 +62,13 @@
                         }
                     },
                     "itemInformation": {
-                        "title": "Item Information"
+                        "title": "Item Information",
+                        "uploadPhoto": {
+                            "label": "Upload Photo",
+                            "errors": {
+                                "required": "Please upload a photo"
+                            }
+                        }
                     },
                     "send": "Send the Request"
                 }

@@ -8,6 +8,7 @@ import { GhPhoneFieldComponent } from "./input/phone-field/phone-field.component
 import { GhSelectFieldComponent } from "./input/select-field/select-field.component";
 import { GhTextFieldComponent } from "./input/text-field/text-field.component";
 import { GhToggleComponent } from "./input/toggle/toggle.component";
+import { GhUploadImageComponent } from "./input/upload-image/upload-image.component";
 import { GhMenuComponent } from "./menu/menu.component";
 import { GhTitleComponent } from "./title/title.component";
 
@@ -28,5 +29,6 @@ export const ELEMENTS_COMPONENTS = [
     GhSelectFieldComponent,
     GhPhoneFieldComponent,
     GhCheckboxComponent,
-    GhToggleComponent
+    GhToggleComponent,
+    GhUploadImageComponent
 ]

@@ -1,0 +1,14 @@
+<div 
+    class="content" 
+    [ngStyle]="{'background-image': 'url(' + (selectedImage$ | async) + ')'}"
+    [ngClass]="{'content-with-image': (selectedImage$ | async)}"
+    (click)="openFileExplorer()"
+>
+        <div *ngIf="!(selectedImage$ | async)">
+             <div class="icon">
+                 <gh-icon [name]="uploadImageIcon"></gh-icon>
+            </div>
+            <div class="label">{{ label | translate }}</div>
+        </div>
+</div>
+<input #input type="file" accept=".jpg, .jpeg, .png" (change)="onFileSelected($event)">
