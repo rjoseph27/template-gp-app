@@ -10,8 +10,29 @@
                 [errorCaptions]="imageErrorCaptions"
             ></gh-upload-image>
         </div>
-        <div>
-            name<br>category
+        <div class="sub-section-item-information">
+            <gh-text-field
+            [label]="'moduleList.client.sendItems.content.itemInformation.itemName.label' | translate" 
+            [placeholder]="'moduleList.client.sendItems.content.itemInformation.itemName.placeholder' | translate"
+            [name]="itemNameField"
+            [value]="itemInformationForm.get(itemNameField).value"
+            (valueChange)="itemInformationForm.get(itemNameField).setValue($event)"
+            [errors]="itemInformationForm.get(itemNameField).errors"
+            [errorCaptions]="itemNameErrorCaptions"
+            ></gh-text-field>
+            <gh-select-field
+                [label]="'moduleList.client.sendItems.content.itemInformation.itemCategory.label' | translate" 
+                [placeholder]="'moduleList.client.sendItems.content.itemInformation.itemCategory.placeholder' | translate"
+                [name]="itemCategoryField"
+                [value]="itemInformationForm.get(itemCategoryField).value"
+                (valueChange)="itemInformationForm.get(itemCategoryField).setValue($event)"
+                [errors]="itemInformationForm.get(itemCategoryField).errors"
+                [errorCaptions]="itemCategoryErrorCaptions"
+                [groupedOptions]="itemInformationSelectOptions"
+                ></gh-select-field>
         </div>
+    </div>
+    <div>
+        
     </div>
 </div>

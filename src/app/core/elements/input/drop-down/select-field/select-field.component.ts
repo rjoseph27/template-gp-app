@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { BaseInputFieldComponent } from '../base-input-field.component';
+import { BaseInputFieldComponent } from '../../base-input-field.component';
+
 
 /**
  * @interface SelectFieldOption
@@ -25,10 +26,32 @@ export interface SelectFieldOption {
   prefix?: string;
 }
 
+/**
+ * @interface GroupedSelectFieldOption
+ * @description An interface for the grouped select field option
+ */
+export interface GroupedSelectFieldOption {
+  /**
+   * @description The label of the select option group
+   * @type {string}
+   */
+  label: string;
+
+  /**
+   * @description The options of the select option group
+   * @type {string}
+   */
+  options: SelectFieldOption[];
+}
+
+/**
+ * @class GhSelectFieldComponent
+ * @description The select field component for the application
+ */
 @Component({
   selector: 'gh-select-field',
   templateUrl: './select-field.component.html',
-  styleUrls: ['./select-field.component.scss', './../base-input-field.component.scss']
+  styleUrls: ['./../../base-input-field.component.scss', './select-field.component.scss']
 })
 export class GhSelectFieldComponent extends BaseInputFieldComponent<string> { 
   /**
@@ -36,6 +59,12 @@ export class GhSelectFieldComponent extends BaseInputFieldComponent<string> {
    * @type {SelectFieldOption[]}
    */
   @Input() options: SelectFieldOption[];
+
+  /**
+   * @description The grouped options of the select field
+   * @type {GroupedSelectFieldOption[]}
+   */
+  @Input() groupedOptions: GroupedSelectFieldOption[];
 
   /**
    * @description This methods ensure that the value is set to the default if the value is not set

@@ -70,6 +70,20 @@
                                 "format": "Please enter a .jpg, .jpeg or .png file",
                                 "size": "Please enter a file with a size less than 25KB"
                             }
+                        },
+                        "itemName": {
+                            "label": "Name of the item",
+                            "placeholder": "Enter the name of the item",
+                            "errors": {
+                                "required": "Please enter the name of the item"
+                            }
+                        },
+                        "itemCategory": {
+                            "label": "Category of the item",
+                            "placeholder": "Select the category of the item",
+                            "errors": {
+                                "required": "Please select the category of the item"
+                            }
                         }
                     },
                     "send": "Send the Request"

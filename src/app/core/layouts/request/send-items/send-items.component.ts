@@ -1,16 +1,14 @@
 import { Component, Input, OnInit, inject } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { CurrentFormService } from "../../../../services/current-form.service";
-import { SelectFieldOption } from "../../../elements/input/select-field/select-field.component";
 import { REQUIRED_VALIDATION } from "../../../../misc/constants/validations";
 import { COUNTRY_SELECTION_OPTIONS, CountryInfo } from "../../../../misc/constants/countries/countries.type";
 import { BehaviorSubject, Observable, map } from "rxjs";
 import { Country } from "../../../../misc/enums/country.enum";
-import { ActivatedRoute } from "@angular/router";
 import { COUNTRY_INFO_LIST } from "../../../../misc/constants/countries/countries";
-import { EnumUtil } from "../../../../misc/util/enum.util";
 import { INVALID_NAME_VALIDATION, nameValidator } from "../../../../misc/validation/name.validator";
 import { INVALID_PHONE_NUMBER_VALIDATION, phoneNumberValidator } from "../../../../misc/validation/phone.validation";
+import { SelectFieldOption } from "../../../elements/input/drop-down/select-field/select-field.component";
 
 /**
  * @class GhSendItemsComponent

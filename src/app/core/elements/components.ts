@@ -3,9 +3,9 @@ import { ButtonLoadingComponent } from "./button-loading/button-loading.componen
 import { GhIconComponent } from "./icon/icon.component";
 import { GhCheckboxComponent } from "./input/checkbox/checkbox.component";
 import { GhDateFieldComponent } from "./input/date-field/date-field.component";
+import { GhSelectFieldComponent } from "./input/drop-down/select-field/select-field.component";
 import { GhPasswordFieldComponent } from "./input/password-field/password-field.component";
 import { GhPhoneFieldComponent } from "./input/phone-field/phone-field.component";
-import { GhSelectFieldComponent } from "./input/select-field/select-field.component";
 import { GhTextFieldComponent } from "./input/text-field/text-field.component";
 import { GhToggleComponent } from "./input/toggle/toggle.component";
 import { GhUploadImageComponent } from "./input/upload-image/upload-image.component";
@@ -30,5 +30,5 @@ export const ELEMENTS_COMPONENTS = [
     GhPhoneFieldComponent,
     GhCheckboxComponent,
     GhToggleComponent,
-    GhUploadImageComponent
+    GhUploadImageComponent,
 ]
