@@ -3,11 +3,12 @@ import { FileType } from "../../../elements/input/upload-image/upload-image.comp
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { IMAGE_FORMAT_VALIDATION, imageFormatValidator } from "../../../../misc/validation/image-format.validator";
 import { IMAGE_SIZE_VALIDATION, imageSizeValidator } from "../../../../misc/validation/image-size.validator";
-import { REQUIRED_VALIDATION } from "../../../../misc/constants/validations";
-import { GroupedSelectFieldOption } from "../../../elements/input/drop-down/select-field/select-field.component";
+import { MAX_VALIDATION, MIN_VALIDATION, REQUIRED_VALIDATION } from "../../../../misc/constants/validations";
+import { GroupedSelectFieldOption } from "../../../elements/input/select-field/select-field.component";
 import { LIST_ITEM_CATEGORY } from "../../../../misc/constants/item-category";
 import { ItemCategory } from "../../../../misc/enums/item-category.enum";
 import { EnumUtil } from "../../../../misc/util/enum.util";
+import { MAX_LUGGAGE_WEIGHT } from "../../../../misc/constants/application";
 
 /**
  * @interface ItemInformation
@@ -40,7 +41,8 @@ export class GhItemInformationComponent {
   protected readonly itemInformationForm = new FormGroup({
     image: new FormControl(<File>{}, [Validators.required, imageFormatValidator, imageSizeValidator]),
     itemName: new FormControl('', [Validators.required]),
-    itemCategory: new FormControl('', [Validators.required])
+    itemCategory: new FormControl('', [Validators.required]),
+    itemWeight: new FormControl(undefined, [Validators.required, Validators.min(0), Validators.max(MAX_LUGGAGE_WEIGHT)]),
   });
 
   /**
@@ -60,6 +62,18 @@ export class GhItemInformationComponent {
    * @type {string}
    */
   protected readonly itemCategoryField = "itemCategory";
+
+  /**
+   * @description The name of the item weight field
+   * @type {string}
+   */
+  protected readonly itemWeightField = "itemWeight"
+
+  /**
+   * @description The maximum luggage weight
+   * @type {number}
+   */
+  protected readonly maxLuggageWeight = MAX_LUGGAGE_WEIGHT;
 
   /**
    * @description The error messages of the upload image field
@@ -84,6 +98,16 @@ export class GhItemInformationComponent {
    */
   protected readonly itemCategoryErrorCaptions = new Map<string, string>([
     [REQUIRED_VALIDATION, "moduleList.client.sendItems.content.itemInformation.itemCategory.errors.required"]
+  ]);
+
+  /**
+   * @description The error messages of the item weight field
+   * @type {Map<string, string>}
+   */
+  protected readonly itemWeightErrorCaptions = new Map<string, string>([
+    [REQUIRED_VALIDATION, "moduleList.client.sendItems.content.itemInformation.itemWeight.errors.required"],
+    [MAX_VALIDATION, "moduleList.client.sendItems.content.itemInformation.itemWeight.errors.max"],
+    [MIN_VALIDATION, "moduleList.client.sendItems.content.itemInformation.itemWeight.errors.min"]
   ]);
 
   /**

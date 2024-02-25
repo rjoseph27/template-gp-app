@@ -84,6 +84,23 @@
                             "errors": {
                                 "required": "Please select the category of the item"
                             }
+                        },
+                        "itemWeight": {
+                            "label": "Weight of the item (KGs) per item",
+                            "placeholder": "Enter the weight of the item",
+                            "errors": {
+                                "required": "Please enter the weight of the item",
+                                "max": "Please enter a weight less than {{max}} KGs",
+                                "min": "Please enter a weight more than {{min}} KGs"
+                            }
+                        },
+                        "itemQuantity": {
+                            "label": "Quantity of the item",
+                            "placeholder": "Enter the quantity of the item",
+                            "errors": {
+                                "required": "Please enter the quantity of the item",
+                                "min": "Please enter a quantity more than {{min}}"
+                            }
                         }
                     },
                     "send": "Send the Request"

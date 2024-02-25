@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { BaseInputFieldComponent } from '../../base-input-field.component';
+import { BaseInputFieldComponent } from '../base-input-field.component';
 
 
 /**
@@ -51,7 +51,7 @@ export interface GroupedSelectFieldOption {
 @Component({
   selector: 'gh-select-field',
   templateUrl: './select-field.component.html',
-  styleUrls: ['./../../base-input-field.component.scss', './select-field.component.scss']
+  styleUrls: ['./../base-input-field.component.scss', './select-field.component.scss']
 })
 export class GhSelectFieldComponent extends BaseInputFieldComponent<string> { 
   /**

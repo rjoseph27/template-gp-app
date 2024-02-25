@@ -8,7 +8,7 @@ import { Country } from "../../../../misc/enums/country.enum";
 import { COUNTRY_INFO_LIST } from "../../../../misc/constants/countries/countries";
 import { INVALID_NAME_VALIDATION, nameValidator } from "../../../../misc/validation/name.validator";
 import { INVALID_PHONE_NUMBER_VALIDATION, phoneNumberValidator } from "../../../../misc/validation/phone.validation";
-import { SelectFieldOption } from "../../../elements/input/drop-down/select-field/select-field.component";
+import { SelectFieldOption } from "../../../elements/input/select-field/select-field.component";
 
 /**
  * @class GhSendItemsComponent

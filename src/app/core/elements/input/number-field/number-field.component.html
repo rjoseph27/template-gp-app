@@ -1,0 +1,24 @@
+<div class="section">
+    <label [for]="name">{{ label }}</label>
+</div>
+<div class="section">
+    <input 
+        #input="ngModel"
+        type="number" 
+        [id]="name"
+        class="input"
+        [ngClass]="{'error-input': ((errorMessage$ | async) && (input.dirty || input.touched))}" 
+        [placeholder]="placeholder" 
+        [ngModel]="value"
+        (ngModelChange)="valueChange.emit($event)"
+        [disabled]="disabled"
+        [max]="max"
+        [min]="min"
+        [step]="step"
+    >
+    <div
+        *ngIf="(errorMessage$ | async) && (input.dirty || input.touched)"
+        class="error-message" 
+        >{{ (errorMessage$ | async) | translate : { max: max, min: min} }}
+    </div>
+</div>

@@ -13,3 +13,17 @@ export const EMAIL_VALIDATION = 'email';
  * @description The name of the validation that ensure that the field is defined.
  */
 export const REQUIRED_VALIDATION = 'required';
+
+/**
+ * @constant
+ * @type {string}
+ * @description The name of the validation that ensure that the field don't exceed a certain amount.
+ */
+export const MAX_VALIDATION = 'max';
+
+/**
+ * @constant
+ * @type {string}
+ * @description The name of the validation that ensure that the field don't go below a certain amount.
+ */
+export const MIN_VALIDATION = 'min';

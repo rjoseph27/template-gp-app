@@ -19,7 +19,7 @@ import { GhTermsAndConditionsComponent } from './terms-and-conditions/terms-and-
 import { EMAIL_TAKEN_VALIDATOR, EmailTakenValidator } from '../../../../misc/validation/email-taken.validation';
 import { PHONE_NUMBER_TAKEN_VALIDATOR, PhoneNumberTakenValidator } from '../../../../misc/validation/phone-number-taken.validator';
 import { COUNTRY_SELECTION_OPTIONS, CountryInfo } from '../../../../misc/constants/countries/countries.type';
-import { SelectFieldOption } from '../../../elements/input/drop-down/select-field/select-field.component';
+import { SelectFieldOption } from '../../../elements/input/select-field/select-field.component';
 
 /**
  * @title Sign Up Component
