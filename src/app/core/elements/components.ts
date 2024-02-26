@@ -13,6 +13,7 @@ import { GhMenuComponent } from "./menu/menu.component";
 import { GhTitleComponent } from "./title/title.component";
 import { GhNumberFieldComponent } from "./input/number-field/number-field.component";
 import { GhTextAreaComponent } from "./input/text-area/text-area.component";
+import { GhhelpComponent } from "./help/help.component";
 
 /**
  * @constant
@@ -34,5 +35,6 @@ export const ELEMENTS_COMPONENTS = [
     GhToggleComponent,
     GhUploadImageComponent,
     GhNumberFieldComponent,
-    GhTextAreaComponent
+    GhTextAreaComponent,
+    GhhelpComponent
 ]

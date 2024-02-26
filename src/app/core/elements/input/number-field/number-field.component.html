@@ -1,5 +1,6 @@
-<div class="section">
+<div class="section label-section">
     <label [for]="name">{{ label }}</label>
+    <gh-help *ngIf="tooltip" [tooltip]="tooltip"></gh-help>
 </div>
 <div class="section">
     <input 

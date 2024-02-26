@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TranslateModule } from '@ngx-translate/core';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 /**
  * @constant
@@ -36,7 +37,8 @@ const lists = [...LAYOUTS_COMPONENTS, ...ELEMENTS_COMPONENTS]
     FormsModule,
     MatSnackBarModule,
     MatDialogModule,
-    TranslateModule
+    TranslateModule,
+    MatTooltipModule 
   ],
   exports: [...lists]
 })

@@ -9,6 +9,7 @@ import { LIST_ITEM_CATEGORY } from "../../../../misc/constants/item-category";
 import { ItemCategory } from "../../../../misc/enums/item-category.enum";
 import { EnumUtil } from "../../../../misc/util/enum.util";
 import { MAX_LUGGAGE_WEIGHT } from "../../../../misc/constants/application";
+import { BehaviorSubject } from "rxjs";
 
 /**
  * @interface ItemInformation
@@ -43,7 +44,7 @@ export class GhItemInformationComponent {
     itemName: new FormControl('', [Validators.required]),
     itemCategory: new FormControl('', [Validators.required]),
     itemWeight: new FormControl(undefined, [Validators.required, Validators.min(0), Validators.max(MAX_LUGGAGE_WEIGHT)]),
-    itemQuantity: new FormControl(undefined, [Validators.required, Validators.min(1)]),
+    itemQuantity: new FormControl(1, [Validators.required, Validators.min(1)]),
     itemSize: new FormGroup({
       depth: new FormControl(undefined, [Validators.required, Validators.min(0)]),
       width: new FormControl(undefined, [Validators.required, Validators.min(0)]),

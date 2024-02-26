@@ -41,3 +41,10 @@ export const CALENDAR_ICON: string = "calendar_month";
  * @description The icon for the upload icon.
  */
 export const UPLOAD_ICON: string = "upload";
+
+/**
+ * @constant
+ * @type {string}
+ * @description The icon for the help icon.
+ */
+export const HELP_ICON: string = "help";

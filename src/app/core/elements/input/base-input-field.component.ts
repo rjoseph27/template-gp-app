@@ -46,6 +46,12 @@ export abstract class BaseInputFieldComponent<T> {
     @Input() name: string;
 
     /**
+     * @description The tooltip of the input field
+     * @type {string}
+     */
+    @Input() tooltip: string;
+
+    /**
      * @description The value of the input field
      * @type {T}
      */

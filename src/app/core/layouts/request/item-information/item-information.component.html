@@ -52,6 +52,7 @@
                [label]="'moduleList.client.sendItems.content.itemInformation.itemQuantity.label' | translate" 
                [placeholder]="'moduleList.client.sendItems.content.itemInformation.itemQuantity.placeholder' | translate"
                [name]="itemQuantityField"
+               [tooltip]="'moduleList.client.sendItems.content.itemInformation.itemQuantity.tooltip' | translate"
                [value]="itemInformationForm.get(itemQuantityField).value"
                (valueChange)="itemInformationForm.get(itemQuantityField).setValue($event)"
                [errors]="itemInformationForm.get(itemQuantityField).errors"
@@ -60,10 +61,10 @@
                [step]="1"
               ></gh-number-field>
           </div>
+          <div class="label">{{ 'moduleList.client.sendItems.content.itemInformation.itemSize.label' | translate }}</div>
           <div class="section size-section">
-            <div class="with-label">
-              <gh-number-field
-               [label]="'moduleList.client.sendItems.content.itemInformation.itemSize.label' | translate" 
+            <div class="section">
+              <gh-number-field 
                [placeholder]="'moduleList.client.sendItems.content.itemInformation.itemSize.width.placeholder' | translate"
                [name]="widthField"
                [value]="itemInformationForm.get(widthField).value"
@@ -74,7 +75,7 @@
                [step]="0.1"
               ></gh-number-field>
             </div>
-            <div class="no-label">
+            <div class="section">
               <gh-number-field
                [placeholder]="'moduleList.client.sendItems.content.itemInformation.itemSize.height.placeholder' | translate"
                [name]="heightField"
@@ -86,7 +87,7 @@
                [step]="0.1"
               ></gh-number-field>
              </div>
-             <div class="no-label">
+             <div class="section">
                 <gh-number-field
                  [placeholder]="'moduleList.client.sendItems.content.itemInformation.itemSize.depth.placeholder' | translate"
                  [name]="depthField"

@@ -26,11 +26,12 @@ button {
     display: flex;
     justify-content: space-between;
 
-    .no-label {
-        margin-top: 1.45em;
-    }
-
-    .no-label, .with-label {
+    .section {
         width: 30%;
     }
+}
+
+.label {
+    color: $secondary-color;
+    font-weight: $semi-bold;
 }
