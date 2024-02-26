@@ -1,0 +1,20 @@
+<div class="section">
+    <label [for]="name">{{ label }}</label>
+</div>
+<div class="section">
+    <textarea 
+        #input="ngModel"
+        [id]="name"
+        class="input"
+        [ngClass]="{'error-input': ((errorMessage$ | async) && (input.dirty || input.touched))}" 
+        [placeholder]="placeholder" 
+        [ngModel]="value"
+        (ngModelChange)="valueChange.emit($event)"
+        [disabled]="disabled">
+    </textarea>
+    <div
+        *ngIf="(errorMessage$ | async) && (input.dirty || input.touched)"
+        class="error-message" 
+        >{{ (errorMessage$ | async) | translate }}
+    </div>
+</div>

@@ -43,6 +43,14 @@ export class GhItemInformationComponent {
     itemName: new FormControl('', [Validators.required]),
     itemCategory: new FormControl('', [Validators.required]),
     itemWeight: new FormControl(undefined, [Validators.required, Validators.min(0), Validators.max(MAX_LUGGAGE_WEIGHT)]),
+    itemQuantity: new FormControl(undefined, [Validators.required, Validators.min(1)]),
+    itemSize: new FormGroup({
+      depth: new FormControl(undefined, [Validators.required, Validators.min(0)]),
+      width: new FormControl(undefined, [Validators.required, Validators.min(0)]),
+      height: new FormControl(undefined, [Validators.required, Validators.min(0)])
+    }),
+    extraNotes: new FormControl(''),
+    reasonShipping: new FormControl('', [Validators.required])
   });
 
   /**
@@ -68,6 +76,48 @@ export class GhItemInformationComponent {
    * @type {string}
    */
   protected readonly itemWeightField = "itemWeight"
+
+  /**
+   * @description The name of the item quantity field
+   * @type {string}
+   */
+  protected readonly itemQuantityField = "itemQuantity"
+
+  /**
+   * @description The name of the extra notes field
+   * @type {string}
+   */
+  protected readonly extraNotesField = "extraNotes";
+
+  /**
+   * @description The name of the reason shipping field
+   * @type {string}
+   */
+  protected readonly reasonShippingField = "reasonShipping";
+
+  /**
+   * @description The name of the item size field
+   * @type {string}
+   */
+  private readonly itemSizeField = "itemSize";
+
+  /**
+   * @description The name of the item size width field
+   * @type {string}
+   */
+  protected readonly widthField = this.itemSizeField+".width";
+
+  /**
+   * @description The name of the item size height field
+   * @type {string}
+   */
+  protected readonly heightField = this.itemSizeField+".height";
+
+  /**
+   * @description The name of the item size depth field
+   * @type {string}
+   */
+  protected readonly depthField = this.itemSizeField+".depth";
 
   /**
    * @description The maximum luggage weight
@@ -108,6 +158,33 @@ export class GhItemInformationComponent {
     [REQUIRED_VALIDATION, "moduleList.client.sendItems.content.itemInformation.itemWeight.errors.required"],
     [MAX_VALIDATION, "moduleList.client.sendItems.content.itemInformation.itemWeight.errors.max"],
     [MIN_VALIDATION, "moduleList.client.sendItems.content.itemInformation.itemWeight.errors.min"]
+  ]);
+
+  /**
+   * @description The error messages of the item width field
+   * @type {Map<string, string>}
+   */
+  protected readonly itemWidthErrorCaptions = new Map<string, string>([
+    [REQUIRED_VALIDATION, "moduleList.client.sendItems.content.itemInformation.itemSize.width.errors.required"],
+    [MIN_VALIDATION, "moduleList.client.sendItems.content.itemInformation.itemSize.width.errors.min"]
+  ]);
+
+  /**
+   * @description The error messages of the item height field
+   * @type {Map<string, string>}
+   */
+  protected readonly itemHeightErrorCaptions = new Map<string, string>([
+    [REQUIRED_VALIDATION, "moduleList.client.sendItems.content.itemInformation.itemSize.height.errors.required"],
+    [MIN_VALIDATION, "moduleList.client.sendItems.content.itemInformation.itemSize.height.errors.min"]
+  ]);
+
+  /**
+   * @description The error messages of the item depth field
+   * @type {Map<string, string>}
+   */
+  protected readonly itemDepthErrorCaptions = new Map<string, string>([
+    [REQUIRED_VALIDATION, "moduleList.client.sendItems.content.itemInformation.itemSize.depth.errors.required"],
+    [MIN_VALIDATION, "moduleList.client.sendItems.content.itemInformation.itemSize.depth.errors.min"]
   ]);
 
   /**

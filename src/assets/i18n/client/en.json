@@ -86,7 +86,7 @@
                             }
                         },
                         "itemWeight": {
-                            "label": "Weight of the item (KGs) per item",
+                            "label": "Weight of the item (KGs)",
                             "placeholder": "Enter the weight of the item",
                             "errors": {
                                 "required": "Please enter the weight of the item",
@@ -95,13 +95,52 @@
                             }
                         },
                         "itemQuantity": {
-                            "label": "Quantity of the item",
-                            "placeholder": "Enter the quantity of the item",
+                            "label": "Quantity",
+                            "placeholder": "Enter the quantity",
                             "errors": {
-                                "required": "Please enter the quantity of the item",
+                                "required": "Please enter the quantity",
                                 "min": "Please enter a quantity more than {{min}}"
                             }
-                        }
+                        },
+                        "itemSize": {
+                            "label": "Size (cm)",
+                            "width": {
+                                "placeholder": "width",
+                                "errors": {
+                                    "required": "Please enter the width of the item",
+                                    "min": "Please enter a width more than {{min}} cm"
+                                }
+                            },
+                            "height": {
+                                "placeholder": "height",
+                                "errors": {
+                                    "required": "Please enter the height of the item",
+                                    "min": "Please enter a height more than {{min}} cm"
+                                }
+                            },
+                            "depth": {
+                                "placeholder": "depth",
+                                "errors": {
+                                    "required": "Please enter the depth of the item",
+                                    "min": "Please enter a depth more than {{min}} cm"
+                                }
+                            },
+                            "errors": {
+                                "required": "Please enter the size of the item",
+                                "max": "Please enter a size less than {{max}} cm",
+                                "min": "Please enter a size more than {{min}} cm"
+                            }
+                        },
+                        "extraNotes": {
+                            "label": "Extra Notes"
+                        },
+                        "reasonShipping": {
+                            "label": "Reason for the shipping",
+                            "errors": {
+                                "required": "Please explain the reason for shipping"
+                            }
+                        },
+                        "save": "Save"
                     },
                     "send": "Send the Request"
                 }

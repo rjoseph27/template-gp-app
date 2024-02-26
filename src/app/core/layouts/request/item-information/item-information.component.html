@@ -33,17 +33,94 @@
         </div>
     </div>
     <div>
-        <gh-number-field
-            [label]="'moduleList.client.sendItems.content.itemInformation.itemWeight.label' | translate" 
-            [placeholder]="'moduleList.client.sendItems.content.itemInformation.itemWeight.placeholder' | translate"
-            [name]="itemWeightField"
-            [value]="itemInformationForm.get(itemWeightField).value"
-            (valueChange)="itemInformationForm.get(itemWeightField).setValue($event)"
-            [errors]="itemInformationForm.get(itemWeightField).errors"
-            [errorCaptions]="itemWeightErrorCaptions"
-            [min]="0"
-            [step]="0.01"
-            [max]="maxLuggageWeight"
-        ></gh-number-field>
+        <div class="section">
+          <gh-number-field
+             [label]="'moduleList.client.sendItems.content.itemInformation.itemWeight.label' | translate" 
+             [placeholder]="'moduleList.client.sendItems.content.itemInformation.itemWeight.placeholder' | translate"
+             [name]="itemWeightField"
+             [value]="itemInformationForm.get(itemWeightField).value"
+             (valueChange)="itemInformationForm.get(itemWeightField).setValue($event)"
+             [errors]="itemInformationForm.get(itemWeightField).errors"
+             [errorCaptions]="itemWeightErrorCaptions"
+             [min]="0"
+             [step]="0.01"
+             [max]="maxLuggageWeight"
+            ></gh-number-field>
+        </div>
+        <div class="section">
+            <gh-number-field
+               [label]="'moduleList.client.sendItems.content.itemInformation.itemQuantity.label' | translate" 
+               [placeholder]="'moduleList.client.sendItems.content.itemInformation.itemQuantity.placeholder' | translate"
+               [name]="itemQuantityField"
+               [value]="itemInformationForm.get(itemQuantityField).value"
+               (valueChange)="itemInformationForm.get(itemQuantityField).setValue($event)"
+               [errors]="itemInformationForm.get(itemQuantityField).errors"
+               [errorCaptions]="itemWeightErrorCaptions"
+               [min]="1"
+               [step]="1"
+              ></gh-number-field>
+          </div>
+          <div class="section size-section">
+            <div class="with-label">
+              <gh-number-field
+               [label]="'moduleList.client.sendItems.content.itemInformation.itemSize.label' | translate" 
+               [placeholder]="'moduleList.client.sendItems.content.itemInformation.itemSize.width.placeholder' | translate"
+               [name]="widthField"
+               [value]="itemInformationForm.get(widthField).value"
+               (valueChange)="itemInformationForm.get(widthField).setValue($event)"
+               [errors]="itemInformationForm.get(widthField).errors"
+               [errorCaptions]="itemWidthErrorCaptions"
+               [min]="0"
+               [step]="0.1"
+              ></gh-number-field>
+            </div>
+            <div class="no-label">
+              <gh-number-field
+               [placeholder]="'moduleList.client.sendItems.content.itemInformation.itemSize.height.placeholder' | translate"
+               [name]="heightField"
+               [value]="itemInformationForm.get(heightField).value"
+               (valueChange)="itemInformationForm.get(heightField).setValue($event)"
+               [errors]="itemInformationForm.get(heightField).errors"
+               [errorCaptions]="itemHeightErrorCaptions"
+               [min]="0"
+               [step]="0.1"
+              ></gh-number-field>
+             </div>
+             <div class="no-label">
+                <gh-number-field
+                 [placeholder]="'moduleList.client.sendItems.content.itemInformation.itemSize.depth.placeholder' | translate"
+                 [name]="depthField"
+                 [value]="itemInformationForm.get(depthField).value"
+                 (valueChange)="itemInformationForm.get(depthField).setValue($event)"
+                 [errors]="itemInformationForm.get(depthField).errors"
+                 [errorCaptions]="itemDepthErrorCaptions"
+                 [min]="0"
+                 [step]="0.1"
+                ></gh-number-field>
+               </div>
+          </div>
+          <div class="section">
+            <gh-text-area
+             [label]="'moduleList.client.sendItems.content.itemInformation.extraNotes.label' | translate" 
+             [name]="extraNotesField"
+             [value]="itemInformationForm.get(extraNotesField).value"
+             (valueChange)="itemInformationForm.get(extraNotesField).setValue($event)"
+             [errors]="itemInformationForm.get(extraNotesField).errors"
+            ></gh-text-area>
+          </div>
+          <div class="section">
+            <gh-text-area
+             [label]="'moduleList.client.sendItems.content.itemInformation.reasonShipping.label' | translate" 
+             [name]="reasonShippingField"
+             [value]="itemInformationForm.get(reasonShippingField).value"
+             (valueChange)="itemInformationForm.get(reasonShippingField).setValue($event)"
+             [errors]="itemInformationForm.get(reasonShippingField).errors"
+            ></gh-text-area>
+          </div>
+          <button
+            type="submit" 
+            class="gp-button" 
+            [disabled]="!itemInformationForm.valid"
+        >{{ 'moduleList.client.sendItems.content.itemInformation.save' | translate }}</button>
     </div>
 </div>
