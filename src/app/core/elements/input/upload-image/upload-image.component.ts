@@ -8,7 +8,7 @@ import { BehaviorSubject } from 'rxjs';
  * @description The maximum image size
  * @type {number}
  */
-export const MAX_IMAGE_SIZE = 25 * 1024; // 25KB
+export const MAX_IMAGE_SIZE = 100 * 1024;
 
 /**
  * @type FileType
@@ -37,6 +37,12 @@ export class GhUploadImageComponent extends BaseInputFieldComponent<File> {
    * @type {BehaviorSubject<boolean>}
    */
   private readonly _inputTouched$ = new BehaviorSubject<boolean>(false);
+
+  /**
+   * @description The maximum size of the image in KB
+   * @type {number}
+   */
+  protected readonly maxSize = MAX_IMAGE_SIZE/1024;
 
   /**
    * @description An observable of a boolean that indicates if the input is touched

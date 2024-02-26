@@ -12,7 +12,7 @@
         </div>
 </div>
 <div *ngIf="(errorMessage$ | async) && (inputTouched$ | async)" class="error-message" >
-    {{ (errorMessage$ | async) | translate }}
+    {{ (errorMessage$ | async) | translate : { maxSize: maxSize } }}
 </div>
 <input 
     #input

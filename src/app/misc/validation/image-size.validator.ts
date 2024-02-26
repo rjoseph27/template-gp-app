@@ -1,4 +1,5 @@
 import { AbstractControl, ValidatorFn } from "@angular/forms";
+import { MAX_IMAGE_SIZE } from "../../core/elements/input/upload-image/upload-image.component";
 
 /**
  * @constant
@@ -12,7 +13,7 @@ export const IMAGE_SIZE_VALIDATION = 'imageSize';
  */
 export const imageSizeValidator: ValidatorFn = (control: AbstractControl): { [key: string]: any } | null => {
     const file = control.value;
-    const maxSize = 25 * 1024;
+    const maxSize = MAX_IMAGE_SIZE;
 
       if (file) {
         const fileSize = file.size;

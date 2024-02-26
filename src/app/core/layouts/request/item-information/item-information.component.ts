@@ -112,6 +112,12 @@ type ItemInformationForm = FormGroup<
   */
 interface ItemInformationBody {
   /**
+   * @description The id of the item information
+   * @type {number}
+   */
+  id: number;
+
+  /**
    * @description The form mode of the item information
    * @type {FormMode}
    */
@@ -122,6 +128,12 @@ interface ItemInformationBody {
    * @type {ItemInformationForm}
    */
   itemInformation: ItemInformationForm;
+
+  /**
+   * @description The item information cache
+   * @type {ItemInformation}
+   */
+  cache?: ItemInformationForm;
 }
 
 /**
@@ -301,26 +313,36 @@ export class GhItemInformationComponent {
   }
 
   /**
+   * @description The method that creates a new form factory
+   * @param itemInformation The item information form
+   * @returns The form group
+   */
+  private newFormFactory(itemInformation?: ItemInformationForm): FormGroup {
+    return new FormGroup({
+      image: new FormControl(itemInformation?.get(this.imageField).value || <File>{}, [Validators.required, imageFormatValidator, imageSizeValidator]),
+      itemName: new FormControl(itemInformation?.get(this.itemNameField).value || '', [Validators.required]),
+      itemCategory: new FormControl(itemInformation?.get(this.itemCategoryField).value || '', [Validators.required]),
+      itemWeight: new FormControl(itemInformation?.get(this.itemWeightField).value || undefined, [Validators.required, Validators.min(0), Validators.max(MAX_LUGGAGE_WEIGHT)]),
+      itemQuantity: new FormControl(itemInformation?.get(this.itemQuantityField).value || 1, [Validators.required, Validators.min(1)]),
+      itemSize: new FormGroup({
+        depth: new FormControl(itemInformation?.get(this.depthField).value || undefined, [Validators.required, Validators.min(0)]),
+        width: new FormControl(itemInformation?.get(this.widthField).value || undefined, [Validators.required, Validators.min(0)]),
+        height: new FormControl(itemInformation?.get(this.heightField).value || undefined, [Validators.required, Validators.min(0)])
+      }),
+      extraNotes: new FormControl(itemInformation?.get(this.extraNotesField).value || ''),
+      reasonShipping: new FormControl(itemInformation?.get(this.reasonShippingField).value || '', [Validators.required])
+    });
+  }
+
+  /**
    * @description The method that adds a new item information
    * @returns void
    */
   private addNewItemInformation() {
     const newItem: ItemInformationBody = {
+      id: this.itemInformationList.length,
       formMode: FormMode.CREATE,
-      itemInformation: new FormGroup({
-        image: new FormControl(<File>{}, [Validators.required, imageFormatValidator, imageSizeValidator]),
-        itemName: new FormControl('', [Validators.required]),
-        itemCategory: new FormControl('', [Validators.required]),
-        itemWeight: new FormControl(undefined, [Validators.required, Validators.min(0), Validators.max(MAX_LUGGAGE_WEIGHT)]),
-        itemQuantity: new FormControl(1, [Validators.required, Validators.min(1)]),
-        itemSize: new FormGroup({
-          depth: new FormControl(undefined, [Validators.required, Validators.min(0)]),
-          width: new FormControl(undefined, [Validators.required, Validators.min(0)]),
-          height: new FormControl(undefined, [Validators.required, Validators.min(0)])
-        }),
-        extraNotes: new FormControl(''),
-        reasonShipping: new FormControl('', [Validators.required])
-      })
+      itemInformation: this.newFormFactory()
     };
 
     this.itemInformationList.push(newItem)
@@ -334,5 +356,46 @@ export class GhItemInformationComponent {
   protected saveItemInformation(itemInformation: ItemInformationBody) {
     itemInformation.formMode = FormMode.VIEW;
     this.addNewItemInformation();
+  }
+
+  /**
+   * @description Set the form mode to edit
+   * @param itemInformation The item information to edit
+   * @returns void
+   */
+  protected goToEditMode(itemInformation: ItemInformationBody) {
+    itemInformation.formMode = FormMode.EDIT;
+    itemInformation.cache = this.newFormFactory(itemInformation.itemInformation);
+  }
+
+  /**
+   * @description Edit an item information
+   * @param itemInformation The item information to edit
+   * @returns void
+   */
+  protected editItemInformation(itemInformation: ItemInformationBody) {
+    itemInformation.formMode = FormMode.VIEW;
+    this.itemInformationList[itemInformation.id] = itemInformation;
+    itemInformation.cache = undefined;
+  }
+
+  /**
+   * @description The method to cancel an item information edit
+   * @param itemInformation The item information to cancel
+   * @returns void
+   */
+  protected cancelEditItemInformation(itemInformation: ItemInformationBody) {
+    itemInformation.itemInformation = itemInformation.cache;
+    itemInformation.formMode = FormMode.VIEW;
+    itemInformation.cache = undefined;
+  }
+
+  /**
+   * @description The method to delete an item information
+   * @param itemInformation The item information to delete
+   * @returns void
+   */
+  protected deleteItemInformation(itemInformation: ItemInformationBody) {
+    this.itemInformationList.splice(itemInformation.id, 1);
   }
 }

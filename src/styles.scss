@@ -6,14 +6,23 @@
     font-family: 'gp-hub-font';
     src: url('./assets/font/rantera.otf') format('opentype'),
 }
-
-.gp-button {
-    background-color: $primary-button-color;
+@mixin button-mixin {
     color: #fff;
     border-width: 0px;
     font-size: 1em;
     padding:0.7em;
     border-radius:25px;
+}
+
+.gp-button {
+    @include button-mixin;
+    background-color: $primary-button-color;
+    margin: 0.5em 0em;
+}
+
+.attention-button {
+    @include button-mixin;
+    background-color: $error-color;
 }
 
 .gp-button:disabled {

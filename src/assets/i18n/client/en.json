@@ -68,7 +68,7 @@
                             "errors": {
                                 "required": "Please upload a photo",
                                 "format": "Please enter a .jpg, .jpeg or .png file",
-                                "size": "Please enter a file with a size less than 25KB"
+                                "size": "Please enter a file with a size less than {{maxSize}}KB"
                             }
                         },
                         "itemName": {
@@ -140,8 +140,7 @@
                             "errors": {
                                 "required": "Please explain the reason for shipping"
                             }
-                        },
-                        "save": "Save"
+                        }
                     },
                     "send": "Send the Request"
                 }

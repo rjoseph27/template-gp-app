@@ -5,6 +5,12 @@
             "en":"English",
             "fr":"Français"
         },
+        "common": {
+            "save": "Save",
+            "edit": "Edit",
+            "delete": "Delete",
+            "cancel": "Cancel"
+        },
         "credentials": {
             "email": {
                 "label": "Email",

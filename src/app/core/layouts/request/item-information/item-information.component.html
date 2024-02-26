@@ -3,7 +3,7 @@
         <div>
             <gh-upload-image 
                 [label]="'moduleList.client.sendItems.content.itemInformation.uploadPhoto.label'"
-                [name]="imageField"
+                [name]="imageField+itemInformationForm.id"
                 [value]="itemInformationForm.itemInformation.get(imageField).value"
                 (valueChange)="itemInformationForm.itemInformation.get(imageField).setValue($event)"
                 [errors]="itemInformationForm.itemInformation.get(imageField).errors"
@@ -15,7 +15,7 @@
             <gh-text-field
             [label]="'moduleList.client.sendItems.content.itemInformation.itemName.label' | translate" 
             [placeholder]="'moduleList.client.sendItems.content.itemInformation.itemName.placeholder' | translate"
-            [name]="itemNameField"
+            [name]="itemNameField+itemInformationForm.id"
             [value]="itemInformationForm.itemInformation.get(itemNameField).value"
             (valueChange)="itemInformationForm.itemInformation.get(itemNameField).setValue($event)"
             [errors]="itemInformationForm.itemInformation.get(itemNameField).errors"
@@ -25,7 +25,7 @@
             <gh-select-field
                 [label]="'moduleList.client.sendItems.content.itemInformation.itemCategory.label' | translate" 
                 [placeholder]="'moduleList.client.sendItems.content.itemInformation.itemCategory.placeholder' | translate"
-                [name]="itemCategoryField"
+                [name]="itemCategoryField+itemInformationForm.id"
                 [value]="itemInformationForm.itemInformation.get(itemCategoryField).value"
                 (valueChange)="itemInformationForm.itemInformation.get(itemCategoryField).setValue($event)"
                 [errors]="itemInformationForm.itemInformation.get(itemCategoryField).errors"
@@ -40,7 +40,7 @@
           <gh-number-field
              [label]="'moduleList.client.sendItems.content.itemInformation.itemWeight.label' | translate" 
              [placeholder]="'moduleList.client.sendItems.content.itemInformation.itemWeight.placeholder' | translate"
-             [name]="itemWeightField"
+             [name]="itemWeightField+itemInformationForm.id"
              [value]="itemInformationForm.itemInformation.get(itemWeightField).value"
              (valueChange)="itemInformationForm.itemInformation.get(itemWeightField).setValue($event)"
              [errors]="itemInformationForm.itemInformation.get(itemWeightField).errors"
@@ -55,7 +55,7 @@
             <gh-number-field
                [label]="'moduleList.client.sendItems.content.itemInformation.itemQuantity.label' | translate" 
                [placeholder]="'moduleList.client.sendItems.content.itemInformation.itemQuantity.placeholder' | translate"
-               [name]="itemQuantityField"
+               [name]="itemQuantityField+itemInformationForm.id"
                [tooltip]="'moduleList.client.sendItems.content.itemInformation.itemQuantity.tooltip' | translate"
                [value]="itemInformationForm.itemInformation.get(itemQuantityField).value"
                (valueChange)="itemInformationForm.itemInformation.get(itemQuantityField).setValue($event)"
@@ -71,7 +71,7 @@
             <div class="section">
               <gh-number-field 
                [placeholder]="'moduleList.client.sendItems.content.itemInformation.itemSize.width.placeholder' | translate"
-               [name]="widthField"
+               [name]="widthField+itemInformationForm.id"
                [value]="itemInformationForm.itemInformation.get(widthField).value"
                (valueChange)="itemInformationForm.itemInformation.get(widthField).setValue($event)"
                [errors]="itemInformationForm.itemInformation.get(widthField).errors"
@@ -84,7 +84,7 @@
             <div class="section">
               <gh-number-field
                [placeholder]="'moduleList.client.sendItems.content.itemInformation.itemSize.height.placeholder' | translate"
-               [name]="heightField"
+               [name]="heightField+itemInformationForm.id"
                [value]="itemInformationForm.itemInformation.get(heightField).value"
                (valueChange)="itemInformationForm.itemInformation.get(heightField).setValue($event)"
                [errors]="itemInformationForm.itemInformation.get(heightField).errors"
@@ -97,7 +97,7 @@
              <div class="section">
                 <gh-number-field
                  [placeholder]="'moduleList.client.sendItems.content.itemInformation.itemSize.depth.placeholder' | translate"
-                 [name]="depthField"
+                 [name]="depthField+itemInformationForm.id"
                  [value]="itemInformationForm.itemInformation.get(depthField).value"
                  (valueChange)="itemInformationForm.itemInformation.get(depthField).setValue($event)"
                  [errors]="itemInformationForm.itemInformation.get(depthField).errors"
@@ -111,7 +111,7 @@
           <div class="section">
             <gh-text-area
              [label]="'moduleList.client.sendItems.content.itemInformation.extraNotes.label' | translate" 
-             [name]="extraNotesField"
+             [name]="extraNotesField+itemInformationForm.id"
              [value]="itemInformationForm.itemInformation.get(extraNotesField).value"
              (valueChange)="itemInformationForm.itemInformation.get(extraNotesField).setValue($event)"
              [errors]="itemInformationForm.itemInformation.get(extraNotesField).errors"
@@ -121,7 +121,7 @@
           <div class="section">
             <gh-text-area
              [label]="'moduleList.client.sendItems.content.itemInformation.reasonShipping.label' | translate" 
-             [name]="reasonShippingField"
+             [name]="reasonShippingField+itemInformationForm.id"
              [value]="itemInformationForm.itemInformation.get(reasonShippingField).value"
              (valueChange)="itemInformationForm.itemInformation.get(reasonShippingField).setValue($event)"
              [errors]="itemInformationForm.itemInformation.get(reasonShippingField).errors"
@@ -129,11 +129,35 @@
             ></gh-text-area>
           </div>
           <button
-            *ngIf="itemInformationForm.formMode !== formMode.VIEW"
+            *ngIf="itemInformationForm.formMode === formMode.CREATE"
             type="submit" 
             class="gp-button" 
             [disabled]="!itemInformationForm.itemInformation.valid"
             (click)="saveItemInformation(itemInformationForm)"
-        >{{ 'moduleList.client.sendItems.content.itemInformation.save' | translate }}</button>
+        >{{ 'global.common.save' | translate }}</button>
+        <button
+            *ngIf="itemInformationForm.formMode === formMode.VIEW"
+            type="submit" 
+            class="gp-button" 
+            (click)="goToEditMode(itemInformationForm)"
+        >{{ 'global.common.edit' | translate }}</button>
+        <button
+            *ngIf="itemInformationForm.formMode === formMode.EDIT"
+            type="submit" 
+            class="gp-button" 
+            (click)="editItemInformation(itemInformationForm)"
+        >{{ 'global.common.edit' | translate }}</button>
+        <button
+            *ngIf="itemInformationForm.formMode === formMode.EDIT"
+            type="submit" 
+            class="attention-button" 
+            (click)="cancelEditItemInformation(itemInformationForm)"
+        >{{ 'global.common.cancel' | translate }}</button>
+        <button
+            *ngIf="itemInformationForm.formMode === formMode.VIEW"
+            type="submit" 
+            class="attention-button" 
+            (click)="deleteItemInformation(itemInformationForm)"
+        >{{ 'global.common.delete' | translate }}</button>
     </div>
 </div>
