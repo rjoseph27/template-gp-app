@@ -1,13 +1,14 @@
-<div class="content">
+<div class="content" *ngFor="let itemInformationForm of itemInformationList">
     <div class="section-item-information">
         <div>
             <gh-upload-image 
                 [label]="'moduleList.client.sendItems.content.itemInformation.uploadPhoto.label'"
                 [name]="imageField"
-                [value]="itemInformationForm.get(imageField).value"
-                (valueChange)="itemInformationForm.get(imageField).setValue($event)"
-                [errors]="itemInformationForm.get(imageField).errors"
+                [value]="itemInformationForm.itemInformation.get(imageField).value"
+                (valueChange)="itemInformationForm.itemInformation.get(imageField).setValue($event)"
+                [errors]="itemInformationForm.itemInformation.get(imageField).errors"
                 [errorCaptions]="imageErrorCaptions"
+                [readonly]="itemInformationForm.formMode === formMode.VIEW"
             ></gh-upload-image>
         </div>
         <div class="sub-section-item-information">
@@ -15,20 +16,22 @@
             [label]="'moduleList.client.sendItems.content.itemInformation.itemName.label' | translate" 
             [placeholder]="'moduleList.client.sendItems.content.itemInformation.itemName.placeholder' | translate"
             [name]="itemNameField"
-            [value]="itemInformationForm.get(itemNameField).value"
-            (valueChange)="itemInformationForm.get(itemNameField).setValue($event)"
-            [errors]="itemInformationForm.get(itemNameField).errors"
+            [value]="itemInformationForm.itemInformation.get(itemNameField).value"
+            (valueChange)="itemInformationForm.itemInformation.get(itemNameField).setValue($event)"
+            [errors]="itemInformationForm.itemInformation.get(itemNameField).errors"
             [errorCaptions]="itemNameErrorCaptions"
+            [readonly]="itemInformationForm.formMode === formMode.VIEW"
             ></gh-text-field>
             <gh-select-field
                 [label]="'moduleList.client.sendItems.content.itemInformation.itemCategory.label' | translate" 
                 [placeholder]="'moduleList.client.sendItems.content.itemInformation.itemCategory.placeholder' | translate"
                 [name]="itemCategoryField"
-                [value]="itemInformationForm.get(itemCategoryField).value"
-                (valueChange)="itemInformationForm.get(itemCategoryField).setValue($event)"
-                [errors]="itemInformationForm.get(itemCategoryField).errors"
+                [value]="itemInformationForm.itemInformation.get(itemCategoryField).value"
+                (valueChange)="itemInformationForm.itemInformation.get(itemCategoryField).setValue($event)"
+                [errors]="itemInformationForm.itemInformation.get(itemCategoryField).errors"
                 [errorCaptions]="itemCategoryErrorCaptions"
                 [groupedOptions]="itemInformationSelectOptions"
+                [readonly]="itemInformationForm.formMode === formMode.VIEW"
                 ></gh-select-field>
         </div>
     </div>
@@ -38,13 +41,14 @@
              [label]="'moduleList.client.sendItems.content.itemInformation.itemWeight.label' | translate" 
              [placeholder]="'moduleList.client.sendItems.content.itemInformation.itemWeight.placeholder' | translate"
              [name]="itemWeightField"
-             [value]="itemInformationForm.get(itemWeightField).value"
-             (valueChange)="itemInformationForm.get(itemWeightField).setValue($event)"
-             [errors]="itemInformationForm.get(itemWeightField).errors"
+             [value]="itemInformationForm.itemInformation.get(itemWeightField).value"
+             (valueChange)="itemInformationForm.itemInformation.get(itemWeightField).setValue($event)"
+             [errors]="itemInformationForm.itemInformation.get(itemWeightField).errors"
              [errorCaptions]="itemWeightErrorCaptions"
              [min]="0"
              [step]="0.01"
              [max]="maxLuggageWeight"
+             [readonly]="itemInformationForm.formMode === formMode.VIEW"
             ></gh-number-field>
         </div>
         <div class="section">
@@ -53,10 +57,11 @@
                [placeholder]="'moduleList.client.sendItems.content.itemInformation.itemQuantity.placeholder' | translate"
                [name]="itemQuantityField"
                [tooltip]="'moduleList.client.sendItems.content.itemInformation.itemQuantity.tooltip' | translate"
-               [value]="itemInformationForm.get(itemQuantityField).value"
-               (valueChange)="itemInformationForm.get(itemQuantityField).setValue($event)"
-               [errors]="itemInformationForm.get(itemQuantityField).errors"
+               [value]="itemInformationForm.itemInformation.get(itemQuantityField).value"
+               (valueChange)="itemInformationForm.itemInformation.get(itemQuantityField).setValue($event)"
+               [errors]="itemInformationForm.itemInformation.get(itemQuantityField).errors"
                [errorCaptions]="itemWeightErrorCaptions"
+               [readonly]="itemInformationForm.formMode === formMode.VIEW"
                [min]="1"
                [step]="1"
               ></gh-number-field>
@@ -67,10 +72,11 @@
               <gh-number-field 
                [placeholder]="'moduleList.client.sendItems.content.itemInformation.itemSize.width.placeholder' | translate"
                [name]="widthField"
-               [value]="itemInformationForm.get(widthField).value"
-               (valueChange)="itemInformationForm.get(widthField).setValue($event)"
-               [errors]="itemInformationForm.get(widthField).errors"
+               [value]="itemInformationForm.itemInformation.get(widthField).value"
+               (valueChange)="itemInformationForm.itemInformation.get(widthField).setValue($event)"
+               [errors]="itemInformationForm.itemInformation.get(widthField).errors"
                [errorCaptions]="itemWidthErrorCaptions"
+               [readonly]="itemInformationForm.formMode === formMode.VIEW"
                [min]="0"
                [step]="0.1"
               ></gh-number-field>
@@ -79,10 +85,11 @@
               <gh-number-field
                [placeholder]="'moduleList.client.sendItems.content.itemInformation.itemSize.height.placeholder' | translate"
                [name]="heightField"
-               [value]="itemInformationForm.get(heightField).value"
-               (valueChange)="itemInformationForm.get(heightField).setValue($event)"
-               [errors]="itemInformationForm.get(heightField).errors"
+               [value]="itemInformationForm.itemInformation.get(heightField).value"
+               (valueChange)="itemInformationForm.itemInformation.get(heightField).setValue($event)"
+               [errors]="itemInformationForm.itemInformation.get(heightField).errors"
                [errorCaptions]="itemHeightErrorCaptions"
+               [readonly]="itemInformationForm.formMode === formMode.VIEW"
                [min]="0"
                [step]="0.1"
               ></gh-number-field>
@@ -91,10 +98,11 @@
                 <gh-number-field
                  [placeholder]="'moduleList.client.sendItems.content.itemInformation.itemSize.depth.placeholder' | translate"
                  [name]="depthField"
-                 [value]="itemInformationForm.get(depthField).value"
-                 (valueChange)="itemInformationForm.get(depthField).setValue($event)"
-                 [errors]="itemInformationForm.get(depthField).errors"
+                 [value]="itemInformationForm.itemInformation.get(depthField).value"
+                 (valueChange)="itemInformationForm.itemInformation.get(depthField).setValue($event)"
+                 [errors]="itemInformationForm.itemInformation.get(depthField).errors"
                  [errorCaptions]="itemDepthErrorCaptions"
+                 [readonly]="itemInformationForm.formMode === formMode.VIEW"
                  [min]="0"
                  [step]="0.1"
                 ></gh-number-field>
@@ -104,24 +112,28 @@
             <gh-text-area
              [label]="'moduleList.client.sendItems.content.itemInformation.extraNotes.label' | translate" 
              [name]="extraNotesField"
-             [value]="itemInformationForm.get(extraNotesField).value"
-             (valueChange)="itemInformationForm.get(extraNotesField).setValue($event)"
-             [errors]="itemInformationForm.get(extraNotesField).errors"
+             [value]="itemInformationForm.itemInformation.get(extraNotesField).value"
+             (valueChange)="itemInformationForm.itemInformation.get(extraNotesField).setValue($event)"
+             [errors]="itemInformationForm.itemInformation.get(extraNotesField).errors"
+             [readonly]="itemInformationForm.formMode === formMode.VIEW"
             ></gh-text-area>
           </div>
           <div class="section">
             <gh-text-area
              [label]="'moduleList.client.sendItems.content.itemInformation.reasonShipping.label' | translate" 
              [name]="reasonShippingField"
-             [value]="itemInformationForm.get(reasonShippingField).value"
-             (valueChange)="itemInformationForm.get(reasonShippingField).setValue($event)"
-             [errors]="itemInformationForm.get(reasonShippingField).errors"
+             [value]="itemInformationForm.itemInformation.get(reasonShippingField).value"
+             (valueChange)="itemInformationForm.itemInformation.get(reasonShippingField).setValue($event)"
+             [errors]="itemInformationForm.itemInformation.get(reasonShippingField).errors"
+             [readonly]="itemInformationForm.formMode === formMode.VIEW"
             ></gh-text-area>
           </div>
           <button
+            *ngIf="itemInformationForm.formMode !== formMode.VIEW"
             type="submit" 
             class="gp-button" 
-            [disabled]="!itemInformationForm.valid"
+            [disabled]="!itemInformationForm.itemInformation.valid"
+            (click)="saveItemInformation(itemInformationForm)"
         >{{ 'moduleList.client.sendItems.content.itemInformation.save' | translate }}</button>
     </div>
 </div>

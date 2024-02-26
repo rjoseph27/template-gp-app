@@ -2,7 +2,7 @@
     <label [for]="name">{{ label }}</label>
     <gh-help *ngIf="tooltip" [tooltip]="tooltip"></gh-help>
 </div>
-<div class="section">
+<div class="section" *ngIf="!readonly; else readonlyTemplate">
     <input 
         #input="ngModel"
         type="number" 
@@ -23,3 +23,9 @@
         >{{ (errorMessage$ | async) | translate : { max: max, min: min} }}
     </div>
 </div>
+
+<ng-template #readonlyTemplate>
+    <div class="section">
+        <div class="readonly">{{ value }}</div>
+    </div>
+</ng-template>

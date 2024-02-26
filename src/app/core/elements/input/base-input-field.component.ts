@@ -34,6 +34,12 @@ export abstract class BaseInputFieldComponent<T> {
     @Input() label: string;
 
     /**
+     * @description The readonly property of the input field
+     * @type {boolean}
+     */
+    @Input() readonly: boolean = false;
+
+    /**
      * @description The placeholder of the input field
      * @type {string}
      */

@@ -55,8 +55,10 @@ export class GhUploadImageComponent extends BaseInputFieldComponent<File> {
    * @returns {void}
    */
   protected openFileExplorer(): void {
-    this.input.nativeElement.click();
-    this._inputTouched$.next(true);
+    if(!this.readonly) {
+      this.input.nativeElement.click();
+      this._inputTouched$.next(true);
+    }
   }
 
   /**

@@ -73,4 +73,23 @@ export class GhSelectFieldComponent extends BaseInputFieldComponent<string> {
   protected onInputBlur(): void {
     this.valueChange.emit(this.value);
   }
+
+  protected getReadonlyValue(): string {
+    if(this.options && this.value)
+    {
+      return this.options.find(option => option.value === this.value)?.label;
+    }
+    if(this.groupedOptions && this.value)
+    {
+      for(const group of this.groupedOptions)
+      {
+        const option = group.options.find(option => option.value === this.value);
+        if(option)
+        {
+          return option.label;
+        }
+      }
+    }
+    return ""
+  }
 }

@@ -1,5 +1,4 @@
 import { Component } from "@angular/core";
-import { FileType } from "../../../elements/input/upload-image/upload-image.component";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { IMAGE_FORMAT_VALIDATION, imageFormatValidator } from "../../../../misc/validation/image-format.validator";
 import { IMAGE_SIZE_VALIDATION, imageSizeValidator } from "../../../../misc/validation/image-size.validator";
@@ -9,24 +8,120 @@ import { LIST_ITEM_CATEGORY } from "../../../../misc/constants/item-category";
 import { ItemCategory } from "../../../../misc/enums/item-category.enum";
 import { EnumUtil } from "../../../../misc/util/enum.util";
 import { MAX_LUGGAGE_WEIGHT } from "../../../../misc/constants/application";
-import { BehaviorSubject } from "rxjs";
+import { FormMode } from "../../../../misc/enums/form-mode.enum";
 
 /**
  * @interface ItemInformation
- * @description The item information interface
+ * @description The type of the item information
  */
 interface ItemInformation {
   /**
    * @description The image of the item
-   * @type {FileType}
+   * @type {File}
    */
-  image: FileType;
+  image: File;
 
   /**
    * @description The name of the item
    * @type {string}
    */
-  name:string;
+  itemName: string;
+
+  /**
+   * @description The category of the item
+   * @type {ItemCategory}
+   */
+  itemCategory: ItemCategory;
+
+  /**
+   * @description The weight of the item
+   * @type {number}
+   */
+  itemWeight: number;
+
+  /**
+   * @description The quantity of the item
+   * @type {ItemSize}
+   */
+  itemQuantity: number;
+
+  /**
+   * @description The dimension of the item
+   * @type {ItemSize}
+   */
+  itemSize: ItemSize;
+
+  /**
+   * @description The extra notes of the item
+   * @type {string}
+   */
+  extraNotes: string;
+
+  /**
+   * @description The reason for shipping the item
+   * @type {string}
+   */
+  reasonShipping: string;
+}
+
+/**
+ * @interface ItemSize
+ * @description The type of the item size
+ */
+interface ItemSize {
+  /**
+   * @description The width of the item
+   * @type {number}
+   */
+  width: number;
+
+  /**
+   * @description The height of the item
+   * @type {number}
+   */
+  height: number;
+
+  /**
+   * @description The depth of the item
+   * @type {number}
+   */
+  depth: number;
+}
+
+/**
+ * @type ItemInformationForm
+ * @description The type of the item information form
+ */
+type ItemInformationForm = FormGroup<
+  { image: FormControl<File>; 
+    itemName: FormControl<string>; 
+    itemCategory: FormControl<string>; 
+    itemWeight: FormControl<number>; 
+    itemQuantity: FormControl<number>; 
+    itemSize: FormGroup<
+      { depth: FormControl<any>; 
+        width: FormControl<any>; 
+        height: FormControl<any>; }>; 
+    extraNotes: FormControl<string>; 
+    reasonShipping: FormControl<string>;
+  }>;
+
+/**
+  * @interface ItemInformationBody
+  * @description The type of the item information body 
+  */
+interface ItemInformationBody {
+  /**
+   * @description The form mode of the item information
+   * @type {FormMode}
+   */
+  formMode: FormMode;
+
+  /**
+   * @description The item information
+   * @type {ItemInformationForm}
+   */
+  itemInformation: ItemInformationForm;
 }
 
 /**
@@ -39,20 +134,17 @@ interface ItemInformation {
   styleUrl: './item-information.component.scss',
 })
 export class GhItemInformationComponent {
-  protected readonly itemInformationForm = new FormGroup({
-    image: new FormControl(<File>{}, [Validators.required, imageFormatValidator, imageSizeValidator]),
-    itemName: new FormControl('', [Validators.required]),
-    itemCategory: new FormControl('', [Validators.required]),
-    itemWeight: new FormControl(undefined, [Validators.required, Validators.min(0), Validators.max(MAX_LUGGAGE_WEIGHT)]),
-    itemQuantity: new FormControl(1, [Validators.required, Validators.min(1)]),
-    itemSize: new FormGroup({
-      depth: new FormControl(undefined, [Validators.required, Validators.min(0)]),
-      width: new FormControl(undefined, [Validators.required, Validators.min(0)]),
-      height: new FormControl(undefined, [Validators.required, Validators.min(0)])
-    }),
-    extraNotes: new FormControl(''),
-    reasonShipping: new FormControl('', [Validators.required])
-  });
+  /**
+   * @description The item information list
+   * @type {ItemInformationBody[]}
+   */
+  protected readonly itemInformationList: ItemInformationBody[] = [];
+
+  /**
+   * @description The form mode
+   * @type {FormMode}
+   */
+  protected readonly formMode = FormMode;
 
   /**
    * @description The name of the upload image field
@@ -200,4 +292,47 @@ export class GhItemInformationComponent {
       .map((key: string) => ({label: EnumUtil.getKeyByValue(ItemCategory, key), value: key}))
     }
   })
+
+  /**
+   * @constructor
+   */
+  constructor() {
+    this.addNewItemInformation();
+  }
+
+  /**
+   * @description The method that adds a new item information
+   * @returns void
+   */
+  private addNewItemInformation() {
+    const newItem: ItemInformationBody = {
+      formMode: FormMode.CREATE,
+      itemInformation: new FormGroup({
+        image: new FormControl(<File>{}, [Validators.required, imageFormatValidator, imageSizeValidator]),
+        itemName: new FormControl('', [Validators.required]),
+        itemCategory: new FormControl('', [Validators.required]),
+        itemWeight: new FormControl(undefined, [Validators.required, Validators.min(0), Validators.max(MAX_LUGGAGE_WEIGHT)]),
+        itemQuantity: new FormControl(1, [Validators.required, Validators.min(1)]),
+        itemSize: new FormGroup({
+          depth: new FormControl(undefined, [Validators.required, Validators.min(0)]),
+          width: new FormControl(undefined, [Validators.required, Validators.min(0)]),
+          height: new FormControl(undefined, [Validators.required, Validators.min(0)])
+        }),
+        extraNotes: new FormControl(''),
+        reasonShipping: new FormControl('', [Validators.required])
+      })
+    };
+
+    this.itemInformationList.push(newItem)
+  }
+
+  /**
+   * @description The method to save an item information
+   * @param itemInformation The new item information
+   * @returns void
+   */
+  protected saveItemInformation(itemInformation: ItemInformationBody) {
+    itemInformation.formMode = FormMode.VIEW;
+    this.addNewItemInformation();
+  }
 }

@@ -1,7 +1,7 @@
 <div class="section">
     <label [for]="name">{{ label }}</label>
 </div>
-<div class="section">
+<div class="section" *ngIf="!readonly; else readonlyTemplate">
     <select
      #input="ngModel"
      class="input"
@@ -23,3 +23,8 @@
         class="error-message">{{ (errorMessage$ | async) | translate }}
     </div>
 </div>
+<ng-template #readonlyTemplate>
+    <div class="section">
+        <div class="readonly">{{ getReadonlyValue() }}</div>
+    </div>
+</ng-template>
