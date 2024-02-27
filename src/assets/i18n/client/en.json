@@ -167,7 +167,24 @@
         },
         "gp": {
             "reportTrip": {
-                "title": "Report a Trip"
+                "title": "Report a Trip",
+                "airport": {
+                    "label": "Airport",
+                    "placeholder": "Select the airport",
+                    "errors": {
+                        "required": "Please select the airport"
+                    }
+                },
+                "date": {
+                    "departure": {
+                        "label": "Departure Date (local time)",
+                        "placeholder": "Select the departure date",
+                        "errors": {
+                            "required": "Please select the departure date",
+                            "invalidDate": "Please select a valid date"
+                        }
+                    } 
+                }
             },
             "trip": {
                 "title": "My Trips"

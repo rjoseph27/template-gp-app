@@ -85,7 +85,7 @@ export class UsersService {
       if(e.error.message === ConnectStatus.WRONG_CREDENTIALS) {
         this.notificationService.errorNotification('global.login.errors.login.wrongCredentials');
       } else {
-        this.notificationService.errorNotification('global.login.errors.login.internalServerError');
+        this.notificationService.errorNotification('global.errors.serverError');
       }
       return false;
     });

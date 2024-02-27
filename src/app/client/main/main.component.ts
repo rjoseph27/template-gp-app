@@ -128,7 +128,9 @@ export class ClientMainComponent {
     {
       label: "moduleList.gp.reportTrip.title",
       icon: REPORT_TRIP_ICON,
-      action: () => {}
+      action: () => {
+        this.router.navigate([ClientRoutes.reportTrip.fullPath()]);
+      }
     },
     {
       label: "moduleList.gp.trip.title",

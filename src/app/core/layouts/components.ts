@@ -11,6 +11,7 @@ import { GhResetPasswordForgotPasswordComponent } from "./authentication/forgot-
 import { GhMainComponent } from "./main/main.component";
 import { GhSendItemsComponent } from "./request/send-items/send-items.component";
 import { GhItemInformationComponent } from "./request/item-information/item-information.component";
+import { GhReportTripComponent } from "./request/report-trip/report-trip.component";
 
 /**
  * @constant
@@ -30,5 +31,6 @@ export const LAYOUTS_COMPONENTS = [
     GhResetPasswordForgotPasswordComponent,
     GhMainComponent,
     GhSendItemsComponent,
-    GhItemInformationComponent
+    GhItemInformationComponent,
+    GhReportTripComponent
 ]

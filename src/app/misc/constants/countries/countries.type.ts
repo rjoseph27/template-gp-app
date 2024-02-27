@@ -29,7 +29,31 @@ export interface CountryInfo {
      * @type {any[]}
      */
     regions: any[]
-} 
+
+    /**
+     * @description The airports of the country
+     * @type {AirportInfo[]}
+     */
+    airports: AirportInfo[]
+}
+
+/**
+ * @interface AirportInfo
+ * @description An interface for the airport info
+ */
+export interface AirportInfo {
+    /**
+     * @description The name of the airport
+     * @type {string}
+     */
+    name: string;
+
+    /**
+     * @description The code of the airport
+     * @type {string}
+     */
+    code: string;
+}
 
 /**
  * @interface PhoneInfo

@@ -40,6 +40,17 @@ export class DateUtil {
     }
 
     /**
+     * @description Adds years to a date
+     * @param date The date to add date to
+     * @param days The number od days to add
+     * @returns {Date} The date with the days added
+     */
+    static addDaysFromDate(date: Date, days: number): Date { 
+        return new Date(date.getFullYear(), date.getMonth(), date.getDate() + days); 
+    }
+
+
+    /**
      * @description Formats a date to a date picker string
      * @param date the date to format
      * @returns The formatted date

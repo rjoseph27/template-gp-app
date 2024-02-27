@@ -34,4 +34,10 @@ export class ClientRoutes {
      * @type {GhRoute}
      */
     static readonly sendItems: GhRoute = new GhRoute('send-items', ClientRoutes.main);
+
+    /**
+     * @description The send report trip route
+     * @type {GhRoute}
+     */
+    static readonly reportTrip: GhRoute = new GhRoute('report-trip', ClientRoutes.main);
 }

@@ -1,0 +1,40 @@
+<form [formGroup]="reportTripForm">
+    <div class="group">
+        <div class="section">
+            <div class="sub-section">
+                <gh-select-field
+                [label]="'moduleList.client.sendItems.content.location.from' | translate" 
+                [placeholder]="'moduleList.client.sendItems.content.location.country.placeholder' | translate"
+                [name]="userCountryField"
+                [value]="reportTripForm.get(userCountryField).value"
+                (valueChange)="updateUserCountry($event)"
+                [errors]="reportTripForm.get(userCountryField).errors"
+                [errorCaptions]="countryErrorCaptions"
+                [options]="userCountryOptions"
+                ></gh-select-field>
+            </div>
+            <div class="sub-section">
+                <gh-select-field
+                [placeholder]="'moduleList.gp.reportTrip.airport.placeholder' | translate"
+                [name]="userAirportField"
+                [value]="reportTripForm.get(userAirportField).value"
+                (valueChange)="reportTripForm.get(userAirportField).setValue($event)"
+                [errors]="reportTripForm.get(userAirportField).errors"
+                [errorCaptions]="airportErrorCaptions"
+                [options]="userAirports$ | async"
+                ></gh-select-field>
+            </div>
+            <div class="sub-section">
+                <gh-date-field
+                [label]="'moduleList.gp.reportTrip.date.departure.label' | translate" 
+                [name]="departureDatetField"
+                [value]="reportTripForm.get(departureDatetField).value"
+                (valueChange)="reportTripForm.get(departureDatetField).setValue($event)"
+                [errors]="reportTripForm.get(departureDatetField).errors"
+                [minDate]="minDepartureDate"
+                [errorCaptions]="departureDateErrorCaptions"
+                ></gh-date-field>
+            </div>
+        </div>
+    </div> 
+</form>

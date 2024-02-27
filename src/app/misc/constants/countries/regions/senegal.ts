@@ -18,3 +18,14 @@ export enum SenegalRegions {
      */
     Thies = 'Thies',
 }
+
+/**
+ * @constant
+ * @description The list of Senegal airports
+ */
+export const SENEGAL_AIRPORTS = [
+    {
+        name: 'Blaise Diagne International Airport',
+        code: 'DSS'
+    }
+]

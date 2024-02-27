@@ -4,6 +4,7 @@ import { ClientMainComponent } from './main/main.component';
 import { ClientApplicationResolver } from './application.resolver';
 import { ClientSendItemsComponent } from './request/send-items/send-items.component';
 import { ClientRoutes } from '../client.route';
+import { ClientReportTripComponent } from './request/report-trip/report-trip.component';
 
 /**
  * @constant routes
@@ -11,7 +12,8 @@ import { ClientRoutes } from '../client.route';
  */
 const routes: Routes = [
     { path: '', component: ClientMainComponent, pathMatch: 'full', resolve: { userInfo: ClientApplicationResolver} },
-    { path: `${ClientRoutes.sendItems}`, component: ClientSendItemsComponent, pathMatch: 'full', resolve: { userInfo: ClientApplicationResolver} }
+    { path: `${ClientRoutes.sendItems}`, component: ClientSendItemsComponent, pathMatch: 'full', resolve: { userInfo: ClientApplicationResolver} },
+    { path: `${ClientRoutes.reportTrip}`, component: ClientReportTripComponent, pathMatch: 'full', resolve: { userInfo: ClientApplicationResolver} }
 ];
 
 @NgModule({

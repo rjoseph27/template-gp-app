@@ -7,7 +7,6 @@ import { INVALID_PASSWORD_ERROR_MESSAGES, passwordValidator } from '../../../../
 import { INVALID_NAME_VALIDATION, nameValidator } from '../../../../misc/validation/name.validator';
 import { DateUtil } from '../../../../misc/util/date.util';
 import { LEGAL_AGE } from '../../../../misc/constants/application';
-import { MINIMUM_AGE_VALIDATION, minimumAgeValidator } from '../../../../misc/validation/minimum-age.validator';
 import { INVALID_DATE_FORMAT_VALIDATION, dateFormatValidator } from '../../../../misc/validation/date-format.validator';
 import { Genders } from '../../../../misc/enums/genders.enum';
 import { EnumUtil } from '../../../../misc/util/enum.util';
@@ -20,6 +19,7 @@ import { EMAIL_TAKEN_VALIDATOR, EmailTakenValidator } from '../../../../misc/val
 import { PHONE_NUMBER_TAKEN_VALIDATOR, PhoneNumberTakenValidator } from '../../../../misc/validation/phone-number-taken.validator';
 import { COUNTRY_SELECTION_OPTIONS, CountryInfo } from '../../../../misc/constants/countries/countries.type';
 import { SelectFieldOption } from '../../../elements/input/select-field/select-field.component';
+import { MAX_DATE_VALIDATION, maxDateValidator } from '../../../../misc/validation/max-date.validator';
 
 /**
  * @title Sign Up Component
@@ -153,7 +153,7 @@ export class GhSignUpComponent implements OnInit{
    */
   protected readonly dateOfBirthErrorCaptions = new Map<string, string>([
     [REQUIRED_VALIDATION, "global.signup.accountDetails.errors.dateOfBirth.required"],
-    [MINIMUM_AGE_VALIDATION, "global.signup.accountDetails.errors.dateOfBirth.invalid"],
+    [MAX_DATE_VALIDATION, "global.signup.accountDetails.errors.dateOfBirth.invalid"],
     [INVALID_DATE_FORMAT_VALIDATION, "global.signup.accountDetails.errors.dateOfBirth.invalidFormat"]
   ]);
 
@@ -262,16 +262,16 @@ export class GhSignUpComponent implements OnInit{
   /** @inheritdoc */
   ngOnInit(): void {
     this.currentFormService.currentForm = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required, passwordValidator]),
-      confirmPassword: new FormControl('', [Validators.required]),
-      firstName: new FormControl('', [Validators.required, nameValidator]),
-      lastName: new FormControl('', [Validators.required, nameValidator]),
-      dateOfBirth: new FormControl('', [Validators.required, minimumAgeValidator, dateFormatValidator]),
-      gender: new FormControl('', [Validators.required]),
-      country: new FormControl('', [Validators.required]),
-      phoneNumber: new FormControl('', [Validators.required, phoneNumberValidator]),
-      termsAndConditions: new FormControl('', [Validators.requiredTrue]),
+      email: new FormControl(undefined, [Validators.required, Validators.email]),
+      password: new FormControl(undefined, [Validators.required, passwordValidator]),
+      confirmPassword: new FormControl(undefined, [Validators.required]),
+      firstName: new FormControl(undefined, [Validators.required, nameValidator]),
+      lastName: new FormControl(undefined, [Validators.required, nameValidator]),
+      dateOfBirth: new FormControl(undefined, [Validators.required, maxDateValidator(this.maxDate), dateFormatValidator]),
+      gender: new FormControl(undefined, [Validators.required]),
+      country: new FormControl(undefined, [Validators.required]),
+      phoneNumber: new FormControl(undefined, [Validators.required, phoneNumberValidator]),
+      termsAndConditions: new FormControl(undefined, [Validators.requiredTrue]),
     }, { validators: [
         passwordMatchValidator, 
         this.emailTakenValidator.validate.bind(this.emailTakenValidator),

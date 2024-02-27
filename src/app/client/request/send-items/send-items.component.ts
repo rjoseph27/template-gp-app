@@ -1,6 +1,7 @@
 import { Component, inject } from "@angular/core";
 import { CurrentFormService } from "../../../services/current-form.service";
 import { ActivatedRoute } from "@angular/router";
+import { BaseRequestComponent } from "../base-request.component";
 
 /**
  * @class ClientSendItemsComponent
@@ -12,16 +13,5 @@ import { ActivatedRoute } from "@angular/router";
   styleUrls: ['../request.scss'],
   providers: [CurrentFormService]
 })
-export class ClientSendItemsComponent {
-  /**
-   * @description The activated route service
-   * @type {ActivatedRoute}
-   */
-  private readonly route: ActivatedRoute = inject(ActivatedRoute);
- 
-  /**
-   * @description The country of the user
-   * @type {string}
-   */
-  protected readonly userCountry = this.route.snapshot.data['userInfo'].country
+export class ClientSendItemsComponent extends BaseRequestComponent {
 }

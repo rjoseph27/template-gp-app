@@ -45,10 +45,23 @@ export class GhDateFieldComponent extends BaseInputFieldComponent<DateFromDatePi
   protected inputMaxDate: String
 
   /**
+   * @description Backing field for minDate
+   * @type {string}
+   */
+  protected inputMinDate: String
+
+  /**
    * @description The maximum date of the date field
    */
   @Input() set maxDate(date: Date) {
     this.inputMaxDate = DateUtil.formatToDatePicker(date);
+  }
+
+  /**
+   * @description The minimum date of the date field
+   */
+  @Input() set minDate(date: Date) {
+    this.inputMinDate = DateUtil.formatToDatePicker(date);
   }
   
   /**

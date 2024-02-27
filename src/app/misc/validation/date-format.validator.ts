@@ -11,8 +11,13 @@ export const INVALID_DATE_FORMAT_VALIDATION = 'invalidDateFormat';
  * @description The name of the validation that ensure that the field is a valid date format.
  */
 export const dateFormatValidator: ValidatorFn = (control: AbstractControl): { [key: string]: any } | null => {
-    const dateRegex = /^\d{4}-\d{2}-\d{2}$/; // Regular expression for "yyyy-mm-dd" format
-    const isValidFormat = dateRegex.test(control.value.dateString); // Check if value matches the pattern
+    if(control.value)
+    {
+      const dateRegex = /^\d{4}-\d{2}-\d{2}$/; // Regular expression for "yyyy-mm-dd" format
+      const isValidFormat = dateRegex.test(control.value.dateString); // Check if value matches the pattern
 
-    return isValidFormat ? null : { 'invalidDateFormat': { value: control.value.dateString } };
+      return isValidFormat ? null : { 'invalidDateFormat': { value: control.value.dateString } };
+    }
+    
+    return null;
   };

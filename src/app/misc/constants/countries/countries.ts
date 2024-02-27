@@ -1,7 +1,7 @@
 import { Country } from "../../enums/country.enum";
 import { CountryInfo } from "./countries.type";
-import { CanadaRegions } from "./regions/canada";
-import { SenegalRegions } from "./regions/senegal";
+import { CANADA_AIRPORTS, CanadaRegions } from "./regions/canada";
+import { SENEGAL_AIRPORTS, SenegalRegions } from "./regions/senegal";
 
 /**
  * @constant 
@@ -16,7 +16,8 @@ export const COUNTRY_INFO_LIST: CountryInfo[] = [
             length: 10,
             phoneFormat: '(___) ___-____'
         },
-        regions: Object.keys(CanadaRegions).map((key) => CanadaRegions[key as keyof typeof CanadaRegions])
+        regions: Object.keys(CanadaRegions).map((key) => CanadaRegions[key as keyof typeof CanadaRegions]),
+        airports: CANADA_AIRPORTS
     },
     {
         name: Country.SN,
@@ -26,7 +27,8 @@ export const COUNTRY_INFO_LIST: CountryInfo[] = [
             length: 9,
             phoneFormat: '__ ___ __ __'
         },
-        regions: Object.keys(SenegalRegions).map((key) => SenegalRegions[key as keyof typeof SenegalRegions])
+        regions: Object.keys(SenegalRegions).map((key) => SenegalRegions[key as keyof typeof SenegalRegions]),
+        airports: SENEGAL_AIRPORTS
     }
 ]
 

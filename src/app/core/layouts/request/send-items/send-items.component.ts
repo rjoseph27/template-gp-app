@@ -10,6 +10,7 @@ import { INVALID_NAME_VALIDATION, nameValidator } from "../../../../misc/validat
 import { INVALID_PHONE_NUMBER_VALIDATION, phoneNumberValidator } from "../../../../misc/validation/phone.validation";
 import { SelectFieldOption } from "../../../elements/input/select-field/select-field.component";
 import { ItemInformation } from "../item-information/item-information.component";
+import { BaseRequestComponent } from "../base-request.component";
 
 /**
  * @class GhSendItemsComponent
@@ -20,36 +21,7 @@ import { ItemInformation } from "../item-information/item-information.component"
   templateUrl: './send-items.component.html',
   styleUrl: './send-items.component.scss',
 })
-export class GhSendItemsComponent implements OnInit {
-  /**
-   * @description The current form service
-   * @type {CurrentFormService}
-   */
-  private readonly currentFormService: CurrentFormService = inject(CurrentFormService);
- 
-  /**
-   * @description The country of the user
-   * @type {Country}
-   */
-  @Input() set userCountry(value: Country) {
-    this._userCountry$.next(value);
-  } 
-  get userCountry(): Country {
-    return this._userCountry$.value;
-  }
-
-  /**
-   * @description backing field for the user country
-   * @type {BehaviorSubject<Country>}
-   */
-  private readonly _userCountry$ = new BehaviorSubject<Country>(undefined);
-
-  /**
-   * @description An observable of the user country
-   * @type {Observable<Country>}
-   */
-  protected readonly userCountry$: Observable<Country> = this._userCountry$.asObservable();
-
+export class GhSendItemsComponent extends BaseRequestComponent implements OnInit {
   /**
    * @description backing field for the destination country
    * @type {BehaviorSubject<Country>}
@@ -78,12 +50,6 @@ export class GhSendItemsComponent implements OnInit {
   get itemInformation(): ItemInformation[] {
     return this._itemInformation$.value;
   }
-
-  /**
-   * @description The name of the user country field.
-   * @type {string}
-   */
-  protected readonly userCountryField = 'userCountry';
 
   /**
    * @description The name of the user region field
@@ -134,12 +100,6 @@ export class GhSendItemsComponent implements OnInit {
   protected readonly loading$ = this.currentFormService.submitting$;
 
   /**
-   * @description The options of the country
-   * @type {SelectFieldOption[]}
-   */
-  protected readonly userCountryOptions: SelectFieldOption[] = COUNTRY_SELECTION_OPTIONS;
-
-  /**
    * @description The options of the destinations country
    * @type {Observable<SelectFieldOption[]>}
    */
@@ -164,14 +124,6 @@ export class GhSendItemsComponent implements OnInit {
     value: key,
     label: key,
   }))));
-
-  /**
-   * @description The error messages for the country field
-   * @type {Map<string, string>}
-   */
-  protected readonly countryErrorCaptions = new Map<string, string>([
-    [REQUIRED_VALIDATION, "moduleList.client.sendItems.content.location.country.errors.required"],
-  ]);
 
   /**
    * @description The error messages for the region field

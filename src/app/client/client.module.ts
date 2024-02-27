@@ -14,6 +14,7 @@ import { ClientSendItemsComponent } from './request/send-items/send-items.compon
 import { GlobalTranslateService } from '../services/global-translate.service';
 import { filter, tap } from 'rxjs/operators';
 import { ToRootTranslationHandler } from '../services/to-root-translation.handler';
+import { ClientReportTripComponent } from './request/report-trip/report-trip.component';
 
 
 /**
@@ -21,7 +22,13 @@ import { ToRootTranslationHandler } from '../services/to-root-translation.handle
  * @description The client module
  */
 @NgModule({
-    declarations: [ClientLogInComponent, ClientSignUpComponent, ClientMainComponent, ClientSendItemsComponent],
+    declarations: [
+        ClientLogInComponent, 
+        ClientSignUpComponent, 
+        ClientMainComponent, 
+        ClientSendItemsComponent,
+        ClientReportTripComponent
+    ],
     imports: [
         CommonModule,
         ReactiveFormsModule,
