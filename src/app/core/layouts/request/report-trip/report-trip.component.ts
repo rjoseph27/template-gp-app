@@ -8,6 +8,7 @@ import { REQUIRED_VALIDATION } from "../../../../misc/constants/validations";
 import { INVALID_DATE_FORMAT_VALIDATION, dateFormatValidator } from "../../../../misc/validation/date-format.validator";
 import { DateUtil } from "../../../../misc/util/date.util";
 import { MIN_DATE_VALIDATION, minDateValidator } from "../../../../misc/validation/min-date.validator";
+import { INVALID_TIME_FORMAT_VALIDATION, timeFormatValidator } from "../../../../misc/validation/time-format.validator";
 
 /**
  * @class GhReportTripComponent
@@ -40,6 +41,12 @@ export class GhReportTripComponent extends BaseRequestComponent implements OnIni
   protected readonly departureDatetField = 'departureDate';
 
   /**
+   * @description The name of the departure time field.
+   * @type {string}
+   */
+  protected readonly departureTimeField = 'departureTime'
+
+  /**
    * @description The minimum departure date
    * @type {Date}
    */
@@ -63,18 +70,30 @@ export class GhReportTripComponent extends BaseRequestComponent implements OnIni
     [REQUIRED_VALIDATION, "moduleList.gp.reportTrip.airport.errors.required"],
   ]);
 
+  /**
+   * @description The error messages for the departure date field
+   * @type {Map<string, string>}
+   */
   protected readonly departureDateErrorCaptions = new Map<string, string>([
-    [REQUIRED_VALIDATION, "global.signup.accountDetails.errors.dateOfBirth.required"],
     [INVALID_DATE_FORMAT_VALIDATION, "global.signup.accountDetails.errors.dateOfBirth.invalidFormat"],
-    [MIN_DATE_VALIDATION, "moduleList.gp.reportTrip.date.departure.errors.invalidDate"],
+    [MIN_DATE_VALIDATION, "moduleList.gp.reportTrip.date.errors.invalidDate"],
+  ]);
+
+  /**
+   * @description The error messages for the departure time field
+   * @type {Map<string, string>}
+   */
+  protected readonly departureTimeErrorCaptions = new Map<string, string>([
+    [INVALID_TIME_FORMAT_VALIDATION, "moduleList.gp.reportTrip.date.errors.invalidTime"],
   ]);
 
   /** @inheritdoc */
   ngOnInit(): void {
     this.currentFormService.currentForm = new FormGroup({
       userCountry: new FormControl(this.userCountry, [Validators.required]),
-      userAirport: new FormControl(undefined, [Validators.required]),
-      departureDate: new FormControl(undefined, [Validators.required, dateFormatValidator, minDateValidator(this.minDepartureDate)]),
+      userAirport: new FormControl(null, [Validators.required]),
+      departureDate: new FormControl(null, [Validators.required, dateFormatValidator, minDateValidator(this.minDepartureDate)]),
+      departureTime: new FormControl(null, [Validators.required, timeFormatValidator]),
     });
   }
 

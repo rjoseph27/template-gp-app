@@ -180,10 +180,13 @@
                         "label": "Departure Date (local time)",
                         "placeholder": "Select the departure date",
                         "errors": {
-                            "required": "Please select the departure date",
-                            "invalidDate": "Please select a valid date"
+                            "required": "Please select the departure date"
                         }
-                    } 
+                    },
+                    "errors": {
+                        "invalidDate": "Please enter a valid date",
+                        "invalidTime": "Please enter a valid time"
+                    }
                 }
             },
             "trip": {

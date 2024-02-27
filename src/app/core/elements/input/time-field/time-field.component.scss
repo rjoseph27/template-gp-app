@@ -1,0 +1,13 @@
+@import '../../../../../styles/variables';
+
+.time-close {
+  display: none;
+}
+
+.time-open {
+  display: block;
+}
+
+input[type="time"] {
+  visibility: collapse;
+}

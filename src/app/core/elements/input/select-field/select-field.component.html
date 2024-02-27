@@ -12,7 +12,7 @@
      (blur)="onInputBlur()"
      [disabled]="disabled"
      >
-        <option [value]="undefined" disabled selected>{{ placeholder | translate }}</option>
+        <option [value]="null" disabled selected>{{ placeholder | translate }}</option>
         <option *ngFor="let option of options" [value]="option.value">{{ option.prefix ? option.prefix+" " : '' }}{{ option.label | translate }}</option>
         <optgroup *ngFor="let group of groupedOptions" [label]="group.label">
             <option *ngFor="let option of group.options" [value]="option.value">{{ option.prefix ? option.prefix+" " : '' }}{{ option.label | translate }}</option>

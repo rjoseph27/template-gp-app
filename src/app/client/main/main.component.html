@@ -4,7 +4,10 @@
             {{ userFullName$ | async }}
         </div>
         <div>
-            <gh-toggle [label]="currentUserTypeTranslationKey$ | async" (valueChange)="switchMode($event)"></gh-toggle>
+            <gh-toggle 
+                [label]="currentUserTypeTranslationKey$ | async" 
+                (valueChange)="switchMode($event)" 
+                [value]="toggleValue"></gh-toggle>
         </div>
     </div>
 </gh-main>

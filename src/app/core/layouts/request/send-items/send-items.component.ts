@@ -171,9 +171,9 @@ export class GhSendItemsComponent extends BaseRequestComponent implements OnInit
   ngOnInit(): void {
     this.currentFormService.currentForm = new FormGroup({
       userCountry: new FormControl(this.userCountry, [Validators.required]),
-      userRegion: new FormControl(undefined, [Validators.required]),
-      destinationCountry: new FormControl(undefined, [Validators.required]),
-      destinationRegion: new FormControl(undefined, [Validators.required]),
+      userRegion: new FormControl(null, [Validators.required]),
+      destinationCountry: new FormControl(null, [Validators.required]),
+      destinationRegion: new FormControl(null, [Validators.required]),
       consigneeFullName: new FormControl('', [Validators.required, nameValidator]),
       consigneeAddress: new FormControl('', [Validators.required]),
       consigneePhoneNumber: new FormControl('', [Validators.required, phoneNumberValidator]),

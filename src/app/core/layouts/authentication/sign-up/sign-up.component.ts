@@ -262,16 +262,16 @@ export class GhSignUpComponent implements OnInit{
   /** @inheritdoc */
   ngOnInit(): void {
     this.currentFormService.currentForm = new FormGroup({
-      email: new FormControl(undefined, [Validators.required, Validators.email]),
-      password: new FormControl(undefined, [Validators.required, passwordValidator]),
-      confirmPassword: new FormControl(undefined, [Validators.required]),
-      firstName: new FormControl(undefined, [Validators.required, nameValidator]),
-      lastName: new FormControl(undefined, [Validators.required, nameValidator]),
-      dateOfBirth: new FormControl(undefined, [Validators.required, maxDateValidator(this.maxDate), dateFormatValidator]),
-      gender: new FormControl(undefined, [Validators.required]),
-      country: new FormControl(undefined, [Validators.required]),
-      phoneNumber: new FormControl(undefined, [Validators.required, phoneNumberValidator]),
-      termsAndConditions: new FormControl(undefined, [Validators.requiredTrue]),
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      password: new FormControl(null, [Validators.required, passwordValidator]),
+      confirmPassword: new FormControl(null, [Validators.required]),
+      firstName: new FormControl(null, [Validators.required, nameValidator]),
+      lastName: new FormControl(null, [Validators.required, nameValidator]),
+      dateOfBirth: new FormControl(null, [Validators.required, maxDateValidator(this.maxDate), dateFormatValidator]),
+      gender: new FormControl(null, [Validators.required]),
+      country: new FormControl(null, [Validators.required]),
+      phoneNumber: new FormControl(null, [Validators.required, phoneNumberValidator]),
+      termsAndConditions: new FormControl(null, [Validators.requiredTrue]),
     }, { validators: [
         passwordMatchValidator, 
         this.emailTakenValidator.validate.bind(this.emailTakenValidator),

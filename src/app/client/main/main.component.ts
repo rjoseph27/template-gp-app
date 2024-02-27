@@ -6,6 +6,7 @@ import { GhModule } from '../../core/layouts/main/main.component';
 import { ALERTS_ICON, HELP_ICON, LOG_OUT_ICON, REPORT_TRIP_ICON, SEND_ITEMS_ICON, ORDERS_ICON, REQUESTS_ICON, SETTING_ICON } from './icon';
 import { UsersService } from '../../services/users.service';
 import { ClientRoutes } from '../../client.route';
+import { ApplicationService } from '../service/application.service';
 
 /**
  * @component ClientMainComponent
@@ -18,22 +19,22 @@ import { ClientRoutes } from '../../client.route';
 })
 export class ClientMainComponent {
   /**
-   * @description Backing field for the user type
-   * @type {BehaviorSubject<UserType>}
+   * @description The application service
+   * @type {ApplicationService}
    */
-  private readonly _userType$ = new BehaviorSubject<UserType>(UserType.Client);
-
-  /**
-   * @description An observable for the user type
-   * @type {Observable<UserType>}
-   */
-  private readonly userType$ = this._userType$.asObservable();
-
+  private readonly applicationService: ApplicationService = inject(ApplicationService);
+  
   /**
    * @description An observable of the current user type translation key
    * @type {Observable<string>}
    */
-  protected readonly currentUserTypeTranslationKey$ = this.userType$.pipe(map(userType => 'userType.' + userType));
+  protected readonly currentUserTypeTranslationKey$ = this.applicationService.userMode$.pipe(map(userType => 'userType.' + userType));
+
+  /**
+   * @description The value of the toggle.
+   * @type {boolean}
+   */
+  protected readonly toggleValue = this.applicationService.userMode === UserType.GP ? true : false;
 
   /**
    * @description The activated route service
@@ -51,7 +52,7 @@ export class ClientMainComponent {
    * @description An observable for the modules
    * @type {Observable<GhModule[]>}
    */
-  protected readonly modules$ = this.userType$.pipe(map(userType => userType === UserType.Client ? this.clientModules : this.gpModules));
+  protected readonly modules$ = this.applicationService.userMode$.pipe(map(userType => userType === UserType.Client ? this.clientModules : this.gpModules));
 
   /**
    * @description An observable for the user full name
@@ -152,9 +153,9 @@ export class ClientMainComponent {
    */
   protected switchMode(value: boolean): void {
     if(!value) {
-      this._userType$.next(UserType.Client);
+      this.applicationService.userMode = UserType.Client;
     } else {
-      this._userType$.next(UserType.GP);
+      this.applicationService.userMode = UserType.GP;
     }
   }
 }

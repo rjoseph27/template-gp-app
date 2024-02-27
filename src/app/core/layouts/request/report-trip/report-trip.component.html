@@ -24,6 +24,8 @@
                 [options]="userAirports$ | async"
                 ></gh-select-field>
             </div>
+        </div>
+        <div class="section">
             <div class="sub-section">
                 <gh-date-field
                 [label]="'moduleList.gp.reportTrip.date.departure.label' | translate" 
@@ -34,6 +36,15 @@
                 [minDate]="minDepartureDate"
                 [errorCaptions]="departureDateErrorCaptions"
                 ></gh-date-field>
+            </div>
+            <div class="sub-section">
+                <gh-time-field
+                [name]="departureTimeField"
+                [value]="reportTripForm.get(departureTimeField).value"
+                (valueChange)="reportTripForm.get(departureTimeField).setValue($event)"
+                [errors]="reportTripForm.get(departureTimeField).errors"
+                [errorCaptions]="departureTimeErrorCaptions"
+                ></gh-time-field>
             </div>
         </div>
     </div> 
