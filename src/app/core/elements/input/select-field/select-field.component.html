@@ -24,7 +24,5 @@
     </div>
 </div>
 <ng-template #readonlyTemplate>
-    <div class="section">
-        <div class="readonly">{{ getReadonlyValue() }}</div>
-    </div>
+    <gh-value [value]="getReadonlyValue()"></gh-value>
 </ng-template>

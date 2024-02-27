@@ -15,6 +15,7 @@ import { GhNumberFieldComponent } from "./input/number-field/number-field.compon
 import { GhTextAreaComponent } from "./input/text-area/text-area.component";
 import { GhhelpComponent } from "./help/help.component";
 import { GhAlertComponent } from "./alert/alert.component";
+import { GhValueComponent } from "./value/value.component";
 
 /**
  * @constant
@@ -38,5 +39,6 @@ export const ELEMENTS_COMPONENTS = [
     GhNumberFieldComponent,
     GhTextAreaComponent,
     GhhelpComponent,
-    GhAlertComponent
+    GhAlertComponent,
+    GhValueComponent
 ]

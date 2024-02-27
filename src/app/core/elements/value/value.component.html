@@ -1,0 +1,4 @@
+<ng-container *ngIf="value; else emptyTemplate">{{ value }}</ng-container>
+<ng-template #emptyTemplate>
+    <span class="empty">({{ 'global.common.empty' | translate }})</span>
+</ng-template>

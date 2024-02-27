@@ -9,7 +9,8 @@
             "save": "Save",
             "edit": "Edit",
             "delete": "Delete",
-            "cancel": "Cancel"
+            "cancel": "Cancel",
+            "empty": "Empty"
         },
         "credentials": {
             "email": {

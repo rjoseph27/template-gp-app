@@ -1,4 +1,4 @@
-import { Component, inject } from "@angular/core";
+import { Component, EventEmitter, Output, inject } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { IMAGE_FORMAT_VALIDATION, imageFormatValidator } from "../../../../misc/validation/image-format.validator";
 import { IMAGE_SIZE_VALIDATION, imageSizeValidator } from "../../../../misc/validation/image-size.validator";
@@ -10,13 +10,13 @@ import { EnumUtil } from "../../../../misc/util/enum.util";
 import { MAX_LUGGAGE_WEIGHT } from "../../../../misc/constants/application";
 import { FormMode } from "../../../../misc/enums/form-mode.enum";
 import { ModalService } from "../../../../services/modal.service";
-import { tap } from "rxjs/operators";
+
 
 /**
  * @interface ItemInformation
  * @description The type of the item information
  */
-interface ItemInformation {
+export interface ItemInformation {
   /**
    * @description The image of the item
    * @type {File}
@@ -315,10 +315,26 @@ export class GhItemInformationComponent {
   })
 
   /**
+   * @description The event emitter for the item information change
+   * @type {EventEmitter<ItemInformation[]>}
+   */
+  @Output() itemInformationChange = new EventEmitter<ItemInformation[]>();
+
+  /**
    * @constructor
    */
   constructor() {
     this.addNewItemInformation();
+  }
+
+  /**
+   * @description The method that updates the item information
+   * @returns void
+   */
+  private updateItemInformation() {
+    const list = this.itemInformationList.map(x => x.itemInformation.value as ItemInformation)
+    list.pop();
+    this.itemInformationChange.emit(list);
   }
 
   /**
@@ -365,6 +381,7 @@ export class GhItemInformationComponent {
   protected saveItemInformation(itemInformation: ItemInformationBody) {
     itemInformation.formMode = FormMode.VIEW;
     this.addNewItemInformation();
+    this.updateItemInformation();
   }
 
   /**
@@ -386,6 +403,7 @@ export class GhItemInformationComponent {
     itemInformation.formMode = FormMode.VIEW;
     this.itemInformationList[itemInformation.id] = itemInformation;
     itemInformation.cache = undefined;
+    this.updateItemInformation()
   }
 
   /**
@@ -404,6 +422,7 @@ export class GhItemInformationComponent {
         itemInformation.itemInformation = itemInformation.cache;
         itemInformation.formMode = FormMode.VIEW;
         itemInformation.cache = undefined;
+        this.updateItemInformation();
       }
     });
   }
@@ -422,6 +441,7 @@ export class GhItemInformationComponent {
     }).then(x => {
       if(x) {
         this.itemInformationList.splice(itemInformation.id, 1);
+        this.updateItemInformation();
       }
     });
   }

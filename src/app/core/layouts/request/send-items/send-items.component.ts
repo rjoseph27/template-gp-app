@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, inject } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from "@angular/forms";
 import { CurrentFormService } from "../../../../services/current-form.service";
 import { REQUIRED_VALIDATION } from "../../../../misc/constants/validations";
 import { COUNTRY_SELECTION_OPTIONS, CountryInfo } from "../../../../misc/constants/countries/countries.type";
@@ -9,6 +9,7 @@ import { COUNTRY_INFO_LIST } from "../../../../misc/constants/countries/countrie
 import { INVALID_NAME_VALIDATION, nameValidator } from "../../../../misc/validation/name.validator";
 import { INVALID_PHONE_NUMBER_VALIDATION, phoneNumberValidator } from "../../../../misc/validation/phone.validation";
 import { SelectFieldOption } from "../../../elements/input/select-field/select-field.component";
+import { ItemInformation } from "../item-information/item-information.component";
 
 /**
  * @class GhSendItemsComponent
@@ -62,6 +63,23 @@ export class GhSendItemsComponent implements OnInit {
   protected readonly destinationCountry$: Observable<Country> = this._destinationCountry$.asObservable();
 
   /**
+   * @description backing field for the item information
+   * @type {BehaviorSubject<ItemInformation[]>}
+   */
+  private readonly _itemInformation$ = new BehaviorSubject<ItemInformation[]>([]);
+
+  /**
+   * @description The item informations
+   * @type {Observable<ItemInformation>}
+   */
+  set itemInformation(value: ItemInformation[]) {
+    this._itemInformation$.next(value);
+  }
+  get itemInformation(): ItemInformation[] {
+    return this._itemInformation$.value;
+  }
+
+  /**
    * @description The name of the user country field.
    * @type {string}
    */
@@ -104,6 +122,12 @@ export class GhSendItemsComponent implements OnInit {
   protected readonly consigneePhoneNumberField = 'consigneePhoneNumber';
 
   /**
+   * @description The name of the item information field
+   * @type {string}
+   */
+  protected readonly itemInformationField = 'itemInformation';
+
+  /**
    * @description An observable of the loading state
    * @type {Observable<boolean>}
    */
@@ -114,6 +138,12 @@ export class GhSendItemsComponent implements OnInit {
    * @type {SelectFieldOption[]}
    */
   protected readonly userCountryOptions: SelectFieldOption[] = COUNTRY_SELECTION_OPTIONS;
+
+  /**
+   * @description The options of the destinations country
+   * @type {Observable<SelectFieldOption[]>}
+   */
+  protected readonly destinationCountryOptions$ = this.userCountry$.pipe(map(country => COUNTRY_SELECTION_OPTIONS.filter(x => x.value !== country)));
 
   /**
    * @description The options of the user region
@@ -206,6 +236,9 @@ export class GhSendItemsComponent implements OnInit {
   protected updateUserCountry(value: string): void {
     this._userCountry$.next(value as Country);
     this.sendItemsForm.get(this.userCountryField).setValue(value)
+    this.sendItemsForm.get(this.userRegionField).setValue(undefined);
+    this.sendItemsForm.get(this.destinationCountryField).setValue(undefined);
+    this.sendItemsForm.get(this.destinationRegionField).setValue(undefined);
   }
 
   /**
