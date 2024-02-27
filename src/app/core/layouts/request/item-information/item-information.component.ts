@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { IMAGE_FORMAT_VALIDATION, imageFormatValidator } from "../../../../misc/validation/image-format.validator";
 import { IMAGE_SIZE_VALIDATION, imageSizeValidator } from "../../../../misc/validation/image-size.validator";
@@ -9,6 +9,8 @@ import { ItemCategory } from "../../../../misc/enums/item-category.enum";
 import { EnumUtil } from "../../../../misc/util/enum.util";
 import { MAX_LUGGAGE_WEIGHT } from "../../../../misc/constants/application";
 import { FormMode } from "../../../../misc/enums/form-mode.enum";
+import { ModalService } from "../../../../services/modal.service";
+import { tap } from "rxjs/operators";
 
 /**
  * @interface ItemInformation
@@ -144,6 +146,7 @@ interface ItemInformationBody {
   selector: 'gh-item-information',
   templateUrl: './item-information.component.html',
   styleUrl: './item-information.component.scss',
+  providers: [ModalService]
 })
 export class GhItemInformationComponent {
   /**
@@ -151,6 +154,12 @@ export class GhItemInformationComponent {
    * @type {ItemInformationBody[]}
    */
   protected readonly itemInformationList: ItemInformationBody[] = [];
+
+  /**
+   * @description The modal service
+   * @type {ModalService}
+   */
+  private readonly modalService: ModalService = inject(ModalService);
 
   /**
    * @description The form mode
@@ -385,9 +394,18 @@ export class GhItemInformationComponent {
    * @returns void
    */
   protected cancelEditItemInformation(itemInformation: ItemInformationBody) {
-    itemInformation.itemInformation = itemInformation.cache;
-    itemInformation.formMode = FormMode.VIEW;
-    itemInformation.cache = undefined;
+    this.modalService.openModal({
+      title: "moduleList.client.sendItems.content.itemInformation.modal.cancel.title",
+      text: "moduleList.client.sendItems.content.itemInformation.modal.cancel.content",
+      confirmCaption: "global.common.cancel",
+      cancelCaption: "moduleList.client.sendItems.content.itemInformation.modal.cancel.button.stay"
+    }).then(x => {
+      if(x) {
+        itemInformation.itemInformation = itemInformation.cache;
+        itemInformation.formMode = FormMode.VIEW;
+        itemInformation.cache = undefined;
+      }
+    });
   }
 
   /**
@@ -396,6 +414,15 @@ export class GhItemInformationComponent {
    * @returns void
    */
   protected deleteItemInformation(itemInformation: ItemInformationBody) {
-    this.itemInformationList.splice(itemInformation.id, 1);
+    this.modalService.openModal({
+      title: "moduleList.client.sendItems.content.itemInformation.modal.delete.title",
+      text: "moduleList.client.sendItems.content.itemInformation.modal.delete.content",
+      confirmCaption: "global.common.delete",
+      cancelCaption: "global.common.cancel"
+    }).then(x => {
+      if(x) {
+        this.itemInformationList.splice(itemInformation.id, 1);
+      }
+    });
   }
 }

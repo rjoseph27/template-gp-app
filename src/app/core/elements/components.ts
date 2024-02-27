@@ -14,6 +14,7 @@ import { GhTitleComponent } from "./title/title.component";
 import { GhNumberFieldComponent } from "./input/number-field/number-field.component";
 import { GhTextAreaComponent } from "./input/text-area/text-area.component";
 import { GhhelpComponent } from "./help/help.component";
+import { GhAlertComponent } from "./alert/alert.component";
 
 /**
  * @constant
@@ -36,5 +37,6 @@ export const ELEMENTS_COMPONENTS = [
     GhUploadImageComponent,
     GhNumberFieldComponent,
     GhTextAreaComponent,
-    GhhelpComponent
+    GhhelpComponent,
+    GhAlertComponent
 ]

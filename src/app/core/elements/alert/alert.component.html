@@ -1,0 +1,15 @@
+<div class="content">
+    <div class="close-section">
+        <button type="button" (click)="cancel()">X</button>
+    </div>
+    <div>
+        <h2>{{ data.title | translate }}</h2>
+    </div>
+    <div class="content-section">
+        <p>{{ data.text | translate }}</p>
+    </div>
+    <div class="button-section">
+        <button class="cancel-button" (click)="cancel()">{{ data.cancelCaption | translate }}</button>
+        <button class="attention-button" (click)="confirm()">{{ data.confirmCaption | translate }}</button>
+    </div>
+</div>

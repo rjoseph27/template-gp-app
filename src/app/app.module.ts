@@ -22,6 +22,7 @@ import { TranslateLoader, TranslateModule, TranslateService } from "@ngx-transla
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { GlobalTranslateService } from "./services/global-translate.service";
 import { ToRootTranslationHandler } from "./services/to-root-translation.handler";
+import { ModalService } from "./services/modal.service";
 
 /**
  * @module AppModule
@@ -59,7 +60,7 @@ import { ToRootTranslationHandler } from "./services/to-root-translation.handler
         TranslateService,
         GlobalTranslateService,
         { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-        ToRootTranslationHandler
+        ToRootTranslationHandler,
     ],
     bootstrap: [AppComponent]
 })

@@ -140,6 +140,19 @@
                             "errors": {
                                 "required": "Please explain the reason for shipping"
                             }
+                        },
+                        "modal": {
+                            "delete": {
+                                "title": "Confirm Delete",
+                                "content": "Are you sure you want to delete the item?"
+                            },
+                            "cancel" : {
+                                "title": "Confirm Cancel",
+                                "content": "All the unsaved modification will be lost. Are you sure you want to cancel?",
+                                "button": {
+                                    "stay": "Stay"
+                                }
+                            }
                         }
                     },
                     "send": "Send the Request"
