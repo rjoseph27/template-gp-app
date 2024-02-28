@@ -165,7 +165,8 @@
                     },
                     "errors": {
                         "invalidDate": "Please enter a valid date",
-                        "invalidTime": "Please enter a valid time"
+                        "invalidTime": "Please enter a valid time",
+                        "invalidFlightTime": "The arrival date should be after the departure date"
                     }
                 },
                 "pricingInformation": {

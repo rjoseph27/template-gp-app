@@ -1,5 +1,5 @@
-import { AfterViewInit, ChangeDetectorRef, Component, OnInit, TemplateRef, ViewChild, inject } from "@angular/core";
-import { FormArray, FormControl, FormGroup, ValidatorFn, Validators } from "@angular/forms";
+import { AfterViewInit, Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
+import { FormArray, FormControl, FormGroup, Validators } from "@angular/forms";
 import { Country } from "../../../../misc/enums/country.enum";
 import { BaseRequestComponent } from "../base-request.component";
 import { COUNTRY_INFO_LIST } from "../../../../misc/constants/countries/countries";
@@ -11,64 +11,10 @@ import { MIN_DATE_VALIDATION, minDateValidator } from "../../../../misc/validati
 import { INVALID_TIME_FORMAT_VALIDATION, timeFormatValidator } from "../../../../misc/validation/time-format.validator";
 import { ColumnConfig } from "../../../elements/table/table.component";
 import { BehaviorSubject } from "rxjs";
-import { ItemCategory } from "../../../../misc/enums/item-category.enum";
 import { GroupedSelectFieldOption, SelectFieldOption } from "../../../elements/input/select-field/select-field.component";
 import { LIST_ITEM_CATEGORY_OPTION } from "../../../../misc/constants/item-category";
 import { EnumUtil } from "../../../../misc/util/enum.util";
-
-/**
- * @enum
- * @description The unit of the specific price
- */
-enum Unit {
-  /**
-   * @description The price is per item
-   * @type {string}
-   */
-  perItem = "perItem",
-
-  /**
-   * @description The price is per kg
-   * @type {string}
-   */
-  perKg = "perKg", 
-}
-
-/**
- * @interface SpecificPrice
- * @description The specific price of a item
- */
-interface SpecificPrice {
-  /**
-   * @description id of the item
-   * @type {number}
-   */
-  id: number,
-
-  /**
-   * @description The category of the item
-   * @type {ItemCategory}
-   */
-  category: ItemCategory,
-
-  /**
-   * @description The price of the item
-   * @type {number}
-   */
-  price: number,
-
-  /**
-   * @description The unit of the item
-   * @type {Unit}
-   */
-  unit: Unit,
-}
-
-/**
- * @constant
- * @description The icon for the empty table logo
- */
-const EMPTY_TABLE_LOGO = "shoppingmode"
+import { ARRIVAL_DATE, ARRIVAL_TIME, DEPARTURE_DATE, DEPARTURE_TIME, EMPTY_TABLE_LOGO, FLIGHT_TIME_INVALID, SpecificPrice, Unit, flighTimeValidator } from "./report.time.constant";
 
 /**
  * @class GhReportTripComponent
@@ -98,13 +44,13 @@ export class GhReportTripComponent extends BaseRequestComponent implements OnIni
    * @description The name of the departure date field.
    * @type {string}
    */
-  protected readonly departureDatetField = 'departureDate';
+  protected readonly departureDatetField = DEPARTURE_DATE;
 
   /**
    * @description The name of the departure time field.
    * @type {string}
    */
-  protected readonly departureTimeField = 'departureTime'
+  protected readonly departureTimeField = DEPARTURE_TIME
 
   /**
    * @description The name of the destination country field.
@@ -122,13 +68,13 @@ export class GhReportTripComponent extends BaseRequestComponent implements OnIni
    * @description The name of the arrival date field.
    * @type {string}
    */
-  protected readonly arrivalDateField = 'arrivalDate'
+  protected readonly arrivalDateField = ARRIVAL_DATE
 
   /**
    * @description The name of the arrival time field.
    * @type {string}
    */
-  protected readonly arrivalTimeField = 'arrivalTime'
+  protected readonly arrivalTimeField = ARRIVAL_TIME
 
   /**
    * @description The name of the available space field.
@@ -257,6 +203,7 @@ export class GhReportTripComponent extends BaseRequestComponent implements OnIni
   protected readonly dateErrorCaptions = new Map<string, string>([
     [INVALID_DATE_FORMAT_VALIDATION, "global.signup.accountDetails.errors.dateOfBirth.invalidFormat"],
     [MIN_DATE_VALIDATION, "moduleList.gp.reportTrip.date.errors.invalidDate"],
+    [FLIGHT_TIME_INVALID, "moduleList.gp.reportTrip.date.errors.invalidFlightTime"]
   ]);
 
   /**
@@ -265,6 +212,7 @@ export class GhReportTripComponent extends BaseRequestComponent implements OnIni
    */
   protected readonly timeErrorCaptions = new Map<string, string>([
     [INVALID_TIME_FORMAT_VALIDATION, "moduleList.gp.reportTrip.date.errors.invalidTime"],
+    [FLIGHT_TIME_INVALID, "moduleList.gp.reportTrip.date.errors.invalidFlightTime"]
   ]);
 
   /**
@@ -334,7 +282,7 @@ export class GhReportTripComponent extends BaseRequestComponent implements OnIni
       availableSpace: new FormControl(null, [Validators.required, Validators.min(0.5)]),
       defaultPrice: new FormControl(null, [Validators.required, Validators.min(0)]),
       specificPrice: new FormArray([]),
-    });
+    }, { validators: [flighTimeValidator]});
   }
 
   /** @inheritdoc */
