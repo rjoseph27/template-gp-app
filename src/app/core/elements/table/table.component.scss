@@ -1,0 +1,32 @@
+@import '../../../../styles/variables';
+
+.delete-button {
+    color: $error-color;
+    border: 1px solid $error-color;
+    background-color: transparent;
+    border-radius: 5px;
+}
+
+th {
+    text-align: center;
+    background-color: lighten($gray-color, 10%) !important;
+}
+
+td {
+    padding: 0.25em;
+    text-align: center;
+}
+
+.add {
+    color: $secondary-color;
+    font-weight: $bold;
+    background-color: transparent;
+    border-width: 0px;
+    text-decoration: underline;
+    cursor: pointer;
+    margin-top: 1em;
+}
+
+.add:hover {
+    color: $primary-color;
+}

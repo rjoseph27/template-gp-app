@@ -97,10 +97,8 @@ export class GhHeaderComponent implements AfterContentChecked {
     }
     ));
 
-  /**
-   * @inheritdoc
-   */
+  /** @inheritdoc */
   ngAfterContentChecked() {
     this.changeDetectorRef.detectChanges();
- }
+  }
 }

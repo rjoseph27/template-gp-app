@@ -182,7 +182,28 @@
                         "label": "Default Price per KG",
                         "placeholder": "Enter the default price",
                         "errors": {
-                            "required": "Please enter the default price"
+                            "required": "Please enter the default price",
+                            "min": "Please enter a price more than {{min}}"
+                        }
+                    },
+                    "specificPrice": {
+                        "label": "The table of specific prices",
+                        "table": {
+                            "category": {
+                                "name": "Category"
+                            },
+                            "price": {
+                                "name": "Price",
+                                "placeholder": "Enter the price",
+                                "errors": {
+                                    "required": "Please enter the price",
+                                    "min": "Please enter a price more than {{min}}"
+                                }
+                            },
+                            "unit": {
+                                "name": "Unit"
+                            },
+                            "empty": "No specific prices"
                         }
                     }
                 }
@@ -193,6 +214,12 @@
             "orders": {
                 "title": "My Orders"
             }
+        }
+    },
+    "enums": {
+        "Unit": {
+            "perKg": "Per KGs",
+            "perItem": "Per item"
         }
     }
 }

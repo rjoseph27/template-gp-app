@@ -4,7 +4,7 @@ import { IMAGE_FORMAT_VALIDATION, imageFormatValidator } from "../../../../misc/
 import { IMAGE_SIZE_VALIDATION, imageSizeValidator } from "../../../../misc/validation/image-size.validator";
 import { MAX_VALIDATION, MIN_VALIDATION, REQUIRED_VALIDATION } from "../../../../misc/constants/validations";
 import { GroupedSelectFieldOption } from "../../../elements/input/select-field/select-field.component";
-import { LIST_ITEM_CATEGORY } from "../../../../misc/constants/item-category";
+import { LIST_ITEM_CATEGORY, LIST_ITEM_CATEGORY_OPTION } from "../../../../misc/constants/item-category";
 import { ItemCategory } from "../../../../misc/enums/item-category.enum";
 import { EnumUtil } from "../../../../misc/util/enum.util";
 import { MAX_LUGGAGE_WEIGHT } from "../../../../misc/constants/application";
@@ -244,14 +244,7 @@ export class GhItemInformationComponent {
    * @description The item information select options
    * @type {GroupedSelectFieldOption[]}
    */
-  protected itemInformationSelectOptions: GroupedSelectFieldOption[] = LIST_ITEM_CATEGORY.map(category => {
-    return {
-      label: category.name,
-      options: Object.values(ItemCategory)
-      .filter(x => x[0] === category.prefix)
-      .map((key: string) => ({label: EnumUtil.getKeyByValue(ItemCategory, key), value: key}))
-    }
-  })
+  protected itemInformationSelectOptions: GroupedSelectFieldOption[] = LIST_ITEM_CATEGORY_OPTION
 
   /**
    * @description The event emitter for the item information change

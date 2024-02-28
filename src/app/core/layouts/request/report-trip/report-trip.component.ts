@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit, TemplateRef, ViewChild, inject } from "@angular/core";
+import { FormArray, FormControl, FormGroup, ValidatorFn, Validators } from "@angular/forms";
 import { Country } from "../../../../misc/enums/country.enum";
 import { BaseRequestComponent } from "../base-request.component";
 import { COUNTRY_INFO_LIST } from "../../../../misc/constants/countries/countries";
@@ -9,7 +9,66 @@ import { INVALID_DATE_FORMAT_VALIDATION, dateFormatValidator } from "../../../..
 import { DateUtil } from "../../../../misc/util/date.util";
 import { MIN_DATE_VALIDATION, minDateValidator } from "../../../../misc/validation/min-date.validator";
 import { INVALID_TIME_FORMAT_VALIDATION, timeFormatValidator } from "../../../../misc/validation/time-format.validator";
-import { CurrencyInfo } from "../../../../misc/constants/countries/countries.type";
+import { ColumnConfig } from "../../../elements/table/table.component";
+import { BehaviorSubject } from "rxjs";
+import { ItemCategory } from "../../../../misc/enums/item-category.enum";
+import { GroupedSelectFieldOption, SelectFieldOption } from "../../../elements/input/select-field/select-field.component";
+import { LIST_ITEM_CATEGORY_OPTION } from "../../../../misc/constants/item-category";
+import { EnumUtil } from "../../../../misc/util/enum.util";
+
+/**
+ * @enum
+ * @description The unit of the specific price
+ */
+enum Unit {
+  /**
+   * @description The price is per item
+   * @type {string}
+   */
+  perItem = "perItem",
+
+  /**
+   * @description The price is per kg
+   * @type {string}
+   */
+  perKg = "perKg", 
+}
+
+/**
+ * @interface SpecificPrice
+ * @description The specific price of a item
+ */
+interface SpecificPrice {
+  /**
+   * @description id of the item
+   * @type {number}
+   */
+  id: number,
+
+  /**
+   * @description The category of the item
+   * @type {ItemCategory}
+   */
+  category: ItemCategory,
+
+  /**
+   * @description The price of the item
+   * @type {number}
+   */
+  price: number,
+
+  /**
+   * @description The unit of the item
+   * @type {Unit}
+   */
+  unit: Unit,
+}
+
+/**
+ * @constant
+ * @description The icon for the empty table logo
+ */
+const EMPTY_TABLE_LOGO = "shoppingmode"
 
 /**
  * @class GhReportTripComponent
@@ -20,7 +79,7 @@ import { CurrencyInfo } from "../../../../misc/constants/countries/countries.typ
   templateUrl: './report-trip.component.html',
   styleUrl: './report-trip.component.scss',
 })
-export class GhReportTripComponent extends BaseRequestComponent implements OnInit { 
+export class GhReportTripComponent extends BaseRequestComponent implements OnInit, AfterViewInit {
   /**
    * @description The report trip form
    * @type {FormGroup}
@@ -96,6 +155,74 @@ export class GhReportTripComponent extends BaseRequestComponent implements OnIni
   protected readonly userCurrency$ = this.defaultUserCountry$.pipe(map(country => COUNTRY_INFO_LIST.find(x => x.name === country)?.currency));
 
   /**
+   * @description The specific price table columns
+   * @type {BehaviorSubject<ColumnConfig[]>}
+   */
+  private readonly _specificPriceTableColumns$ = new BehaviorSubject<ColumnConfig[]>(undefined);
+
+  /**
+   * @description The observable for the specific price table columns
+   * @type {Observable<ColumnConfig[]>}
+   */
+  protected readonly specificPriceTableColumns$ = this._specificPriceTableColumns$.asObservable();
+
+  /**
+   * @description The elements of the specific price table
+   * @type {SpecificPrice[]}
+   */
+  protected specificPriceElements: SpecificPrice[] = [];
+
+  /**
+   * @description The icon for the empty table logo
+   * @type {string}
+   */
+  protected readonly emptyTableLogo = EMPTY_TABLE_LOGO;
+
+  /**
+   * @description The category cell template
+   * @type {TemplateRef<any>}
+   */
+  @ViewChild('categoryTemplate', { static: true }) categoryTemplate: TemplateRef<any>;
+  
+  /**
+   * @description The price cell template
+   * @type {TemplateRef<any>}
+   */
+  @ViewChild('priceTemplate', { static: true }) priceTemplate: TemplateRef<any>;
+
+  /**
+   * @description The unit cell template
+   * @type {TemplateRef<any>}
+   */
+  @ViewChild('unitTemplate', { static: true }) unitTemplate: TemplateRef<any>;
+
+  /**
+   * @description The function to create a new specific item in the table.
+   * @returns {SpecificPrice}
+   */
+  protected readonly newSpecificItemFactory = () => {
+    this.specificPriceFormControl.push(new FormGroup({
+      category: new FormControl(null, [Validators.required]),
+      price: new FormControl(null, [Validators.required, Validators.min(0)]),
+      unit: new FormControl(null, [Validators.required]),
+    }));
+
+    return <SpecificPrice>{
+    id: this.specificPriceElements.length,
+    category: null,
+    price: null,
+    unit: null
+  }};
+
+  /**
+   * @description The function to delete a specific item in the table.
+   * @returns {(element: SpecificPrice) => void}
+   */
+  protected readonly deleteSpecificItemFactory = (element: SpecificPrice) => {
+    this.specificPriceFormControl.removeAt(element.id);
+  }
+
+  /**
    * @description An obervable of the options for the user country airports
    * @type {Observable<SelectFieldOption[]>}
    */
@@ -148,6 +275,51 @@ export class GhReportTripComponent extends BaseRequestComponent implements OnIni
     [MIN_VALIDATION, "moduleList.gp.reportTrip.pricingInformation.availableSpace.errors.min"],
   ]);
 
+  /**
+   * @description The error messages for the default price field
+   */
+  protected readonly defaultPriceErrorCaptions = new Map<string, string>([
+    [REQUIRED_VALIDATION, "moduleList.gp.reportTrip.pricingInformation.defaultPrice.errors.required"],
+    [MIN_VALIDATION, "moduleList.gp.reportTrip.pricingInformation.defaultPrice.errors.min"],
+  ]);
+
+  /**
+   * @description The item category select options
+   * @type {GroupedSelectFieldOption[]}
+   */
+  protected readonly itemCategorySelectOptions: GroupedSelectFieldOption[] = LIST_ITEM_CATEGORY_OPTION
+
+  /**
+   * @description The error messages of the item category field
+   * @type {Map<string, string>}
+   */
+  protected readonly itemCategoryErrorCaptions = new Map<string, string>([
+    [REQUIRED_VALIDATION, "moduleList.client.sendItems.content.itemInformation.itemCategory.errors.required"]
+  ]);
+
+  /**
+   * @description The form control for the specific price
+   * @type {FormArray}
+   */
+  protected get specificPriceFormControl() {
+    return this.reportTripForm.get('specificPrice') as FormArray;
+  }
+
+  /**
+   * @description The error messages for the specific price field
+   * @type {Map<string, string>}
+   */
+  protected readonly specificPriceErrorCaptions = new Map<string, string>([
+    [REQUIRED_VALIDATION, "moduleList.gp.reportTrip.pricingInformation.specificPrice.table.price.errors.required"],
+    [MIN_VALIDATION, "moduleList.gp.reportTrip.pricingInformation.specificPrice.table.price.errors.min"],
+  ]);
+
+  /**
+   * @description The options of units
+   * @type {SelectFieldOption[]}
+   */
+  protected readonly unitOptions: SelectFieldOption[] = EnumUtil.enumToSelectOptions(Unit,"Unit");
+
   /** @inheritdoc */
   ngOnInit(): void {
     this.currentFormService.currentForm = new FormGroup({
@@ -161,7 +333,29 @@ export class GhReportTripComponent extends BaseRequestComponent implements OnIni
       arrivalTime: new FormControl(null, [Validators.required, timeFormatValidator]),
       availableSpace: new FormControl(null, [Validators.required, Validators.min(0.5)]),
       defaultPrice: new FormControl(null, [Validators.required, Validators.min(0)]),
+      specificPrice: new FormArray([]),
     });
+  }
+
+  /** @inheritdoc */
+  ngAfterViewInit(): void {
+    this._specificPriceTableColumns$.next([
+      {
+        columnName: "moduleList.gp.reportTrip.pricingInformation.specificPrice.table.category.name",
+        valueAccessor: (row: SpecificPrice) => row.category,
+        template: this.categoryTemplate
+      },
+      {
+        columnName: "moduleList.gp.reportTrip.pricingInformation.specificPrice.table.price.name",
+        valueAccessor: (row: SpecificPrice) => row.price,
+        template: this.priceTemplate
+      },
+      {
+        columnName: "moduleList.gp.reportTrip.pricingInformation.specificPrice.table.unit.name",
+        valueAccessor: (row: SpecificPrice) => row.unit,
+        template: this.unitTemplate
+      },
+    ])
   }
 
   /**

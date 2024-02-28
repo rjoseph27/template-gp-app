@@ -1,3 +1,6 @@
+import { ItemCategory } from "../enums/item-category.enum";
+import { EnumUtil } from "../util/enum.util";
+
 /**
  * @interface
  * @description The item category interface
@@ -56,3 +59,16 @@ export const LIST_ITEM_CATEGORY: ItemCategoryInterface[] = [
     DOCUMENT_ITEM_CATEGORY, 
     BEAUTY_ITEM_CATEGORY
 ]; 
+
+/**
+ * @constant
+ * @description The select options for the item category
+ */
+export const LIST_ITEM_CATEGORY_OPTION = LIST_ITEM_CATEGORY.map(category => {
+    return {
+      label: category.name,
+      options: Object.values(ItemCategory)
+      .filter(x => x[0] === category.prefix)
+      .map((key: string) => ({label: EnumUtil.getKeyByValue(ItemCategory, key), value: key}))
+    }
+  })

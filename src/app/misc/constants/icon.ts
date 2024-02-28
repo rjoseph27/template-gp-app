@@ -55,3 +55,10 @@ export const UPLOAD_ICON: string = "upload";
  * @description The icon for the help icon.
  */
 export const HELP_ICON: string = "help";
+
+/**
+ * @constant
+ * @type {string}
+ * @description The icon for the delete icon.
+ */
+export const DELETE_ICON: string = "delete";

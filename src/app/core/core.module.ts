@@ -12,6 +12,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatTableModule } from '@angular/material/table';
 
 /**
  * @constant
@@ -38,7 +39,8 @@ const lists = [...LAYOUTS_COMPONENTS, ...ELEMENTS_COMPONENTS]
     MatSnackBarModule,
     MatDialogModule,
     TranslateModule,
-    MatTooltipModule 
+    MatTooltipModule,
+    MatTableModule 
   ],
   exports: [...lists]
 })
