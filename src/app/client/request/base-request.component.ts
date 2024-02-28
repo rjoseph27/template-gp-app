@@ -11,7 +11,7 @@ export class BaseRequestComponent {
    * @description The activated route service
    * @type {ActivatedRoute}
    */
-  private readonly route: ActivatedRoute = inject(ActivatedRoute);
+  protected readonly route: ActivatedRoute = inject(ActivatedRoute);
  
   /**
    * @description The country of the user

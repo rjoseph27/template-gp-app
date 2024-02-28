@@ -1,7 +1,7 @@
 import { Directive, Input, inject } from "@angular/core";
 import { CurrentFormService } from "../../../services/current-form.service";
 import { Country } from "../../../misc/enums/country.enum";
-import { BehaviorSubject, Observable } from "rxjs";
+import { BehaviorSubject, Observable, map } from "rxjs";
 import { SelectFieldOption } from "../../elements/input/select-field/select-field.component";
 import { COUNTRY_SELECTION_OPTIONS } from "../../../misc/constants/countries/countries.type";
 import { REQUIRED_VALIDATION } from "../../../misc/constants/validations";
@@ -17,6 +17,19 @@ export class BaseRequestComponent  {
    * @type {CurrentFormService}
    */
    protected readonly currentFormService: CurrentFormService = inject(CurrentFormService);
+
+   /**
+   * @description backing field for the destination country
+   * @type {BehaviorSubject<Country>}
+   */
+  protected readonly _destinationCountry$ = new BehaviorSubject<Country>(undefined);
+
+  /**
+   * @description An observable of the destination country
+   * @type {Observable<Country>}
+   */
+  protected readonly destinationCountry$: Observable<Country> = this._destinationCountry$.asObservable();
+
 
    /**
    * @description The name of the user country field.
@@ -46,6 +59,18 @@ export class BaseRequestComponent  {
     * @type {Observable<Country>}
     */
    protected readonly userCountry$: Observable<Country> = this._userCountry$.asObservable();
+
+   /**
+   * @description The options of the destinations country
+   * @type {Observable<SelectFieldOption[]>}
+   */
+  protected readonly destinationCountryOptions$ = this.userCountry$.pipe(map(country => COUNTRY_SELECTION_OPTIONS.filter(x => x.value !== country)));
+
+  /**
+   * @description An observable of the loading state
+   * @type {Observable<boolean>}
+   */
+  protected readonly loading$ = this.currentFormService.submitting$;
    
    /**
    * @description The options of the country

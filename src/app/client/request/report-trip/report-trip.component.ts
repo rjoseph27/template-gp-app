@@ -13,5 +13,9 @@ import { BaseRequestComponent } from "../base-request.component";
   providers: [CurrentFormService]
 })
 export class ClientReportTripComponent extends BaseRequestComponent {
-  
+  /**
+   * @description The currency of the user
+   * @type {string}
+   */
+  protected readonly userCurrency = this.userCountry.currency;
 }

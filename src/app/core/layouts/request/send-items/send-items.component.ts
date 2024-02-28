@@ -23,18 +23,6 @@ import { BaseRequestComponent } from "../base-request.component";
 })
 export class GhSendItemsComponent extends BaseRequestComponent implements OnInit {
   /**
-   * @description backing field for the destination country
-   * @type {BehaviorSubject<Country>}
-   */
-  private readonly _destinationCountry$ = new BehaviorSubject<Country>(undefined);
-
-  /**
-   * @description An observable of the destination country
-   * @type {Observable<Country>}
-   */
-  protected readonly destinationCountry$: Observable<Country> = this._destinationCountry$.asObservable();
-
-  /**
    * @description backing field for the item information
    * @type {BehaviorSubject<ItemInformation[]>}
    */
@@ -92,18 +80,6 @@ export class GhSendItemsComponent extends BaseRequestComponent implements OnInit
    * @type {string}
    */
   protected readonly itemInformationField = 'itemInformation';
-
-  /**
-   * @description An observable of the loading state
-   * @type {Observable<boolean>}
-   */
-  protected readonly loading$ = this.currentFormService.submitting$;
-
-  /**
-   * @description The options of the destinations country
-   * @type {Observable<SelectFieldOption[]>}
-   */
-  protected readonly destinationCountryOptions$ = this.userCountry$.pipe(map(country => COUNTRY_SELECTION_OPTIONS.filter(x => x.value !== country)));
 
   /**
    * @description The options of the user region

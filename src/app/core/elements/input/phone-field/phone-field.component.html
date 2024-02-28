@@ -5,7 +5,6 @@
     <gh-text-field
         #textField
         [name]="name"
-        [placeholder]="placeholder"
         [value]="this.value$ | async"
         (valueChange)="emitValue($event)"
         [disabled]="disabled"
@@ -17,6 +16,7 @@
         class="input"
         type="text" 
         [ngModel]="formattedValue"
+        [placeholder]="placeholder"
         [ngClass]="{'error-input': ((errorMessage$ | async) && textField.inputTouchedAndDirty)}"
         readonly
     >

@@ -103,35 +103,6 @@
                                 "min": "Please enter a quantity more than {{min}}"
                             }
                         },
-                        "itemSize": {
-                            "label": "Size (cm)",
-                            "width": {
-                                "placeholder": "width",
-                                "errors": {
-                                    "required": "Please enter the width of the item",
-                                    "min": "Please enter a width more than {{min}} cm"
-                                }
-                            },
-                            "height": {
-                                "placeholder": "height",
-                                "errors": {
-                                    "required": "Please enter the height of the item",
-                                    "min": "Please enter a height more than {{min}} cm"
-                                }
-                            },
-                            "depth": {
-                                "placeholder": "depth",
-                                "errors": {
-                                    "required": "Please enter the depth of the item",
-                                    "min": "Please enter a depth more than {{min}} cm"
-                                }
-                            },
-                            "errors": {
-                                "required": "Please enter the size of the item",
-                                "max": "Please enter a size less than {{max}} cm",
-                                "min": "Please enter a size more than {{min}} cm"
-                            }
-                        },
                         "extraNotes": {
                             "label": "Extra Notes"
                         },
@@ -178,14 +149,41 @@
                 "date": {
                     "departure": {
                         "label": "Departure Date (local time)",
-                        "placeholder": "Select the departure date",
+                        "datePlaceholder": "Select the departure date",
+                        "timePlaceholder": "Select the departure time",
                         "errors": {
                             "required": "Please select the departure date"
+                        }
+                    },
+                    "arrival": {
+                        "label": "Arrival Date (local time)",
+                        "datePlaceholder": "Select the arrival date",
+                        "timePlaceholder": "Select the arrival time",
+                        "errors": {
+                            "required": "Please select the arrival date"
                         }
                     },
                     "errors": {
                         "invalidDate": "Please enter a valid date",
                         "invalidTime": "Please enter a valid time"
+                    }
+                },
+                "pricingInformation": {
+                    "title": "Pricing Information",
+                    "availableSpace": {
+                        "label": "Available Space (KGs)",
+                        "placeholder": "Enter the available space",
+                        "errors": {
+                            "required": "Please enter the available space",
+                            "min": "Please enter a space more than {{min}} KGs"
+                        }
+                    },
+                    "defaultPrice": {
+                        "label": "Default Price per KG",
+                        "placeholder": "Enter the default price",
+                        "errors": {
+                            "required": "Please enter the default price"
+                        }
                     }
                 }
             },

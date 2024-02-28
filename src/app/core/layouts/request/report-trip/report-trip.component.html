@@ -28,24 +28,109 @@
         <div class="section">
             <div class="sub-section">
                 <gh-date-field
-                [label]="'moduleList.gp.reportTrip.date.departure.label' | translate" 
+                [label]="'moduleList.gp.reportTrip.date.departure.label' | translate"
+                [placeholder]="'moduleList.gp.reportTrip.date.departure.datePlaceholder' | translate" 
                 [name]="departureDatetField"
                 [value]="reportTripForm.get(departureDatetField).value"
                 (valueChange)="reportTripForm.get(departureDatetField).setValue($event)"
                 [errors]="reportTripForm.get(departureDatetField).errors"
                 [minDate]="minDepartureDate"
-                [errorCaptions]="departureDateErrorCaptions"
+                [errorCaptions]="dateErrorCaptions"
                 ></gh-date-field>
             </div>
             <div class="sub-section">
                 <gh-time-field
                 [name]="departureTimeField"
+                [placeholder]="'moduleList.gp.reportTrip.date.departure.timePlaceholder' | translate"
                 [value]="reportTripForm.get(departureTimeField).value"
                 (valueChange)="reportTripForm.get(departureTimeField).setValue($event)"
                 [errors]="reportTripForm.get(departureTimeField).errors"
-                [errorCaptions]="departureTimeErrorCaptions"
+                [errorCaptions]="timeErrorCaptions"
                 ></gh-time-field>
             </div>
         </div>
-    </div> 
+    </div>
+    <div class="group">
+        <div class="section">
+            <div class="sub-section">
+                <gh-select-field
+                [label]="'moduleList.client.sendItems.content.location.to' | translate" 
+                [placeholder]="'moduleList.client.sendItems.content.location.country.placeholder' | translate"
+                [name]="destinationCountryField"
+                [value]="reportTripForm.get(destinationCountryField).value"
+                (valueChange)="destinationUserCountry($event)"
+                [errors]="reportTripForm.get(destinationCountryField).errors"
+                [errorCaptions]="countryErrorCaptions"
+                [options]="destinationCountryOptions$ | async"
+                ></gh-select-field>
+            </div>
+            <div class="sub-section">
+                <gh-select-field
+                [placeholder]="'moduleList.gp.reportTrip.airport.placeholder' | translate"
+                [name]="destinationAirportField"
+                [value]="reportTripForm.get(destinationAirportField).value"
+                (valueChange)="reportTripForm.get(destinationAirportField).setValue($event)"
+                [errors]="reportTripForm.get(destinationAirportField).errors"
+                [errorCaptions]="airportErrorCaptions"
+                [options]="destinationAirports$ | async"
+                ></gh-select-field>
+            </div>
+        </div>
+        <div class="section">
+            <div class="sub-section">
+                <gh-date-field
+                [label]="'moduleList.gp.reportTrip.date.arrival.label' | translate"
+                [placeholder]="'moduleList.gp.reportTrip.date.arrival.datePlaceholder' | translate" 
+                [name]="arrivalDateField"
+                [value]="reportTripForm.get(arrivalDateField).value"
+                (valueChange)="reportTripForm.get(arrivalDateField).setValue($event)"
+                [errors]="reportTripForm.get(arrivalDateField).errors"
+                [minDate]="minDepartureDate"
+                [errorCaptions]="dateErrorCaptions"
+                ></gh-date-field>
+            </div>
+            <div class="sub-section">
+                <gh-time-field
+                [name]="arrivalTimeField"
+                [placeholder]="'moduleList.gp.reportTrip.date.arrival.timePlaceholder' | translate"
+                [value]="reportTripForm.get(arrivalTimeField).value"
+                (valueChange)="reportTripForm.get(arrivalTimeField).setValue($event)"
+                [errors]="reportTripForm.get(arrivalTimeField).errors"
+                [errorCaptions]="timeErrorCaptions"
+                ></gh-time-field>
+            </div>
+        </div>
+    </div>
+    <hr class="gp-divider">
+    <div class="group">
+        <div class="title">
+            {{ 'moduleList.gp.reportTrip.pricingInformation.title' | translate }}
+        </div>
+        <div class="section">
+            <gh-number-field
+            [label]="'moduleList.gp.reportTrip.pricingInformation.availableSpace.label' | translate"
+            [placeholder]="'moduleList.gp.reportTrip.pricingInformation.availableSpace.placeholder' | translate"
+            [name]="availableSpaceField"
+            [value]="reportTripForm.get(availableSpaceField).value"
+            (valueChange)="reportTripForm.get(availableSpaceField).setValue($event)"
+            [errors]="reportTripForm.get(availableSpaceField).errors"
+            [errorCaptions]="availableSpaceErrorCaptions"
+            [min]="0.5"
+            [step]="0.5"
+           ></gh-number-field> 
+        </div>
+        <div class="section">
+            <gh-number-field
+            [label]="('moduleList.gp.reportTrip.pricingInformation.defaultPrice.label' | translate) + ' ('+ (userCurrency$ | async).currency + ')'"
+            [placeholder]="'moduleList.gp.reportTrip.pricingInformation.defaultPrice.placeholder' | translate"
+            [name]="defaultPriceField"
+            [value]="reportTripForm.get(defaultPriceField).value"
+            (valueChange)="reportTripForm.get(defaultPriceField).setValue($event)"
+            [errors]="reportTripForm.get(defaultPriceField).errors"
+            [errorCaptions]="availableSpaceErrorCaptions"
+            [min]="0"
+            [step]="(userCurrency$ | async).step"
+           ></gh-number-field> 
+        </div>
+    </div>
 </form>

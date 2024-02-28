@@ -48,12 +48,6 @@ export interface ItemInformation {
   itemQuantity: number;
 
   /**
-   * @description The dimension of the item
-   * @type {ItemSize}
-   */
-  itemSize: ItemSize;
-
-  /**
    * @description The extra notes of the item
    * @type {string}
    */
@@ -99,11 +93,7 @@ type ItemInformationForm = FormGroup<
     itemName: FormControl<string>; 
     itemCategory: FormControl<string>; 
     itemWeight: FormControl<number>; 
-    itemQuantity: FormControl<number>; 
-    itemSize: FormGroup<
-      { depth: FormControl<any>; 
-        width: FormControl<any>; 
-        height: FormControl<any>; }>; 
+    itemQuantity: FormControl<number>;
     extraNotes: FormControl<string>; 
     reasonShipping: FormControl<string>;
   }>;
@@ -210,30 +200,6 @@ export class GhItemInformationComponent {
   protected readonly reasonShippingField = "reasonShipping";
 
   /**
-   * @description The name of the item size field
-   * @type {string}
-   */
-  private readonly itemSizeField = "itemSize";
-
-  /**
-   * @description The name of the item size width field
-   * @type {string}
-   */
-  protected readonly widthField = this.itemSizeField+".width";
-
-  /**
-   * @description The name of the item size height field
-   * @type {string}
-   */
-  protected readonly heightField = this.itemSizeField+".height";
-
-  /**
-   * @description The name of the item size depth field
-   * @type {string}
-   */
-  protected readonly depthField = this.itemSizeField+".depth";
-
-  /**
    * @description The maximum luggage weight
    * @type {number}
    */
@@ -272,33 +238,6 @@ export class GhItemInformationComponent {
     [REQUIRED_VALIDATION, "moduleList.client.sendItems.content.itemInformation.itemWeight.errors.required"],
     [MAX_VALIDATION, "moduleList.client.sendItems.content.itemInformation.itemWeight.errors.max"],
     [MIN_VALIDATION, "moduleList.client.sendItems.content.itemInformation.itemWeight.errors.min"]
-  ]);
-
-  /**
-   * @description The error messages of the item width field
-   * @type {Map<string, string>}
-   */
-  protected readonly itemWidthErrorCaptions = new Map<string, string>([
-    [REQUIRED_VALIDATION, "moduleList.client.sendItems.content.itemInformation.itemSize.width.errors.required"],
-    [MIN_VALIDATION, "moduleList.client.sendItems.content.itemInformation.itemSize.width.errors.min"]
-  ]);
-
-  /**
-   * @description The error messages of the item height field
-   * @type {Map<string, string>}
-   */
-  protected readonly itemHeightErrorCaptions = new Map<string, string>([
-    [REQUIRED_VALIDATION, "moduleList.client.sendItems.content.itemInformation.itemSize.height.errors.required"],
-    [MIN_VALIDATION, "moduleList.client.sendItems.content.itemInformation.itemSize.height.errors.min"]
-  ]);
-
-  /**
-   * @description The error messages of the item depth field
-   * @type {Map<string, string>}
-   */
-  protected readonly itemDepthErrorCaptions = new Map<string, string>([
-    [REQUIRED_VALIDATION, "moduleList.client.sendItems.content.itemInformation.itemSize.depth.errors.required"],
-    [MIN_VALIDATION, "moduleList.client.sendItems.content.itemInformation.itemSize.depth.errors.min"]
   ]);
 
   /**
@@ -349,11 +288,6 @@ export class GhItemInformationComponent {
       itemCategory: new FormControl(itemInformation?.get(this.itemCategoryField).value || '', [Validators.required]),
       itemWeight: new FormControl(itemInformation?.get(this.itemWeightField).value || undefined, [Validators.required, Validators.min(0), Validators.max(MAX_LUGGAGE_WEIGHT)]),
       itemQuantity: new FormControl(itemInformation?.get(this.itemQuantityField).value || 1, [Validators.required, Validators.min(1)]),
-      itemSize: new FormGroup({
-        depth: new FormControl(itemInformation?.get(this.depthField).value || undefined, [Validators.required, Validators.min(0)]),
-        width: new FormControl(itemInformation?.get(this.widthField).value || undefined, [Validators.required, Validators.min(0)]),
-        height: new FormControl(itemInformation?.get(this.heightField).value || undefined, [Validators.required, Validators.min(0)])
-      }),
       extraNotes: new FormControl(itemInformation?.get(this.extraNotesField).value || ''),
       reasonShipping: new FormControl(itemInformation?.get(this.reasonShippingField).value || '', [Validators.required])
     });

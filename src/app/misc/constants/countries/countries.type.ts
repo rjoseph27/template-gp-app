@@ -1,4 +1,5 @@
 import { Country } from "../../enums/country.enum";
+import { Currency } from "../../enums/currency.enum";
 import { EnumUtil } from "../../util/enum.util";
 import { COUNTRY_INFO_LIST } from "./countries";
 
@@ -35,6 +36,12 @@ export interface CountryInfo {
      * @type {AirportInfo[]}
      */
     airports: AirportInfo[]
+
+    /**
+     * @description The currency of the country
+     * @type {Currency}
+     */
+    currency: CurrencyInfo
 }
 
 /**
@@ -77,6 +84,23 @@ export interface PhoneInfo {
      * @type {string}
      */
     phoneFormat: string;
+}
+
+/**
+ * @interface CurrencyInfo
+ * @description An interface for the currency info
+ */
+export interface CurrencyInfo {
+  /**
+   * @description The currency of the country
+   * @type {Currency}
+   */
+  currency: Currency;
+
+  /**
+   * @description The socially accepted step used for the currency
+   */
+  step: number;
 }
 
 /**
