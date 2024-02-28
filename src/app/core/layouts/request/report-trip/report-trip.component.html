@@ -129,8 +129,16 @@
             [errors]="reportTripForm.get(defaultPriceField).errors"
             [errorCaptions]="availableSpaceErrorCaptions"
             [min]="0"
-            [step]="(userCurrency$ | async).step"
+            [step]="(userCurrency$ | async)?.step"
            ></gh-number-field> 
         </div>
+    </div>
+    <div>
+        <button
+            [buttonLoading]="loading$ | async" 
+            type="submit" 
+            class="gp-button" 
+            [disabled]="!reportTripForm.valid"
+        >{{ 'moduleList.client.sendItems.content.send' | translate }}</button>
     </div>
 </form>

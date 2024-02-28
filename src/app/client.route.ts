@@ -18,6 +18,11 @@ export class ClientRoutes {
     static readonly login: GhRoute = new GhRoute('login', ClientRoutes.client);
 
     /**
+     * @description The forgot password route
+     */
+    static readonly forgotPassword = new GhRoute('forgot-password', ClientRoutes.client);
+
+    /**
      * @description The sign up route
      * @type {GhRoute}
      */

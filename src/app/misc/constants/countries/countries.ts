@@ -31,7 +31,7 @@ export const COUNTRY_INFO_LIST: CountryInfo[] = [
         },
         regions: Object.keys(SenegalRegions).map((key) => SenegalRegions[key as keyof typeof SenegalRegions]),
         airports: SENEGAL_AIRPORTS,
-        currency: {currency: Currency.CAD, step: 1000 }
+        currency: {currency: Currency.XOF, step: 1000 }
     }
 ]
 

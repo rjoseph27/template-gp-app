@@ -30,6 +30,9 @@ export class BaseRequestComponent  {
    */
   protected readonly destinationCountry$: Observable<Country> = this._destinationCountry$.asObservable();
 
+  protected readonly _defaultUserCountry$ = new BehaviorSubject<Country>(undefined); 
+
+  protected readonly defaultUserCountry$: Observable<Country> = this._defaultUserCountry$.asObservable();
 
    /**
    * @description The name of the user country field.
@@ -42,6 +45,7 @@ export class BaseRequestComponent  {
     * @type {Country}
     */
    @Input() set userCountry(value: Country) {
+     this._defaultUserCountry$.next(value);
      this._userCountry$.next(value);
    } 
    get userCountry(): Country {

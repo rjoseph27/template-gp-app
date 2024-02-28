@@ -64,7 +64,6 @@ export class UsersService {
     localStorage.removeItem(TOKEN_LOCAL_STORAGE_KEY);
     localStorage.removeItem(USER_ID_LOCAL_STORAGE_KEY);
     this.navigationService.redirectToMainPage();
-    this.navigationService.clearHistory();
   }
 
   /** 
@@ -78,7 +77,6 @@ export class UsersService {
         localStorage.setItem(TOKEN_LOCAL_STORAGE_KEY, msg.token);
         localStorage.setItem(USER_ID_LOCAL_STORAGE_KEY, msg.userId);
         this.navigationService.redirectToApplication();
-        this.navigationService.clearHistory();
       }
       return true;
     }).catch((e) => {

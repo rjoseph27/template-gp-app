@@ -93,7 +93,7 @@ export class GhReportTripComponent extends BaseRequestComponent implements OnIni
    * @description The currency of the user
    * @type {string}
    */
-  protected readonly userCurrency$ = this.userCountry$.pipe(map(country => COUNTRY_INFO_LIST.find(x => x.name === country)?.currency));
+  protected readonly userCurrency$ = this.defaultUserCountry$.pipe(map(country => COUNTRY_INFO_LIST.find(x => x.name === country)?.currency));
 
   /**
    * @description An obervable of the options for the user country airports

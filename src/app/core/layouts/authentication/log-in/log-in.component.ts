@@ -6,6 +6,7 @@ import { EMAIL_VALIDATION, REQUIRED_VALIDATION } from '../../../../misc/constant
 import { CurrentFormService } from '../../../../services/current-form.service';
 import { Router } from '@angular/router';
 import { GlobalRoutes } from '../../../../global.route';
+import { ClientRoutes } from '../../../../client.route';
 
 /**
  * @title Log in Component
@@ -125,7 +126,7 @@ export class GhLoginComponent implements OnInit{
    * @returns {void}
    */
   protected redirectToForgotPassword(): void {
-    this.router.navigate([GlobalRoutes.forgotPassword.fullPath()]);
+    this.router.navigate([ClientRoutes.forgotPassword.fullPath()]);
   }
 
   /**

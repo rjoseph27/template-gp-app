@@ -1,6 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { ClientRoutes } from '../client.route';
+import { GlobalRoutes } from '../global.route';
+import { GhRoute } from '../misc/classes/route';
 
 /**
  * @class NavigationService
@@ -8,33 +10,11 @@ import { ClientRoutes } from '../client.route';
  */
 @Injectable()
 export class NavigationService {
-
-  /**
-   * @description The history of the navigation
-   * @type {string[]}
-   */
-  private readonly history: string[] = [];
-
   /**
    * @description The angular router service.
    * @type {Router}
    */
   private readonly router: Router = inject(Router);
-
-  /**
-   * @constructor
-   */
-  constructor() {
-    // Listen to router events to update history
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        if(this.history[this.history.length - 1] !== event.urlAfterRedirects)
-        {
-            this.history.push(event.urlAfterRedirects);
-        }
-      }
-    });
-  }
 
   /**
    * @description Redirects to the main page
@@ -61,8 +41,14 @@ export class NavigationService {
     // TODO add entreprise main page
   }
 
-  clearHistory(): void {
-    this.history.length = 0;
+  /**
+   * @description Gets the current route
+   * @returns {GhRoute}
+   */
+  private get currentRoute(): GhRoute {
+    const urlAsArray = this.router.url.split('/');
+    const currentPage = urlAsArray.pop();
+    return [...Object.values(ClientRoutes), ...Object.values(GlobalRoutes)].find((route) => route.segment === currentPage)
   }
 
   /**
@@ -70,7 +56,8 @@ export class NavigationService {
    * @returns {boolean}
    */
   hidePreviousIcon(): boolean {
-    return this.history.length <= 1;
+    return this.currentRoute?.parentRoute === ClientRoutes.client;
+    // TODO ADAPT TO ENTERPRISE
   }
 
   /**
@@ -78,15 +65,7 @@ export class NavigationService {
    * @returns {void}
    */
   goToPreviousPage(): void {
-    if (this.history.length > 1) {
-      // Pop the current page from history
-      this.history.pop();
-      // Navigate to the previous page
-      const previousUrl = this.history.pop();
-      this.router.navigateByUrl(previousUrl);
-    } else {
-      // If there's no previous page, navigate to the home page or any default page
-      this.router.navigateByUrl('/');
-    }
+    this.router.navigate([this.currentRoute?.parentRoute.fullPath()]);
+    // TODO ADAPT TO ENTERPRISE
   }
 }
