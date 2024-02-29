@@ -1,0 +1,86 @@
+@import '../../../../../styles/variables';
+
+.content {
+    position: relative;
+    top: -25px;
+}
+.banner {
+    background-color: lighten($primary-color, 10%);
+    padding: 0em 1em;
+ 
+    .month {
+        display: flex;
+        justify-content: space-between;
+        font-size: 2em;
+        padding-top: 0.5em;
+        color:white;
+    }
+    .widget {
+        display: flex;
+        justify-content: flex-end;  
+        padding: 0.25em;
+        color: $secondary-color;
+
+        gh-icon {
+            margin: 0em 0.25em;
+        }
+    }
+}
+
+.calendar {
+    table {
+        margin: 0 auto;
+
+        th {
+            .desktop-view {
+                display: none;
+            }
+        }
+
+        .date-content {
+            display: flex;
+            justify-content: center;
+        }
+
+        .date {
+            min-width: 45px;
+            cursor: pointer;
+            .date-day, .price {
+                display: flex;
+                justify-content: center;
+            }
+
+            .price {
+                font-size: 0.75em;
+            }
+
+            .hidden {
+                visibility: hidden;
+            }
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    .calendar {
+        table {
+            width: 700px;
+            th {
+               .mobile-view {
+                    display: none;
+                }
+                .desktop-view {
+                    display: block;
+                }
+            }
+        }
+    }
+}
+
+.selected {
+    .date {
+        background-color: $primary-color;
+        border-radius: 50%;
+        color: #fff;
+    }
+}

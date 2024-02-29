@@ -12,6 +12,7 @@ import { GhMainComponent } from "./main/main.component";
 import { GhSendItemsComponent } from "./request/send-items/send-items.component";
 import { GhItemInformationComponent } from "./request/item-information/item-information.component";
 import { GhReportTripComponent } from "./request/report-trip/report-trip.component";
+import { GhCalendarComponent } from "./request/calendar/calendar.component";
 
 /**
  * @constant
@@ -32,5 +33,6 @@ export const LAYOUTS_COMPONENTS = [
     GhMainComponent,
     GhSendItemsComponent,
     GhItemInformationComponent,
-    GhReportTripComponent
+    GhReportTripComponent,
+    GhCalendarComponent
 ]

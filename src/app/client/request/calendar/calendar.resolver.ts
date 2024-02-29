@@ -3,6 +3,7 @@ import { ClientSendItemsService } from "../../service/send-items.service";
 import { Injectable, inject } from "@angular/core";
 import { LoadingService } from "../../../services/loading.service";
 import { ClientRoutes } from "../../../client.route";
+import { DateUtil } from "../../../misc/util/date.util";
 
 @Injectable()
 export class ClientCalendarResolver implements Resolve<any> {
@@ -29,9 +30,17 @@ export class ClientCalendarResolver implements Resolve<any> {
     this.loadingService.startLoading();
     if(this.sendItemsService.requests) {
             this.loadingService.endLoading();
-            return undefined;
+            return {
+                month: DateUtil.addDaysFromDate(new Date(),1).getMonth(),
+            };
     } else {
-        this.router.navigate([ClientRoutes.sendItems.fullPath()]);
+        // this.router.navigate([ClientRoutes.sendItems.fullPath()]); UNCOMMENT LATER FOR DEVELOPMENT PURPOSES
+        // delete later
+        this.loadingService.endLoading();
+        return {
+            month: DateUtil.addDaysFromDate(new Date(),1).getMonth(),
+        };
+        //--------
         this.loadingService.endLoading();
         return undefined;
     }

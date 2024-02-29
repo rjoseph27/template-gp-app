@@ -1,0 +1,37 @@
+<div class="content">
+    <div class="banner">
+        <div class="month">
+            <gh-icon [name]="previousMonthIcon" (click)="goPreviousMonth()"></gh-icon>
+            <div class="month-name">{{ "enums.Month."+ getMonthName(month) | translate }} {{ year }}</div>
+            <gh-icon [name]="nextMonthIcon" (click)="goNextMonth()"></gh-icon>
+        </div>
+        <div class="widget">
+            <gh-icon [name]="filterIcon"></gh-icon>
+            <gh-icon [name]="alertIcon"></gh-icon>
+        </div>
+    </div>
+    <div class="calendar">
+        <table>
+            <thead>
+                <tr>
+                    <th *ngFor="let day of weekDays">
+                        <div class="mobile-view">{{ getFirstLetter(("enums.WeekDays."+day | translate)) }}</div>
+                        <div class="desktop-view">{{ "enums.WeekDays."+day | translate }}</div>
+                    </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let week of [0,1,2,3,4,5]">
+                  <td *ngFor="let cell of [0,1,2,3,4,5,6]" (click)="selectDate(week, cell)" [class]="'cell cell-'+week+'-'+cell">
+                    <div class="date-content">
+                    <div class="date" *ngIf="getDate(week, cell)?.day">
+                      <div class="date-day">{{ getDate(week, cell)?.day }}</div>
+                      <div class="price" [class.hidden]="getDate(week, cell)?.price">{{ getDate(week, cell)?.price || 0 }}</div>
+                    </div>
+                   </div>
+                  </td>
+                </tr>
+              </tbody>
+        </table>
+    </div>
+</div>

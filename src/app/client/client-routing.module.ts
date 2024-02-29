@@ -16,7 +16,7 @@ const routes: Routes = [
     { path: '', component: ClientMainComponent, pathMatch: 'full', resolve: { userInfo: ClientApplicationResolver} },
     { path: `${ClientRoutes.sendItems}`, children: [
         { path: '', component: ClientSendItemsComponent, pathMatch: 'full', resolve: { userInfo: ClientApplicationResolver} },
-        { path: `${ClientRoutes.calendar}`, component: ClientCalendarComponent, pathMatch: 'full', resolve: { listGps: ClientCalendarResolver} }
+        { path: `${ClientRoutes.calendar}`, component: ClientCalendarComponent, pathMatch: 'full', resolve: { calendarInfo: ClientCalendarResolver} }
     ] },
     { path: `${ClientRoutes.reportTrip}`, component: ClientReportTripComponent, pathMatch: 'full', resolve: { userInfo: ClientApplicationResolver} }
 ];
