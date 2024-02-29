@@ -126,7 +126,7 @@
                             }
                         }
                     },
-                    "send": "Send the Request"
+                    "send": "Check for GPs"
                 }
             },
             "orders": {
@@ -207,6 +207,11 @@
                             "empty": "No specific prices"
                         }
                     }
+                },
+                "send": "Report the Trip",
+                "notification": {
+                    "success": "The trip has been reported successfully",
+                    "error": "An error occurred while reporting the trip"
                 }
             },
             "trip": {

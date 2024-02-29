@@ -30,8 +30,16 @@ export class BaseRequestComponent  {
    */
   protected readonly destinationCountry$: Observable<Country> = this._destinationCountry$.asObservable();
 
+  /**
+   * @description The backing field for the destination country
+   * @type {BehaviorSubject<Country>}
+   */
   protected readonly _defaultUserCountry$ = new BehaviorSubject<Country>(undefined); 
 
+  /**
+   * @description An observable of the default user country
+   * @type {Observable<Country>}
+   */
   protected readonly defaultUserCountry$: Observable<Country> = this._defaultUserCountry$.asObservable();
 
    /**

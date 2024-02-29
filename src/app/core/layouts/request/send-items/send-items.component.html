@@ -1,4 +1,4 @@
-<form [formGroup]="sendItemsForm">
+<form [formGroup]="sendItemsForm" (ngSubmit)="sendItems()">
     <div class="group">
         <div class="section">
             <div class="sub-section">
@@ -100,14 +100,14 @@
         <div class="title">
             {{ 'moduleList.client.sendItems.content.itemInformation.title' | translate }}
         </div>
-        <gh-item-information (itemInformationChange)="itemInformation = $event"></gh-item-information>
+        <gh-item-information (itemInformationChange)="sendItemsForm.get(itemInformationField).setValue($event)"></gh-item-information>
     </div>
     <div class="send-request">
         <button
             [buttonLoading]="loading$ | async" 
             type="submit" 
             class="gp-button" 
-            [disabled]="!sendItemsForm.valid || itemInformation.length === 0"
+            [disabled]="!sendItemsForm.valid"
         >{{ 'moduleList.client.sendItems.content.send' | translate }}</button>
     </div>
 </form>

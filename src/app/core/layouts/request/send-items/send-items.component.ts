@@ -1,8 +1,7 @@
-import { Component, Input, OnInit, inject } from "@angular/core";
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from "@angular/forms";
-import { CurrentFormService } from "../../../../services/current-form.service";
+import { Component, OnInit } from "@angular/core";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { REQUIRED_VALIDATION } from "../../../../misc/constants/validations";
-import { COUNTRY_SELECTION_OPTIONS, CountryInfo } from "../../../../misc/constants/countries/countries.type";
+import { CountryInfo } from "../../../../misc/constants/countries/countries.type";
 import { BehaviorSubject, Observable, map } from "rxjs";
 import { Country } from "../../../../misc/enums/country.enum";
 import { COUNTRY_INFO_LIST } from "../../../../misc/constants/countries/countries";
@@ -27,17 +26,6 @@ export class GhSendItemsComponent extends BaseRequestComponent implements OnInit
    * @type {BehaviorSubject<ItemInformation[]>}
    */
   private readonly _itemInformation$ = new BehaviorSubject<ItemInformation[]>([]);
-
-  /**
-   * @description The item informations
-   * @type {Observable<ItemInformation>}
-   */
-  set itemInformation(value: ItemInformation[]) {
-    this._itemInformation$.next(value);
-  }
-  get itemInformation(): ItemInformation[] {
-    return this._itemInformation$.value;
-  }
 
   /**
    * @description The name of the user region field
@@ -153,6 +141,7 @@ export class GhSendItemsComponent extends BaseRequestComponent implements OnInit
       consigneeFullName: new FormControl('', [Validators.required, nameValidator]),
       consigneeAddress: new FormControl('', [Validators.required]),
       consigneePhoneNumber: new FormControl('', [Validators.required, phoneNumberValidator]),
+      itemInformation: new FormControl(undefined, [Validators.required]),
     });
   }
 
@@ -186,5 +175,13 @@ export class GhSendItemsComponent extends BaseRequestComponent implements OnInit
   protected destinationUserCountry(value: string): void {
     this._destinationCountry$.next(value as Country);
     this.sendItemsForm.get(this.destinationCountryField).setValue(value)
+  }
+
+  /**
+   * @description Send the form
+   * @returns {void}
+   */
+  protected sendItems(): void {
+    this.currentFormService.submitting = true;
   }
 }

@@ -1,5 +1,5 @@
 import { Directive, inject } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { CurrentFormService } from "../../services/current-form.service";
 import { UsersService } from "../../services/users.service";
 
@@ -14,6 +14,12 @@ export class BaseRequestComponent {
    * @type {ActivatedRoute}
    */
   protected readonly route: ActivatedRoute = inject(ActivatedRoute);
+
+  /**
+   * @description The router service
+   * @type {Router}
+   */
+  protected readonly router: Router = inject(Router);
  
   /**
    * @description The country of the user

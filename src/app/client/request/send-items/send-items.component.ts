@@ -1,7 +1,10 @@
-import { Component, inject } from "@angular/core";
+import { Component, OnInit, inject } from "@angular/core";
 import { CurrentFormService } from "../../../services/current-form.service";
 import { ActivatedRoute } from "@angular/router";
 import { BaseRequestComponent } from "../base-request.component";
+import { ClientSendItemsService } from "../../service/send-items.service";
+import { tap } from "rxjs/operators";
+import { ClientRoutes } from "../../../client.route";
 
 /**
  * @class ClientSendItemsComponent
@@ -13,5 +16,22 @@ import { BaseRequestComponent } from "../base-request.component";
   styleUrls: ['../request.scss'],
   providers: [CurrentFormService]
 })
-export class ClientSendItemsComponent extends BaseRequestComponent {
+export class ClientSendItemsComponent extends BaseRequestComponent implements OnInit {
+  /**
+   * @description The current form service
+   * @type {CurrentFormService}
+   */
+  private readonly sendItemsService = inject(ClientSendItemsService);
+
+  /** @inheritdoc */
+  ngOnInit(): void {
+    this.currentFormService.submitting$.pipe(
+      tap(async (loading) => {
+        if(loading) {
+          this.sendItemsService.requests = {...this.currentFormService.currentForm.value, userId: this.usersService.currentUserId};
+          this.router.navigate([`${ClientRoutes.calendar.fullPath()}`]);
+        }
+      })
+    ).subscribe()
+  }
 }

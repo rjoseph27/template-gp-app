@@ -3,11 +3,11 @@ import { BehaviorSubject } from "rxjs";
 import { UserType } from "../user-type.enum";
 
 /**
- * @class Application
+ * @class ClientApplicationService
  * @description The application service
  */
 @Injectable()
-export class ApplicationService {
+export class ClientApplicationService {
     /**
      * @description The backing field for the user mode
      * @type {BehaviorSubject<UserType>}

@@ -2,7 +2,8 @@ import { AfterContentChecked, ChangeDetectorRef, Component, OnInit, inject } fro
 import { CurrentFormService } from "../../../services/current-form.service";
 import { BaseRequestComponent } from "../base-request.component";
 import { tap } from "rxjs/operators";
-import { RequestsService } from "../../service/requests.service";
+import { ClientRequestsService } from "../../service/requests.service";
+import { NotificationService } from "../../../services/notification.service";
 
 /**
  * @class ClientReportTripComponent
@@ -29,16 +30,28 @@ export class ClientReportTripComponent extends BaseRequestComponent implements O
 
   /**
    * @description The requests service
-   * @type {RequestsService}
+   * @type {ClientRequestsService}
    */
-  private readonly requestsService: RequestsService = inject(RequestsService);
+  private readonly requestsService: ClientRequestsService = inject(ClientRequestsService);
+
+  /**
+   * @description The notification service
+   * @type {NotificationService}
+   */
+  private readonly notificationService: NotificationService = inject(NotificationService);
 
   /** @inheritdoc */
   ngOnInit(): void {
     this.currentFormService.submitting$.pipe(
-      tap((loading) => {
+      tap(async (loading) => {
         if(loading) {
-          this.requestsService.reportTrip({...this.currentFormService.currentForm.value, userId: this.usersService.currentUserId});
+          const res = await this.requestsService.reportTrip({...this.currentFormService.currentForm.value, userId: this.usersService.currentUserId});
+          if(res) {
+            this.notificationService.successNotification("moduleList.gp.reportTrip.notification.success");
+            console.log("TODO: redirect to trips page")
+          } else {
+             this.notificationService.errorNotification("moduleList.gp.reportTrip.notification.failure");
+          }
         }
       })
     ).subscribe()

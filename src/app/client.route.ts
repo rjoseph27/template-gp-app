@@ -41,6 +41,12 @@ export class ClientRoutes {
     static readonly sendItems: GhRoute = new GhRoute('send-items', ClientRoutes.main);
 
     /**
+     * @description The celendar route
+     * @type {GhRoute}
+     */
+    static readonly calendar: GhRoute = new GhRoute('calendar', ClientRoutes.sendItems);
+
+    /**
      * @description The send report trip route
      * @type {GhRoute}
      */

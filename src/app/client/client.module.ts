@@ -15,9 +15,13 @@ import { GlobalTranslateService } from '../services/global-translate.service';
 import { filter, tap } from 'rxjs/operators';
 import { ToRootTranslationHandler } from '../services/to-root-translation.handler';
 import { ClientReportTripComponent } from './request/report-trip/report-trip.component';
-import { ApplicationService } from './service/application.service';
+import { ClientApplicationService } from './service/application.service';
 import { RequestsServiceApi } from '../api/requests/requests.service.api';
-import { RequestsService } from './service/requests.service';
+import { ClientRequestsService } from './service/requests.service';
+import { NotificationService } from '../services/notification.service';
+import { ClientCalendarComponent } from './request/calendar/calendar.component';
+import { ClientCalendarResolver } from './request/calendar/calendar.resolver';
+import { ClientSendItemsService } from './service/send-items.service';
 
 
 /**
@@ -30,7 +34,8 @@ import { RequestsService } from './service/requests.service';
         ClientSignUpComponent, 
         ClientMainComponent, 
         ClientSendItemsComponent,
-        ClientReportTripComponent
+        ClientReportTripComponent,
+        ClientCalendarComponent
     ],
     imports: [
         CommonModule,
@@ -53,10 +58,13 @@ import { RequestsService } from './service/requests.service';
     ],
     providers: [
         ClientApplicationResolver,
+        ClientCalendarResolver,
+        ClientRequestsService,
+        ClientSendItemsService,
         TranslateService,
-        ApplicationService,
+        ClientApplicationService,
         RequestsServiceApi,
-        RequestsService
+        NotificationService
     ]
 })
 export class ClientModule {

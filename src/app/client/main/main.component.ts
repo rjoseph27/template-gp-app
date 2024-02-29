@@ -6,7 +6,7 @@ import { GhModule } from '../../core/layouts/main/main.component';
 import { ALERTS_ICON, HELP_ICON, LOG_OUT_ICON, REPORT_TRIP_ICON, SEND_ITEMS_ICON, ORDERS_ICON, REQUESTS_ICON, SETTING_ICON } from './icon';
 import { UsersService } from '../../services/users.service';
 import { ClientRoutes } from '../../client.route';
-import { ApplicationService } from '../service/application.service';
+import { ClientApplicationService } from '../service/application.service';
 
 /**
  * @component ClientMainComponent
@@ -20,9 +20,9 @@ import { ApplicationService } from '../service/application.service';
 export class ClientMainComponent {
   /**
    * @description The application service
-   * @type {ApplicationService}
+   * @type {ClientApplicationService}
    */
-  private readonly applicationService: ApplicationService = inject(ApplicationService);
+  private readonly applicationService: ClientApplicationService = inject(ClientApplicationService);
   
   /**
    * @description An observable of the current user type translation key
