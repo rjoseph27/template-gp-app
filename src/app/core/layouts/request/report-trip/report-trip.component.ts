@@ -92,7 +92,7 @@ export class GhReportTripComponent extends BaseRequestComponent implements OnIni
    * @description The minimum departure date
    * @type {Date}
    */
-  protected readonly minDepartureDate = DateUtil.addDaysFromDate(new Date(), 1);
+  protected readonly minDepartureDate = new Date();
 
   /**
    * @description The currency of the user
@@ -277,12 +277,20 @@ export class GhReportTripComponent extends BaseRequestComponent implements OnIni
       departureTime: new FormControl(null, [Validators.required, timeFormatValidator]),
       destinationCountry: new FormControl(null, [Validators.required]),
       destinationAirport: new FormControl(null, [Validators.required]),
-      arrivalDate: new FormControl(null, [Validators.required, dateFormatValidator, minDateValidator(this.minDepartureDate)]),
+      arrivalDate: new FormControl(null, [Validators.required, dateFormatValidator]),
       arrivalTime: new FormControl(null, [Validators.required, timeFormatValidator]),
       availableSpace: new FormControl(null, [Validators.required, Validators.min(0.5)]),
       defaultPrice: new FormControl(null, [Validators.required, Validators.min(0)]),
       specificPrice: new FormArray([]),
     }, { validators: [flighTimeValidator]});
+  }
+
+  /**
+   * @description Reports the trip
+   * @returns {void}
+   */
+  protected reportTrip(): void {
+    this.currentFormService.submitting = true;
   }
 
   /** @inheritdoc */

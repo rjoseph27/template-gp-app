@@ -1,0 +1,202 @@
+import { TimeFromTimePicker } from "../../core/elements/input/time-field/time-field.component"
+import { SpecificPrice } from "../../core/layouts/request/report-trip/report.time.constant"
+import { Country } from "../../misc/enums/country.enum"
+import { DateFromDatePicker } from "../../misc/util/date.util"
+
+/**
+   * @interface ReportTrip
+   * @description The report trip interface
+   */
+export interface ReportTrip {
+    /**
+     * @description The user id
+     * @type {string}
+     */
+    userId: string,
+
+    /**
+     * @description The arrival date
+     * @type {DateFromDatePicker}
+     */
+    arrivalDate: DateFromDatePicker,
+
+    /**
+     * @description The arrival time
+     * @type {TimeFromTimePicker}
+     */
+    arrivalTime: TimeFromTimePicker,
+
+    /**
+     * @description The available space
+     * @type {number}
+     */
+    availableSpace: number
+
+    /**
+     * @description The default price for the item
+     * @type {number}
+     */
+    defaultPrice: number,
+
+    /**
+     * @description The departure date
+     * @type {DateFromDatePicker}
+     */
+    departureDate: DateFromDatePicker,
+
+    /**
+     * @description The departure time
+     * @type {TimeFromTimePicker}
+     */
+    departureTime: TimeFromTimePicker,
+
+    /**
+     * @description The destination airport
+     * @type {any}
+     */
+    destinationAirport: any,
+
+    /**
+     * @description The destination country
+     * @type {Country}
+     */
+    destinationCountry: Country,
+
+    /**
+     * @description The list of specific prices
+     * @type {SpecificPrice[]}
+     */
+    specificPrice: SpecificPrice[],
+
+    /**
+     * @description The user airport
+     * @type {any}
+     */
+    userAirport: any,
+
+    /**
+     * @description The user country
+     * @type {Country}
+     */
+    userCountry: Country
+  }
+
+  /**
+   * @enum ReportTripStatus
+   * @description The report trip status
+   */
+  export enum ReportTripStatus {
+    /**
+     * @description The user country is not set
+     * @type {string}
+     */
+    NO_USER_COUNTRY = "NO_USER_COUNTRY",
+
+    /**
+     * @description The user airport is not set
+     * @type {string}
+     */
+    NO_USER_AIRPORT = "NO_USER_AIRPORT",
+
+    /**
+     * @description The departure date is not set
+     * @type {string}
+     */
+    NO_DEPARTURE_DATE = "NO_DEPARTURE_DATE",
+
+    /**
+     * @description The departure date is invalid
+     * @type {string}
+     */
+    INVALID_DEPARTURE_DATE = "INVALID_DEPARTURE_DATE",
+
+    /**
+     * @description The departure date has passed
+     * @type {string}
+     */
+    DEPARTURE_DATE_PASSED = "DEPARTURE_DATE_PASSED",
+
+    /**
+     * @description The departure time is not set
+     * @type {string}
+     */
+    NO_DEPARTURE_TIME = "NO_DEPARTURE_TIME",
+
+    /**
+     * @description The departure time is invalid
+     * @type {string}
+     */
+    INVALID_DEPARTURE_TIME = "INVALID_DEPARTURE_TIME",
+
+    /**
+     * @description The destination country is not set
+     * @type {string}
+     */
+    NO_DESTINATION_COUNTRY = "NO_DESTINATION_COUNTRY",
+
+    /**
+     * @description The destination airport is not set
+     * @type {string}
+     */
+    NO_DESTINATION_AIRPORT = "NO_DESTINATION_AIRPORT",
+
+    /**
+     * @description The arrival date is not set
+     * @type {string}
+     */
+    NO_ARRIVAL_DATE = "NO_ARRIVAL_DATE",
+
+    /**
+     * @description The arrival date is invalid
+     * @type {string}
+     */
+    INVALID_ARRIVAL_DATE = "INVALID_ARRIVAL_DATE",
+
+    /**
+     * @description The arrival time is not set
+     * @type {string}
+     */
+    NO_ARRIVAL_TIME = "NO_ARRIVAL_TIME",
+
+    /**
+     * @description The arrival time is invalid
+     * @type {string}
+     */
+    INVALID_ARRIVAL_TIME = "INVALID_ARRIVAL_TIME",
+
+    /**
+     * @description The arrival date has passed
+     * @type {string}
+     */
+    NO_AVAILABLE_SPACE = "NO_AVAILABLE_SPACE",
+
+    /**
+     * @description The available space is invalid
+     * @type {string}
+     */
+    INVALID_AVAILABLE_SPACE = "INVALID_AVAILABLE_SPACE",
+
+    /**
+     * @description The default price is not set
+     * @type {string}
+     */
+    NO_DEFAULT_PRICE = "NO_DEFAULT_PRICE",
+
+    /**
+     * @description The default price is invalid
+     * @type {string}
+     */
+    INVALID_DEFAULT_PRICE = "INVALID_DEFAULT_PRICE",
+
+    /**
+     * @description The specific price is not set
+     * @type {string}
+     */
+    INVALID_SPECIFIC_PRICE = "INVALID_SPECIFIC_PRICE",
+
+    /**
+     * @description The trip has been reported successfully
+     * @type {string}
+     */
+    TRIP_REPORTED_SUCCESSFULLY = "TRIP_REPORTED_SUCCESSFULLY"
+  }

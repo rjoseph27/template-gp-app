@@ -8,7 +8,7 @@ import { Time } from '@angular/common';
  * @interface TimeFromTimePicker
  * @description The time from the time picker
  */
-interface TimeFromTimePicker {
+export interface TimeFromTimePicker {
   /**
    * @description The Time as a Object
    * @type {Time}

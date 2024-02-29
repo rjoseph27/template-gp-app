@@ -20,7 +20,7 @@
     </tr>
   </table>
 <div>
-  <button *ngIf="canAdd" class="add" (click)="add()">{{ 'global.common.add' | translate }}</button>
+  <button *ngIf="canAdd" type="button" class="add" (click)="add()">{{ 'global.common.add' | translate }}</button>
 </div>
 
 <ng-template #canDeleteTemplate let-element="element">

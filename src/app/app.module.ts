@@ -47,7 +47,7 @@ import { ModalService } from "./services/modal.service";
     ],
     providers: [
         UsersService, 
-        UsersServiceApi, 
+        UsersServiceApi,
         NotificationService, 
         NavigationService, 
         EmailTakenValidator,

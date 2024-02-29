@@ -1,10 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse } from '@angular/common/http';
-import { Observable, catchError, tap, throwError } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { UsersService } from './users.service';
 import { TokenError } from '../api/users/users.type';
-import { TOKEN_LOCAL_STORAGE_KEY, USER_ID_LOCAL_STORAGE_KEY } from '../misc/constants/local-storage';
-import { NavigationService } from './navigation.service';
 import { NotificationService } from './notification.service';
 
 /**

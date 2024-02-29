@@ -1,8 +1,8 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { firstValue } from '../../misc/function/firstValue';
 import { ApiResponse, BaseServiceApi, DEBOUNCE_TIME } from '../base.service.api'; 
 import { ConnectResponse, CreateUser, Credentials, ResetPassword, ResetPasswordGetRequestApiResponse, UpdateLanguage, UserInfo, UserInfoApiResponse } from './users.type';
-import { Observable, debounceTime, delay } from 'rxjs';
+import { debounceTime } from 'rxjs';
 
 
 /**

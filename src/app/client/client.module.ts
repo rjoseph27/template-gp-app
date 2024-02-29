@@ -16,6 +16,8 @@ import { filter, tap } from 'rxjs/operators';
 import { ToRootTranslationHandler } from '../services/to-root-translation.handler';
 import { ClientReportTripComponent } from './request/report-trip/report-trip.component';
 import { ApplicationService } from './service/application.service';
+import { RequestsServiceApi } from '../api/requests/requests.service.api';
+import { RequestsService } from './service/requests.service';
 
 
 /**
@@ -52,7 +54,9 @@ import { ApplicationService } from './service/application.service';
     providers: [
         ClientApplicationResolver,
         TranslateService,
-        ApplicationService
+        ApplicationService,
+        RequestsServiceApi,
+        RequestsService
     ]
 })
 export class ClientModule {
