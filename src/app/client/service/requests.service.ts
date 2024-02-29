@@ -21,6 +21,7 @@ export class RequestsService {
             if(msg.message === ReportTripStatus.TRIP_REPORTED_SUCCESSFULLY)
             {
                 console.log("TODO: Handle success")
+                // Redirect to the trip page
             }
         });
     }
