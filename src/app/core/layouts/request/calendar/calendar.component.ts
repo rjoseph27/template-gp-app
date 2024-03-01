@@ -6,6 +6,7 @@ import { ReportTrip } from "../../../../api/requests/requests.type";
 import { SendItemsRequest } from "../../../../client/service/send-items.service";
 import { MoneyUtil } from "../../../../misc/util/money.util";
 import { Unit } from "../report-trip/report.time.constant";
+import { DateUtil } from "../../../../misc/util/date.util";
 
 /**
  * @constant FILTER_ICON
@@ -126,6 +127,18 @@ interface DayPoint {
    private readonly _baseDate$ = new BehaviorSubject<Date>(new Date(this.year, this.month, 1));
 
    /**
+    * @description An observable for the base date
+    * @type {Observable<Date>}
+    */
+   protected readonly baseDate$ = this._baseDate$.asObservable();
+
+   /**
+    * @description A Emmiter for the month year change
+    * @type {EventEmitter<Date>}
+    */
+   @Output() readonly monthYearChange = new EventEmitter<Date>();
+
+   /**
     * @description The angular renderer service.
     * @type {Renderer2}
     */
@@ -141,7 +154,7 @@ interface DayPoint {
     * @description The first day of the month
     * @type {Observable<number>}
     */
-   protected readonly _firstDayOfMonth$ = new BehaviorSubject<number>(this._baseDate$.value.getDay());
+   private readonly _firstDayOfMonth$ = new BehaviorSubject<number>(this._baseDate$.value.getDay());
 
    /**
    * @description The previous month icon
@@ -185,8 +198,6 @@ interface DayPoint {
     */
    private readonly _selectedDate$ = new BehaviorSubject<DayPoint>(undefined);
 
-   @Output() monthChange = new EventEmitter<number>();
-
    /**
     * @description A method to get the first letter of a day
     * @param day The day
@@ -204,6 +215,12 @@ interface DayPoint {
    protected getMonthName(month: number): Month {
       return this.months[month];
    }
+
+   /**
+    * @description The minimum month that the user can select
+    * @type {Date}
+    */
+   protected readonly minimumMonth = DateUtil.currentBaseDate();
 
    /**
     * @description A method to select a date
@@ -281,9 +298,9 @@ interface DayPoint {
    private changeMonth(month: number): void {
       this._baseDate$.next(new Date(this.year, month, 1));
       this.month = this._baseDate$.value.getMonth();
-      this.monthChange.emit(this.month);
       this.year = this._baseDate$.value.getFullYear();
       this._firstDayOfMonth$.next(this._baseDate$.value.getDay() - 1);
+      this.monthYearChange.emit(this._baseDate$.value);
       if(this._selectedDate$.value) {
         const oldElement = this.elementRef.nativeElement.querySelector(`.cell-${this._selectedDate$.value.week}-${this._selectedDate$.value.cell}`);
         this.renderer.removeClass(oldElement, 'selected')

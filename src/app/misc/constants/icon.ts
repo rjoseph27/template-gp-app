@@ -38,27 +38,34 @@ export const CALENDAR_ICON: string = "calendar_month";
 /**
  * @constant
  * @type {string}
- * @description The icon for the time icon.
+ * @description The value for the time icon.
  */
 export const TIME_ICON: string = "schedule";
 
 /**
  * @constant
  * @type {string}
- * @description The icon for the upload icon.
+ * @description The value for the upload icon.
  */
 export const UPLOAD_ICON: string = "upload";
 
 /**
  * @constant
  * @type {string}
- * @description The icon for the help icon.
+ * @description The value for the help icon.
  */
 export const HELP_ICON: string = "help";
 
 /**
  * @constant
  * @type {string}
- * @description The icon for the delete icon.
+ * @description The value for the delete icon.
  */
 export const DELETE_ICON: string = "delete";
+
+/**
+ * @constant
+ * @type {string}
+ * @description The value for the close icon.
+ */
+export const CLOSE_ICON = "close";

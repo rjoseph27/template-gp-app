@@ -1,9 +1,13 @@
 <div class="content">
     <div class="banner">
         <div class="month">
-            <gh-icon [name]="previousMonthIcon" (click)="goPreviousMonth()"></gh-icon>
+            <div [class.hidden]="minimumMonth > (baseDate$ | async)">
+              <gh-icon [name]="previousMonthIcon" (click)="goPreviousMonth()"></gh-icon>
+            </div>
             <div class="month-name">{{ "enums.Month."+ getMonthName(month) | translate }} {{ year }}</div>
-            <gh-icon [name]="nextMonthIcon" (click)="goNextMonth()"></gh-icon>
+            <div>
+              <gh-icon [name]="nextMonthIcon" (click)="goNextMonth()"></gh-icon>
+            </div>
         </div>
         <div class="widget">
             <gh-icon [name]="filterIcon"></gh-icon>
@@ -35,3 +39,4 @@
         </table>
     </div>
 </div>
+<!--<gh-console-view [title]="'ok'"></gh-console-view>-->

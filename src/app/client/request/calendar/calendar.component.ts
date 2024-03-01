@@ -37,7 +37,7 @@ import { ClientRequestsService } from "../../service/requests.service";
      * @description The trips cache
      * @type {Map<number, ReportTrip[]>}
      */
-    private readonly tripsCache = new Map<number, ReportTrip[]>();
+    private readonly tripsCache = new Map<Date, ReportTrip[]>();
 
     /**
      * @description The backing field for the shipping list
@@ -103,7 +103,7 @@ import { ClientRequestsService } from "../../service/requests.service";
      * @description Search for trips in a given month
      * @param month The month to display
      */
-    protected async searchTrips(month: number) {
+    protected async searchTrips(month: Date) {
         this._loading$.next(true);
         if(this.tripsCache.has(month)) {
             this._shippingList$.next(this.tripsCache.get(month));

@@ -46,7 +46,7 @@ export class ClientRequestsService {
      * @param searchTrips The search trips request
      * @returns {Promise<ReportTrip>} A promise that resolves to the trips found
      */
-    searchTrips(searchTrips: SendItemsRequest, month?: number): Promise<StringKeys<ReportTrip>[]> {
+    searchTrips(searchTrips: SendItemsRequest, month?: Date): Promise<StringKeys<ReportTrip>[]> {
         return this.requestsServiceApi.searchTrips({
             userId: this.usersService.currentUserId,
             userCountry: searchTrips.userCountry,
@@ -54,7 +54,7 @@ export class ClientRequestsService {
             destinationCountry: searchTrips.destinationCountry,
             destinationRegion: searchTrips.destinationRegion,
             itemInformation: searchTrips.itemInformation.map(item => ({itemCategory: item.itemCategory, itemWeight: item.itemWeight, itemQuantity: item.itemQuantity})),
-            month: month !== undefined ? month : DateUtil.addDaysFromDate(new Date(),1).getMonth(),
+            month: month !== undefined ? month : DateUtil.addDaysFromDate(new Date(),1),
         }).then(msg => msg.searchResults);
     }
 }

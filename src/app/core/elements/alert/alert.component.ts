@@ -1,6 +1,7 @@
 import { Component, Inject, inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ModalTemplate } from '../../../services/modal.service';
+import { CLOSE_ICON } from '../../../misc/constants/icon';
 
 /**
  * @class GhAlertComponent
@@ -17,6 +18,12 @@ export class GhAlertComponent {
    * @param dialogRef
    */
   private dialogRef: MatDialogRef<GhAlertComponent> = inject(MatDialogRef);
+
+  /**
+   * @description The close icon
+   * @type {string}
+   */
+  protected readonly closeIcon = CLOSE_ICON;
 
   /**
    * @constructor

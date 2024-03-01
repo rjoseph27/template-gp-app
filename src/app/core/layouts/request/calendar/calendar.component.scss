@@ -55,10 +55,6 @@
                 font-size: 0.75em;
                 text-wrap: nowrap;
             }
-
-            .hidden {
-                visibility: hidden;
-            }
         }
     }
 }
@@ -91,4 +87,8 @@
     color: transparent;
     visibility: visible !important;
     border-radius: 5px;
+}
+
+.hidden {
+    visibility: hidden;
 }

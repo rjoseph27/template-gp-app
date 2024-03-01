@@ -67,4 +67,14 @@ export class DateUtil {
     static formatToDatePicker(date: Date): string {
         return date.toISOString().split('T')[0];
     }
+
+    /**
+     * @description Gets the current base date
+     * @returns {Date}
+     */
+    static currentBaseDate(): Date {
+        const date = new Date();
+        date.setDate(1);
+        return date;
+    }
 }

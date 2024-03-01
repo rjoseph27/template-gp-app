@@ -277,9 +277,9 @@ export interface ReportTrip {
 
     /**
      * @description The month of the user is searching for trips
-     * @type {number}
+     * @type {Date}
      */
-    month: number,
+    month: Date,
 
     /**
      * @description The year of the user is searching for trips

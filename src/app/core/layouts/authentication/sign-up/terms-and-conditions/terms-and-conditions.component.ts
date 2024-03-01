@@ -1,5 +1,6 @@
 import { Component, Input, inject } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { CLOSE_ICON } from '../../../../../misc/constants/icon';
 
 /**
  * @class GhTermsAndConditionsComponent
@@ -16,6 +17,12 @@ export class GhTermsAndConditionsComponent {
    * @param dialogRef
    */
   private dialogRef: MatDialogRef<GhTermsAndConditionsComponent> = inject(MatDialogRef);
+
+  /**
+   * @description The close icon
+   * @type {string}
+   */
+  protected readonly closeIcon = CLOSE_ICON;
   
   /**
    * @description A method that close the modal.

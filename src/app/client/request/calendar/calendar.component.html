@@ -1,7 +1,7 @@
 <div class="content">
     <gh-calendar 
         [month]="months" 
-        (monthChange)="searchTrips($event)" 
+        (monthYearChange)="searchTrips($event)" 
         [elements]="shippingList$ | async" 
         [items]="items" [rates]="rates"
         [loading]="loading$ | async"
