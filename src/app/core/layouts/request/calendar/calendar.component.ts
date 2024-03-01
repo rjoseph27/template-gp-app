@@ -5,6 +5,7 @@ import { BehaviorSubject, map } from "rxjs";
 import { ReportTrip } from "../../../../api/requests/requests.type";
 import { SendItemsRequest } from "../../../../client/service/send-items.service";
 import { MoneyUtil } from "../../../../misc/util/money.util";
+import { Unit } from "../report-trip/report.time.constant";
 
 /**
  * @constant FILTER_ICON
@@ -235,14 +236,32 @@ interface DayPoint {
     */
    protected getPrice(id: string): number {
     if(id) {
-      const cheapestOption = this._elements$.value.filter((element) => element.id === id).sort((a, b) => a.defaultPrice - b.defaultPrice)[0];
+      const cheapestOption = this._elements$.value.filter((element) => element.id === id).map((trip) => {
+        const defaultPrice = trip.defaultPrice;
+        let price = 0;
+        this.items.itemInformation.forEach(element => {
+         const specificPrice = trip.specificPrice.find((price) => price.category === element.itemCategory);
+          if(specificPrice) {
+            if(specificPrice.unit === Unit.perKg)
+            {
+              price += element.itemWeight * specificPrice.price * element.itemQuantity;
+            } else {
+              price += specificPrice.price * element.itemQuantity;
+            }
+          } else {
+            price += element.itemWeight * defaultPrice * element.itemQuantity;
+          }
+        });
+
+        return {
+          currency: trip.currency,
+          totalPrice: price
+        };
+      })
+      .sort((a, b) => a.totalPrice - b.totalPrice)[0];
+
       const currentRate = this.rates[cheapestOption.currency];
-      const defaultPrice = cheapestOption.defaultPrice;
-      let price = 0;
-      this.items.itemInformation.forEach(element => {
-       price += element.itemWeight * defaultPrice * element.itemQuantity;
-      });
-      return MoneyUtil.totalPrice(price, currentRate)
+      return MoneyUtil.totalPrice(cheapestOption.totalPrice, currentRate)
     }
     return undefined;
    }
