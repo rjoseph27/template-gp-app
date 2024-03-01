@@ -26,7 +26,7 @@
                     <div class="date-content">
                     <div class="date" *ngIf="getDate(week, cell)?.day">
                       <div class="date-day">{{ getDate(week, cell)?.day }}</div>
-                      <div class="price" [class.hidden]="!getPrice(getDate(week, cell)?.id)">{{ getPrice(getDate(week, cell)?.id) }} {{ items.currency }}</div>
+                      <div class="price" [class.loading]="loading" [class.hidden]="!getPrice(getDate(week, cell)?.id)">{{ getPrice(getDate(week, cell)?.id) }} {{ items.currency }}</div>
                     </div>
                    </div>
                   </td>

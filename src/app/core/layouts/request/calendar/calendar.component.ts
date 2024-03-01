@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, Renderer2, inject } from "@angular/core";
+import { Component, ElementRef, EventEmitter, Input, Output, Renderer2, inject } from "@angular/core";
 import { NEXT_PAGE_ICON, PREVIOUS_PAGE_ICON } from "../../../../misc/constants/icon";
 import { Month, WeekDays } from "./calendar.enum";
 import { BehaviorSubject, map } from "rxjs";
@@ -86,6 +86,12 @@ interface DayPoint {
     * @type {SendItemsRequest}
     */
    @Input() items: SendItemsRequest;
+
+    /**
+    * @description The loading state
+    * @type {boolean}
+    */
+    @Input() loading: boolean;
 
    /**
     * @description The elements to display in the calendar
@@ -178,6 +184,8 @@ interface DayPoint {
     * @type {BehaviorSubject<DayPoint>}
     */
    private readonly _selectedDate$ = new BehaviorSubject<DayPoint>(undefined);
+
+   @Output() monthChange = new EventEmitter<number>();
 
    /**
     * @description A method to get the first letter of a day
@@ -273,6 +281,7 @@ interface DayPoint {
    private changeMonth(month: number): void {
       this._baseDate$.next(new Date(this.year, month, 1));
       this.month = this._baseDate$.value.getMonth();
+      this.monthChange.emit(this.month);
       this.year = this._baseDate$.value.getFullYear();
       this._firstDayOfMonth$.next(this._baseDate$.value.getDay() - 1);
       if(this._selectedDate$.value) {

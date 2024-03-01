@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
-import { ItemCategory } from "../../misc/enums/item-category.enum";
 import { Country } from "../../misc/enums/country.enum";
 import { ItemInformation } from "../../core/layouts/request/item-information/item-information.component";
 import { Currency } from "../../misc/enums/currency.enum";

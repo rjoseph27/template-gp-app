@@ -49,6 +49,15 @@ export class DateUtil {
         return new Date(date.getFullYear(), date.getMonth(), date.getDate() + days); 
     }
 
+    /**
+     * @description Adds months to a date
+     * @param date The date to add months to
+     * @param months The number of months to add
+     * @returns {Date}
+     */
+    static addMonthFromDate(date: Date, months: number): Date { 
+        return new Date(date.getFullYear(), date.getMonth() + months, date.getDate()); 
+    }
 
     /**
      * @description Formats a date to a date picker string

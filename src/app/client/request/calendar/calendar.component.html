@@ -1,3 +1,9 @@
 <div class="content">
-    <gh-calendar [month]="months" [elements]="shippingList$ | async" [items]="items" [rates]="rates"></gh-calendar>
+    <gh-calendar 
+        [month]="months" 
+        (monthChange)="searchTrips($event)" 
+        [elements]="shippingList$ | async" 
+        [items]="items" [rates]="rates"
+        [loading]="loading$ | async"
+    ></gh-calendar>
 </div>

@@ -85,3 +85,10 @@
         color: #fff;
     }
 }
+
+.loading {
+    background-color: $gray-color;
+    color: transparent;
+    visibility: visible !important;
+    border-radius: 5px;
+}
