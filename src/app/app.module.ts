@@ -23,6 +23,8 @@ import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { GlobalTranslateService } from "./services/global-translate.service";
 import { ToRootTranslationHandler } from "./services/to-root-translation.handler";
 import { ModalService } from "./services/modal.service";
+import { CurrencyService } from "./services/currency.service";
+import { CurrencyServiceApi } from "./api/currency/currency.service.api";
 
 /**
  * @module AppModule
@@ -61,6 +63,8 @@ import { ModalService } from "./services/modal.service";
         GlobalTranslateService,
         { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
         ToRootTranslationHandler,
+        CurrencyService,
+        CurrencyServiceApi
     ],
     bootstrap: [AppComponent]
 })

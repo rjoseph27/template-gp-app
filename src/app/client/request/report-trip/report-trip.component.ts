@@ -4,6 +4,7 @@ import { BaseRequestComponent } from "../base-request.component";
 import { tap } from "rxjs/operators";
 import { ClientRequestsService } from "../../service/requests.service";
 import { NotificationService } from "../../../services/notification.service";
+import { COUNTRY_INFO_LIST } from "../../../misc/constants/countries/countries";
 
 /**
  * @class ClientReportTripComponent
@@ -20,7 +21,7 @@ export class ClientReportTripComponent extends BaseRequestComponent implements O
    * @description The currency of the user
    * @type {string}
    */
-  protected readonly userCurrency = this.userCountry.currency;
+  protected readonly userCurrency = COUNTRY_INFO_LIST.find(x => x.name === this.userCountry).currency;
 
   /**
    * @description The change detector reference
@@ -45,7 +46,11 @@ export class ClientReportTripComponent extends BaseRequestComponent implements O
     this.currentFormService.submitting$.pipe(
       tap(async (loading) => {
         if(loading) {
-          const res = await this.requestsService.reportTrip({...this.currentFormService.currentForm.value, userId: this.usersService.currentUserId});
+          const res = await this.requestsService.reportTrip({
+            ...this.currentFormService.currentForm.value, 
+            userId: this.usersService.currentUserId,
+            currency: this.userCurrency.currency
+          });
           if(res) {
             this.notificationService.successNotification("moduleList.gp.reportTrip.notification.success");
             console.log("TODO: redirect to trips page")

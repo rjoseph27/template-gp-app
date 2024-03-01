@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { ApiResponse, BaseServiceApi } from "../base.service.api";
 import { firstValue } from "../../misc/function/firstValue";
-import { ReportTrip } from "./requests.type";
+import { ReportTrip, SearchTripsRequest, SearchTripsApiResponse } from "./requests.type";
 
 /**
  * @class RequestsServiceApi
@@ -19,5 +19,14 @@ export class RequestsServiceApi extends BaseServiceApi {
      */
     reportTrip(reportTrip: ReportTrip): Promise<ApiResponse> {
         return firstValue(this.postRequest<ApiResponse>('report-trip', reportTrip));
+    }
+
+    /**
+     * @description A method that searches trips
+     * @param searchTrips The search trips request
+     * @returns {Promise<ApiResponse>}
+     */
+    searchTrips(searchTrips: SearchTripsRequest): Promise<SearchTripsApiResponse> {
+        return firstValue(this.postRequest<SearchTripsApiResponse>('search-trips', searchTrips));
     }
 }

@@ -1,7 +1,10 @@
 import { TimeFromTimePicker } from "../../core/elements/input/time-field/time-field.component"
 import { SpecificPrice } from "../../core/layouts/request/report-trip/report.time.constant"
 import { Country } from "../../misc/enums/country.enum"
+import { Currency } from "../../misc/enums/currency.enum"
+import { ItemCategory } from "../../misc/enums/item-category.enum"
 import { DateFromDatePicker } from "../../misc/util/date.util"
+import { ApiResponse, StringKeys } from "../base.service.api"
 
 /**
    * @interface ReportTrip
@@ -9,10 +12,22 @@ import { DateFromDatePicker } from "../../misc/util/date.util"
    */
 export interface ReportTrip {
     /**
+     * @description The id of the trip
+     * @type {string}
+     */
+    id?: string;
+
+    /**
      * @description The user id
      * @type {string}
      */
-    userId: string,
+    userId?: string,
+
+    /**
+     * @description The currency of the user
+     * @type {Currency}
+     */
+    currency: Currency
 
     /**
      * @description The arrival date
@@ -200,3 +215,87 @@ export interface ReportTrip {
      */
     TRIP_REPORTED_SUCCESSFULLY = "TRIP_REPORTED_SUCCESSFULLY"
   }
+
+  /**
+   * @interface itemInformationRequest
+   * @description An interface for the item information request
+   */
+  interface itemInformationRequest {
+    /**
+     * @description The category of the item
+     * @type {ItemCategory}
+     */
+    itemCategory: ItemCategory,
+
+    /**
+     * @description The weight of the item
+     * @type {number}
+     */
+    itemWeight: number,
+
+    /**
+     * @description The quantity of the item
+     * @type {number}
+     */
+    itemQuantity: number
+  }
+
+  /**
+   * @interface SearchTripsRequest
+   * @description An interface for the search trips request
+   */
+  export interface SearchTripsRequest {
+    /**
+     * @description The user id
+     * @type {string}
+     */
+    userId: string,
+
+    /**
+     * @description The user country
+     * @type {Country}
+     */
+    userCountry: Country,
+
+    /**
+     * @description The user region
+     * @type {any}
+     */
+    userRegion: any,
+
+    /**
+     * @description The destination country
+     * @type {Country}
+     */
+    destinationCountry: Country,
+
+    /**
+     * @description The destination region
+     * @type {any}
+     */
+    destinationRegion: any,
+
+    /**
+     * @description The month of the user is searching for trips
+     * @type {number}
+     */
+    month: number,
+
+    /**
+     * @description The year of the user is searching for trips
+     * @type {itemInformationRequest[]}
+     */
+    itemInformation: itemInformationRequest[]
+  }
+
+  /**
+   * @interface SearchTripsApiResponse
+   * @description An interface for the search trips api response
+   */
+  export interface SearchTripsApiResponse extends ApiResponse {
+    /**
+     * @description The user info
+     * @type {UserInfo}
+     */
+    searchResults: StringKeys<ReportTrip>[]
+}

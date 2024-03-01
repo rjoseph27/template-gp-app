@@ -4,6 +4,8 @@ import { Injectable, inject } from "@angular/core";
 import { LoadingService } from "../../../services/loading.service";
 import { ClientRoutes } from "../../../client.route";
 import { DateUtil } from "../../../misc/util/date.util";
+import { ClientRequestsService } from "../../service/requests.service";
+import { CurrencyService } from "../../../services/currency.service";
 
 @Injectable()
 export class ClientCalendarResolver implements Resolve<any> {
@@ -12,6 +14,12 @@ export class ClientCalendarResolver implements Resolve<any> {
   * @returns {LoadingService}
   */
   private readonly loadingService: LoadingService = inject(LoadingService)
+
+  /**
+   * @description The requests service
+   * @type {ClientRequestsService}
+   */
+  private readonly requestsService = inject(ClientRequestsService);
 
   /**
    * @description The router service
@@ -25,22 +33,26 @@ export class ClientCalendarResolver implements Resolve<any> {
   */ 
   private readonly sendItemsService = inject(ClientSendItemsService);
 
+  /**
+   * @description The currency service
+   * @type {CurrencyService}
+   */
+  private readonly currencyService = inject(CurrencyService);
+
   /** @inheritdoc */
   async resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<any> {
     this.loadingService.startLoading();
     if(this.sendItemsService.requests) {
+            const trips = await this.requestsService.searchTrips(this.sendItemsService.requests);
+            const currency = await this.currencyService.getCurrency(this.sendItemsService.requests.currency);
             this.loadingService.endLoading();
             return {
                 month: DateUtil.addDaysFromDate(new Date(),1).getMonth(),
+                trips: trips,
+                rates: currency
             };
     } else {
-        // this.router.navigate([ClientRoutes.sendItems.fullPath()]); UNCOMMENT LATER FOR DEVELOPMENT PURPOSES
-        // delete later
-        this.loadingService.endLoading();
-        return {
-            month: DateUtil.addDaysFromDate(new Date(),1).getMonth(),
-        };
-        //--------
+        this.router.navigate([ClientRoutes.sendItems.fullPath()]); 
         this.loadingService.endLoading();
         return undefined;
     }

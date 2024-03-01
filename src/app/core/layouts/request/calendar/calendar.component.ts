@@ -2,6 +2,8 @@ import { Component, ElementRef, Input, Renderer2, inject } from "@angular/core";
 import { NEXT_PAGE_ICON, PREVIOUS_PAGE_ICON } from "../../../../misc/constants/icon";
 import { Month, WeekDays } from "./calendar.enum";
 import { BehaviorSubject, map } from "rxjs";
+import { ReportTrip } from "../../../../api/requests/requests.type";
+import { SendItemsRequest } from "../../../../client/service/send-items.service";
 
 /**
  * @constant FILTER_ICON
@@ -27,10 +29,10 @@ interface DateCell {
   day: number;
 
   /**
-   * @description The price
-   * @type {number}
+   * @description The id of the trip
+   * @type {string}
    */
-  price: number;
+  id: string;
 }
 
 /**
@@ -70,6 +72,44 @@ interface DayPoint {
     * @type {number}
     */
    @Input() year: number = new Date().getFullYear();
+
+   /**
+    * @description The current rates for the user currency
+    * @type {any}
+    */
+   @Input() rates: any;
+
+   /**
+    * @description The item to send
+    * @type {SendItemsRequest}
+    */
+   @Input() items: SendItemsRequest;
+
+   /**
+    * @description The elements to display in the calendar
+    * @type {ReportTrip[]}
+    */
+   @Input() set elements(value: ReportTrip[]) {
+      this._elements$.next(value);
+      this._dataCellList$.next(value.map((element) => {
+        return { day: new Date(element.departureDate.date).getDate(), id: element.id}
+      }));
+   }
+    get elements() {
+        return this._elements$.value;
+    }
+
+   /**
+    * @description The backing field for the elements
+    * @type {BehaviorSubject<ReportTrip[]>}
+    */
+    private _elements$ = new BehaviorSubject<ReportTrip[]>([]);
+
+    /**
+     * @description The data cell list
+     * @type {BehaviorSubject<DateCell[]>}
+     */
+    private _dataCellList$ = new BehaviorSubject<DateCell[]>([]);
 
    /**
     * @description Backing field for the base date
@@ -182,9 +222,26 @@ interface DayPoint {
     const daysInMonth = new Date(this.year, this.month + 1, 0).getDate();
 
     if(date > 0 && date <= daysInMonth) {
-      return { day: date, price: 32 };
+      return { day: date, id: this._dataCellList$.value.find((element) => element.day === date+1)?.id };
     }
      return undefined;
+   }
+
+   /**
+    * @description A method to get the price of an element
+    * @param id The id of the trip
+    * @returns {number}
+    */
+   protected getPrice(id: string): number {
+    if(id) {
+      const defaultPrice = this._elements$.value.find((element) => element.id === id).defaultPrice / this.rates[this._elements$.value.find((element) => element.id === id).currency];
+      let price = 0;
+      this.items.itemInformation.forEach(element => {
+       price += element.itemWeight * defaultPrice * element.itemQuantity;
+      });
+      return Math.round(price)
+    }
+    return undefined;
    }
 
    /**

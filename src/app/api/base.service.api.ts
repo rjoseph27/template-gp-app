@@ -62,7 +62,7 @@ export abstract class BaseServiceApi {
      * @param action The name of the api endpoint
      * @returns an observable of the response
      */
-    protected getRequest<T>(action: string, param: string): Observable<T> {
+    protected getRequest<T>(action: string, param?: string): Observable<T> {
         const apiLink = `${this.baseUrl}/${this.apiName}/${action}`;
         if (param) {
             return this.httpClient.get<T>(`${apiLink}/${param}`);

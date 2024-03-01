@@ -43,7 +43,8 @@
         }
 
         .date {
-            min-width: 45px;
+            min-width: 55px;
+            min-height: 55px;
             cursor: pointer;
             .date-day, .price {
                 display: flex;
@@ -52,6 +53,7 @@
 
             .price {
                 font-size: 0.75em;
+                text-wrap: nowrap;
             }
 
             .hidden {

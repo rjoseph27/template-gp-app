@@ -28,7 +28,7 @@ export class ClientSendItemsComponent extends BaseRequestComponent implements On
     this.currentFormService.submitting$.pipe(
       tap(async (loading) => {
         if(loading) {
-          this.sendItemsService.requests = {...this.currentFormService.currentForm.value, userId: this.usersService.currentUserId};
+          this.sendItemsService.requests = {...this.currentFormService.currentForm.value, userId: this.usersService.currentUserId, currency: this.currency.currency};
           this.router.navigate([`${ClientRoutes.calendar.fullPath()}`]);
         }
       })

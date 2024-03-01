@@ -2,6 +2,7 @@ import { Directive, inject } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { CurrentFormService } from "../../services/current-form.service";
 import { UsersService } from "../../services/users.service";
+import { COUNTRY_INFO_LIST } from "../../misc/constants/countries/countries";
 
 /**
  * @class BaseRequestComponent
@@ -26,6 +27,12 @@ export class BaseRequestComponent {
    * @type {string}
    */
   protected readonly userCountry = this.route.snapshot.data['userInfo'].country;
+
+  /**
+   * @description The currency of the user
+   * @type {string}
+   */
+  protected readonly currency = COUNTRY_INFO_LIST.find(x => x.name === this.userCountry).currency;
 
   /**
    * @description The users service

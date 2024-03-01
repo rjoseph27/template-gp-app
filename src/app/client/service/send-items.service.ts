@@ -2,17 +2,25 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { ItemCategory } from "../../misc/enums/item-category.enum";
 import { Country } from "../../misc/enums/country.enum";
+import { ItemInformation } from "../../core/layouts/request/item-information/item-information.component";
+import { Currency } from "../../misc/enums/currency.enum";
 
 /**
  * @interface SendItemsRequest
  * @description The send items request
  */
-interface SendItemsRequest {
+export interface SendItemsRequest {
     /**
      * @description The user id
      * @type {string}
      */
     userId: string;
+
+    /**
+     * @description The currency
+     * @type {Currency}
+     */
+    currency: Currency;
 
     /**
      * @description The user country
@@ -58,9 +66,9 @@ interface SendItemsRequest {
 
     /**
      * @description The item information
-     * @type {ItemCategory[]}
+     * @type {ItemInformation[]}
      */
-    itemInformation: ItemCategory[];
+    itemInformation: ItemInformation[];
 }
 
 /**

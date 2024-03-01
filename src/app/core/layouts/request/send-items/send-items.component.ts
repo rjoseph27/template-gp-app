@@ -22,12 +22,6 @@ import { BaseRequestComponent } from "../base-request.component";
 })
 export class GhSendItemsComponent extends BaseRequestComponent implements OnInit {
   /**
-   * @description backing field for the item information
-   * @type {BehaviorSubject<ItemInformation[]>}
-   */
-  private readonly _itemInformation$ = new BehaviorSubject<ItemInformation[]>([]);
-
-  /**
    * @description The name of the user region field
    * @type {string}
    */
