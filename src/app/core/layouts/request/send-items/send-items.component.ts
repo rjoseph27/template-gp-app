@@ -147,9 +147,9 @@ export class GhSendItemsComponent extends BaseRequestComponent implements OnInit
   protected updateUserCountry(value: string): void {
     this._userCountry$.next(value as Country);
     this.sendItemsForm.get(this.userCountryField).setValue(value)
-    this.sendItemsForm.get(this.userRegionField).setValue(undefined);
-    this.sendItemsForm.get(this.destinationCountryField).setValue(undefined);
-    this.sendItemsForm.get(this.destinationRegionField).setValue(undefined);
+    this.sendItemsForm.get(this.userRegionField).setValue(null);
+    this.sendItemsForm.get(this.destinationCountryField).setValue(null);
+    this.sendItemsForm.get(this.destinationRegionField).setValue(null);
   }
 
   /**
@@ -169,6 +169,7 @@ export class GhSendItemsComponent extends BaseRequestComponent implements OnInit
   protected destinationUserCountry(value: string): void {
     this._destinationCountry$.next(value as Country);
     this.sendItemsForm.get(this.destinationCountryField).setValue(value)
+    this.sendItemsForm.get(this.destinationRegionField).setValue(null);
   }
 
   /**

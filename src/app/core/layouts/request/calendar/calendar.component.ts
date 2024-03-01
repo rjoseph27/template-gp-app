@@ -4,6 +4,7 @@ import { Month, WeekDays } from "./calendar.enum";
 import { BehaviorSubject, map } from "rxjs";
 import { ReportTrip } from "../../../../api/requests/requests.type";
 import { SendItemsRequest } from "../../../../client/service/send-items.service";
+import { MoneyUtil } from "../../../../misc/util/money.util";
 
 /**
  * @constant FILTER_ICON
@@ -222,7 +223,7 @@ interface DayPoint {
     const daysInMonth = new Date(this.year, this.month + 1, 0).getDate();
 
     if(date > 0 && date <= daysInMonth) {
-      return { day: date, id: this._dataCellList$.value.find((element) => element.day === date+1)?.id };
+      return { day: date, id: this._dataCellList$.value.find((element) => element.day + 1 === date)?.id };
     }
      return undefined;
    }
@@ -234,12 +235,14 @@ interface DayPoint {
     */
    protected getPrice(id: string): number {
     if(id) {
-      const defaultPrice = this._elements$.value.find((element) => element.id === id).defaultPrice / this.rates[this._elements$.value.find((element) => element.id === id).currency];
+      const cheapestOption = this._elements$.value.filter((element) => element.id === id).sort((a, b) => a.defaultPrice - b.defaultPrice)[0];
+      const currentRate = this.rates[cheapestOption.currency];
+      const defaultPrice = cheapestOption.defaultPrice;
       let price = 0;
       this.items.itemInformation.forEach(element => {
        price += element.itemWeight * defaultPrice * element.itemQuantity;
       });
-      return Math.round(price)
+      return MoneyUtil.totalPrice(price, currentRate)
     }
     return undefined;
    }
