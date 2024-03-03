@@ -1,3 +1,6 @@
+import { ReportTrip } from "../../../../api/requests/requests.type";
+import { Currency } from "../../../../misc/enums/currency.enum";
+
 /**
  * @enum WeekDays
  * @description The week days
@@ -29,4 +32,28 @@ export enum Month {
     October = "October",
     November = "November",
     December = "December"
+}
+
+/**
+ * @interface TripInfo
+ * @description The trip info
+ */
+export interface TripInfo {
+    /**
+     * @description The currency
+     * @type {Currency}
+     */
+    currency: Currency,
+
+    /**
+     * @description The total price
+     * @type {number}
+     */
+    totalPrice: number,
+
+    /**
+     * @description The trip
+     * @type {ReportTrip}
+     */
+    trip: ReportTrip
 }

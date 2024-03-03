@@ -126,7 +126,21 @@
                             }
                         }
                     },
-                    "send": "Check for GPs"
+                    "send": "Check for GPs",
+                    "calendar": {
+                        "selectTrip": {
+                            "title": "Selected Trip",
+                            "total": "Total",
+                            "departure": "Departure",
+                            "arrival": "Arrival",
+                            "confirmButton": "Confirm",
+                            "confirm": {
+                                "title": "Request Confirmation",
+                                "content": "The GP will be notified about your request. You will be notified once the GP confirms the request. You can see the status of the request in the 'My orders page'.",
+                                "button": "Confirm"
+                            }
+                        }
+                    }
                 }
             },
             "orders": {

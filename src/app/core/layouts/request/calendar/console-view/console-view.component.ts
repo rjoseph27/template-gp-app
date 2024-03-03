@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input } from "@angular/core";
+import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { CLOSE_ICON } from "../../../../../misc/constants/icon";
 
 /**
@@ -27,7 +27,7 @@ export class GhConsoleViewComponent {
    * @description A method that close the console view
    * @returns void
    */
-  private readonly closed = new EventEmitter<void>();
+  @Output() readonly closed = new EventEmitter<void>();
 
   /**
    * @description A method that close the console view

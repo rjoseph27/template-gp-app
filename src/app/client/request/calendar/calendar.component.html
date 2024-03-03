@@ -1,9 +1,20 @@
-<div class="content">
-    <gh-calendar 
-        [month]="months" 
-        (monthYearChange)="searchTrips($event)" 
-        [elements]="shippingList$ | async" 
-        [items]="items" [rates]="rates"
-        [loading]="loading$ | async"
-    ></gh-calendar>
-</div>
+<gh-calendar 
+    [month]="months" 
+    (monthYearChange)="searchTrips($event)" 
+    [elements]="shippingList$ | async" 
+    [items]="items" 
+    [rates]="rates"
+    [loading]="loading$ | async"
+    [selectTripCaptions]="{
+        title: 'moduleList.client.sendItems.content.calendar.selectTrip.title' | translate,
+        departure: 'moduleList.client.sendItems.content.calendar.selectTrip.departure' | translate,
+        arrival: 'moduleList.client.sendItems.content.calendar.selectTrip.arrival' | translate,
+        total: 'moduleList.client.sendItems.content.calendar.selectTrip.total' | translate,
+        select: 'moduleList.client.sendItems.content.calendar.selectTrip.confirmButton' | translate,
+        confirm: {
+            title: 'moduleList.client.sendItems.content.calendar.selectTrip.confirm.title' | translate,
+            content: 'moduleList.client.sendItems.content.calendar.selectTrip.confirm.content' | translate,
+            button: 'moduleList.client.sendItems.content.calendar.selectTrip.confirm.button' | translate,
+        }
+    }"
+></gh-calendar>

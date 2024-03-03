@@ -1,3 +1,4 @@
+import { SendItemsRequest } from "../../client/service/send-items.service"
 import { TimeFromTimePicker } from "../../core/elements/input/time-field/time-field.component"
 import { SpecificPrice } from "../../core/layouts/request/report-trip/report.time.constant"
 import { Country } from "../../misc/enums/country.enum"
@@ -298,4 +299,70 @@ export interface ReportTrip {
      * @type {UserInfo}
      */
     searchResults: StringKeys<ReportTrip>[]
-}
+  }
+
+  /**
+   * @interface ConfirmItemRequest
+   * @description An interface for the confirm item request
+   */
+  export interface ConfirmItemRequest {
+    /**
+     * @description The items to send
+     * @type {SendItemsRequest}
+     */
+    items: SendItemsRequest,
+
+    /**
+     * @description The trip id
+     * @type {string}
+     */
+    tripId: string
+  }
+
+  /**
+   * @enum SendItemsStatus
+   * @description The send items status
+   */
+  export enum SendItemsStatus {
+    /**
+     * @description The items were sent successfully
+     * @type {string}
+     */
+    ITEMS_SENT_SUCCESSFULLY = "ITEMS_SENT_SUCCESSFULLY",
+  }
+
+  /**
+   * @interface SendItemsRequest
+   * @description An interface for the send items request
+   */
+  export interface SendItemsRequestApiResponse extends ApiResponse {
+    /**
+     * @description The id of the new request
+     * @type {string}
+     */
+    newId: string;
+  }
+
+  /**
+   * @interface UpdateImageNameRequest
+   * @description An interface for the update image name request
+   */
+  export interface UpdateImageNameRequest {
+    /**
+     * @description The new filename
+     * @type {string}
+     */
+    filename: string;
+
+    /**
+     * @description The index of the image
+     * @type {number}
+     */
+    index: number;
+
+    /**
+     * @description The id of the request
+     * @type {string}
+     */
+    id: string; 
+  }

@@ -27,7 +27,8 @@ export type FileType = string | ArrayBuffer;
 })
 export class GhUploadImageComponent extends BaseInputFieldComponent<File> {
   /**
-   * @description The icon for the upload image
+   * @description The icon for the upload imageconst formData = new FormData();
+            formData.append('image', item.image);
    * @type {string}
    */
   protected readonly uploadImageIcon = UPLOAD_ICON;

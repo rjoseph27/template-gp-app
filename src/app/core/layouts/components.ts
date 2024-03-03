@@ -14,6 +14,7 @@ import { GhItemInformationComponent } from "./request/item-information/item-info
 import { GhReportTripComponent } from "./request/report-trip/report-trip.component";
 import { GhCalendarComponent } from "./request/calendar/calendar.component";
 import { GhConsoleViewComponent } from "./request/calendar/console-view/console-view.component";
+import { GhSelectTripComponent } from "./request/calendar/console-view/select-trip/select-trip.component";
 
 /**
  * @constant
@@ -36,5 +37,6 @@ export const LAYOUTS_COMPONENTS = [
     GhItemInformationComponent,
     GhReportTripComponent,
     GhCalendarComponent,
-    GhConsoleViewComponent
+    GhConsoleViewComponent,
+    GhSelectTripComponent
 ]

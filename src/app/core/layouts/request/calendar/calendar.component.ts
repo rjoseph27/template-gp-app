@@ -1,12 +1,13 @@
 import { Component, ElementRef, EventEmitter, Input, Output, Renderer2, inject } from "@angular/core";
 import { NEXT_PAGE_ICON, PREVIOUS_PAGE_ICON } from "../../../../misc/constants/icon";
-import { Month, WeekDays } from "./calendar.enum";
+import { Month, TripInfo, WeekDays } from "./calendar.enum";
 import { BehaviorSubject, map } from "rxjs";
 import { ReportTrip } from "../../../../api/requests/requests.type";
 import { SendItemsRequest } from "../../../../client/service/send-items.service";
 import { MoneyUtil } from "../../../../misc/util/money.util";
 import { Unit } from "../report-trip/report.time.constant";
 import { DateUtil } from "../../../../misc/util/date.util";
+import { SelectTripCaption } from "./console-view/select-trip/select-trip.component";
 
 /**
  * @constant FILTER_ICON
@@ -107,6 +108,24 @@ interface DayPoint {
     get elements() {
         return this._elements$.value;
     }
+
+    /**
+     * @description The selected trip caption
+     * @type {SelectTripCaption}
+     */
+    @Input() selectTripCaptions: SelectTripCaption;
+
+    /**
+    * @description The backing field for the selected trip
+    * @type {BehaviorSubject<ReportTrip>}
+    */
+   private readonly _selectedTrip$ = new BehaviorSubject<ReportTrip>(undefined);
+
+   /**
+    * @description An observable for the selected trip
+    * @type {Observable<ReportTrip>}
+    */
+   protected readonly selectedTrip$ = this._selectedTrip$.asObservable();
 
    /**
     * @description The backing field for the elements
@@ -236,6 +255,13 @@ interface DayPoint {
     const element = this.elementRef.nativeElement.querySelector(`.cell-${week}-${cell}`);
     this.renderer.addClass(element, 'selected')
     this._selectedDate$.next({ week, cell });
+
+    const displayTrip =  this.bestTripOption(this.getDate(week, cell)?.id)?.trip
+    if(displayTrip) {
+      this._selectedTrip$.next(displayTrip);
+    } else {
+      this._selectedTrip$.next(undefined);
+    }
    }
 
    /**
@@ -260,8 +286,23 @@ interface DayPoint {
     * @returns {number}
     */
    protected getPrice(id: string): number {
-    if(id) {
-      const cheapestOption = this._elements$.value.filter((element) => element.id === id).map((trip) => {
+      const cheapestOption = this.bestTripOption(id);
+      if(cheapestOption)
+      {
+        const currentRate = this.rates[cheapestOption.currency];
+        return MoneyUtil.totalPrice(cheapestOption.totalPrice, currentRate)
+      }
+    return undefined;
+   }
+
+   /**
+    * @description A method to get the best trip option
+    * @param id The id of the trip
+    * @returns 
+    */
+   private bestTripOption(id: string): TripInfo {
+    if(id && this.items) {
+      return this._elements$.value.filter((element) => element.id === id).map((trip) => {
         const defaultPrice = trip.defaultPrice;
         let price = 0;
         this.items.itemInformation.forEach(element => {
@@ -280,15 +321,14 @@ interface DayPoint {
 
         return {
           currency: trip.currency,
-          totalPrice: price
+          totalPrice: price,
+          trip: trip
         };
       })
       .sort((a, b) => a.totalPrice - b.totalPrice)[0];
-
-      const currentRate = this.rates[cheapestOption.currency];
-      return MoneyUtil.totalPrice(cheapestOption.totalPrice, currentRate)
+    } else {
+      return undefined;
     }
-    return undefined;
    }
 
    /**
@@ -322,5 +362,13 @@ interface DayPoint {
     */
    protected goNextMonth(): void {
     this.changeMonth(this.month + 1);
+   }
+
+   /**
+    * @description A method to close the select trip view
+    * @returns {void}
+    */
+   protected closeSelectTrip(): void {
+    this._selectedTrip$.next(undefined);
    }
   }

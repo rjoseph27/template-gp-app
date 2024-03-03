@@ -30,7 +30,7 @@
                     <div class="date-content">
                     <div class="date" *ngIf="getDate(week, cell)?.day">
                       <div class="date-day">{{ getDate(week, cell)?.day }}</div>
-                      <div class="price" [class.loading]="loading" [class.hidden]="!getPrice(getDate(week, cell)?.id)">{{ getPrice(getDate(week, cell)?.id) }} {{ items.currency }}</div>
+                      <div class="price" [class.loading]="loading" [class.hidden]="!getPrice(getDate(week, cell)?.id)">{{ getPrice(getDate(week, cell)?.id) }} {{ items?.currency }}</div>
                     </div>
                    </div>
                   </td>
@@ -39,4 +39,13 @@
         </table>
     </div>
 </div>
-<!--<gh-console-view [title]="'ok'"></gh-console-view>-->
+
+<div class="sidebar" *ngIf="selectedTrip$ | async">
+  <gh-select-trip  
+  [selectedTrip]="selectedTrip$ | async" 
+  [totalPrice]="getPrice((selectedTrip$ | async).id)"
+  [captions]="selectTripCaptions"
+  (closed)="closeSelectTrip()"
+  >
+  </gh-select-trip>
+</div>

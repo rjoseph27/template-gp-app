@@ -1,6 +1,5 @@
 import { Component, OnInit, inject } from "@angular/core";
 import { CurrentFormService } from "../../../services/current-form.service";
-import { ActivatedRoute } from "@angular/router";
 import { BaseRequestComponent } from "../base-request.component";
 import { ClientSendItemsService } from "../../service/send-items.service";
 import { tap } from "rxjs/operators";

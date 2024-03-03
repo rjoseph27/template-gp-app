@@ -1,13 +1,12 @@
-<div class="content">
-    <div class="header">
-        <div class="title">{{ title | translate }}</div>
-        <div>
-            <button type="button" (click)="close()">
-                <gh-icon [name]="closeIcon"></gh-icon>
-            </button>
-        </div>
-    </div>
+
+<div class="header">
+    <div class="title">{{ title | translate }}</div>
     <div>
-        <ng-content></ng-content>
+        <button type="button" (click)="close()">
+            <gh-icon [name]="closeIcon"></gh-icon>
+        </button>
     </div>
+</div>
+<div class="content">
+    <ng-content></ng-content>
 </div>

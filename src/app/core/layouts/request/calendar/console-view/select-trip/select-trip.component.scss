@@ -1,0 +1,50 @@
+@import '../../../../../../../styles/variables';
+
+.section {
+    display: flex;
+
+    .sub-section {
+        margin:0.5em;
+        width:50%;
+        .title {
+            font-weight: $bold;
+        }
+    }
+
+    button {
+        margin: 1em 0.5em;
+    }
+}
+
+button {
+    width:100%;
+    cursor: pointer;
+}
+
+.confirmed-view {
+    padding: 1em;
+
+    .confirmed-view-section {
+        margin-bottom: 1em;
+    }
+
+    .check-logo {
+        ::ng-deep .gh-icon-content {
+            margin:0.25em 0;
+            padding:0.5em;
+            font-size: 2em;
+            border:2px solid #fff;
+            border-radius: 50%;
+          }
+    }
+
+    .title, .check-logo {
+        display: flex;
+        justify-content: center;    
+    }
+
+    .title {
+        font-size: 1em;
+        font-weight: $bold;
+    }
+}

@@ -2,13 +2,12 @@ import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { REQUIRED_VALIDATION } from "../../../../misc/constants/validations";
 import { CountryInfo } from "../../../../misc/constants/countries/countries.type";
-import { BehaviorSubject, Observable, map } from "rxjs";
+import { Observable, map } from "rxjs";
 import { Country } from "../../../../misc/enums/country.enum";
 import { COUNTRY_INFO_LIST } from "../../../../misc/constants/countries/countries";
 import { INVALID_NAME_VALIDATION, nameValidator } from "../../../../misc/validation/name.validator";
 import { INVALID_PHONE_NUMBER_VALIDATION, phoneNumberValidator } from "../../../../misc/validation/phone.validation";
 import { SelectFieldOption } from "../../../elements/input/select-field/select-field.component";
-import { ItemInformation } from "../item-information/item-information.component";
 import { BaseRequestComponent } from "../base-request.component";
 
 /**
