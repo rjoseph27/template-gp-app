@@ -1,14 +1,15 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { REQUIRED_VALIDATION } from "../../../../misc/constants/validations";
 import { CountryInfo } from "../../../../misc/constants/countries/countries.type";
-import { Observable, map } from "rxjs";
+import { BehaviorSubject, Observable, map } from "rxjs";
 import { Country } from "../../../../misc/enums/country.enum";
 import { COUNTRY_INFO_LIST } from "../../../../misc/constants/countries/countries";
 import { INVALID_NAME_VALIDATION, nameValidator } from "../../../../misc/validation/name.validator";
 import { INVALID_PHONE_NUMBER_VALIDATION, phoneNumberValidator } from "../../../../misc/validation/phone.validation";
 import { SelectFieldOption } from "../../../elements/input/select-field/select-field.component";
 import { BaseRequestComponent } from "../base-request.component";
+import { SendItemsRequest } from "../../../../client/service/send-items.service";
 
 /**
  * @class GhSendItemsComponent
@@ -25,6 +26,12 @@ export class GhSendItemsComponent extends BaseRequestComponent implements OnInit
    * @type {string}
    */
   protected readonly userRegionField = 'userRegion';
+
+  /**
+   * @description The request
+   * @type {SendItemsRequest}
+   */
+  @Input() request: SendItemsRequest;
 
   /**
    * @description The name of the destination country field.
@@ -126,15 +133,17 @@ export class GhSendItemsComponent extends BaseRequestComponent implements OnInit
 
   /** @inheritdoc */
   ngOnInit(): void {
+    this._userCountry$.next(this.request?.userCountry || this.userCountry);
+    this._destinationCountry$.next(this.request?.destinationCountry);
     this.currentFormService.currentForm = new FormGroup({
-      userCountry: new FormControl(this.userCountry, [Validators.required]),
-      userRegion: new FormControl(null, [Validators.required]),
-      destinationCountry: new FormControl(null, [Validators.required]),
-      destinationRegion: new FormControl(null, [Validators.required]),
-      consigneeFullName: new FormControl('', [Validators.required, nameValidator]),
-      consigneeAddress: new FormControl('', [Validators.required]),
-      consigneePhoneNumber: new FormControl('', [Validators.required, phoneNumberValidator]),
-      itemInformation: new FormControl(undefined, [Validators.required]),
+      userCountry: new FormControl(this.request?.userCountry || this.userCountry, [Validators.required]),
+      userRegion: new FormControl(this.request?.userRegion, [Validators.required]),
+      destinationCountry: new FormControl(this.request?.destinationCountry || null, [Validators.required]),
+      destinationRegion: new FormControl(this.request?.destinationRegion || null, [Validators.required]),
+      consigneeFullName: new FormControl(this.request?.consigneeFullName || '', [Validators.required, nameValidator]),
+      consigneeAddress: new FormControl(this.request?.consigneeAddress || '', [Validators.required]),
+      consigneePhoneNumber: new FormControl(this.request?.consigneePhoneNumber || '', [Validators.required, phoneNumberValidator]),
+      itemInformation: new FormControl(this.request?.itemInformation || undefined, [Validators.required]),
     });
   }
 
@@ -144,11 +153,13 @@ export class GhSendItemsComponent extends BaseRequestComponent implements OnInit
    * @returns {void}
    */
   protected updateUserCountry(value: string): void {
-    this._userCountry$.next(value as Country);
-    this.sendItemsForm.get(this.userCountryField).setValue(value)
-    this.sendItemsForm.get(this.userRegionField).setValue(null);
-    this.sendItemsForm.get(this.destinationCountryField).setValue(null);
-    this.sendItemsForm.get(this.destinationRegionField).setValue(null);
+    if(value !== this.userCountry) {
+      this._userCountry$.next(value as Country);
+      this.sendItemsForm.get(this.userCountryField).setValue(value)
+      this.sendItemsForm.get(this.userRegionField).setValue(null);
+      this.sendItemsForm.get(this.destinationCountryField).setValue(null);
+      this.sendItemsForm.get(this.destinationRegionField).setValue(null);
+    }
   }
 
   /**
@@ -166,9 +177,11 @@ export class GhSendItemsComponent extends BaseRequestComponent implements OnInit
    * @returns {void}
    */
   protected destinationUserCountry(value: string): void {
-    this._destinationCountry$.next(value as Country);
-    this.sendItemsForm.get(this.destinationCountryField).setValue(value)
-    this.sendItemsForm.get(this.destinationRegionField).setValue(null);
+    if(this._destinationCountry$.value !== value){
+      this._destinationCountry$.next(value as Country);
+      this.sendItemsForm.get(this.destinationCountryField).setValue(value)
+      this.sendItemsForm.get(this.destinationRegionField).setValue(null);
+    }
   }
 
   /**

@@ -39,6 +39,12 @@ export class GhPhoneFieldComponent extends BaseInputFieldComponent<string> {
   private _phoneInfo: PhoneInfo;
 
   /**
+   * @description The default value of the phone field
+   * @type {string}
+   */
+  @Input() defaultValue: string;
+
+  /**
    * @description The phone info of the phone field
    * @type {PhoneInfo}
    */
@@ -49,7 +55,7 @@ export class GhPhoneFieldComponent extends BaseInputFieldComponent<string> {
       this._phoneInfo = value;
       this.formattedValue = value.code+" "+value.phoneFormat;
       setTimeout(() => {
-        this.formattedValueChange.emit("");
+        this.formattedValueChange.emit(this.defaultValue || "");
       },0);
     }
   } get phoneInfo(): PhoneInfo {
@@ -74,6 +80,7 @@ export class GhPhoneFieldComponent extends BaseInputFieldComponent<string> {
    * @type {void}
    */
   protected emitValue(event: string): void {
+    this.defaultValue = null;
     const transformValue = this.phoneInfo.phoneFormat.split('');
     this._value$.next(event.replace(/\s/g, "").replace(/-/g, ""))
     for(let i = 0; i < this._value$.value.length; i++) {

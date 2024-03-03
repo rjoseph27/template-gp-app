@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { BaseInputFieldComponent } from '../base-input-field.component';
 import { UPLOAD_ICON } from '../../../../misc/constants/icon';
 import { BehaviorSubject } from 'rxjs';
@@ -17,6 +17,18 @@ export const MAX_IMAGE_SIZE = 100 * 1024;
 export type FileType = string | ArrayBuffer;
 
 /**
+ * @interface GhFile
+ * @description The file interface for the application
+ */
+export interface GhFile extends File {
+  /**
+   * @description The temporary URL of the file
+   * @type {FileType}
+   */
+  tempUrl?: FileType;
+}
+
+/**
  * @class GhUploadImageComponent
  * @description The upload image component for the application
  */
@@ -25,7 +37,7 @@ export type FileType = string | ArrayBuffer;
   templateUrl: './upload-image.component.html',
   styleUrls: ['./upload-image.component.component.scss', './../base-input-field.component.scss']
 })
-export class GhUploadImageComponent extends BaseInputFieldComponent<File> {
+export class GhUploadImageComponent extends BaseInputFieldComponent<GhFile> {
   /**
    * @description The icon for the upload imageconst formData = new FormData();
             formData.append('image', item.image);
@@ -69,18 +81,6 @@ export class GhUploadImageComponent extends BaseInputFieldComponent<File> {
   }
 
   /**
-   * @description backing field for the selected image
-   * @type {BehaviorSubject<FileType>}
-   */
-  private readonly _selectedImage$ = new BehaviorSubject<FileType>(undefined);
-
-  /**
-   * @description An observable of the selected image
-   * @type {Observable<FileType>}
-   */
-  protected readonly selectedImage$ = this._selectedImage$.asObservable();
-
-  /**
    * @description Handle the file selected event
    * @param event The event that contains the selected file
    * @returns {void}
@@ -93,8 +93,6 @@ export class GhUploadImageComponent extends BaseInputFieldComponent<File> {
     if (files.length > 0) {
       // Access the first selected image file
       const selectedFile = files[0];
-      this.value = selectedFile;
-      this.valueChange.emit(selectedFile);
       
       // Read the selected image file as data URL
       const reader = new FileReader();
@@ -102,10 +100,12 @@ export class GhUploadImageComponent extends BaseInputFieldComponent<File> {
       
       // Set the selectedImage property when the image file is loaded
       reader.onload = () => {
-        this._selectedImage$.next(reader.result);
+        (<GhFile>selectedFile).tempUrl = reader.result;
+        this.value = selectedFile;
+        this.valueChange.emit(selectedFile);
       };
     } else {
-      this._selectedImage$.next(undefined);
+      this.value = undefined;
     }
   }
 }

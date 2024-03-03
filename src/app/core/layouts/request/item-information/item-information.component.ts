@@ -1,15 +1,16 @@
-import { Component, EventEmitter, Output, inject } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output, inject } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { IMAGE_FORMAT_VALIDATION, imageFormatValidator } from "../../../../misc/validation/image-format.validator";
 import { IMAGE_SIZE_VALIDATION, imageSizeValidator } from "../../../../misc/validation/image-size.validator";
 import { MAX_VALIDATION, MIN_VALIDATION, REQUIRED_VALIDATION } from "../../../../misc/constants/validations";
 import { GroupedSelectFieldOption } from "../../../elements/input/select-field/select-field.component";
-import { LIST_ITEM_CATEGORY, LIST_ITEM_CATEGORY_OPTION } from "../../../../misc/constants/item-category";
+import { LIST_ITEM_CATEGORY_OPTION } from "../../../../misc/constants/item-category";
 import { ItemCategory } from "../../../../misc/enums/item-category.enum";
-import { EnumUtil } from "../../../../misc/util/enum.util";
 import { MAX_LUGGAGE_WEIGHT } from "../../../../misc/constants/application";
 import { FormMode } from "../../../../misc/enums/form-mode.enum";
 import { ModalService } from "../../../../services/modal.service";
+import { SERVER_URL } from "../../../../api/base.service.api";
+import { GhFile } from "../../../elements/input/upload-image/upload-image.component";
 
 
 /**
@@ -89,7 +90,7 @@ interface ItemSize {
  * @description The type of the item information form
  */
 type ItemInformationForm = FormGroup<
-  { image: FormControl<File>; 
+  { image: FormControl<GhFile>; 
     itemName: FormControl<string>; 
     itemCategory: FormControl<string>; 
     itemWeight: FormControl<number>; 
@@ -138,7 +139,7 @@ interface ItemInformationBody {
   styleUrl: './item-information.component.scss',
   providers: [ModalService]
 })
-export class GhItemInformationComponent {
+export class GhItemInformationComponent implements OnInit {
   /**
    * @description The item information list
    * @type {ItemInformationBody[]}
@@ -253,10 +254,18 @@ export class GhItemInformationComponent {
   @Output() itemInformationChange = new EventEmitter<ItemInformation[]>();
 
   /**
-   * @constructor
+   * @description The item information
+   * @type {ItemInformation[]}
    */
-  constructor() {
-    this.addNewItemInformation();
+  @Input() itemInformation: ItemInformation[];
+  
+  /** @inheritdoc */
+  ngOnInit(): void {
+    if(this.itemInformation) {
+      this.itemInformation.forEach(x => this.addNewItemInformation(x));
+    } else {
+      this.addNewItemInformation();
+    }
   }
 
   /**
@@ -264,37 +273,29 @@ export class GhItemInformationComponent {
    * @returns void
    */
   private updateItemInformation() {
-    const list = this.itemInformationList.map(x => x.itemInformation.value as ItemInformation)
-    list.pop();
-    this.itemInformationChange.emit(list);
+    const list = this.itemInformationList.map(x => x.itemInformation.value as ItemInformation);
+    this.itemInformationChange.emit(list as ItemInformation[]);
   }
-
-  /**
-   * @description The method that creates a new form factory
-   * @param itemInformation The item information form
-   * @returns The form group
-   */
-  private newFormFactory(itemInformation?: ItemInformationForm): FormGroup {
-    return new FormGroup({
-      image: new FormControl(itemInformation?.get(this.imageField).value || <File>{}, [Validators.required, imageFormatValidator, imageSizeValidator]),
-      itemName: new FormControl(itemInformation?.get(this.itemNameField).value || '', [Validators.required]),
-      itemCategory: new FormControl(itemInformation?.get(this.itemCategoryField).value || '', [Validators.required]),
-      itemWeight: new FormControl(itemInformation?.get(this.itemWeightField).value || undefined, [Validators.required, Validators.min(0), Validators.max(MAX_LUGGAGE_WEIGHT)]),
-      itemQuantity: new FormControl(itemInformation?.get(this.itemQuantityField).value || 1, [Validators.required, Validators.min(1)]),
-      extraNotes: new FormControl(itemInformation?.get(this.extraNotesField).value || ''),
-      reasonShipping: new FormControl(itemInformation?.get(this.reasonShippingField).value || '', [Validators.required])
-    });
-  }
+  
 
   /**
    * @description The method that adds a new item information
+   * @param itemInformation The item information
    * @returns void
    */
-  private addNewItemInformation() {
+  private addNewItemInformation(itemInformation?: ItemInformation) {
     const newItem: ItemInformationBody = {
       id: this.itemInformationList.length,
       formMode: FormMode.CREATE,
-      itemInformation: this.newFormFactory()
+      itemInformation: new FormGroup({
+          image: new FormControl(itemInformation?.image || <GhFile>{}, [Validators.required, imageFormatValidator, imageSizeValidator]),
+          itemName: new FormControl(itemInformation?.itemName, [Validators.required]),
+          itemCategory: new FormControl(itemInformation?.itemCategory as string, [Validators.required]),
+          itemWeight: new FormControl(itemInformation?.itemWeight, [Validators.required, Validators.min(0.0001), Validators.max(MAX_LUGGAGE_WEIGHT)]),
+          itemQuantity: new FormControl(itemInformation?.itemQuantity || 1, [Validators.required, Validators.min(1)]),
+          extraNotes: new FormControl(itemInformation?.extraNotes),
+          reasonShipping: new FormControl(itemInformation?.reasonShipping, [Validators.required])
+        })
     };
 
     this.itemInformationList.push(newItem)
@@ -318,7 +319,7 @@ export class GhItemInformationComponent {
    */
   protected goToEditMode(itemInformation: ItemInformationBody) {
     itemInformation.formMode = FormMode.EDIT;
-    itemInformation.cache = this.newFormFactory(itemInformation.itemInformation);
+    itemInformation.cache = itemInformation.itemInformation;
   }
 
   /**

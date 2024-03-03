@@ -325,6 +325,102 @@ export interface ReportTrip {
    */
   export enum SendItemsStatus {
     /**
+     * @description The user country is not set
+     * @type {string}
+     */
+    NO_USER_COUNTRY = "NO_USER_COUNTRY",
+
+    /**
+     * @description The user region is not set
+     * @type {string}
+     */
+    NO_USER_REGION = "NO_USER_REGION",
+
+    /**
+     * @description The destination country is not set
+     * @type {string}
+     */
+    NO_DESTINATION_COUNTRY = "NO_DESTINATION_COUNTRY",
+
+    /**
+     * @description The destination region is not set
+     * @type {string}
+     */
+    NO_DESTINATION_REGION = "NO_DESTINATION_REGION",
+
+    /**
+     * @description The consignee full name is not set
+     * @type {string}
+     */
+    NO_CONSIGNEE_FULL_NAME = "NO_CONSIGNEE_FULL_NAME",
+
+    /**
+     * @description The consignee address is not set
+     * @type {string}
+     */
+    NO_CONSIGNEE_ADDRESS = "NO_CONSIGNEE_ADDRESS",
+
+    /**
+     * @description The consignee phone number is not set
+     * @type {string}
+     */
+    NO_CONSIGNEE_PHONE_NUMBER = "NO_CONSIGNEE_PHONE_NUMBER",
+
+    /**
+     * @description The consignee full name is invalid
+     * @type {string}
+     */
+    INVALID_CONSIGNEE_FULL_NAME = "INVALID_CONSIGNEE_FULL_NAME",
+
+    /**
+     * @description The consignee address is invalid
+     * @type {string}
+     */
+    INVALID_CONSIGNEE_PHONE_NUMBER = "INVALID_CONSIGNEE_PHONE_NUMBER",
+
+    /**
+     * @description The item name is not set
+     * @type {string}
+     */
+    NO_ITEM_NAME = "NO_ITEM_NAME",
+
+    /**
+     * @description The item category is not set
+     * @type {string}
+     */
+    NO_ITEM_CATEGORY = "NO_ITEM_CATEGORY",
+
+    /**
+     * @description The item weight is not set
+     * @type {string}
+     */
+    NO_ITEM_WEIGHT = "NO_ITEM_WEIGHT",
+
+    /**
+     * @description The item quantity is not set
+     * @type {string}
+     */
+    NO_ITEM_QUANTITY = "NO_ITEM_QUANTITY",
+
+    /**
+     * @description The item weight is invalid
+     * @type {string}
+     */
+    INVALID_ITEM_WEIGHT = "INVALID_ITEM_WEIGHT",
+
+    /**
+     * @description The item quantity is invalid
+     * @type {string}
+     */
+    INVALID_ITEM_QUANTITY = "INVALID_ITEM_QUANTITY",
+
+    /**
+     * @description The reason for shipping is not set
+     * @type {string}
+     */
+    NO_REASON_SHIPPING = "NO_REASON_SHIPPING",
+
+    /**
      * @description The items were sent successfully
      * @type {string}
      */

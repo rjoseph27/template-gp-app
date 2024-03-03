@@ -85,6 +85,7 @@
                 [label]="'moduleList.client.sendItems.content.shippingInformation.consigneePhoneNumber.label' | translate" 
                 [placeholder]="'moduleList.client.sendItems.content.shippingInformation.consigneePhoneNumber.placeholder' | translate"
                 [name]="consigneePhoneNumberField"
+                [defaultValue]="this.request?.consigneePhoneNumber"
                 (formattedValueChange)="sendItemsForm.get(consigneePhoneNumberField).setValue($event)"
                 [maxLength]="currentCountryInfo(sendItemsForm.get(destinationCountryField).value)?.phone.length"
                 [errors]="sendItemsForm.get(consigneePhoneNumberField).errors"
@@ -100,7 +101,10 @@
         <div class="title">
             {{ 'moduleList.client.sendItems.content.itemInformation.title' | translate }}
         </div>
-        <gh-item-information (itemInformationChange)="sendItemsForm.get(itemInformationField).setValue($event)"></gh-item-information>
+        <gh-item-information 
+            [itemInformation]="sendItemsForm.get(itemInformationField).value"
+            (itemInformationChange)="sendItemsForm.get(itemInformationField).setValue($event)"
+        ></gh-item-information>
     </div>
     <div class="send-request">
         <button

@@ -24,6 +24,12 @@ export type StringKeys<T> = {
 export const DEBOUNCE_TIME = 2000;
 
 /**
+ * @constant
+ * @description The server url
+ */
+export const SERVER_URL = 'http://localhost:3000';
+
+/**
  * @abstract
  * @class BaseService
  * @description The base service that provides common properties for all the api.
@@ -33,7 +39,7 @@ export abstract class BaseServiceApi {
      * @description The base url of the api
      * @type {string}
      */
-    protected readonly baseUrl: string = 'http://localhost:3000';
+    protected readonly baseUrl: string = SERVER_URL;
 
     /**
      * @description The name of the api

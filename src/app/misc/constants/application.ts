@@ -15,4 +15,4 @@ export const LEGAL_AGE = 16;
  * @constant
  * @description The maximum weight for the luggage
  */
-export const MAX_LUGGAGE_WEIGHT = 30;
+export const MAX_LUGGAGE_WEIGHT = 32;

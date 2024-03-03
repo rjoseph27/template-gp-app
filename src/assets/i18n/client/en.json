@@ -137,7 +137,7 @@
                             "confirm": {
                                 "title": "Request Confirmation",
                                 "content": "The GP will be notified about your request. You will be notified once the GP confirms the request. You can see the status of the request in the 'My orders page'.",
-                                "button": "Confirm"
+                                "button": "See my Orders"
                             }
                         }
                     }

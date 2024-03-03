@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from "@angular/core";
 import { CurrentFormService } from "../../../services/current-form.service";
 import { BaseRequestComponent } from "../base-request.component";
-import { ClientSendItemsService } from "../../service/send-items.service";
+import { ClientSendItemsService, SendItemsRequest } from "../../service/send-items.service";
 import { tap } from "rxjs/operators";
 import { ClientRoutes } from "../../../client.route";
 
@@ -21,6 +21,12 @@ export class ClientSendItemsComponent extends BaseRequestComponent implements On
    * @type {CurrentFormService}
    */
   private readonly sendItemsService = inject(ClientSendItemsService);
+
+  /**
+   * @description The current request
+   * @type {SendItemsRequest}
+   */
+  protected readonly request = this.sendItemsService.requests;
 
   /** @inheritdoc */
   ngOnInit(): void {
