@@ -59,6 +59,7 @@
     (closed)="closeFilterView()"
     (filterValueChange)="filterValue = $event"
     [captions]="filterTripCaptions"
+    [country]="items?.userCountry"
   ></gh-filter-trip>
 </div>
 
@@ -67,5 +68,6 @@
     (closed)="closeAlertView()"
     [captions]="alertTripCaptions"
     [selectedDate]="alertDate$ | async"
+    [country]="items?.userCountry"
   ></gh-alert-trip>
 </div>

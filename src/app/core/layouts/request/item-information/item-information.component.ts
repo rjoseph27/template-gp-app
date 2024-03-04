@@ -263,9 +263,8 @@ export class GhItemInformationComponent implements OnInit {
   ngOnInit(): void {
     if(this.itemInformation) {
       this.itemInformation.forEach(x => this.addNewItemInformation(x));
-    } else {
-      this.addNewItemInformation();
-    }
+    } 
+    this.addNewItemInformation();
   }
 
   /**
@@ -286,7 +285,7 @@ export class GhItemInformationComponent implements OnInit {
   private addNewItemInformation(itemInformation?: ItemInformation) {
     const newItem: ItemInformationBody = {
       id: this.itemInformationList.length,
-      formMode: FormMode.CREATE,
+      formMode: itemInformation ? FormMode.VIEW : FormMode.CREATE,
       itemInformation: new FormGroup({
           image: new FormControl(itemInformation?.image || <GhFile>{}, [Validators.required, imageFormatValidator, imageSizeValidator]),
           itemName: new FormControl(itemInformation?.itemName, [Validators.required]),
@@ -368,7 +367,8 @@ export class GhItemInformationComponent implements OnInit {
       cancelCaption: "global.common.cancel"
     }).then(x => {
       if(x) {
-        this.itemInformationList.splice(itemInformation.id, 1);
+        const index = this.itemInformationList.findIndex(x => x.id === itemInformation.id);
+        this.itemInformationList.splice(index, 1);
         this.updateItemInformation();
       }
     });

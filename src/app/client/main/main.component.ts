@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, map } from 'rxjs';
 import { UserType } from '../user-type.enum';
@@ -7,6 +7,7 @@ import { ALERTS_ICON, HELP_ICON, LOG_OUT_ICON, REPORT_TRIP_ICON, SEND_ITEMS_ICON
 import { UsersService } from '../../services/users.service';
 import { ClientRoutes } from '../../client.route';
 import { ClientApplicationService } from '../service/application.service';
+import { ClientSendItemsService } from '../service/send-items.service';
 
 /**
  * @component ClientMainComponent
@@ -17,7 +18,13 @@ import { ClientApplicationService } from '../service/application.service';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss'],
 })
-export class ClientMainComponent {
+export class ClientMainComponent implements OnInit {
+  /**
+   * @description The send items service
+   * @type {ClientSendItemsService}
+   */
+  private readonly sendItemsService = inject(ClientSendItemsService);
+  
   /**
    * @description The application service
    * @type {ClientApplicationService}
@@ -145,6 +152,11 @@ export class ClientMainComponent {
     },
     ...this.commonModules
   ]
+
+  /** @inheritdoc */
+  ngOnInit(): void {
+    this.sendItemsService.requests = undefined;
+  }
 
   /**
    * @description A method that switch the user mode

@@ -1,4 +1,7 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Country } from "../../../../../../misc/enums/country.enum";
+import { CurrencyInfo } from "../../../../../../misc/constants/countries/countries.type";
+import { COUNTRY_INFO_LIST } from "../../../../../../misc/constants/countries/countries";
 
 /**
  * @interface FilterTripCaption
@@ -74,6 +77,20 @@ export class GhFilterTripComponent {
    * @type {FilterTripCaption}
    */
    @Input() captions: FilterTripCaption;
+
+   /**
+    * @description The currency of the alert trip
+    * @type {CurrencyInfo}
+    */
+   protected currency: CurrencyInfo;
+   
+   /**
+    * @description The country of the alert trip
+    * @type {Country}
+    */
+   @Input() set country(country: Country) {
+      this.currency = COUNTRY_INFO_LIST.find(x => x.name === country).currency;
+   }
 
    /**
     * @description A method that close the console view

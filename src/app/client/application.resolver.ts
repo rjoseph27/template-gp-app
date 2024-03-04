@@ -3,7 +3,6 @@ import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/r
 import { UserInfo } from "../api/users/users.type";
 import { UsersService } from "../services/users.service";
 import { LoadingService } from "../services/loading.service";
-import { TranslateService } from "@ngx-translate/core";
 import { GlobalTranslateService } from "../services/global-translate.service";
 
 /**
@@ -22,7 +21,7 @@ export class ClientApplicationResolver implements Resolve<UserInfo> {
    * @description The loading service
    * @returns {LoadingService}
    */
-  protected readonly loadingService: LoadingService = inject(LoadingService)
+  private readonly loadingService: LoadingService = inject(LoadingService)
 
   /**
    * @description The global translate service

@@ -5,6 +5,10 @@ import { MIN_DATE_VALIDATION, minDateValidator } from "../../../../../../misc/va
 import { MIN_VALIDATION, REQUIRED_VALIDATION } from "../../../../../../misc/constants/validations";
 import { INVALID_DATE_FORMAT_VALIDATION, dateFormatValidator } from "../../../../../../misc/validation/date-format.validator";
 import { BehaviorSubject } from "rxjs";
+import { Currency } from "../../../../../../misc/enums/currency.enum";
+import { CurrencyInfo } from "../../../../../../misc/constants/countries/countries.type";
+import { Country } from "../../../../../../misc/enums/country.enum";
+import { COUNTRY_INFO_LIST } from "../../../../../../misc/constants/countries/countries";
 
 /**
  * @description The from field
@@ -208,6 +212,20 @@ export class GhAlertTripComponent implements OnInit {
         dateString: DateUtil.formatToDatePicker(value)
       };
     }
+   }
+
+   /**
+    * @description The currency of the alert trip
+    * @type {CurrencyInfo}
+    */
+   protected currency: CurrencyInfo;
+   
+   /**
+    * @description The country of the alert trip
+    * @type {Country}
+    */
+   @Input() set country(country: Country) {
+      this.currency = COUNTRY_INFO_LIST.find(x => x.name === country).currency;
    }
 
    /**
