@@ -1,16 +1,17 @@
-<gh-console-view [title]="'Filter'" (closed)="close()">
+<gh-console-view [title]="captions.title" (closed)="close()">
     <div class="content">
         <div>
             <gh-number-field 
-                [label]="'Maximum Total Price'"
-                [placeholder]="'Enter the maximum total price'"
+                [label]="captions.filterField.label"
+                [placeholder]="captions.filterField.placeholder"
                 [min]="0"
+                [step]="1"
                 (valueChange)="filterValue = $event"
             ></gh-number-field>
         </div>
         <div class="button-section">
-            <button class="attention-button" (click)="removeFilter()">Remove Filter</button>
-            <button class="gp-button" (click)="applyFilter()">Filter</button>
+            <button class="attention-button" (click)="removeFilter()">{{ captions.remove }}</button>
+            <button class="gp-button" (click)="applyFilter()">{{ captions.button }}</button>
         </div>
     </div>
 </gh-console-view>

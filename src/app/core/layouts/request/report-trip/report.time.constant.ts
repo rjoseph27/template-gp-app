@@ -106,7 +106,15 @@ export enum Unit {
        if (arrivalDate < departureDate) {
          control.get(ARRIVAL_TIME).setErrors({ invalidFlightDate: true });
           control.get(ARRIVAL_DATE).setErrors({ invalidFlightDate: true });
-        }
+        } else {
+          const arrivalTimeFieldErrors = { ...control.get(ARRIVAL_TIME).errors }; 
+          delete arrivalTimeFieldErrors[FLIGHT_TIME_INVALID]; 
+          control.get(ARRIVAL_TIME).setErrors(Object.keys(arrivalTimeFieldErrors).length ? arrivalTimeFieldErrors : null);
+
+          const fromFieldErrors = { ...control.get(ARRIVAL_DATE).errors }; 
+          delete fromFieldErrors[FLIGHT_TIME_INVALID]; 
+          control.get(ARRIVAL_DATE).setErrors(Object.keys(fromFieldErrors).length ? fromFieldErrors : null);
+      }
      }
       
     return null;

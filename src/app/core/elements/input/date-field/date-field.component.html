@@ -6,7 +6,7 @@
         <gh-text-field 
         [name]="name"
         [placeholder]="placeholder" 
-        [value]="dateValue?.toString()"
+        [value]="dateValue?.toString() || value?.dateString"
         (valueChange)="emitValue($event)"
         [externalError]="!!(errorMessage$ | async)"
         ></gh-text-field>

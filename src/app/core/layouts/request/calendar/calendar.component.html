@@ -11,7 +11,7 @@
         </div>
         <div class="widget">
             <gh-icon [name]="filterIcon" (click)="openFilterView()"></gh-icon>
-            <gh-icon [name]="alertIcon"></gh-icon>
+            <gh-icon [name]="alertIcon" (click)="openAlertView()"></gh-icon>
         </div>
     </div>
     <div class="calendar">
@@ -60,4 +60,12 @@
     (filterValueChange)="filterValue = $event"
     [captions]="filterTripCaptions"
   ></gh-filter-trip>
+</div>
+
+<div class="sidebar" *ngIf="alertSelected$ | async">
+  <gh-alert-trip
+    (closed)="closeAlertView()"
+    [captions]="alertTripCaptions"
+    [selectedDate]="alertDate$ | async"
+  ></gh-alert-trip>
 </div>

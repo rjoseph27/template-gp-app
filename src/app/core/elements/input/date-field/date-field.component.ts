@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { BaseInputFieldComponent } from '../base-input-field.component';
 import { CALENDAR_ICON } from '../../../../misc/constants/icon';
 import { DateFromDatePicker, DateUtil } from '../../../../misc/util/date.util';
@@ -36,7 +36,7 @@ export class GhDateFieldComponent extends BaseInputFieldComponent<DateFromDatePi
    * @description The value of the date
    * @type {string}
    */
-  protected dateValue: string;
+  protected dateValue: string 
 
   /**
    * @description Backing field for maxDate

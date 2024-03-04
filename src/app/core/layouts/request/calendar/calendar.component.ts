@@ -9,6 +9,7 @@ import { Unit } from "../report-trip/report.time.constant";
 import { DateUtil } from "../../../../misc/util/date.util";
 import { SelectTripCaption } from "./console-view/select-trip/select-trip.component";
 import { FilterTripCaption } from "./console-view/filter-trip/filter-trip.component";
+import { AlertTripCaptions } from "./console-view/alert-trip/alert-trip.component";
 
 /**
  * @constant FILTER_ICON
@@ -63,7 +64,7 @@ interface DayPoint {
 @Component({
     selector: 'gh-calendar',
     templateUrl: './calendar.component.html',
-    styleUrls: ['./calendar.component.scss']
+    styleUrls: ['./calendar.component.scss'],
   })
   export class GhCalendarComponent  {
    /**
@@ -146,6 +147,12 @@ interface DayPoint {
     @Input() filterTripCaptions: FilterTripCaption
 
     /**
+     * @description The alert trip caption
+     * @type {AlertTripCaptions}
+     */
+    @Input() alertTripCaptions: AlertTripCaptions
+
+    /**
     * @description The backing field for the selected trip
     * @type {BehaviorSubject<ReportTrip>}
     */
@@ -161,13 +168,37 @@ interface DayPoint {
    * @description The backing field for the filter selected
    * @type {BehaviorSubject<boolean>}
    */
-   protected readonly _filterSelected$ = new BehaviorSubject<boolean>(false);
+   private readonly _filterSelected$ = new BehaviorSubject<boolean>(false);
 
    /**
    * @description An observable of a boolean that indicates if the filter is selected
    * @type {Observable<boolean>}
    */
    protected readonly filterSelected$ = this._filterSelected$.asObservable();
+
+   /**
+   * @description The backing field for the alert date
+   * @type {BehaviorSubject<Date>}
+   */
+   private readonly _alertDate$ = new BehaviorSubject<Date>(undefined);
+
+   /**
+    * @description An observable of a date that indicates the alert date
+    * @type {Observable<Date>}
+    */
+   protected readonly alertDate$ = this._alertDate$.asObservable();
+
+   /**
+    * @description The backing field for the alert selected
+    * @type {BehaviorSubject<boolean>}
+    */
+   private readonly _alertSelected$ = new BehaviorSubject<boolean>(false);
+
+   /**
+    * @description An observable of a boolean that indicates if the alert is selected
+    * @type {Observable<boolean>}
+    */
+   protected readonly alertSelected$ = this._alertSelected$.asObservable();
 
    /**
     * @description The backing field for the elements
@@ -302,8 +333,15 @@ interface DayPoint {
     if((!this.filterValue && displayTrip) || (displayTrip && this.filterValue && this.getPrice(displayTrip?.id) <= this.filterValue)) {
       this._selectedTrip$.next(displayTrip);
       this._filterSelected$.next(false);
+      this._alertSelected$.next(false);
     } else {
+      if(this.getDate(week, cell)) {
+        const alertDate = new Date(this.year, this.month, this.getDate(week, cell)?.day);
+        this._alertDate$.next(alertDate);
+        this._alertSelected$.next(true);
+      }
       this._selectedTrip$.next(undefined);
+      this._filterSelected$.next(false);
     }
    }
 
@@ -422,6 +460,18 @@ interface DayPoint {
    protected openFilterView(): void {
     this._filterSelected$.next(true);
     this._selectedTrip$.next(undefined);
+    this._alertSelected$.next(false);
+   }
+
+
+   /**
+    * @description A method to open the alert view
+    * @returns {void}
+    */
+   protected openAlertView(): void {
+    this._alertSelected$.next(true);
+    this._filterSelected$.next(false);
+    this._selectedTrip$.next(undefined);
    }
 
    /**
@@ -430,5 +480,13 @@ interface DayPoint {
     */
    protected closeFilterView(): void {
     this._filterSelected$.next(false);
+   }
+
+   /**
+   * @description A method to close the alert view
+   * @returns {void}
+   */
+   protected closeAlertView(): void {
+    this._alertSelected$.next(false);
    }
   }

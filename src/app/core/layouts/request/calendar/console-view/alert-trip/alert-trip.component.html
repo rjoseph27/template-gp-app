@@ -1,0 +1,47 @@
+<gh-console-view [title]="captions.title" (closed)="close()">
+    <form [formGroup]="alertForm" (ngSubmit)="createAlert()">
+        <div class="content">
+        <div class="section">
+            <gh-date-field
+                [label]="captions.from.title" 
+                [name]="fromField"
+                [value]="defaultDate"
+                (valueChange)="alertForm.get(fromField).setValue($event)"
+                [errors]="alertForm.get(fromField).errors"
+                [minDate]="minDate"
+                [errorCaptions]="fromErrorCaptions"
+            ></gh-date-field>
+        </div>
+        <div class="section">
+            <gh-date-field
+                [label]="captions.to.title" 
+                [name]="toField"
+                [value]="defaultDate"
+                (valueChange)="alertForm.get(toField).setValue($event)"
+                [errors]="alertForm.get(toField).errors"
+                [errorCaptions]="toErrorCaptions"
+            ></gh-date-field>
+        </div>
+        <div class="section">
+            <gh-number-field
+            [label]="captions.maxPrice.title" 
+            [name]="maxPriceField"
+            [value]="alertForm.get(maxPriceField).value"
+            (valueChange)="alertForm.get(maxPriceField).setValue($event)"
+            [errors]="alertForm.get(maxPriceField).errors"
+            [errorCaptions]="maxPriceErrorCaptions"
+            [min]="0"
+            [step]="0.01"
+           ></gh-number-field> 
+        </div>
+        <div class="section">
+            <button
+                [buttonLoading]="loading$ | async" 
+                type="submit" 
+                class="gp-button" 
+                [disabled]="!alertForm.valid"
+             >{{ captions.button }}</button>
+        </div>
+        </div>
+    </form>
+</gh-console-view>
