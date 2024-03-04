@@ -8,6 +8,7 @@ import { MoneyUtil } from "../../../../misc/util/money.util";
 import { Unit } from "../report-trip/report.time.constant";
 import { DateUtil } from "../../../../misc/util/date.util";
 import { SelectTripCaption } from "./console-view/select-trip/select-trip.component";
+import { FilterTripCaption } from "./console-view/filter-trip/filter-trip.component";
 
 /**
  * @constant FILTER_ICON
@@ -95,6 +96,29 @@ interface DayPoint {
     */
     @Input() loading: boolean;
 
+    /**
+     * @description The backing field for the filter value
+     * @type {BehaviorSubject<number>}
+     */
+    private readonly _filterValue$ = new BehaviorSubject<number>(undefined);
+
+    /**
+     * @description An observable for the filter value
+     * @type {Observable<number>}
+     */ 
+    protected readonly filterValue$ = this._filterValue$.asObservable();
+
+    /**
+     * @description The filter value
+     * @type {number}
+     */
+    protected set filterValue(value: number) {
+      this._filterValue$.next(value);
+    }
+    protected get filterValue() {
+      return this._filterValue$.value;
+    }
+
    /**
     * @description The elements to display in the calendar
     * @type {ReportTrip[]}
@@ -116,6 +140,12 @@ interface DayPoint {
     @Input() selectTripCaptions: SelectTripCaption;
 
     /**
+     * @description The filter trip caption
+     * @type {FilterTripCaption}
+     */
+    @Input() filterTripCaptions: FilterTripCaption
+
+    /**
     * @description The backing field for the selected trip
     * @type {BehaviorSubject<ReportTrip>}
     */
@@ -126,6 +156,18 @@ interface DayPoint {
     * @type {Observable<ReportTrip>}
     */
    protected readonly selectedTrip$ = this._selectedTrip$.asObservable();
+
+   /**
+   * @description The backing field for the filter selected
+   * @type {BehaviorSubject<boolean>}
+   */
+   protected readonly _filterSelected$ = new BehaviorSubject<boolean>(false);
+
+   /**
+   * @description An observable of a boolean that indicates if the filter is selected
+   * @type {Observable<boolean>}
+   */
+   protected readonly filterSelected$ = this._filterSelected$.asObservable();
 
    /**
     * @description The backing field for the elements
@@ -257,8 +299,9 @@ interface DayPoint {
     this._selectedDate$.next({ week, cell });
 
     const displayTrip =  this.bestTripOption(this.getDate(week, cell)?.id)?.trip
-    if(displayTrip) {
+    if((!this.filterValue && displayTrip) || (displayTrip && this.filterValue && this.getPrice(displayTrip?.id) <= this.filterValue)) {
       this._selectedTrip$.next(displayTrip);
+      this._filterSelected$.next(false);
     } else {
       this._selectedTrip$.next(undefined);
     }
@@ -370,5 +413,22 @@ interface DayPoint {
     */
    protected closeSelectTrip(): void {
     this._selectedTrip$.next(undefined);
+   }
+
+   /**
+    * @description A method to open the filter view
+    * @returns {void}
+    */
+   protected openFilterView(): void {
+    this._filterSelected$.next(true);
+    this._selectedTrip$.next(undefined);
+   }
+
+   /**
+    * @description A method to close the filter view
+    * @returns {void}
+    */
+   protected closeFilterView(): void {
+    this._filterSelected$.next(false);
    }
   }

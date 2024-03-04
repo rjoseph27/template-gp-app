@@ -308,8 +308,8 @@ export class GhItemInformationComponent implements OnInit {
    */
   protected saveItemInformation(itemInformation: ItemInformationBody) {
     itemInformation.formMode = FormMode.VIEW;
-    this.addNewItemInformation();
     this.updateItemInformation();
+    this.addNewItemInformation();
   }
 
   /**

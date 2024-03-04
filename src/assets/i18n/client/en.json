@@ -139,6 +139,15 @@
                                 "content": "The GP will be notified about your request. You will be notified once the GP confirms the request. You can see the status of the request in the 'My orders page'.",
                                 "button": "See my Orders"
                             }
+                        },
+                        "filter": {
+                            "title": "Filter",
+                            "filterField": {
+                                "label": "Maximum Total Price",
+                                "placeholder": "Enter the maximum total price"
+                            },
+                            "remove": "Remove Filter",
+                            "button": "Filter"
                         }
                     }
                 }
