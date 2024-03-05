@@ -51,7 +51,7 @@
         </div>
         <div class="alert-sent-text">{{ captions.alertSent.content }}</div>
         <div>
-            <button type="button" class="gp-button" (click)="goAlertPage()">{{ captions.alertSent.button }}</button>
+            <button [buttonLoading]="sendingDataServer$ | async" type="button" class="gp-button" (click)="goAlertPage()">{{ captions.alertSent.button }}</button>
         </div>
     </div>
 </div>

@@ -137,10 +137,23 @@ export class GhSelectTripComponent {
   protected readonly currency = this.sendItemsService.requests.currency
 
   /**
+   * @description The backing field for the sendingDataServer observable
+   * @type {BehaviorSubject<boolean>}
+   */
+  private readonly _sendingDataServer$ = new BehaviorSubject<boolean>(false);
+
+  /**
+   * @description An observable that indicates if the data is sending to the server
+   * @type {Observable<boolean>}
+   */
+  protected readonly sendingDataServer$ = this._sendingDataServer$.asObservable();
+
+  /**
    * @description Confirm the trip
    * @returns void
    */
   protected confirm(): void {
+    this._sendingDataServer$.next(true);
     this.requestsService.sendItems({ items: this.sendItemsService.requests, tripId: this.selectedTrip.id }).then(success => {
       if(success) {
         this._isConfirmed$.next(true);

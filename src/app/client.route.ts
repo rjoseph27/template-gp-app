@@ -51,4 +51,10 @@ export class ClientRoutes {
      * @type {GhRoute}
      */
     static readonly reportTrip: GhRoute = new GhRoute('report-trip', ClientRoutes.main);
+
+    /**
+     * @description The client order route
+     * @type {GhRoute}
+     */
+    static readonly clientOrder: GhRoute = new GhRoute('client-order', ClientRoutes.main);
 }

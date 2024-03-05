@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output, inject } from "@angular/core";
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
 import { DateFromDatePicker, DateUtil } from "../../../../../../misc/util/date.util";
 import { MIN_DATE_VALIDATION, minDateValidator } from "../../../../../../misc/validation/min-date.validator";
@@ -9,6 +9,8 @@ import { Currency } from "../../../../../../misc/enums/currency.enum";
 import { CurrencyInfo } from "../../../../../../misc/constants/countries/countries.type";
 import { Country } from "../../../../../../misc/enums/country.enum";
 import { COUNTRY_INFO_LIST } from "../../../../../../misc/constants/countries/countries";
+import { ClientRequestsService } from "../../../../../../client/service/requests.service";
+import { ClientSendItemsService } from "../../../../../../client/service/send-items.service";
 
 /**
  * @description The from field
@@ -298,6 +300,18 @@ export class GhAlertTripComponent implements OnInit {
    */
   protected maxPriceErrorCaptions: Map<string, string>;
 
+  /**
+   * @description The requests service
+   * @type {ClientRequestsService}
+   */
+  private readonly requestsService = inject(ClientRequestsService);
+
+  /**
+   * @description The send items service
+   * @type {ClientSendItemsService}
+   */
+  private readonly sendItemsService = inject(ClientSendItemsService);
+
    /**
     * @description The alert form
     * @type {FormGroup}
@@ -337,12 +351,28 @@ export class GhAlertTripComponent implements OnInit {
    }
 
    /**
+   * @description The backing field for the sendingDataServer observable
+   * @type {BehaviorSubject<boolean>}
+   */
+  private readonly _sendingDataServer$ = new BehaviorSubject<boolean>(false);
+
+  /**
+   * @description An observable that indicates if the data is sending to the server
+   * @type {Observable<boolean>}
+   */
+  protected readonly sendingDataServer$ = this._sendingDataServer$.asObservable();
+
+   /**
    * @description A method that create an alert
    * @returns void
    */
    protected createAlert(): void{
-    this._alertSent$.next(true);
-    console.log('alert created');
+    this.requestsService.createAlert({...this.alertForm.value, items: this.sendItemsService.requests}).then(res => {
+      if(res) {
+        this._alertSent$.next(true);
+        console.log('alert created');
+      }
+    })
    }
 
    /**

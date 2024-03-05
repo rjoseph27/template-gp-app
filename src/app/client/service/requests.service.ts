@@ -1,6 +1,6 @@
 import { Injectable, inject } from "@angular/core";
 import { RequestsServiceApi } from "../../api/requests/requests.service.api";
-import { ConfirmItemRequest, ReportTrip, ReportTripStatus, SendItemsStatus } from "../../api/requests/requests.type";
+import { ConfirmItemRequest, CreateAlertRequest, CreateAlertStatus, ReportTrip, ReportTripStatus, SendItemsStatus } from "../../api/requests/requests.type";
 import { ItemInformation } from "../../core/layouts/request/item-information/item-information.component";
 import { SendItemsRequest } from "./send-items.service";
 import { DateUtil } from "../../misc/util/date.util";
@@ -72,6 +72,21 @@ export class ClientRequestsService {
                     formData.append('image', item.image); 
                     await this.requestsServiceApi.uploadImages(formData).then(async img => await this.requestsServiceApi.updateImageName({id: msg.newId, filename: img, index: index}));
                 });
+                return true
+            }
+            return false
+        });
+    }
+
+    /**
+     * @description Creates an alert
+     * @param createAlertRequest The create alert request
+     * @returns {Promise<boolean>} A promise that resolves to true if the alert was created successfully, false otherwise
+     */
+    createAlert(createAlertRequest: CreateAlertRequest): Promise<boolean> {
+        return this.requestsServiceApi.createAlert(createAlertRequest).then(msg => {
+            if(msg.message === CreateAlertStatus.ALERT_CREATED_SUCCESSFULLY)
+            {
                 return true
             }
             return false

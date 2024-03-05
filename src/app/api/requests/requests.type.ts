@@ -492,3 +492,27 @@ export interface ReportTrip {
      */
     maxPrice?: number,
   }
+
+  /**
+   * @enum CreateAlertStatus
+   * @description The create alert status
+   */
+  export enum CreateAlertStatus {
+    /**
+     * @description The from date is not valid.
+     * @type {string}
+     */
+    INVALID_FROM_DATE = "INVALID_FROM_DATE",
+
+    /**
+     * The max price is not valid.
+     * @type {string}
+     */
+    INVALID_MAX_PRICE = "INVALID_MAX_PRICE",
+
+    /**
+     * @description The alert was created successfully.
+     * @type {string}
+     */
+    ALERT_CREATED_SUCCESSFULLY = "ALERT_CREATED_SUCCESSFULLY"
+  }
