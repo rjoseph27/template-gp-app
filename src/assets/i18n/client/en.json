@@ -154,7 +154,6 @@
                             "from": {
                                 "title": "From",
                                 "errors": {
-                                    "required": "Please select the departure date",
                                     "minDate": "Please select a date after today",
                                     "invalidDate": "Please enter a valid date",
                                     "invalidAlertDate": "The arrival date should be after the departure date"
@@ -163,7 +162,6 @@
                             "to": {
                                 "title": "To",
                                 "errors": {
-                                    "required": "Please select the arrival date",
                                     "invalidDate": "Please enter a valid date",
                                     "invalidAlertDate": "The arrival date should be after the departure date"
                                 }
@@ -171,7 +169,6 @@
                             "maxPrice": {
                                 "title": "Maximum Total Price",
                                 "errors": {
-                                    "required": "Please enter the maximum total price",
                                     "min": "Please enter a price more than {{min}}"
                                 }
                             },

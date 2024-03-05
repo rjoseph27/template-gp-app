@@ -82,12 +82,6 @@ export interface AlertTripCaptions {
        */
       errors: {
           /**
-           * @description The required error
-           * @type {string}
-           */
-          required: string,
-
-          /**
            * @description The min date error
            * @type {string}
            */
@@ -123,12 +117,6 @@ export interface AlertTripCaptions {
        */
       errors: {
           /**
-           * @description The required error
-           * @type {string}
-           */
-          required: string,
-
-          /**
            * @description The invalid date error
            * @type {string}
            */
@@ -157,12 +145,6 @@ export interface AlertTripCaptions {
        * @type {Object}
        */
       errors: {
-          /**
-           * @description The required error
-           * @type {string}
-           */
-          required: string,
-
           /**
            * @description The min error
            * @type {string}
@@ -232,7 +214,7 @@ export class GhAlertTripComponent implements OnInit {
     * @description The min date
     * @type {Date}
     */
-   protected readonly minDate = DateUtil.addDaysFromDate(new Date(), 1);
+   protected readonly minDate = new Date();
 
    /**
    * @description The from field
@@ -287,9 +269,9 @@ export class GhAlertTripComponent implements OnInit {
     * @type {FormGroup}
     */
    protected readonly alertForm = new FormGroup({
-      from: new FormControl(null, [Validators.required, minDateValidator(this.minDate), dateFormatValidator]),
-      to: new FormControl(null, [Validators.required, dateFormatValidator]),
-      maxPrice: new FormControl(null, [Validators.required, Validators.min(0)])
+      from: new FormControl(null, [minDateValidator(this.minDate), dateFormatValidator]),
+      to: new FormControl(null, [dateFormatValidator]),
+      maxPrice: new FormControl(null, [Validators.min(0)])
     }, 
     { validators: [alertDateValidator] }
    )
@@ -297,20 +279,17 @@ export class GhAlertTripComponent implements OnInit {
    /** @inheritdoc */
    ngOnInit(): void {
     this.fromErrorCaptions = new Map<string, string>([
-      [REQUIRED_VALIDATION, this.captions.from.errors.required],
       [MIN_DATE_VALIDATION, this.captions.from.errors.minDate],
       [INVALID_DATE_FORMAT_VALIDATION, this.captions.from.errors.invalidDate],
       [ALERT_DATE_VALIDATION, this.captions.from.errors.invalidAlertDate]
      ]);
 
      this.toErrorCaptions = new Map<string, string>([
-      [REQUIRED_VALIDATION, this.captions.to.errors.required],
       [INVALID_DATE_FORMAT_VALIDATION, this.captions.to.errors.invalidDate],
       [ALERT_DATE_VALIDATION, this.captions.to.errors.invalidAlertDate]
     ]);
 
     this.maxPriceErrorCaptions = new Map<string, string>([
-      [REQUIRED_VALIDATION, this.captions.maxPrice.errors.required],
       [MIN_VALIDATION, this.captions.maxPrice.errors.min]
     ]);
   }

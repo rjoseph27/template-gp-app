@@ -24,7 +24,6 @@ export class LoadingService {
      * @returns {void}
      */
     startLoading(): void {
-        console.warn("start loading") // For Debug
         this._loading$.next(true)
     }
 
@@ -33,7 +32,6 @@ export class LoadingService {
      * @returns {void}
      */
     endLoading(): void {
-        console.warn("end loading") // For Debug
         this._loading$.next(false)
     }
 }

@@ -16,7 +16,7 @@ export const dateFormatValidator: ValidatorFn = (control: AbstractControl): { [k
       const dateRegex = /^\d{4}-\d{2}-\d{2}$/; // Regular expression for "yyyy-mm-dd" format
       const isValidFormat = dateRegex.test(control.value.dateString); // Check if value matches the pattern
 
-      return isValidFormat ? null : { 'invalidDateFormat': { value: control.value.dateString } };
+      return isValidFormat || !control.value.dateString ? null : { invalidDateFormat: { value: control.value.dateString } };
     }
     
     return null;

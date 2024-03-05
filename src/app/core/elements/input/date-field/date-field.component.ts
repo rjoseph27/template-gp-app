@@ -98,7 +98,7 @@ export class GhDateFieldComponent extends BaseInputFieldComponent<DateFromDatePi
    */
   protected emitValue(event: string): void {
     this.valueChange.emit({
-      date: new Date(event),
+      date: event ? new Date(event) : undefined,
       dateString: event
     })
     this._isCalendarOpen$.next(false);

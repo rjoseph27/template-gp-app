@@ -32,8 +32,10 @@ export class ClientApplicationResolver implements Resolve<UserInfo> {
   /** @inheritdoc */
   async resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<UserInfo> {
       if(this.userService.currentUserId) {
+            console.log('loading start'); // For Debug
             this.loadingService.startLoading();
             const userInfo = await this.userService.getUserInfo(this.userService.currentUserId);
+            console.log('loading end'); // For Debug
             this.loadingService.endLoading();
             if(userInfo) {
                 this.globalTranslateService.changeLanguage(userInfo.language);
