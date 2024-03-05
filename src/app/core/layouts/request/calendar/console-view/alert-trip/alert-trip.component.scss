@@ -9,4 +9,20 @@
         margin-top: 1em;
         width: 100%;
     }
+
+    .check-logo {
+        display: flex;
+        justify-content: center;
+        ::ng-deep .gh-icon-content {
+            margin:0.25em 0em 1em 0em;
+            padding:0.5em;
+            font-size: 2em;
+            border:2px solid #fff;
+            border-radius: 50%;
+          }
+    } 
+
+    .alert-sent-text {
+        margin-bottom:2em;
+    }
 }

@@ -152,6 +152,28 @@ export interface AlertTripCaptions {
           min: string
       }
   },
+
+  /**
+   * @description The alert sent
+   * @type {Object}
+   */
+  alertSent: {
+    /**
+     * @description The content of the alert sent
+     * @type {string}
+     */
+    content: string,
+
+    /**
+     * @description The caption of the button to redirect to the alert page
+     * @type {string}
+     */
+    button: string
+  },
+
+  /**
+   * @description The caption of the submit button
+   */
   button: string
 }
 
@@ -182,6 +204,18 @@ export class GhAlertTripComponent implements OnInit {
     * @type {DateFromDatePicker}
     */
    protected defaultDate: DateFromDatePicker;
+
+   /**
+   * @description The backing field for alertSent$
+   * @type {BehaviorSubject<boolean>}
+   */
+   private readonly _alertSent$ = new BehaviorSubject<boolean>(false);
+
+   /**
+   * @description An observable that indicates if the alert was sent
+   * @type {Observable<boolean>}
+   */
+   protected readonly alertSent$ = this._alertSent$.asObservable();
 
    /**
     * @description The selected date
@@ -307,6 +341,15 @@ export class GhAlertTripComponent implements OnInit {
    * @returns void
    */
    protected createAlert(): void{
+    this._alertSent$.next(true);
     console.log('alert created');
+   }
+
+   /**
+   * @description A method that go to the alert page
+   * @returns void
+   */
+   protected goAlertPage() {
+     console.log('go to alert page');
    }
 }

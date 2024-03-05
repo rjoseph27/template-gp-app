@@ -1,6 +1,6 @@
 <gh-console-view [title]="captions.title" (closed)="close()">
+    <div class="content" *ngIf="!(alertSent$ | async)">
     <form [formGroup]="alertForm" (ngSubmit)="createAlert()">
-        <div class="content">
         <div class="section">
             <gh-date-field
                 [label]="captions.from.title" 
@@ -42,6 +42,17 @@
                 [disabled]="!alertForm.valid"
              >{{ captions.button }}</button>
         </div>
-        </div>
     </form>
+  </div>
+  <div *ngIf="alertSent$ | async">
+    <div class="content">
+        <div class="check-logo">
+            <gh-icon name="check"></gh-icon>
+        </div>
+        <div class="alert-sent-text">{{ captions.alertSent.content }}</div>
+        <div>
+            <button type="button" class="gp-button" (click)="goAlertPage()">{{ captions.alertSent.button }}</button>
+        </div>
+    </div>
+</div>
 </gh-console-view>

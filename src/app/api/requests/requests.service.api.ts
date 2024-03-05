@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { ApiResponse, BaseServiceApi } from "../base.service.api";
 import { firstValue } from "../../misc/function/firstValue";
-import { ReportTrip, SearchTripsRequest, SearchTripsApiResponse, ConfirmItemRequest, SendItemsRequestApiResponse, UpdateImageNameRequest } from "./requests.type";
+import { ReportTrip, SearchTripsRequest, SearchTripsApiResponse, ConfirmItemRequest, SendItemsRequestApiResponse, UpdateImageNameRequest, CreateAlertRequest } from "./requests.type";
 
 /**
  * @class RequestsServiceApi
@@ -55,5 +55,14 @@ export class RequestsServiceApi extends BaseServiceApi {
      */
     updateImageName(imageUpdateInfo: UpdateImageNameRequest): Promise<ApiResponse> {
         return firstValue(this.postRequest<ApiResponse>('update-image-name', imageUpdateInfo));
+    }
+
+    /**
+     * @description A method that creates an alert
+     * @param alertRequest The create alert request
+     * @returns {Promise<ApiResponse>}
+     */
+    createAlert(alertRequest: CreateAlertRequest): Promise<ApiResponse> {
+        return firstValue(this.postRequest<ApiResponse>('create-alert', alertRequest));
     }
 }

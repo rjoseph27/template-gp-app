@@ -462,3 +462,33 @@ export interface ReportTrip {
      */
     id: string; 
   }
+
+  /**
+   * @interface CreateAlertRequest
+   * @description An interface for the create alert request
+   */
+  export interface CreateAlertRequest {
+    /**
+     * @description The send items request
+     * @type {SendItemsRequest}
+     */
+    items: SendItemsRequest,
+
+    /**
+     * @description from date
+     * @type {DateFromDatePicker}
+     */
+    from?: DateFromDatePicker,
+
+    /**
+     * @description to date
+     * @type {DateFromDatePicker}
+     */
+    to?: DateFromDatePicker,
+
+    /**
+     * @description The max price
+     * @type {number}
+     */
+    maxPrice?: number,
+  }

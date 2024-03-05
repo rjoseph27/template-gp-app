@@ -172,6 +172,10 @@
                                     "min": "Please enter a price more than {{min}}"
                                 }
                             },
+                            "alertSent": {
+                                "content": "You will be notified once a GP creates a trip that matches your alert.",
+                                "button": "See my Alerts"
+                            },
                             "button": "Create Alert"
                         }
                     }
