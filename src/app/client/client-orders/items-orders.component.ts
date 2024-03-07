@@ -3,6 +3,7 @@ import { ClientRequestsService } from '../service/requests.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsersService } from '../../services/users.service';
 import { ClientRoutes } from '../../client.route';
+import { RequestTableElement } from '../../core/layouts/orders/orders.component';
 
 /**
  * @enum ItemsStatus
@@ -108,8 +109,8 @@ export enum ItemsStatus {
      * @description The items orders
      * @type {Observable<RequestTableElement[]>}
      */
-    protected readonly getStatusInfo = (status: ItemsStatus) => {
-      switch (status) {
+    protected readonly getStatusInfo = (row: RequestTableElement) => {
+      switch (row.status) {
         case ItemsStatus.WAIT_CONFIRMATION:
           return {
             label: 'moduleList.client.orders.status.waitConfirmation',

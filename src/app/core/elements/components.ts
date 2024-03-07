@@ -18,6 +18,7 @@ import { GhAlertComponent } from "./alert/alert.component";
 import { GhValueComponent } from "./value/value.component";
 import { GhTimeFieldComponent } from "./input/time-field/time-field.component";
 import { GhTableComponent } from "./table/table.component";
+import { TableLoadingComponent } from "./table/table-loader/table-loader.component";
 
 /**
  * @constant
@@ -44,5 +45,6 @@ export const ELEMENTS_COMPONENTS = [
     GhAlertComponent,
     GhValueComponent,
     GhTimeFieldComponent,
-    GhTableComponent
+    GhTableComponent,
+    TableLoadingComponent
 ]

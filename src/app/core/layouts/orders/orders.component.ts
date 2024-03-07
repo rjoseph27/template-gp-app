@@ -133,7 +133,7 @@ const ROUTE_ICON = "connecting_airports"
     * @description The function to get the status info
     * @type {(status: any) => Status}
     */
-    @Input() getStatusInfo: (status: any) => Status;
+    @Input() getStatusInfo: (row: RequestTableElement) => Status;
 
     /** @inheritdoc */
     ngOnInit(): void {
@@ -154,7 +154,7 @@ const ROUTE_ICON = "connecting_airports"
             },
             {
               columnName: "global.request.table.status",
-              valueAccessor: (row: RequestTableElement) => this.getStatusInfo(row.status),
+              valueAccessor: (row: RequestTableElement) => this.getStatusInfo(row),
               template: this.statusTemplate,
             },
           ])

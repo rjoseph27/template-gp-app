@@ -13,6 +13,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 /**
  * @constant
@@ -40,7 +41,8 @@ const lists = [...LAYOUTS_COMPONENTS, ...ELEMENTS_COMPONENTS]
     MatDialogModule,
     TranslateModule,
     MatTooltipModule,
-    MatTableModule 
+    MatTableModule,
+    MatPaginatorModule
   ],
   exports: [...lists]
 })

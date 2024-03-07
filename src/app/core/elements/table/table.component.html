@@ -1,5 +1,5 @@
   <div *ngIf="label" class="label">{{ label }}</div>
-  <table mat-table [dataSource]="elements$ | async" *ngIf="columns$ | async">
+  <table mat-table [dataSource]="dataSource" *ngIf="columns$ | async">
     <ng-container *ngFor="let column of (columns$ | async);" [matColumnDef]="column.columnName">
       <th mat-header-cell *matHeaderCellDef> {{ column.columnName | translate }} </th>
         <td mat-cell *matCellDef="let element">
@@ -19,7 +19,14 @@
         <ng-container *ngTemplateOutlet="emptyTemplate"></ng-container>
       </td>
     </tr>
+
   </table>
+<div *ngIf="!(elements$ | async)">
+  <gh-table-loader></gh-table-loader>
+</div>
+<div [class.hidden]="!(elements$ | async)?.length">
+  <mat-paginator [pageSize]="5"></mat-paginator>
+</div>
 <div>
   <button *ngIf="canAdd" type="button" class="add" (click)="add()">{{ 'global.common.add' | translate }}</button>
 </div>

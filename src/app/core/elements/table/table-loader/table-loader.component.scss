@@ -1,0 +1,23 @@
+.table-loading {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  .shimmer-effect {
+    background: linear-gradient(-90deg, #a3a2a2 0%, #e0e0e0 50%, #a3a2a2 100%);
+    background-size: 200% 200%;
+    animation: shimmer 2s infinite linear;
+    border-bottom: 1px solid #ccc;
+    height: 2em;
+    margin: 1em 0em;
+  }
+  
+  @keyframes shimmer {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+  

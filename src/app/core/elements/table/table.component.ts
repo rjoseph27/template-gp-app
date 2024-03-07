@@ -1,6 +1,8 @@
-import { Component, EventEmitter, Input, Output, TemplateRef, ViewChild} from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, Output, TemplateRef, ViewChild} from '@angular/core';
 import { BehaviorSubject, Observable, map } from 'rxjs';
 import { DELETE_ICON } from '../../../misc/constants/icon';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
 /**
  * @interface ColumnConfig
@@ -35,7 +37,17 @@ export interface ColumnConfig {
   templateUrl: 'table.component.html',
   styleUrls: ['./table.component.scss'],
 })
-export class GhTableComponent {
+export class GhTableComponent implements AfterViewInit {
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+  }
+
+  /**
+   * @description The data source for the table
+   * @type {MatTableDataSource<any>}
+   */
+  protected readonly dataSource = new MatTableDataSource<any>(/* Your data array */);
+  
   /**
    * @description The backing store columns$
    * @type {BehaviorSubject<ColumnConfig[]>}
@@ -52,7 +64,7 @@ export class GhTableComponent {
    * @description The backing store elements$
    * @type {BehaviorSubject<any>}
    */
-  private readonly _elements$: BehaviorSubject<any> = new BehaviorSubject<any>([]);
+  private readonly _elements$: BehaviorSubject<any> = new BehaviorSubject<any>(undefined);
 
   /**
    * @description The observable for the elements for the table
@@ -65,6 +77,12 @@ export class GhTableComponent {
    * @type {Observable<ColumnConfig[]>}
    */
   protected readonly columns$: Observable<ColumnConfig[]> = this._columns$.asObservable();
+
+  /**
+   * @description The paginator for the table
+   * @type {MatPaginator}
+   */
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   /**
    * @description A boolean to determine if the elements of the table can delete
@@ -116,6 +134,7 @@ export class GhTableComponent {
    */
   @Input() set elements(value: any) {
     this._elements$.next(value);
+    this.dataSource.data = value;
   } 
   get elements(): any {
     return this._elements$.getValue();
