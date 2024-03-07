@@ -17,6 +17,12 @@ export interface DateFromDatePicker {
 }
 
 /**
+ * @constant INVALID_DATE
+ * @description The invalid date string
+ */
+export const INVALID_DATE = 'Invalid Date';
+
+/**
  * @class DateUtil
  * @description A utility class for date operations
  */

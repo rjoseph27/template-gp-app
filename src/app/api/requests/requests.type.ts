@@ -1,6 +1,7 @@
 import { SendItemsRequest } from "../../client/service/send-items.service"
 import { TimeFromTimePicker } from "../../core/elements/input/time-field/time-field.component"
 import { SpecificPrice } from "../../core/layouts/request/report-trip/report.time.constant"
+import { RequestTableElement } from "../../core/layouts/orders/orders.component"
 import { Country } from "../../misc/enums/country.enum"
 import { Currency } from "../../misc/enums/currency.enum"
 import { ItemCategory } from "../../misc/enums/item-category.enum"
@@ -515,4 +516,34 @@ export interface ReportTrip {
      * @type {string}
      */
     ALERT_CREATED_SUCCESSFULLY = "ALERT_CREATED_SUCCESSFULLY"
+  }
+
+  /**
+   * @interface ListItemsApiResponse
+   * @description An interface for the list items api response
+   */
+  export enum ItemsOrdersStatus {
+    /**
+     * @description The items were found
+     * @type {string}
+     */
+    ITEMS_FOUND = "ITEMS_FOUND",
+
+    /**
+     * @description The items were not found
+     * @type {string}
+     */
+    ITEMS_NOT_FOUND = "ITEMS_NOT_FOUND"
+  }
+
+  /**
+   * @interface ListItemsApiResponse
+   * @description An interface for the list items api response
+   */
+  export interface ListItemsApiResponse extends ApiResponse {
+    /**
+     * @description The orders
+     * @type {RequestTableElement[]}
+     */
+    orders: RequestTableElement[];
   }

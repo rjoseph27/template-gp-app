@@ -4,6 +4,7 @@ import { Observable, tap } from 'rxjs';
 import { UsersService } from './users.service';
 import { TokenError } from '../api/users/users.type';
 import { NotificationService } from './notification.service';
+import { LoadingService } from './loading.service';
 
 /**
  * @class AuthInterceptor
@@ -22,6 +23,12 @@ export class AuthInterceptor implements HttpInterceptor {
    * @type {NotificationService}
    */
   private readonly notificationService: NotificationService = inject(NotificationService);
+
+  /**
+   * @description The loading service
+   * @returns {LoadingService}
+   */
+  private readonly loadingService: LoadingService = inject(LoadingService)
 
   /** @inheritdoc */
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -42,6 +49,7 @@ export class AuthInterceptor implements HttpInterceptor {
         if(TokenError[event.body.message as keyof typeof TokenError]) {
         this.userService.logout()
         this.notificationService.errorNotification('global.errors.logAgain');
+        this.loadingService.endLoading();
       }
     }
     }));

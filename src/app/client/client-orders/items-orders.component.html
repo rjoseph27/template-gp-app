@@ -1,0 +1,43 @@
+<div class="title">
+    <h1>{{ 'moduleList.client.orders.title' | translate }}</h1>
+</div>
+<gh-orders 
+    [requests]="getItemsOrders$ | async"
+    [idColumn]="'moduleList.client.orders.tableId'"
+    [getStatusInfo]="getStatusInfo"
+    [emptyTemplate]="onGoingRequestEmptyTemplate"
+    [label]="'global.request.onGoingRequest' | translate"
+>
+    <ng-template #onGoingRequestEmptyTemplate>
+        <div class="empty">
+            <div class="section section-title">
+                {{ 'moduleList.client.orders.emptyView.onGoingRequest.title' | translate }}
+            </div>
+            <div class="section">
+                <gh-icon name="feature_search"></gh-icon>
+            </div>
+            <div class="section">{{ 'moduleList.client.orders.emptyView.onGoingRequest.content' | translate }}</div>
+            <div class="section"><button class="gp-button" (click)="goSendItemsPage()">{{ 'moduleList.client.orders.emptyView.onGoingRequest.button' | translate }}</button></div>
+        </div>
+    </ng-template>
+</gh-orders>
+
+<gh-orders 
+    [requests]="[]"
+    [idColumn]="'moduleList.client.orders.tableId'"
+    [getStatusInfo]="getStatusInfo"
+    [emptyTemplate]="deliveredRequestEmptyTemplate"
+    [label]="'global.request.deliveredRequest' | translate"
+>
+    <ng-template #deliveredRequestEmptyTemplate>
+        <div class="empty">
+            <div class="section section-title">
+                {{ 'moduleList.client.orders.emptyView.deliveredRequest.title' | translate }}
+            </div>
+            <div class="section">
+                <gh-icon name="package"></gh-icon>
+            </div>
+            <div class="section">{{ 'moduleList.client.orders.emptyView.deliveredRequest.content' | translate }}</div>
+        </div>
+    </ng-template>
+</gh-orders>

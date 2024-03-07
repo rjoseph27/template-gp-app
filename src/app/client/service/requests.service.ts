@@ -1,11 +1,11 @@
 import { Injectable, inject } from "@angular/core";
 import { RequestsServiceApi } from "../../api/requests/requests.service.api";
-import { ConfirmItemRequest, CreateAlertRequest, CreateAlertStatus, ReportTrip, ReportTripStatus, SendItemsStatus } from "../../api/requests/requests.type";
-import { ItemInformation } from "../../core/layouts/request/item-information/item-information.component";
+import { ConfirmItemRequest, CreateAlertRequest, CreateAlertStatus, ItemsOrdersStatus, ReportTrip, ReportTripStatus, SendItemsStatus } from "../../api/requests/requests.type";
 import { SendItemsRequest } from "./send-items.service";
 import { DateUtil } from "../../misc/util/date.util";
 import { UsersService } from "../../services/users.service";
 import { StringKeys } from "../../api/base.service.api";
+import { RequestTableElement } from "../../core/layouts/orders/orders.component";
 
 
 /**
@@ -84,12 +84,32 @@ export class ClientRequestsService {
      * @returns {Promise<boolean>} A promise that resolves to true if the alert was created successfully, false otherwise
      */
     createAlert(createAlertRequest: CreateAlertRequest): Promise<boolean> {
-        return this.requestsServiceApi.createAlert(createAlertRequest).then(msg => {
+        return this.requestsServiceApi.createAlert({...createAlertRequest}).then(msg => {
             if(msg.message === CreateAlertStatus.ALERT_CREATED_SUCCESSFULLY)
             {
+                createAlertRequest.items.itemInformation.forEach(async (item,index) =>{
+                    const formData = new FormData();
+                    formData.append('image', item.image); 
+                    await this.requestsServiceApi.uploadImages(formData).then(async img => await this.requestsServiceApi.updateImageName({id: msg.newId, filename: img, index: index}));
+                });
                 return true
             }
             return false
         });
+    }
+    
+    /**
+     * @description Gets the items orders for a user
+     * @param userId The id of the user
+     * @returns {Promise<RequestTableElement[]>} A promise that resolves to the items orders
+     */
+    getItemsOrders(userId: string): Promise<RequestTableElement[]> {
+        return this.requestsServiceApi.getItemsOrders(userId).then(msg => {
+            if(ItemsOrdersStatus.ITEMS_FOUND) {
+                return msg.orders || [];
+            } else {
+                return [];
+            }
+        })        
     }
 }

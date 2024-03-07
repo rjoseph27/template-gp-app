@@ -17,6 +17,8 @@ import { GhConsoleViewComponent } from "./request/calendar/console-view/console-
 import { GhSelectTripComponent } from "./request/calendar/console-view/select-trip/select-trip.component";
 import { GhFilterTripComponent } from "./request/calendar/console-view/filter-trip/filter-trip.component";
 import { GhAlertTripComponent } from "./request/calendar/console-view/alert-trip/alert-trip.component";
+import { GhOrdersComponent } from "./orders/orders.component";
+import { GhStatusComponent } from "./orders/status/status.component";
 
 /**
  * @constant
@@ -42,5 +44,7 @@ export const LAYOUTS_COMPONENTS = [
     GhConsoleViewComponent,
     GhSelectTripComponent,
     GhFilterTripComponent,
-    GhAlertTripComponent
+    GhAlertTripComponent,
+    GhOrdersComponent,
+    GhStatusComponent
 ]

@@ -1,7 +1,7 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { BaseInputFieldComponent } from '../base-input-field.component';
 import { CALENDAR_ICON } from '../../../../misc/constants/icon';
-import { DateFromDatePicker, DateUtil } from '../../../../misc/util/date.util';
+import { DateFromDatePicker, DateUtil, INVALID_DATE } from '../../../../misc/util/date.util';
 import { BehaviorSubject } from 'rxjs';
 
 /**
@@ -97,8 +97,9 @@ export class GhDateFieldComponent extends BaseInputFieldComponent<DateFromDatePi
    * @type {void}
    */
   protected emitValue(event: string): void {
+    const date = new Date(event);
     this.valueChange.emit({
-      date: event ? new Date(event) : undefined,
+      date: date.toString() !== INVALID_DATE ? new Date(event) : undefined,
       dateString: event
     })
     this._isCalendarOpen$.next(false);

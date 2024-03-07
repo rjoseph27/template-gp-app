@@ -214,6 +214,15 @@
         "errors": {
             "serverError": "An error occured, please try again later",
             "logAgain": "Please login again"
+        },
+        "request": {
+            "onGoingRequest": "On Going Request",
+            "deliveredRequest": "Delivered Request",
+            "table": {
+                "route": "Route",
+                "deliveryDate": "Delivery date",
+                "status": "Status"
+            }
         }
     },
     "enums": {

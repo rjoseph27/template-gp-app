@@ -1,0 +1,11 @@
+@import '../../../../../styles/variables';
+
+.content {
+    display: flex;
+    justify-content: center;
+    font-size:0.9em;
+    line-height: 1;
+    gh-icon {
+        color: $secondary-color;
+    }
+}

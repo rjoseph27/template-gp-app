@@ -7,6 +7,7 @@ import { ClientRoutes } from '../client.route';
 import { ClientReportTripComponent } from './request/report-trip/report-trip.component';
 import { ClientCalendarComponent } from './request/calendar/calendar.component';
 import { ClientCalendarResolver } from './request/calendar/calendar.resolver';
+import { ClientItemsOrdersComponent } from './client-orders/items-orders.component';
 
 /**
  * @constant routes
@@ -18,7 +19,8 @@ const routes: Routes = [
         { path: '', component: ClientSendItemsComponent, pathMatch: 'full', resolve: { userInfo: ClientApplicationResolver} },
         { path: `${ClientRoutes.calendar}`, component: ClientCalendarComponent, pathMatch: 'full', resolve: { calendarInfo: ClientCalendarResolver} }
     ] },
-    { path: `${ClientRoutes.reportTrip}`, component: ClientReportTripComponent, pathMatch: 'full', resolve: { userInfo: ClientApplicationResolver} }
+    { path: `${ClientRoutes.reportTrip}`, component: ClientReportTripComponent, pathMatch: 'full', resolve: { userInfo: ClientApplicationResolver} },
+    { path: `${ClientRoutes.clientOrder}`, component: ClientItemsOrdersComponent, pathMatch: 'full', resolve: { userInfo: ClientApplicationResolver} }
 ];
 
 @NgModule({

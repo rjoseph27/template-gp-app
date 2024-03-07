@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { ApiResponse, BaseServiceApi } from "../base.service.api";
 import { firstValue } from "../../misc/function/firstValue";
-import { ReportTrip, SearchTripsRequest, SearchTripsApiResponse, ConfirmItemRequest, SendItemsRequestApiResponse, UpdateImageNameRequest, CreateAlertRequest } from "./requests.type";
+import { ReportTrip, SearchTripsRequest, SearchTripsApiResponse, ConfirmItemRequest, SendItemsRequestApiResponse, UpdateImageNameRequest, CreateAlertRequest, ListItemsApiResponse } from "./requests.type";
 
 /**
  * @class RequestsServiceApi
@@ -62,7 +62,16 @@ export class RequestsServiceApi extends BaseServiceApi {
      * @param alertRequest The create alert request
      * @returns {Promise<ApiResponse>}
      */
-    createAlert(alertRequest: CreateAlertRequest): Promise<ApiResponse> {
-        return firstValue(this.postRequest<ApiResponse>('create-alert', alertRequest));
+    createAlert(alertRequest: CreateAlertRequest): Promise<SendItemsRequestApiResponse> {
+        return firstValue(this.postRequest<SendItemsRequestApiResponse>('create-alert', alertRequest));
+    }
+
+    /**
+     * @description A method that gets the items orders
+     * @param itemId The id of the item
+     * @returns {Promise<ListItemsApiResponse>}
+     */
+    getItemsOrders(itemId: string): Promise<ListItemsApiResponse> {
+        return firstValue(this.getRequest<ListItemsApiResponse>('lists-items', itemId));
     }
 }

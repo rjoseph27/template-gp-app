@@ -1,0 +1,22 @@
+<div class="content">
+    <gh-table 
+        [columns]="requestTableColumns$ | async" 
+        [elements]="requests"
+        [label]="label"
+        [emptyTemplate]="emptyTemplate"
+    >
+        <ng-template #routeTemplate let-value="value">
+            <div class="route">
+                <div>{{ value.from }}</div>
+                <div><gh-icon [name]="routeIcon"></gh-icon></div>
+                <div>{{ value.to }}</div>
+            </div>
+        </ng-template>
+        <ng-template #deliveryDateTemplate let-value="value">
+            {{ value | date: 'dd/MM/yyyy' }}
+        </ng-template>
+        <ng-template #statusTemplate let-value="value">
+            <gh-status [status]="value"></gh-status>
+        </ng-template>
+    </gh-table>
+</div>

@@ -1,0 +1,22 @@
+@import '../../../../styles/variables';
+
+.content {
+    display: flex;
+    justify-content: center;
+    padding: 1em;
+}
+
+.route {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gh-icon {
+        color: $secondary-color;
+    }
+}
+
+@media (min-width: 768px) {
+    gh-table {
+        min-width:700px;
+    }
+}

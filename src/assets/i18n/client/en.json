@@ -182,7 +182,22 @@
                 }
             },
             "orders": {
-                "title": "My orders"
+                "title": "My Orders",
+                "tableId": "Order Number",
+                "status": {
+                    "waitConfirmation": "Waiting GP Confirmation"
+                },
+                "emptyView": {
+                    "deliveredRequest": {
+                        "title": "You have no delivered requests yet",
+                        "content": "When an order is delivered, you will be able to see it here."
+                    },
+                    "onGoingRequest": {
+                        "title": "You have no on going requests yet",
+                        "content": "When a GP will confirm your request, you will be able to see it here.",
+                        "button": "Create a Request"
+                    }
+                }
             },
             "alerts": {
                 "title": "My Alerts"

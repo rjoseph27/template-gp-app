@@ -3,6 +3,8 @@ import { ReportTrip } from "../../../../../../api/requests/requests.type";
 import { ClientSendItemsService } from "../../../../../../client/service/send-items.service";
 import { BehaviorSubject } from "rxjs";
 import { ClientRequestsService } from "../../../../../../client/service/requests.service";
+import { ClientRoutes } from "../../../../../../client.route";
+import { Router } from "@angular/router";
 
 /**
  * @interface SelectTripCaption
@@ -111,6 +113,12 @@ export class GhSelectTripComponent {
   protected readonly isConfirmed$ = this._isConfirmed$.asObservable();
 
   /**
+   * @description The angular router service.
+   * @type {Router}
+   */
+  private readonly router: Router = inject(Router);
+
+  /**
    * @description A method that close the console view
    * @returns void
    */
@@ -167,6 +175,6 @@ export class GhSelectTripComponent {
    * @returns void
    */
   protected seeMyOrders(): void {
-    console.log("TODO: Redirect to orders page")
+    this.router.navigate([ClientRoutes.clientOrder.fullPath()]);
   }
 }

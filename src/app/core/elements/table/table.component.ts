@@ -43,6 +43,12 @@ export class GhTableComponent {
   private readonly _columns$: BehaviorSubject<ColumnConfig[]> = new BehaviorSubject<ColumnConfig[]>([]);
 
   /**
+   * @description The label of the table
+   * @type {string}
+   */
+  @Input() label: string;
+
+  /**
    * @description The backing store elements$
    * @type {BehaviorSubject<any>}
    */

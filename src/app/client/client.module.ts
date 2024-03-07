@@ -22,6 +22,7 @@ import { NotificationService } from '../services/notification.service';
 import { ClientCalendarComponent } from './request/calendar/calendar.component';
 import { ClientCalendarResolver } from './request/calendar/calendar.resolver';
 import { ClientSendItemsService } from './service/send-items.service';
+import { ClientItemsOrdersComponent } from './client-orders/items-orders.component';
 
 
 /**
@@ -35,7 +36,8 @@ import { ClientSendItemsService } from './service/send-items.service';
         ClientMainComponent, 
         ClientSendItemsComponent,
         ClientReportTripComponent,
-        ClientCalendarComponent
+        ClientCalendarComponent,
+        ClientItemsOrdersComponent
     ],
     imports: [
         CommonModule,

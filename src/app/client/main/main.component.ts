@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, map } from 'rxjs';
+import { map } from 'rxjs';
 import { UserType } from '../user-type.enum';
 import { GhModule } from '../../core/layouts/main/main.component';
 import { ALERTS_ICON, HELP_ICON, LOG_OUT_ICON, REPORT_TRIP_ICON, SEND_ITEMS_ICON, ORDERS_ICON, REQUESTS_ICON, SETTING_ICON } from './icon';
@@ -118,7 +118,9 @@ export class ClientMainComponent implements OnInit {
     {
       label: "moduleList.client.orders.title",
       icon: REQUESTS_ICON,
-      action: () => {}
+      action: () => {
+        this.router.navigate([ClientRoutes.clientOrder.fullPath()]);
+      }
     },
     {
       label: "moduleList.client.alerts.title",
@@ -141,13 +143,13 @@ export class ClientMainComponent implements OnInit {
       }
     },
     {
-      label: "moduleList.gp.trip.title",
-      icon: REQUESTS_ICON,
+      label: "moduleList.gp.orders.title",
+      icon: ORDERS_ICON,
       action: () => {}
     },
     {
-      label: "moduleList.gp.orders.title",
-      icon: ORDERS_ICON,
+      label: "moduleList.gp.trip.title",
+      icon: REQUESTS_ICON,
       action: () => {}
     },
     ...this.commonModules
