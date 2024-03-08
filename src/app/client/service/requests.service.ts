@@ -1,12 +1,12 @@
 import { Injectable, inject } from "@angular/core";
 import { RequestsServiceApi } from "../../api/requests/requests.service.api";
-import { ConfirmItemRequest, CreateAlertRequest, CreateAlertStatus, ItemsOrdersStatus, ReportTrip, ReportTripStatus, SendItemsStatus } from "../../api/requests/requests.type";
+import { ConfirmItemRequest, CreateAlertRequest, CreateAlertStatus, ItemsOrdersStatus, ReportTrip, ReportTripStatus, RequestTableElementRequest, SendItemsStatus } from "../../api/requests/requests.type";
 import { SendItemsRequest } from "./send-items.service";
 import { DateUtil } from "../../misc/util/date.util";
 import { UsersService } from "../../services/users.service";
 import { StringKeys } from "../../api/base.service.api";
 import { RequestTableElement } from "../../core/layouts/orders/orders.component";
-
+import { OrderDetails } from "../../core/layouts/order-details/order-details.component";
 
 /**
  * @class RequestsService
@@ -111,5 +111,14 @@ export class ClientRequestsService {
                 return [];
             }
         })        
+    }
+
+    /**
+     * @description Gets the item information
+     * @param request The request table element
+     * @returns {Promise<OrderDetails>}
+     */
+    getItemInformation(request: RequestTableElementRequest): Promise<OrderDetails> {
+        return this.requestsServiceApi.getItemInformation(request).then(msg => msg.order);
     }
 }

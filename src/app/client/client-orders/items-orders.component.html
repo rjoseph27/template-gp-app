@@ -23,7 +23,7 @@
 </gh-orders>
 
 <gh-orders 
-    [requests]="[]"
+    [requests]="getDeliveredOrders$ | async"
     [idColumn]="'moduleList.client.orders.tableId'"
     [getStatusInfo]="getStatusInfo"
     [emptyTemplate]="deliveredRequestEmptyTemplate"

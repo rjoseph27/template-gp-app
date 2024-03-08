@@ -40,6 +40,12 @@ export class UsersService {
    */
   private readonly navigationService: NavigationService = inject(NavigationService)
 
+  /**
+   * @description The backing field for user info
+   * @type {UserInfo}
+   */
+  private _userInfo: UserInfo;
+
   /** 
    * @description Gets the current user id
    * @returns {string}
@@ -179,13 +185,21 @@ export class UsersService {
    * @returns {Promise<UserInfo>}
    */
   getUserInfo(userId: string): Promise<UserInfo> {
-    return this.usersServiceApi.getUserInfo(userId).then(msg => {
-      return <UserInfo>{
-      firstName: msg.userInfo["firstName"],
-      lastName: msg.userInfo["lastName"],
-      language: Language[msg.userInfo["language"].toUpperCase() as keyof typeof Language],
-      country: msg.userInfo["country"] as Country
-    }});
+    if(!this._userInfo)
+    {
+      return this.usersServiceApi.getUserInfo(userId).then(msg => {
+        this._userInfo = <UserInfo>{
+          firstName: msg.userInfo["firstName"],
+          lastName: msg.userInfo["lastName"],
+          language: Language[msg.userInfo["language"].toUpperCase() as keyof typeof Language],
+          country: msg.userInfo["country"] as Country
+        }
+
+        return this._userInfo;
+      });
+    } else {
+      return Promise.resolve(this._userInfo);
+    }
   }
 
   /**

@@ -1,0 +1,36 @@
+<div class="title">
+    {{ 'global.orderDetails.title' | translate }}
+</div>
+<div class="details">
+    <div class="section">
+        <div class="label">{{ 'global.orderDetails.orderDate' | translate }}</div><div>{{ orderDetails.orderDate | date: 'dd/MM/yyyy' }}</div>
+    </div>
+    <div class="section">
+        <div class="label">{{ 'global.orderDetails.shippingOrder' | translate }}</div><div>{{ orderDetails.itemInformation.id }}</div>
+    </div>
+    <div class="section">
+        <div class="label">{{ 'global.orderDetails.from' | translate }}</div><div>{{ orderDetails.originCountry }}, {{ orderDetails.originRegion }}</div>
+    </div>
+    <div class="section">
+        <div class="label">{{ 'global.orderDetails.to' | translate }}</div><div>{{ orderDetails.destinationRegion }}, {{ orderDetails.destinationCountry }}</div>
+    </div>
+    <div class="section">
+        <div class="label">{{ 'global.orderDetails.departureTime' | translate }}</div><div>{{ orderDetails.departureDate | date: 'dd/MM/yyyy' }}, {{ orderDetails.departureTime }}</div>
+    </div>
+    <div class="section">
+        <div class="label">{{ 'global.orderDetails.arrivalTime' | translate }}</div><div>{{ orderDetails.arrivalDate | date: 'dd/MM/yyyy' }}, {{ orderDetails.arrivalTime }}</div>
+    </div>
+    <div class="section">
+        <div class="label">{{ 'global.orderDetails.totalCost' | translate }}</div><div class="price">{{ orderDetails.price}} {{ currency }}</div>
+    </div>
+</div>
+<hr class="gp-divider">
+<div class="information">
+    <div class="title">{{ 'global.orderDetails.item' | translate }}</div>
+    <div class="item-information">
+        <gh-item-information 
+            [itemInformation]="[orderDetails.itemInformation]"
+            [isEditable]="false"
+        ></gh-item-information>
+    </div>
+</div>

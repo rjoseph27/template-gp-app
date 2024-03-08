@@ -242,7 +242,7 @@ export class GhReportTripComponent extends BaseRequestComponent implements OnIni
    * @type {Map<string, string>}
    */
   protected readonly itemCategoryErrorCaptions = new Map<string, string>([
-    [REQUIRED_VALIDATION, "moduleList.client.sendItems.content.itemInformation.itemCategory.errors.required"]
+    [REQUIRED_VALIDATION, "global.itemInformation.itemCategory.errors.required"]
   ]);
 
   /**

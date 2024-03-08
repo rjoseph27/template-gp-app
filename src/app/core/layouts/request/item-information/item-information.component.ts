@@ -9,8 +9,8 @@ import { ItemCategory } from "../../../../misc/enums/item-category.enum";
 import { MAX_LUGGAGE_WEIGHT } from "../../../../misc/constants/application";
 import { FormMode } from "../../../../misc/enums/form-mode.enum";
 import { ModalService } from "../../../../services/modal.service";
-import { SERVER_URL } from "../../../../api/base.service.api";
 import { GhFile } from "../../../elements/input/upload-image/upload-image.component";
+import { ITEM_INFORMATION_IMAGE_FOLDER, ImageUtil } from "../../../../misc/util/image.util";
 
 
 /**
@@ -18,6 +18,12 @@ import { GhFile } from "../../../elements/input/upload-image/upload-image.compon
  * @description The type of the item information
  */
 export interface ItemInformation {
+  /**
+   * @description The id of the item information
+   * @type {number}
+   */
+  id?: number;
+
   /**
    * @description The image of the item
    * @type {File}
@@ -59,30 +65,6 @@ export interface ItemInformation {
    * @type {string}
    */
   reasonShipping: string;
-}
-
-/**
- * @interface ItemSize
- * @description The type of the item size
- */
-interface ItemSize {
-  /**
-   * @description The width of the item
-   * @type {number}
-   */
-  width: number;
-
-  /**
-   * @description The height of the item
-   * @type {number}
-   */
-  height: number;
-
-  /**
-   * @description The depth of the item
-   * @type {number}
-   */
-  depth: number;
 }
 
 /**
@@ -207,12 +189,18 @@ export class GhItemInformationComponent implements OnInit {
   protected readonly maxLuggageWeight = MAX_LUGGAGE_WEIGHT;
 
   /**
+   * @description A boolean to indicate if the item information is editable
+   * @type {boolean}
+   */
+  @Input() isEditable = true;
+
+  /**
    * @description The error messages of the upload image field
    */
   protected readonly imageErrorCaptions = new Map<string, string>([
-    [REQUIRED_VALIDATION, "moduleList.client.sendItems.content.itemInformation.uploadPhoto.errors.required"],
-    [IMAGE_FORMAT_VALIDATION, "moduleList.client.sendItems.content.itemInformation.uploadPhoto.errors.format"],
-    [IMAGE_SIZE_VALIDATION, "moduleList.client.sendItems.content.itemInformation.uploadPhoto.errors.size"]
+    [REQUIRED_VALIDATION, "global.itemInformation.uploadPhoto.errors.required"],
+    [IMAGE_FORMAT_VALIDATION, "global.itemInformation.uploadPhoto.errors.format"],
+    [IMAGE_SIZE_VALIDATION, "global.itemInformation.uploadPhoto.errors.size"]
   ]);
 
   /**
@@ -220,7 +208,7 @@ export class GhItemInformationComponent implements OnInit {
    * @type {Map<string, string>}
    */
   protected readonly itemNameErrorCaptions = new Map<string, string>([
-    [REQUIRED_VALIDATION, "moduleList.client.sendItems.content.itemInformation.itemName.errors.required"]
+    [REQUIRED_VALIDATION, "global.itemInformation.itemName.errors.required"]
   ]);
 
   /**
@@ -228,7 +216,7 @@ export class GhItemInformationComponent implements OnInit {
    * @type {Map<string, string>}
    */
   protected readonly itemCategoryErrorCaptions = new Map<string, string>([
-    [REQUIRED_VALIDATION, "moduleList.client.sendItems.content.itemInformation.itemCategory.errors.required"]
+    [REQUIRED_VALIDATION, "global.itemInformation.itemCategory.errors.required"]
   ]);
 
   /**
@@ -236,9 +224,9 @@ export class GhItemInformationComponent implements OnInit {
    * @type {Map<string, string>}
    */
   protected readonly itemWeightErrorCaptions = new Map<string, string>([
-    [REQUIRED_VALIDATION, "moduleList.client.sendItems.content.itemInformation.itemWeight.errors.required"],
-    [MAX_VALIDATION, "moduleList.client.sendItems.content.itemInformation.itemWeight.errors.max"],
-    [MIN_VALIDATION, "moduleList.client.sendItems.content.itemInformation.itemWeight.errors.min"]
+    [REQUIRED_VALIDATION, "global.itemInformation.itemWeight.errors.required"],
+    [MAX_VALIDATION, "global.itemInformation.itemWeight.errors.max"],
+    [MIN_VALIDATION, "global.content.itemInformation.itemWeight.errors.min"]
   ]);
 
   /**
@@ -263,8 +251,10 @@ export class GhItemInformationComponent implements OnInit {
   ngOnInit(): void {
     if(this.itemInformation) {
       this.itemInformation.forEach(x => this.addNewItemInformation(x));
+    }
+    if(this.isEditable) {
+      this.addNewItemInformation();
     } 
-    this.addNewItemInformation();
   }
 
   /**
@@ -283,11 +273,21 @@ export class GhItemInformationComponent implements OnInit {
    * @returns void
    */
   private addNewItemInformation(itemInformation?: ItemInformation) {
+    let image;
+    if(itemInformation?.image) {
+      if(typeof itemInformation.image === "string") {
+        image = <GhFile>{};
+        image.tempUrl = ImageUtil.getImageLink(ITEM_INFORMATION_IMAGE_FOLDER, itemInformation.image);
+      } else {
+        image = itemInformation.image;
+      }    
+    }
+
     const newItem: ItemInformationBody = {
       id: this.itemInformationList.length,
       formMode: itemInformation ? FormMode.VIEW : FormMode.CREATE,
       itemInformation: new FormGroup({
-          image: new FormControl(itemInformation?.image || <GhFile>{}, [Validators.required, imageFormatValidator, imageSizeValidator]),
+          image: new FormControl(image || <GhFile>{}, [Validators.required, imageFormatValidator, imageSizeValidator]),
           itemName: new FormControl(itemInformation?.itemName, [Validators.required]),
           itemCategory: new FormControl(itemInformation?.itemCategory as string, [Validators.required]),
           itemWeight: new FormControl(itemInformation?.itemWeight, [Validators.required, Validators.min(0.0001), Validators.max(MAX_LUGGAGE_WEIGHT)]),
@@ -340,10 +340,10 @@ export class GhItemInformationComponent implements OnInit {
    */
   protected cancelEditItemInformation(itemInformation: ItemInformationBody) {
     this.modalService.openModal({
-      title: "moduleList.client.sendItems.content.itemInformation.modal.cancel.title",
-      text: "moduleList.client.sendItems.content.itemInformation.modal.cancel.content",
+      title: "global.itemInformation.modal.cancel.title",
+      text: "global.itemInformation.modal.cancel.content",
       confirmCaption: "global.common.cancel",
-      cancelCaption: "moduleList.client.sendItems.content.itemInformation.modal.cancel.button.stay"
+      cancelCaption: "global.itemInformation.modal.cancel.button.stay"
     }).then(x => {
       if(x) {
         itemInformation.itemInformation = itemInformation.cache;
@@ -361,8 +361,8 @@ export class GhItemInformationComponent implements OnInit {
    */
   protected deleteItemInformation(itemInformation: ItemInformationBody) {
     this.modalService.openModal({
-      title: "moduleList.client.sendItems.content.itemInformation.modal.delete.title",
-      text: "moduleList.client.sendItems.content.itemInformation.modal.delete.content",
+      title: "global.itemInformation.modal.delete.title",
+      text: "global.itemInformation.modal.delete.content",
       confirmCaption: "global.common.delete",
       cancelCaption: "global.common.cancel"
     }).then(x => {

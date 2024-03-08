@@ -61,71 +61,6 @@
                             }
                         }
                     },
-                    "itemInformation": {
-                        "title": "Item Information",
-                        "uploadPhoto": {
-                            "label": "Upload the photo of your item",
-                            "errors": {
-                                "required": "Please upload a photo",
-                                "format": "Please enter a .jpg, .jpeg or .png file",
-                                "size": "Please enter a file with a size less than {{maxSize}}KB"
-                            }
-                        },
-                        "itemName": {
-                            "label": "Name of the item",
-                            "placeholder": "Enter the name of the item",
-                            "errors": {
-                                "required": "Please enter the name of the item"
-                            }
-                        },
-                        "itemCategory": {
-                            "label": "Category of the item",
-                            "placeholder": "Select the category of the item",
-                            "errors": {
-                                "required": "Please select the category of the item"
-                            }
-                        },
-                        "itemWeight": {
-                            "label": "Weight of the item (KGs)",
-                            "placeholder": "Enter the weight of the item",
-                            "errors": {
-                                "required": "Please enter the weight of the item",
-                                "max": "Please enter a weight less than {{max}} KGs",
-                                "min": "Please enter a weight more than {{min}} KGs"
-                            }
-                        },
-                        "itemQuantity": {
-                            "label": "Quantity",
-                            "placeholder": "Enter the quantity",
-                            "tooltip": "A unit of a item is considered when the item can be divided for multiple shipping. Make sure that the weight and size is considered for the unit of the item.",
-                            "errors": {
-                                "required": "Please enter the quantity",
-                                "min": "Please enter a quantity more than {{min}}"
-                            }
-                        },
-                        "extraNotes": {
-                            "label": "Extra Notes"
-                        },
-                        "reasonShipping": {
-                            "label": "Reason for the shipping",
-                            "errors": {
-                                "required": "Please explain the reason for shipping"
-                            }
-                        },
-                        "modal": {
-                            "delete": {
-                                "title": "Confirm Delete",
-                                "content": "Are you sure you want to delete the item?"
-                            },
-                            "cancel" : {
-                                "title": "Confirm Cancel",
-                                "content": "All the unsaved modification will be lost. Are you sure you want to cancel?",
-                                "button": {
-                                    "stay": "Stay"
-                                }
-                            }
-                        }
-                    },
                     "send": "Check for GPs",
                     "calendar": {
                         "selectTrip": {
@@ -197,6 +132,12 @@
                         "content": "When a GP will confirm your request, you will be able to see it here.",
                         "button": "Create a Request"
                     }
+                },
+                "waitConfirmation": {
+                    "title": "Waiting GP Confirmation",
+                    "content": "The GP has been notified about your request. You will be notified once the GP confirms the request.",
+                    "button": "Go Back to my Orders",
+                    "cancelButton": "Cancel the Request"
                 }
             },
             "alerts": {

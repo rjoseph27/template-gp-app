@@ -370,7 +370,6 @@ export class GhAlertTripComponent implements OnInit {
     this.requestsService.createAlert({...this.alertForm.value, items: this.sendItemsService.requests}).then(res => {
       if(res) {
         this._alertSent$.next(true);
-        console.log('alert created');
       }
     })
    }

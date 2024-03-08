@@ -1,0 +1,30 @@
+@import '../../../../styles/variables';
+
+.section {
+    display: flex;
+    justify-content: space-between;
+    .label {
+        color: $secondary-color;
+        font-weight: $semi-bold;
+        &::after {
+            content: ' :';
+        }
+    }
+    .price {
+        font-weight: $bold;
+    }
+}
+
+.title {
+    font-size: 1.5em;
+    font-weight: $semi-bold;
+    display: flex;
+    justify-content: center;
+    margin:1em 0em;
+}
+
+.information {
+    .item-information {
+        margin: 1em 0.5em;
+    }
+}

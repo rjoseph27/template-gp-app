@@ -1,7 +1,8 @@
 import { Injectable } from "@angular/core";
 import { ApiResponse, BaseServiceApi } from "../base.service.api";
 import { firstValue } from "../../misc/function/firstValue";
-import { ReportTrip, SearchTripsRequest, SearchTripsApiResponse, ConfirmItemRequest, SendItemsRequestApiResponse, UpdateImageNameRequest, CreateAlertRequest, ListItemsApiResponse } from "./requests.type";
+import { ReportTrip, SearchTripsRequest, SearchTripsApiResponse, ConfirmItemRequest, SendItemsRequestApiResponse, UpdateImageNameRequest, CreateAlertRequest, ListItemsApiResponse, ItemInformationApiResponse, RequestTableElementRequest } from "./requests.type";
+import { RequestTableElement } from "../../core/layouts/orders/orders.component";
 
 /**
  * @class RequestsServiceApi
@@ -73,5 +74,14 @@ export class RequestsServiceApi extends BaseServiceApi {
      */
     getItemsOrders(itemId: string): Promise<ListItemsApiResponse> {
         return firstValue(this.getRequest<ListItemsApiResponse>('lists-items', itemId));
+    }
+
+    /**
+     * @description A method that gets the item information
+     * @param request The request table element
+     * @returns {Promise<ItemInformationApiResponse>}
+     */
+    getItemInformation(request: RequestTableElementRequest): Promise<ItemInformationApiResponse> {
+        return firstValue(this.postRequest<ItemInformationApiResponse>('get-item-information', request));
     }
 }

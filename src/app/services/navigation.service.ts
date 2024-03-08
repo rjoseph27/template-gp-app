@@ -46,7 +46,7 @@ export class NavigationService {
    * @returns {GhRoute}
    */
   private get currentRoute(): GhRoute {
-    const urlAsArray = this.router.url.split('/');
+    const urlAsArray = this.router.url.split('?')[0].split('/');
     const currentPage = urlAsArray.pop();
     return [...Object.values(ClientRoutes), ...Object.values(GlobalRoutes)].find((route) => route.segment === currentPage)
   }

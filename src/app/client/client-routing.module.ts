@@ -8,6 +8,8 @@ import { ClientReportTripComponent } from './request/report-trip/report-trip.com
 import { ClientCalendarComponent } from './request/calendar/calendar.component';
 import { ClientCalendarResolver } from './request/calendar/calendar.resolver';
 import { ClientItemsOrdersComponent } from './client-orders/items-orders.component';
+import { ClientWaitingGpConfirmationComponent } from './client-orders/waiting-gp-confirmation/waiting-gp-confirmation.component';
+import { ClientWaitingGpConfirmationResolver } from './client-orders/waiting-gp-confirmation/waiting-gp-confirmation.resolver';
 
 /**
  * @constant routes
@@ -20,7 +22,10 @@ const routes: Routes = [
         { path: `${ClientRoutes.calendar}`, component: ClientCalendarComponent, pathMatch: 'full', resolve: { calendarInfo: ClientCalendarResolver} }
     ] },
     { path: `${ClientRoutes.reportTrip}`, component: ClientReportTripComponent, pathMatch: 'full', resolve: { userInfo: ClientApplicationResolver} },
-    { path: `${ClientRoutes.clientOrder}`, component: ClientItemsOrdersComponent, pathMatch: 'full', resolve: { userInfo: ClientApplicationResolver} }
+    { path: `${ClientRoutes.clientOrder}`, children: [
+        { path: '', component: ClientItemsOrdersComponent, pathMatch: 'full', resolve: { userInfo: ClientApplicationResolver} },
+        { path: `${ClientRoutes.waitingGpConfirmation}`, component: ClientWaitingGpConfirmationComponent, pathMatch: 'full', resolve: { orderDetails: ClientWaitingGpConfirmationResolver, userInfo: ClientApplicationResolver } }
+    ] }
 ];
 
 @NgModule({

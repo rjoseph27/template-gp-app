@@ -165,7 +165,7 @@
 
 <ng-template #categoryTemplate let-element="element">
     <gh-select-field
-        [placeholder]="'moduleList.client.sendItems.content.itemInformation.itemCategory.placeholder' | translate"
+        [placeholder]="'global.itemInformation.itemCategory.placeholder' | translate"
         [name]="element.id"
         [value]="specificPriceFormControl.at(element.id).get('category').value"
         (valueChange)="specificPriceFormControl.at(element.id).get('category').setValue($event)"
@@ -190,7 +190,7 @@
 
 <ng-template #unitTemplate let-element="element">
     <gh-select-field
-        [placeholder]="'moduleList.client.sendItems.content.itemInformation.itemCategory.placeholder' | translate"
+        [placeholder]="'global.itemInformation.itemCategory.placeholder' | translate"
         [name]="element.id"
         [value]="specificPriceFormControl.at(element.id).get('unit').value"
         (valueChange)="specificPriceFormControl.at(element.id).get('unit').setValue($event)"

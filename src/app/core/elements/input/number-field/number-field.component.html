@@ -1,6 +1,6 @@
 <div class="section label-section">
     <label [for]="name">{{ label }}</label>
-    <gh-help *ngIf="tooltip" [tooltip]="tooltip"></gh-help>
+    <gh-help *ngIf="tooltip && !readonly" [tooltip]="tooltip"></gh-help>
 </div>
 <div class="section" *ngIf="!readonly; else readonlyTemplate">
     <input 

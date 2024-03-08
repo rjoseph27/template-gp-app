@@ -23,6 +23,8 @@ import { ClientCalendarComponent } from './request/calendar/calendar.component';
 import { ClientCalendarResolver } from './request/calendar/calendar.resolver';
 import { ClientSendItemsService } from './service/send-items.service';
 import { ClientItemsOrdersComponent } from './client-orders/items-orders.component';
+import { ClientWaitingGpConfirmationComponent } from './client-orders/waiting-gp-confirmation/waiting-gp-confirmation.component';
+import { ClientWaitingGpConfirmationResolver } from './client-orders/waiting-gp-confirmation/waiting-gp-confirmation.resolver';
 
 
 /**
@@ -37,7 +39,8 @@ import { ClientItemsOrdersComponent } from './client-orders/items-orders.compone
         ClientSendItemsComponent,
         ClientReportTripComponent,
         ClientCalendarComponent,
-        ClientItemsOrdersComponent
+        ClientItemsOrdersComponent,
+        ClientWaitingGpConfirmationComponent
     ],
     imports: [
         CommonModule,
@@ -60,6 +63,7 @@ import { ClientItemsOrdersComponent } from './client-orders/items-orders.compone
     ],
     providers: [
         ClientApplicationResolver,
+        ClientWaitingGpConfirmationResolver,
         ClientCalendarResolver,
         ClientRequestsService,
         ClientSendItemsService,

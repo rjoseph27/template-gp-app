@@ -7,6 +7,8 @@ import { Currency } from "../../misc/enums/currency.enum"
 import { ItemCategory } from "../../misc/enums/item-category.enum"
 import { DateFromDatePicker } from "../../misc/util/date.util"
 import { ApiResponse, StringKeys } from "../base.service.api"
+import { ItemsStatus } from "../../client/client-orders/items-orders.component"
+import { OrderDetails } from "../../core/layouts/order-details/order-details.component"
 
 /**
    * @interface ReportTrip
@@ -440,6 +442,49 @@ export interface ReportTrip {
     newId: string;
   }
 
+  export interface RequestTableElementRequest {
+    /**
+     * @description The id of the request
+     * @type {string}
+     */
+    id: string;
+  
+    /**
+     * @description The departure airport of the flight
+     * @type {any}
+     */
+    from: any;
+
+    /**
+     * @description The arrival airport of the flight
+     * @type {any}
+     */
+    to: any;
+  
+    /**
+    * @description The delivery date of the request
+    * @type {Date}
+    */
+    deliveryDate: Date;
+  
+    /**
+     * @description The status of the request
+     * @type {ItemsStatus}
+     */
+    status: ItemsStatus
+  }
+
+  /**
+   * @interface ItemInformationApiResponse
+   * @description An interface for the item information api response
+   */
+  export interface ItemInformationApiResponse {
+    /**
+     * @description The item information
+     */
+    order: OrderDetails;
+  }
+
   /**
    * @interface UpdateImageNameRequest
    * @description An interface for the update image name request
@@ -546,4 +591,22 @@ export interface ReportTrip {
      * @type {RequestTableElement[]}
      */
     orders: RequestTableElement[];
+  }
+
+  /**
+   * @enum
+   * @description The waiting gp confirmation status  
+   */
+  export enum WaitingGpConfirmationStatus {
+    /**
+     * @description The item was found
+     * @type {string}
+     */
+    ITEM_FOUND = "ITEM_FOUND",
+
+    /**
+     * @description The item was not found
+     * @type {string}
+     */
+    ITEM_NOT_FOUND = "ITEM_NOT_FOUND"
   }
