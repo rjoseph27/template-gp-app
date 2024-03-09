@@ -610,3 +610,39 @@ export interface ReportTrip {
      */
     ITEM_NOT_FOUND = "ITEM_NOT_FOUND"
   }
+
+  /**
+   * @interface ClientCancelRequest
+   * @description An interface for the client cancel request
+   */
+  export interface ClientCancelRequest {
+    /**
+     * @description The id of the request
+     * @type {string}
+     */
+    id: string;
+
+    /**
+     * @description The order id
+     * @type {string}
+     */
+    orderId: string;
+
+    /**
+     * @description The trip id
+     * @type {string}
+     */
+    tripId: string;
+  }
+
+  /**
+   * @enum ClientCancelStatus
+   * @description The client cancel status
+   */
+  export enum ClientCancelStatus {
+    /**
+     * @description The order was canceled successfully
+     * @type {string}
+     */
+    ORDER_CANCELED_SUCCESSFULLY = "ORDER_CANCELED_SUCCESSFULLY"
+  }

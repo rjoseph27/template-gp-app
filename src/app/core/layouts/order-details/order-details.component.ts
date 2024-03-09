@@ -75,6 +75,18 @@ export interface OrderDetails {
   orderDate: Date,
 
   /**
+   * @description The send items id
+   * @type {string}
+   */
+  itemGroupId: string,
+
+  /**
+   * @description The trip id
+   * @type {string}
+   */
+  tripId: string,
+
+  /**
    * @description The total price of the order
    * @type {number}
    */

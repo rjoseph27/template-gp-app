@@ -1,6 +1,6 @@
 import { Injectable, inject } from "@angular/core";
 import { RequestsServiceApi } from "../../api/requests/requests.service.api";
-import { ConfirmItemRequest, CreateAlertRequest, CreateAlertStatus, ItemsOrdersStatus, ReportTrip, ReportTripStatus, RequestTableElementRequest, SendItemsStatus } from "../../api/requests/requests.type";
+import { ClientCancelRequest, ClientCancelStatus, ConfirmItemRequest, CreateAlertRequest, CreateAlertStatus, ItemsOrdersStatus, ReportTrip, ReportTripStatus, RequestTableElementRequest, SendItemsStatus } from "../../api/requests/requests.type";
 import { SendItemsRequest } from "./send-items.service";
 import { DateUtil } from "../../misc/util/date.util";
 import { UsersService } from "../../services/users.service";
@@ -120,5 +120,20 @@ export class ClientRequestsService {
      */
     getItemInformation(request: RequestTableElementRequest): Promise<OrderDetails> {
         return this.requestsServiceApi.getItemInformation(request).then(msg => msg.order);
+    }
+
+    /**
+     * @description Cancels an order
+     * @param clientCancelRequest The client cancel request
+     * @returns {Promise<boolean>} A promise that resolves to true if the order was canceled successfully, false otherwise
+     */
+    clientCancelOrder(clientCancelRequest: ClientCancelRequest): Promise<boolean> {
+        return this.requestsServiceApi.clientCancelOrder(clientCancelRequest).then(msg => {
+            if(msg.message === ClientCancelStatus.ORDER_CANCELED_SUCCESSFULLY)
+            {
+                return true
+            }
+            return false
+        });
     }
 }

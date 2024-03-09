@@ -226,7 +226,7 @@ export class GhItemInformationComponent implements OnInit {
   protected readonly itemWeightErrorCaptions = new Map<string, string>([
     [REQUIRED_VALIDATION, "global.itemInformation.itemWeight.errors.required"],
     [MAX_VALIDATION, "global.itemInformation.itemWeight.errors.max"],
-    [MIN_VALIDATION, "global.content.itemInformation.itemWeight.errors.min"]
+    [MIN_VALIDATION, "global.itemInformation.itemWeight.errors.min"]
   ]);
 
   /**

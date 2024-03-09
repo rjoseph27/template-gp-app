@@ -1,8 +1,7 @@
 import { Injectable } from "@angular/core";
 import { ApiResponse, BaseServiceApi } from "../base.service.api";
 import { firstValue } from "../../misc/function/firstValue";
-import { ReportTrip, SearchTripsRequest, SearchTripsApiResponse, ConfirmItemRequest, SendItemsRequestApiResponse, UpdateImageNameRequest, CreateAlertRequest, ListItemsApiResponse, ItemInformationApiResponse, RequestTableElementRequest } from "./requests.type";
-import { RequestTableElement } from "../../core/layouts/orders/orders.component";
+import { ReportTrip, SearchTripsRequest, SearchTripsApiResponse, ConfirmItemRequest, SendItemsRequestApiResponse, UpdateImageNameRequest, CreateAlertRequest, ListItemsApiResponse, ItemInformationApiResponse, RequestTableElementRequest, ClientCancelRequest } from "./requests.type";
 
 /**
  * @class RequestsServiceApi
@@ -83,5 +82,14 @@ export class RequestsServiceApi extends BaseServiceApi {
      */
     getItemInformation(request: RequestTableElementRequest): Promise<ItemInformationApiResponse> {
         return firstValue(this.postRequest<ItemInformationApiResponse>('get-item-information', request));
+    }
+
+    /**
+     * @description A method that cancels an order
+     * @param clientCancelRequest The client cancel request
+     * @returns {Promise<ApiResponse>}
+     */
+    clientCancelOrder(clientCancelRequest: ClientCancelRequest): Promise<ApiResponse> {
+        return firstValue(this.postRequest<ApiResponse>('client-cancel-order', clientCancelRequest));
     }
 }

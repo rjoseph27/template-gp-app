@@ -5,7 +5,7 @@
                 <div class="title">{{ captions.departure }}</div>
                 <div>{{ selectedTrip.departureDate.date | date: 'dd/MM/yyyy' }}</div>
                 <div>{{ selectedTrip.departureTime.timeString }}</div>
-                <div>{{ selectedTrip.userCountry }} {{ selectedTrip.userAirport }}</div>
+                <div>{{ selectedTrip.userCountry }} - {{ selectedTrip.userAirport }}</div>
             </div>
             <div class="sub-section">
                 <div class="title">{{ captions.arrival }}</div>

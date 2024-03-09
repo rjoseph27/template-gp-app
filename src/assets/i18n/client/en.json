@@ -137,7 +137,11 @@
                     "title": "Waiting GP Confirmation",
                     "content": "The GP has been notified about your request. You will be notified once the GP confirms the request.",
                     "button": "Go Back to my Orders",
-                    "cancelButton": "Cancel the Request"
+                    "cancelButton": "Cancel the Request",
+                    "notification": {
+                        "success": "The request has been canceled successfully",
+                        "error": "An error occurred while canceling the request"
+                    }
                 }
             },
             "alerts": {
