@@ -1,0 +1,21 @@
+<div class="content">
+    <gh-orders 
+    [requests]="newOrders$ | async"
+    [idColumn]="'moduleList.gp.orders.tableId'"
+    [getStatusInfo]="getStatusInfo"
+    [emptyTemplate]="onGoingRequestEmptyTemplate"
+    [label]="'moduleList.gp.orders.newOrders' | translate"
+>
+    <ng-template #onGoingRequestEmptyTemplate>
+        <div class="empty">
+            <div class="section section-title">
+                {{ 'moduleList.gp.orders.confirmOrder.emptyView.title' | translate }}
+            </div>
+            <div class="section">
+                <gh-icon name="feature_search"></gh-icon>
+            </div>
+            <div class="section">{{ 'moduleList.gp.orders.confirmOrder.emptyView.content' | translate }}</div>
+        </div>
+    </ng-template>
+</gh-orders>
+</div>

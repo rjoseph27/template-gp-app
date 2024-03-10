@@ -145,7 +145,9 @@ export class ClientMainComponent implements OnInit {
     {
       label: "moduleList.gp.orders.title",
       icon: ORDERS_ICON,
-      action: () => {}
+      action: () => {
+        this.router.navigate([ClientRoutes.gpOrders.fullPath()]);
+      }
     },
     {
       label: "moduleList.gp.trip.title",

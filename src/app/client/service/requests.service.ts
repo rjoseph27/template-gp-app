@@ -1,6 +1,6 @@
 import { Injectable, inject } from "@angular/core";
 import { RequestsServiceApi } from "../../api/requests/requests.service.api";
-import { ClientCancelRequest, ClientCancelStatus, ConfirmItemRequest, CreateAlertRequest, CreateAlertStatus, ItemsOrdersStatus, ReportTrip, ReportTripStatus, RequestTableElementRequest, SendItemsStatus } from "../../api/requests/requests.type";
+import { OrderDetailRequest, CancelOrderStatus, ConfirmItemRequest, CreateAlertRequest, CreateAlertStatus, ItemsOrdersStatus, ReportTrip, ReportTripStatus, RequestTableElementRequest, SendItemsStatus, GpAcceptOrderStatus } from "../../api/requests/requests.type";
 import { SendItemsRequest } from "./send-items.service";
 import { DateUtil } from "../../misc/util/date.util";
 import { UsersService } from "../../services/users.service";
@@ -127,9 +127,54 @@ export class ClientRequestsService {
      * @param clientCancelRequest The client cancel request
      * @returns {Promise<boolean>} A promise that resolves to true if the order was canceled successfully, false otherwise
      */
-    clientCancelOrder(clientCancelRequest: ClientCancelRequest): Promise<boolean> {
+    clientCancelOrder(clientCancelRequest: OrderDetailRequest): Promise<boolean> {
         return this.requestsServiceApi.clientCancelOrder(clientCancelRequest).then(msg => {
-            if(msg.message === ClientCancelStatus.ORDER_CANCELED_SUCCESSFULLY)
+            if(msg.message === CancelOrderStatus.ORDER_CANCELED_SUCCESSFULLY)
+            {
+                return true
+            }
+            return false
+        });
+    }
+
+    /**
+     * @description Gets the items orders for a user
+     * @param userId The id of the user
+     * @returns {Promise<RequestTableElement[]>} A promise that resolves to the items orders
+     */
+    getItemsOrdersForGp(userId: string): Promise<RequestTableElement[]> {
+        return this.requestsServiceApi.getItemsOrdersForGp(userId).then(msg => {
+            if(ItemsOrdersStatus.ITEMS_FOUND) {
+                return msg.orders || [];
+            } else {
+                return [];
+            }
+        })        
+    }
+
+    /**
+     * @description Cancels an order
+     * @param clientCancelRequest The client cancel request
+     * @returns {Promise<boolean>} A promise that resolves to true if the order was canceled successfully, false otherwise
+     */
+    gpCancelOrder(clientCancelRequest: OrderDetailRequest): Promise<boolean> {
+        return this.requestsServiceApi.gpCancelOrder(clientCancelRequest).then(msg => {
+            if(msg.message === CancelOrderStatus.ORDER_CANCELED_SUCCESSFULLY)
+            {
+                return true
+            }
+            return false
+        });
+    }
+
+    /**
+     * @description Accepts an order
+     * @param clientAcceptRequest The client accept request
+     * @returns {Promise<boolean>} A promise that resolves to true if the order was accepted successfully, false otherwise
+     */
+    gpAcceptOrder(clientAcceptRequest: OrderDetailRequest): Promise<boolean> {
+        return this.requestsServiceApi.gpAcceptOrder(clientAcceptRequest).then(msg => {
+            if(msg.message === GpAcceptOrderStatus.ORDER_ACCEPTED_SUCCESSFULLY)
             {
                 return true
             }

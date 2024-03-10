@@ -230,7 +230,36 @@
                 "title": "My Trips"
             },
             "orders": {
-                "title": "My Orders"
+                "title": "My Orders",
+                "tableId":"Order Number",
+                "newOrders": "New Orders",
+                "status": {
+                    "confirmOrder": "Confirm Order"
+                },
+                "confirmOrder": {
+                    "title": "You have a new order !",
+                    "content": "You have a new order. Please confirm the order to start the delivery process.",
+                    "acceptButton": "Accept the order",
+                    "rejectButton": "Reject the order",
+                    "cancelModal": {
+                        "title": "Cancel the Order",
+                        "content": "Are you sure you want to cancel the order?",
+                        "acceptButton": "Yes",
+                        "rejectButton": "No"
+                    },
+                    "cancelNotification": {
+                        "success": "The order has been canceled successfully",
+                        "error": "An error occurred while canceling the order"
+                    },
+                    "acceptNotification": {
+                        "success": "The order has been accepted successfully",
+                        "error": "An error occurred while accepting the order"
+                    },
+                    "emptyView": {
+                        "title": "You have no new orders yet",
+                        "content": "When a client creates a request, you will be able to see it here."
+                    }
+                }
             }
         }
     },

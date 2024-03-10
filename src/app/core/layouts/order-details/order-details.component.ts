@@ -2,6 +2,7 @@ import { Component, Input } from "@angular/core";
 import { Currency } from "../../../misc/enums/currency.enum";
 import { Country } from "../../../misc/enums/country.enum";
 import { ItemInformation } from "../request/item-information/item-information.component";
+import { SpecificPrice } from "../request/report-trip/report.time.constant";
 
 /**
  * @interface OrderDetails
@@ -87,10 +88,22 @@ export interface OrderDetails {
   tripId: string,
 
   /**
-   * @description The total price of the order
+   * @description The default price of the trip
    * @type {number}
    */
-  price: number,
+  defaultPrice: number,
+
+  /**
+   * @description The specific price of the trip
+   * @type {SpecificPrice[]}
+   */
+  specificPrice: SpecificPrice[];
+
+  /**
+   * @description The total price of the trip
+   * @type {number}
+   */
+  price?: number;
 }
 
 /**

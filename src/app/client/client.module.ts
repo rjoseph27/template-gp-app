@@ -22,9 +22,12 @@ import { NotificationService } from '../services/notification.service';
 import { ClientCalendarComponent } from './request/calendar/calendar.component';
 import { ClientCalendarResolver } from './request/calendar/calendar.resolver';
 import { ClientSendItemsService } from './service/send-items.service';
-import { ClientItemsOrdersComponent } from './client-orders/items-orders.component';
-import { ClientWaitingGpConfirmationComponent } from './client-orders/waiting-gp-confirmation/waiting-gp-confirmation.component';
-import { ClientWaitingGpConfirmationResolver } from './client-orders/waiting-gp-confirmation/waiting-gp-confirmation.resolver';
+import { ClientItemsOrdersComponent } from './orders/client-orders/items-orders.component';
+import { ClientWaitingGpConfirmationComponent } from './orders/client-orders/waiting-gp-confirmation/waiting-gp-confirmation.component';
+import { ClientWaitingGpConfirmationResolver } from './orders/client-orders/waiting-gp-confirmation/waiting-gp-confirmation.resolver';
+import { ClientGpOrdersComponent } from './orders/gp-orders/gp-orders.component';
+import { ClientConfirmOrdersComponent } from './orders/gp-orders/confirm-orders/confirm-orders.component';
+import { ClientConfirmOrdersResolver } from './orders/gp-orders/confirm-orders/confirm-orders.resolver';
 
 
 /**
@@ -40,7 +43,9 @@ import { ClientWaitingGpConfirmationResolver } from './client-orders/waiting-gp-
         ClientReportTripComponent,
         ClientCalendarComponent,
         ClientItemsOrdersComponent,
-        ClientWaitingGpConfirmationComponent
+        ClientWaitingGpConfirmationComponent,
+        ClientGpOrdersComponent,
+        ClientConfirmOrdersComponent
     ],
     imports: [
         CommonModule,
@@ -64,6 +69,7 @@ import { ClientWaitingGpConfirmationResolver } from './client-orders/waiting-gp-
     providers: [
         ClientApplicationResolver,
         ClientWaitingGpConfirmationResolver,
+        ClientConfirmOrdersResolver,
         ClientCalendarResolver,
         ClientRequestsService,
         ClientSendItemsService,

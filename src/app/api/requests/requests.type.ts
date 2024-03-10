@@ -7,8 +7,8 @@ import { Currency } from "../../misc/enums/currency.enum"
 import { ItemCategory } from "../../misc/enums/item-category.enum"
 import { DateFromDatePicker } from "../../misc/util/date.util"
 import { ApiResponse, StringKeys } from "../base.service.api"
-import { ItemsStatus } from "../../client/client-orders/items-orders.component"
 import { OrderDetails } from "../../core/layouts/order-details/order-details.component"
+import { ItemsStatus } from "../../client/orders/base-orders.component"
 
 /**
    * @interface ReportTrip
@@ -612,10 +612,10 @@ export interface ReportTrip {
   }
 
   /**
-   * @interface ClientCancelRequest
-   * @description An interface for the client cancel request
+   * @interface OrderDetailRequest
+   * @description An interface for the order details
    */
-  export interface ClientCancelRequest {
+  export interface OrderDetailRequest {
     /**
      * @description The id of the request
      * @type {string}
@@ -636,13 +636,25 @@ export interface ReportTrip {
   }
 
   /**
-   * @enum ClientCancelStatus
-   * @description The client cancel status
+   * @enum CancelOrderStatus
+   * @description The cancel order status
    */
-  export enum ClientCancelStatus {
+  export enum CancelOrderStatus {
     /**
      * @description The order was canceled successfully
      * @type {string}
      */
     ORDER_CANCELED_SUCCESSFULLY = "ORDER_CANCELED_SUCCESSFULLY"
+  }
+
+  /**
+   * @enum GpAcceptOrderStatus
+   * @description The accept order status
+   */
+  export enum GpAcceptOrderStatus {
+    /**
+     * @description The order was accepted successfully
+     * @type {string}
+     */
+    ORDER_ACCEPTED_SUCCESSFULLY = "ORDER_ACCEPTED_SUCCESSFULLY"
   }

@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { ApiResponse, BaseServiceApi } from "../base.service.api";
 import { firstValue } from "../../misc/function/firstValue";
-import { ReportTrip, SearchTripsRequest, SearchTripsApiResponse, ConfirmItemRequest, SendItemsRequestApiResponse, UpdateImageNameRequest, CreateAlertRequest, ListItemsApiResponse, ItemInformationApiResponse, RequestTableElementRequest, ClientCancelRequest } from "./requests.type";
+import { ReportTrip, SearchTripsRequest, SearchTripsApiResponse, ConfirmItemRequest, SendItemsRequestApiResponse, UpdateImageNameRequest, CreateAlertRequest, ListItemsApiResponse, ItemInformationApiResponse, RequestTableElementRequest, OrderDetailRequest } from "./requests.type";
 
 /**
  * @class RequestsServiceApi
@@ -68,11 +68,11 @@ export class RequestsServiceApi extends BaseServiceApi {
 
     /**
      * @description A method that gets the items orders
-     * @param itemId The id of the item
+     * @param userId The id of the user
      * @returns {Promise<ListItemsApiResponse>}
      */
-    getItemsOrders(itemId: string): Promise<ListItemsApiResponse> {
-        return firstValue(this.getRequest<ListItemsApiResponse>('lists-items', itemId));
+    getItemsOrders(userId: string): Promise<ListItemsApiResponse> {
+        return firstValue(this.getRequest<ListItemsApiResponse>('lists-items', userId));
     }
 
     /**
@@ -85,11 +85,38 @@ export class RequestsServiceApi extends BaseServiceApi {
     }
 
     /**
-     * @description A method that cancels an order
+     * @description A method that cancels an order for a client
      * @param clientCancelRequest The client cancel request
      * @returns {Promise<ApiResponse>}
      */
-    clientCancelOrder(clientCancelRequest: ClientCancelRequest): Promise<ApiResponse> {
+    clientCancelOrder(clientCancelRequest: OrderDetailRequest): Promise<ApiResponse> {
         return firstValue(this.postRequest<ApiResponse>('client-cancel-order', clientCancelRequest));
+    }
+
+    /**
+     * @description A method that gets the items orders for a user
+     * @param userId The id of the user
+     * @returns {Promise<ListItemsApiResponse>}
+     */
+    getItemsOrdersForGp(userId: string): Promise<ListItemsApiResponse> {
+        return firstValue(this.getRequest<ListItemsApiResponse>('lists-gp-items', userId));
+    }
+
+    /**
+     * @description A method that cancels an order for a GP
+     * @param clientCancelRequest The client cancel request
+     * @returns {Promise<ApiResponse>}
+     */
+    gpCancelOrder(clientCancelRequest: OrderDetailRequest): Promise<ApiResponse> {
+        return firstValue(this.postRequest<ApiResponse>('gp-cancel-order', clientCancelRequest));
+    }
+
+    /**
+     * @description A method that accepts an order for a GP
+     * @param clientAcceptRequest The client accept request
+     * @returns {Promise<ApiResponse>}
+     */
+    gpAcceptOrder(clientAcceptRequest: OrderDetailRequest): Promise<ApiResponse> {
+        return firstValue(this.postRequest<ApiResponse>('gp-accept-order', clientAcceptRequest));
     }
 }

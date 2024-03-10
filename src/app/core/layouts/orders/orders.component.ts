@@ -1,7 +1,6 @@
 import { Component, Input, OnInit, TemplateRef, ViewChild } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { ColumnConfig } from "../../elements/table/table.component";
-import { ItemsStatus } from "../../../client/client-orders/items-orders.component";
 import { Status } from "./status/status.component";
 
 /**
@@ -48,9 +47,9 @@ export interface RequestTableElement {
 
   /**
    * @description The status of the request
-   * @type {ItemsStatus}
+   * @type {any}
    */
-  status: ItemsStatus
+  status: any
 }
 
 /**

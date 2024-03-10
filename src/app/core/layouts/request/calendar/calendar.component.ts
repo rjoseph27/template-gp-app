@@ -371,7 +371,7 @@ interface DayPoint {
       if(cheapestOption)
       {
         const currentRate = this.rates[cheapestOption.currency];
-        return MoneyUtil.totalPrice(cheapestOption.totalPrice, currentRate)
+        return Math.round(MoneyUtil.totalPrice(cheapestOption.totalPrice, currentRate) / currentRate)
       }
     return undefined;
    }
@@ -384,22 +384,12 @@ interface DayPoint {
    private bestTripOption(id: string): TripInfo {
     if(id && this.items) {
       return this._elements$.value.filter((element) => element.id === id).map((trip) => {
-        const defaultPrice = trip.defaultPrice;
         let price = 0;
         this.items.itemInformation.forEach(element => {
-         const specificPrice = trip.specificPrice.find((price) => price.category === element.itemCategory);
-          if(specificPrice) {
-            if(specificPrice.unit === Unit.perKg)
-            {
-              price += element.itemWeight * specificPrice.price * element.itemQuantity;
-            } else {
-              price += specificPrice.price * element.itemQuantity;
-            }
-          } else {
-            price += element.itemWeight * defaultPrice * element.itemQuantity;
-          }
+          const currentRate = this.rates[this.items.currency];
+          price += MoneyUtil.getPrice(element, trip, currentRate);
         });
-
+        
         return {
           currency: trip.currency,
           totalPrice: price,

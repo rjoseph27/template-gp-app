@@ -7,9 +7,12 @@ import { ClientRoutes } from '../client.route';
 import { ClientReportTripComponent } from './request/report-trip/report-trip.component';
 import { ClientCalendarComponent } from './request/calendar/calendar.component';
 import { ClientCalendarResolver } from './request/calendar/calendar.resolver';
-import { ClientItemsOrdersComponent } from './client-orders/items-orders.component';
-import { ClientWaitingGpConfirmationComponent } from './client-orders/waiting-gp-confirmation/waiting-gp-confirmation.component';
-import { ClientWaitingGpConfirmationResolver } from './client-orders/waiting-gp-confirmation/waiting-gp-confirmation.resolver';
+import { ClientItemsOrdersComponent } from './orders/client-orders/items-orders.component';
+import { ClientWaitingGpConfirmationComponent } from './orders/client-orders/waiting-gp-confirmation/waiting-gp-confirmation.component';
+import { ClientWaitingGpConfirmationResolver } from './orders/client-orders/waiting-gp-confirmation/waiting-gp-confirmation.resolver';
+import { ClientGpOrdersComponent } from './orders/gp-orders/gp-orders.component';
+import { ClientConfirmOrdersResolver } from './orders/gp-orders/confirm-orders/confirm-orders.resolver';
+import { ClientConfirmOrdersComponent } from './orders/gp-orders/confirm-orders/confirm-orders.component';
 
 /**
  * @constant routes
@@ -25,6 +28,11 @@ const routes: Routes = [
     { path: `${ClientRoutes.clientOrder}`, children: [
         { path: '', component: ClientItemsOrdersComponent, pathMatch: 'full', resolve: { userInfo: ClientApplicationResolver} },
         { path: `${ClientRoutes.waitingGpConfirmation}`, component: ClientWaitingGpConfirmationComponent, pathMatch: 'full', resolve: { orderDetails: ClientWaitingGpConfirmationResolver, userInfo: ClientApplicationResolver } }
+    ] },
+
+    { path: `${ClientRoutes.gpOrders}`, children: [
+        { path: '', component: ClientGpOrdersComponent, pathMatch: 'full', resolve: { userInfo: ClientApplicationResolver} },
+        { path: `${ClientRoutes.confirmOrders}`, component: ClientConfirmOrdersComponent, pathMatch: 'full', resolve: { orderDetails: ClientConfirmOrdersResolver, userInfo: ClientApplicationResolver } }
     ] }
 ];
 

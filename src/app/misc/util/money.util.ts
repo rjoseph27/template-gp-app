@@ -1,3 +1,23 @@
+import { ItemInformation } from "../../core/layouts/request/item-information/item-information.component";
+import { SpecificPrice, Unit } from "../../core/layouts/request/report-trip/report.time.constant";
+
+/**
+ * @interface PriceInfo
+ * @description The information to calculate the price
+ */
+export interface PriceInfo {
+    /**
+     * @description The specific price
+     * @type {SpecificPrice[]}
+     */
+    specificPrice: SpecificPrice[];
+
+    /**
+     * @description The default price
+     * @type {number}
+     */
+    defaultPrice: number;
+}
 /**
  * @class MoneyUtil
  * @description Util class for money related operations
@@ -23,18 +43,39 @@ export class MoneyUtil {
     }
 
     /**
+     * @description A method that calculates the price
+     * @param order The item information
+     * @param trip The report trip
+     * @param rate The conversion rate
+     * @returns {number}
+     */
+    static getPrice(order: ItemInformation, priceInfo: PriceInfo, rate: number) {
+        let price = 0;
+        const category = priceInfo.specificPrice.find(x => x.category === order.itemCategory) 
+        if(category) {
+            if(category.unit === Unit.perItem) {
+                price = order.itemWeight * category.price * order.itemQuantity;
+            } else {
+                price = category.price * order.itemQuantity;
+            }
+        } else {
+            price = priceInfo.defaultPrice * order.itemWeight;
+        }
+        return price / rate;
+    }
+
+    /**
      * @description A method that calculates the total price
      * @param price The original price
      * @param rate The conversion rate
      * @returns {number}
      */
     static totalPrice(price: number, rate: number): number {
-        let total = price / rate;
         if(rate !== 1) {
-            total = MoneyUtil.addPercentage(total, CONVERSION_FEE)
+            price = MoneyUtil.addPercentage(price, CONVERSION_FEE)
         }
-        total = MoneyUtil.addPercentage(total, GH_HUB_FEE);
-        return Math.round(total);
+        price = MoneyUtil.addPercentage(price, GH_HUB_FEE);
+        return Math.round(price);
     }
 }
 
