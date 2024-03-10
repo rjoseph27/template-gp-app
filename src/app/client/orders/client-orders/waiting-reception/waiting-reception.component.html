@@ -1,0 +1,13 @@
+<div class="content">
+    <div>
+    <div class="section">
+        <h1>{{ 'moduleList.client.orders.waitReception.title' | translate }}</h1>
+    </div>
+    <div class="section">
+        <p [innerHTML]="contentText$ | async"></p>
+    </div>
+    <div class="section">
+        <gh-order-details [currency]="userCurrency.currency" [orderDetails]="orderDetail$ | async"></gh-order-details>
+    </div>
+    </div>
+</div>

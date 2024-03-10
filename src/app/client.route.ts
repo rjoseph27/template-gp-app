@@ -75,4 +75,10 @@ export class ClientRoutes {
      * @type {GhRoute}
      */
     static readonly confirmOrders: GhRoute = new GhRoute('confirm-orders', ClientRoutes.gpOrders);
+
+    /**
+     * @description The waiting reception route
+     * @type {GhRoute}
+     */
+    static readonly waitingReception: GhRoute = new GhRoute('waiting-reception', ClientRoutes.clientOrder);
 }

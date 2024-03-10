@@ -41,7 +41,13 @@ export interface CountryInfo {
      * @description The currency of the country
      * @type {Currency}
      */
-    currency: CurrencyInfo
+    currency: CurrencyInfo,
+
+    /**
+     * @description The list of the country's succursales
+     * @type {Map<any, SuccursaleInfo>}
+     */
+    succursales: Map<any, SuccursaleInfo>;
 }
 
 /**
@@ -102,6 +108,30 @@ export interface CurrencyInfo {
    */
   step: number;
 }
+
+/**
+ * @interface SuccursaleInfo
+ * @description An interface for the succursale info
+ */
+export interface SuccursaleInfo {
+  /**
+   * @description The name of the succursale
+   * @type {string}
+   */
+  name: string,
+
+  /**
+   * @description The name of the succursale
+   * @type {string}
+   */
+  address: string,
+
+  /**
+   * @description The phone number of the succursale
+   * @type {string}
+   */
+  phone: string
+}  
 
 /**
  * @constant

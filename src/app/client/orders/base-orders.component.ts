@@ -21,22 +21,22 @@ export enum ItemsStatus {
     ON_ALERT = 'ON_ALERT',
   
     /**
-     * @description The items are canceled by the user
+     * @description The items are canceled by the client
      * @type {string}
      */
-    CANCELED_BY_USER = 'CANCELED_BY_USER',
+    CANCELED_BY_CLIENT = 'CANCELED_BY_CLIENT',
   
     /**
      * @description The items are canceled by the GP
      * @type {string}
      */
-    CANCEL_BY_GP = 'CANCEL_BY_GP',
+    CANCELED_BY_GP = 'CANCELED_BY_GP',
   
     /**
      * @description The items has been canceled by the team
      * @type {string}
      */
-    CANCEL_BY_TEAM = '  CANCEL_BY_TEAM',
+    CANCELED_BY_TEAM = '  CANCELED_BY_TEAM',
   
     /**
      * @description The clients need to send the items to the checkpoint

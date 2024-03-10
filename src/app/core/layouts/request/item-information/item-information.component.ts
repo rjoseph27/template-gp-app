@@ -11,6 +11,7 @@ import { FormMode } from "../../../../misc/enums/form-mode.enum";
 import { ModalService } from "../../../../services/modal.service";
 import { GhFile } from "../../../elements/input/upload-image/upload-image.component";
 import { ITEM_INFORMATION_IMAGE_FOLDER, ImageUtil } from "../../../../misc/util/image.util";
+import { ItemsStatus } from "../../../../client/orders/base-orders.component";
 
 
 /**
@@ -41,6 +42,12 @@ export interface ItemInformation {
    * @type {ItemCategory}
    */
   itemCategory: ItemCategory;
+
+  /**
+   * @description The status of the item
+   * @type {ItemsStatus}
+   */
+  status?: ItemsStatus;
 
   /**
    * @description The weight of the item

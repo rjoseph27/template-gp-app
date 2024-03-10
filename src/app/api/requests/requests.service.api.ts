@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { ApiResponse, BaseServiceApi } from "../base.service.api";
 import { firstValue } from "../../misc/function/firstValue";
-import { ReportTrip, SearchTripsRequest, SearchTripsApiResponse, ConfirmItemRequest, SendItemsRequestApiResponse, UpdateImageNameRequest, CreateAlertRequest, ListItemsApiResponse, ItemInformationApiResponse, RequestTableElementRequest, OrderDetailRequest } from "./requests.type";
+import { ReportTrip, SearchTripsRequest, SearchTripsApiResponse, ConfirmItemRequest, SendItemsRequestApiResponse, UpdateImageNameRequest, CreateAlertRequest, ListItemsApiResponse, ItemInformationApiResponse, RequestTableElementRequest, OrderDetailRequest, GetSendItemsRequestApiResponse } from "./requests.type";
 
 /**
  * @class RequestsServiceApi
@@ -118,5 +118,14 @@ export class RequestsServiceApi extends BaseServiceApi {
      */
     gpAcceptOrder(clientAcceptRequest: OrderDetailRequest): Promise<ApiResponse> {
         return firstValue(this.postRequest<ApiResponse>('gp-accept-order', clientAcceptRequest));
+    }
+
+    /**
+     * @description A method that gets the send items info
+     * @param sendItemId The id of the send items
+     * @returns {Promise<GetSendItemsRequestApiResponse>}
+     */
+    getSendItemsInfo(sendItemId: string): Promise<GetSendItemsRequestApiResponse> {
+        return firstValue(this.getRequest<GetSendItemsRequestApiResponse>('get-send-items-info', sendItemId));
     }
 }

@@ -24,10 +24,11 @@ import { ClientCalendarResolver } from './request/calendar/calendar.resolver';
 import { ClientSendItemsService } from './service/send-items.service';
 import { ClientItemsOrdersComponent } from './orders/client-orders/items-orders.component';
 import { ClientWaitingGpConfirmationComponent } from './orders/client-orders/waiting-gp-confirmation/waiting-gp-confirmation.component';
-import { ClientWaitingGpConfirmationResolver } from './orders/client-orders/waiting-gp-confirmation/waiting-gp-confirmation.resolver';
+import { ClientOrderDetailsResolver } from './orders/client-orders/client-order-details.resolver';
 import { ClientGpOrdersComponent } from './orders/gp-orders/gp-orders.component';
 import { ClientConfirmOrdersComponent } from './orders/gp-orders/confirm-orders/confirm-orders.component';
 import { ClientConfirmOrdersResolver } from './orders/gp-orders/confirm-orders/confirm-orders.resolver';
+import { ClientWaitingReceptionComponent } from './orders/client-orders/waiting-reception/waiting-reception.component';
 
 
 /**
@@ -45,7 +46,8 @@ import { ClientConfirmOrdersResolver } from './orders/gp-orders/confirm-orders/c
         ClientItemsOrdersComponent,
         ClientWaitingGpConfirmationComponent,
         ClientGpOrdersComponent,
-        ClientConfirmOrdersComponent
+        ClientConfirmOrdersComponent,
+        ClientWaitingReceptionComponent
     ],
     imports: [
         CommonModule,
@@ -68,7 +70,7 @@ import { ClientConfirmOrdersResolver } from './orders/gp-orders/confirm-orders/c
     ],
     providers: [
         ClientApplicationResolver,
-        ClientWaitingGpConfirmationResolver,
+        ClientOrderDetailsResolver,
         ClientConfirmOrdersResolver,
         ClientCalendarResolver,
         ClientRequestsService,

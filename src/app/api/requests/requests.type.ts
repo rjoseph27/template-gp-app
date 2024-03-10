@@ -242,6 +242,18 @@ export interface ReportTrip {
      * @type {number}
      */
     itemQuantity: number
+
+    /**
+     * @description The status of the item
+     * @type {ItemsStatus}
+     */
+    status: ItemsStatus
+
+    /**
+     * @description The id of the item
+     * @type {string}
+     */
+    id: string
   }
 
   /**
@@ -591,6 +603,18 @@ export interface ReportTrip {
      * @type {RequestTableElement[]}
      */
     orders: RequestTableElement[];
+  }
+
+  /**
+   * @interface GetSendItemsRequestApiResponse
+   * @description An interface for the get send items request api response
+   */
+  export interface GetSendItemsRequestApiResponse extends ApiResponse {
+    /**
+     * @description The send items request
+     * @type {SendItemsRequest}
+     */
+    sendItemRequest: SendItemsRequest;
   }
 
   /**

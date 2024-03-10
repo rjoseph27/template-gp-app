@@ -2,6 +2,8 @@ import { Component, inject } from '@angular/core';
 import { ClientRoutes } from '../../../client.route';
 import { RequestTableElement } from '../../../core/layouts/orders/orders.component';
 import { ItemsStatus, baseOrdersComponent } from '../base-orders.component';
+import { ClientSendItemsService } from '../../service/send-items.service';
+import { LoadingService } from '../../../services/loading.service';
 
 /**
  * @class ClientItemsOrdersComponent
@@ -25,6 +27,18 @@ import { ItemsStatus, baseOrdersComponent } from '../base-orders.component';
      */
     protected readonly getDeliveredOrders$ = this.requestsService.getItemsOrders(this.userService.currentUserId).then(x => x.filter(y => y.status === ItemsStatus.DELIVERED));
 
+   /**
+   * @description The send items service
+   * @type {ClientSendItemsService}
+   */
+   private readonly sendItemsService = inject(ClientSendItemsService);
+
+   /**
+    * @description The loading service
+    * @type {LoadingService}
+    */
+   private readonly loadingService = inject(LoadingService);
+
     /**
      * @description The items orders
      * @type {Observable<RequestTableElement[]>}
@@ -43,6 +57,36 @@ import { ItemsStatus, baseOrdersComponent } from '../base-orders.component';
               deliveryDate: row.deliveryDate,
             }})
           }
+        case ItemsStatus.WAITING_RECEPTION:
+          return {
+            label: 'moduleList.client.orders.status.waitReception',
+            icon: 'quick_reorder',
+            action: () => this.router.navigate([ClientRoutes.waitingReception.fullPath()], { queryParams: {
+              id: row.id,
+              status: row.status,
+              from: row.route.from,
+              to: row.route.to,
+              deliveryDate: row.deliveryDate,
+            }})
+          }
+        case ItemsStatus.CANCELED_BY_GP:
+          return {
+            label: 'moduleList.client.orders.status.canceledByGp',
+            icon: 'calendar_month',
+            action: async () => {
+                this.loadingService.startLoading();
+                const order = await this.requestsService.getItemInformation({
+                  id: row.id,
+                  status: row.status,
+                  from: row.route.from,
+                  to: row.route.to,
+                  deliveryDate: row.deliveryDate,
+                });
+                const sendItemsInfo = await this.requestsService.getSendItemsInfo(order.itemGroupId);
+                this.sendItemsService.requests = sendItemsInfo;
+                this.router.navigate([ClientRoutes.calendar.fullPath()])
+              }
+            }
         default:
           return undefined;
       }

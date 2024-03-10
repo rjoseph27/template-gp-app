@@ -53,7 +53,12 @@ export class ClientRequestsService {
             userRegion: searchTrips.userRegion,
             destinationCountry: searchTrips.destinationCountry,
             destinationRegion: searchTrips.destinationRegion,
-            itemInformation: searchTrips.itemInformation.map(item => ({itemCategory: item.itemCategory, itemWeight: item.itemWeight, itemQuantity: item.itemQuantity})),
+            itemInformation: searchTrips.itemInformation.map(item => ({
+                id: item.id?.toString(),
+                status: item.status,
+                itemCategory: item.itemCategory, 
+                itemWeight: item.itemWeight, 
+                itemQuantity: item.itemQuantity})),
             month: month !== undefined ? month : DateUtil.addDaysFromDate(new Date(),1),
         }).then(msg => msg.searchResults);
     }
@@ -68,9 +73,12 @@ export class ClientRequestsService {
             if(msg.message === SendItemsStatus.ITEMS_SENT_SUCCESSFULLY)
             {
                 confirmItemRequest.items.itemInformation.forEach(async (item,index) =>{
-                    const formData = new FormData();
-                    formData.append('image', item.image); 
-                    await this.requestsServiceApi.uploadImages(formData).then(async img => await this.requestsServiceApi.updateImageName({id: msg.newId, filename: img, index: index}));
+                    if(typeof item.image !== 'string')
+                    {
+                        const formData = new FormData();
+                        formData.append('image', item.image); 
+                        await this.requestsServiceApi.uploadImages(formData).then(async img => await this.requestsServiceApi.updateImageName({id: msg.newId, filename: img, index: index}));
+                    }
                 });
                 return true
             }
@@ -144,7 +152,7 @@ export class ClientRequestsService {
      */
     getItemsOrdersForGp(userId: string): Promise<RequestTableElement[]> {
         return this.requestsServiceApi.getItemsOrdersForGp(userId).then(msg => {
-            if(ItemsOrdersStatus.ITEMS_FOUND) {
+            if(msg.message === ItemsOrdersStatus.ITEMS_FOUND) {
                 return msg.orders || [];
             } else {
                 return [];
@@ -180,5 +188,19 @@ export class ClientRequestsService {
             }
             return false
         });
+    }
+
+    /**
+     * @description Gets the send items info
+     * @param sendItemId The id of the send items
+     * @returns {Promise<SendItemsRequest>} A promise that resolves to the send items info
+     */
+    getSendItemsInfo(sendItemId: string): Promise<SendItemsRequest> {
+        return this.requestsServiceApi.getSendItemsInfo(sendItemId).then(msg => {
+            if(msg.message === ItemsOrdersStatus.ITEMS_FOUND) {
+                return msg.sendItemRequest;
+            }
+            return undefined;
+        })        
     }
 }

@@ -120,7 +120,9 @@
                 "title": "My Orders",
                 "tableId": "Order Number",
                 "status": {
-                    "waitConfirmation": "Waiting GP Confirmation"
+                    "waitConfirmation": "Waiting GP Confirmation",
+                    "waitReception": "Waiting Reception",
+                    "canceledByGp": "Select a New Trip"
                 },
                 "emptyView": {
                     "deliveredRequest": {
@@ -142,6 +144,11 @@
                         "success": "The request has been canceled successfully",
                         "error": "An error occurred while canceling the request"
                     }
+                },
+                "waitReception": {
+                    "title": "Send your Item",
+                    "content": "The GP is ready to take your items at <u>{{address}}</u>. For more details, please call <u>{{phone}}</u> for assistance.",
+                    "button": "Go Back to my Orders"
                 }
             },
             "alerts": {

@@ -9,10 +9,11 @@ import { ClientCalendarComponent } from './request/calendar/calendar.component';
 import { ClientCalendarResolver } from './request/calendar/calendar.resolver';
 import { ClientItemsOrdersComponent } from './orders/client-orders/items-orders.component';
 import { ClientWaitingGpConfirmationComponent } from './orders/client-orders/waiting-gp-confirmation/waiting-gp-confirmation.component';
-import { ClientWaitingGpConfirmationResolver } from './orders/client-orders/waiting-gp-confirmation/waiting-gp-confirmation.resolver';
+import { ClientOrderDetailsResolver } from './orders/client-orders/client-order-details.resolver';
 import { ClientGpOrdersComponent } from './orders/gp-orders/gp-orders.component';
 import { ClientConfirmOrdersResolver } from './orders/gp-orders/confirm-orders/confirm-orders.resolver';
 import { ClientConfirmOrdersComponent } from './orders/gp-orders/confirm-orders/confirm-orders.component';
+import { ClientWaitingReceptionComponent } from './orders/client-orders/waiting-reception/waiting-reception.component';
 
 /**
  * @constant routes
@@ -27,7 +28,8 @@ const routes: Routes = [
     { path: `${ClientRoutes.reportTrip}`, component: ClientReportTripComponent, pathMatch: 'full', resolve: { userInfo: ClientApplicationResolver} },
     { path: `${ClientRoutes.clientOrder}`, children: [
         { path: '', component: ClientItemsOrdersComponent, pathMatch: 'full', resolve: { userInfo: ClientApplicationResolver} },
-        { path: `${ClientRoutes.waitingGpConfirmation}`, component: ClientWaitingGpConfirmationComponent, pathMatch: 'full', resolve: { orderDetails: ClientWaitingGpConfirmationResolver, userInfo: ClientApplicationResolver } }
+        { path: `${ClientRoutes.waitingGpConfirmation}`, component: ClientWaitingGpConfirmationComponent, pathMatch: 'full', resolve: { orderDetails: ClientOrderDetailsResolver, userInfo: ClientApplicationResolver } },
+        { path: `${ClientRoutes.waitingReception}`, component: ClientWaitingReceptionComponent, pathMatch: 'full', resolve: { orderDetails: ClientOrderDetailsResolver, userInfo: ClientApplicationResolver } }
     ] },
 
     { path: `${ClientRoutes.gpOrders}`, children: [
