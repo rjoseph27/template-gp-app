@@ -1,7 +1,7 @@
 <div class="content">
     <div>
     <div class="section">
-        <h1>{{ 'moduleList.client.orders.waitReception.title' | translate }}</h1>
+        <h1>{{ 'moduleList.client.orders.readyForPickup.title' | translate }}</h1>
     </div>
     <div class="section">
         <p [innerHTML]="contentText$ | async"></p>
@@ -11,7 +11,6 @@
     </div>
     <div class="section">
         <button class="gp-button" (click)="navigateToMyOrders()">{{ 'moduleList.client.orders.waitConfirmation.button' | translate }}</button>
-        <button class="attention-button" (click)="cancelOrder()">{{ 'moduleList.client.orders.waitConfirmation.cancelButton' | translate }}</button>
     </div>
     </div>
 </div>

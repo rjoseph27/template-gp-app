@@ -19,13 +19,13 @@ import { LoadingService } from '../../../services/loading.service';
      * @description The items orders
      * @type {Observable<RequestTableElement[]>}
      */
-    protected readonly getItemsOrders$ = this.requestsService.getItemsOrders(this.userService.currentUserId);
+    protected readonly getItemsOrders$ = this.requestsService.getItemsOrders(this.userService.currentUserId).then(x => x.filter(y => y.status !== ItemsStatus.DELIVERED && y.status !== ItemsStatus.EXCEPTION));;
 
     /**
      * @description The delivered items orders
      * @type {Observable<RequestTableElement[]>}
      */
-    protected readonly getDeliveredOrders$ = this.requestsService.getItemsOrders(this.userService.currentUserId).then(x => x.filter(y => y.status === ItemsStatus.DELIVERED));
+    protected readonly getDeliveredOrders$ = this.requestsService.getItemsOrders(this.userService.currentUserId).then(x => x.filter(y => y.status === ItemsStatus.DELIVERED || y.status === ItemsStatus.EXCEPTION));
 
    /**
    * @description The send items service
@@ -87,6 +87,67 @@ import { LoadingService } from '../../../services/loading.service';
                 this.router.navigate([ClientRoutes.calendar.fullPath()])
               }
             }
+          case ItemsStatus.AT_CHECKPOINT:
+          case ItemsStatus.READY_TO_PICK_UP:
+            return {
+              label: 'moduleList.client.orders.status.atCheckpoint',
+              icon: 'location_on',
+              action: () => this.router.navigate([ClientRoutes.atCheckPoint.fullPath()], { queryParams: {
+                id: row.id,
+                status: row.status,
+                from: row.route.from,
+                to: row.route.to,
+                deliveryDate: row.deliveryDate,
+              }})
+            }
+          case ItemsStatus.WITH_GP:
+            return {
+              label: 'moduleList.client.orders.status.withGp',
+              icon: 'assignment_ind',
+              action: () => this.router.navigate([ClientRoutes.itemWithGp.fullPath()], { queryParams: {
+                id: row.id,
+                status: row.status,
+                from: row.route.from,
+                to: row.route.to,
+                deliveryDate: row.deliveryDate,
+              }})
+            }
+          case ItemsStatus.ON_DELIVERY:
+            return {
+              label: 'moduleList.client.orders.status.onDelivery',
+              icon: 'flightsmode',
+              action: () => console.log("wait on dispatch module")
+            }
+          case ItemsStatus.FINAL_CHECKPOINT:
+            return {
+              label: 'moduleList.client.orders.status.finalCheckpoint',
+              icon: 'location_on',
+              action: () => this.router.navigate([ClientRoutes.itemReadyForPickup.fullPath()], { queryParams: {
+                id: row.id,
+                status: row.status,
+                from: row.route.from,
+                to: row.route.to,
+                deliveryDate: row.deliveryDate,
+              }})
+            }
+          case ItemsStatus.DELIVERED:
+            return {
+              label: 'moduleList.client.orders.status.delivered',
+              icon: 'done',
+              action: () => this.router.navigate([ClientRoutes.itemDelivered.fullPath()], { queryParams: {
+                id: row.id,
+                status: row.status,
+                from: row.route.from,
+                to: row.route.to,
+                deliveryDate: row.deliveryDate,
+              }})
+            }
+        case ItemsStatus.EXCEPTION:
+          return {
+            label: 'moduleList.client.orders.status.exception',
+            icon: 'error',
+            action: () => console.log("wait on dispatch module")
+          }
         default:
           return undefined;
       }

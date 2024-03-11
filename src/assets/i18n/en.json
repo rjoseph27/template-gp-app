@@ -217,7 +217,7 @@
         },
         "request": {
             "onGoingRequest": "On Going Request",
-            "deliveredRequest": "Delivered Request",
+            "deliveredRequest": "Completed",
             "table": {
                 "route": "Route",
                 "deliveryDate": "Delivery date",

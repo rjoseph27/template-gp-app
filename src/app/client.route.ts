@@ -81,4 +81,28 @@ export class ClientRoutes {
      * @type {GhRoute}
      */
     static readonly waitingReception: GhRoute = new GhRoute('waiting-reception', ClientRoutes.clientOrder);
+
+    /**
+     * @description The at check point route
+     * @type {GhRoute}
+     */
+    static readonly atCheckPoint: GhRoute = new GhRoute('at-check-point', ClientRoutes.clientOrder);
+
+    /**
+     * @description The item with GP route
+     * @type {GhRoute}
+     */
+    static readonly itemWithGp: GhRoute = new GhRoute('item-with-gp', ClientRoutes.clientOrder);
+
+    /**
+     * @description The item ready for pickup route
+     * @type {GhRoute}
+     */
+    static readonly itemReadyForPickup: GhRoute = new GhRoute('item-ready-for-pickup', ClientRoutes.clientOrder);
+
+    /**
+     * @description The item delivered route
+     * @type {GhRoute}
+     */
+    static readonly itemDelivered: GhRoute = new GhRoute('item-delivered', ClientRoutes.clientOrder);
 }

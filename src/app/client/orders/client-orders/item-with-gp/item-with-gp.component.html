@@ -1,17 +1,16 @@
 <div class="content">
     <div>
     <div class="section">
-        <h1>{{ 'moduleList.client.orders.waitReception.title' | translate }}</h1>
+        <h1>{{ 'moduleList.client.orders.itemWithGp.title' | translate }}</h1>
     </div>
     <div class="section">
-        <p [innerHTML]="contentText$ | async"></p>
+        <p>{{ 'moduleList.client.orders.itemWithGp.content' | translate }}</p>
     </div>
     <div class="section">
         <gh-order-details [currency]="userCurrency.currency" [orderDetails]="orderDetail$ | async"></gh-order-details>
     </div>
     <div class="section">
         <button class="gp-button" (click)="navigateToMyOrders()">{{ 'moduleList.client.orders.waitConfirmation.button' | translate }}</button>
-        <button class="attention-button" (click)="cancelOrder()">{{ 'moduleList.client.orders.waitConfirmation.cancelButton' | translate }}</button>
     </div>
     </div>
 </div>

@@ -33,12 +33,6 @@ export enum ItemsStatus {
     CANCELED_BY_GP = 'CANCELED_BY_GP',
   
     /**
-     * @description The items has been canceled by the team
-     * @type {string}
-     */
-    CANCELED_BY_TEAM = '  CANCELED_BY_TEAM',
-  
-    /**
      * @description The clients need to send the items to the checkpoint
      * @type {string}
      */
@@ -49,6 +43,18 @@ export enum ItemsStatus {
      * @type {string}
      */
     AT_CHECKPOINT = 'AT_CHECKPOINT',
+
+    /**
+     * @description The items are ready to be picked up by the GP
+     * @type {string}
+     */
+    READY_TO_PICK_UP = 'READY_TO_PICK_UP',
+
+    /**
+     * @description The items are in the possession of the GP
+     * @type {string}
+     */
+    WITH_GP = 'WITH_GP',
   
     /**
      * @description The items are on the way to the final destination
@@ -63,10 +69,10 @@ export enum ItemsStatus {
     EXCEPTION = 'EXCEPTION',
   
     /**
-     * @description The items are at the final destination
+     * @description The items are at the final checkpoint
      * @type {string}
      */
-    FINAL_DESTINATION = 'FINAL_DESTINATION',
+    FINAL_CHECKPOINT = 'FINAL_CHECKPOINT',
   
     /**
      * @description The items has been delivered

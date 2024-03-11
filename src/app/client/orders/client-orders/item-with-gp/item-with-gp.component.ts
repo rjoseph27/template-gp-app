@@ -3,13 +3,13 @@ import { baseClientOrderDetailsComponent } from "../base-client-order-details.co
 import { ModalService } from "../../../../services/modal.service";
 
 /**
- * @class ClientWaitingGpConfirmationComponent
- * @description The waiting for GP confirmation component
+ * @class ClientItemWithGpComponent
+ * @description The item with GP component
  */
 @Component({
-    selector: 'client-waiting-gp-confirmation',
-    templateUrl: './waiting-gp-confirmation.component.html',
+    selector: 'client-item-with-gp',
+    templateUrl: './item-with-gp.component.html',
     styleUrls: ['./../../base-order-details.component.scss'],
     providers: [ModalService]
   })
-  export class ClientWaitingGpConfirmationComponent extends baseClientOrderDetailsComponent {}
+  export class ClientItemWithGpComponent extends baseClientOrderDetailsComponent {}
