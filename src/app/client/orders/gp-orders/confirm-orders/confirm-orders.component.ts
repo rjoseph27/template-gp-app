@@ -1,7 +1,8 @@
 import { Component } from "@angular/core";
-import { baseOrderDetailsComponent } from "../../base-order-details.component";
+import { BaseOrderDetailsComponent } from "../../base-order-details.component";
 import { ModalService } from "../../../../services/modal.service";
 import { ClientRoutes } from "../../../../client.route";
+import { BaseGpOrderDetailsComponent } from "../base-gp-order-details.component";
 
 /**
  * @class ClientConfirmOrdersComponent
@@ -10,39 +11,10 @@ import { ClientRoutes } from "../../../../client.route";
 @Component({
     selector: 'client-confirm-orders',
     templateUrl: './confirm-orders.component.html',
-    styleUrls: ['./../../base-order-details.component.scss'],
+    styleUrls: ['./../../base-order-details.component.scss', './confirm-orders.component.scss'],
     providers: [ModalService]
   })
-  export class ClientConfirmOrdersComponent extends baseOrderDetailsComponent {
-    /**
-     * @description A method that cancel the order
-     * @returns {void}
-     */
-    protected cancelOrder(): void {
-        this.modalService.openModal({
-            title: "moduleList.gp.orders.confirmOrder.cancelModal.title",
-            text: "moduleList.gp.orders.confirmOrder.cancelModal.content",
-            confirmCaption: "moduleList.gp.orders.confirmOrder.cancelModal.acceptButton",
-            cancelCaption: "moduleList.gp.orders.confirmOrder.cancelModal.rejectButton"
-          }).then(async x => {
-            const currentOrder = this.route.snapshot.data['orderDetails'];
-            const cancelRequest = {
-                orderId: currentOrder.itemInformation.id,
-                tripId: currentOrder.tripId,
-                id: currentOrder.itemGroupId
-            }
-            if(x) {
-                const isCanceledSucessfully = await this.requestsService.gpCancelOrder(cancelRequest);
-                if(isCanceledSucessfully) {
-                    this.router.navigate([ClientRoutes.gpOrders.fullPath()]);
-                    this.notificationService.successNotification('moduleList.gp.orders.confirmOrder.cancelNotification.success');
-                } else {
-                    this.notificationService.errorNotification('moduleList.gp.orders.confirmOrder.cancelNotification.error');
-                }
-            }
-          });
-    }
-
+  export class ClientConfirmOrdersComponent extends BaseGpOrderDetailsComponent {
     /**
      * @description A method that accept the order
      * @returns {Promise<void>}

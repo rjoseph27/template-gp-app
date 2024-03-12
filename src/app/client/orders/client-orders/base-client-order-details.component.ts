@@ -1,11 +1,11 @@
 import { ClientRoutes } from "../../../client.route";
-import { baseOrderDetailsComponent } from "../base-order-details.component";
+import { BaseOrderDetailsComponent } from "../base-order-details.component";
 
 /**
- * @class baseClientOrderDetailsComponent
+ * @class BaseClientOrderDetailsComponent
  * @description The base client order details component
  */
-export abstract class baseClientOrderDetailsComponent extends baseOrderDetailsComponent {
+export abstract class BaseClientOrderDetailsComponent extends BaseOrderDetailsComponent {
     /**
     * @description Navigates to the my orders page
     * @returns {void}

@@ -3,7 +3,7 @@ import { ModalService } from "../../../../services/modal.service";
 import { combineLatest, map } from "rxjs";
 import { COUNTRY_INFO_LIST } from "../../../../misc/constants/countries/countries";
 import { TranslateService } from "@ngx-translate/core";
-import { baseClientOrderDetailsComponent } from "../base-client-order-details.component";
+import { BaseClientOrderDetailsComponent } from "../base-client-order-details.component";
 
 /**
  * @class ClientWaitingReceptionComponent
@@ -15,7 +15,7 @@ import { baseClientOrderDetailsComponent } from "../base-client-order-details.co
     styleUrls: ['./../../base-order-details.component.scss'],
     providers: [ModalService]
   })
-  export class ClientWaitingReceptionComponent extends baseClientOrderDetailsComponent {
+  export class ClientWaitingReceptionComponent extends BaseClientOrderDetailsComponent {
     /**
      * @description An observable of the address of the succursale
      * @type {Observable<string>}

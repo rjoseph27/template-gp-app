@@ -1,22 +1,22 @@
 import { Component, inject } from "@angular/core";
-import { BaseClientOrderDetailsComponent } from "../base-client-order-details.component";
 import { ModalService } from "../../../../services/modal.service";
+import { BaseGpOrderDetailsComponent } from "../base-gp-order-details.component";
 import { map } from "rxjs/operators";
-import { COUNTRY_INFO_LIST } from "../../../../misc/constants/countries/countries";
-import { TranslateService } from "@ngx-translate/core";
 import { combineLatest } from "rxjs";
+import { TranslateService } from "@ngx-translate/core";
+import { COUNTRY_INFO_LIST } from "../../../../misc/constants/countries/countries";
 
 /**
- * @class ClientItemReadyForPickupComponent
- * @description The item ready for pickup component
+ * @class ClientReadyForPickupComponent
+ * @description The ready for pickup component
  */
 @Component({
-    selector: 'client-item-ready-for-pickup',
-    templateUrl: './item-ready-for-pickup.component.html',
+    selector: 'client-ready-for-pickup',
+    templateUrl: './ready-for-pickup.component.html',
     styleUrls: ['./../../base-order-details.component.scss'],
     providers: [ModalService]
   })
-  export class ClientItemReadyForPickupComponent extends BaseClientOrderDetailsComponent {
+  export class ClientReadyForPickupComponent extends BaseGpOrderDetailsComponent {
     /**
      * @description An observable of the address of the succursale
      * @type {Observable<string>}
@@ -40,7 +40,8 @@ import { combineLatest } from "rxjs";
      * @type {Observable<string>}
      */
     protected readonly contentText$ = combineLatest([this.succursalePhone$, this.succursaleAddress$])
-        .pipe(map(([phone, address]) => this.translate.instant('moduleList.client.orders.readyForPickup.content', {
+        .pipe(map(([phone, address]) => this.translate.instant('moduleList.gp.orders.readyForPickup.content', {
             phone: phone,
             address: address })))
+
   }

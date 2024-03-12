@@ -77,6 +77,30 @@ export class ClientRoutes {
     static readonly confirmOrders: GhRoute = new GhRoute('confirm-orders', ClientRoutes.gpOrders);
 
     /**
+     * @description The item on his way route
+     * @type {GhRoute}
+     */
+    static readonly itemOnHisWay: GhRoute = new GhRoute('item-on-his-way', ClientRoutes.gpOrders);
+
+    /**
+     * @description The item at checkpoint route
+     * @type {GhRoute}
+     */
+    static readonly itemAtCheckpoint: GhRoute = new GhRoute('item-at-checkpoint', ClientRoutes.gpOrders);
+
+    /**
+     * @description The ready for pickup route
+     * @type {GhRoute}
+     */
+    static readonly readyForPickup: GhRoute = new GhRoute('ready-for-pickup', ClientRoutes.gpOrders);
+
+    /**
+     * @description The item with you route
+     * @type {GhRoute}
+     */
+    static readonly itemWithYou: GhRoute = new GhRoute('item-with-you', ClientRoutes.gpOrders);
+
+    /**
      * @description The waiting reception route
      * @type {GhRoute}
      */
@@ -105,4 +129,10 @@ export class ClientRoutes {
      * @type {GhRoute}
      */
     static readonly itemDelivered: GhRoute = new GhRoute('item-delivered', ClientRoutes.clientOrder);
+
+    /**
+     * @description The item delivered route
+     * @type {GhRoute}
+     */
+    static readonly itemDeliveredGp: GhRoute = new GhRoute('item-delivered', ClientRoutes.gpOrders);
 }

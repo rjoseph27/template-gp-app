@@ -1,9 +1,9 @@
 import { Component } from "@angular/core";
-import { BaseClientOrderDetailsComponent } from "../base-client-order-details.component";
 import { ModalService } from "../../../../services/modal.service";
+import { BaseGpOrderDetailsComponent } from "../base-gp-order-details.component";
 
 /**
- * @class ClientItemAtCheckPointComponent
+ * @class ClientGpItemAtCheckpointComponent
  * @description The item at checkpoint component
  */
 @Component({
@@ -12,4 +12,4 @@ import { ModalService } from "../../../../services/modal.service";
     styleUrls: ['./../../base-order-details.component.scss'],
     providers: [ModalService]
   })
-  export class ClientItemAtCheckPointComponent extends BaseClientOrderDetailsComponent {}
+  export class ClientGpItemAtCheckpointComponent extends BaseGpOrderDetailsComponent {}

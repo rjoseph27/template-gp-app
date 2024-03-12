@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { baseClientOrderDetailsComponent } from "../base-client-order-details.component";
+import { BaseClientOrderDetailsComponent } from "../base-client-order-details.component";
 import { ModalService } from "../../../../services/modal.service";
 
 /**
@@ -12,4 +12,4 @@ import { ModalService } from "../../../../services/modal.service";
     styleUrls: ['./../../base-order-details.component.scss'],
     providers: [ModalService]
   })
-  export class ClientWaitingGpConfirmationComponent extends baseClientOrderDetailsComponent {}
+  export class ClientWaitingGpConfirmationComponent extends BaseClientOrderDetailsComponent {}

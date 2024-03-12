@@ -261,15 +261,50 @@
             "orders": {
                 "title": "My Orders",
                 "tableId":"Order Number",
-                "newOrders": "New Orders",
+                "tableName": {
+                    "newOrders": "New Orders",
+                    "onPreparation": {
+                        "title": "On Preparation",
+                        "emptyView": {
+                            "title": "You have no orders on preparation yet",
+                            "content": "When you accept a request, you will be able to see it here."
+                        }
+                    },
+                    "readyForPickup": {
+                        "title": "Ready for Pickup",
+                        "emptyView": {
+                            "title": "You have no orders ready for pickup yet",
+                            "content": "When the item is ready for pickup, you will be able to see it here."
+                        }
+                    },
+                    "delivery": {
+                        "title": "On Delivery",
+                        "emptyView": {
+                            "title": "You have no orders on delivery yet",
+                            "content": "When they day of departure will come, you will be able to see items here."
+                        }
+                    },
+                    "completed": {
+                        "title": "Completed Orders",
+                        "emptyView": {
+                            "title": "You have no completed orders yet",
+                            "content": "When you deliver an item, you will be able to see it here."
+                        }
+                    }
+                },
                 "status": {
-                    "confirmOrder": "Confirm Order"
+                    "confirmOrder": "Confirm Order",
+                    "itemOnHisWay": "Item on his way",
+                    "itemAtCheckpoint": "Item at Checkpoint",
+                    "readyForPickup": "Ready for Pickup",
+                    "itemWithYou": "Item with you"
                 },
                 "confirmOrder": {
                     "title": "You have a new order !",
                     "content": "You have a new order. Please confirm the order to start the delivery process.",
                     "acceptButton": "Accept the order",
                     "rejectButton": "Reject the order",
+                    "return": "Go Back to my Orders",
                     "cancelModal": {
                         "title": "Cancel the Order",
                         "content": "Are you sure you want to cancel the order?",
@@ -288,6 +323,22 @@
                         "title": "You have no new orders yet",
                         "content": "When a client creates a request, you will be able to see it here."
                     }
+                },
+                "itemOnHisWay": {
+                    "title": "The item is on his way",
+                    "content": "We are waiting that the client send the item at the checkpoint. We will notify you once the item is ready for pickup."
+                },
+                "itemAtCheckpoint": {
+                    "title": "The item is at the checkpoint",
+                    "content": "The item is at the checkpoint. Our team is inspecting the item. We will notify you once the item is ready for pickup."
+                },
+                "readyForPickup": {
+                    "title": "The item is ready for pickup",
+                    "content": "The item is ready for pickup. You can pick it up at <u>{{address}}</u>. For more details, please call <u>{{phone}}</u> for assistance."
+                },
+                "itemWithYou": {
+                    "title": "The item is with you",
+                    "content": "You are now in the possession of the item. You can deliver it to the destination checkpoint."
                 }
             }
         }

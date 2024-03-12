@@ -27,12 +27,17 @@ import { ClientWaitingGpConfirmationComponent } from './orders/client-orders/wai
 import { ClientOrderDetailsResolver } from './orders/client-orders/client-order-details.resolver';
 import { ClientGpOrdersComponent } from './orders/gp-orders/gp-orders.component';
 import { ClientConfirmOrdersComponent } from './orders/gp-orders/confirm-orders/confirm-orders.component';
-import { ClientConfirmOrdersResolver } from './orders/gp-orders/confirm-orders/confirm-orders.resolver';
+import { ClientGpOrderDetailsResolver } from './orders/gp-orders/gp-order-details.resolver';
 import { ClientWaitingReceptionComponent } from './orders/client-orders/waiting-reception/waiting-reception.component';
 import { ClientItemAtCheckPointComponent } from './orders/client-orders/item-at-checkpoint/item-at-checkpoint.component';
 import { ClientItemWithGpComponent } from './orders/client-orders/item-with-gp/item-with-gp.component';
 import { ClientItemReadyForPickupComponent } from './orders/client-orders/item-ready-for-pickup/item-ready-for-pickup.component';
 import { ClientItemDeliveredComponent } from './orders/client-orders/item-delivered/item-delivered.component';
+import { ClientItemOnHisWayComponent } from './orders/gp-orders/item-on-his-way/item-on-his-way.component';
+import { ClientGpItemAtCheckpointComponent } from './orders/gp-orders/item-at-checkpoint/item-at-checkpoint.component';
+import { ClientReadyForPickupComponent } from './orders/gp-orders/ready-for-pickup/ready-for-pickup.component';
+import { ClientItemWithYouComponent } from './orders/gp-orders/item-with-you/item-with-you.component';
+import { ClientItemDeliveredGpComponent } from './orders/gp-orders/item-delivered/item-delivered.component';
 
 
 /**
@@ -55,7 +60,12 @@ import { ClientItemDeliveredComponent } from './orders/client-orders/item-delive
         ClientItemAtCheckPointComponent,
         ClientItemWithGpComponent,
         ClientItemReadyForPickupComponent,
-        ClientItemDeliveredComponent
+        ClientItemDeliveredComponent,
+        ClientItemOnHisWayComponent,
+        ClientGpItemAtCheckpointComponent,
+        ClientReadyForPickupComponent,
+        ClientItemWithYouComponent,
+        ClientItemDeliveredGpComponent
     ],
     imports: [
         CommonModule,
@@ -79,7 +89,7 @@ import { ClientItemDeliveredComponent } from './orders/client-orders/item-delive
     providers: [
         ClientApplicationResolver,
         ClientOrderDetailsResolver,
-        ClientConfirmOrdersResolver,
+        ClientGpOrderDetailsResolver,
         ClientCalendarResolver,
         ClientRequestsService,
         ClientSendItemsService,

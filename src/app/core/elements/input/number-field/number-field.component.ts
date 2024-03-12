@@ -28,4 +28,10 @@ export class GhNumberFieldComponent extends BaseInputFieldComponent<number> {
    * @type {number}
    */
   @Input() step: number;
+
+  /**
+   * @description The maximum number of decimal of the number field
+   * @type {number}
+   */
+  @Input() maxDecimal: number;
 }

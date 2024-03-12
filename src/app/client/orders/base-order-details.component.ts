@@ -6,7 +6,11 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { map } from "rxjs/operators";
 import { ModalService } from "../../services/modal.service";
 
-export abstract class baseOrderDetailsComponent {
+/**
+ * @class BaseOrderDetailsComponent
+ * @description The base order details component
+ */
+export abstract class BaseOrderDetailsComponent {
     /**
     * @description The activated route service
     * @type {ActivatedRoute}

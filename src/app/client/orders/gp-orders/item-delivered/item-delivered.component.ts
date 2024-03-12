@@ -1,15 +1,15 @@
 import { Component } from "@angular/core";
 import { ModalService } from "../../../../services/modal.service";
-import { BaseClientOrderDetailsComponent } from "../base-client-order-details.component";
+import { BaseGpOrderDetailsComponent } from "../base-gp-order-details.component";
 
 /**
- * @class ClientItemDeliveredComponent
+ * @class ClientItemDeliveredGpComponent
  * @description The item delivered component
  */
 @Component({
-    selector: 'client-item-delivered',
+    selector: 'client-item-delivered-gp',
     templateUrl: './item-delivered.component.html',
     styleUrls: ['./../../base-order-details.component.scss'],
     providers: [ModalService]
   })
-  export class ClientItemDeliveredComponent extends BaseClientOrderDetailsComponent {}
+  export class ClientItemDeliveredGpComponent extends BaseGpOrderDetailsComponent {}

@@ -45,6 +45,7 @@
              (valueChange)="itemInformationForm.itemInformation.get(itemWeightField).setValue($event)"
              [errors]="itemInformationForm.itemInformation.get(itemWeightField).errors"
              [errorCaptions]="itemWeightErrorCaptions"
+             [maxDecimal]="2"
              [min]="0"
              [step]="0.01"
              [max]="maxLuggageWeight"
