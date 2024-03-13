@@ -333,5 +333,8 @@
             "November": "November",
             "December": "December"
         }
+    },
+    "unit": {
+        "kg": "KGs"
     }
 }

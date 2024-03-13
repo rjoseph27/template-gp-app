@@ -25,5 +25,5 @@
 </div>
 
 <ng-template #readonlyTemplate>
-    <gh-value [value]="value?.toFixed(maxDecimal).toString()"></gh-value>
+    <gh-value [value]="value?.toFixed(maxDecimal).toString()+(suffix? ' '+suffix:'')"></gh-value>
 </ng-template>

@@ -8,7 +8,7 @@ import { ItemCategory } from "../../misc/enums/item-category.enum"
 import { DateFromDatePicker } from "../../misc/util/date.util"
 import { ApiResponse, StringKeys } from "../base.service.api"
 import { OrderDetails } from "../../core/layouts/order-details/order-details.component"
-import { ItemsStatus } from "../../client/orders/base-orders.component"
+import { ItemsStatus, TripStatus } from "../../client/orders/base-orders.component"
 
 /**
    * @interface ReportTrip
@@ -20,6 +20,12 @@ export interface ReportTrip {
      * @type {string}
      */
     id?: string;
+
+    /**
+     * @description The status of the trip
+     * @type {TripStatus}
+     */
+    status?: TripStatus;
 
     /**
      * @description The user id
@@ -576,8 +582,8 @@ export interface ReportTrip {
   }
 
   /**
-   * @interface ListItemsApiResponse
-   * @description An interface for the list items api response
+   * @interface ItemsOrdersStatus
+   * @description The status of the items orders request
    */
   export enum ItemsOrdersStatus {
     /**
@@ -591,6 +597,54 @@ export interface ReportTrip {
      * @type {string}
      */
     ITEMS_NOT_FOUND = "ITEMS_NOT_FOUND"
+  }
+
+  /**
+   * @interface GetReportTripStatus
+   * @description The status of the get report trip request
+   */
+  export enum GetReportTripStatus {
+    /**
+     * @description The trip was found
+     * @type {string}
+     */
+    TRIPS_FOUND = "TRIPS_FOUND",
+
+    /**
+     * @description The trip was not found
+     * @type {string}
+     */
+    TRIPS_NOT_FOUND = "TRIPS_NOT_FOUND"
+  }
+
+  /**
+   * @interface GetTripInfoStatus
+   * @description The status of the get trip info request
+   */
+  export enum GetTripInfoStatus {
+    /**
+     * @description The trip was found
+     * @type {string}
+     */
+    TRIP_FOUND = "TRIP_FOUND",
+
+    /**
+     * @description The trip was not found
+     * @type {string}
+     */
+    TRIP_NOT_FOUND = "TRIP_NOT_FOUND"
+  }
+
+  /**
+   * @interface GetSendItemsRequestStatus
+   * @description The status of the get send items request
+   */
+  export enum CancelTripStatus {
+    /**
+     * @description The trip was canceled successfully
+     * @type {string}
+     */
+    TRIP_CANCELED_SUCCESSFULLY = "TRIP_CANCELED_SUCCESSFULLY"
   }
 
   /**
@@ -615,6 +669,30 @@ export interface ReportTrip {
      * @type {SendItemsRequest}
      */
     sendItemRequest: SendItemsRequest;
+  }
+
+  /**
+   * @interface GetTripListApiResponse
+   * @description An interface for the get trip list api response
+   */
+  export interface GetTripListApiResponse extends ApiResponse {
+    /**
+     * @description The trips
+     * @type {RequestTableElement[]}
+     */
+    trips: RequestTableElement[];
+  }
+
+  /**
+   * @interface GetTripInfoApiResponse
+   * @description An interface for the get trip info api response
+   */
+  export interface GetTripInfoApiResponse extends ApiResponse {
+    /**
+     * @description The information on the trip
+     * @type {ReportTrip}
+     */
+    trip: ReportTrip;
   }
 
   /**
@@ -645,7 +723,7 @@ export interface ReportTrip {
      * @type {string}
      */
     id: string;
-
+  
     /**
      * @description The order id
      * @type {string}
@@ -654,6 +732,18 @@ export interface ReportTrip {
 
     /**
      * @description The trip id
+     * @type {string}
+     */
+    tripId: string;
+  }
+
+  /**
+   * @interface CancelTripRequest
+   * @description An interface for the cancel trip request
+   */
+  export interface CancelTripRequest {
+    /**
+     * @description The id of the trip
      * @type {string}
      */
     tripId: string;

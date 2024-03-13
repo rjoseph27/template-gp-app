@@ -1,7 +1,7 @@
 <div class="section">
     <label [for]="name">{{ label }}</label>
 </div>
-<div class="section">
+<div class="section" *ngIf="!readonly; else readonlyTemplate">
     <div class="input-with-icon">
         <gh-text-field 
         [name]="name"
@@ -18,12 +18,16 @@
         *ngIf="(errorMessage$ | async)"
         class="error-message" 
         >{{ (errorMessage$ | async) | translate }}</div>
-    <input 
-        [ngClass]="{'time-close': !(isTimePickerOpen$ | async),'time-open': (isTimePickerOpen$ | async)}"
-        #input 
-        type="time" 
-        [max]="inputMaxTime"
-        [min]="inputMaxTime"
-        (change)="onTimeChange($event)"
-    >
 </div>
+<input 
+    #input 
+    [ngClass]="{'time-close': !(isTimePickerOpen$ | async),'time-open': (isTimePickerOpen$ | async)}"
+    type="time" 
+    [max]="inputMaxTime"
+    [min]="inputMaxTime"
+    (change)="onTimeChange($event)"
+>
+
+<ng-template #readonlyTemplate>
+    <gh-value [value]="value?.timeString"></gh-value>
+</ng-template>

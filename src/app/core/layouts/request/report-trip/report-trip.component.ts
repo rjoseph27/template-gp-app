@@ -1,9 +1,9 @@
-import { AfterViewInit, Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
+import { AfterViewInit, Component, Input, OnInit, TemplateRef, ViewChild } from "@angular/core";
 import { FormArray, FormControl, FormGroup, Validators } from "@angular/forms";
 import { Country } from "../../../../misc/enums/country.enum";
 import { BaseRequestComponent } from "../base-request.component";
 import { COUNTRY_INFO_LIST } from "../../../../misc/constants/countries/countries";
-import { map } from "rxjs/operators";
+import { map, tap } from "rxjs/operators";
 import { MIN_VALIDATION, REQUIRED_VALIDATION } from "../../../../misc/constants/validations";
 import { INVALID_DATE_FORMAT_VALIDATION, dateFormatValidator } from "../../../../misc/validation/date-format.validator";
 import { DateUtil } from "../../../../misc/util/date.util";
@@ -15,6 +15,8 @@ import { GroupedSelectFieldOption, SelectFieldOption } from "../../../elements/i
 import { LIST_ITEM_CATEGORY_OPTION } from "../../../../misc/constants/item-category";
 import { EnumUtil } from "../../../../misc/util/enum.util";
 import { ARRIVAL_DATE, ARRIVAL_TIME, DEPARTURE_DATE, DEPARTURE_TIME, EMPTY_TABLE_LOGO, FLIGHT_TIME_INVALID, SpecificPrice, Unit, flighTimeValidator } from "./report.time.constant";
+import { FormMode } from "../../../../misc/enums/form-mode.enum";
+import { ReportTrip } from "../../../../api/requests/requests.type";
 
 /**
  * @class GhReportTripComponent
@@ -105,6 +107,24 @@ export class GhReportTripComponent extends BaseRequestComponent implements OnIni
    * @type {BehaviorSubject<ColumnConfig[]>}
    */
   private readonly _specificPriceTableColumns$ = new BehaviorSubject<ColumnConfig[]>(undefined);
+
+  /**
+   * @description The form mode
+   * @type {FormMode}
+   */
+  @Input() currentFormMode: FormMode;
+
+  /**
+   * @description The report trip
+   * @type {ReportTrip}
+   */
+  @Input() reportTrip: ReportTrip;
+
+  /**
+   * @description The form mode enum for template use.
+   * @type {FormMode}
+   */
+  protected readonly formMode = FormMode;
 
   /**
    * @description The observable for the specific price table columns
@@ -270,18 +290,28 @@ export class GhReportTripComponent extends BaseRequestComponent implements OnIni
 
   /** @inheritdoc */
   ngOnInit(): void {
+    this._destinationCountry$.next(this.reportTrip?.destinationCountry);
+    const specificPrice = this.reportTrip?.specificPrice.map((x,i) => {
+      x.id = i
+      return x
+    }) || [];
+    this.specificPriceElements = specificPrice || [];
     this.currentFormService.currentForm = new FormGroup({
-      userCountry: new FormControl(this.userCountry, [Validators.required]),
-      userAirport: new FormControl(null, [Validators.required]),
-      departureDate: new FormControl(null, [Validators.required, dateFormatValidator, minDateValidator(this.minDepartureDate)]),
-      departureTime: new FormControl(null, [Validators.required, timeFormatValidator]),
-      destinationCountry: new FormControl(null, [Validators.required]),
-      destinationAirport: new FormControl(null, [Validators.required]),
-      arrivalDate: new FormControl(null, [Validators.required, dateFormatValidator]),
-      arrivalTime: new FormControl(null, [Validators.required, timeFormatValidator]),
-      availableSpace: new FormControl(null, [Validators.required, Validators.min(0.5)]),
-      defaultPrice: new FormControl(null, [Validators.required, Validators.min(0)]),
-      specificPrice: new FormArray([]),
+      userCountry: new FormControl(this.reportTrip?.userCountry || this.userCountry, [Validators.required]),
+      userAirport: new FormControl(this.reportTrip?.userAirport, [Validators.required]),
+      departureDate: new FormControl(this.reportTrip?.departureDate, [Validators.required, dateFormatValidator, minDateValidator(this.minDepartureDate)]),
+      departureTime: new FormControl(this.reportTrip?.departureTime, [Validators.required, timeFormatValidator]),
+      destinationCountry: new FormControl(this.reportTrip?.destinationCountry, [Validators.required]),
+      destinationAirport: new FormControl(this.reportTrip?.destinationAirport, [Validators.required]),
+      arrivalDate: new FormControl(this.reportTrip?.arrivalDate, [Validators.required, dateFormatValidator]),
+      arrivalTime: new FormControl(this.reportTrip?.arrivalTime, [Validators.required, timeFormatValidator]),
+      availableSpace: new FormControl(this.reportTrip?.availableSpace, [Validators.required, Validators.min(0.5)]),
+      defaultPrice: new FormControl(this.reportTrip?.defaultPrice, [Validators.required, Validators.min(0)]),
+      specificPrice: new FormArray(specificPrice.map(x => new FormGroup({
+        category: new FormControl(x.category, [Validators.required]),
+        price: new FormControl(x.price, [Validators.required, Validators.min(0)]),
+        unit: new FormControl(x.unit, [Validators.required]),
+      })) || []),
     }, { validators: [flighTimeValidator]});
   }
 
@@ -289,7 +319,7 @@ export class GhReportTripComponent extends BaseRequestComponent implements OnIni
    * @description Reports the trip
    * @returns {void}
    */
-  protected reportTrip(): void {
+  protected submitForm(): void {
     this.currentFormService.submitting = true;
   }
 

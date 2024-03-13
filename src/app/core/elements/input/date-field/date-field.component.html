@@ -1,7 +1,7 @@
 <div class="section">
     <label [for]="name">{{ label }}</label>
 </div>
-<div class="section">
+<div class="section" *ngIf="!readonly; else readonlyTemplate">
     <div class="input-with-icon">
         <gh-text-field 
         [name]="name"
@@ -18,12 +18,17 @@
         *ngIf="(errorMessage$ | async)"
         class="error-message" 
         >{{ (errorMessage$ | async) | translate }}</div>
-    <input 
-        [ngClass]="{'calendar-close': !(isCalendarOpen$ | async),'calendar-open': (isCalendarOpen$ | async)}"
-        #input 
-        type="date" 
-        [max]="inputMaxDate"
-        [min]="inputMinDate"
-        (change)="onDateChange($event)"
-    >
 </div>
+
+<input 
+    #input 
+    [ngClass]="{'calendar-close': !(isCalendarOpen$ | async),'calendar-open': (isCalendarOpen$ | async)}"
+    type="date" 
+    [max]="inputMaxDate"
+    [min]="inputMinDate"
+    (change)="onDateChange($event)"
+>
+
+<ng-template #readonlyTemplate>
+    <gh-value [value]="value?.dateString"></gh-value>
+</ng-template>

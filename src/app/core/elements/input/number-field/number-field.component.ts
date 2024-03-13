@@ -34,4 +34,10 @@ export class GhNumberFieldComponent extends BaseInputFieldComponent<number> {
    * @type {number}
    */
   @Input() maxDecimal: number;
+
+  /**
+   * @description The suffix of the number field
+   * @type {string}
+   */
+  @Input() suffix: string;
 }

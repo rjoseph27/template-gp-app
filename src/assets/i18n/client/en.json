@@ -256,7 +256,45 @@
                 }
             },
             "trip": {
-                "title": "My Trips"
+                "title": "My Trips",
+                "tableId": "Trip Id",
+                "uncompleted": {
+                    "title": "Uncompleted Trips",
+                    "emptyView": {
+                        "title": "You have no uncompleted trips yet",
+                        "content": "When you report a trip, you will be able to see it here.",
+                        "button": "Report a Trip"
+                    }
+                },
+                "status": {
+                    "planned": "Planned Trip",
+                    "confirmed": "Confirmed Trip",
+                    "onFlight": "On Flight",
+                    "tripDone": "Trip Completed"
+                },
+                "plannedTrip": {
+                    "title": "Planned Trip",
+                    "button": {
+                        "back": "Go Back to my Trips",
+                        "cancel": "Cancel the Trip"
+                    },
+                    "cancelModal": {
+                        "title": "Cancel the Trip",
+                        "content": "Are you sure you want to cancel the trip?",
+                        "acceptButton": "Yes",
+                        "rejectButton": "No",
+                        "notification": {
+                            "success": "The trip has been canceled successfully",
+                            "error": "An error occurred while canceling the trip"
+                        }
+                    }
+                },
+                "confirmedTrip": {
+                    "title": "Confirmed Trip"
+                },
+                "tripDone": {
+                    "title": "The trip has been successfully completed"
+                }
             },
             "orders": {
                 "title": "My Orders",

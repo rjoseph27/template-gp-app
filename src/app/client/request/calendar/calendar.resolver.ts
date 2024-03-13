@@ -7,6 +7,10 @@ import { DateUtil } from "../../../misc/util/date.util";
 import { ClientRequestsService } from "../../service/requests.service";
 import { CurrencyService } from "../../../services/currency.service";
 
+/**
+ * @class ClientCalendarResolver
+ * @description The resolver for the client calendar
+ */
 @Injectable()
 export class ClientCalendarResolver implements Resolve<any> {
   /**

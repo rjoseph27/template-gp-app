@@ -12,10 +12,14 @@ export const MIN_DATE_VALIDATION = 'minDate';
  */
 export const minDateValidator = (minDate: Date): ValidatorFn => {
         return (control: AbstractControl): ValidationErrors | null => {
-            const selectedDate = control.value?.date;
+            let selectedDate = control.value?.date;
 
             if(!selectedDate) {
                 return null
+            }
+
+            if(typeof selectedDate === 'string') {
+                selectedDate = new Date(selectedDate);
             }
     
             if (!isNaN(selectedDate.getTime()) && selectedDate < minDate) {

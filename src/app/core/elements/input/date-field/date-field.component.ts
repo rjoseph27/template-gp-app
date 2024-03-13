@@ -85,8 +85,9 @@ export class GhDateFieldComponent extends BaseInputFieldComponent<DateFromDatePi
    */
   protected onDateChange(event: Event) {
     this.dateValue = new Date((event.target as HTMLInputElement).value).toISOString().split('T')[0];
+    const decomposedDateValue = this.dateValue.split('-');
     this.valueChange.emit({
-      date: new Date(this.dateValue),
+      date: new Date(+decomposedDateValue[0],+decomposedDateValue[1] - 1,+decomposedDateValue[2]),
       dateString: this.dateValue
     })
     this._isCalendarOpen$.next(false);

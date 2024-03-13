@@ -135,4 +135,28 @@ export class ClientRoutes {
      * @type {GhRoute}
      */
     static readonly itemDeliveredGp: GhRoute = new GhRoute('item-delivered', ClientRoutes.gpOrders);
+
+    /**
+     * @description The trip list route
+     * @type {GhRoute}
+     */
+    static readonly tripList: GhRoute = new GhRoute('trip-list', ClientRoutes.main);
+
+    /**
+     * @description The planned trip route
+     * @type {GhRoute}
+     */
+    static readonly plannedTrip: GhRoute = new GhRoute('planned-trip', ClientRoutes.tripList);
+
+    /**
+     * @description The confirmed trip route
+     * @type {GhRoute}
+     */
+    static readonly confirmedTrip: GhRoute = new GhRoute('confirmed-trip', ClientRoutes.tripList);
+
+    /**
+     * @description The trip details route
+     * @type {GhRoute}
+     */
+    static readonly tripDone: GhRoute = new GhRoute('trip-done', ClientRoutes.tripList);
 }

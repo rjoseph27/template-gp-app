@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { ApiResponse, BaseServiceApi } from "../base.service.api";
 import { firstValue } from "../../misc/function/firstValue";
-import { ReportTrip, SearchTripsRequest, SearchTripsApiResponse, ConfirmItemRequest, SendItemsRequestApiResponse, UpdateImageNameRequest, CreateAlertRequest, ListItemsApiResponse, ItemInformationApiResponse, RequestTableElementRequest, OrderDetailRequest, GetSendItemsRequestApiResponse } from "./requests.type";
+import { ReportTrip, SearchTripsRequest, SearchTripsApiResponse, ConfirmItemRequest, SendItemsRequestApiResponse, UpdateImageNameRequest, CreateAlertRequest, ListItemsApiResponse, ItemInformationApiResponse, RequestTableElementRequest, OrderDetailRequest, GetSendItemsRequestApiResponse, GetTripListApiResponse, GetTripInfoApiResponse, CancelTripRequest } from "./requests.type";
 
 /**
  * @class RequestsServiceApi
@@ -127,5 +127,32 @@ export class RequestsServiceApi extends BaseServiceApi {
      */
     getSendItemsInfo(sendItemId: string): Promise<GetSendItemsRequestApiResponse> {
         return firstValue(this.getRequest<GetSendItemsRequestApiResponse>('get-send-items-info', sendItemId));
+    }
+
+    /**
+     * @description A method that gets the trip list
+     * @param userId The id of the user
+     * @returns {Promise<GetTripListApiResponse>}
+     */
+    getTripList(userId: string): Promise<GetTripListApiResponse> {
+        return firstValue(this.getRequest<GetTripListApiResponse>('lists-gp-trips', userId));
+    }
+
+    /**
+     * @description A method that gets the trip info
+     * @param tripId The trip id
+     * @returns {Promise<GetTripInfoApiResponse>}
+     */
+    getTripInfo(tripInfo: string): Promise<GetTripInfoApiResponse> {
+        return firstValue(this.getRequest<GetTripInfoApiResponse>('get-trip-info', tripInfo));
+    }
+
+    /**
+     * @description A method that cancels a trip
+     * @param cancelTripRequest The cancel trip request 
+     * @returns {Promise<ApiResponse>}
+     */
+    gpCancelTrip(cancelTripRequest: CancelTripRequest): Promise<ApiResponse> {
+        return firstValue(this.postRequest<ApiResponse>('gp-cancel-trip', cancelTripRequest));
     }
 }

@@ -1,6 +1,6 @@
 import { Injectable, inject } from "@angular/core";
 import { RequestsServiceApi } from "../../api/requests/requests.service.api";
-import { OrderDetailRequest, CancelOrderStatus, ConfirmItemRequest, CreateAlertRequest, CreateAlertStatus, ItemsOrdersStatus, ReportTrip, ReportTripStatus, RequestTableElementRequest, SendItemsStatus, GpAcceptOrderStatus } from "../../api/requests/requests.type";
+import { OrderDetailRequest, CancelOrderStatus, ConfirmItemRequest, CreateAlertRequest, CreateAlertStatus, ItemsOrdersStatus, ReportTrip, ReportTripStatus, RequestTableElementRequest, SendItemsStatus, GpAcceptOrderStatus, GetReportTripStatus, GetTripInfoStatus, CancelTripStatus } from "../../api/requests/requests.type";
 import { SendItemsRequest } from "./send-items.service";
 import { DateUtil } from "../../misc/util/date.util";
 import { UsersService } from "../../services/users.service";
@@ -202,5 +202,47 @@ export class ClientRequestsService {
             }
             return undefined;
         })        
+    }
+
+    /**
+     * @description Gets the trip list
+     * @param userId The id of the user
+     * @returns {Promise<ReportTrip[]>} A promise that resolves to the trip list
+     */
+    getTripList(userId: string): Promise<RequestTableElement[]> {
+        return this.requestsServiceApi.getTripList(userId).then(msg => {
+            if(msg.message === GetReportTripStatus.TRIPS_FOUND) {
+                return msg.trips;
+            }
+            return [];
+        })        
+    }
+
+    /**
+     * @description Gets the trip info
+     * @param tripId The trip id
+     * @returns {Promise<ReportTrip>} A promise that resolves to the trip info
+     */
+    getTripInfo(tripId: string): Promise<ReportTrip> {
+        return this.requestsServiceApi.getTripInfo(tripId).then(msg => {
+            if(msg.message === GetTripInfoStatus.TRIP_FOUND) {
+                return msg.trip;
+            }
+            return undefined;
+        });
+    }
+
+    /**
+     * @description Cancels a trip
+     * @param tripId The trip id
+     * @returns {Promise<boolean>} A promise that resolves to true if the trip was canceled successfully, false otherwise
+     */
+    cancelTrip(tripId: string): Promise<boolean> {
+        return this.requestsServiceApi.gpCancelTrip({tripId}).then(msg => {
+            if(msg.message === CancelTripStatus.TRIP_CANCELED_SUCCESSFULLY) {
+                return true;
+            }
+            return false;
+        });
     }
 }

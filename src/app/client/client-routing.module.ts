@@ -23,6 +23,11 @@ import { ClientGpItemAtCheckpointComponent } from './orders/gp-orders/item-at-ch
 import { ClientReadyForPickupComponent } from './orders/gp-orders/ready-for-pickup/ready-for-pickup.component';
 import { ClientItemWithYouComponent } from './orders/gp-orders/item-with-you/item-with-you.component';
 import { ClientItemDeliveredGpComponent } from './orders/gp-orders/item-delivered/item-delivered.component';
+import { ClientTripListComponent } from './orders/trip-list/trip-list.component';
+import { ClientPlannedTripComponent } from './orders/trip-list/planned-trip/planned-trip.component';
+import { ClientTripInfoResolver } from './orders/trip-list/trip-details.resolver';
+import { ClientConfirmedTripComponent } from './orders/trip-list/confirmed-trip/confirmed-trip.component';
+import { ClientTripDoneComponent } from './orders/trip-list/trip-done/trip-done.component';
 
 /**
  * @constant routes
@@ -44,7 +49,6 @@ const routes: Routes = [
         { path: `${ClientRoutes.itemReadyForPickup}`, component: ClientItemReadyForPickupComponent, pathMatch: 'full', resolve: { orderDetails: ClientGpOrderDetailsResolver, userInfo: ClientApplicationResolver }},
         { path: `${ClientRoutes.itemDelivered}`, component: ClientItemDeliveredComponent, pathMatch: 'full', resolve: { orderDetails: ClientGpOrderDetailsResolver, userInfo: ClientApplicationResolver }}
     ] },
-
     { path: `${ClientRoutes.gpOrders}`, children: [
         { path: '', component: ClientGpOrdersComponent, pathMatch: 'full', resolve: { userInfo: ClientApplicationResolver} },
         { path: `${ClientRoutes.confirmOrders}`, component: ClientConfirmOrdersComponent, pathMatch: 'full', resolve: { orderDetails: ClientGpOrderDetailsResolver, userInfo: ClientApplicationResolver } },
@@ -53,6 +57,12 @@ const routes: Routes = [
         { path: `${ClientRoutes.readyForPickup}`, component: ClientReadyForPickupComponent, pathMatch: 'full', resolve: { orderDetails: ClientGpOrderDetailsResolver, userInfo: ClientApplicationResolver }},
         { path: `${ClientRoutes.itemWithYou}`, component: ClientItemWithYouComponent, pathMatch: 'full', resolve: { orderDetails: ClientGpOrderDetailsResolver, userInfo: ClientApplicationResolver }},
         { path: `${ClientRoutes.itemDeliveredGp}`, component: ClientItemDeliveredGpComponent, pathMatch: 'full', resolve: { orderDetails: ClientGpOrderDetailsResolver, userInfo: ClientApplicationResolver }}
+    ] },
+    { path: `${ClientRoutes.tripList}`, children: [
+        { path: '', component: ClientTripListComponent, pathMatch: 'full', resolve: { userInfo: ClientApplicationResolver} },
+        { path: `${ClientRoutes.plannedTrip}`, component: ClientPlannedTripComponent, pathMatch: 'full', resolve: { tripDetails: ClientTripInfoResolver, userInfo: ClientApplicationResolver } },
+        { path: `${ClientRoutes.confirmedTrip }`, component: ClientConfirmedTripComponent, pathMatch: 'full', resolve: { tripDetails: ClientTripInfoResolver, userInfo: ClientApplicationResolver }},
+        { path: `${ClientRoutes.tripDone}`, component: ClientTripDoneComponent, pathMatch: 'full', resolve: { tripDetails: ClientTripInfoResolver, userInfo: ClientApplicationResolver }}
     ] }
 ];
 

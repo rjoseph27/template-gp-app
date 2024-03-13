@@ -96,12 +96,18 @@ export enum Unit {
         control.get(ARRIVAL_DATE).value && 
         control.get(ARRIVAL_TIME).value)
     {
-        const departureDate = control.get(DEPARTURE_DATE).value.date;
+        let departureDate = control.get(DEPARTURE_DATE).value.date;
+        if(typeof departureDate === 'string') {
+            departureDate = new Date(departureDate);
+        }
         departureDate.setHours(control.get(DEPARTURE_TIME).value.time.hours);
         departureDate.setMinutes(control.get(DEPARTURE_TIME).value.time.minutes);
-        const arrivalDate = control.get(ARRIVAL_DATE).value.date;
-        arrivalDate.setHours(control.get(ARRIVAL_TIME).value.time.hours);
-        arrivalDate.setMinutes(control.get(ARRIVAL_TIME).value.time.minutes);
+        let arrivalDate = control.get(ARRIVAL_DATE).value.date;
+        if(typeof arrivalDate === 'string') {
+          arrivalDate = new Date(arrivalDate);
+      }
+        arrivalDate?.setHours(control.get(ARRIVAL_TIME).value.time.hours);
+        arrivalDate?.setMinutes(control.get(ARRIVAL_TIME).value.time.minutes);
   
        if (arrivalDate < departureDate) {
          control.get(ARRIVAL_TIME).setErrors({ invalidFlightDate: true });

@@ -82,6 +82,42 @@ export enum ItemsStatus {
   }
 
 /**
+ * @enum TripStatus
+ * @description The trip status
+ */
+export enum TripStatus {
+  /**
+   * @description The trip is planned
+   * @type {string}
+   */
+  PLANNED = 'PLANNED',
+
+  /**
+   * @description The trip has been confirmed
+   * @type {string}
+   */
+  CONFIRMED = 'CONFIRMED',
+
+  /**
+   * @description The trip is in progress
+   * @type {string}
+   */
+  ON_FLIGHT = 'ON_FLIGHT',
+
+  /**
+   * @description The trip is completed
+   * @type {string}
+   */
+  TRIP_DONE = 'TRIP_DONE',
+
+  /**
+   * @description The trip has been canceled
+   * @type {string}
+   */
+  CANCELED = 'CANCELED'
+}
+
+/**
  * @class baseOrdersComponent
  * @description The base class for the orders
  */

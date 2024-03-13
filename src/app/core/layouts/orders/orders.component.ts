@@ -139,7 +139,7 @@ const ROUTE_ICON = "connecting_airports"
         this._requestTableColumns$.next([
             {
               columnName: this.idColumn,
-              valueAccessor: (row: RequestTableElement) => row.id,
+              valueAccessor: (row: RequestTableElement) => row.id.substring(0,5),
             },          
             {
               columnName: "global.request.table.route",

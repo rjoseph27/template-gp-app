@@ -38,10 +38,6 @@ export interface ColumnConfig {
   styleUrls: ['./table.component.scss'],
 })
 export class GhTableComponent implements AfterViewInit {
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
-  }
-
   /**
    * @description The data source for the table
    * @type {MatTableDataSource<any>}
@@ -169,6 +165,11 @@ export class GhTableComponent implements AfterViewInit {
    * @type {TemplateRef<any>}
    */
   @ViewChild('canDeleteTemplate', { static: true }) canDeleteTemplate: TemplateRef<any>;
+
+  /** @inheritdoc */
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+  }
 
   /**
    * @description Deletes an element from the table

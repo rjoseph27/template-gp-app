@@ -5,6 +5,8 @@ import { tap } from "rxjs/operators";
 import { ClientRequestsService } from "../../service/requests.service";
 import { NotificationService } from "../../../services/notification.service";
 import { COUNTRY_INFO_LIST } from "../../../misc/constants/countries/countries";
+import { ClientRoutes } from "../../../client.route";
+import { FormMode } from "../../../misc/enums/form-mode.enum";
 
 /**
  * @class ClientReportTripComponent
@@ -41,6 +43,12 @@ export class ClientReportTripComponent extends BaseRequestComponent implements O
    */
   private readonly notificationService: NotificationService = inject(NotificationService);
 
+  /**
+   * @description The form mode enum for template use.
+   * @type {FormMode}
+   */
+  protected readonly formMode = FormMode;
+
   /** @inheritdoc */
   ngOnInit(): void {
     this.currentFormService.submitting$.pipe(
@@ -53,7 +61,7 @@ export class ClientReportTripComponent extends BaseRequestComponent implements O
           });
           if(res) {
             this.notificationService.successNotification("moduleList.gp.reportTrip.notification.success");
-            console.log("TODO: redirect to trips page")
+            this.router.navigate([ClientRoutes.tripList.fullPath()]);
           } else {
              this.notificationService.errorNotification("moduleList.gp.reportTrip.notification.failure");
           }

@@ -1,4 +1,4 @@
-<form [formGroup]="reportTripForm" (ngSubmit)="reportTrip()">
+<form [formGroup]="reportTripForm" (ngSubmit)="submitForm()">
     <div class="group">
         <div class="section">
             <div class="sub-section">
@@ -11,6 +11,7 @@
                 [errors]="reportTripForm.get(userCountryField).errors"
                 [errorCaptions]="countryErrorCaptions"
                 [options]="userCountryOptions"
+                [readonly]="currentFormMode === formMode.VIEW"
                 ></gh-select-field>
             </div>
             <div class="sub-section">
@@ -22,6 +23,7 @@
                 [errors]="reportTripForm.get(userAirportField).errors"
                 [errorCaptions]="airportErrorCaptions"
                 [options]="userAirports$ | async"
+                [readonly]="currentFormMode === formMode.VIEW"
                 ></gh-select-field>
             </div>
         </div>
@@ -36,6 +38,7 @@
                 [errors]="reportTripForm.get(departureDatetField).errors"
                 [minDate]="minDepartureDate"
                 [errorCaptions]="dateErrorCaptions"
+                [readonly]="currentFormMode === formMode.VIEW"
                 ></gh-date-field>
             </div>
             <div class="sub-section">
@@ -46,6 +49,7 @@
                 (valueChange)="reportTripForm.get(departureTimeField).setValue($event)"
                 [errors]="reportTripForm.get(departureTimeField).errors"
                 [errorCaptions]="timeErrorCaptions"
+                [readonly]="currentFormMode === formMode.VIEW"
                 ></gh-time-field>
             </div>
         </div>
@@ -62,6 +66,7 @@
                 [errors]="reportTripForm.get(destinationCountryField).errors"
                 [errorCaptions]="countryErrorCaptions"
                 [options]="destinationCountryOptions$ | async"
+                [readonly]="currentFormMode === formMode.VIEW"
                 ></gh-select-field>
             </div>
             <div class="sub-section">
@@ -73,6 +78,7 @@
                 [errors]="reportTripForm.get(destinationAirportField).errors"
                 [errorCaptions]="airportErrorCaptions"
                 [options]="destinationAirports$ | async"
+                [readonly]="currentFormMode === formMode.VIEW"
                 ></gh-select-field>
             </div>
         </div>
@@ -87,6 +93,7 @@
                 [errors]="reportTripForm.get(arrivalDateField).errors"
                 [minDate]="minDepartureDate"
                 [errorCaptions]="dateErrorCaptions"
+                [readonly]="currentFormMode === formMode.VIEW"
                 ></gh-date-field>
             </div>
             <div class="sub-section">
@@ -97,6 +104,7 @@
                 (valueChange)="reportTripForm.get(arrivalTimeField).setValue($event)"
                 [errors]="reportTripForm.get(arrivalTimeField).errors"
                 [errorCaptions]="timeErrorCaptions"
+                [readonly]="currentFormMode === formMode.VIEW"
                 ></gh-time-field>
             </div>
         </div>
@@ -117,6 +125,8 @@
             [errorCaptions]="availableSpaceErrorCaptions"
             [min]="0.5"
             [step]="0.5"
+            [suffix]="'unit.kg' | translate"
+            [readonly]="currentFormMode === formMode.VIEW"
            ></gh-number-field> 
         </div>
         <div class="section">
@@ -130,6 +140,8 @@
             [errorCaptions]="defaultPriceErrorCaptions"
             [min]="0"
             [step]="(userCurrency$ | async)?.step"
+            [readonly]="currentFormMode === formMode.VIEW"
+            [suffix]="(userCurrency$ | async)?.currency"
            ></gh-number-field> 
         </div>
     </div>
@@ -137,8 +149,8 @@
         <gh-table 
             [columns]="specificPriceTableColumns$ | async" 
             [(elements)]="specificPriceElements"
-            [canAdd]="true" 
-            [canDelete]="true" 
+            [canAdd]="currentFormMode === formMode.CREATE" 
+            [canDelete]="currentFormMode === formMode.CREATE" 
             [idProperty]="'id'" 
             [emptyTemplate]="emptyTemplate"
             [itemFactory]="newSpecificItemFactory"
@@ -147,6 +159,7 @@
     </div>
     <div>
         <button
+            *ngIf="currentFormMode === formMode.CREATE"
             [buttonLoading]="loading$ | async" 
             type="submit" 
             class="gp-button" 
@@ -172,6 +185,7 @@
         [errors]="specificPriceFormControl.at(element.id).get('category').errors"
         [errorCaptions]="itemCategoryErrorCaptions"
         [groupedOptions]="itemCategorySelectOptions"
+        [readonly]="currentFormMode === formMode.VIEW"
     ></gh-select-field>
 </ng-template>
 
@@ -185,6 +199,8 @@
         [errorCaptions]="specificPriceErrorCaptions"
         [min]="0"
         [step]="(userCurrency$ | async)?.step"
+        [suffix]="(userCurrency$ | async)?.currency"
+        [readonly]="currentFormMode === formMode.VIEW"
     ></gh-number-field>
 </ng-template>
 
@@ -197,5 +213,6 @@
         [errors]="specificPriceFormControl.at(element.id).get('unit').errors"
         [errorCaptions]="itemCategoryErrorCaptions"
         [options]="unitOptions"
+        [readonly]="currentFormMode === formMode.VIEW"
     ></gh-select-field>
 </ng-template>

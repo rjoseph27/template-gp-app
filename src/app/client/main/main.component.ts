@@ -97,9 +97,7 @@ export class ClientMainComponent implements OnInit {
     {
       label: "moduleList.global.logOut.title",
       icon: LOG_OUT_ICON,
-      action: () => {
-        this.userService.logout();
-      }
+      action: () => this.userService.logout()
     },
   ]
 
@@ -111,16 +109,12 @@ export class ClientMainComponent implements OnInit {
     {
       label: "moduleList.client.sendItems.title",
       icon: SEND_ITEMS_ICON,
-      action: () => {
-        this.router.navigate([ClientRoutes.sendItems.fullPath()]);
-      }
+      action: () => this.router.navigate([ClientRoutes.sendItems.fullPath()])
     },
     {
       label: "moduleList.client.orders.title",
       icon: REQUESTS_ICON,
-      action: () => {
-        this.router.navigate([ClientRoutes.clientOrder.fullPath()]);
-      }
+      action: () => this.router.navigate([ClientRoutes.clientOrder.fullPath()])
     },
     {
       label: "moduleList.client.alerts.title",
@@ -138,21 +132,17 @@ export class ClientMainComponent implements OnInit {
     {
       label: "moduleList.gp.reportTrip.title",
       icon: REPORT_TRIP_ICON,
-      action: () => {
-        this.router.navigate([ClientRoutes.reportTrip.fullPath()]);
-      }
+      action: () => this.router.navigate([ClientRoutes.reportTrip.fullPath()])
     },
     {
       label: "moduleList.gp.orders.title",
       icon: ORDERS_ICON,
-      action: () => {
-        this.router.navigate([ClientRoutes.gpOrders.fullPath()]);
-      }
+      action: () => this.router.navigate([ClientRoutes.gpOrders.fullPath()])
     },
     {
       label: "moduleList.gp.trip.title",
       icon: REQUESTS_ICON,
-      action: () => {}
+      action: () => this.router.navigate([ClientRoutes.tripList.fullPath()])
     },
     ...this.commonModules
   ]
