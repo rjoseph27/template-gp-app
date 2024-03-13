@@ -119,7 +119,7 @@ export class ClientMainComponent implements OnInit {
     {
       label: "moduleList.client.alerts.title",
       icon: ALERTS_ICON,
-      action: () => {}
+      action: () => this.router.navigate([ClientRoutes.alertList.fullPath()])
     },
     ...this.commonModules
   ]

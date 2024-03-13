@@ -87,6 +87,12 @@ export class GhTableComponent implements AfterViewInit {
   @Input() canDelete: boolean = false;
 
   /**
+   * @description A boolean to determine if the elements of the table can edit
+   * @type {boolean}
+   */
+  @Input() canEdit: boolean = false;
+
+  /**
    * @description A boolean to determine if the elements of the table can add
    * @type {boolean}
    */
@@ -96,13 +102,6 @@ export class GhTableComponent implements AfterViewInit {
    * @description The columns for the table
    */
   @Input() set columns(value: ColumnConfig[]) {
-    if(this.canDelete) {
-      value.push({
-        columnName: 'global.common.delete',
-        valueAccessor: () => null,
-        template: this.canDeleteTemplate
-      });
-    }
     this._columns$.next(value);
   }
   
@@ -161,13 +160,26 @@ export class GhTableComponent implements AfterViewInit {
   @Input() deleteFactory: (element: any) => void;
 
   /**
+   * @description The edit factory to edit an element
+   * @type {(element: any) => void}
+   */
+  @Input() editFactory: (element: any) => void;
+
+  /**
    * @description The template for the delete button
    * @type {TemplateRef<any>}
    */
-  @ViewChild('canDeleteTemplate', { static: true }) canDeleteTemplate: TemplateRef<any>;
+  @ViewChild('actionTemplate', { static: true }) actionTemplate: TemplateRef<any>;
 
   /** @inheritdoc */
   ngAfterViewInit(): void {
+    if(this.canDelete || this.canEdit) {
+      this._columns$.next([...this._columns$.value, {
+        columnName: 'global.common.action',
+        valueAccessor: () => null,
+        template: this.actionTemplate
+      }])
+    }
     this.dataSource.paginator = this.paginator;
   }
 

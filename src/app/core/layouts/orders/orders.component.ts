@@ -2,25 +2,7 @@ import { Component, Input, OnInit, TemplateRef, ViewChild } from "@angular/core"
 import { BehaviorSubject } from "rxjs";
 import { ColumnConfig } from "../../elements/table/table.component";
 import { Status } from "./status/status.component";
-
-/**
- * @interface FlightRoute
- * @description The route of the flight
- */
-interface FlightRoute {
-  /**
-   * @description The departure airport of the flight
-   * @type {string}
-   */
-  from: string;
-
-  /**
-   * @description The arrival airport of the flight
-   * @type {string}
-   */
-  to: string;
-}
-
+import { FlightRoute } from "../flight-route/flight-route.component";
 
 /**
  * @interface RequestTableElement
@@ -51,12 +33,6 @@ export interface RequestTableElement {
    */
   status: any
 }
-
-/**
- * @constant ROUTE_ICON
- * @description The icon of the route
- */
-const ROUTE_ICON = "connecting_airports"
 
 /**
  * @class GhOrdersComponent
@@ -115,12 +91,6 @@ const ROUTE_ICON = "connecting_airports"
    * @type {TemplateRef<any>}
    */
   @Input() emptyTemplate: TemplateRef<any>;
-
-    /**
-     * @description The icon of the route
-     * @type {string}
-     */
-    protected readonly routeIcon = ROUTE_ICON;
 
     /**
      * @description The request table columns

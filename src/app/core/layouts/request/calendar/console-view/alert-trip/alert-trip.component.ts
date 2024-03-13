@@ -11,6 +11,8 @@ import { Country } from "../../../../../../misc/enums/country.enum";
 import { COUNTRY_INFO_LIST } from "../../../../../../misc/constants/countries/countries";
 import { ClientRequestsService } from "../../../../../../client/service/requests.service";
 import { ClientSendItemsService } from "../../../../../../client/service/send-items.service";
+import { Router } from "@angular/router";
+import { ClientRoutes } from "../../../../../../client.route";
 
 /**
  * @description The from field
@@ -316,16 +318,23 @@ export class GhAlertTripComponent implements OnInit {
     * @description The alert form
     * @type {FormGroup}
     */
-   protected readonly alertForm = new FormGroup({
-      from: new FormControl(null, [minDateValidator(this.minDate), dateFormatValidator]),
-      to: new FormControl(null, [dateFormatValidator]),
-      maxPrice: new FormControl(null, [Validators.min(0)])
-    }, 
-    { validators: [alertDateValidator] }
-   )
+   protected alertForm: FormGroup;
+
+   /**
+   * @description The angular router service.
+   * @type {Router}
+   */
+  private readonly router: Router = inject(Router);
    
    /** @inheritdoc */
    ngOnInit(): void {
+      this.alertForm = new FormGroup({
+        from: new FormControl(this.defaultDate, [minDateValidator(this.minDate), dateFormatValidator]),
+        to: new FormControl(this.defaultDate, [dateFormatValidator]),
+        maxPrice: new FormControl(null, [Validators.min(0)])
+      }, { validators: [alertDateValidator] }
+     )
+
     this.fromErrorCaptions = new Map<string, string>([
       [MIN_DATE_VALIDATION, this.captions.from.errors.minDate],
       [INVALID_DATE_FORMAT_VALIDATION, this.captions.from.errors.invalidDate],
@@ -367,7 +376,10 @@ export class GhAlertTripComponent implements OnInit {
    * @returns void
    */
    protected createAlert(): void{
-    this.requestsService.createAlert({...this.alertForm.value, items: this.sendItemsService.requests}).then(res => {
+    this.requestsService.createAlert({...this.alertForm.value, route: {
+      from: this.sendItemsService.requests.userRegion,
+      to: this.sendItemsService.requests.destinationRegion
+    }, items: this.sendItemsService.requests}).then(res => {
       if(res) {
         this._alertSent$.next(true);
       }
@@ -379,6 +391,6 @@ export class GhAlertTripComponent implements OnInit {
    * @returns void
    */
    protected goAlertPage() {
-     console.log('go to alert page');
+     this.router.navigate([ClientRoutes.alertList.fullPath()]);
    }
 }

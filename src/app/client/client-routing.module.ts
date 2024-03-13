@@ -28,6 +28,8 @@ import { ClientPlannedTripComponent } from './orders/trip-list/planned-trip/plan
 import { ClientTripInfoResolver } from './orders/trip-list/trip-details.resolver';
 import { ClientConfirmedTripComponent } from './orders/trip-list/confirmed-trip/confirmed-trip.component';
 import { ClientTripDoneComponent } from './orders/trip-list/trip-done/trip-done.component';
+import { ClientAlertListComponent } from './alert-list/alert-list.component';
+import { ClientAlertListResolver } from './alert-list/alert-list.resolver';
 
 /**
  * @constant routes
@@ -62,8 +64,11 @@ const routes: Routes = [
         { path: '', component: ClientTripListComponent, pathMatch: 'full', resolve: { userInfo: ClientApplicationResolver} },
         { path: `${ClientRoutes.plannedTrip}`, component: ClientPlannedTripComponent, pathMatch: 'full', resolve: { tripDetails: ClientTripInfoResolver, userInfo: ClientApplicationResolver } },
         { path: `${ClientRoutes.confirmedTrip }`, component: ClientConfirmedTripComponent, pathMatch: 'full', resolve: { tripDetails: ClientTripInfoResolver, userInfo: ClientApplicationResolver }},
-        { path: `${ClientRoutes.tripDone}`, component: ClientTripDoneComponent, pathMatch: 'full', resolve: { tripDetails: ClientTripInfoResolver, userInfo: ClientApplicationResolver }}
-    ] }
+        { path: `${ClientRoutes.tripDone}`, component: ClientTripDoneComponent, pathMatch: 'full', resolve: { tripDetails: ClientTripInfoResolver, userInfo: ClientApplicationResolver }},
+    ] },
+    { path: `${ClientRoutes.alertList}`, children: [
+        { path: '', component: ClientAlertListComponent, pathMatch: 'full', resolve: { userInfo: ClientApplicationResolver, alertList: ClientAlertListResolver}}
+    ]}
 ];
 
 @NgModule({

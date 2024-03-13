@@ -19,7 +19,7 @@ import { LoadingService } from '../../../services/loading.service';
      * @description The items orders
      * @type {Observable<RequestTableElement[]>}
      */
-    protected readonly getItemsOrders$ = this.requestsService.getItemsOrders(this.userService.currentUserId).then(x => x.filter(y => y.status !== ItemsStatus.DELIVERED && y.status !== ItemsStatus.EXCEPTION));;
+    protected readonly getItemsOrders$ = this.requestsService.getItemsOrders(this.userService.currentUserId).then(x => x.filter(y => y.status !== ItemsStatus.DELIVERED && y.status !== ItemsStatus.EXCEPTION));
 
     /**
      * @description The delivered items orders

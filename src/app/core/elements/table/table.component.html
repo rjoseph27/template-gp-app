@@ -31,8 +31,17 @@
   <button *ngIf="canAdd" type="button" class="add" (click)="add()">{{ 'global.common.add' | translate }}</button>
 </div>
 
-<ng-template #canDeleteTemplate let-element="element">
-    <button class="delete-button" (click)="deleteElement(element)">
-        <gh-icon name="delete"></gh-icon>
-    </button>
+<ng-template #actionTemplate let-element="element">
+    <div class="action">
+      <div *ngIf="canEdit">
+        <button class="edit-button" (click)="editFactory(element)">
+          <gh-icon name="edit"></gh-icon>
+        </button>
+      </div>
+      <div *ngIf="canDelete">
+        <button class="delete-button" (click)="deleteElement(element)">
+          <gh-icon name="delete"></gh-icon>
+        </button>
+      </div>
+    </div>
 </ng-template>

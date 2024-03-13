@@ -174,7 +174,8 @@
                 }
             },
             "alerts": {
-                "title": "My Alerts"
+                "title": "My Alerts",
+                "newAlert": "Create a New Alert" 
             }
         },
         "gp": {
@@ -264,6 +265,13 @@
                         "title": "You have no uncompleted trips yet",
                         "content": "When you report a trip, you will be able to see it here.",
                         "button": "Report a Trip"
+                    }
+                },
+                "completed": {
+                    "title": "Completed Trips",
+                    "emptyView": {
+                        "title": "You have no completed trips yet",
+                        "content": "When you complete a trip, you will be able to see it here."
                     }
                 },
                 "status": {

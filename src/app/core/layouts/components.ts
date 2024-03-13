@@ -20,6 +20,8 @@ import { GhAlertTripComponent } from "./request/calendar/console-view/alert-trip
 import { GhOrdersComponent } from "./orders/orders.component";
 import { GhStatusComponent } from "./orders/status/status.component";
 import { GhOrderDetailsComponent } from "./order-details/order-details.component";
+import { GhAlertTableComponent } from "./alert-table/alert-table.component";
+import { GhFlightRouteComponent } from "./flight-route/flight-route.component";
 
 /**
  * @constant
@@ -48,5 +50,7 @@ export const LAYOUTS_COMPONENTS = [
     GhAlertTripComponent,
     GhOrdersComponent,
     GhStatusComponent,
-    GhOrderDetailsComponent
+    GhOrderDetailsComponent,
+    GhAlertTableComponent,
+    GhFlightRouteComponent
 ]

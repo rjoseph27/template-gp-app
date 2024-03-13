@@ -16,6 +16,6 @@ export class ToRootTranslationHandler implements MissingTranslationHandler {
 
   /** @inheritdoc */
   handle(params: MissingTranslationHandlerParams) {
-    return this.globalTranslateService.getRootTranslation(params.key);
+    return this.globalTranslateService.getRootTranslation(params.key, params.interpolateParams);
   }
 }

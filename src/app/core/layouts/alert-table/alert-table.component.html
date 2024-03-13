@@ -1,0 +1,33 @@
+<gh-table 
+        [columns]="alertListTableColumns$ | async" 
+        [elements]="alertList"
+        [canDelete]="true"
+        [canEdit]="true"
+        [idProperty]="'id'"
+        [deleteFactory]="deleteAlertFactory"
+    >
+        <ng-template #routeTemplate let-value="value">
+            <gh-flight-route [route]="value"></gh-flight-route>
+        </ng-template>
+
+        <ng-template #maxPriceTemplate let-value="value">
+            <div *ngIf="value; else noMaxPriceTemplate">
+                {{value + ' ' + currency }}
+            </div>
+            <ng-template #noMaxPriceTemplate> - </ng-template>
+        </ng-template>
+
+        <ng-template #timeRangeTemplate let-value="value">
+            <div *ngIf="value.from && value.to">
+                {{ 'global.alertList.timeRange.to' | translate : { from: value.from | date: 'dd/MM/yyyy', to: value.to | date: 'dd/MM/yyyy' } }}
+            </div>
+            <div *ngIf="value.from && !value.to">
+                {{ 'global.alertList.timeRange.from' | translate : { from: value.from | date: 'dd/MM/yyyy' } }}
+            </div>
+            <div *ngIf="!value.from && value.to">
+                {{ 'global.alertList.timeRange.until' | translate : { until: value.to | date: 'dd/MM/yyyy' } }}
+            </div>
+            <div *ngIf="!value.from && !value.to"> - </div>
+        </ng-template>
+        
+    </gh-table>

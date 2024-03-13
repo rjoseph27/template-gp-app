@@ -159,4 +159,10 @@ export class ClientRoutes {
      * @type {GhRoute}
      */
     static readonly tripDone: GhRoute = new GhRoute('trip-done', ClientRoutes.tripList);
+
+    /**
+     * @description The alert list route
+     * @type {GhRoute}
+     */
+    static readonly alertList: GhRoute = new GhRoute('alert-list', ClientRoutes.main);
 }

@@ -337,8 +337,10 @@ interface DayPoint {
     } else {
       if(this.getDate(week, cell)) {
         const alertDate = new Date(this.year, this.month, this.getDate(week, cell)?.day);
-        this._alertDate$.next(alertDate);
-        this._alertSelected$.next(true);
+        if(alertDate > new Date()) {
+          this._alertDate$.next(alertDate);
+          this._alertSelected$.next(true);
+        }
       }
       this._selectedTrip$.next(undefined);
       this._filterSelected$.next(false);

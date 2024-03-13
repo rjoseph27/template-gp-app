@@ -9,6 +9,8 @@ import { DateFromDatePicker } from "../../misc/util/date.util"
 import { ApiResponse, StringKeys } from "../base.service.api"
 import { OrderDetails } from "../../core/layouts/order-details/order-details.component"
 import { ItemsStatus, TripStatus } from "../../client/orders/base-orders.component"
+import { FlightRoute } from "../../core/layouts/flight-route/flight-route.component"
+import { AlertTableElement } from "../../core/layouts/alert-table/alert-table.component"
 
 /**
    * @interface ReportTrip
@@ -539,6 +541,18 @@ export interface ReportTrip {
     items: SendItemsRequest,
 
     /**
+     * @description The route of the flight
+     * @type {FlightRoute}
+     */
+    route: FlightRoute,
+
+    /**
+     * @description The user id
+     * @type {string}
+     */
+    userId?: string,
+
+    /**
      * @description from date
      * @type {DateFromDatePicker}
      */
@@ -579,6 +593,36 @@ export interface ReportTrip {
      * @type {string}
      */
     ALERT_CREATED_SUCCESSFULLY = "ALERT_CREATED_SUCCESSFULLY"
+  }
+
+  /**
+   * @interface AlertListApiResponse
+   * @description An interface for the alert list api response
+   */
+  export interface AlertListApiResponse extends ApiResponse {
+    /**
+     * @description The alerts
+     * @type {AlertTableElement[]}
+     */
+    alerts: AlertTableElement[];
+  }
+
+  /**
+   * @enum AlertListStatus
+   * @description The status of the alert list request
+   */
+  export enum AlertListStatus {
+    /**
+     * @description The alerts were found
+     * @type {string}
+     */
+    ALERTS_FOUND = "ALERTS_FOUND",
+
+    /**
+     * @description The alerts were not found
+     * @type {string}
+     */
+    ALERTS_NOT_FOUND = "ALERTS_NOT_FOUND"
   }
 
   /**

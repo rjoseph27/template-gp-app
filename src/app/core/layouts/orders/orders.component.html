@@ -6,11 +6,7 @@
         [emptyTemplate]="emptyTemplate"
     >
         <ng-template #routeTemplate let-value="value">
-            <div class="route">
-                <div>{{ value.from }}</div>
-                <div><gh-icon [name]="routeIcon"></gh-icon></div>
-                <div>{{ value.to }}</div>
-            </div>
+            <gh-flight-route [route]="value"></gh-flight-route>
         </ng-template>
         <ng-template #deliveryDateTemplate let-value="value">
             {{ value | date: 'dd/MM/yyyy' }}

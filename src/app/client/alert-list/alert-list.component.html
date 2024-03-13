@@ -1,0 +1,9 @@
+<div class="content">
+    <div>
+        <div class="title">
+            <h1>{{ 'moduleList.client.alerts.title' | translate }}</h1>
+        </div>
+        <gh-alert-table [alertList]="alertList$ | async" [currency]="currency$ | async"></gh-alert-table>
+        <button class="gp-button">{{ 'moduleList.client.alerts.newAlert' | translate }}</button>
+    </div>
+</div>

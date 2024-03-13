@@ -43,6 +43,8 @@ import { ClientTripInfoResolver } from './orders/trip-list/trip-details.resolver
 import { ClientPlannedTripComponent } from './orders/trip-list/planned-trip/planned-trip.component';
 import { ClientConfirmedTripComponent } from './orders/trip-list/confirmed-trip/confirmed-trip.component';
 import { ClientTripDoneComponent } from './orders/trip-list/trip-done/trip-done.component';
+import { ClientAlertListComponent } from './alert-list/alert-list.component';
+import { ClientAlertListResolver } from './alert-list/alert-list.resolver';
 
 
 /**
@@ -74,7 +76,8 @@ import { ClientTripDoneComponent } from './orders/trip-list/trip-done/trip-done.
         ClientTripListComponent,
         ClientPlannedTripComponent,
         ClientConfirmedTripComponent,
-        ClientTripDoneComponent
+        ClientTripDoneComponent,
+        ClientAlertListComponent
     ],
     imports: [
         CommonModule,
@@ -99,6 +102,7 @@ import { ClientTripDoneComponent } from './orders/trip-list/trip-done/trip-done.
         ClientApplicationResolver,
         ClientOrderDetailsResolver,
         ClientGpOrderDetailsResolver,
+        ClientAlertListResolver,
         ClientCalendarResolver,
         ClientRequestsService,
         ClientSendItemsService,

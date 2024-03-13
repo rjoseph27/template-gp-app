@@ -1,12 +1,13 @@
 import { Injectable, inject } from "@angular/core";
 import { RequestsServiceApi } from "../../api/requests/requests.service.api";
-import { OrderDetailRequest, CancelOrderStatus, ConfirmItemRequest, CreateAlertRequest, CreateAlertStatus, ItemsOrdersStatus, ReportTrip, ReportTripStatus, RequestTableElementRequest, SendItemsStatus, GpAcceptOrderStatus, GetReportTripStatus, GetTripInfoStatus, CancelTripStatus } from "../../api/requests/requests.type";
+import { OrderDetailRequest, CancelOrderStatus, ConfirmItemRequest, CreateAlertRequest, CreateAlertStatus, ItemsOrdersStatus, ReportTrip, ReportTripStatus, RequestTableElementRequest, SendItemsStatus, GpAcceptOrderStatus, GetReportTripStatus, GetTripInfoStatus, CancelTripStatus, AlertListStatus } from "../../api/requests/requests.type";
 import { SendItemsRequest } from "./send-items.service";
 import { DateUtil } from "../../misc/util/date.util";
 import { UsersService } from "../../services/users.service";
 import { StringKeys } from "../../api/base.service.api";
 import { RequestTableElement } from "../../core/layouts/orders/orders.component";
 import { OrderDetails } from "../../core/layouts/order-details/order-details.component";
+import { AlertTableElement } from "../../core/layouts/alert-table/alert-table.component";
 
 /**
  * @class RequestsService
@@ -92,7 +93,7 @@ export class ClientRequestsService {
      * @returns {Promise<boolean>} A promise that resolves to true if the alert was created successfully, false otherwise
      */
     createAlert(createAlertRequest: CreateAlertRequest): Promise<boolean> {
-        return this.requestsServiceApi.createAlert({...createAlertRequest}).then(msg => {
+        return this.requestsServiceApi.createAlert({...createAlertRequest, userId: this.usersService.currentUserId}).then(msg => {
             if(msg.message === CreateAlertStatus.ALERT_CREATED_SUCCESSFULLY)
             {
                 createAlertRequest.items.itemInformation.forEach(async (item,index) =>{
@@ -244,5 +245,19 @@ export class ClientRequestsService {
             }
             return false;
         });
+    }
+
+    /**
+     * @description Gets the alerts of a user
+     * @param userId The id of the user
+     * @returns {Promise<AlertTableElement[]>} A promise that resolves to the alerts
+     */
+    getAlertByUserId(userId?: string): Promise<AlertTableElement[]> {
+        return this.requestsServiceApi.getAlertByUserId(userId || this.usersService.currentUserId).then(msg => {
+            if(msg.message === AlertListStatus.ALERTS_FOUND) {
+                return msg.alerts || [];
+            }
+            return [];
+        })        
     }
 }

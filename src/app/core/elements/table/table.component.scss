@@ -4,7 +4,23 @@
     color: $error-color;
     border: 1px solid $error-color;
     background-color: transparent;
+}
+
+.edit-button {
+    color: #fff;
+    background-color: $secondary-color;
+    border: 1px solid $secondary-color;
+}
+
+.action {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.delete-button, .edit-button {
     border-radius: 5px;
+    margin: 0.1em;
 }
 
 th {

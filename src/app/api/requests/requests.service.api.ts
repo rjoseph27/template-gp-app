@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { ApiResponse, BaseServiceApi } from "../base.service.api";
 import { firstValue } from "../../misc/function/firstValue";
-import { ReportTrip, SearchTripsRequest, SearchTripsApiResponse, ConfirmItemRequest, SendItemsRequestApiResponse, UpdateImageNameRequest, CreateAlertRequest, ListItemsApiResponse, ItemInformationApiResponse, RequestTableElementRequest, OrderDetailRequest, GetSendItemsRequestApiResponse, GetTripListApiResponse, GetTripInfoApiResponse, CancelTripRequest } from "./requests.type";
+import { ReportTrip, SearchTripsRequest, SearchTripsApiResponse, ConfirmItemRequest, SendItemsRequestApiResponse, UpdateImageNameRequest, CreateAlertRequest, ListItemsApiResponse, ItemInformationApiResponse, RequestTableElementRequest, OrderDetailRequest, GetSendItemsRequestApiResponse, GetTripListApiResponse, GetTripInfoApiResponse, CancelTripRequest, AlertListApiResponse } from "./requests.type";
 
 /**
  * @class RequestsServiceApi
@@ -154,5 +154,14 @@ export class RequestsServiceApi extends BaseServiceApi {
      */
     gpCancelTrip(cancelTripRequest: CancelTripRequest): Promise<ApiResponse> {
         return firstValue(this.postRequest<ApiResponse>('gp-cancel-trip', cancelTripRequest));
+    }
+
+    /**
+     * @description A method that gets all the alerts of a user
+     * @param userId The id of the user
+     * @returns {Promise<ApiResponse>}
+     */
+    getAlertByUserId(userId: string): Promise<AlertListApiResponse> {
+        return firstValue(this.getRequest<AlertListApiResponse>('get-alert-by-userid', userId));
     }
 }

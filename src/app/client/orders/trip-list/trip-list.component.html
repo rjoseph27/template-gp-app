@@ -26,19 +26,18 @@
 [requests]="completedTrips$ | async"
 [idColumn]="'moduleList.gp.trip.tableId'"
 [getStatusInfo]="getStatusInfo"
-[emptyTemplate]="uncompletedEmptyTemplate"
-[label]="'moduleList.gp.trip.uncompleted.title' | translate"
+[emptyTemplate]="completedEmptyTemplate"
+[label]="'moduleList.gp.trip.completed.title' | translate"
 >
-<ng-template #uncompletedEmptyTemplate>
+<ng-template #completedEmptyTemplate>
     <div class="empty">
         <div class="section section-title">
-            {{ 'moduleList.gp.trip.uncompleted.emptyView.title' | translate }}
+            {{ 'moduleList.gp.trip.completed.emptyView.title' | translate }}
         </div>
         <div class="section">
             <gh-icon name="feature_search"></gh-icon>
         </div>
-        <div class="section">{{ 'moduleList.gp.trip.uncompleted.emptyView.content' | translate }}</div>
-        <div class="section"><button class="gp-button" (click)="goReportTripPage()">{{ 'moduleList.gp.trip.uncompleted.emptyView.button' | translate }}</button></div>
+        <div class="section">{{ 'moduleList.gp.trip.completed.emptyView.content' | translate }}</div>
     </div>
 </ng-template>
 </gh-orders>
