@@ -45,6 +45,7 @@ import { ClientConfirmedTripComponent } from './orders/trip-list/confirmed-trip/
 import { ClientTripDoneComponent } from './orders/trip-list/trip-done/trip-done.component';
 import { ClientAlertListComponent } from './alert-list/alert-list.component';
 import { ClientAlertListResolver } from './alert-list/alert-list.resolver';
+import { ClientCreateAlertComponent } from './request/alert/create-alert/create-alert.component';
 
 
 /**
@@ -77,7 +78,8 @@ import { ClientAlertListResolver } from './alert-list/alert-list.resolver';
         ClientPlannedTripComponent,
         ClientConfirmedTripComponent,
         ClientTripDoneComponent,
-        ClientAlertListComponent
+        ClientAlertListComponent,
+        ClientCreateAlertComponent
     ],
     imports: [
         CommonModule,

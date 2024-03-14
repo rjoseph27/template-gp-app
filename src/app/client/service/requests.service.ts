@@ -67,9 +67,10 @@ export class ClientRequestsService {
     /**
      * @description Sends items
      * @param confirmItemRequest The confirm item request
-     * @returns {Promise<boolean>} A promise that resolves to true if the items were sent successfully, false otherwise
+     * @returns {Promise<string>}
      */
-    sendItems(confirmItemRequest: ConfirmItemRequest): Promise<boolean> {
+    sendItems(confirmItemRequest: ConfirmItemRequest): Promise<string> {
+        let id: string;
         return this.requestsServiceApi.sendItems(confirmItemRequest).then(async msg => {
             if(msg.message === SendItemsStatus.ITEMS_SENT_SUCCESSFULLY)
             {
@@ -77,13 +78,14 @@ export class ClientRequestsService {
                     if(typeof item.image !== 'string')
                     {
                         const formData = new FormData();
-                        formData.append('image', item.image); 
+                        formData.append('image', item.image);
+                        id = msg.newId 
                         await this.requestsServiceApi.uploadImages(formData).then(async img => await this.requestsServiceApi.updateImageName({id: msg.newId, filename: img, index: index}));
                     }
                 });
-                return true
+                return id
             }
-            return false
+            return undefined
         });
     }
 

@@ -1,7 +1,8 @@
 import { AfterContentChecked, ChangeDetectorRef, Component, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { COUNTRY_INFO_LIST } from '../../misc/constants/countries/countries';
+import { ClientRoutes } from '../../client.route';
 
 /**
  * @class ClientAlertListComponent
@@ -18,12 +19,6 @@ import { COUNTRY_INFO_LIST } from '../../misc/constants/countries/countries';
    * @type {ActivatedRoute}
    */
     private readonly route: ActivatedRoute = inject(ActivatedRoute);
-
-    /**
-     * @description An observable for the user info
-     * @type {Observable<UserInfo>}
-     */
-    private readonly userInfo$ = this.route.data.pipe(map(data => data['userInfo']));
 
     /**
      * @description An observable for the currency
@@ -43,8 +38,22 @@ import { COUNTRY_INFO_LIST } from '../../misc/constants/countries/countries';
     */
     private readonly changeDetectorRef: ChangeDetectorRef = inject(ChangeDetectorRef);
 
+    /**
+    * @description The angular router service.
+    * @type {Router}
+    */
+    private readonly router: Router = inject(Router);
+
     /** @inheritdoc */
     ngAfterContentChecked() {
       this.changeDetectorRef.detectChanges();
+    }
+
+    /**
+     * @description Create an alert
+     * @returns {void}
+     */
+    protected createAlert() {
+      this.router.navigate([ClientRoutes.createAlert.fullPath()])
     }
   }

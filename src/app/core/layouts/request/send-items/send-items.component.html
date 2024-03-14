@@ -3,8 +3,8 @@
         <div class="section">
             <div class="sub-section">
                 <gh-select-field
-                [label]="'moduleList.client.sendItems.content.location.from' | translate" 
-                [placeholder]="'moduleList.client.sendItems.content.location.country.placeholder' | translate"
+                [label]="'sendItems.location.from' | translate" 
+                [placeholder]="'sendItems.location.country.placeholder' | translate"
                 [name]="userCountryField"
                 [value]="sendItemsForm.get(userCountryField).value"
                 (valueChange)="updateUserCountry($event)"
@@ -15,7 +15,7 @@
             </div>
             <div class="sub-section">
                 <gh-select-field
-                [placeholder]="'moduleList.client.sendItems.content.location.region.placeholder' | translate"
+                [placeholder]="'sendItems.location.region.placeholder' | translate"
                 [name]="userRegionField"
                 [value]="sendItemsForm.get(userRegionField).value"
                 (valueChange)="sendItemsForm.get(userRegionField).setValue($event)"
@@ -28,8 +28,8 @@
         <div class="section">
             <div class="sub-section">
                 <gh-select-field
-                [label]="'moduleList.client.sendItems.content.location.to' | translate" 
-                [placeholder]="'moduleList.client.sendItems.content.location.country.placeholder' | translate"
+                [label]="'sendItems.location.to' | translate" 
+                [placeholder]="'sendItems.location.country.placeholder' | translate"
                 [name]="destinationCountryField"
                 [value]="sendItemsForm.get(destinationCountryField).value"
                 (valueChange)="destinationUserCountry($event)"
@@ -40,7 +40,7 @@
             </div>
             <div class="sub-section">
                 <gh-select-field
-                [placeholder]="'moduleList.client.sendItems.content.location.region.placeholder' | translate"
+                [placeholder]="'sendItems.location.region.placeholder' | translate"
                 [name]="destinationRegionField"
                 [value]="sendItemsForm.get(destinationRegionField).value"
                 (valueChange)="sendItemsForm.get(destinationRegionField).setValue($event)"
@@ -55,13 +55,13 @@
     <hr class="gp-divider">
     <div class="group">
         <div class="title">
-            {{ 'moduleList.client.sendItems.content.shippingInformation.title' | translate }}
+            {{ 'sendItems.shippingInformation.title' | translate }}
         </div>
         <div class="section">
             <div class="section">
                 <gh-text-field
-                [label]="'moduleList.client.sendItems.content.shippingInformation.consigneeFullName.label' | translate" 
-                [placeholder]="'moduleList.client.sendItems.content.shippingInformation.consigneeFullName.placeholder' | translate"
+                [label]="'sendItems.shippingInformation.consigneeFullName.label' | translate" 
+                [placeholder]="'sendItems.shippingInformation.consigneeFullName.placeholder' | translate"
                 [name]="consigneeFullNameField"
                 [value]="sendItemsForm.get(consigneeFullNameField).value"
                 (valueChange)="sendItemsForm.get(consigneeFullNameField).setValue($event)"
@@ -71,8 +71,8 @@
             </div>
             <div class="section">
                 <gh-text-field
-                [label]="'moduleList.client.sendItems.content.shippingInformation.consigneeAddress.label' | translate" 
-                [placeholder]="'moduleList.client.sendItems.content.shippingInformation.consigneeAddress.placeholder' | translate"
+                [label]="'sendItems.shippingInformation.consigneeAddress.label' | translate" 
+                [placeholder]="'sendItems.shippingInformation.consigneeAddress.placeholder' | translate"
                 [name]="consigneeAddressField"
                 [value]="sendItemsForm.get(consigneeAddressField).value"
                 (valueChange)="sendItemsForm.get(consigneeAddressField).setValue($event)"
@@ -82,8 +82,8 @@
             </div>
             <div class="section">
                 <gh-phone-field
-                [label]="'moduleList.client.sendItems.content.shippingInformation.consigneePhoneNumber.label' | translate" 
-                [placeholder]="'moduleList.client.sendItems.content.shippingInformation.consigneePhoneNumber.placeholder' | translate"
+                [label]="'sendItems.shippingInformation.consigneePhoneNumber.label' | translate" 
+                [placeholder]="'sendItems.shippingInformation.consigneePhoneNumber.placeholder' | translate"
                 [name]="consigneePhoneNumberField"
                 [defaultValue]="this.request?.consigneePhoneNumber"
                 (formattedValueChange)="sendItemsForm.get(consigneePhoneNumberField).setValue($event)"
@@ -106,12 +106,21 @@
             (itemInformationChange)="sendItemsForm.get(itemInformationField).setValue($event)"
         ></gh-item-information>
     </div>
+    <ng-container *ngIf="alertMode">
+        <hr class="gp-divider">
+        <div class="group">
+            <div class="title">
+                {{ 'global.alertRequirement.title' | translate }}
+            </div>
+            <gh-alert-form [currency]="currency"></gh-alert-form>    
+        </div>
+    </ng-container>
     <div class="send-request">
         <button
             [buttonLoading]="loading$ | async" 
             type="submit" 
             class="gp-button" 
             [disabled]="!sendItemsForm.valid"
-        >{{ 'moduleList.client.sendItems.content.send' | translate }}</button>
+        >{{ submitCapiton }}</button>
     </div>
 </form>

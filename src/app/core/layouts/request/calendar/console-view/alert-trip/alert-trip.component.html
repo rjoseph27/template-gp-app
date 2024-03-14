@@ -1,58 +1,25 @@
 <gh-console-view [title]="captions.title" (closed)="close()">
     <div class="content" *ngIf="!(alertSent$ | async)">
-    <form [formGroup]="alertForm" (ngSubmit)="createAlert()">
-        <div class="section">
-            <gh-date-field
-                [label]="captions.from.title" 
-                [name]="fromField"
-                [value]="defaultDate"
-                (valueChange)="alertForm.get(fromField).setValue($event)"
-                [errors]="alertForm.get(fromField).errors"
-                [minDate]="minDate"
-                [errorCaptions]="fromErrorCaptions"
-            ></gh-date-field>
-        </div>
-        <div class="section">
-            <gh-date-field
-                [label]="captions.to.title" 
-                [name]="toField"
-                [value]="defaultDate"
-                (valueChange)="alertForm.get(toField).setValue($event)"
-                [errors]="alertForm.get(toField).errors"
-                [errorCaptions]="toErrorCaptions"
-            ></gh-date-field>
-        </div>
-        <div class="section">
-            <gh-number-field
-            [label]="captions.maxPrice.title" 
-            [name]="maxPriceField"
-            [value]="alertForm.get(maxPriceField).value"
-            (valueChange)="alertForm.get(maxPriceField).setValue($event)"
-            [errors]="alertForm.get(maxPriceField).errors"
-            [errorCaptions]="maxPriceErrorCaptions"
-            [min]="0"
-            [step]="currency.step"
-           ></gh-number-field> 
-        </div>
+        <gh-alert-form [currency]="currency" [defaultDate]="defaultDate"></gh-alert-form>
         <div class="section">
             <button
                 [buttonLoading]="loading$ | async" 
                 type="submit" 
                 class="gp-button" 
                 [disabled]="!alertForm.valid"
+                (click)="createAlert()"
              >{{ captions.button }}</button>
         </div>
-    </form>
-  </div>
-  <div *ngIf="alertSent$ | async">
-    <div class="content">
-        <div class="check-logo">
-            <gh-icon name="check"></gh-icon>
-        </div>
-        <div class="alert-sent-text">{{ captions.alertSent.content }}</div>
-        <div>
-            <button [buttonLoading]="sendingDataServer$ | async" type="button" class="gp-button" (click)="goAlertPage()">{{ captions.alertSent.button }}</button>
-        </div>
+    </div>
+    <div *ngIf="alertSent$ | async">
+        <div class="content">
+            <div class="check-logo">
+                <gh-icon name="check"></gh-icon>
+            </div>
+            <div class="alert-sent-text">{{ captions.alertSent.content }}</div>
+            <div>
+                <button [buttonLoading]="sendingDataServer$ | async" type="button" class="gp-button" (click)="goAlertPage()">{{ captions.alertSent.button }}</button>
+            </div>
     </div>
 </div>
 </gh-console-view>

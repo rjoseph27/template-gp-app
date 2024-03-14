@@ -1,0 +1,11 @@
+<div class="title">
+    <h1> {{ 'moduleList.client.alerts.createAlert.title' | translate }}</h1>
+</div>
+<div class="content">
+    <gh-send-items 
+        [userCountry]="userCountry" 
+        [alertMode]="true" 
+        [currency]="currency$ | async"
+        [submitCapiton]="'moduleList.client.alerts.createAlert.button' | translate"
+    ></gh-send-items>
+</div>

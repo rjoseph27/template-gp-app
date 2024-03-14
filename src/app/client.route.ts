@@ -165,4 +165,10 @@ export class ClientRoutes {
      * @type {GhRoute}
      */
     static readonly alertList: GhRoute = new GhRoute('alert-list', ClientRoutes.main);
+
+    /**
+     * @description The create alert route
+     * @type {GhRoute}
+     */
+    static readonly createAlert: GhRoute = new GhRoute('create', ClientRoutes.alertList);
 }

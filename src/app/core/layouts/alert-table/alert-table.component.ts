@@ -50,6 +50,7 @@ export interface AlertTableElement {
 @Component({
     selector: 'gh-alert-table',
     templateUrl: 'alert-table.component.html',
+    styleUrls: ['./alert-table.component.scss'],
   })
   export class GhAlertTableComponent implements OnInit {
     /**

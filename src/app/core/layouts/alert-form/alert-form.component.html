@@ -1,0 +1,35 @@
+<form [formGroup]="alertForm">
+    <div class="section">
+        <gh-date-field
+            [label]="'global.alertForm.from.title' | translate" 
+            [name]="fromField"
+            [value]="defaultDate"
+            (valueChange)="alertForm.get(fromField).setValue($event)"
+            [errors]="alertForm.get(fromField).errors"
+            [minDate]="minDate"
+            [errorCaptions]="fromErrorCaptions"
+        ></gh-date-field>
+    </div>
+    <div class="section">
+        <gh-date-field
+            [label]="'global.alertForm.to.title' | translate" 
+            [name]="toField"
+            [value]="defaultDate"
+            (valueChange)="alertForm.get(toField).setValue($event)"
+            [errors]="alertForm.get(toField).errors"
+            [errorCaptions]="toErrorCaptions"
+        ></gh-date-field>
+    </div>
+    <div class="section">
+        <gh-number-field
+        [label]="'global.alertForm.maxPrice.title' | translate" 
+        [name]="maxPriceField"
+        [value]="alertForm.get(maxPriceField).value"
+        (valueChange)="alertForm.get(maxPriceField).setValue($event)"
+        [errors]="alertForm.get(maxPriceField).errors"
+        [errorCaptions]="maxPriceErrorCaptions"
+        [min]="0"
+        [step]="currency.step"
+       ></gh-number-field> 
+    </div>
+</form>

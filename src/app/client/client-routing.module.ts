@@ -30,6 +30,7 @@ import { ClientConfirmedTripComponent } from './orders/trip-list/confirmed-trip/
 import { ClientTripDoneComponent } from './orders/trip-list/trip-done/trip-done.component';
 import { ClientAlertListComponent } from './alert-list/alert-list.component';
 import { ClientAlertListResolver } from './alert-list/alert-list.resolver';
+import { ClientCreateAlertComponent } from './request/alert/create-alert/create-alert.component';
 
 /**
  * @constant routes
@@ -67,7 +68,8 @@ const routes: Routes = [
         { path: `${ClientRoutes.tripDone}`, component: ClientTripDoneComponent, pathMatch: 'full', resolve: { tripDetails: ClientTripInfoResolver, userInfo: ClientApplicationResolver }},
     ] },
     { path: `${ClientRoutes.alertList}`, children: [
-        { path: '', component: ClientAlertListComponent, pathMatch: 'full', resolve: { userInfo: ClientApplicationResolver, alertList: ClientAlertListResolver}}
+        { path: '', component: ClientAlertListComponent, pathMatch: 'full', resolve: { userInfo: ClientApplicationResolver, alertList: ClientAlertListResolver}},
+        { path: `${ClientRoutes.createAlert}`, component: ClientCreateAlertComponent, pathMatch: 'full', resolve: { userInfo: ClientApplicationResolver }}
     ]}
 ];
 

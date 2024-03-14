@@ -5,6 +5,7 @@
         [canEdit]="true"
         [idProperty]="'id'"
         [deleteFactory]="deleteAlertFactory"
+        [emptyTemplate]="emptyTemplate"
     >
         <ng-template #routeTemplate let-value="value">
             <gh-flight-route [route]="value"></gh-flight-route>
@@ -18,7 +19,7 @@
         </ng-template>
 
         <ng-template #timeRangeTemplate let-value="value">
-            <div *ngIf="value.from && value.to">
+            <div *ngIf="value.from && value.to && value.from !== value.to">
                 {{ 'global.alertList.timeRange.to' | translate : { from: value.from | date: 'dd/MM/yyyy', to: value.to | date: 'dd/MM/yyyy' } }}
             </div>
             <div *ngIf="value.from && !value.to">
@@ -28,6 +29,18 @@
                 {{ 'global.alertList.timeRange.until' | translate : { until: value.to | date: 'dd/MM/yyyy' } }}
             </div>
             <div *ngIf="!value.from && !value.to"> - </div>
+            <div *ngIf="value.from && value.to && value.from === value.to"> {{ value.from | date: 'dd/MM/yyyy' }} </div>
         </ng-template>
         
+        <ng-template #emptyTemplate>
+            <div class="empty">
+                <div class="section section-title">
+                    {{ 'global.alertList.empty.title' | translate }}
+                </div>
+                <div class="section">
+                    <gh-icon name="warning"></gh-icon>
+                </div>
+                <div class="section">{{ 'global.alertList.empty.content' | translate }}</div>
+            </div>
+        </ng-template>
     </gh-table>

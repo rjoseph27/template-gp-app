@@ -19,48 +19,6 @@
             "sendItems": {
                 "title": "Send items",
                 "content" : {
-                    "location": {
-                        "from": "From",
-                        "to": "To",
-                        "country": {
-                            "placeholder": "Select country",
-                            "errors": {
-                                "required": "Please select a country"
-                            }
-                        },
-                        "region": {
-                            "placeholder": "Select region",
-                            "errors": {
-                                "required": "Please select a region"
-                            }
-                        }
-                    },
-                    "shippingInformation": {
-                        "title": "Shipping Information",
-                         "consigneeFullName": {
-                            "label": "Consignee Full Name",
-                            "placeholder": "Enter consignee full name",
-                            "errors": {
-                                "required": "Please enter consignee full name",
-                                "invalid": "Please enter a valid name"
-                            }
-                        },
-                        "consigneeAddress": {
-                            "label": "Consignee Address",
-                            "placeholder": "Enter consignee address, city and zip code",
-                            "errors": {
-                                "required": "Please enter consignee address"
-                            }
-                        },
-                        "consigneePhoneNumber": {
-                            "label": "Consignee Phone",
-                            "placeholder": "Enter consignee phone",
-                            "errors": {
-                                "required": "Please enter consignee phone",
-                                "invalid": "Please enter a valid phone number"
-                            }
-                        }
-                    },
                     "send": "Check for GPs",
                     "calendar": {
                         "selectTrip": {
@@ -86,27 +44,6 @@
                         },
                         "alert": {
                             "title": "Alert",
-                            "from": {
-                                "title": "From",
-                                "errors": {
-                                    "minDate": "Please select a date after today",
-                                    "invalidDate": "Please enter a valid date",
-                                    "invalidAlertDate": "The arrival date should be after the departure date"
-                                }
-                            },
-                            "to": {
-                                "title": "To",
-                                "errors": {
-                                    "invalidDate": "Please enter a valid date",
-                                    "invalidAlertDate": "The arrival date should be after the departure date"
-                                }
-                            },
-                            "maxPrice": {
-                                "title": "Maximum Total Price",
-                                "errors": {
-                                    "min": "Please enter a price more than {{min}}"
-                                }
-                            },
                             "alertSent": {
                                 "content": "You will be notified once a GP creates a trip that matches your alert.",
                                 "button": "See my Alerts"
@@ -175,7 +112,15 @@
             },
             "alerts": {
                 "title": "My Alerts",
-                "newAlert": "Create a New Alert" 
+                "newAlert": "Create a New Alert",
+                "createAlert": {
+                    "title": "Create a New Alert",
+                    "button": "Create an Alert",
+                    "notification": {
+                        "success": "The alert has been created successfully",
+                        "error": "An error occurred while creating the alert"
+                    }
+                }
             }
         },
         "gp": {

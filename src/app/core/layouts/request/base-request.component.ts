@@ -95,6 +95,6 @@ export class BaseRequestComponent  {
    * @type {Map<string, string>}
    */
   protected readonly countryErrorCaptions = new Map<string, string>([
-    [REQUIRED_VALIDATION, "moduleList.client.sendItems.content.location.country.errors.required"],
+    [REQUIRED_VALIDATION, "sendItems.location.country.errors.required"],
   ]);
 }

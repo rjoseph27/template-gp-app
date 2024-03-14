@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { REQUIRED_VALIDATION } from "../../../../misc/constants/validations";
-import { CountryInfo } from "../../../../misc/constants/countries/countries.type";
-import { BehaviorSubject, Observable, map } from "rxjs";
+import { CountryInfo, CurrencyInfo } from "../../../../misc/constants/countries/countries.type";
+import { Observable, map } from "rxjs";
 import { Country } from "../../../../misc/enums/country.enum";
 import { COUNTRY_INFO_LIST } from "../../../../misc/constants/countries/countries";
 import { INVALID_NAME_VALIDATION, nameValidator } from "../../../../misc/validation/name.validator";
@@ -32,6 +32,12 @@ export class GhSendItemsComponent extends BaseRequestComponent implements OnInit
    * @type {SendItemsRequest}
    */
   @Input() request: SendItemsRequest;
+
+  /**
+   * @description The currency of the user
+   * @type {Currency}
+   */
+  @Input() currency: CurrencyInfo;
 
   /**
    * @description The name of the destination country field.
@@ -70,6 +76,12 @@ export class GhSendItemsComponent extends BaseRequestComponent implements OnInit
   protected readonly itemInformationField = 'itemInformation';
 
   /**
+   * @description The submit caption
+   * @type {string}
+   */
+  @Input() submitCapiton: string;
+
+  /**
    * @description The options of the user region
    * @type {Observable<SelectFieldOption[]>}
    */
@@ -94,7 +106,7 @@ export class GhSendItemsComponent extends BaseRequestComponent implements OnInit
    * @type {Map<string, string>}
    */
   protected readonly regionErrorCaptions = new Map<string, string>([
-    [REQUIRED_VALIDATION, "moduleList.client.sendItems.content.location.region.errors.required"],
+    [REQUIRED_VALIDATION, "sendItems.location.region.errors.required"],
   ]);
 
   /**
@@ -102,8 +114,8 @@ export class GhSendItemsComponent extends BaseRequestComponent implements OnInit
    * @type {Map<string, string>}
    */
   protected readonly consigneeFullNameErrorCaptions = new Map<string, string>([
-    [REQUIRED_VALIDATION, "moduleList.client.sendItems.content.shippingInformation.consigneeFullName.errors.required"],
-    [INVALID_NAME_VALIDATION, "moduleList.client.sendItems.content.shippingInformation.consigneeFullName.errors.invalid"]
+    [REQUIRED_VALIDATION, "sendItems.shippingInformation.consigneeFullName.errors.required"],
+    [INVALID_NAME_VALIDATION, "sendItemsshippingInformation.consigneeFullName.errors.invalid"]
   ]);
 
   /**
@@ -111,7 +123,7 @@ export class GhSendItemsComponent extends BaseRequestComponent implements OnInit
    * @type {Map<string, string>}
    */
   protected readonly consigneeAddressErrorCaptions = new Map<string, string>([
-    [REQUIRED_VALIDATION, "moduleList.client.sendItems.content.shippingInformation.consigneeAddress.errors.required"],
+    [REQUIRED_VALIDATION, "sendItems.shippingInformation.consigneeAddress.errors.required"],
   ]);
 
   /**
@@ -119,9 +131,15 @@ export class GhSendItemsComponent extends BaseRequestComponent implements OnInit
    * @type {Map<string, string>}
    */
   protected readonly consigneePhoneNumberErrorCaptions = new Map<string, string>([
-    [REQUIRED_VALIDATION, "moduleList.client.sendItems.content.shippingInformation.consigneePhoneNumber.errors.required"],
-    [INVALID_PHONE_NUMBER_VALIDATION, "moduleList.client.sendItems.content.shippingInformation.consigneePhoneNumber.errors.invalid"],
+    [REQUIRED_VALIDATION, "sendItems.shippingInformation.consigneePhoneNumber.errors.required"],
+    [INVALID_PHONE_NUMBER_VALIDATION, "sendItems.shippingInformation.consigneePhoneNumber.errors.invalid"],
   ]);
+
+  /**
+   * @description A mode used for alert management
+   * @type {boolean}
+   */
+  @Input() alertMode: boolean = false;
   
   /**
    * @description The send items form
