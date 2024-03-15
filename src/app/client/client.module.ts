@@ -46,6 +46,8 @@ import { ClientTripDoneComponent } from './orders/trip-list/trip-done/trip-done.
 import { ClientAlertListComponent } from './alert-list/alert-list.component';
 import { ClientAlertListResolver } from './alert-list/alert-list.resolver';
 import { ClientCreateAlertComponent } from './request/alert/create-alert/create-alert.component';
+import { ClientEditAlertComponent } from './request/alert/edit-alert/edit-alert.component';
+import { ClientEditAlertResolver } from './request/alert/edit-alert/edit-alert.resolver';
 
 
 /**
@@ -79,7 +81,8 @@ import { ClientCreateAlertComponent } from './request/alert/create-alert/create-
         ClientConfirmedTripComponent,
         ClientTripDoneComponent,
         ClientAlertListComponent,
-        ClientCreateAlertComponent
+        ClientCreateAlertComponent,
+        ClientEditAlertComponent
     ],
     imports: [
         CommonModule,
@@ -104,6 +107,7 @@ import { ClientCreateAlertComponent } from './request/alert/create-alert/create-
         ClientApplicationResolver,
         ClientOrderDetailsResolver,
         ClientGpOrderDetailsResolver,
+        ClientEditAlertResolver,
         ClientAlertListResolver,
         ClientCalendarResolver,
         ClientRequestsService,

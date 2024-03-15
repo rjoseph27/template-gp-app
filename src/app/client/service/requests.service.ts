@@ -1,6 +1,6 @@
 import { Injectable, inject } from "@angular/core";
 import { RequestsServiceApi } from "../../api/requests/requests.service.api";
-import { OrderDetailRequest, CancelOrderStatus, ConfirmItemRequest, CreateAlertRequest, CreateAlertStatus, ItemsOrdersStatus, ReportTrip, ReportTripStatus, RequestTableElementRequest, SendItemsStatus, GpAcceptOrderStatus, GetReportTripStatus, GetTripInfoStatus, CancelTripStatus, AlertListStatus } from "../../api/requests/requests.type";
+import { OrderDetailRequest, CancelOrderStatus, ConfirmItemRequest, CreateAlertRequest, CreateAlertStatus, ItemsOrdersStatus, ReportTrip, ReportTripStatus, RequestTableElementRequest, SendItemsStatus, GpAcceptOrderStatus, GetReportTripStatus, GetTripInfoStatus, CancelTripStatus, AlertListStatus, AlertFormType, EditAlertStatus } from "../../api/requests/requests.type";
 import { SendItemsRequest } from "./send-items.service";
 import { DateUtil } from "../../misc/util/date.util";
 import { UsersService } from "../../services/users.service";
@@ -261,5 +261,41 @@ export class ClientRequestsService {
             }
             return [];
         })        
+    }
+
+    /**
+     * @description Gets the alert
+     * @param alertId The id of the alert
+     * @returns {Promise<AlertTableElement>}
+     */
+    getAlert(alertId: string): Promise<AlertTableElement> {
+        return this.requestsServiceApi.getAlert(alertId).then(msg => {
+            if(msg.message === AlertListStatus.ALERTS_FOUND) {
+                return msg.alert;
+            }
+            return undefined;
+        })        
+    }
+
+    /**
+     * @description Edit an alert
+     * @param alert The alert to edit
+     * @returns 
+     */
+    editAlert(alert: CreateAlertRequest): Promise<boolean> {
+        return this.requestsServiceApi.editAlert(alert).then(msg => {
+            if(msg.message === EditAlertStatus.ALERT_EDITED_SUCCESSFULLY)
+            {
+                alert.items.itemInformation.forEach(async (item,index) =>{
+                    if(typeof item.image !== 'string' && item.image.type) {
+                        const formData = new FormData();
+                        formData.append('image', item.image); 
+                        await this.requestsServiceApi.uploadImages(formData).then(async img => await this.requestsServiceApi.updateImageName({id: alert.itemId, filename: img, index: index}));
+                    }
+                });
+                return true
+            }
+            return false
+        });
     }
 }

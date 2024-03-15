@@ -41,6 +41,13 @@ export interface AlertTableElement {
      * @type {number}
      */
     maxPrice: number;
+
+    
+    /**
+     * @description The id of the alert
+     * @type {string}
+     */
+    alertId?: string
   }
 
 /**

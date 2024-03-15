@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { ApiResponse, BaseServiceApi } from "../base.service.api";
 import { firstValue } from "../../misc/function/firstValue";
-import { ReportTrip, SearchTripsRequest, SearchTripsApiResponse, ConfirmItemRequest, SendItemsRequestApiResponse, UpdateImageNameRequest, CreateAlertRequest, ListItemsApiResponse, ItemInformationApiResponse, RequestTableElementRequest, OrderDetailRequest, GetSendItemsRequestApiResponse, GetTripListApiResponse, GetTripInfoApiResponse, CancelTripRequest, AlertListApiResponse } from "./requests.type";
+import { ReportTrip, SearchTripsRequest, SearchTripsApiResponse, ConfirmItemRequest, SendItemsRequestApiResponse, UpdateImageNameRequest, CreateAlertRequest, ListItemsApiResponse, ItemInformationApiResponse, RequestTableElementRequest, OrderDetailRequest, GetSendItemsRequestApiResponse, GetTripListApiResponse, GetTripInfoApiResponse, CancelTripRequest, AlertListApiResponse, AlertApiResponse } from "./requests.type";
 
 /**
  * @class RequestsServiceApi
@@ -163,5 +163,23 @@ export class RequestsServiceApi extends BaseServiceApi {
      */
     getAlertByUserId(userId: string): Promise<AlertListApiResponse> {
         return firstValue(this.getRequest<AlertListApiResponse>('get-alert-by-userid', userId));
+    }
+
+    /**
+     * @description A method to get an alert by id
+     * @param alertId The id of the alert 
+     * @returns {Promise<AlertApiResponse>}
+     */
+    getAlert(alertId: string): Promise<AlertApiResponse> {
+        return firstValue(this.getRequest<AlertApiResponse>('get-alert', alertId));
+    }
+
+    /**
+     * @description A method to edit an alert
+     * @param alert The alert to edit
+     * @returns {Promise<ApiResponse>}
+     */
+    editAlert(alert: CreateAlertRequest): Promise<ApiResponse> {
+        return firstValue(this.postRequest<ApiResponse>('edit-alert', alert));
     }
 }

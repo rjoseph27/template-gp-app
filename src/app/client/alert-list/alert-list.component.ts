@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { COUNTRY_INFO_LIST } from '../../misc/constants/countries/countries';
 import { ClientRoutes } from '../../client.route';
+import { AlertTableElement } from '../../core/layouts/alert-table/alert-table.component';
 
 /**
  * @class ClientAlertListComponent
@@ -25,6 +26,16 @@ import { ClientRoutes } from '../../client.route';
      * @type {Observable<Currency>}
      */
     protected readonly currency$ = this.route.data.pipe(map(data => COUNTRY_INFO_LIST.find(x => x.name === data['userInfo'].country).currency.currency));
+
+    /**
+     * @description The edit table factory
+     * @type {(row: AlertTableElement) => void}
+     */
+    protected readonly editTableFactory = (row: AlertTableElement) => {
+      this.router.navigate([ClientRoutes.editAlert.fullPath()], { queryParams: {
+        id: row.id
+      }})
+    }
 
     /**
      * @description An observable for the alert list

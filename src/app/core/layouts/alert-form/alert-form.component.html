@@ -3,7 +3,7 @@
         <gh-date-field
             [label]="'global.alertForm.from.title' | translate" 
             [name]="fromField"
-            [value]="defaultDate"
+            [value]="alertForm.get(fromField).value"
             (valueChange)="alertForm.get(fromField).setValue($event)"
             [errors]="alertForm.get(fromField).errors"
             [minDate]="minDate"
@@ -14,7 +14,7 @@
         <gh-date-field
             [label]="'global.alertForm.to.title' | translate" 
             [name]="toField"
-            [value]="defaultDate"
+            [value]="alertForm.get(toField).value"
             (valueChange)="alertForm.get(toField).setValue($event)"
             [errors]="alertForm.get(toField).errors"
             [errorCaptions]="toErrorCaptions"

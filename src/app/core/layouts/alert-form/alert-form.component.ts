@@ -7,6 +7,7 @@ import { DateFromDatePicker } from "../../../misc/util/date.util";
 import { CurrencyInfo } from "../../../misc/constants/countries/countries.type";
 import { CurrentFormService } from "../../../services/current-form.service";
 import { SendItemsRequest } from "../../../client/service/send-items.service";
+import { AlertFormType } from "../../../api/requests/requests.type";
 
 /**
  * @description The from field
@@ -66,6 +67,12 @@ const alertDateValidator: ValidatorFn = (control: AbstractControl): ValidationEr
     * @type {Date}
     */
    protected readonly minDate = new Date();
+
+   /**
+   * @description The request
+   * @type {SendItemsRequest}
+   */
+  @Input() request: AlertFormType;
 
    /**
     * @description The captions of the alert form
@@ -139,9 +146,9 @@ const alertDateValidator: ValidatorFn = (control: AbstractControl): ValidationEr
           }, { validators: [alertDateValidator] }
          )   
     } else {
-        this.currentFormService.currentForm.addControl(this.fromField, new FormControl(this.defaultDate, [minDateValidator(this.minDate), dateFormatValidator]));
-        this.currentFormService.currentForm.addControl(this.toField, new FormControl(this.defaultDate, [dateFormatValidator]));
-        this.currentFormService.currentForm.addControl(this.maxPriceField, new FormControl(null, [Validators.min(0)]));
+        this.currentFormService.currentForm.addControl(this.fromField, new FormControl(this.request?.from, [minDateValidator(this.minDate), dateFormatValidator]));
+        this.currentFormService.currentForm.addControl(this.toField, new FormControl(this.request?.to, [dateFormatValidator]));
+        this.currentFormService.currentForm.addControl(this.maxPriceField, new FormControl(this.request?.maxPrice, [Validators.min(0)]));
         this.currentFormService.currentForm.addValidators(alertDateValidator);
     }
 

@@ -120,6 +120,14 @@
                         "success": "The alert has been created successfully",
                         "error": "An error occurred while creating the alert"
                     }
+                },
+                "editAlert": {
+                    "title": "Edit the Alert",
+                    "button": "Edit the Alert",
+                    "notification": {
+                        "success": "The alert has been edited successfully",
+                        "error": "An error occurred while editing the alert"
+                    }
                 }
             }
         },

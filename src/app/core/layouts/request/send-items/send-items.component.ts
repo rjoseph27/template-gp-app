@@ -10,6 +10,7 @@ import { INVALID_PHONE_NUMBER_VALIDATION, phoneNumberValidator } from "../../../
 import { SelectFieldOption } from "../../../elements/input/select-field/select-field.component";
 import { BaseRequestComponent } from "../base-request.component";
 import { SendItemsRequest } from "../../../../client/service/send-items.service";
+import { AlertFormType } from "../../../../api/requests/requests.type";
 
 /**
  * @class GhSendItemsComponent
@@ -31,7 +32,7 @@ export class GhSendItemsComponent extends BaseRequestComponent implements OnInit
    * @description The request
    * @type {SendItemsRequest}
    */
-  @Input() request: SendItemsRequest;
+  @Input() request: AlertFormType;
 
   /**
    * @description The currency of the user

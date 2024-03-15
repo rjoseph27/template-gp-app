@@ -112,7 +112,10 @@
             <div class="title">
                 {{ 'global.alertRequirement.title' | translate }}
             </div>
-            <gh-alert-form [currency]="currency"></gh-alert-form>    
+            <gh-alert-form 
+                [request]="request"
+                [currency]="currency"
+            ></gh-alert-form>    
         </div>
     </ng-container>
     <div class="send-request">

@@ -538,13 +538,13 @@ export interface ReportTrip {
      * @description The send items request
      * @type {SendItemsRequest}
      */
-    items: SendItemsRequest,
+    items?: SendItemsRequest,
 
     /**
      * @description The route of the flight
      * @type {FlightRoute}
      */
-    route: FlightRoute,
+    route?: FlightRoute,
 
     /**
      * @description The user id
@@ -569,6 +569,18 @@ export interface ReportTrip {
      * @type {number}
      */
     maxPrice?: number,
+
+    /**
+     * @description The id of the alert
+     * @type {string}
+     */
+    alertId?: string
+
+    /**
+     * @description The id of the item
+     * @type {string}
+     */
+    itemId?: string
   }
 
   /**
@@ -596,6 +608,24 @@ export interface ReportTrip {
   }
 
   /**
+   * @enum EditAlertStatus
+   * @description The edit alert status
+   */
+  export enum EditAlertStatus {
+    /**
+     * @description The alert was edited successfully.
+     * @type {string}
+     */
+    ALERT_EDITED_SUCCESSFULLY = "ALERT_EDITED_SUCCESSFULLY",
+
+    /**
+     * @description The alert was not found.
+     * @type {string}
+     */
+    ALERT_NOT_FOUND = "ALERT_NOT_FOUND"
+  }
+
+  /**
    * @interface AlertListApiResponse
    * @description An interface for the alert list api response
    */
@@ -605,6 +635,24 @@ export interface ReportTrip {
      * @type {AlertTableElement[]}
      */
     alerts: AlertTableElement[];
+  }
+
+  /**
+   * @interface AlertFormType
+   * @description An interface for the alert form type
+   */
+  export type AlertFormType = SendItemsRequest & CreateAlertRequest;
+
+  /**
+   * @interface AlertApiResponse
+   * @description An interface for the alert api response
+   */
+  export interface AlertApiResponse extends ApiResponse {
+    /**
+     * @description The alert
+     * @type {AlertTableElement}
+     */
+    alert: AlertTableElement;
   }
 
   /**

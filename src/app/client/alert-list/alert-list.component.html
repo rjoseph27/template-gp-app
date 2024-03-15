@@ -3,7 +3,11 @@
         <div class="title">
             <h1>{{ 'moduleList.client.alerts.title' | translate }}</h1>
         </div>
-        <gh-alert-table [alertList]="alertList$ | async" [currency]="currency$ | async"></gh-alert-table>
+        <gh-alert-table 
+            [alertList]="alertList$ | async" 
+            [currency]="currency$ | async"
+            [editAlertFactory]="editTableFactory"
+        ></gh-alert-table>
         <button class="gp-button" (click)="createAlert()">{{ 'moduleList.client.alerts.newAlert' | translate }}</button>
     </div>
 </div>

@@ -31,6 +31,8 @@ import { ClientTripDoneComponent } from './orders/trip-list/trip-done/trip-done.
 import { ClientAlertListComponent } from './alert-list/alert-list.component';
 import { ClientAlertListResolver } from './alert-list/alert-list.resolver';
 import { ClientCreateAlertComponent } from './request/alert/create-alert/create-alert.component';
+import { ClientEditAlertComponent } from './request/alert/edit-alert/edit-alert.component';
+import { ClientEditAlertResolver } from './request/alert/edit-alert/edit-alert.resolver';
 
 /**
  * @constant routes
@@ -69,7 +71,8 @@ const routes: Routes = [
     ] },
     { path: `${ClientRoutes.alertList}`, children: [
         { path: '', component: ClientAlertListComponent, pathMatch: 'full', resolve: { userInfo: ClientApplicationResolver, alertList: ClientAlertListResolver}},
-        { path: `${ClientRoutes.createAlert}`, component: ClientCreateAlertComponent, pathMatch: 'full', resolve: { userInfo: ClientApplicationResolver }}
+        { path: `${ClientRoutes.createAlert}`, component: ClientCreateAlertComponent, pathMatch: 'full', resolve: { userInfo: ClientApplicationResolver }},
+        { path: `${ClientRoutes.editAlert}`, component: ClientEditAlertComponent, pathMatch: 'full', resolve: { userInfo: ClientApplicationResolver, alert: ClientEditAlertResolver }}
     ]}
 ];
 

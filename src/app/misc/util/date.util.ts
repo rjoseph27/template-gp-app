@@ -75,6 +75,26 @@ export class DateUtil {
     }
 
     /**
+     * @description Formats a date from a date picker
+     * @param date The date to format
+     * @returns The formatted date
+     */
+    static formatFromDatePicker(date: Date): DateFromDatePicker {
+        let dateFormat = date
+        if(typeof date === 'string') {
+            dateFormat = new Date(date);
+        }
+        if(dateFormat)
+        {
+            return {
+                date: dateFormat,
+                dateString: dateFormat.toISOString().split('T')[0],
+            };
+        }
+        return undefined;
+    }
+
+    /**
      * @description Gets the current base date
      * @returns {Date}
      */
