@@ -1,6 +1,6 @@
 import { Injectable, inject } from "@angular/core";
 import { RequestsServiceApi } from "../../api/requests/requests.service.api";
-import { OrderDetailRequest, CancelOrderStatus, ConfirmItemRequest, CreateAlertRequest, CreateAlertStatus, ItemsOrdersStatus, ReportTrip, ReportTripStatus, RequestTableElementRequest, SendItemsStatus, GpAcceptOrderStatus, GetReportTripStatus, GetTripInfoStatus, CancelTripStatus, AlertListStatus, AlertFormType, EditAlertStatus } from "../../api/requests/requests.type";
+import { OrderDetailRequest, CancelOrderStatus, ConfirmItemRequest, CreateAlertRequest, CreateAlertStatus, ItemsOrdersStatus, ReportTrip, ReportTripStatus, RequestTableElementRequest, SendItemsStatus, GpAcceptOrderStatus, GetReportTripStatus, GetTripInfoStatus, CancelTripStatus, AlertListStatus, AlertFormType, EditAlertStatus, DeleteAlertStatus } from "../../api/requests/requests.type";
 import { SendItemsRequest } from "./send-items.service";
 import { DateUtil } from "../../misc/util/date.util";
 import { UsersService } from "../../services/users.service";
@@ -296,6 +296,20 @@ export class ClientRequestsService {
                 return true
             }
             return false
+        });
+    }
+
+    /**
+     * @description Deletes an alert
+     * @param alertId The id of the alert
+     * @returns {Promise<boolean>} A promise that resolves to true if the alert was deleted successfully, false otherwise
+     */
+    deleteAlert(alertId: CreateAlertRequest): Promise<boolean> {
+        return this.requestsServiceApi.deleteAlert(alertId).then(msg => {
+            if(msg.message === DeleteAlertStatus.ALERT_DELETED_SUCCESSFULLY) {
+                return true;
+            }
+            return false;
         });
     }
 }

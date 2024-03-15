@@ -113,6 +113,16 @@
             "alerts": {
                 "title": "My Alerts",
                 "newAlert": "Create a New Alert",
+                "deleteAlert": {
+                    "title": "Delete the Alert",
+                    "content": "Are you sure you want to delete the alert?",
+                    "acceptButton": "Yes",
+                    "rejectButton": "No",
+                    "notification": {
+                        "success": "The alert has been deleted successfully",
+                        "error": "An error occurred while deleting the alert"
+                    }
+                },
                 "createAlert": {
                     "title": "Create a New Alert",
                     "button": "Create an Alert",

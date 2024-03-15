@@ -41,7 +41,6 @@ async resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promis
     this.loadingService.startLoading();
     const alert = await this.requestsService.getAlert((<AlertParams>route.queryParams).id);
     this.loadingService.endLoading();
-    console.log(alert)
     return {
             ...alert, 
             alertId: (<AlertParams>route.queryParams).id,

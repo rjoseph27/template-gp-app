@@ -674,6 +674,24 @@ export interface ReportTrip {
   }
 
   /**
+   * @enum DeleteAlertStatus
+   * @description The status of the delete alert request
+   */
+  export enum DeleteAlertStatus {
+    /**
+     * @description The alert was deleted successfully
+     * @type {string}
+     */
+    ALERT_DELETED_SUCCESSFULLY = "ALERT_DELETED_SUCCESSFULLY",
+
+    /**
+     * @description The alert was not found
+     * @type {string}
+     */
+    ALERT_NOT_FOUND = "ALERT_NOT_FOUND"
+  }
+
+  /**
    * @interface ItemsOrdersStatus
    * @description The status of the items orders request
    */

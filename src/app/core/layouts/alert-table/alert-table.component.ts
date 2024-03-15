@@ -103,16 +103,16 @@ export interface AlertTableElement {
     @ViewChild('routeTemplate', { static: true }) routeTemplate: TemplateRef<any>;
 
     /**
-     * @description The delete alert factory
-     * @type {(element: AlertTableElement) => void}
-     */
-    @Input() deleteAlertFactory: (element: AlertTableElement) => void;
-
-    /**
      * @description The edit alert factory
      * @type {(element: AlertTableElement) => void}
      */
     @Input() editAlertFactory: (element: AlertTableElement) => void;
+
+    /**
+     * @description The delete table factory
+     * @type {(element: AlertTableElement) => void}
+     */
+    @Input() deleteTableFactory: (element: AlertTableElement) => void;
    
     /** @inheritdoc */
     ngOnInit(): void {

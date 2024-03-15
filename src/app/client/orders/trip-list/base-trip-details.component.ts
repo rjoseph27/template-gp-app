@@ -92,7 +92,6 @@ export abstract class BaseTripDetailsComponent {
         confirmCaption: "moduleList.gp.trip.plannedTrip.cancelModal.acceptButton",
         cancelCaption: "moduleList.gp.trip.plannedTrip.cancelModal.rejectButton"
       }).then(async x => {
-        console.log(this.route.snapshot.data['tripDetails'])
         const id = this.route.snapshot.data['tripDetails'].id;
         if(x) {
             const isCanceledSucessfully = await this.requestsService.cancelTrip(id);

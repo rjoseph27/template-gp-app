@@ -182,4 +182,13 @@ export class RequestsServiceApi extends BaseServiceApi {
     editAlert(alert: CreateAlertRequest): Promise<ApiResponse> {
         return firstValue(this.postRequest<ApiResponse>('edit-alert', alert));
     }
+
+    /**
+     * @description A method to delete an alert
+     * @param alertId The id of the alert
+     * @returns {Promise<ApiResponse>}
+     */
+    deleteAlert(alertId: CreateAlertRequest): Promise<ApiResponse> {
+        return firstValue(this.postRequest<ApiResponse>('delete-alert', alertId));
+    }
 }

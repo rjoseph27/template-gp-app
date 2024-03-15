@@ -4,6 +4,9 @@ import { map } from 'rxjs/operators';
 import { COUNTRY_INFO_LIST } from '../../misc/constants/countries/countries';
 import { ClientRoutes } from '../../client.route';
 import { AlertTableElement } from '../../core/layouts/alert-table/alert-table.component';
+import { ModalService } from '../../services/modal.service';
+import { NotificationService } from '../../services/notification.service';
+import { ClientRequestsService } from '../service/requests.service';
 
 /**
  * @class ClientAlertListComponent
@@ -12,7 +15,8 @@ import { AlertTableElement } from '../../core/layouts/alert-table/alert-table.co
 @Component({
     selector: 'client-alert-list',
     templateUrl: './alert-list.component.html',
-    styleUrls: ['./alert-list.component.scss']
+    styleUrls: ['./alert-list.component.scss'],
+    providers: [ModalService]
 })
   export class ClientAlertListComponent implements AfterContentChecked {
    /**
@@ -27,6 +31,8 @@ import { AlertTableElement } from '../../core/layouts/alert-table/alert-table.co
      */
     protected readonly currency$ = this.route.data.pipe(map(data => COUNTRY_INFO_LIST.find(x => x.name === data['userInfo'].country).currency.currency));
 
+
+
     /**
      * @description The edit table factory
      * @type {(row: AlertTableElement) => void}
@@ -35,6 +41,46 @@ import { AlertTableElement } from '../../core/layouts/alert-table/alert-table.co
       this.router.navigate([ClientRoutes.editAlert.fullPath()], { queryParams: {
         id: row.id
       }})
+    }
+
+    /**
+    * @description The modal service
+    * @type {ModalService}
+    */
+    protected readonly modalService: ModalService = inject(ModalService);
+
+    /**
+    * @description The notification service
+    * @type {NotificationService}
+    */
+    protected readonly notificationService: NotificationService = inject(NotificationService);
+
+    /**
+    * @description The requests service
+    * @type {ClientRequestsService}
+    */
+    protected readonly requestsService = inject(ClientRequestsService);
+
+    /**
+     * @description The delete table factory
+     * @type {(row: AlertTableElement) => void}
+     */
+    protected readonly deleteTableFactory = (row: AlertTableElement) => {
+      this.modalService.openModal({
+        title: "moduleList.client.alerts.deleteAlert.title",
+        text: "moduleList.client.alerts.deleteAlert.content",
+        confirmCaption: "moduleList.client.alerts.deleteAlert.acceptButton",
+        cancelCaption: "moduleList.client.alerts.deleteAlert.rejectButton"
+      }).then(async x => {
+        if(x) {
+          const isCanceledSucessfully = await this.requestsService.deleteAlert(row);
+          if(isCanceledSucessfully) {
+            this.notificationService.successNotification('moduleList.client.alerts.deleteAlert.notification.success');
+          } else {
+            this.notificationService.errorNotification('moduleList.client.alerts.deleteAlert.notification.error');
+          }
+        }
+      });
     }
 
     /**
