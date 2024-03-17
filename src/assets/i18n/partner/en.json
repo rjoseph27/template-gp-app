@@ -1,0 +1,14 @@
+{
+    "moduleList": {
+        "registerItem": {
+            "title": "Register Item",
+            "filterLabel": "Filter order"
+        },
+        "dispatching": {
+            "title": "Dispatching"
+        },
+        "receivingItem": {
+            "title": "Receiving Item"
+        }
+    }
+}

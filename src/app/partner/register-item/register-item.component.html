@@ -1,0 +1,11 @@
+<div class="content">
+    <div>
+        <div class="title">
+            <h1>{{ 'moduleList.registerItem.title' | translate }}</h1>
+        </div>
+        <gh-order-filter 
+            [country]="country$ | async"
+            [label]="'moduleList.registerItem.filterLabel' | translate"
+        ></gh-order-filter>
+    </div>
+</div>

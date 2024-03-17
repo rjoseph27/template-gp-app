@@ -15,3 +15,21 @@ export const SETTING_ICON = 'settings'
  * @description The icon to be used for the help module
  */
 export const HELP_ICON = 'help'
+
+/**
+ * @constant
+ * @description The icon to be used for the register item module
+ */
+export const REGISTER_ITEM_ICON = 'place_item'
+
+/**
+ * @constant
+ * @description The icon to be used for the receiving item module
+ */
+export const RECEIVING_ITEM_ICON = 'move_item'
+
+/**
+ * @constant
+ * @description The icon to be used for the dispatching module
+ */
+export const DISPATCH_ICON = 'shield_person'

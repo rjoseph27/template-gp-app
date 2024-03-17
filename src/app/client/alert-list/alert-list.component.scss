@@ -10,12 +10,12 @@
     padding: 1em;
 }
 
+button {
+    width: 100%;
+}
+
 @media (min-width: 768px) {
     gh-table {
         min-width:700px;
     }
-}
-
-button {
-    width: 100%;
 }

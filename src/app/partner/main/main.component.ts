@@ -2,8 +2,9 @@ import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs';
 import { GhModule } from '../../core/layouts/main/main.component';
-import { HELP_ICON, LOG_OUT_ICON, SETTING_ICON } from './icon';
+import { DISPATCH_ICON, HELP_ICON, LOG_OUT_ICON, RECEIVING_ITEM_ICON, REGISTER_ITEM_ICON, SETTING_ICON } from './icon';
 import { UsersService } from '../../services/users.service';
+import { PartnerRoutes } from '../partner.route';
 
 /**
  * @component PartnerMainComponent
@@ -56,6 +57,21 @@ export class PartnerMainComponent {
    * @type {GhModule[]}
    */
   protected readonly modules: GhModule[] = [
+    {
+      label: "moduleList.registerItem.title",
+      icon: REGISTER_ITEM_ICON,
+      action: () => this.router.navigate([PartnerRoutes.registerItem.fullPath()])
+    },
+    {
+      label: "moduleList.dispatching.title",
+      icon: DISPATCH_ICON,
+      action: () => {}
+    },
+    {
+      label: "moduleList.receivingItem.title",
+      icon: RECEIVING_ITEM_ICON,
+      action: () => {}
+    },
     {
       label: "main.settings.title",
       icon: SETTING_ICON,

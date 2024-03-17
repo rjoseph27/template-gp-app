@@ -1,0 +1,68 @@
+<div class="label">{{ label }}</div>
+<div class="content">
+    <div class="section">
+        <gh-text-field
+            [label]="'orderFilter.form.email.label' | translate" 
+            [placeholder]="'orderFilter.form.email.placeholder' | translate"
+            [name]="emailField"
+            [value]="orderFilterForm.get(emailField).value"
+            (valueChange)="orderFilterForm.get(emailField).setValue($event)"
+            [errors]="orderFilterForm.get(emailField).errors"
+            [errorCaptions]="emailErrorCaptions"
+        ></gh-text-field>
+    </div>
+    <div class="section">
+        <gh-text-field
+            [label]="'orderFilter.form.order.label' | translate" 
+            [placeholder]="'orderFilter.form.order.placeholder' | translate"
+            [name]="emailField"
+            [value]="orderFilterForm.get(orderField).value"
+            (valueChange)="orderFilterForm.get(orderField).setValue($event)"
+            [errors]="orderFilterForm.get(orderField).errors"
+            [errorCaptions]="orderErrorCaptions"
+            [maxLength]="5"
+        ></gh-text-field>
+    </div>
+    <div class="section">
+        <gh-date-field
+        [label]="'orderFilter.form.deliveryDate.label' | translate" 
+        [placeholder]="'orderFilter.form.deliveryDate.placeholder' | translate"
+        [name]="deliveryDateField"
+        [value]="orderFilterForm.get(deliveryDateField).value"
+        (valueChange)="orderFilterForm.get(deliveryDateField).setValue($event)"
+        [errors]="orderFilterForm.get(deliveryDateField).errors"
+        [minDate]="todayDate"
+        [errorCaptions]="deliveryDateErrorCaptions"
+        ></gh-date-field>
+    </div>
+    <div class="section">
+        <gh-select-field
+        [label]="'orderFilter.form.country.label' | translate" 
+        [placeholder]="'orderFilter.form.country.placeholder' | translate"
+        [name]="countryField"
+        [value]="orderFilterForm.get(countryField).value"
+        (valueChange)="updateCountry($event)"
+        [errors]="orderFilterForm.get(countryField).errors"
+        [options]="countryOptions$ | async"
+        ></gh-select-field>
+    </div>
+    <div class="section">
+        <gh-select-field
+        [label]="'orderFilter.form.region.label' | translate" 
+        [placeholder]="'orderFilter.form.region.placeholder' | translate"
+        [name]="regionField"
+        [value]="orderFilterForm.get(regionField).value"
+        (valueChange)="orderFilterForm.get(regionField).setValue($event)"
+        [errors]="orderFilterForm.get(regionField).errors"
+        [options]="regionOptions$ | async"
+        ></gh-select-field>
+    </div>
+    <div class="button-section">
+        <button
+            [disabled]="!orderFilterForm.valid" 
+            class="gp-button" 
+            (click)="filterOrders()">
+            {{ 'orderFilter.form.submit' | translate }}
+        </button>
+    </div>
+</div>

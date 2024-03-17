@@ -22,4 +22,10 @@ export class PartnerRoutes {
      * @type {GhRoute}
      */
     static readonly main: GhRoute = new GhRoute('app', PartnerRoutes.partner);
+
+    /**
+     * @description The register item route
+     * @type {GhRoute}
+     */
+    static readonly registerItem: GhRoute = new GhRoute('register-item', PartnerRoutes.main);
 }

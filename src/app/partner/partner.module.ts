@@ -12,6 +12,7 @@ import { PartnerLogInComponent } from "./log-in/log-in.component";
 import { PartnerMainComponent } from "./main/main.component";
 import { PartnerRouteModule } from "./partner-routing.module";
 import { PartnerApplicationResolver } from "./application.resolver";
+import { PartnerRegisterItemComponent } from "./register-item/register-item.component";
 
 /**
  * @module PartnerModule
@@ -20,7 +21,8 @@ import { PartnerApplicationResolver } from "./application.resolver";
 @NgModule({
     declarations: [
         PartnerLogInComponent,
-        PartnerMainComponent
+        PartnerMainComponent,
+        PartnerRegisterItemComponent
     ],
     imports: [
         CommonModule,

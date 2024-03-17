@@ -408,6 +408,37 @@
             }
         }
     },
+    "orderFilter": {
+        "form": {
+            "email": {
+                "label": "Email",
+                "placeholder": "Enter the user email"
+            },
+            "order": {
+                "label": "Order",
+                "placeholder": "Enter the order number",
+                "errors": {
+                    "invalid": "Please enter a valid order number"
+                }
+            },
+            "deliveryDate": {
+                "label": "Delivery Date",
+                "placeholder": "Enter the delivery date",
+                "errors": {
+                    "invalid": "Please enter a valid date"
+                }
+            },
+            "country": {
+                "label": "Destination Country",
+                "placeholder": "Select the destination country"
+            },
+            "region": {
+                "label": "Destination Region",
+                "placeholder": "Select the destination region"
+            },
+            "submit": "Filter"
+        }
+    },
     "enums": {
         "Genders": {
             "Male":"Male",

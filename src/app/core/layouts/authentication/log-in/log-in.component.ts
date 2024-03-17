@@ -5,7 +5,6 @@ import { filter, tap } from 'rxjs/operators';
 import { EMAIL_VALIDATION, REQUIRED_VALIDATION } from '../../../../misc/constants/validations';
 import { CurrentFormService } from '../../../../services/current-form.service';
 import { Router } from '@angular/router';
-import { GlobalRoutes } from '../../../../global.route';
 import { ClientRoutes } from '../../../../client.route';
 
 /**

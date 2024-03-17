@@ -46,7 +46,14 @@ export class NavigationService {
   private get currentRoute(): GhRoute {
     const urlAsArray = this.router.url.split('?')[0].split('/');
     const currentPage = urlAsArray.pop();
-    return [...Object.values(ClientRoutes), ...Object.values(GlobalRoutes)].find((route) => route.segment === currentPage)
+    let routingArray;
+    if(urlAsArray[1] === ClientRoutes.client.segment)
+    {
+        routingArray = Object.values(ClientRoutes);
+    } else {
+        routingArray = Object.values(PartnerRoutes);
+    }
+    return [...routingArray, ...Object.values(GlobalRoutes)].find((route) => route.segment === currentPage)
   }
 
   /**
