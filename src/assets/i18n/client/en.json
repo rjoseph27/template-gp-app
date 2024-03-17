@@ -4,17 +4,6 @@
         "gp": "GP"
     },
     "moduleList": {
-        "global": {
-            "logOut": {
-                "title":"Log Out"
-            },
-            "settings":  {
-                "title": "My Settings"
-            },
-            "help": {
-                "title": "Help"
-            }
-        },
         "client": {
             "sendItems": {
                 "title": "Send items",

@@ -342,12 +342,28 @@ export enum ResetPasswordResponse {
     PASSWORD_SUCCESSFULLY_MODIFIED = 'PASSWORD_SUCCESSFULLY_MODIFIED'
 }
 
+/**
+ * @interface
+ * @description The user info api response
+ */
 export interface UserInfoApiResponse extends ApiResponse {
     /**
      * @description The user info
      * @type {UserInfo}
      */
     userInfo?: StringKeys<UserInfo>
+}
+
+/**
+ * @interface
+ * @description The partner user info api response
+ */
+export interface PartnerUserInfoApiResponse extends ApiResponse {
+    /**
+     * @description The user info
+     * @type {UserInfo}
+     */
+    userInfo?: StringKeys<PartnerUserInfo>
 }
 
 /**
@@ -378,6 +394,36 @@ export interface UserInfo {
      * @type {Country}
      */
     country: Country
+}
+
+/**
+ * @interface
+ * @description The partner user info
+ */
+export interface PartnerUserInfo {
+    /**
+     * @description The first name of the user
+     * @type {string}
+     */
+    firstName: string,
+
+    /**
+     * @description The last name of the user
+     * @type {string}
+     */
+    lastName: string,
+
+    /**
+     * @description The date of birth of the user
+     * @type {Date}
+     */
+    language: Language,
+
+    /**
+     * @description The succursale of the user
+     * @type {string}
+     */
+    succursale: string
 }
 
 /**

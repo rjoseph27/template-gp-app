@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { firstValue } from '../../misc/function/firstValue';
 import { ApiResponse, BaseServiceApi, DEBOUNCE_TIME } from '../base.service.api'; 
-import { ConnectResponse, CreateUser, Credentials, ResetPassword, ResetPasswordGetRequestApiResponse, UpdateLanguage, UserInfo, UserInfoApiResponse } from './users.type';
+import { ConnectResponse, CreateUser, Credentials, PartnerUserInfoApiResponse, ResetPassword, ResetPasswordGetRequestApiResponse, UpdateLanguage, UserInfo, UserInfoApiResponse } from './users.type';
 import { debounceTime } from 'rxjs';
 
 
@@ -103,5 +103,23 @@ export class UsersServiceApi extends BaseServiceApi {
      */
     updateUserLanguage(updateLanguage: UpdateLanguage): Promise<ApiResponse> {
         return firstValue(this.postRequest<ApiResponse>('update-language', updateLanguage));
+    }
+
+    /**
+     * @description A method to connect as a partner
+     * @param credentials The credentials of the partner
+     * @returns {Promise<ConnectResponse>}
+     */
+    connectAsPartner(credentials: Credentials): Promise<ConnectResponse> {
+        return firstValue(this.postRequest<ConnectResponse>('login-partner', credentials));
+    }
+
+    /**
+     * @description A method to get the partner user info
+     * @param id The id of the partner
+     * @returns {Promise<PartnerUserInfo>}
+     */
+    getPartnerUserInfo(id: string): Promise<PartnerUserInfoApiResponse> {
+        return firstValue(this.getRequest<ApiResponse>('partner-info', id));
     }
 } 

@@ -85,17 +85,17 @@ export class ClientMainComponent implements OnInit {
    */
   private readonly commonModules: GhModule[] = [
     {
-      label: "moduleList.global.settings.title",
+      label: "main.settings.title",
       icon: SETTING_ICON,
       action: () => {}
     },
     {
-      label: "moduleList.global.help.title",
+      label: "main.help.title",
       icon: HELP_ICON,
       action: () => {}
     },
     {
-      label: "moduleList.global.logOut.title",
+      label: "main.logOut.title",
       icon: LOG_OUT_ICON,
       action: () => this.userService.logout()
     },

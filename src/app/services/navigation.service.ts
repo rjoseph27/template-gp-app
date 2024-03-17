@@ -3,6 +3,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { ClientRoutes } from '../client.route';
 import { GlobalRoutes } from '../global.route';
 import { GhRoute } from '../misc/classes/route';
+import { PartnerRoutes } from '../partner/partner.route';
 
 /**
  * @class NavigationService
@@ -21,24 +22,21 @@ export class NavigationService {
    * @returns {void}
    */
   redirectToMainPage(): void {
-    if(this.router.url[0] === ClientRoutes.client.segment)
+    if(this.router.url.split("/")[1] === ClientRoutes.client.segment)
     {
         this.router.navigate([ClientRoutes.client.fullPath()]);
     } else {
-        this.router.navigate([ClientRoutes.client.fullPath()]);
+        this.router.navigate([PartnerRoutes.partner.fullPath()]);
     }
-    // TODO add entreprise main page
   }
 
   redirectToApplication(): void {
-    if(this.router.url[0] === ClientRoutes.client.segment)
+    if(this.router.url.split("/")[1] === ClientRoutes.client.segment)
     {
         this.router.navigate([ClientRoutes.main.fullPath()]);
     } else {
-        this.router.navigate([ClientRoutes.main.fullPath()]);
+        this.router.navigate([PartnerRoutes.main.fullPath()]);
     }
-
-    // TODO add entreprise main page
   }
 
   /**

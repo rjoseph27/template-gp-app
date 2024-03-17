@@ -11,6 +11,8 @@ import { GhResetPasswordForgotPasswordComponent } from './core/layouts/authentic
 import { ResetPasswordResolver } from './core/layouts/authentication/forgot-password/reset-password/reset-password.resolver';
 import { LoggedInGuard } from './misc/guard/logged-in.guard';
 import { LoggedOutGuard } from './misc/guard/logged-out.guard';
+import { PartnerRoutes } from './partner/partner.route';
+import { PartnerLogInComponent } from './partner/log-in/log-in.component';
 
 /**
  * @constant routes
@@ -25,6 +27,14 @@ export const routes: Routes = [
             { path: `${ClientRoutes.signup}`, component: ClientSignUpComponent, pathMatch: 'full', canActivate: [LoggedOutGuard]},
             { path: `${ClientRoutes.forgotPassword}`, component: GhForgotPasswordComponent, pathMatch: 'full', canActivate: [LoggedOutGuard] },
             { path: `${ClientRoutes.main}`, loadChildren: () => import('./client/client.module').then(m => m.ClientModule), canActivate: [LoggedInGuard] }       
+        ],
+    },
+    {
+        path: `${PartnerRoutes.partner}`,
+        children: [
+            { path: '', redirectTo: `${PartnerRoutes.login}`, pathMatch: 'full' },
+            { path: `${PartnerRoutes.login}`, component: PartnerLogInComponent, pathMatch: 'full', canActivate: [LoggedOutGuard]},
+            { path: `${PartnerRoutes.main}`, loadChildren: () => import('./partner/partner.module').then(m => m.PartnerModule), canActivate: [LoggedInGuard] }
         ],
     },
     {
@@ -48,4 +58,4 @@ export const routes: Routes = [
             RouterModule
         ]
     })
-    export class AppRoutingModule { }
+    export class AppRoutingModule {}

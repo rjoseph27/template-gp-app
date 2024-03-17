@@ -353,6 +353,17 @@
             }
         }
     },
+    "main": {
+        "logOut": {
+            "title":"Log Out"
+        },
+        "settings":  {
+            "title": "My Settings"
+        },
+        "help": {
+            "title": "Help"
+        }
+    },
     "sendItems": {
         "location": {
             "from": "From",

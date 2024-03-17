@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { NotificationService } from './notification.service';
-import { ConnectStatus, CreateUser, Credentials, EmailActivationRequestResponse, ForgotPasswordRequestResponse, ResetPassword, ResetPasswordGetRequest, ResetPasswordGetRequestResponse, ResetPasswordResponse, SignUpResponse, UniqueValue, UpdateLanguage, UpdateLanguageResponse, UserInfo } from '../api/users/users.type';
+import { ConnectStatus, CreateUser, Credentials, EmailActivationRequestResponse, ForgotPasswordRequestResponse, PartnerUserInfo, ResetPassword, ResetPasswordGetRequest, ResetPasswordGetRequestResponse, ResetPasswordResponse, SignUpResponse, UniqueValue, UpdateLanguage, UpdateLanguageResponse, UserInfo } from '../api/users/users.type';
 import { UsersServiceApi } from '../api/users/users.service.api';
 import { TranslateService } from '@ngx-translate/core';
 import { Language } from '../misc/enums/language.enum';
@@ -45,6 +45,12 @@ export class UsersService {
    * @type {UserInfo}
    */
   private _userInfo: UserInfo;
+
+  /**
+   * @description The backing field for partner user info
+   * @type {PartnerUserInfo}
+   */
+  private _partnerUserInfo: PartnerUserInfo;
 
   /** 
    * @description Gets the current user id
@@ -215,5 +221,52 @@ export class UsersService {
       }
       return false;
     });
+  }
+
+  /**
+   * @description Connects as a partner
+   * @param credentials The credentials of the partner
+   * @returns {Promise<boolean>}
+   */
+  connectAsPartner(credentials: Credentials): Promise<boolean> {
+    return this.usersServiceApi.connectAsPartner(credentials).then(msg => {
+      if(msg.message === ConnectStatus.LOGIN_SUCCESSFUL) {
+
+        localStorage.setItem(TOKEN_LOCAL_STORAGE_KEY, msg.token);
+        localStorage.setItem(USER_ID_LOCAL_STORAGE_KEY, msg.userId);
+        this.navigationService.redirectToApplication();
+      }
+      return true;
+    }).catch((e) => {
+      if(e.error.message === ConnectStatus.WRONG_CREDENTIALS) {
+        this.notificationService.errorNotification('global.login.errors.login.wrongCredentials');
+      } else {
+        this.notificationService.errorNotification('global.errors.serverError');
+      }
+      return false;
+    });
+  }
+
+  /**
+   * @description Gets the partner user info
+   * @param userId The id of the partner
+   * @returns {Promise<PartnerUserInfo>}
+   */
+  getPartnerUserInfo(userId: string): Promise<PartnerUserInfo> {
+    if(!this._partnerUserInfo)
+    {
+      return this.usersServiceApi.getPartnerUserInfo(userId).then(msg => {
+        this._partnerUserInfo = <PartnerUserInfo>{
+          firstName: msg.userInfo["firstName"],
+          lastName: msg.userInfo["lastName"],
+          language: Language[msg.userInfo["language"].toUpperCase() as keyof typeof Language],
+          succursale: msg.userInfo["succursale"]
+        }
+
+        return this._partnerUserInfo;
+      });
+    } else {
+      return Promise.resolve(this._partnerUserInfo);
+    }
   }
 }

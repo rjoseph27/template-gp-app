@@ -22,9 +22,9 @@ import { TranslateLoader, TranslateModule, TranslateService } from "@ngx-transla
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { GlobalTranslateService } from "./services/global-translate.service";
 import { ToRootTranslationHandler } from "./services/to-root-translation.handler";
-import { ModalService } from "./services/modal.service";
 import { CurrencyService } from "./services/currency.service";
 import { CurrencyServiceApi } from "./api/currency/currency.service.api";
+import { PartnerModule } from "./partner/partner.module";
 
 /**
  * @module AppModule
@@ -39,6 +39,7 @@ import { CurrencyServiceApi } from "./api/currency/currency.service.api";
         HttpClientModule,
         CoreModule,
         ClientModule,
+        PartnerModule,
         TranslateModule.forRoot({
             loader: {
               provide: TranslateLoader,

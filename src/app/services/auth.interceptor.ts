@@ -46,7 +46,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
     return next.handle(request).pipe(tap((event) => {
       if (event instanceof HttpResponse) {
-        if(TokenError[event.body.message as keyof typeof TokenError]) {
+        if(TokenError[event.body?.message as keyof typeof TokenError]) {
         this.userService.logout()
         this.notificationService.errorNotification('global.errors.logAgain');
         this.loadingService.endLoading();
