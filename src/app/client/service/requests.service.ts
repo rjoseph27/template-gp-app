@@ -1,6 +1,6 @@
 import { Injectable, inject } from "@angular/core";
 import { RequestsServiceApi } from "../../api/requests/requests.service.api";
-import { OrderDetailRequest, CancelOrderStatus, ConfirmItemRequest, CreateAlertRequest, CreateAlertStatus, ItemsOrdersStatus, ReportTrip, ReportTripStatus, RequestTableElementRequest, SendItemsStatus, GpAcceptOrderStatus, GetReportTripStatus, GetTripInfoStatus, CancelTripStatus, AlertListStatus, AlertFormType, EditAlertStatus, DeleteAlertStatus } from "../../api/requests/requests.type";
+import { OrderDetailRequest, CancelOrderStatus, ConfirmItemRequest, CreateAlertRequest, CreateAlertStatus, ItemsOrdersStatus, ReportTrip, ReportTripStatus, RequestTableElementRequest, SendItemsStatus, GpAcceptOrderStatus, GetReportTripStatus, GetTripInfoStatus, CancelTripStatus, AlertListStatus, AlertFormType, EditAlertStatus, DeleteAlertStatus, OrderFilterInfo } from "../../api/requests/requests.type";
 import { SendItemsRequest } from "./send-items.service";
 import { DateUtil } from "../../misc/util/date.util";
 import { UsersService } from "../../services/users.service";
@@ -8,6 +8,7 @@ import { StringKeys } from "../../api/base.service.api";
 import { RequestTableElement } from "../../core/layouts/orders/orders.component";
 import { OrderDetails } from "../../core/layouts/order-details/order-details.component";
 import { AlertTableElement } from "../../core/layouts/alert-table/alert-table.component";
+import { OrderFilter } from "../../core/layouts/filter/order-filter/order-filter.component";
 
 /**
  * @class RequestsService
@@ -311,5 +312,14 @@ export class ClientRequestsService {
             }
             return false;
         });
+    }
+
+    /**
+     * @description Filters the orders
+     * @param orderFilter The order filter
+     * @returns {Promise<OrderFilterInfo[]>} A promise that resolves to the orders
+     */
+    orderFilter(orderFilter: OrderFilter): Promise<OrderFilterInfo[]> {
+        return this.requestsServiceApi.orderFilter(orderFilter).then(msg => msg.orders);
     }
 }

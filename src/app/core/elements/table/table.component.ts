@@ -93,6 +93,12 @@ export class GhTableComponent implements AfterViewInit {
   @Input() canEdit: boolean = false;
 
   /**
+   * @description A boolean to determine if the elements of the table can be viewed
+   * @type {boolean}
+   */
+  @Input() canView: boolean = false;
+
+  /**
    * @description A boolean to determine if the elements of the table can add
    * @type {boolean}
    */
@@ -166,6 +172,12 @@ export class GhTableComponent implements AfterViewInit {
   @Input() editFactory: (element: any) => void;
 
   /**
+   * @description The view factory to view an element
+   * @type {(element: any) => void}
+   */
+  @Input() viewFactory: (element: any) => void;
+
+  /**
    * @description The template for the delete button
    * @type {TemplateRef<any>}
    */
@@ -173,8 +185,8 @@ export class GhTableComponent implements AfterViewInit {
 
   /** @inheritdoc */
   ngAfterViewInit(): void {
-    if(this.canDelete || this.canEdit) {
-      this._columns$.next([...this._columns$.value, {
+    if(this.canDelete || this.canEdit || this.canView) {
+      this._columns$.next([...(this._columns$.value || []), {
         columnName: 'global.common.action',
         valueAccessor: () => null,
         template: this.actionTemplate

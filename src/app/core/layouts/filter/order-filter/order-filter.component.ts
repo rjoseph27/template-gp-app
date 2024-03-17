@@ -13,7 +13,7 @@ import { DateFromDatePicker } from "../../../../misc/util/date.util";
  * @interface OrderFilter
  * @description The order filter
  */
-interface OrderFilter {
+export interface OrderFilter {
     /**
      * @description The email of to filter
      * @type {string}
@@ -33,16 +33,16 @@ interface OrderFilter {
     deliveryDate: DateFromDatePicker;
 
     /**
-     * @description The country to filter
+     * @description The destination country to filter
      * @type {Country}
      */
-    country: string;
+    destinationCountry: string;
 
     /**
-     * @description The region to filter
+     * @description The destination region to filter
      * @type {string}
      */
-    region: string;
+    destinationRegion: string;
 }
 
 /**

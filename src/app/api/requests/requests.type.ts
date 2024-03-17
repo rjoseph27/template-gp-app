@@ -11,6 +11,7 @@ import { OrderDetails } from "../../core/layouts/order-details/order-details.com
 import { ItemsStatus, TripStatus } from "../../client/orders/base-orders.component"
 import { FlightRoute } from "../../core/layouts/flight-route/flight-route.component"
 import { AlertTableElement } from "../../core/layouts/alert-table/alert-table.component"
+import { ItemInformation } from "../../core/layouts/request/item-information/item-information.component"
 
 /**
    * @interface ReportTrip
@@ -881,4 +882,76 @@ export interface ReportTrip {
      * @type {string}
      */
     ORDER_ACCEPTED_SUCCESSFULLY = "ORDER_ACCEPTED_SUCCESSFULLY"
+  }
+
+  /**
+   * @enum OrderFilterResponse
+   * @description The order filter response
+   */
+  export interface OrderFilterResponse {
+    /**
+     * @description The orders
+     * @type {OrderFilterInfo[]}
+     */
+    orders: OrderFilterInfo[];
+  }
+
+  /**
+   * @interface OrderFilterInfo
+   * @description An interface for the order filter info
+   */
+  export interface OrderFilterInfo {
+    /**
+     * @description The order id
+     * @type {string}
+     */
+    orderId: string,
+
+    /**
+     * @description The departure date
+     * @type {Date}
+     */
+    departureDate: Date,
+
+    /**
+     * @description The id of the send item request
+     * @type {string}
+     */
+    itemId: string,
+
+    /**
+     * @description The country of origin
+     * @type {Country}
+     */
+    originCountry: Country,
+
+    /**
+     * @description The region of origin
+     * @type {any}
+     */
+    originRegion: any,
+
+    /**
+     * @description The destination country
+     * @type {Country}
+     */
+    destinationCountry: Country,
+
+    /**
+     * @description The destination region
+     * @type {any}
+     */
+    destinationRegion: any,
+
+    /**
+     * @description The item information
+     * @type {ItemInformation}
+     */
+    item: ItemInformation,
+
+    /**
+     * @description The email of the sender
+     * @type {string}
+     */
+    email: string
   }

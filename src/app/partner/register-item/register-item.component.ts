@@ -1,9 +1,12 @@
-import { Component, inject } from "@angular/core";
+import { AfterContentChecked, ChangeDetectorRef, Component, OnInit, inject } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { map } from "rxjs";
+import { BehaviorSubject, map } from "rxjs";
 import { COUNTRY_INFO_LIST } from "../../misc/constants/countries/countries";
 import { Country } from "../../misc/enums/country.enum";
 import { SuccursaleInfo } from "../../misc/constants/countries/countries.type";
+import { ClientRequestsService } from "../../client/service/requests.service";
+import { OrderFilter } from "../../core/layouts/filter/order-filter/order-filter.component";
+import { OrderFilterInfo } from "../../api/requests/requests.type";
 
 /**
  * @interface SuccursaleByCountry
@@ -32,7 +35,7 @@ interface SuccursaleByCountry {
     templateUrl: './register-item.component.html',
     styleUrls: ['./register-item.component.scss']
   })
-  export class PartnerRegisterItemComponent {
+  export class PartnerRegisterItemComponent implements AfterContentChecked {
     /**
     * @description The activated route service
     * @type {ActivatedRoute}
@@ -49,7 +52,31 @@ interface SuccursaleByCountry {
      * @description An observable for the user country
      * @type {Observable<Country>}
      */
-    protected readonly country$ = this.userInfo$.pipe(map(userInfo => this.succursaleByCountry.find(x => x.regions.find(z => z[1].name === userInfo.succursale)).country)); 
+    protected readonly country$ = this.userInfo$.pipe(map(userInfo => this.succursaleByCountry.find(x => x.regions.find(z => z[1].name === userInfo.succursale)).country));
+
+    /**
+     * @description The backing field for the elements
+     * @type {BehaviorSubject<OrderFilterInfo[]>}
+     */
+    private readonly _elements$ = new BehaviorSubject<OrderFilterInfo[]>([]);
+
+    /**
+    * @description The change detector reference
+    * @type {ChangeDetectorRef}
+    */
+    private readonly changeDetectorRef: ChangeDetectorRef = inject(ChangeDetectorRef);
+
+    /**
+     * @description The elements to display
+     * @type {Observable<OrderFilterInfo[]>}
+     */
+    protected readonly elements$ = this._elements$.asObservable();
+
+    /**
+    * @description The requests service
+    * @type {ClientRequestsService}
+    */
+    private readonly requestsService = inject(ClientRequestsService);
 
     /**
      * @description The list of succursale by country
@@ -59,4 +86,20 @@ interface SuccursaleByCountry {
         country: x.name,
         regions: Array.from(x.succursales)
     }));
+
+    /**
+     * @description Filter the orders
+     * @param orderFilter The params to filter
+     * @returns {Promise<void>}
+     */
+    protected async filter(orderFilter: OrderFilter) {
+        this._elements$.next(undefined)
+        const orders = await this.requestsService.orderFilter(orderFilter);
+        this._elements$.next(orders);
+    }
+
+    /** @inheritdoc */
+    ngAfterContentChecked() {
+        this.changeDetectorRef.detectChanges();
+    }
   }  

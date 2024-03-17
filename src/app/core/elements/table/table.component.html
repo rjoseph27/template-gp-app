@@ -33,6 +33,11 @@
 
 <ng-template #actionTemplate let-element="element">
     <div class="action">
+      <div *ngIf="canView">
+        <button class="view-button" (click)="viewFactory(element)">
+          <gh-icon name="visibility"></gh-icon>
+        </button>
+      </div>
       <div *ngIf="canEdit">
         <button class="edit-button" (click)="editFactory(element)">
           <gh-icon name="edit"></gh-icon>

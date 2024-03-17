@@ -437,6 +437,14 @@
                 "placeholder": "Select the destination region"
             },
             "submit": "Filter"
+        },
+        "table": {
+            "header": {
+                "email": "Email",
+                "orderNumber": "Order Number",
+                "route": "Route",
+                "deliveryDate": "Delivery Date"
+            }
         }
     },
     "enums": {

@@ -1,0 +1,12 @@
+<gh-table 
+        [columns]="columns$ | async" 
+        [elements]="elements"
+        [canView]="true"
+>
+    <ng-template #routeTemplate let-value="value">
+        <gh-flight-route [route]="value"></gh-flight-route>
+    </ng-template>
+    <ng-template #deliveryDateTemplate let-value="value">
+        {{ value | date: 'dd/MM/yyyy' }}
+    </ng-template>
+</gh-table>

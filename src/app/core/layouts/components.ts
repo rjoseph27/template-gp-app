@@ -24,6 +24,7 @@ import { GhAlertTableComponent } from "./alert-table/alert-table.component";
 import { GhFlightRouteComponent } from "./flight-route/flight-route.component";
 import { GhAlertFormComponent } from "./alert-form/alert-form.component";
 import { GhOrderFilterComponent } from "./filter/order-filter/order-filter.component";
+import { GhOrderFilterTableComponent } from "./filter/order-filter-table/order-filter-table.component";
 
 /**
  * @constant
@@ -56,5 +57,6 @@ export const LAYOUTS_COMPONENTS = [
     GhAlertTableComponent,
     GhFlightRouteComponent,
     GhAlertFormComponent,
-    GhOrderFilterComponent
+    GhOrderFilterComponent,
+    GhOrderFilterTableComponent
 ]

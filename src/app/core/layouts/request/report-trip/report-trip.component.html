@@ -3,8 +3,8 @@
         <div class="section">
             <div class="sub-section">
                 <gh-select-field
-                [label]="'moduleList.client.sendItems.content.location.from' | translate" 
-                [placeholder]="'moduleList.client.sendItems.content.location.country.placeholder' | translate"
+                [label]="'sendItems.location.from' | translate" 
+                [placeholder]="'sendItems.content.country.placeholder' | translate"
                 [name]="userCountryField"
                 [value]="reportTripForm.get(userCountryField).value"
                 (valueChange)="updateUserCountry($event)"
@@ -58,8 +58,8 @@
         <div class="section">
             <div class="sub-section">
                 <gh-select-field
-                [label]="'moduleList.client.sendItems.content.location.to' | translate" 
-                [placeholder]="'moduleList.client.sendItems.content.location.country.placeholder' | translate"
+                [label]="'sendItems.location.to' | translate" 
+                [placeholder]="'sendItems.location.country.placeholder' | translate"
                 [name]="destinationCountryField"
                 [value]="reportTripForm.get(destinationCountryField).value"
                 (valueChange)="destinationUserCountry($event)"

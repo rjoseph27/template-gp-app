@@ -1,7 +1,8 @@
 import { Injectable } from "@angular/core";
 import { ApiResponse, BaseServiceApi } from "../base.service.api";
 import { firstValue } from "../../misc/function/firstValue";
-import { ReportTrip, SearchTripsRequest, SearchTripsApiResponse, ConfirmItemRequest, SendItemsRequestApiResponse, UpdateImageNameRequest, CreateAlertRequest, ListItemsApiResponse, ItemInformationApiResponse, RequestTableElementRequest, OrderDetailRequest, GetSendItemsRequestApiResponse, GetTripListApiResponse, GetTripInfoApiResponse, CancelTripRequest, AlertListApiResponse, AlertApiResponse } from "./requests.type";
+import { ReportTrip, SearchTripsRequest, SearchTripsApiResponse, ConfirmItemRequest, SendItemsRequestApiResponse, UpdateImageNameRequest, CreateAlertRequest, ListItemsApiResponse, ItemInformationApiResponse, RequestTableElementRequest, OrderDetailRequest, GetSendItemsRequestApiResponse, GetTripListApiResponse, GetTripInfoApiResponse, CancelTripRequest, AlertListApiResponse, AlertApiResponse, OrderFilterResponse } from "./requests.type";
+import { OrderFilter } from "../../core/layouts/filter/order-filter/order-filter.component";
 
 /**
  * @class RequestsServiceApi
@@ -190,5 +191,14 @@ export class RequestsServiceApi extends BaseServiceApi {
      */
     deleteAlert(alertId: CreateAlertRequest): Promise<ApiResponse> {
         return firstValue(this.postRequest<ApiResponse>('delete-alert', alertId));
+    }
+
+    /**
+     * @description A method to get the order filter
+     * @param orderFilterRequest The order filter request
+     * @returns {Promise<ApiResponse>}
+     */
+    orderFilter(orderFilterRequest: OrderFilter): Promise<OrderFilterResponse> {
+        return firstValue(this.postRequest<OrderFilterResponse>('filter-order', orderFilterRequest));
     }
 }

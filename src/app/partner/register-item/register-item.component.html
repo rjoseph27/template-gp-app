@@ -6,6 +6,10 @@
         <gh-order-filter 
             [country]="country$ | async"
             [label]="'moduleList.registerItem.filterLabel' | translate"
+            (filterChange)="filter($event)"
         ></gh-order-filter>
+        <div class="table">
+            <gh-order-filter-table [elements]="elements$ | async"></gh-order-filter-table>
+        </div>
     </div>
 </div>
