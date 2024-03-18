@@ -2,12 +2,13 @@ import { Injectable, inject } from "@angular/core";
 import { OrderDetails } from "../../core/layouts/order-details/order-details.component";
 import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from "@angular/router";
 import { LoadingService } from "../../services/loading.service";
-import { ClientRequestsService } from "../service/requests.service";
+import { ClientRequestsService } from "../../client/service/requests.service";
 import { UsersService } from "../../services/users.service";
 import { CurrencyService } from "../../services/currency.service";
-import { COUNTRY_INFO_LIST } from "../../misc/constants/countries/countries";
+import { COUNTRY_INFO_LIST } from "../constants/countries/countries";
 import { RequestTableElementRequest } from "../../api/requests/requests.type";
-import { MoneyUtil } from "../../misc/util/money.util";
+import { MoneyUtil } from "../util/money.util";
+import { CurrencyInfo } from "../constants/countries/countries.type";
 
 /**
  * @class baseOrderDetailsResolver
@@ -31,7 +32,7 @@ export abstract class baseOrderDetailsResolver implements Resolve<OrderDetails> 
   * @description The users service
   * @type {UsersService}
   */
-  private readonly userService: UsersService = inject(UsersService);
+  protected readonly userService: UsersService = inject(UsersService);
 
   /**
    * @description The router service
@@ -57,13 +58,18 @@ export abstract class baseOrderDetailsResolver implements Resolve<OrderDetails> 
   */
   protected showTotalPrice: boolean = true;
 
+  /**
+   * @description The get currency function
+   * @returns {CurrencyInfo}
+   */
+  abstract getCurrency: () => Promise<CurrencyInfo>
+
   /** @inheritdoc */
   async resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<OrderDetails> {
     this.loadingService.startLoading();
     const order = await this.requestsService.getItemInformation(<RequestTableElementRequest>route.queryParams);
     if(order) {
-        const userCountry = (await this.userService.getUserInfo(this.userService.currentUserId)).country;
-        const userCurrency = COUNTRY_INFO_LIST.find(country => country.name === userCountry).currency;
+        const userCurrency = await this.getCurrency();
         const currency = await this.currencyService.getCurrency(userCurrency.currency);
         order.price = Math.round(MoneyUtil.getPrice(order.itemInformation, {
             specificPrice: order.specificPrice,

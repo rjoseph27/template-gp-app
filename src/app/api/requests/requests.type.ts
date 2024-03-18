@@ -938,6 +938,18 @@ export interface ReportTrip {
     destinationCountry: Country,
 
     /**
+     * @description The airport of origin
+     * @type {any}
+     */
+    originAirport: any,
+
+    /**
+     * @description The destination airport
+     * @type {any}
+     */
+    destinationAirport: any,
+
+    /**
      * @description The destination region
      * @type {any}
      */
@@ -954,4 +966,10 @@ export interface ReportTrip {
      * @type {string}
      */
     email: string
+
+    /**
+     * @description The user Id
+     * @type {string}
+     */
+    userId: string
   }

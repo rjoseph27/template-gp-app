@@ -1,5 +1,5 @@
 import { ClientRoutes } from "../../../client.route";
-import { BaseOrderDetailsComponent } from "../base-order-details.component";
+import { BaseOrderDetailsComponent } from "../../../misc/base-class/base-order-details.component";
 
 /**
  * @class BaseGpOrderDetailsComponent

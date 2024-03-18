@@ -28,4 +28,10 @@ export class PartnerRoutes {
      * @type {GhRoute}
      */
     static readonly registerItem: GhRoute = new GhRoute('register-item', PartnerRoutes.main);
+
+    /**
+     * @description The receiving item route
+     * @type {GhRoute}
+     */
+    static readonly registerItemView: GhRoute = new GhRoute('view', PartnerRoutes.registerItem);
 }

@@ -9,7 +9,11 @@
             (filterChange)="filter($event)"
         ></gh-order-filter>
         <div class="table">
-            <gh-order-filter-table [elements]="elements$ | async"></gh-order-filter-table>
+            <gh-order-filter-table 
+                [elements]="elements$ | async"
+                [hasBeenFiltered]="hasBeenFiltered$ | async"
+                [viewFactory]="viewFactory"
+            ></gh-order-filter-table>
         </div>
     </div>
 </div>

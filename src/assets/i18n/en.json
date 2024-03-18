@@ -444,6 +444,14 @@
                 "orderNumber": "Order Number",
                 "route": "Route",
                 "deliveryDate": "Delivery Date"
+            },
+            "empty": {
+                "title": "No Order",
+                "content": "There is no order that match the filter"
+            },
+            "filterMessage": {
+                "title": "Filter Message",
+                "content": "You can filter the order by email, order number, delivery date and destination"
             }
         }
     },

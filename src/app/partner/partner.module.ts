@@ -13,6 +13,8 @@ import { PartnerMainComponent } from "./main/main.component";
 import { PartnerRouteModule } from "./partner-routing.module";
 import { PartnerApplicationResolver } from "./application.resolver";
 import { PartnerRegisterItemComponent } from "./register-item/register-item.component";
+import { PartnerRegisterItemViewComponent } from "./register-item/register-item-view/register-item-view.component";
+import { PartnerRegisterItemViewResolver } from "./register-item/register-item-view/register-item-view.resolver";
 
 /**
  * @module PartnerModule
@@ -22,7 +24,8 @@ import { PartnerRegisterItemComponent } from "./register-item/register-item.comp
     declarations: [
         PartnerLogInComponent,
         PartnerMainComponent,
-        PartnerRegisterItemComponent
+        PartnerRegisterItemComponent,
+        PartnerRegisterItemViewComponent
     ],
     imports: [
         CommonModule,
@@ -44,7 +47,8 @@ import { PartnerRegisterItemComponent } from "./register-item/register-item.comp
         })
     ],
     providers: [
-        PartnerApplicationResolver
+        PartnerApplicationResolver,
+        PartnerRegisterItemViewResolver
     ]
 })
 export class PartnerModule {

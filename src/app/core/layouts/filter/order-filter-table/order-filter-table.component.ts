@@ -11,6 +11,7 @@ import { FlightRoute } from "../../flight-route/flight-route.component";
 @Component({
     selector: 'gh-order-filter-table',
     templateUrl: 'order-filter-table.component.html',
+    styleUrls: ['order-filter-table.component.scss']
   })
   export class GhOrderFilterTableComponent implements OnInit {
     /**
@@ -30,6 +31,18 @@ import { FlightRoute } from "../../flight-route/flight-route.component";
      * @type {TemplateRef<any>}
      */
     @ViewChild('deliveryDateTemplate', { static: true }) deliveryDateTemplate: TemplateRef<any>;
+
+    /**
+     * @description Whether the table has been filtered
+     * @type {boolean}
+     */
+    @Input() hasBeenFiltered: boolean;
+
+    /**
+     * @description The view factory
+     * @type {(row: OrderFilterInfo) => void}
+     */
+    @Input() viewFactory: (row: OrderFilterInfo) => void;
 
     /**
      * @description Backing field for the columns property

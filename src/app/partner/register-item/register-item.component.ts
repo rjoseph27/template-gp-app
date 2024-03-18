@@ -1,12 +1,13 @@
 import { AfterContentChecked, ChangeDetectorRef, Component, OnInit, inject } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { BehaviorSubject, map } from "rxjs";
 import { COUNTRY_INFO_LIST } from "../../misc/constants/countries/countries";
 import { Country } from "../../misc/enums/country.enum";
 import { SuccursaleInfo } from "../../misc/constants/countries/countries.type";
 import { ClientRequestsService } from "../../client/service/requests.service";
 import { OrderFilter } from "../../core/layouts/filter/order-filter/order-filter.component";
-import { OrderFilterInfo } from "../../api/requests/requests.type";
+import { OrderFilterInfo, RequestTableElementRequest } from "../../api/requests/requests.type";
+import { PartnerRoutes } from "../partner.route";
 
 /**
  * @interface SuccursaleByCountry
@@ -79,6 +80,36 @@ interface SuccursaleByCountry {
     private readonly requestsService = inject(ClientRequestsService);
 
     /**
+     * @description The backing field for the hasBeenFiltered
+     * @type {BehaviorSubject<boolean>}
+     */
+    private readonly _hasBeenFiltered$ = new BehaviorSubject<boolean>(false);
+
+    /**
+     * @description Whether the table has been filtered
+     * @type {Observable<boolean>}
+     */
+    protected readonly hasBeenFiltered$ = this._hasBeenFiltered$.asObservable();
+
+    /**
+    * @description The router service
+    * @type {Router}
+    */
+    protected readonly router: Router = inject(Router);
+
+    /**
+     * @description The view factory
+     * @type {(row: OrderFilterInfo) => void}
+     */
+    protected readonly viewFactory = (row: OrderFilterInfo) => this.router.navigate([PartnerRoutes.registerItemView.fullPath()], { queryParams: {
+        id: row.orderId,
+        deliveryDate: row.departureDate,
+        from: row.originAirport,
+        to: row.destinationAirport,
+        userId: row.userId 
+    } })
+
+    /**
      * @description The list of succursale by country
      * @type {SuccursaleByCountry[]}
      */
@@ -96,6 +127,7 @@ interface SuccursaleByCountry {
         this._elements$.next(undefined)
         const orders = await this.requestsService.orderFilter(orderFilter);
         this._elements$.next(orders);
+        this._hasBeenFiltered$.next(true);
     }
 
     /** @inheritdoc */

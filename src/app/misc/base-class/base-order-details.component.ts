@@ -1,7 +1,7 @@
 import { inject } from "@angular/core";
 import { NotificationService } from "../../services/notification.service";
-import { ClientRequestsService } from "../service/requests.service";
-import { COUNTRY_INFO_LIST } from "../../misc/constants/countries/countries";
+import { ClientRequestsService } from "../../client/service/requests.service";
+import { COUNTRY_INFO_LIST } from "../constants/countries/countries";
 import { ActivatedRoute, Router } from "@angular/router";
 import { map } from "rxjs/operators";
 import { ModalService } from "../../services/modal.service";
@@ -39,7 +39,7 @@ export abstract class BaseOrderDetailsComponent {
     * @description The currency of the user
     * @type {string}
     */
-    protected readonly userCurrency = COUNTRY_INFO_LIST.find(x => x.name === this.userCountry).currency;
+    protected readonly userCurrency = COUNTRY_INFO_LIST.find(x => x.name === this.userCountry)?.currency;
     
     /**
     * @description The notification service

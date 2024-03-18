@@ -61,6 +61,7 @@ export class MoneyUtil {
         } else {
             price = priceInfo.defaultPrice * order.itemWeight;
         }
+        
         return price / rate;
     }
 
