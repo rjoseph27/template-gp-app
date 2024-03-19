@@ -87,6 +87,7 @@ import { LoadingService } from '../../../services/loading.service';
                 this.router.navigate([ClientRoutes.calendar.fullPath()])
               }
             }
+          case ItemsStatus.WAIT_ON_PAYMENT:
           case ItemsStatus.AT_CHECKPOINT:
           case ItemsStatus.READY_TO_PICK_UP:
             return {

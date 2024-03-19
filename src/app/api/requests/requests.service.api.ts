@@ -210,4 +210,13 @@ export class RequestsServiceApi extends BaseServiceApi {
     editItemInformation(editItemInformationRequest: EditItemInformationRequest): Promise<ApiResponse> {
         return firstValue(this.postRequest<ApiResponse>('edit-item-information', editItemInformationRequest));
     }
+
+    /**
+     * @description A method to cancel an order for a partner
+     * @param partnerCancelRequest The partner cancel request
+     * @returns {Promise<ApiResponse>}
+     */
+    partnerCancelOrder(partnerCancelRequest: OrderDetailRequest): Promise<ApiResponse> {
+        return firstValue(this.postRequest<ApiResponse>('partner-cancel-order', partnerCancelRequest));
+    }
 }

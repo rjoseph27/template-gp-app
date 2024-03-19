@@ -45,6 +45,12 @@ export enum ItemsStatus {
     AT_CHECKPOINT = 'AT_CHECKPOINT',
 
     /**
+     * @description The items are waiting for the payment
+     * @type {string}
+     */
+    WAIT_ON_PAYMENT = 'WAIT_ON_PAYMENT',
+
+    /**
      * @description The items are ready to be picked up by the GP
      * @type {string}
      */

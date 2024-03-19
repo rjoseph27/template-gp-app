@@ -19,7 +19,7 @@ import { EditItemInformationStatus } from "../../../api/requests/requests.type";
     selector: 'partner-register-item-edit',
     templateUrl: './register-item-edit.component.html',
     styleUrls: ['./register-item-edit.component.scss'],
-    providers: [ModalService, NotificationService]
+    providers: [ModalService]
   })
   export class PartnerRegisterItemEditComponent implements OnInit {
     /**

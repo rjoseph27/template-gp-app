@@ -18,6 +18,7 @@ import { PartnerRegisterItemViewResolver } from "./register-item/register-item-v
 import { PartnerRegisterItemEditComponent } from "./register-item/register-item-edit/register-item-edit.component";
 import { PartnerRegisterItemService } from "./service/register-item.service";
 import { PartnerRegisterItemEditResolver } from "./register-item/register-item-edit/register-item-edit.resolver";
+import { NotificationService } from "../services/notification.service";
 
 /**
  * @module PartnerModule
@@ -54,7 +55,8 @@ import { PartnerRegisterItemEditResolver } from "./register-item/register-item-e
         PartnerApplicationResolver,
         PartnerRegisterItemViewResolver,
         PartnerRegisterItemService,
-        PartnerRegisterItemEditResolver
+        PartnerRegisterItemEditResolver,
+        NotificationService
     ]
 })
 export class PartnerModule {

@@ -3,7 +3,11 @@
         <gh-order-details [currency]="currency$ | async" [orderDetails]="orderDetail$ | async"></gh-order-details>
         <div>
             <button class="gp-button" (click)="goToEditPage()">{{ 'moduleList.registerItem.view.edit' | translate }}</button>
-            <button class="attention-button">{{ 'moduleList.registerItem.view.cancel' | translate }}</button>
+            <button
+                [buttonLoading]="cancelLoading$ | async"
+                class="attention-button" 
+                (click)="cancelOrder()"
+            >{{ 'moduleList.registerItem.view.cancel' | translate }}</button>
             <button class="gp-button confirm-button">{{ 'moduleList.registerItem.view.confirm' | translate }}</button>
         </div>
     </div>

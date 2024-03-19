@@ -73,6 +73,7 @@ import { ClientRoutes } from "../../../client.route";
                 deliveryDate: row.deliveryDate,
               }})
             }
+          case ItemsStatus.WAIT_ON_PAYMENT:
           case ItemsStatus.AT_CHECKPOINT:
             return {
               label: 'moduleList.gp.orders.status.itemAtCheckpoint',

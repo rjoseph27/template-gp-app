@@ -333,4 +333,19 @@ export class ClientRequestsService {
             return msg.message as EditItemInformationStatus
         });
     }
+
+    /**
+     * @description Cancels an order by a partner
+     * @param cancelRequest The cancel request
+     * @returns {Promise<boolean>} A promise that resolves to true if the order was canceled successfully, false otherwise
+     */
+    partnerCancelOrder(cancelRequest: OrderDetailRequest): Promise<boolean> {
+        return this.requestsServiceApi.partnerCancelOrder(cancelRequest).then(msg => {
+            if(msg.message === CancelOrderStatus.ORDER_CANCELED_SUCCESSFULLY)
+            {
+                return true
+            }
+            return false
+        });
+    }
 }
