@@ -15,6 +15,9 @@ import { PartnerApplicationResolver } from "./application.resolver";
 import { PartnerRegisterItemComponent } from "./register-item/register-item.component";
 import { PartnerRegisterItemViewComponent } from "./register-item/register-item-view/register-item-view.component";
 import { PartnerRegisterItemViewResolver } from "./register-item/register-item-view/register-item-view.resolver";
+import { PartnerRegisterItemEditComponent } from "./register-item/register-item-edit/register-item-edit.component";
+import { PartnerRegisterItemService } from "./service/register-item.service";
+import { PartnerRegisterItemEditResolver } from "./register-item/register-item-edit/register-item-edit.resolver";
 
 /**
  * @module PartnerModule
@@ -25,7 +28,8 @@ import { PartnerRegisterItemViewResolver } from "./register-item/register-item-v
         PartnerLogInComponent,
         PartnerMainComponent,
         PartnerRegisterItemComponent,
-        PartnerRegisterItemViewComponent
+        PartnerRegisterItemViewComponent,
+        PartnerRegisterItemEditComponent
     ],
     imports: [
         CommonModule,
@@ -48,7 +52,9 @@ import { PartnerRegisterItemViewResolver } from "./register-item/register-item-v
     ],
     providers: [
         PartnerApplicationResolver,
-        PartnerRegisterItemViewResolver
+        PartnerRegisterItemViewResolver,
+        PartnerRegisterItemService,
+        PartnerRegisterItemEditResolver
     ]
 })
 export class PartnerModule {

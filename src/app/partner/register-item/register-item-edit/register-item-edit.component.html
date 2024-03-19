@@ -1,0 +1,25 @@
+<div class="content">
+    <div>
+        <h1>{{ 'moduleList.registerItem.edit.title' | translate }}</h1>
+        <gh-item-information 
+            [(itemInformation)]="itemInformation"
+            [canAddOrDelete]="false"
+        ></gh-item-information>
+        <div class="current-price">
+            <div class="title">
+                {{ 'moduleList.registerItem.edit.currentPrice' | translate }}
+            </div>
+            <div>
+                {{ (currentPrice$ | async) | currency: currency }}
+            </div>           
+        </div>
+        <div>
+            <button class="attention-button" (click)="confirm()">
+                {{ 'moduleList.registerItem.edit.button.confirm' | translate }}
+            </button>
+            <button class="gp-button" (click)="goToPreviousPage()">
+                {{ 'moduleList.registerItem.edit.button.return' | translate }}
+            </button>
+        </div>
+    </div>
+</div>

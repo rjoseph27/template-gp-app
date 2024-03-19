@@ -113,7 +113,7 @@
             (click)="cancelEditItemInformation(itemInformationForm)"
         >{{ 'global.common.cancel' | translate }}</button>
         <button
-            *ngIf="itemInformationForm.formMode === formMode.VIEW && isEditable"
+            *ngIf="itemInformationForm.formMode === formMode.VIEW && isEditable && canAddOrDelete"
             type="button" 
             class="attention-button" 
             (click)="deleteItemInformation(itemInformationForm)"

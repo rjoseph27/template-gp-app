@@ -253,13 +253,19 @@ export class GhItemInformationComponent implements OnInit {
    * @type {ItemInformation[]}
    */
   @Input() itemInformation: ItemInformation[];
+
+  /**
+   * @description A boolean to indicate if the user can add or delete an item information
+   * @type {boolean}
+   */
+  @Input() canAddOrDelete: boolean = true;
   
   /** @inheritdoc */
   ngOnInit(): void {
     if(this.itemInformation) {
       this.itemInformation.forEach(x => this.addNewItemInformation(x));
     }
-    if(this.isEditable) {
+    if(this.isEditable && this.canAddOrDelete) {
       this.addNewItemInformation();
     } 
   }

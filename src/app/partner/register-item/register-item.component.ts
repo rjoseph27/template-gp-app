@@ -101,13 +101,17 @@ interface SuccursaleByCountry {
      * @description The view factory
      * @type {(row: OrderFilterInfo) => void}
      */
-    protected readonly viewFactory = (row: OrderFilterInfo) => this.router.navigate([PartnerRoutes.registerItemView.fullPath()], { queryParams: {
-        id: row.orderId,
-        deliveryDate: row.departureDate,
-        from: row.originAirport,
-        to: row.destinationAirport,
-        userId: row.userId 
-    } })
+    protected readonly viewFactory = (row: OrderFilterInfo) => {
+        const queryParams = {
+            id: row.orderId,
+            deliveryDate: row.departureDate,
+            from: row.originAirport,
+            to: row.destinationAirport,
+            userId: row.userId 
+        }
+        PartnerRoutes.registerItemView.currentParams = queryParams;
+        return this.router.navigate([PartnerRoutes.registerItemView.fullPath()], { queryParams:  queryParams} )
+    }
 
     /**
      * @description The list of succursale by country

@@ -2,7 +2,13 @@
  * @class GhRoute
  * @description Represents a route in the application
  */
-export class GhRoute {    
+export class GhRoute {
+    /**
+     * @description The current params of the route
+     * @type {any}
+     */
+    currentParams: any;
+
     /**
      * @constructor
      * @param segment The name of the segment

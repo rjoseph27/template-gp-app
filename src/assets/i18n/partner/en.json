@@ -2,7 +2,31 @@
     "moduleList": {
         "registerItem": {
             "title": "Register Item",
-            "filterLabel": "Filter order"
+            "filterLabel": "Filter order",
+            "view": {
+                "edit": "Edit",
+                "cancel": "Cancel",
+                "confirm": "Confirm"
+            },
+            "edit": {
+                "title": "Edit Item",
+                "confirm": "Confirm",
+                "currentPrice": "Current Price",
+                "button": {
+                    "return": "Return to the previous page",
+                    "confirm": "Confirm"
+                },
+                "modal": {
+                    "title": "Edit Item",
+                    "content": "Are you sure you want to edit this item?",
+                    "confirm": "Confirm",
+                    "cancel": "Cancel",
+                    "notification": {
+                        "success": "Item has been edited successfully",
+                        "error": "Failed to edit item"
+                    }
+                }
+            }
         },
         "dispatching": {
             "title": "Dispatching"

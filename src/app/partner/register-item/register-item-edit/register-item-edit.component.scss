@@ -1,0 +1,24 @@
+.content {
+    display: flex;
+    justify-content: center;
+
+    h1 {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1em;
+    }
+
+    .current-price {
+        display: flex;
+        justify-content: space-around;
+        margin: 2em 0;
+
+        .title {
+            font-size: 1.5em;
+        }
+    }
+
+    button {
+        width: 100%;
+    }
+}

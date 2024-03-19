@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { ApiResponse, BaseServiceApi } from "../base.service.api";
 import { firstValue } from "../../misc/function/firstValue";
-import { ReportTrip, SearchTripsRequest, SearchTripsApiResponse, ConfirmItemRequest, SendItemsRequestApiResponse, UpdateImageNameRequest, CreateAlertRequest, ListItemsApiResponse, ItemInformationApiResponse, RequestTableElementRequest, OrderDetailRequest, GetSendItemsRequestApiResponse, GetTripListApiResponse, GetTripInfoApiResponse, CancelTripRequest, AlertListApiResponse, AlertApiResponse, OrderFilterResponse } from "./requests.type";
+import { ReportTrip, SearchTripsRequest, SearchTripsApiResponse, ConfirmItemRequest, SendItemsRequestApiResponse, UpdateImageNameRequest, CreateAlertRequest, ListItemsApiResponse, ItemInformationApiResponse, RequestTableElementRequest, OrderDetailRequest, GetSendItemsRequestApiResponse, GetTripListApiResponse, GetTripInfoApiResponse, CancelTripRequest, AlertListApiResponse, AlertApiResponse, OrderFilterResponse, EditItemInformationRequest } from "./requests.type";
 import { OrderFilter } from "../../core/layouts/filter/order-filter/order-filter.component";
 
 /**
@@ -200,5 +200,14 @@ export class RequestsServiceApi extends BaseServiceApi {
      */
     orderFilter(orderFilterRequest: OrderFilter): Promise<OrderFilterResponse> {
         return firstValue(this.postRequest<OrderFilterResponse>('filter-order', orderFilterRequest));
+    }
+
+    /**
+     * @description A method to edit the item information
+     * @param editItemInformationRequest The edit item information request
+     * @returns {Promise<ApiResponse>}
+     */
+    editItemInformation(editItemInformationRequest: EditItemInformationRequest): Promise<ApiResponse> {
+        return firstValue(this.postRequest<ApiResponse>('edit-item-information', editItemInformationRequest));
     }
 }

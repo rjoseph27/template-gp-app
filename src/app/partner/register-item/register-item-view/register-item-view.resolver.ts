@@ -8,7 +8,7 @@ import { COUNTRY_INFO_LIST } from "../../../misc/constants/countries/countries";
  * @description The resolver for the partner register item view
  */
 @Injectable()
-export class PartnerRegisterItemViewResolver extends baseOrderDetailsResolver{  
+export class PartnerRegisterItemViewResolver extends baseOrderDetailsResolver {  
   /** @inheritdoc */
   override redirectTo = PartnerRoutes.registerItem.fullPath();
 

@@ -59,7 +59,7 @@ export class MoneyUtil {
                 price = category.price * order.itemQuantity;
             }
         } else {
-            price = priceInfo.defaultPrice * order.itemWeight;
+            price = priceInfo.defaultPrice * order.itemWeight * order.itemQuantity;
         }
         
         return price / rate;

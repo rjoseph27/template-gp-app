@@ -68,6 +68,7 @@ export abstract class baseOrderDetailsResolver implements Resolve<OrderDetails> 
   async resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<OrderDetails> {
     this.loadingService.startLoading();
     const order = await this.requestsService.getItemInformation(<RequestTableElementRequest>route.queryParams);
+    
     if(order) {
         const userCurrency = await this.getCurrency();
         const currency = await this.currencyService.getCurrency(userCurrency.currency);

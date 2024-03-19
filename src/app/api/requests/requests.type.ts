@@ -693,6 +693,24 @@ export interface ReportTrip {
   }
 
   /**
+   * @enum EditItemInformationStatus
+   * @description The status of the edit item information request
+   */
+  export enum EditItemInformationStatus {
+    /**
+     * @description The item information was edited successfully
+     * @type {string}
+     */
+    ITEM_INFORMATION_UPDATED_SUCCESSFULLY = "ITEM_INFORMATION_UPDATED_SUCCESSFULLY",
+
+    /**
+     * @description The item information was edited but the GP needs to review it
+     * @type {string}
+     */
+    ITEM_WILL_BE_REVIEWED_BY_GP = "ITEM_WILL_BE_REVIEWED_BY_GP"
+  }
+
+  /**
    * @interface ItemsOrdersStatus
    * @description The status of the items orders request
    */
@@ -972,4 +990,22 @@ export interface ReportTrip {
      * @type {string}
      */
     userId: string
+  }
+
+  /**
+   * @interface EditItemInformationRequest
+   * @description An interface for the edit item information request
+   */
+  export interface EditItemInformationRequest {
+    /**
+     * @description The id of the request
+     * @type {string}
+     */
+    id: string,
+
+    /**
+     * @description The item information to edit
+     * @type {ItemInformation}
+     */
+    itemInformation: ItemInformation
   }

@@ -70,7 +70,10 @@ export class NavigationService {
    * @returns {void}
    */
   goToPreviousPage(): void {
-    this.router.navigate([this.currentRoute?.parentRoute.fullPath()]);
-    // TODO ADAPT TO ENTERPRISE
+    if(this.currentRoute?.parentRoute.currentParams) {
+      this.router.navigate([this.currentRoute?.parentRoute.fullPath()], { queryParams: this.currentRoute?.parentRoute.currentParams });
+    } else {
+      this.router.navigate([this.currentRoute?.parentRoute.fullPath()]);
+    }
   }
 }

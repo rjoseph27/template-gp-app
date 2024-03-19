@@ -1,6 +1,6 @@
 import { Injectable, inject } from "@angular/core";
 import { RequestsServiceApi } from "../../api/requests/requests.service.api";
-import { OrderDetailRequest, CancelOrderStatus, ConfirmItemRequest, CreateAlertRequest, CreateAlertStatus, ItemsOrdersStatus, ReportTrip, ReportTripStatus, RequestTableElementRequest, SendItemsStatus, GpAcceptOrderStatus, GetReportTripStatus, GetTripInfoStatus, CancelTripStatus, AlertListStatus, AlertFormType, EditAlertStatus, DeleteAlertStatus, OrderFilterInfo } from "../../api/requests/requests.type";
+import { OrderDetailRequest, CancelOrderStatus, ConfirmItemRequest, CreateAlertRequest, CreateAlertStatus, ItemsOrdersStatus, ReportTrip, ReportTripStatus, RequestTableElementRequest, SendItemsStatus, GpAcceptOrderStatus, GetReportTripStatus, GetTripInfoStatus, CancelTripStatus, AlertListStatus, AlertFormType, EditAlertStatus, DeleteAlertStatus, OrderFilterInfo, EditItemInformationRequest, EditItemInformationStatus } from "../../api/requests/requests.type";
 import { SendItemsRequest } from "./send-items.service";
 import { DateUtil } from "../../misc/util/date.util";
 import { UsersService } from "../../services/users.service";
@@ -321,5 +321,16 @@ export class ClientRequestsService {
      */
     orderFilter(orderFilter: OrderFilter): Promise<OrderFilterInfo[]> {
         return this.requestsServiceApi.orderFilter(orderFilter).then(msg => msg.orders);
+    }
+
+    /**
+     * @description Edits the item information
+     * @param editItemInformationRequest The edit item information request
+     * @returns {Promise<boolean>} A promise that resolves to true if the item information was edited successfully, false otherwise
+     */
+    editItemInformation(editItemInformationRequest: EditItemInformationRequest): Promise<EditItemInformationStatus> {
+        return this.requestsServiceApi.editItemInformation(editItemInformationRequest).then(msg => {
+            return msg.message as EditItemInformationStatus
+        });
     }
 }
