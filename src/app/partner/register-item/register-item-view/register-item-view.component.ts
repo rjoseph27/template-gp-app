@@ -43,6 +43,18 @@ import { NotificationService } from "../../../services/notification.service";
     protected readonly cancelLoading$ = this._cancelLoading$.asObservable();
 
     /**
+     * @description The backing field for confirm loading
+     * @type {BehaviorSubject<boolean>}
+     */
+    private readonly _confirmLoading$ = new BehaviorSubject<boolean>(false);
+
+    /**
+     * @description The confirm loading
+     * @type {Observable<boolean>}
+     */
+    protected readonly confirmLoading$ = this._confirmLoading$.asObservable();
+
+    /**
      * @description A method to go to the edit page
      * @returns {void}
      */
@@ -83,6 +95,38 @@ import { NotificationService } from "../../../services/notification.service";
               this.router.navigate([PartnerRoutes.registerItem.fullPath()]);
             } else {
               this.notificationService.errorNotification('moduleList.registerItem.cancelOrder.modal.notification.error');
+            }
+          });
+        }
+      })
+    }
+
+    /**
+     * @description A method to confirm the order
+     * @returns {void}
+     */
+    protected confirmOrder(): void {
+      this.modalService.openModal({
+        title: "moduleList.registerItem.confirmOrder.modal.title",
+        text: "moduleList.registerItem.confirmOrder.modal.content",
+        confirmCaption: "moduleList.registerItem.confirmOrder.modal.confirm",
+        cancelCaption: "moduleList.registerItem.confirmOrder.modal.cancel"
+      }).then(async x => {
+        if(x)
+        {
+          const orderDetails = this.registerItemService.currentOrderDetails
+          this._confirmLoading$.next(true);
+          this.requestsService.orderWaitOnPayment({
+            id: orderDetails.itemGroupId, 
+            tripId: orderDetails.tripId, 
+            orderId: orderDetails.itemInformation.id.toString()
+          }).then(() => {
+            if(x) {
+              this._confirmLoading$.next(false);
+              this.notificationService.successNotification('moduleList.registerItem.confirmOrder.modal.notification.success');
+              this.router.navigate([PartnerRoutes.registerItem.fullPath()]);
+            } else {
+              this.notificationService.errorNotification('moduleList.registerItem.confirmOrder.modal.notification.error');
             }
           });
         }

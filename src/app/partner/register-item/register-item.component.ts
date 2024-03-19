@@ -128,8 +128,10 @@ interface SuccursaleByCountry {
      * @returns {Promise<void>}
      */
     protected async filter(orderFilter: OrderFilter) {
+        const countrySuccursale = this.succursaleByCountry.find(x => x.regions.find(z => z[1].name === this.route.snapshot.data['userInfo'].succursale))
+        const region = countrySuccursale.regions.find(x => x[1].name === this.route.snapshot.data['userInfo'].succursale)[0]
         this._elements$.next(undefined)
-        const orders = await this.requestsService.orderFilter(orderFilter);
+        const orders = await this.requestsService.orderFilter({...orderFilter, userCountry: countrySuccursale.country, userRegion: region});
         this._elements$.next(orders);
         this._hasBeenFiltered$.next(true);
     }

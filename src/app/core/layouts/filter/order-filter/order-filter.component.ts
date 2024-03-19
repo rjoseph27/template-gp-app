@@ -43,6 +43,18 @@ export interface OrderFilter {
      * @type {string}
      */
     destinationRegion: string;
+
+    /**
+     * @description The origin country to filter
+     * @type {Country}
+     */
+    userCountry: string;
+
+    /**
+     * @description The origin region to filter
+     * @type {string}
+     */
+    userRegion: string;
 }
 
 /**

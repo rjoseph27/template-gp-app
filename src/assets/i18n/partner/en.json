@@ -20,6 +20,18 @@
                     }
                 }
             },
+            "confirmOrder": {
+                "modal": {
+                    "title": "Confirm Order",
+                    "content": "Are you sure you want to confirm this order?",
+                    "confirm": "Confirm",
+                    "cancel": "Cancel",
+                    "notification": {
+                        "success": "Order has been confirmed successfully",
+                        "error": "Failed to confirm order"
+                    }
+                }
+            },
             "edit": {
                 "title": "Edit Item",
                 "confirm": "Confirm",
@@ -45,6 +57,9 @@
         },
         "receivingItem": {
             "title": "Receiving Item"
+        },
+        "billing": {
+            "title": "Billing"
         }
     }
 }

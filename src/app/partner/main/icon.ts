@@ -33,3 +33,9 @@ export const RECEIVING_ITEM_ICON = 'move_item'
  * @description The icon to be used for the dispatching module
  */
 export const DISPATCH_ICON = 'shield_person'
+
+/**
+ * @constant
+ * @description The icon to be used for the billing module
+ */
+export const BILLING_ICON = 'payments'

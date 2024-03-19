@@ -219,4 +219,13 @@ export class RequestsServiceApi extends BaseServiceApi {
     partnerCancelOrder(partnerCancelRequest: OrderDetailRequest): Promise<ApiResponse> {
         return firstValue(this.postRequest<ApiResponse>('partner-cancel-order', partnerCancelRequest));
     }
+
+    /**
+     * @description A method to update the status of an order to wait on payment
+     * @param updateStatusRequest The update status request
+     * @returns {Promise<ApiResponse>}
+     */
+    orderWaitOnPayment(updateStatusRequest: OrderDetailRequest): Promise<ApiResponse> {
+        return firstValue(this.postRequest<ApiResponse>('order-wait-on-payment', updateStatusRequest));
+    }
 }

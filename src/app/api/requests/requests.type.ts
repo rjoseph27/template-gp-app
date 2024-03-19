@@ -891,6 +891,18 @@ export interface ReportTrip {
   }
 
   /**
+   * @enum UpdateStatus
+   * @description The update status
+   */
+  export enum UpdateStatus {
+    /**
+     * @description The status was updated successfully
+     * @type {string}
+     */
+    ORDER_STATUS_UPDATED_SUCCESSFULLY = "ORDER_STATUS_UPDATED_SUCCESSFULLY"
+  }
+
+  /**
    * @enum GpAcceptOrderStatus
    * @description The accept order status
    */

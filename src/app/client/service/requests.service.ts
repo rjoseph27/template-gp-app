@@ -1,6 +1,6 @@
 import { Injectable, inject } from "@angular/core";
 import { RequestsServiceApi } from "../../api/requests/requests.service.api";
-import { OrderDetailRequest, CancelOrderStatus, ConfirmItemRequest, CreateAlertRequest, CreateAlertStatus, ItemsOrdersStatus, ReportTrip, ReportTripStatus, RequestTableElementRequest, SendItemsStatus, GpAcceptOrderStatus, GetReportTripStatus, GetTripInfoStatus, CancelTripStatus, AlertListStatus, AlertFormType, EditAlertStatus, DeleteAlertStatus, OrderFilterInfo, EditItemInformationRequest, EditItemInformationStatus } from "../../api/requests/requests.type";
+import { OrderDetailRequest, CancelOrderStatus, ConfirmItemRequest, CreateAlertRequest, CreateAlertStatus, ItemsOrdersStatus, ReportTrip, ReportTripStatus, RequestTableElementRequest, SendItemsStatus, GpAcceptOrderStatus, GetReportTripStatus, GetTripInfoStatus, CancelTripStatus, AlertListStatus, AlertFormType, EditAlertStatus, DeleteAlertStatus, OrderFilterInfo, EditItemInformationRequest, EditItemInformationStatus, UpdateStatus } from "../../api/requests/requests.type";
 import { SendItemsRequest } from "./send-items.service";
 import { DateUtil } from "../../misc/util/date.util";
 import { UsersService } from "../../services/users.service";
@@ -342,6 +342,21 @@ export class ClientRequestsService {
     partnerCancelOrder(cancelRequest: OrderDetailRequest): Promise<boolean> {
         return this.requestsServiceApi.partnerCancelOrder(cancelRequest).then(msg => {
             if(msg.message === CancelOrderStatus.ORDER_CANCELED_SUCCESSFULLY)
+            {
+                return true
+            }
+            return false
+        });
+    }
+
+    /**
+     * @description Confirms an order by a partner
+     * @param statusUpdateRequest the status update request
+     * @returns {Promise<boolean>}
+     */
+    orderWaitOnPayment(statusUpdateRequest: OrderDetailRequest): Promise<boolean> {
+        return this.requestsServiceApi.orderWaitOnPayment(statusUpdateRequest).then(msg => {
+            if(msg.message === UpdateStatus.ORDER_STATUS_UPDATED_SUCCESSFULLY)
             {
                 return true
             }

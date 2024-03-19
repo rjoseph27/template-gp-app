@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs';
 import { GhModule } from '../../core/layouts/main/main.component';
-import { DISPATCH_ICON, HELP_ICON, LOG_OUT_ICON, RECEIVING_ITEM_ICON, REGISTER_ITEM_ICON, SETTING_ICON } from './icon';
+import { BILLING_ICON, DISPATCH_ICON, HELP_ICON, LOG_OUT_ICON, RECEIVING_ITEM_ICON, REGISTER_ITEM_ICON, SETTING_ICON } from './icon';
 import { UsersService } from '../../services/users.service';
 import { PartnerRoutes } from '../partner.route';
 
@@ -70,6 +70,11 @@ export class PartnerMainComponent {
     {
       label: "moduleList.receivingItem.title",
       icon: RECEIVING_ITEM_ICON,
+      action: () => {}
+    },
+    {
+      label: "moduleList.billing.title",
+      icon: BILLING_ICON,
       action: () => {}
     },
     {
