@@ -12,7 +12,8 @@
             "cancel": "Cancel",
             "empty": "Empty",
             "add": "Add",
-            "action": "Action"
+            "action": "Action",
+            "select": "Select"
         },
         "credentials": {
             "email": {
@@ -441,8 +442,9 @@
         "table": {
             "header": {
                 "email": "Email",
-                "orderNumber": "Order Number",
+                "orderNumber": "Order Id",
                 "route": "Route",
+                "price": "Price",
                 "deliveryDate": "Delivery Date"
             },
             "empty": {
@@ -453,6 +455,16 @@
                 "title": "Filter Message",
                 "content": "You can filter the order by email, order number, delivery date and destination"
             }
+        }
+    },
+    "billingFilter": {
+        "empty": {
+            "title": "No Billing",
+            "content": "There is no billing that match this user"
+        },
+        "filterMessage": {
+            "title": "Filter Message",
+            "content": "You can filter the billing by email"
         }
     },
     "enums": {

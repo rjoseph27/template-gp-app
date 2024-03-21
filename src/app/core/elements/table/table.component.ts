@@ -105,10 +105,30 @@ export class GhTableComponent implements AfterViewInit {
   @Input() canAdd: boolean = false;
 
   /**
+   * @description A boolean to determine if the elements of the table can select
+   * @type {boolean}
+   */
+  @Input() canSelect: boolean = false;
+
+  /**
    * @description The columns for the table
    */
   @Input() set columns(value: ColumnConfig[]) {
     this._columns$.next(value);
+    if(this.canSelect) {
+      this._columns$.next([{
+        columnName: 'global.common.select',
+        valueAccessor: () => null,
+        template: this.selectTemplate
+      }, ...(value || [])])
+    }
+    if(this.canDelete || this.canEdit || this.canView) {
+      this._columns$.next([...(this._columns$.value || []), {
+        columnName: 'global.common.action',
+        valueAccessor: () => null,
+        template: this.actionTemplate
+      }])
+    }
   }
   
   /**
@@ -122,6 +142,18 @@ export class GhTableComponent implements AfterViewInit {
    * @type {Observable<string[]>}
    */
   protected columnNames$: Observable<string[]> = this._columns$.pipe(map(column => column.map(col => col.columnName)));
+
+  /**
+   * @description The selected elements
+   * @type {any[]}
+   */
+  protected selectedElements: any[] = [];
+
+  /**
+   * @description An event emitter for the selected elements
+   * @type {EventEmitter<any[]>}
+   */
+  @Output() selectedElementsChange = new EventEmitter<any[]>();
 
   /**
    * @description The id property for the table
@@ -178,10 +210,16 @@ export class GhTableComponent implements AfterViewInit {
   @Input() viewFactory: (element: any) => void;
 
   /**
-   * @description The template for the delete button
+   * @description The template for the action buttons
    * @type {TemplateRef<any>}
    */
   @ViewChild('actionTemplate', { static: true }) actionTemplate: TemplateRef<any>;
+
+  /**
+   * @description The template for the select box
+   * @type {TemplateRef<any>}
+   */
+  @ViewChild('selectTemplate', { static: true }) selectTemplate: TemplateRef<any>;
 
   /** @inheritdoc */
   ngAfterViewInit(): void {
@@ -192,6 +230,7 @@ export class GhTableComponent implements AfterViewInit {
         template: this.actionTemplate
       }])
     }
+
     this.dataSource.paginator = this.paginator;
   }
 
@@ -204,6 +243,21 @@ export class GhTableComponent implements AfterViewInit {
     this.elements = this.elements.filter((e: any) => e[this.idProperty] !== element[this.idProperty]);
     this.deleteFactory(element);
     this.elementsChange.emit(this.elements);
+  }
+
+  /**
+   * @description Adds or removes an element from the selected elements
+   * @param add Whether to add or remove the element
+   * @param element The element to add or remove
+   * @returns {void}
+   */
+  protected addRemoveSelectedElement(add: boolean, element: any): void {
+    if(add) {
+      this.selectedElements.push(element);
+    } else {
+      this.selectedElements = this.selectedElements.filter(e => e[this.idProperty] !== element[this.idProperty]);
+    }
+    this.selectedElementsChange.emit(this.selectedElements);
   }
 
   /**

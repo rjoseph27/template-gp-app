@@ -1,0 +1,22 @@
+<div class="label">{{ label }}</div>
+<div class="content">
+    <div class="section">
+        <gh-text-field
+            [label]="'orderFilter.form.email.label' | translate" 
+            [placeholder]="'orderFilter.form.email.placeholder' | translate"
+            [name]="emailField"
+            [value]="billingFilterForm.get(emailField).value"
+            (valueChange)="billingFilterForm.get(emailField).setValue($event)"
+            [errors]="billingFilterForm.get(emailField).errors"
+            [errorCaptions]="emailErrorCaptions"
+        ></gh-text-field>
+    </div>
+    <div class="button-section">
+        <button
+            [disabled]="!billingFilterForm.valid" 
+            class="gp-button" 
+            (click)="filterBilling()">
+            {{ 'orderFilter.form.submit' | translate }}
+        </button>
+    </div>
+</div>

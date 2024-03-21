@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { ApiResponse, BaseServiceApi } from "../base.service.api";
 import { firstValue } from "../../misc/function/firstValue";
-import { ReportTrip, SearchTripsRequest, SearchTripsApiResponse, ConfirmItemRequest, SendItemsRequestApiResponse, UpdateImageNameRequest, CreateAlertRequest, ListItemsApiResponse, ItemInformationApiResponse, RequestTableElementRequest, OrderDetailRequest, GetSendItemsRequestApiResponse, GetTripListApiResponse, GetTripInfoApiResponse, CancelTripRequest, AlertListApiResponse, AlertApiResponse, OrderFilterResponse, EditItemInformationRequest } from "./requests.type";
+import { ReportTrip, SearchTripsRequest, SearchTripsApiResponse, ConfirmItemRequest, SendItemsRequestApiResponse, UpdateImageNameRequest, CreateAlertRequest, ListItemsApiResponse, ItemInformationApiResponse, RequestTableElementRequest, OrderDetailRequest, GetSendItemsRequestApiResponse, GetTripListApiResponse, GetTripInfoApiResponse, CancelTripRequest, AlertListApiResponse, AlertApiResponse, OrderFilterResponse, EditItemInformationRequest, BillingListApiResponse, BillingFilterInfo } from "./requests.type";
 import { OrderFilter } from "../../core/layouts/filter/order-filter/order-filter.component";
 
 /**
@@ -227,5 +227,23 @@ export class RequestsServiceApi extends BaseServiceApi {
      */
     orderWaitOnPayment(updateStatusRequest: OrderDetailRequest): Promise<ApiResponse> {
         return firstValue(this.postRequest<ApiResponse>('order-wait-on-payment', updateStatusRequest));
+    }
+
+    /**
+     * @description A method to fetch the billing list by email
+     * @param email The email to search
+     * @returns {Promise<BillingListApiResponse>}
+     */
+    findBillingByEmail(email: string): Promise<BillingListApiResponse> {
+        return firstValue(this.getRequest<BillingListApiResponse>('find-billing-by-email', email));
+    }
+
+    /**
+     * @description A method to create a bill
+     * @param orders The list of orders
+     * @returns {Promise<ApiResponse>}
+     */
+    createBill(orders: BillingFilterInfo[]): Promise<ApiResponse> {
+        return firstValue(this.postRequest<ApiResponse>('create-bill', { orders: orders }));
     }
 }

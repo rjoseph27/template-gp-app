@@ -50,3 +50,7 @@
       </div>
     </div>
 </ng-template>
+
+<ng-template #selectTemplate let-element="element">
+  <gh-checkbox (valueChange)="addRemoveSelectedElement($event,element)"></gh-checkbox>
+</ng-template>

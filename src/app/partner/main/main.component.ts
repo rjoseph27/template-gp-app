@@ -75,7 +75,7 @@ export class PartnerMainComponent {
     {
       label: "moduleList.billing.title",
       icon: BILLING_ICON,
-      action: () => {}
+      action: () => this.router.navigate([PartnerRoutes.billing.fullPath()])
     },
     {
       label: "main.settings.title",

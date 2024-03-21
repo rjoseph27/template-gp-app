@@ -1,5 +1,7 @@
 import { ItemInformation } from "../../core/layouts/request/item-information/item-information.component";
 import { SpecificPrice, Unit } from "../../core/layouts/request/report-trip/report.time.constant";
+import { COUNTRY_INFO_LIST } from "../constants/countries/countries";
+import { CurrencyInfo, SUCCURSALE_BY_COUNTRY } from "../constants/countries/countries.type";
 
 /**
  * @interface PriceInfo
@@ -77,6 +79,16 @@ export class MoneyUtil {
         }
         price = MoneyUtil.addPercentage(price, GH_HUB_FEE);
         return Math.round(price);
+    }
+
+    /**
+     * @description A method that gets the currency of a succursale
+     * @param succursale The succursale
+     * @returns {CurrencyInfo}
+     */
+    static getSuccursaleCurrency(succursale: string): CurrencyInfo {
+          const country = SUCCURSALE_BY_COUNTRY.find(x => x.regions.find(z => z[1].name === succursale)).country
+          return COUNTRY_INFO_LIST.find(c => c.name === country).currency;
     }
 }
 

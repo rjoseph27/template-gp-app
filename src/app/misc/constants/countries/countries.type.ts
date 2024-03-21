@@ -142,3 +142,12 @@ export const COUNTRY_SELECTION_OPTIONS = COUNTRY_INFO_LIST.map((country: Country
     label: EnumUtil.EnumTranslationKey(Country, EnumUtil.getKeyByValue(Country, country.name), "Country"),
     prefix: country.flag
   }))
+
+/**
+ * @constant
+ * @description The succursale by country
+ */
+export const SUCCURSALE_BY_COUNTRY = COUNTRY_INFO_LIST.map(x => ({
+    country: x.name,
+    regions: Array.from(x.succursales)
+}));

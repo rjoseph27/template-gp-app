@@ -40,4 +40,16 @@ export class PartnerRoutes {
      * @type {GhRoute}
      */
     static readonly registerItemEdit: GhRoute = new GhRoute('edit', PartnerRoutes.registerItemView);
+
+    /**
+     * @description The billing route
+     * @type {GhRoute}
+     */
+    static readonly billing: GhRoute = new GhRoute('billing', PartnerRoutes.main);
+
+    /**
+     * @description The view for the billing route
+     * @type {GhRoute}
+     */
+    static readonly billingView: GhRoute = new GhRoute('view', PartnerRoutes.billing);
 }

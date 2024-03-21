@@ -1,0 +1,40 @@
+<gh-table 
+        [columns]="columns$ | async" 
+        [elements]="elements"
+        [emptyTemplate]="emptyTemplate"
+        [canSelect]="true"
+        [idProperty]="'id'"
+        [canView]="true"
+        [viewFactory]="viewFactory"
+        (selectedElementsChange)="selectedElementsChange.emit($event)"
+>
+    <ng-template #routeTemplate let-value="value">
+        <gh-flight-route [route]="value"></gh-flight-route>
+    </ng-template>
+    <ng-template #priceTemplate let-value="value">
+        {{ value | currency: currency }}
+    </ng-template>
+
+    <ng-template #emptyTemplate>
+        <div class="empty">
+            <ng-container *ngIf="hasBeenFiltered; else filterTemplate">
+                <div class="section section-title">
+                    {{ 'billingFilter.empty.title' | translate }}
+                </div>
+                <div class="section">
+                    <gh-icon name="feature_search"></gh-icon>
+                </div>
+                <div class="section">{{ 'billingFilter.empty.content' | translate }}</div>
+            </ng-container>
+            <ng-template #filterTemplate>
+                <div class="section section-title">
+                    {{ 'billingFilter.filterMessage.title' | translate }}
+                </div>
+                <div class="section">
+                    <gh-icon name="filter_alt"></gh-icon>
+                </div>
+                <div class="section">{{ 'billingFilter.filterMessage.content' | translate }}</div>
+            </ng-template>
+        </div>
+    </ng-template>
+</gh-table>

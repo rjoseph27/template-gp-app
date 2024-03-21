@@ -19,6 +19,9 @@ import { PartnerRegisterItemEditComponent } from "./register-item/register-item-
 import { PartnerRegisterItemService } from "./service/register-item.service";
 import { PartnerRegisterItemEditResolver } from "./register-item/register-item-edit/register-item-edit.resolver";
 import { NotificationService } from "../services/notification.service";
+import { PartnerBillingComponent } from "./billing/billing.component";
+import { PartnerBillingResolver } from "./billing/billing.resolver";
+import { PartnerBillingViewComponent } from "./billing/billing-view/billing-view.component";
 
 /**
  * @module PartnerModule
@@ -30,7 +33,9 @@ import { NotificationService } from "../services/notification.service";
         PartnerMainComponent,
         PartnerRegisterItemComponent,
         PartnerRegisterItemViewComponent,
-        PartnerRegisterItemEditComponent
+        PartnerRegisterItemEditComponent,
+        PartnerBillingComponent,
+        PartnerBillingViewComponent
     ],
     imports: [
         CommonModule,
@@ -56,7 +61,8 @@ import { NotificationService } from "../services/notification.service";
         PartnerRegisterItemViewResolver,
         PartnerRegisterItemService,
         PartnerRegisterItemEditResolver,
-        NotificationService
+        NotificationService,
+        PartnerBillingResolver
     ]
 })
 export class PartnerModule {

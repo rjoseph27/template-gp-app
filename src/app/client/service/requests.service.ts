@@ -1,6 +1,6 @@
 import { Injectable, inject } from "@angular/core";
 import { RequestsServiceApi } from "../../api/requests/requests.service.api";
-import { OrderDetailRequest, CancelOrderStatus, ConfirmItemRequest, CreateAlertRequest, CreateAlertStatus, ItemsOrdersStatus, ReportTrip, ReportTripStatus, RequestTableElementRequest, SendItemsStatus, GpAcceptOrderStatus, GetReportTripStatus, GetTripInfoStatus, CancelTripStatus, AlertListStatus, AlertFormType, EditAlertStatus, DeleteAlertStatus, OrderFilterInfo, EditItemInformationRequest, EditItemInformationStatus, UpdateStatus } from "../../api/requests/requests.type";
+import { OrderDetailRequest, CancelOrderStatus, ConfirmItemRequest, CreateAlertRequest, CreateAlertStatus, ItemsOrdersStatus, ReportTrip, ReportTripStatus, RequestTableElementRequest, SendItemsStatus, GpAcceptOrderStatus, GetReportTripStatus, GetTripInfoStatus, CancelTripStatus, AlertListStatus, AlertFormType, EditAlertStatus, DeleteAlertStatus, OrderFilterInfo, EditItemInformationRequest, EditItemInformationStatus, UpdateStatus, BillingFilterInfo, BillingStatus, CreateBillStatus } from "../../api/requests/requests.type";
 import { SendItemsRequest } from "./send-items.service";
 import { DateUtil } from "../../misc/util/date.util";
 import { UsersService } from "../../services/users.service";
@@ -361,6 +361,34 @@ export class ClientRequestsService {
                 return true
             }
             return false
+        });
+    }
+
+    /**
+     * @description Fetches billing by email
+     * @param email The email to search
+     * @returns {Promise<BillingFilterInfo[]>}
+     */
+    findBillingByEmail(email: string): Promise<BillingFilterInfo[]> {
+        return this.requestsServiceApi.findBillingByEmail(email).then(msg => {
+            if(msg.message === BillingStatus.BILLING_FOUND) {
+                return msg.billings;
+            } 
+            return [];
+        });
+    }
+
+    /**
+     * @description Creates a bill
+     * @param billing The billing to create
+     * @returns {Promise<boolean>} A promise that resolves to true if the bill was created successfully, false otherwise
+     */
+    createBill(billing: BillingFilterInfo[]): Promise<boolean> {
+        return this.requestsServiceApi.createBill(billing).then(msg => {
+            if(msg.message === CreateBillStatus.BILL_CREATED_SUCCESSFULLY) {
+                return true;
+            } 
+            return false;
         });
     }
 }

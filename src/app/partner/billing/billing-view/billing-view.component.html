@@ -1,0 +1,12 @@
+<div class="content">
+    <div>
+        <gh-order-details [currency]="currency$ | async" [orderDetails]="orderDetail$ | async"></gh-order-details>
+        <div>
+            <button
+                [buttonLoading]="cancelLoading$ | async"
+                class="attention-button" 
+                (click)="cancelOrder()"
+            >{{ 'moduleList.registerItem.view.cancel' | translate }}</button>
+        </div>
+    </div>
+</div>

@@ -789,6 +789,18 @@ export interface ReportTrip {
   }
 
   /**
+   * @interface BillingListApiResponse
+   * @description An interface for the billing list api response
+   */
+  export interface BillingListApiResponse extends ApiResponse {
+    /**
+     * @description The billing list
+     * @type {BillingFilterInfo[]}
+     */
+    billings: BillingFilterInfo[];
+  }
+
+  /**
    * @interface GetSendItemsRequestApiResponse
    * @description An interface for the get send items request api response
    */
@@ -903,6 +915,42 @@ export interface ReportTrip {
   }
 
   /**
+   * @enum CreateBillStatus
+   * @description The create bill status
+   */
+  export enum CreateBillStatus {
+    /**
+     * @description The billing was created successfully
+     * @type {string}
+     */
+    BILL_CREATED_SUCCESSFULLY = "BILL_CREATED_SUCCESSFULLY"
+  }
+
+  /**
+   * @enum BillingStatus
+   * @description The billing status
+   */
+  export enum BillingStatus {
+    /**
+     * @description The billing was found
+     * @type {string}
+     */
+    BILLING_FOUND = "BILLING_FOUND",
+
+    /**
+     * @description The billing was not found
+     * @type {string}
+     */
+    BILLING_NOT_FOUND = "BILLING_NOT_FOUND",
+
+    /**
+     * @description The email was not found
+     * @type {string}
+     */
+    USER_NOT_FOUND = "USER_NOT_FOUND"
+  }
+
+  /**
    * @enum GpAcceptOrderStatus
    * @description The accept order status
    */
@@ -925,6 +973,78 @@ export interface ReportTrip {
      */
     orders: OrderFilterInfo[];
   }
+
+  /**
+   * @interface BillingFilterInfo
+   * @description An interface for the billing filter info
+   */
+  export interface BillingFilterInfo extends ItemInformation {
+    /**
+     * @description The specific price
+     * @type {SpecificPrice[]}
+     */
+    specificPrice: SpecificPrice[],
+
+    /**
+     * @description The default price
+     * @type {number}
+     */
+    defaultPrice: number,
+
+    /**
+     * @description The route of the flight
+     * @type {FlightRoute}
+     */
+    route: FlightRoute
+
+    /**
+     * @description The email of the sender
+     * @type {string}
+     */
+    email: string
+
+    /**
+     * @description The currency of the order
+     * @type {Currency}
+     */
+    currency: Currency
+
+    /**
+     * @description The details of the billing
+     * @type {BillingDetails}
+     */
+    details: BillingDetails
+  }
+
+  /**
+   * @interface BillingDetails
+   * @description An interface for the billing details
+   */
+  interface BillingDetails {
+    /**
+     * @description The id of the user
+     * @type {string}
+     */
+    userId: string,
+
+    /**
+     * @description The departure date
+     * @type {Date}
+     */
+    deliveryDate: Date,
+
+    /**
+     * @description The departure airport
+     * @type {any}
+     */
+    from: any,
+
+    /**
+     * @description The arrival airport
+     * @type {any}
+     */
+    to: any
+}
 
   /**
    * @interface OrderFilterInfo

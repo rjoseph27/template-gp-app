@@ -2,30 +2,11 @@ import { AfterContentChecked, ChangeDetectorRef, Component, OnInit, inject } fro
 import { ActivatedRoute, Router } from "@angular/router";
 import { BehaviorSubject, map } from "rxjs";
 import { COUNTRY_INFO_LIST } from "../../misc/constants/countries/countries";
-import { Country } from "../../misc/enums/country.enum";
-import { SuccursaleInfo } from "../../misc/constants/countries/countries.type";
 import { ClientRequestsService } from "../../client/service/requests.service";
 import { OrderFilter } from "../../core/layouts/filter/order-filter/order-filter.component";
-import { OrderFilterInfo, RequestTableElementRequest } from "../../api/requests/requests.type";
+import { OrderFilterInfo } from "../../api/requests/requests.type";
 import { PartnerRoutes } from "../partner.route";
-
-/**
- * @interface SuccursaleByCountry
- * @description The succursale by country
- */
-interface SuccursaleByCountry {
-    /**
-     * @description The country
-     * @type {Country}
-     */
-    country: Country,
-
-    /**
-     * @description The regions
-     * @type {[any, SuccursaleInfo][]}
-     */
-    regions: [any, SuccursaleInfo][]
-}
+import { SUCCURSALE_BY_COUNTRY } from "../../misc/constants/countries/countries.type";
 
 /**
  * @component PartnerRegisterItemComponent
@@ -53,7 +34,7 @@ interface SuccursaleByCountry {
      * @description An observable for the user country
      * @type {Observable<Country>}
      */
-    protected readonly country$ = this.userInfo$.pipe(map(userInfo => this.succursaleByCountry.find(x => x.regions.find(z => z[1].name === userInfo.succursale)).country));
+    protected readonly country$ = this.userInfo$.pipe(map(userInfo => SUCCURSALE_BY_COUNTRY.find(x => x.regions.find(z => z[1].name === userInfo.succursale)).country));
 
     /**
      * @description The backing field for the elements
@@ -114,21 +95,12 @@ interface SuccursaleByCountry {
     }
 
     /**
-     * @description The list of succursale by country
-     * @type {SuccursaleByCountry[]}
-     */
-    private readonly succursaleByCountry = COUNTRY_INFO_LIST.map(x => ({
-        country: x.name,
-        regions: Array.from(x.succursales)
-    }));
-
-    /**
      * @description Filter the orders
      * @param orderFilter The params to filter
      * @returns {Promise<void>}
      */
     protected async filter(orderFilter: OrderFilter) {
-        const countrySuccursale = this.succursaleByCountry.find(x => x.regions.find(z => z[1].name === this.route.snapshot.data['userInfo'].succursale))
+        const countrySuccursale = SUCCURSALE_BY_COUNTRY.find(x => x.regions.find(z => z[1].name === this.route.snapshot.data['userInfo'].succursale))
         const region = countrySuccursale.regions.find(x => x[1].name === this.route.snapshot.data['userInfo'].succursale)[0]
         this._elements$.next(undefined)
         const orders = await this.requestsService.orderFilter({...orderFilter, userCountry: countrySuccursale.country, userRegion: region});

@@ -8,6 +8,9 @@ import { PartnerRegisterItemViewComponent } from "./register-item/register-item-
 import { PartnerRegisterItemViewResolver } from "./register-item/register-item-view/register-item-view.resolver";
 import { PartnerRegisterItemEditComponent } from "./register-item/register-item-edit/register-item-edit.component";
 import { PartnerRegisterItemEditResolver } from "./register-item/register-item-edit/register-item-edit.resolver";
+import { PartnerBillingComponent } from "./billing/billing.component";
+import { PartnerBillingResolver } from "./billing/billing.resolver";
+import { PartnerBillingViewComponent } from "./billing/billing-view/billing-view.component";
 
 /**
  * @constant routes
@@ -20,8 +23,12 @@ const routes: Routes = [
         { path: `${PartnerRoutes.registerItemView}`, children: [
             { path: '', component: PartnerRegisterItemViewComponent, pathMatch: 'full', resolve: { userInfo: PartnerApplicationResolver, orderDetails: PartnerRegisterItemViewResolver} },
             { path: `${PartnerRoutes.registerItemEdit}`, component: PartnerRegisterItemEditComponent, pathMatch: 'full', resolve: { userInfo: PartnerApplicationResolver, orderDetails: PartnerRegisterItemEditResolver } }
-        ]}
-    ] }
+        ]},
+    ]},
+    { path: `${PartnerRoutes.billing}`, children: [
+        { path: '', component: PartnerBillingComponent, pathMatch: 'full', resolve: { userInfo: PartnerApplicationResolver, currency: PartnerBillingResolver} },
+        { path: `${PartnerRoutes.billingView}`, component: PartnerBillingViewComponent, pathMatch: 'full', resolve: { userInfo: PartnerApplicationResolver, orderDetails: PartnerRegisterItemViewResolver} }
+    ]}
 ];
 
 /**
