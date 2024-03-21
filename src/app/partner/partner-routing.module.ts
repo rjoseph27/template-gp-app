@@ -11,6 +11,8 @@ import { PartnerRegisterItemEditResolver } from "./register-item/register-item-e
 import { PartnerBillingComponent } from "./billing/billing.component";
 import { PartnerBillingResolver } from "./billing/billing.resolver";
 import { PartnerBillingViewComponent } from "./billing/billing-view/billing-view.component";
+import { PartnerGpPickUpComponent } from "./gp-pick-up/gp-pick-up.component";
+import { PartnerGpPickUpViewComponent } from "./gp-pick-up/gp-pick-up-view/gp-pick-up-view.component";
 
 /**
  * @constant routes
@@ -28,6 +30,10 @@ const routes: Routes = [
     { path: `${PartnerRoutes.billing}`, children: [
         { path: '', component: PartnerBillingComponent, pathMatch: 'full', resolve: { userInfo: PartnerApplicationResolver, currency: PartnerBillingResolver} },
         { path: `${PartnerRoutes.billingView}`, component: PartnerBillingViewComponent, pathMatch: 'full', resolve: { userInfo: PartnerApplicationResolver, orderDetails: PartnerRegisterItemViewResolver} }
+    ]},
+    { path: `${PartnerRoutes.gpPickUp}`, children: [
+        { path: '', component: PartnerGpPickUpComponent, pathMatch: 'full', resolve: { userInfo: PartnerApplicationResolver} },
+        { path: `${PartnerRoutes.gpPickUpView}`, component: PartnerGpPickUpViewComponent, pathMatch: 'full', resolve: { userInfo: PartnerApplicationResolver, orderDetails: PartnerRegisterItemViewResolver} }
     ]}
 ];
 

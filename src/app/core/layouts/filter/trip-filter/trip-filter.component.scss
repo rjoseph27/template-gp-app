@@ -1,0 +1,39 @@
+@import '../../../../../styles/variables';
+
+.label {
+    color: $secondary-color;
+    font-weight: $semi-bold;
+}
+
+.content {
+    border:1px solid #000;
+    padding:1em;
+
+    .section {
+        margin-bottom: 0.5em;
+    }
+
+    .button-section {
+        button {
+            width: 100%;
+            padding-left: 3em;
+            padding-right: 3em;
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    .content {
+        display: flex;
+        justify-content: space-between;
+
+        .section {
+            margin: auto 0.5em;
+        }
+
+        .button-section {
+            display: flex;
+            align-items: end;
+        }
+    }
+}

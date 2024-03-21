@@ -22,6 +22,8 @@ import { NotificationService } from "../services/notification.service";
 import { PartnerBillingComponent } from "./billing/billing.component";
 import { PartnerBillingResolver } from "./billing/billing.resolver";
 import { PartnerBillingViewComponent } from "./billing/billing-view/billing-view.component";
+import { PartnerGpPickUpComponent } from "./gp-pick-up/gp-pick-up.component";
+import { PartnerGpPickUpViewComponent } from "./gp-pick-up/gp-pick-up-view/gp-pick-up-view.component";
 
 /**
  * @module PartnerModule
@@ -35,7 +37,9 @@ import { PartnerBillingViewComponent } from "./billing/billing-view/billing-view
         PartnerRegisterItemViewComponent,
         PartnerRegisterItemEditComponent,
         PartnerBillingComponent,
-        PartnerBillingViewComponent
+        PartnerBillingViewComponent,
+        PartnerGpPickUpComponent,
+        PartnerGpPickUpViewComponent
     ],
     imports: [
         CommonModule,

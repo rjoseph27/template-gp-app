@@ -33,13 +33,13 @@ export class PartnerRoutes {
      * @description The view for receiving item route
      * @type {GhRoute}
      */
-    static readonly registerItemView: GhRoute = new GhRoute('view', PartnerRoutes.registerItem);
+    static readonly registerItemView: GhRoute = new GhRoute('register-item-view', PartnerRoutes.registerItem);
 
     /**
      * @description The edit page for receiving item route
      * @type {GhRoute}
      */
-    static readonly registerItemEdit: GhRoute = new GhRoute('edit', PartnerRoutes.registerItemView);
+    static readonly registerItemEdit: GhRoute = new GhRoute('register-item-edit', PartnerRoutes.registerItemView);
 
     /**
      * @description The billing route
@@ -51,5 +51,17 @@ export class PartnerRoutes {
      * @description The view for the billing route
      * @type {GhRoute}
      */
-    static readonly billingView: GhRoute = new GhRoute('view', PartnerRoutes.billing);
+    static readonly billingView: GhRoute = new GhRoute('billing-view', PartnerRoutes.billing);
+
+    /**
+     * @description The route for the GP pick up
+     * @type {GhRoute}
+     */
+    static readonly gpPickUp: GhRoute = new GhRoute('gp-pick-up', PartnerRoutes.main);
+
+    /**
+     * @description The view for the GP pick up
+     * @type {GhRoute}
+     */
+    static readonly gpPickUpView: GhRoute = new GhRoute('gp-pick-up-view', PartnerRoutes.gpPickUp);
 }

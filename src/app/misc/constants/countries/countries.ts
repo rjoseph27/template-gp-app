@@ -37,4 +37,3 @@ export const COUNTRY_INFO_LIST: CountryInfo[] = [
     }
 ]
 
-

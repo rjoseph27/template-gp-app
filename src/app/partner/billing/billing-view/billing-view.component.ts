@@ -17,12 +17,6 @@ import { BehaviorSubject } from "rxjs";
   })
   export class PartnerBillingViewComponent extends BaseOrderDetailsComponent {
     /**
-     * @description The currency of the order
-     * @type {Observable<string>}
-     */
-    protected readonly currency$ = this.orderDetail$.pipe(map(orderDetails => orderDetails.currency));
-
-    /**
      * @description The backing field for cancel loading
      * @type {BehaviorSubject<boolean>}
      */

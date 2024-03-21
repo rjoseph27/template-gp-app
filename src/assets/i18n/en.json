@@ -422,6 +422,13 @@
                     "invalid": "Please enter a valid order number"
                 }
             },
+            "trip": {
+                "label": "Trip",
+                "placeholder": "Enter the trip id",
+                "errors": {
+                    "invalid": "Please enter a valid trip id"
+                }
+            },
             "deliveryDate": {
                 "label": "Delivery Date",
                 "placeholder": "Enter the delivery date",
@@ -436,6 +443,10 @@
             "region": {
                 "label": "Destination Region",
                 "placeholder": "Select the destination region"
+            },
+            "airport": {
+                "label": "Destination Airport",
+                "placeholder": "Select the destination airport"
             },
             "submit": "Filter"
         },

@@ -22,6 +22,12 @@ export abstract class BaseOrderDetailsComponent {
     * @type {Observable<OrderDetails>}
     */
     protected readonly orderDetail$ = this.route.data.pipe(map(data => data['orderDetails']));
+
+    /**
+     * @description The currency of the order
+     * @type {Observable<string>}
+     */
+    protected readonly currency$ = this.orderDetail$.pipe(map(orderDetails => orderDetails.currency));
     
     /**
     * @description The angular router service.

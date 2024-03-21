@@ -1,0 +1,24 @@
+@import '../../../../styles/variables';
+
+.content {
+    margin:0.5em 1em;
+    display: flex;
+    justify-content: center;
+
+    h1 {
+        display: flex;
+        justify-content: center;
+    }
+
+    .section {
+        margin-bottom: 2em;
+    }
+
+    button {
+        width:100%;
+    }
+
+    .confirm-button {
+        background-color: $success-color;     
+    }
+}

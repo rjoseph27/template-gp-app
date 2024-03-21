@@ -30,6 +30,12 @@ export const RECEIVING_ITEM_ICON = 'move_item'
 
 /**
  * @constant
+ * @description The icon to be used for the GP pick up module
+ */
+export const GP_PICK_UP_ICON = 'partner_exchange'
+
+/**
+ * @constant
  * @description The icon to be used for the dispatching module
  */
 export const DISPATCH_ICON = 'shield_person'

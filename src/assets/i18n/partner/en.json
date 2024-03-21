@@ -73,6 +73,22 @@
                     }
                 }
             }
+        },
+        "gpPickUp": {
+            "title": "GP Pick Up",
+            "view": {
+                "changeGp": "Change GP",
+                "changeGpModal": {
+                    "title": "Change GP",
+                    "content": "Are you sure you want to change gp for this order ?",
+                    "acceptButton": "Yes",
+                    "rejectButton": "No",
+                    "notification": {
+                        "success": "The order has been canceled successfully",
+                        "error": "An error occurred while canceling the order"
+                    }
+                }
+            }
         }
     }
 }

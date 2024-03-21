@@ -324,6 +324,15 @@ export class ClientRequestsService {
     }
 
     /**
+     * @description Filters the orders for a gp
+     * @param orderFilter The order filter
+     * @returns {Promise<OrderFilterInfo[]>} A promise that resolves to the orders
+     */
+    orderFilterForGp(orderFilter: OrderFilter): Promise<OrderFilterInfo[]> {
+        return this.requestsServiceApi.orderFilterForGp(orderFilter).then(msg => msg.orders);
+    }
+
+    /**
      * @description Edits the item information
      * @param editItemInformationRequest The edit item information request
      * @returns {Promise<boolean>} A promise that resolves to true if the item information was edited successfully, false otherwise
@@ -356,6 +365,21 @@ export class ClientRequestsService {
      */
     orderWaitOnPayment(statusUpdateRequest: OrderDetailRequest): Promise<boolean> {
         return this.requestsServiceApi.orderWaitOnPayment(statusUpdateRequest).then(msg => {
+            if(msg.message === UpdateStatus.ORDER_STATUS_UPDATED_SUCCESSFULLY)
+            {
+                return true
+            }
+            return false
+        });
+    }
+
+    /**
+     * @description Confirms an order by a partner that the item is now with the gp
+     * @param statusUpdateRequest the status update request
+     * @returns {Promise<boolean>}
+     */
+    orderWithGp(statusUpdateRequest: OrderDetailRequest): Promise<boolean> {
+        return this.requestsServiceApi.orderWithGp(statusUpdateRequest).then(msg => {
             if(msg.message === UpdateStatus.ORDER_STATUS_UPDATED_SUCCESSFULLY)
             {
                 return true

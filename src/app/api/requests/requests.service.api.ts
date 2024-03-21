@@ -203,6 +203,15 @@ export class RequestsServiceApi extends BaseServiceApi {
     }
 
     /**
+     * @description A method to get the order filter for a GP
+     * @param orderFilterRequest The order filter request
+     * @returns {Promise<ApiResponse>}
+     */
+    orderFilterForGp(orderFilterRequest: OrderFilter): Promise<OrderFilterResponse> {
+        return firstValue(this.postRequest<OrderFilterResponse>('filter-order-for-gp', orderFilterRequest));
+    }
+
+    /**
      * @description A method to edit the item information
      * @param editItemInformationRequest The edit item information request
      * @returns {Promise<ApiResponse>}
@@ -227,6 +236,15 @@ export class RequestsServiceApi extends BaseServiceApi {
      */
     orderWaitOnPayment(updateStatusRequest: OrderDetailRequest): Promise<ApiResponse> {
         return firstValue(this.postRequest<ApiResponse>('order-wait-on-payment', updateStatusRequest));
+    }
+
+    /**
+     * @description A method to update the status of an order to with gp state
+     * @param updateStatusRequest The update status request
+     * @returns {Promise<ApiResponse>}
+     */
+    orderWithGp(updateStatusRequest: OrderDetailRequest): Promise<ApiResponse> {
+        return firstValue(this.postRequest<ApiResponse>('order-with-gp', updateStatusRequest));
     }
 
     /**

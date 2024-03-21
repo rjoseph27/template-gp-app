@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { baseOrderDetailsResolver } from "../../../misc/base-class/base-order-details.resolver";
 import { PartnerRoutes } from "../../partner.route";
-import { COUNTRY_INFO_LIST } from "../../../misc/constants/countries/countries";
 import { MoneyUtil } from "../../../misc/util/money.util";
 
 /**

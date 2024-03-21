@@ -19,12 +19,6 @@ import { NotificationService } from "../../../services/notification.service";
   })
   export class PartnerRegisterItemViewComponent extends BaseOrderDetailsComponent implements OnInit {
     /**
-     * @description The currency of the order
-     * @type {Observable<string>}
-     */
-    protected readonly currency$ = this.orderDetail$.pipe(map(orderDetails => orderDetails.currency));
-
-    /**
      * @description The register item service
      * @type {PartnerRegisterItemService}
      */
