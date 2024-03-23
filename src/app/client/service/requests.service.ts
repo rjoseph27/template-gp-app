@@ -333,6 +333,15 @@ export class ClientRequestsService {
     }
 
     /**
+     * @description Filters the trips
+     * @param orderFilter The order filter
+     * @returns {Promise<OrderFilterInfo[]>} A promise that resolves to the trips
+     */
+    filterTrip(orderFilter: OrderFilter): Promise<OrderFilterInfo[]> {
+        return this.requestsServiceApi.filterTrip(orderFilter).then(msg => msg.orders);
+    }
+
+    /**
      * @description Edits the item information
      * @param editItemInformationRequest The edit item information request
      * @returns {Promise<boolean>} A promise that resolves to true if the item information was edited successfully, false otherwise
@@ -413,6 +422,20 @@ export class ClientRequestsService {
                 return true;
             } 
             return false;
+        });
+    }
+
+    /**
+     * @description Gets the item tracking information
+     * @param request The request table element
+     * @returns {Promise<ReportTrip>}
+     */
+    getItemTrackingInformation(request: RequestTableElementRequest): Promise<ReportTrip> {
+        return this.requestsServiceApi.getItemTrackingInformation(request).then(msg => {
+            if(msg.message === GetTripInfoStatus.TRIP_FOUND) {
+                return msg.trip;
+            }
+            return undefined;
         });
     }
 }

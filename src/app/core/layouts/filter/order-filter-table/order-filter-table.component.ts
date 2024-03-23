@@ -65,7 +65,7 @@ import { FlightRoute } from "../../flight-route/flight-route.component";
         },
         {
           columnName: 'orderFilter.table.header.orderNumber',
-          valueAccessor: (row: OrderFilterInfo) => row.orderId
+          valueAccessor: (row: OrderFilterInfo) => row.orderId.substring(0,5)
         },
         {
           columnName: 'orderFilter.table.header.route',

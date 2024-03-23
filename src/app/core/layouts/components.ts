@@ -28,6 +28,9 @@ import { GhOrderFilterTableComponent } from "./filter/order-filter-table/order-f
 import { GhBillingFilterComponent } from "./filter/billing-filter/billing-filter.component";
 import { GhBillingFilterTableComponent } from "./filter/billing-filter-table/billing-filter-table.component";
 import { GhTripFilterComponent } from "./filter/trip-filter/trip-filter.component";
+import { GhTrackingViewComponent } from "./tracking/tracking-view/tracking-view.component";
+import { GhTrackingComponent } from "./tracking/tracking.component";
+import { GhTrackingHistoryComponent } from "./tracking/tracking-history/tracking-history.component";
 
 /**
  * @constant
@@ -64,5 +67,8 @@ export const LAYOUTS_COMPONENTS = [
     GhOrderFilterTableComponent,
     GhBillingFilterComponent,
     GhBillingFilterTableComponent,
-    GhTripFilterComponent
+    GhTripFilterComponent,
+    GhTrackingViewComponent,
+    GhTrackingComponent,
+    GhTrackingHistoryComponent
 ]

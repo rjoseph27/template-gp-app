@@ -117,7 +117,13 @@ import { LoadingService } from '../../../services/loading.service';
             return {
               label: 'moduleList.client.orders.status.onDelivery',
               icon: 'flightsmode',
-              action: () => console.log("wait on dispatch module")
+              action: () => this.router.navigate([ClientRoutes.tracking.fullPath()], { queryParams: {
+                id: row.id,
+                status: row.status,
+                from: row.route.from,
+                to: row.route.to,
+                deliveryDate: row.deliveryDate,
+              }})
             }
           case ItemsStatus.FINAL_CHECKPOINT:
             return {

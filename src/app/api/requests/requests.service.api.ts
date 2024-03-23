@@ -212,6 +212,15 @@ export class RequestsServiceApi extends BaseServiceApi {
     }
 
     /**
+     * @description A method to get the trip filter
+     * @param orderFilterRequest The order filter request
+     * @returns {Promise<ApiResponse>}
+     */
+    filterTrip(orderFilterRequest: OrderFilter): Promise<OrderFilterResponse> {
+        return firstValue(this.postRequest<OrderFilterResponse>('filter-trip', orderFilterRequest));
+    }
+
+    /**
      * @description A method to edit the item information
      * @param editItemInformationRequest The edit item information request
      * @returns {Promise<ApiResponse>}
@@ -263,5 +272,14 @@ export class RequestsServiceApi extends BaseServiceApi {
      */
     createBill(orders: BillingFilterInfo[]): Promise<ApiResponse> {
         return firstValue(this.postRequest<ApiResponse>('create-bill', { orders: orders }));
+    }
+
+    /**
+     * @description A method to get the item tracking information
+     * @param request The request table element
+     * @returns {Promise<GetTripInfoApiResponse>}
+     */
+    getItemTrackingInformation(request: RequestTableElementRequest): Promise<GetTripInfoApiResponse> {
+        return firstValue(this.postRequest<GetTripInfoApiResponse>('get-item-tracking-information', request ));
     }
 }

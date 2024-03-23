@@ -478,6 +478,28 @@
             "content": "You can filter the billing by email"
         }
     },
+    "tracking": {
+        "view": {
+            "inTransit": "In Transit",
+            "atCheckpoint": "At Checkpoint",
+            "scheduledDate": "Scheduled Date",
+            "to": "to",
+            "orderId": "Order Id"
+        },
+        "history": {
+            "table": {
+                "date": "Date",
+                "message": "Message"
+            },
+            "message": {
+                "location": "{{city}}, {{country}}",
+                "TRIP_CREATION": "The trip has been created",
+                "ORDER_ACCEPTED": "The order has been accepted",
+                "AT_CHECKPOINT": "The order is at the checkpoint",
+                "WITH_GP": "The order is with the GP"
+            }
+        }
+    },
     "enums": {
         "Genders": {
             "Male":"Male",

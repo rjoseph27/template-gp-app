@@ -1,0 +1,47 @@
+@import "../../../../../styles/variables";
+
+.current-information {
+    margin-bottom: 1em;
+    div {
+        display: flex;
+        justify-content: center;
+    }
+
+    .title {
+        font-size: 1.5em;
+        font-weight: $semi-bold;
+    }
+}
+
+.graph {
+    display: flex;
+    align-items: center;
+    margin: 2em 0em;
+
+    .point {
+        border-radius: 50%;
+        background-color: $primary-color;
+        width: 1em;
+        height: 1em;
+    }
+
+    .transit {
+        margin-top:0.25em;
+        background-color: $primary-color;
+        width: 20%;
+        height: 0.5em;
+    }
+
+    .done {
+        background-color: $secondary-color;
+    }
+
+    .current {
+        width:1.5em;
+        height: 1.5em;
+    }
+}
+
+.detail {
+    margin-bottom: 1em;
+}

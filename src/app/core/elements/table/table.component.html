@@ -25,7 +25,7 @@
   <gh-table-loader></gh-table-loader>
 </div>
 <div [class.hidden]="!(elements$ | async)?.length">
-  <mat-paginator [pageSize]="5"></mat-paginator>
+  <mat-paginator [pageSize]="pageSize"></mat-paginator>
 </div>
 <div>
   <button *ngIf="canAdd" type="button" class="add" (click)="add()">{{ 'global.common.add' | translate }}</button>

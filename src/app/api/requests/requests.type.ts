@@ -12,6 +12,7 @@ import { ItemsStatus, TripStatus } from "../../client/orders/base-orders.compone
 import { FlightRoute } from "../../core/layouts/flight-route/flight-route.component"
 import { AlertTableElement } from "../../core/layouts/alert-table/alert-table.component"
 import { ItemInformation } from "../../core/layouts/request/item-information/item-information.component"
+import { TrackingPoint } from "../../core/layouts/tracking/tracking.type"
 
 /**
    * @interface ReportTrip
@@ -107,6 +108,12 @@ export interface ReportTrip {
      * @type {Country}
      */
     userCountry: Country
+
+    /**
+     * @description The history of the trip
+     * @type {TrackingPoint[]}
+     */
+    history?: TrackingPoint[]
   }
 
   /**

@@ -99,6 +99,12 @@ export class GhTableComponent implements AfterViewInit {
   @Input() canView: boolean = false;
 
   /**
+   * @description The page size for the table
+   * @type {number}
+   */
+  @Input() pageSize = 5
+
+  /**
    * @description A boolean to determine if the elements of the table can add
    * @type {boolean}
    */

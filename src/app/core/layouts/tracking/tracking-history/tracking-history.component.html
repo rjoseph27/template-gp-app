@@ -1,0 +1,13 @@
+<gh-table 
+        [columns]="columns$ | async" 
+        [elements]="history"
+        [pageSize]="10"
+>
+    <ng-template #dateTemplate let-value="value">
+        {{ value | date: 'dd/MM/yyyy HH:MM' }}
+    </ng-template>
+    <ng-template #messageTemplate let-value="value" let-element="element">
+        <div>{{ "tracking.history.message."+ value | translate }}</div>
+        <div>{{ "tracking.history.message.location" | translate : {city: element.location, country: getCountry(element.location)} }}</div>
+    </ng-template>
+</gh-table>

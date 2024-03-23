@@ -131,6 +131,12 @@ export interface SuccursaleInfo {
    * @type {string}
    */
   phone: string
+
+  /**
+   * @description The airport of the succursale
+   * @type {AirportInfo}
+   */
+  airport: string
 }  
 
 /**

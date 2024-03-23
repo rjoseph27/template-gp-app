@@ -39,4 +39,4 @@ import { PartnerRoutes } from "../partner.route";
       PartnerRoutes.gpPickUpView.currentParams = queryParams;
       return this.router.navigate([PartnerRoutes.gpPickUpView.fullPath()], { queryParams:  queryParams} )
   }
-  }
+}

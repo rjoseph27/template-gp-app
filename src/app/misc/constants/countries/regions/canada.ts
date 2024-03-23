@@ -89,17 +89,20 @@ export const CANADA_SUCCURSALES = new Map<CanadaRegions, SuccursaleInfo>(
         [CanadaRegions.Montreal, {
             name: 'CA-QC-MTL-01',
             address: '1234 Rue de la rue, Montreal, QC, H1H 1H1',
-            phone: '+1 123 456 7890'
+            phone: '+1 123 456 7890',
+            airport: 'YUL'
         }],
         [CanadaRegions.Quebec, {
             name: 'CA-QC-QC-01',
             address: '1234 Rue de la rue, Quebec, QC, H1H 1H1',
-            phone: '+1 123 456 7890'
+            phone: '+1 123 456 7890',
+            airport: 'YQB'
         }],
         [CanadaRegions.Sherbrooke, {
             name: 'CA-QC-SHE-01',
             address: '1234 Rue de la rue, Sherbrooke, QC, H1H 1H1',
-            phone: '+1 123 456 7890'
+            phone: '+1 123 456 7890',
+            airport: 'YQB'
         }]
     ]
 )

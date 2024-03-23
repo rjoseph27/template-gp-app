@@ -1,0 +1,28 @@
+<div>
+    <div class="current-information">
+        <div class="title">{{ lastCheckpoint.done ? 'tracking.view.atCheckpoint' : 'tracking.view.inTransit' | translate }}</div>
+        <div>{{ currentCheckpoint.location }}, {{ getCountry(currentCheckpoint.location) }}</div>
+    </div>
+    <div class="current-information">
+        <div class="title">{{ 'tracking.view.scheduledDate' | translate }}</div>
+        <div>{{ lastCheckpoint.date | date: 'dd/MM/yyyy HH:MM' }}</div>
+    </div>
+</div>
+<div class="graph">
+    <ng-container *ngFor="let point of trackingPoints; let i = index">
+        <div 
+            class="point" 
+            [class.done]="point.done"
+            [class.current]="!(trackingPoints[i+1]?.done) && point.done"
+        ></div>
+        <div 
+            *ngIf="i < trackingPoints.length - 1" 
+            class="transit"
+            [class.done]="trackingPoints[i+1].done"
+        ></div>
+    </ng-container>
+</div>
+<div class="detail">
+    <div>{{ 'tracking.view.orderId' | translate }} #{{ orderId }}</div>
+    <div>{{ currentCheckpoint.location }}, {{ getCountry(currentCheckpoint.location) }} {{ 'tracking.view.to' | translate }} {{ lastCheckpoint.location }}, {{ getCountry(lastCheckpoint.location) }}</div>
+</div>

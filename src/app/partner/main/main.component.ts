@@ -70,7 +70,7 @@ export class PartnerMainComponent {
     {
       label: "moduleList.dispatching.title",
       icon: DISPATCH_ICON,
-      action: () => {}
+      action: () => this.router.navigate([PartnerRoutes.dispatching.fullPath()])
     },
     {
       label: "moduleList.receivingItem.title",

@@ -33,6 +33,8 @@ import { ClientAlertListResolver } from './alert-list/alert-list.resolver';
 import { ClientCreateAlertComponent } from './request/alert/create-alert/create-alert.component';
 import { ClientEditAlertComponent } from './request/alert/edit-alert/edit-alert.component';
 import { ClientEditAlertResolver } from './request/alert/edit-alert/edit-alert.resolver';
+import { ClientOrderTrackingComponent } from './orders/client-orders/order-tracking/order-tracking.component';
+import { ClientOrderTrackingResolver } from './orders/client-orders/order-tracking/order-tracking.resolver';
 
 /**
  * @constant routes
@@ -52,7 +54,8 @@ const routes: Routes = [
         { path: `${ClientRoutes.atCheckPoint}`, component: ClientItemAtCheckPointComponent, pathMatch: 'full', resolve: { orderDetails: ClientOrderDetailsResolver, userInfo: ClientApplicationResolver } },
         { path: `${ClientRoutes.itemWithGp}`, component: ClientItemWithGpComponent, pathMatch: 'full', resolve: { orderDetails: ClientOrderDetailsResolver, userInfo: ClientApplicationResolver }},
         { path: `${ClientRoutes.itemReadyForPickup}`, component: ClientItemReadyForPickupComponent, pathMatch: 'full', resolve: { orderDetails: ClientGpOrderDetailsResolver, userInfo: ClientApplicationResolver }},
-        { path: `${ClientRoutes.itemDelivered}`, component: ClientItemDeliveredComponent, pathMatch: 'full', resolve: { orderDetails: ClientGpOrderDetailsResolver, userInfo: ClientApplicationResolver }}
+        { path: `${ClientRoutes.itemDelivered}`, component: ClientItemDeliveredComponent, pathMatch: 'full', resolve: { orderDetails: ClientGpOrderDetailsResolver, userInfo: ClientApplicationResolver }},
+        { path: `${ClientRoutes.tracking}`, component: ClientOrderTrackingComponent, pathMatch: 'full', resolve: { trip: ClientOrderTrackingResolver, userInfo: ClientApplicationResolver }}
     ] },
     { path: `${ClientRoutes.gpOrders}`, children: [
         { path: '', component: ClientGpOrdersComponent, pathMatch: 'full', resolve: { userInfo: ClientApplicationResolver} },

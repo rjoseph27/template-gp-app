@@ -48,6 +48,8 @@ import { ClientAlertListResolver } from './alert-list/alert-list.resolver';
 import { ClientCreateAlertComponent } from './request/alert/create-alert/create-alert.component';
 import { ClientEditAlertComponent } from './request/alert/edit-alert/edit-alert.component';
 import { ClientEditAlertResolver } from './request/alert/edit-alert/edit-alert.resolver';
+import { ClientOrderTrackingComponent } from './orders/client-orders/order-tracking/order-tracking.component';
+import { ClientOrderTrackingResolver } from './orders/client-orders/order-tracking/order-tracking.resolver';
 
 
 /**
@@ -82,7 +84,8 @@ import { ClientEditAlertResolver } from './request/alert/edit-alert/edit-alert.r
         ClientTripDoneComponent,
         ClientAlertListComponent,
         ClientCreateAlertComponent,
-        ClientEditAlertComponent
+        ClientEditAlertComponent,
+        ClientOrderTrackingComponent
     ],
     imports: [
         CommonModule,
@@ -116,7 +119,8 @@ import { ClientEditAlertResolver } from './request/alert/edit-alert/edit-alert.r
         ClientApplicationService,
         RequestsServiceApi,
         NotificationService,
-        ClientTripInfoResolver
+        ClientTripInfoResolver,
+        ClientOrderTrackingResolver
     ]
 })
 export class ClientModule {

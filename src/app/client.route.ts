@@ -119,6 +119,12 @@ export class ClientRoutes {
     static readonly itemWithGp: GhRoute = new GhRoute('item-with-gp', ClientRoutes.clientOrder);
 
     /**
+     * @description The item on delivery route
+     * @type {GhRoute}
+     */
+    static readonly tracking: GhRoute = new GhRoute('order-tracking', ClientRoutes.clientOrder);
+
+    /**
      * @description The item ready for pickup route
      * @type {GhRoute}
      */

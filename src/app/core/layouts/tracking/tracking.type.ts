@@ -1,0 +1,46 @@
+export enum TrackingPointType {
+    TRIP_CREATION = 'TRIP_CREATION',
+    AT_CHECKPOINT = 'AT_CHECKPOINT',
+    ORDER_ACCEPTED = 'ORDER_ACCEPTED',
+    WITH_GP = 'WITH_GP',
+    CANCELED_AT_CHECKPOINT = 'CANCELED_AT_CHECKPOINT',
+    DEPARTURE = 'DEPARTURE',
+    ARRIVAL = 'ARRIVAL',
+    FINAL_CHECKPOINT = 'FINAL_CHECKPOINT'
+}
+
+/**
+ * @interface TrackingPoint
+ * @description The tracking point
+ */
+export interface TrackingPoint {
+    /**
+     * @description The planned date
+     * @type {Date}
+     */
+    date: Date;
+
+    /**
+     * @description The type of the tracking point
+     * @type {TrackingPointType}
+     */
+    type: TrackingPointType;
+
+    /**
+     * @description The location of the tracking point
+     * @type {string}
+     */
+    location: string;
+
+    /**
+     * @description The order id
+     * @type {string}
+     */
+    ordrerId: string;
+
+    /**
+     * @description If the tracking point is an exception
+     * @type {boolean}
+     */
+    isException: boolean;
+}

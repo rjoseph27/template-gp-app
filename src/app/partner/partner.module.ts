@@ -24,6 +24,8 @@ import { PartnerBillingResolver } from "./billing/billing.resolver";
 import { PartnerBillingViewComponent } from "./billing/billing-view/billing-view.component";
 import { PartnerGpPickUpComponent } from "./gp-pick-up/gp-pick-up.component";
 import { PartnerGpPickUpViewComponent } from "./gp-pick-up/gp-pick-up-view/gp-pick-up-view.component";
+import { PartnerDispatchingComponent } from "./dispatching/dispatching.component";
+import { PartnerDispatchingViewComponent } from "./dispatching/dispatching-view/dispatching-view.component";
 
 /**
  * @module PartnerModule
@@ -39,7 +41,9 @@ import { PartnerGpPickUpViewComponent } from "./gp-pick-up/gp-pick-up-view/gp-pi
         PartnerBillingComponent,
         PartnerBillingViewComponent,
         PartnerGpPickUpComponent,
-        PartnerGpPickUpViewComponent
+        PartnerGpPickUpViewComponent,
+        PartnerDispatchingComponent,
+        PartnerDispatchingViewComponent
     ],
     imports: [
         CommonModule,

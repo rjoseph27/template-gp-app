@@ -64,4 +64,16 @@ export class PartnerRoutes {
      * @type {GhRoute}
      */
     static readonly gpPickUpView: GhRoute = new GhRoute('gp-pick-up-view', PartnerRoutes.gpPickUp);
+
+    /**
+     * @description The route for the dispatching
+     * @type {GhRoute}
+     */
+    static readonly dispatching: GhRoute = new GhRoute('dispatching', PartnerRoutes.main);
+
+    /**
+     * @description The view for the dispatching
+     * @type {GhRoute}
+     */
+    static readonly dispatchingView: GhRoute = new GhRoute('dispatching-view', PartnerRoutes.dispatching);
 }
