@@ -23,6 +23,6 @@
     </ng-container>
 </div>
 <div class="detail">
-    <div>{{ 'tracking.view.orderId' | translate }} #{{ orderId }}</div>
+    <div *ngIf="orderId">{{ 'tracking.view.orderId' | translate }} #{{ orderId }}</div>
     <div>{{ currentCheckpoint.location }}, {{ getCountry(currentCheckpoint.location) }} {{ 'tracking.view.to' | translate }} {{ lastCheckpoint.location }}, {{ getCountry(lastCheckpoint.location) }}</div>
 </div>

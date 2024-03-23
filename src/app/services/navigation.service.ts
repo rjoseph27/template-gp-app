@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { ClientRoutes } from '../client.route';
+import { ClientRoutes } from '../client/client.route';
 import { GlobalRoutes } from '../global.route';
 import { GhRoute } from '../misc/classes/route';
 import { PartnerRoutes } from '../partner/partner.route';

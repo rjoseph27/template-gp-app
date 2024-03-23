@@ -3,7 +3,7 @@ import { CurrentFormService } from "../../../../services/current-form.service";
 import { tap } from "rxjs/operators";
 import { SendItemsRequest } from "../../../service/send-items.service";
 import { CreateAlertRequest } from "../../../../api/requests/requests.type";
-import { ClientRoutes } from "../../../../client.route";
+import { ClientRoutes } from "../../../client.route";
 import { BaseAlertComponent } from "../base-alert.component";
 
 /**

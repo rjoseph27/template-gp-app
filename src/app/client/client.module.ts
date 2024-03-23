@@ -49,8 +49,6 @@ import { ClientCreateAlertComponent } from './request/alert/create-alert/create-
 import { ClientEditAlertComponent } from './request/alert/edit-alert/edit-alert.component';
 import { ClientEditAlertResolver } from './request/alert/edit-alert/edit-alert.resolver';
 import { ClientOrderTrackingComponent } from './orders/client-orders/order-tracking/order-tracking.component';
-import { ClientOrderTrackingResolver } from './orders/client-orders/order-tracking/order-tracking.resolver';
-
 
 /**
  * @module ClientModule
@@ -120,7 +118,6 @@ import { ClientOrderTrackingResolver } from './orders/client-orders/order-tracki
         RequestsServiceApi,
         NotificationService,
         ClientTripInfoResolver,
-        ClientOrderTrackingResolver
     ]
 })
 export class ClientModule {

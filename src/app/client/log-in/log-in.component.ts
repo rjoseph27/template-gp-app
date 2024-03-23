@@ -2,7 +2,7 @@ import { Component, OnInit, inject, } from '@angular/core';
 import { UsersService } from '../../services/users.service';
 import { CurrentFormService } from '../../services/current-form.service';
 import { tap } from 'rxjs/operators';
-import { ClientRoutes } from '../../client.route';
+import { ClientRoutes } from '../client.route';
 
 /**
  * @constant

@@ -5,7 +5,7 @@ import { map, tap } from "rxjs/operators";
 import { CreateAlertRequest } from "../../../../api/requests/requests.type";
 import { SendItemsRequest } from "../../../service/send-items.service";
 import { combineLatest } from "rxjs";
-import { ClientRoutes } from "../../../../client.route";
+import { ClientRoutes } from "../../../client.route";
 
 /**
  * @class ClientEditAlertComponent

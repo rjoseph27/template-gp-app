@@ -8,7 +8,7 @@ import { COUNTRY_INFO_LIST } from "../../../../../../misc/constants/countries/co
 import { ClientRequestsService } from "../../../../../../client/service/requests.service";
 import { ClientSendItemsService } from "../../../../../../client/service/send-items.service";
 import { Router } from "@angular/router";
-import { ClientRoutes } from "../../../../../../client.route";
+import { ClientRoutes } from "../../../../../../client/client.route";
 import { CurrentFormService } from "../../../../../../services/current-form.service";
 
 /**

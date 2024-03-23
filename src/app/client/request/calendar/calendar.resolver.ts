@@ -2,7 +2,7 @@ import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from "@a
 import { ClientSendItemsService } from "../../service/send-items.service";
 import { Injectable, inject } from "@angular/core";
 import { LoadingService } from "../../../services/loading.service";
-import { ClientRoutes } from "../../../client.route";
+import { ClientRoutes } from "../../client.route";
 import { DateUtil } from "../../../misc/util/date.util";
 import { ClientRequestsService } from "../../service/requests.service";
 import { CurrencyService } from "../../../services/currency.service";

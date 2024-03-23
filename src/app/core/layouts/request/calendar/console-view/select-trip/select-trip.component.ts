@@ -3,7 +3,7 @@ import { ReportTrip } from "../../../../../../api/requests/requests.type";
 import { ClientSendItemsService } from "../../../../../../client/service/send-items.service";
 import { BehaviorSubject } from "rxjs";
 import { ClientRequestsService } from "../../../../../../client/service/requests.service";
-import { ClientRoutes } from "../../../../../../client.route";
+import { ClientRoutes } from "../../../../../../client/client.route";
 import { Router } from "@angular/router";
 
 /**

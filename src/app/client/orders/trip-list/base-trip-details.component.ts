@@ -6,7 +6,7 @@ import { Observable, map } from "rxjs";
 import { ReportTrip } from "../../../api/requests/requests.type";
 import { NotificationService } from "../../../services/notification.service";
 import { ClientRequestsService } from "../../service/requests.service";
-import { ClientRoutes } from "../../../client.route";
+import { ClientRoutes } from "../../client.route";
 
 /**
  * @class BaseTripDetailsComponent

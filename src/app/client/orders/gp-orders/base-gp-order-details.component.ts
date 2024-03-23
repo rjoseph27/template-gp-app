@@ -1,4 +1,4 @@
-import { ClientRoutes } from "../../../client.route";
+import { ClientRoutes } from "../../client.route";
 import { BaseOrderDetailsComponent } from "../../../misc/base-class/base-order-details.component";
 
 /**

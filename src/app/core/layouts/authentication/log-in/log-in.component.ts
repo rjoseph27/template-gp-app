@@ -5,7 +5,7 @@ import { filter, tap } from 'rxjs/operators';
 import { EMAIL_VALIDATION, REQUIRED_VALIDATION } from '../../../../misc/constants/validations';
 import { CurrentFormService } from '../../../../services/current-form.service';
 import { Router } from '@angular/router';
-import { ClientRoutes } from '../../../../client.route';
+import { ClientRoutes } from '../../../../client/client.route';
 
 /**
  * @title Log in Component

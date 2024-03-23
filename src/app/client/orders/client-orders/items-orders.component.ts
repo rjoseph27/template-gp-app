@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { ClientRoutes } from '../../../client.route';
+import { ClientRoutes } from '../../client.route';
 import { RequestTableElement } from '../../../core/layouts/orders/orders.component';
 import { ItemsStatus, baseOrdersComponent } from '../base-orders.component';
 import { ClientSendItemsService } from '../../service/send-items.service';

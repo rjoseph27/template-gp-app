@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { baseOrderDetailsResolver } from "../../../misc/base-class/base-order-details.resolver";
-import { ClientRoutes } from "../../../client.route";
+import { ClientRoutes } from "../../client.route";
 import { COUNTRY_INFO_LIST } from "../../../misc/constants/countries/countries";
 
 /**

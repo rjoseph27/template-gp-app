@@ -3,7 +3,7 @@ import { CurrentFormService } from "../../../services/current-form.service";
 import { BaseRequestComponent } from "../base-request.component";
 import { ClientSendItemsService, SendItemsRequest } from "../../service/send-items.service";
 import { tap } from "rxjs/operators";
-import { ClientRoutes } from "../../../client.route";
+import { ClientRoutes } from "../../client.route";
 
 /**
  * @class ClientSendItemsComponent

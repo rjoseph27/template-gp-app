@@ -4,7 +4,7 @@ import { CurrentFormService } from '../../services/current-form.service';
 import { combineLatest, map, tap } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { StringUtil } from '../../misc/util/string.util';
-import { ClientRoutes } from '../../client.route';
+import { ClientRoutes } from '../client.route';
 import { Language } from '../../misc/enums/language.enum';
 import { CreateUser } from '../../api/users/users.type';
 

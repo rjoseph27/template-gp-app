@@ -2,7 +2,7 @@ import { Component, inject } from "@angular/core";
 import { BasePartnerPageComponent } from "../base-partner-page.component";
 import { OrderFilter } from "../../core/layouts/filter/order-filter/order-filter.component";
 import { ClientRequestsService } from "../../client/service/requests.service";
-import { OrderFilterInfo } from "../../api/requests/requests.type";
+import { OrderFilterInfo, RequestTableElementRequest } from "../../api/requests/requests.type";
 import { PartnerRoutes } from "../partner.route";
 
 /**
@@ -29,8 +29,8 @@ import { PartnerRoutes } from "../partner.route";
      * @type {(row: OrderFilterInfo) => void}
      */
     protected readonly viewFactory = (row: OrderFilterInfo) => {
-        const queryParams = {
-            id: row.orderId,
+        const queryParams = <any>{
+            id: undefined,
             deliveryDate: row.departureDate,
             from: row.originAirport,
             to: row.destinationAirport,

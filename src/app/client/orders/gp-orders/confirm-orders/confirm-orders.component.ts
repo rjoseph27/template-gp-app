@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { BaseOrderDetailsComponent } from "../../../../misc/base-class/base-order-details.component";
 import { ModalService } from "../../../../services/modal.service";
-import { ClientRoutes } from "../../../../client.route";
+import { ClientRoutes } from "../../../client.route";
 import { BaseGpOrderDetailsComponent } from "../base-gp-order-details.component";
 
 /**

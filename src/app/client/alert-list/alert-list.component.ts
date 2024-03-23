@@ -2,7 +2,7 @@ import { AfterContentChecked, ChangeDetectorRef, Component, inject } from '@angu
 import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { COUNTRY_INFO_LIST } from '../../misc/constants/countries/countries';
-import { ClientRoutes } from '../../client.route';
+import { ClientRoutes } from '../client.route';
 import { AlertTableElement } from '../../core/layouts/alert-table/alert-table.component';
 import { ModalService } from '../../services/modal.service';
 import { NotificationService } from '../../services/notification.service';

@@ -25,6 +25,7 @@ import { ToRootTranslationHandler } from "./services/to-root-translation.handler
 import { CurrencyService } from "./services/currency.service";
 import { CurrencyServiceApi } from "./api/currency/currency.service.api";
 import { PartnerModule } from "./partner/partner.module";
+import { TrackingResolver } from "./services/tracking.resolver";
 
 /**
  * @module AppModule
@@ -65,6 +66,7 @@ import { PartnerModule } from "./partner/partner.module";
         { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
         ToRootTranslationHandler,
         CurrencyService,
+        TrackingResolver,
         CurrencyServiceApi
     ],
     bootstrap: [AppComponent]

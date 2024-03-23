@@ -1,15 +1,15 @@
 import { Injectable, inject } from "@angular/core";
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/router";
-import { ReportTrip, RequestTableElementRequest } from "../../../../api/requests/requests.type";
-import { LoadingService } from "../../../../services/loading.service";
-import { ClientRequestsService } from "../../../service/requests.service";
+import { ReportTrip, RequestTableElementRequest } from "../api/requests/requests.type";
+import { LoadingService } from "./loading.service";
+import { ClientRequestsService } from "../client/service/requests.service";
 
 /**
- * @class ClientOrderTrackingResolver
+ * @class TrackingResolver
  * @description The resolver for the order tracking
  */
 @Injectable()
-export class ClientOrderTrackingResolver implements Resolve<ReportTrip> {
+export class TrackingResolver implements Resolve<ReportTrip> {
   /**
   * @description The loading service
   * @returns {LoadingService}

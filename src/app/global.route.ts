@@ -1,4 +1,4 @@
-import { ClientRoutes } from "./client.route";
+import { ClientRoutes } from "./client/client.route";
 import { GhRoute } from "./misc/classes/route";
 
 /**

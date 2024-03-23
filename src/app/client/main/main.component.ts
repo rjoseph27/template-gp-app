@@ -5,7 +5,7 @@ import { UserType } from '../user-type.enum';
 import { GhModule } from '../../core/layouts/main/main.component';
 import { ALERTS_ICON, HELP_ICON, LOG_OUT_ICON, REPORT_TRIP_ICON, SEND_ITEMS_ICON, ORDERS_ICON, REQUESTS_ICON, SETTING_ICON } from './icon';
 import { UsersService } from '../../services/users.service';
-import { ClientRoutes } from '../../client.route';
+import { ClientRoutes } from '../client.route';
 import { ClientApplicationService } from '../service/application.service';
 import { ClientSendItemsService } from '../service/send-items.service';
 

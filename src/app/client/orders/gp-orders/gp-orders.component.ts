@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { RequestTableElement } from "../../../core/layouts/orders/orders.component";
 import { ItemsStatus, baseOrdersComponent } from "../base-orders.component";
-import { ClientRoutes } from "../../../client.route";
+import { ClientRoutes } from "../../client.route";
 
 /**
  * @class ClientGpOrdersComponent

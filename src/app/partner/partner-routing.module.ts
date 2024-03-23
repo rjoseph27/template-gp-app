@@ -15,6 +15,7 @@ import { PartnerGpPickUpComponent } from "./gp-pick-up/gp-pick-up.component";
 import { PartnerGpPickUpViewComponent } from "./gp-pick-up/gp-pick-up-view/gp-pick-up-view.component";
 import { PartnerDispatchingComponent } from "./dispatching/dispatching.component";
 import { PartnerDispatchingViewComponent } from "./dispatching/dispatching-view/dispatching-view.component";
+import { TrackingResolver } from "../services/tracking.resolver";
 
 /**
  * @constant routes
@@ -39,7 +40,7 @@ const routes: Routes = [
     ]},
     { path: `${PartnerRoutes.dispatching}`, children: [
         { path: '', component: PartnerDispatchingComponent, pathMatch: 'full', resolve: { userInfo: PartnerApplicationResolver} },
-        { path: `${PartnerRoutes.dispatchingView}`, component: PartnerDispatchingViewComponent, pathMatch: 'full', resolve: { userInfo: PartnerApplicationResolver} }
+        { path: `${PartnerRoutes.dispatchingView}`, component: PartnerDispatchingViewComponent, pathMatch: 'full', resolve: { trip: TrackingResolver, userInfo: PartnerApplicationResolver} }
     ]},
 ];
 

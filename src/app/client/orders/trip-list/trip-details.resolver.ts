@@ -3,7 +3,7 @@ import { LoadingService } from "../../../services/loading.service";
 import { ClientRequestsService } from "../../service/requests.service";
 import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from "@angular/router";
 import { ReportTrip } from "../../../api/requests/requests.type";
-import { ClientRoutes } from "../../../client.route";
+import { ClientRoutes } from "../../client.route";
 
 /**
  * @interface TripInfoRequest
