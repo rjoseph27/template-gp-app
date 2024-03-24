@@ -53,7 +53,25 @@
             }
         },
         "dispatching": {
-            "title": "Dispatching"
+            "title": "Dispatching",
+            "view": {
+                "title": "Manage the Delivery",
+                "confirmButton": "Confirm",
+                "confirm": {
+                    "title": "Confirm the delivery",
+                    "layover": "Add Layover",
+                    "modal": {
+                        "title": "Confirm Delivery",
+                        "content": "Are you sure you want to confirm this delivery?",
+                        "confirm": "Confirm",
+                        "cancel": "Cancel",
+                        "notification": {
+                            "success": "Delivery has been confirmed successfully",
+                            "error": "Failed to confirm delivery"
+                        }
+                    }
+                }
+            }
         },
         "receivingItem": {
             "title": "Receiving Item"

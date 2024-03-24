@@ -46,7 +46,7 @@ export class GhReportTripComponent extends BaseRequestComponent implements OnIni
    * @description The name of the departure date field.
    * @type {string}
    */
-  protected readonly departureDatetField = DEPARTURE_DATE;
+  protected readonly departureDateField = DEPARTURE_DATE;
 
   /**
    * @description The name of the departure time field.
@@ -213,7 +213,7 @@ export class GhReportTripComponent extends BaseRequestComponent implements OnIni
    * @type {Map<string, string>}
    */
   protected readonly airportErrorCaptions = new Map<string, string>([
-    [REQUIRED_VALIDATION, "moduleList.gp.reportTrip.airport.errors.required"],
+    [REQUIRED_VALIDATION, "reportTrip.airport.errors.required"],
   ]);
 
   /**
@@ -222,8 +222,8 @@ export class GhReportTripComponent extends BaseRequestComponent implements OnIni
    */
   protected readonly dateErrorCaptions = new Map<string, string>([
     [INVALID_DATE_FORMAT_VALIDATION, "global.signup.accountDetails.errors.dateOfBirth.invalidFormat"],
-    [MIN_DATE_VALIDATION, "moduleList.gp.reportTrip.date.errors.invalidDate"],
-    [FLIGHT_TIME_INVALID, "moduleList.gp.reportTrip.date.errors.invalidFlightTime"]
+    [MIN_DATE_VALIDATION, "reportTrip.date.errors.invalidDate"],
+    [FLIGHT_TIME_INVALID, "reportTrip.date.errors.invalidFlightTime"]
   ]);
 
   /**
@@ -231,24 +231,26 @@ export class GhReportTripComponent extends BaseRequestComponent implements OnIni
    * @type {Map<string, string>}
    */
   protected readonly timeErrorCaptions = new Map<string, string>([
-    [INVALID_TIME_FORMAT_VALIDATION, "moduleList.gp.reportTrip.date.errors.invalidTime"],
-    [FLIGHT_TIME_INVALID, "moduleList.gp.reportTrip.date.errors.invalidFlightTime"]
+    [INVALID_TIME_FORMAT_VALIDATION, "reportTrip.date.errors.invalidTime"],
+    [FLIGHT_TIME_INVALID, "reportTrip.date.errors.invalidFlightTime"]
   ]);
 
   /**
    * @description The error messages for the available space field
+   * @type {Map<string, string>}
    */
   protected readonly availableSpaceErrorCaptions = new Map<string, string>([
-    [REQUIRED_VALIDATION, "moduleList.gp.reportTrip.pricingInformation.availableSpace.errors.required"],
-    [MIN_VALIDATION, "moduleList.gp.reportTrip.pricingInformation.availableSpace.errors.min"],
+    [REQUIRED_VALIDATION, "reportTrip.pricingInformation.availableSpace.errors.required"],
+    [MIN_VALIDATION, "reportTrip.pricingInformation.availableSpace.errors.min"],
   ]);
 
   /**
    * @description The error messages for the default price field
+   * @type {Map<string, string>}
    */
   protected readonly defaultPriceErrorCaptions = new Map<string, string>([
-    [REQUIRED_VALIDATION, "moduleList.gp.reportTrip.pricingInformation.defaultPrice.errors.required"],
-    [MIN_VALIDATION, "moduleList.gp.reportTrip.pricingInformation.defaultPrice.errors.min"],
+    [REQUIRED_VALIDATION, "reportTrip.pricingInformation.defaultPrice.errors.required"],
+    [MIN_VALIDATION, "reportTrip.pricingInformation.defaultPrice.errors.min"],
   ]);
 
   /**
@@ -278,8 +280,8 @@ export class GhReportTripComponent extends BaseRequestComponent implements OnIni
    * @type {Map<string, string>}
    */
   protected readonly specificPriceErrorCaptions = new Map<string, string>([
-    [REQUIRED_VALIDATION, "moduleList.gp.reportTrip.pricingInformation.specificPrice.table.price.errors.required"],
-    [MIN_VALIDATION, "moduleList.gp.reportTrip.pricingInformation.specificPrice.table.price.errors.min"],
+    [REQUIRED_VALIDATION, "reportTrip.pricingInformation.specificPrice.table.price.errors.required"],
+    [MIN_VALIDATION, "reportTrip.pricingInformation.specificPrice.table.price.errors.min"],
   ]);
 
   /**
@@ -327,17 +329,17 @@ export class GhReportTripComponent extends BaseRequestComponent implements OnIni
   ngAfterViewInit(): void {
     this._specificPriceTableColumns$.next([
       {
-        columnName: "moduleList.gp.reportTrip.pricingInformation.specificPrice.table.category.name",
+        columnName: "reportTrip.pricingInformation.specificPrice.table.category.name",
         valueAccessor: (row: SpecificPrice) => row.category,
         template: this.categoryTemplate
       },
       {
-        columnName: "moduleList.gp.reportTrip.pricingInformation.specificPrice.table.price.name",
+        columnName: "reportTrip.pricingInformation.specificPrice.table.price.name",
         valueAccessor: (row: SpecificPrice) => row.price,
         template: this.priceTemplate
       },
       {
-        columnName: "moduleList.gp.reportTrip.pricingInformation.specificPrice.table.unit.name",
+        columnName: "reportTrip.pricingInformation.specificPrice.table.unit.name",
         valueAccessor: (row: SpecificPrice) => row.unit,
         template: this.unitTemplate
       },

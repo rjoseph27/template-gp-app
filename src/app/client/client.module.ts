@@ -39,7 +39,7 @@ import { ClientReadyForPickupComponent } from './orders/gp-orders/ready-for-pick
 import { ClientItemWithYouComponent } from './orders/gp-orders/item-with-you/item-with-you.component';
 import { ClientItemDeliveredGpComponent } from './orders/gp-orders/item-delivered/item-delivered.component';
 import { ClientTripListComponent } from './orders/trip-list/trip-list.component';
-import { ClientTripInfoResolver } from './orders/trip-list/trip-details.resolver';
+import { GhTripInfoResolver } from '../services/trip-details.resolver';
 import { ClientPlannedTripComponent } from './orders/trip-list/planned-trip/planned-trip.component';
 import { ClientConfirmedTripComponent } from './orders/trip-list/confirmed-trip/confirmed-trip.component';
 import { ClientTripDoneComponent } from './orders/trip-list/trip-done/trip-done.component';
@@ -117,7 +117,7 @@ import { ClientOrderTrackingComponent } from './orders/client-orders/order-track
         ClientApplicationService,
         RequestsServiceApi,
         NotificationService,
-        ClientTripInfoResolver,
+        GhTripInfoResolver,
     ]
 })
 export class ClientModule {

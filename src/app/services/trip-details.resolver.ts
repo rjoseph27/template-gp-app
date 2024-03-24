@@ -1,9 +1,9 @@
 import { Injectable, inject } from "@angular/core";
-import { LoadingService } from "../../../services/loading.service";
-import { ClientRequestsService } from "../../service/requests.service";
+import { LoadingService } from "./loading.service";
+import { ClientRequestsService } from "../client/service/requests.service";
 import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from "@angular/router";
-import { ReportTrip } from "../../../api/requests/requests.type";
-import { ClientRoutes } from "../../client.route";
+import { ReportTrip } from "../api/requests/requests.type";
+import { ClientRoutes } from "../client/client.route";
 
 /**
  * @interface TripInfoRequest
@@ -18,11 +18,11 @@ interface TripInfoRequest {
 }
 
 /**
- * @class ClientTripInfoResolver
- * @description The client trip info resolver
+ * @class GhTripInfoResolver
+ * @description The resolver for the trip info
  */
 @Injectable()
-export class ClientTripInfoResolver implements Resolve<ReportTrip> {
+export class GhTripInfoResolver implements Resolve<ReportTrip> {
   /**
   * @description The loading service
   * @returns {LoadingService}

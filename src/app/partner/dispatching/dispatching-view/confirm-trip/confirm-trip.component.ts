@@ -1,0 +1,137 @@
+import { AfterContentChecked, ChangeDetectorRef, Component, inject } from "@angular/core";
+import { CurrentFormService } from "../../../../services/current-form.service";
+import { ModalService } from "../../../../services/modal.service";
+import { ActivatedRoute, Router } from "@angular/router";
+import { ReportTrip } from "../../../../api/requests/requests.type";
+import { Observable, map, tap } from "rxjs";
+import { FormMode } from "../../../../misc/enums/form-mode.enum";
+import { SUCCURSALE_BY_COUNTRY } from "../../../../misc/constants/countries/countries.type";
+import { NotificationService } from "../../../../services/notification.service";
+import { DateUtil } from "../../../../misc/util/date.util";
+
+@Component({
+    selector: 'partner-confirm-trip',
+    templateUrl: './confirm-trip.component.html',
+    styleUrls: ['./confirm-trip.component.scss'],
+    providers: [ModalService, CurrentFormService]
+  })
+  export class PartnerConfirmTripComponent implements AfterContentChecked {
+    /**
+     * @description The activated route
+     * @type {ActivatedRoute}
+     */
+    protected readonly route: ActivatedRoute = inject(ActivatedRoute);
+    
+    /**
+     * @description The router service
+     * @type {Router}
+     */
+    private readonly router: Router = inject(Router);
+    
+    /**
+     * @description The details of the trip
+     * @type {Observable<ReportTrip>}
+     */
+    protected readonly tripDetail$: Observable<ReportTrip> = this.route.data.pipe(map(data => data['tripDetails']));
+
+    /**
+     * @description The departure date of the trip
+     * @type {Observable<Date>}
+     */
+    protected readonly departureDate$ = this.tripDetail$.pipe(map(trip => {
+        const date = new Date(trip.departureDate.dateString)
+        date.setHours(trip.departureTime.time.hours);
+        date.setMinutes(trip.departureTime.time.minutes);
+        return date;
+    }));
+
+    /**
+     * @description The arrival date of the trip
+     * @type {Observable<Date>}
+     */
+    protected readonly arrivalDate$ = this.tripDetail$.pipe(map(trip => {
+        const date = new Date(trip.arrivalDate.dateString)
+        date.setHours(trip.arrivalTime.time.hours);
+        date.setMinutes(trip.arrivalTime.time.minutes);
+        return date;
+    }));
+
+    /**
+    * @description The country of the user
+    * @type {string}
+    */
+    protected readonly userCountry = SUCCURSALE_BY_COUNTRY.find(x => x.regions.find(z => z[1].name === this.route.snapshot.data['userInfo'].succursale)).country;
+
+    /**
+     * @description The origin airport
+     * @type {Observable<string>}
+     */
+    protected readonly originAirport$ = this.tripDetail$.pipe(map(trip => trip.userAirport));
+
+    /**
+     * @description The destination airport
+     * @type {Observable<string>}
+     */
+    protected readonly destinationAirport$ = this.tripDetail$.pipe(map(trip => trip.destinationAirport));
+
+    /**
+     * @description The form mode for template use
+     * @type {FormMode}
+     */
+    protected readonly formMode = FormMode;
+
+    /**
+    * @description The change detector reference
+    * @type {ChangeDetectorRef}
+    */
+    private readonly changeDetectorRef: ChangeDetectorRef = inject(ChangeDetectorRef);
+
+    /**
+     * @description The current form service
+     * @type {CurrentFormService}
+     */
+    private readonly currentFormService: CurrentFormService = inject(CurrentFormService);
+
+    /**
+     * @description The notification service
+     * @type {NotificationService}
+     */
+    private readonly notificationService: NotificationService = inject(NotificationService);
+
+    /**
+     * @description The modal service
+     * @type {ModalService}
+     */
+    protected readonly modalService: ModalService = inject(ModalService);
+
+    /**
+     * @description The current form
+     * @type {FormGroup}
+     */
+    protected get form() {
+        return this.currentFormService.currentForm;
+    }
+
+    /**
+     * @description The method to confirm the trip
+     * @returns void
+     */
+    protected confirm() {
+        this.modalService.openModal({
+            title: "moduleList.dispatching.view.confirm.modal.title",
+            text: "moduleList.dispatching.view.confirm.modal.content",
+            confirmCaption: "moduleList.dispatching.view.confirm.modal.confirm",
+            cancelCaption: "moduleList.dispatching.view.confirm.modal.cancel"
+          }).then(async x => {
+              console.log({
+                tripId: this.route.snapshot.data['tripDetails'].id,
+                layover: this.form.get('layover').value
+              })
+          });
+    }
+
+    /** @inheritdoc */
+    ngAfterContentChecked() {
+        this.changeDetectorRef.detectChanges();
+      }
+  }

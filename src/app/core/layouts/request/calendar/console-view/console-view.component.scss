@@ -12,18 +12,6 @@
     .title {
         font-size: 1.5em;
     }
-
-    button {
-        background-color: $error-color;
-        color: #fff;
-        border-radius: 50%;
-        border-width: 0em;
-        padding:0.30em 0.25em 0em 0.25em;
-        cursor: pointer;
-        ::ng-deep .gh-icon-content {
-            font-size: 1em;
-          }
-    }
 }
 
 .content {

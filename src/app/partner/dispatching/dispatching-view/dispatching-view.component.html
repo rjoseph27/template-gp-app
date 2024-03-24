@@ -1,5 +1,8 @@
 <div class="content">
     <div>
+        <div class="title">
+            <h1>{{ 'moduleList.dispatching.view.title' | translate }}</h1>
+        </div>
         <gh-tracking 
             [departureDate]="departureDate$ | async"
             [arrivalDate]="arrivalDate$ | async"
@@ -8,9 +11,10 @@
             [destinationCity]="destinationCity$ | async"
             [orderId]="orderId$ | async"
         ></gh-tracking>
+        <div>
+            <button class="gp-button" (click)="navigateToConfirmTrip()">{{ 'moduleList.dispatching.view.confirm.title' | translate }}</button>
+        </div>
     </div>
 </div>
-
-<!-- MANAGE LAYOVER -->
 
 <!-- CREATE EXECTION -->

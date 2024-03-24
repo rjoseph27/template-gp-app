@@ -1,0 +1,103 @@
+<div>
+    <div class="layover" *ngFor="let element of layoutFormControl.value; let i = index; trackBy: trackByIndex">
+        <div class="close-section">
+            <button class="close-button" type="button" (click)="deleteLayover(i)">
+                <gh-icon [name]="closeIcon"></gh-icon>
+            </button>
+        </div>
+        <div class="section">
+            <div class="sub-section">
+                <gh-select-field
+                [label]="'createLayover.form.layover' | translate" 
+                [placeholder]="'sendItems.location.country.placeholder' | translate"
+                [name]="countryField+i"
+                [value]="layoutFormControl.at(i).get(countryField).value"
+                (valueChange)="updateCountry($event,i)"
+                [errors]="layoutFormControl.at(i).get(countryField).errors"
+                [errorCaptions]="countryErrorCaptions"
+                [options]="userCountryOptions"
+                [readonly]="currentFormMode === formMode.VIEW"
+                ></gh-select-field>
+            </div>
+            <div class="sub-section">
+                <gh-select-field
+                [placeholder]="'reportTrip.airport.placeholder' | translate"
+                [name]="airportField+i"
+                [value]="layoutFormControl.at(i).get(airportField).value"
+                (valueChange)="layoutFormControl.at(i).get(airportField).setValue($event)"
+                [errors]="layoutFormControl.at(i).get(airportField).errors"
+                [errorCaptions]="airportErrorCaptions"
+                [options]="(airport$ | async).get(i)"
+                [readonly]="currentFormMode === formMode.VIEW"
+                ></gh-select-field>
+            </div>
+        </div>
+        <div class="section">
+            <div class="sub-section">
+                <gh-date-field
+                [label]="'reportTrip.date.arrival.label' | translate"
+                [placeholder]="'reportTrip.date.arrival.datePlaceholder' | translate" 
+                [name]="arrivalDateField+i"
+                [value]="layoutFormControl.at(i).get(arrivalDateField).value"
+                (valueChange)="layoutFormControl.at(i).get(arrivalDateField).setValue($event)"
+                [errors]="layoutFormControl.at(i).get(arrivalDateField).errors"
+                [minDate]="minDate"
+                [maxDate]="maxDate"
+                [errorCaptions]="dateErrorCaptions"
+                [readonly]="currentFormMode === formMode.VIEW"
+                ></gh-date-field>
+            </div>
+            <div class="sub-section">
+                <gh-time-field
+                [name]="arrivalTimeField+i"
+                [placeholder]="'reportTrip.date.arrival.timePlaceholder' | translate"
+                [value]="layoutFormControl.at(i).get(arrivalTimeField).value"
+                (valueChange)="layoutFormControl.at(i).get(arrivalTimeField).setValue($event)"
+                [errors]="layoutFormControl.at(i).get(arrivalTimeField).errors"
+                [errorCaptions]="timeErrorCaptions"
+                [readonly]="currentFormMode === formMode.VIEW"
+                ></gh-time-field>
+            </div>
+        </div>
+        <div class="section">
+            <div class="sub-section">
+                <gh-date-field
+                [label]="'reportTrip.date.departure.label' | translate"
+                [placeholder]="'reportTrip.date.departure.datePlaceholder' | translate" 
+                [name]="departureDateField+i"
+                [value]="layoutFormControl.at(i).get(departureDateField).value"
+                (valueChange)="layoutFormControl.at(i).get(departureDateField).setValue($event)"
+                [errors]="layoutFormControl.at(i).get(departureDateField).errors"
+                [minDate]="minDate"
+                [maxDate]="maxDate"
+                [errorCaptions]="dateErrorCaptions"
+                [readonly]="currentFormMode === formMode.VIEW"
+                ></gh-date-field>
+            </div>
+            <div class="sub-section">
+                <gh-time-field
+                [name]="departureTimeField+i"
+                [placeholder]="'reportTrip.date.departure.timePlaceholder' | translate"
+                [value]="layoutFormControl.at(i).get(departureTimeField).value"
+                (valueChange)="layoutFormControl.at(i).get(departureTimeField).setValue($event)"
+                [errors]="layoutFormControl.at(i).get(departureTimeField).errors"
+                [errorCaptions]="timeErrorCaptions"
+                [readonly]="currentFormMode === formMode.VIEW"
+                ></gh-time-field>
+            </div>
+        </div>
+    </div>
+    <div
+        *ngIf="(duplicatedRouteErrorMessage$ | async)"
+        class="error-message" 
+        >{{ (duplicatedRouteErrorMessage$ | async) | translate }}</div>
+        <div
+        *ngIf="(wrongOrderDateErrorMessage$ | async)"
+        class="error-message" 
+        >{{ (wrongOrderDateErrorMessage$ | async) | translate }}</div>
+        <div
+        *ngIf="(intersectingDateErrorMessage$ | async)"
+        class="error-message" 
+        >{{ (intersectingDateErrorMessage$ | async) | translate }}</div>
+    <button class="gp-button" (click)="addLayover()">{{ 'createLayover.add' | translate }}</button>
+</div>

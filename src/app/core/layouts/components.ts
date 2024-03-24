@@ -31,6 +31,7 @@ import { GhTripFilterComponent } from "./filter/trip-filter/trip-filter.componen
 import { GhTrackingViewComponent } from "./tracking/tracking-view/tracking-view.component";
 import { GhTrackingComponent } from "./tracking/tracking.component";
 import { GhTrackingHistoryComponent } from "./tracking/tracking-history/tracking-history.component";
+import { GhCreateLayoverComponent } from "./request/create-layover/create-layover.component";
 
 /**
  * @constant
@@ -70,5 +71,6 @@ export const LAYOUTS_COMPONENTS = [
     GhTripFilterComponent,
     GhTrackingViewComponent,
     GhTrackingComponent,
-    GhTrackingHistoryComponent
+    GhTrackingHistoryComponent,
+    GhCreateLayoverComponent
 ]

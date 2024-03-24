@@ -25,7 +25,7 @@ import { ClientItemWithYouComponent } from './orders/gp-orders/item-with-you/ite
 import { ClientItemDeliveredGpComponent } from './orders/gp-orders/item-delivered/item-delivered.component';
 import { ClientTripListComponent } from './orders/trip-list/trip-list.component';
 import { ClientPlannedTripComponent } from './orders/trip-list/planned-trip/planned-trip.component';
-import { ClientTripInfoResolver } from './orders/trip-list/trip-details.resolver';
+import { GhTripInfoResolver } from '../services/trip-details.resolver';
 import { ClientConfirmedTripComponent } from './orders/trip-list/confirmed-trip/confirmed-trip.component';
 import { ClientTripDoneComponent } from './orders/trip-list/trip-done/trip-done.component';
 import { ClientAlertListComponent } from './alert-list/alert-list.component';
@@ -68,9 +68,9 @@ const routes: Routes = [
     ] },
     { path: `${ClientRoutes.tripList}`, children: [
         { path: '', component: ClientTripListComponent, pathMatch: 'full', resolve: { userInfo: ClientApplicationResolver} },
-        { path: `${ClientRoutes.plannedTrip}`, component: ClientPlannedTripComponent, pathMatch: 'full', resolve: { tripDetails: ClientTripInfoResolver, userInfo: ClientApplicationResolver } },
-        { path: `${ClientRoutes.confirmedTrip }`, component: ClientConfirmedTripComponent, pathMatch: 'full', resolve: { tripDetails: ClientTripInfoResolver, userInfo: ClientApplicationResolver }},
-        { path: `${ClientRoutes.tripDone}`, component: ClientTripDoneComponent, pathMatch: 'full', resolve: { tripDetails: ClientTripInfoResolver, userInfo: ClientApplicationResolver }},
+        { path: `${ClientRoutes.plannedTrip}`, component: ClientPlannedTripComponent, pathMatch: 'full', resolve: { tripDetails: GhTripInfoResolver, userInfo: ClientApplicationResolver } },
+        { path: `${ClientRoutes.confirmedTrip }`, component: ClientConfirmedTripComponent, pathMatch: 'full', resolve: { tripDetails: GhTripInfoResolver, userInfo: ClientApplicationResolver }},
+        { path: `${ClientRoutes.tripDone}`, component: ClientTripDoneComponent, pathMatch: 'full', resolve: { tripDetails: GhTripInfoResolver, userInfo: ClientApplicationResolver }},
     ] },
     { path: `${ClientRoutes.alertList}`, children: [
         { path: '', component: ClientAlertListComponent, pathMatch: 'full', resolve: { userInfo: ClientApplicationResolver, alertList: ClientAlertListResolver}},

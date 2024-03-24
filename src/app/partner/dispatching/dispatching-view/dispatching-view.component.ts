@@ -1,5 +1,7 @@
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { BaseTrackingPageComponent } from "../../../core/layouts/tracking/base-tracking-page.component";
+import { PartnerRoutes } from "../../partner.route";
+import { Router } from "@angular/router";
 
 /**
  * @class PartnerDispatchingViewComponent
@@ -10,4 +12,20 @@ import { BaseTrackingPageComponent } from "../../../core/layouts/tracking/base-t
     templateUrl: './dispatching-view.component.html',
     styleUrls: ['./dispatching-view.component.scss']
   })
-  export class PartnerDispatchingViewComponent extends BaseTrackingPageComponent {}
+  export class PartnerDispatchingViewComponent extends BaseTrackingPageComponent {
+    /**
+    * @description The router service
+    * @type {Router}
+    */
+    protected readonly router: Router = inject(Router);
+    
+    /**
+     * @description The navigate to confirm trip
+     * @returns {void}
+     */
+    protected navigateToConfirmTrip(): void {
+      this.router.navigate([PartnerRoutes.confirmTrip.fullPath()], { queryParams: {
+        id: this.route.snapshot.data['trip'].id
+      }})
+    }
+  }

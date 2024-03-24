@@ -1,0 +1,26 @@
+.title {
+    text-align: center;
+}
+
+.content {
+    padding: 0 1em;
+    display: flex;
+    justify-content: center;
+    * {
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .title {
+        text-align: center;
+        font-size: 1.5em;
+        margin: 1em 0;
+    }
+}
+
+.section {
+    margin-bottom: 1em;
+    button {
+        width: 100%;
+    }
+}

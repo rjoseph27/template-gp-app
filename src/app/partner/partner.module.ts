@@ -26,6 +26,7 @@ import { PartnerGpPickUpComponent } from "./gp-pick-up/gp-pick-up.component";
 import { PartnerGpPickUpViewComponent } from "./gp-pick-up/gp-pick-up-view/gp-pick-up-view.component";
 import { PartnerDispatchingComponent } from "./dispatching/dispatching.component";
 import { PartnerDispatchingViewComponent } from "./dispatching/dispatching-view/dispatching-view.component";
+import { PartnerConfirmTripComponent } from "./dispatching/dispatching-view/confirm-trip/confirm-trip.component";
 
 /**
  * @module PartnerModule
@@ -43,7 +44,8 @@ import { PartnerDispatchingViewComponent } from "./dispatching/dispatching-view/
         PartnerGpPickUpComponent,
         PartnerGpPickUpViewComponent,
         PartnerDispatchingComponent,
-        PartnerDispatchingViewComponent
+        PartnerDispatchingViewComponent,
+        PartnerConfirmTripComponent
     ],
     imports: [
         CommonModule,

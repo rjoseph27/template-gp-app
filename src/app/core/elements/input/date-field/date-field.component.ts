@@ -54,14 +54,14 @@ export class GhDateFieldComponent extends BaseInputFieldComponent<DateFromDatePi
    * @description The maximum date of the date field
    */
   @Input() set maxDate(date: Date) {
-    this.inputMaxDate = DateUtil.formatToDatePicker(date);
+    this.inputMaxDate = DateUtil.formatToDatePicker(date).split('/').join('-');
   }
 
   /**
    * @description The minimum date of the date field
    */
   @Input() set minDate(date: Date) {
-    this.inputMinDate = DateUtil.formatToDatePicker(date);
+    this.inputMinDate = DateUtil.formatToDatePicker(date).split('/').join('-');
   }
   
   /**
@@ -84,8 +84,8 @@ export class GhDateFieldComponent extends BaseInputFieldComponent<DateFromDatePi
    * @type {void}
    */
   protected onDateChange(event: Event) {
-    this.dateValue = new Date((event.target as HTMLInputElement).value).toISOString().split('T')[0];
-    const decomposedDateValue = this.dateValue.split('-');
+    this.dateValue = new Date((event.target as HTMLInputElement).value).toISOString().split('T')[0].split('-').join('/');
+    const decomposedDateValue = this.dateValue.split('/');
     this.valueChange.emit({
       date: new Date(+decomposedDateValue[0],+decomposedDateValue[1] - 1,+decomposedDateValue[2]),
       dateString: this.dateValue

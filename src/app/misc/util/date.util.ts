@@ -71,7 +71,9 @@ export class DateUtil {
      * @returns The formatted date
      */
     static formatToDatePicker(date: Date): string {
-        return date.toISOString().split('T')[0];
+        const dateString = new Date(date.toString());
+        dateString.setHours(0,0)
+        return dateString.getFullYear()+"/"+(dateString.getMonth()+1).toString().padStart(2, '0')+"/"+dateString.getDate().toString().padStart(2, '0');
     }
 
     /**

@@ -1,0 +1,24 @@
+<div class="title">
+    <h1>{{ 'moduleList.dispatching.view.confirm.title' | translate }}</h1>
+</div>
+<div class="content">
+    <div>
+        <gh-report-trip 
+        [reportTrip]="tripDetail$ | async" 
+        [userCountry]="userCountry" 
+        [currentFormMode]="formMode.VIEW"></gh-report-trip>
+        <hr class="gp-divider">
+        <div class="title">{{ 'moduleList.dispatching.view.confirm.layover' | translate }}</div>
+        <gh-create-layover 
+            [currentFormMode]="formMode.EDIT"
+            [minDate]="departureDate$ | async"
+            [maxDate]="arrivalDate$ | async"
+            [originAirport]="originAirport$ | async"
+            [destinationAirport]="destinationAirport$ | async"
+        ></gh-create-layover>
+        <hr class="gp-divider">
+        <div class="section">
+            <button [disabled]="!form.valid" class="gp-button" (click)="confirm()">{{ 'moduleList.dispatching.view.confirmButton' | translate }}</button>
+        </div>
+    </div>
+</div>

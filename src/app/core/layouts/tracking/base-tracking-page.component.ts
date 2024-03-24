@@ -10,11 +10,11 @@ import { SUCCURSALE_BY_COUNTRY } from "../../../misc/constants/countries/countri
  */
 @Directive()
 export class BaseTrackingPageComponent {
-        /**
-     * @description The activated route service
-     * @type {ActivatedRoute}
-     */
-        private readonly route = inject(ActivatedRoute);
+      /**
+      * @description The activated route service
+      * @type {ActivatedRoute}
+      */
+      protected readonly route = inject(ActivatedRoute);
 
         /**
          * @description An observable for the trip history
