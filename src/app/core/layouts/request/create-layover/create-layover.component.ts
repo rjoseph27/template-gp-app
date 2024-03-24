@@ -14,17 +14,15 @@ import { BehaviorSubject } from "rxjs";
 import { COUNTRY_INFO_LIST } from "../../../../misc/constants/countries/countries";
 import { CLOSE_ICON } from "../../../../misc/constants/icon";
 import { Country } from "../../../../misc/enums/country.enum";
-import { Time } from "@angular/common";
 import { DateFromDatePicker } from "../../../../misc/util/date.util";
 import { TimeFromTimePicker } from "../../../elements/input/time-field/time-field.component";
 import { ArrayUtil } from "../../../../misc/util/array.util";
-import { ObjectUtil } from "../../../../misc/util/object.util";
 
 /**
- * @interface CreateLayover
- * @description The create layover
+ * @interface Layovers
+ * @description The interface layovers
  */
-interface CreateLayover {
+export interface Layovers {
   /**
    * @description The country
    * @type {Country}
@@ -265,7 +263,7 @@ interface CreateLayover {
    * @type {ValidatorFn}
    */
   private readonly duplicateRouteValidator: ValidatorFn = (control: AbstractControl) => {
-    const route = [...(<CreateLayover[]>control.value.layover).map(x => x.airport), this.originAirport, this.destinationAirport];
+    const route = [...(<Layovers[]>control.value.layover).map(x => x.airport), this.originAirport, this.destinationAirport];
     const set = new Set(route);
     if(set.size !== route.length) {
       control.get(this.layoverField).setErrors({ duplicateRoute: true });
@@ -284,7 +282,7 @@ interface CreateLayover {
    * @type {ValidatorFn}
    */
   private readonly wrongDateOrderValidator: ValidatorFn = (control: AbstractControl) => {
-    const dates: Date[] = [this.minDate,...(<CreateLayover[]>control.value.layover).map(x => {
+    const dates: Date[] = [this.minDate,...(<Layovers[]>control.value.layover).map(x => {
       const date = new Date(x.arrivalDate?.date);
       date.setHours(x.arrivalTime?.time.hours);
       date.setMinutes(x.arrivalTime?.time.minutes);
@@ -310,7 +308,7 @@ interface CreateLayover {
    */
   private readonly intersectingDateValidator: ValidatorFn = (control: AbstractControl) => {
     let isDateIntersect = false;
-    <CreateLayover[]>control.value.layover.forEach((layover: CreateLayover, index: number) => {
+    <Layovers[]>control.value.layover.forEach((layover: Layovers, index: number) => {
       if(index > 0) {
         const arrivalDate = new Date(layover.arrivalDate?.date.toString());
         arrivalDate.setHours(layover.arrivalTime?.time.hours, layover.arrivalTime?.time.minutes);

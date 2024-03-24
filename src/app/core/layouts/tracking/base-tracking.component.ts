@@ -1,5 +1,6 @@
 import { Directive, Input } from "@angular/core";
 import { TrackingPoint } from "./tracking.type";
+import { Layovers } from "../request/create-layover/create-layover.component";
 
 /**
  * @class BaseTrackingComponent
@@ -12,6 +13,12 @@ export class BaseTrackingComponent {
      * @type {TrackingPoint[]}
      */
     @Input() history: TrackingPoint[]
+
+    /**
+     * @description The layovers
+     * @type {Layovers[]}
+     */
+    @Input() layovers: Layovers[]
 
     /**
      * @description The departure date

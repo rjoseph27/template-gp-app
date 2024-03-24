@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { ApiResponse, BaseServiceApi } from "../base.service.api";
 import { firstValue } from "../../misc/function/firstValue";
-import { ReportTrip, SearchTripsRequest, SearchTripsApiResponse, ConfirmItemRequest, SendItemsRequestApiResponse, UpdateImageNameRequest, CreateAlertRequest, ListItemsApiResponse, ItemInformationApiResponse, RequestTableElementRequest, OrderDetailRequest, GetSendItemsRequestApiResponse, GetTripListApiResponse, GetTripInfoApiResponse, CancelTripRequest, AlertListApiResponse, AlertApiResponse, OrderFilterResponse, EditItemInformationRequest, BillingListApiResponse, BillingFilterInfo } from "./requests.type";
+import { ReportTrip, SearchTripsRequest, SearchTripsApiResponse, ConfirmItemRequest, SendItemsRequestApiResponse, UpdateImageNameRequest, CreateAlertRequest, ListItemsApiResponse, ItemInformationApiResponse, RequestTableElementRequest, OrderDetailRequest, GetSendItemsRequestApiResponse, GetTripListApiResponse, GetTripInfoApiResponse, CancelTripRequest, AlertListApiResponse, AlertApiResponse, OrderFilterResponse, EditItemInformationRequest, BillingListApiResponse, BillingFilterInfo, ConfirmTripRequest } from "./requests.type";
 import { OrderFilter } from "../../core/layouts/filter/order-filter/order-filter.component";
 
 /**
@@ -281,5 +281,14 @@ export class RequestsServiceApi extends BaseServiceApi {
      */
     getItemTrackingInformation(request: RequestTableElementRequest): Promise<GetTripInfoApiResponse> {
         return firstValue(this.postRequest<GetTripInfoApiResponse>('get-item-tracking-information', request ));
+    }
+
+    /**
+     * @description A method to confirm a trip
+     * @param confirmTripRequest The confirm trip request
+     * @returns {Promise<ApiResponse>}
+     */
+    confirmTrip(confirmTripRequest: ConfirmTripRequest): Promise<ApiResponse> {
+        return firstValue(this.postRequest<ApiResponse>('confirm-trip', confirmTripRequest));
     }
 }

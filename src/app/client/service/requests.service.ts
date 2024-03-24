@@ -1,6 +1,6 @@
 import { Injectable, inject } from "@angular/core";
 import { RequestsServiceApi } from "../../api/requests/requests.service.api";
-import { OrderDetailRequest, CancelOrderStatus, ConfirmItemRequest, CreateAlertRequest, CreateAlertStatus, ItemsOrdersStatus, ReportTrip, ReportTripStatus, RequestTableElementRequest, SendItemsStatus, GpAcceptOrderStatus, GetReportTripStatus, GetTripInfoStatus, CancelTripStatus, AlertListStatus, AlertFormType, EditAlertStatus, DeleteAlertStatus, OrderFilterInfo, EditItemInformationRequest, EditItemInformationStatus, UpdateStatus, BillingFilterInfo, BillingStatus, CreateBillStatus } from "../../api/requests/requests.type";
+import { OrderDetailRequest, CancelOrderStatus, ConfirmItemRequest, CreateAlertRequest, CreateAlertStatus, ItemsOrdersStatus, ReportTrip, ReportTripStatus, RequestTableElementRequest, SendItemsStatus, GpAcceptOrderStatus, GetReportTripStatus, GetTripInfoStatus, CancelTripStatus, AlertListStatus, AlertFormType, EditAlertStatus, DeleteAlertStatus, OrderFilterInfo, EditItemInformationRequest, EditItemInformationStatus, UpdateStatus, BillingFilterInfo, BillingStatus, CreateBillStatus, ConfirmTripRequest, ConfirmTripStatus } from "../../api/requests/requests.type";
 import { SendItemsRequest } from "./send-items.service";
 import { DateUtil } from "../../misc/util/date.util";
 import { UsersService } from "../../services/users.service";
@@ -436,6 +436,20 @@ export class ClientRequestsService {
                 return msg.trip;
             }
             return undefined;
+        });
+    }
+
+    /**
+     * @description Confirms a trip
+     * @param confirmTripRequest The confirm trip request
+     * @returns {Promise<boolean>} A promise that resolves to true if the trip was confirmed successfully, false otherwise
+     */
+    confirmTrip(confirmTripRequest: ConfirmTripRequest): Promise<boolean> {
+        return this.requestsServiceApi.confirmTrip(confirmTripRequest).then(msg => {
+            if(msg.message === ConfirmTripStatus.TRIP_CONFIRMED_SUCCESSFULLY) {
+                return true;
+            }
+            return false;
         });
     }
 }

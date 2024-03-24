@@ -12,7 +12,7 @@
             [orderId]="orderId$ | async"
         ></gh-tracking>
         <div>
-            <button class="gp-button" (click)="navigateToConfirmTrip()">{{ 'moduleList.dispatching.view.confirm.title' | translate }}</button>
+            <button *ngIf="(status$ | async) === tripStatus.PLANNED" class="gp-button" (click)="navigateToConfirmTrip()">{{ 'moduleList.dispatching.view.confirm.title' | translate }}</button>
         </div>
     </div>
 </div>

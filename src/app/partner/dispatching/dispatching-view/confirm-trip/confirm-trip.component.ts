@@ -8,6 +8,8 @@ import { FormMode } from "../../../../misc/enums/form-mode.enum";
 import { SUCCURSALE_BY_COUNTRY } from "../../../../misc/constants/countries/countries.type";
 import { NotificationService } from "../../../../services/notification.service";
 import { DateUtil } from "../../../../misc/util/date.util";
+import { ClientRequestsService } from "../../../../client/service/requests.service";
+import { NavigationService } from "../../../../services/navigation.service";
 
 @Component({
     selector: 'partner-confirm-trip',
@@ -113,6 +115,18 @@ import { DateUtil } from "../../../../misc/util/date.util";
     }
 
     /**
+    * @description The requests service
+    * @type {ClientRequestsService}
+    */
+    private readonly requestsService = inject(ClientRequestsService);
+
+    /**
+    * @description The navigation service
+    * @type {NavigationService}
+    */
+    private readonly navigationService: NavigationService = inject(NavigationService);
+
+    /**
      * @description The method to confirm the trip
      * @returns void
      */
@@ -123,10 +137,19 @@ import { DateUtil } from "../../../../misc/util/date.util";
             confirmCaption: "moduleList.dispatching.view.confirm.modal.confirm",
             cancelCaption: "moduleList.dispatching.view.confirm.modal.cancel"
           }).then(async x => {
-              console.log({
-                tripId: this.route.snapshot.data['tripDetails'].id,
-                layover: this.form.get('layover').value
-              })
+            if(x) {
+                const isConfirmed = await this.requestsService.confirmTrip({
+                    tripId: this.route.snapshot.data['tripDetails'].id,
+                    layovers: this.form.get('layover').value
+                  })
+                
+                if(isConfirmed) {
+                    this.notificationService.successNotification("moduleList.dispatching.view.confirm.modal.notification.success");
+                    this.navigationService.goToPreviousPage();
+                } else {
+                    this.notificationService.errorNotification("moduleList.dispatching.view.confirm.modal.notification.error");
+                }
+            }
           });
     }
 

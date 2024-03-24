@@ -3,6 +3,7 @@ import { TrackingPoint, TrackingPointType } from "../tracking.type";
 import { BehaviorSubject } from "rxjs";
 import { COUNTRY_INFO_LIST } from "../../../../misc/constants/countries/countries";
 import { BaseTrackingComponent } from "../base-tracking.component";
+import { CountryUtil } from "../../../../misc/util/country.util";
 
 /**
  * @interface Tracking
@@ -57,7 +58,13 @@ interface Tracking extends TrackingPoint {
         return this.trackingPoints[this.trackingPoints.length - 1];
     }
 
-
+    /**
+     * @description The width of the transit element
+     * @type {string}
+     */
+    protected get transitWidth() {
+        return (100 / this.trackingPoints.length)+"%";
+    }
     
     /** @inheritdoc */
     ngOnInit(): void {
@@ -66,6 +73,24 @@ interface Tracking extends TrackingPoint {
 
         const finalCheckpointDate = this.arrivalDate;
         finalCheckpointDate.setHours(finalCheckpointDate.getHours() + 3);
+
+        const layovers = [...(this.layovers || []).map(layover => ([{
+                date: layover.arrivalDate.date,
+                type: TrackingPointType.ARRIVAL,
+                location: CountryUtil.getCityByAirportCode(layover.airport),
+                ordrerId: null,
+                isException: false,
+                done: this.history.some(point => point.type === TrackingPointType.ARRIVAL && point.location === CountryUtil.getCityByAirportCode(layover.airport))
+             },
+             {
+                date: layover.departureDate.date,
+                type: TrackingPointType.DEPARTURE,
+                location: CountryUtil.getCityByAirportCode(layover.airport),
+                ordrerId: null,
+                isException: false,
+                done: this.history.some(point => point.type === TrackingPointType.DEPARTURE && point.location === CountryUtil.getCityByAirportCode(layover.airport))
+             }])).flat()
+        ]
         
         this._trackingPoints$.next([
             {
@@ -86,19 +111,20 @@ interface Tracking extends TrackingPoint {
             },
             {
                 date: this.departureDate,
-                type: TrackingPointType.DEPARTURE,
+                type: TrackingPointType.FIRST_DEPARTURE,
                 location: this.originCity,
                 ordrerId: null,
                 isException: false,
-                done: this.history.some(point => point.type === TrackingPointType.DEPARTURE)
+                done: this.history.some(point => point.type === TrackingPointType.FIRST_DEPARTURE)
             },
+            ...layovers,
             {
                 date: this.arrivalDate,
-                type: TrackingPointType.ARRIVAL,
+                type: TrackingPointType.LAST_ARRIVAL,
                 location: this.destinationCity,
                 ordrerId: null,
                 isException: false,
-                done: this.history.some(point => point.type === TrackingPointType.ARRIVAL)
+                done: this.history.some(point => point.type === TrackingPointType.LAST_ARRIVAL)
             },
             {
                 date: finalCheckpointDate,

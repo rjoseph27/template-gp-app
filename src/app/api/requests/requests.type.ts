@@ -13,6 +13,7 @@ import { FlightRoute } from "../../core/layouts/flight-route/flight-route.compon
 import { AlertTableElement } from "../../core/layouts/alert-table/alert-table.component"
 import { ItemInformation } from "../../core/layouts/request/item-information/item-information.component"
 import { TrackingPoint } from "../../core/layouts/tracking/tracking.type"
+import { Layovers } from "../../core/layouts/request/create-layover/create-layover.component"
 
 /**
    * @interface ReportTrip
@@ -114,6 +115,24 @@ export interface ReportTrip {
      * @type {TrackingPoint[]}
      */
     history?: TrackingPoint[]
+
+    /**
+     * @description The layovers of the trip
+     * @type {Layovers}
+     */
+    layovers?: Layovers[]
+  }
+
+  /**
+   * @interface ConfirmTripStatus
+   * @description An interface for the confirm trip request
+   */
+  export enum ConfirmTripStatus {
+    /**
+     * @description The trip was confirmed successfully
+     * @type {string}
+     */
+    TRIP_CONFIRMED_SUCCESSFULLY = "TRIP_CONFIRMED_SUCCESSFULLY"
   }
 
   /**
@@ -468,6 +487,24 @@ export interface ReportTrip {
      * @type {string}
      */
     newId: string;
+  }
+
+  /**
+   * @interface ConfirmTripRequest
+   * @description An interface for the confirm trip request
+   */
+  export interface ConfirmTripRequest {
+    /**
+     * @description The id of the trip
+     * @type {string}
+     */
+    tripId: string;
+
+    /**
+     * @description The layovers of the trip
+     * @type {Layovers}
+     */
+    layovers: Layovers 
   }
 
   export interface RequestTableElementRequest {

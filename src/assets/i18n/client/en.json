@@ -132,6 +132,7 @@
         },
         "gp": {
             "reportTrip": {
+                "title": "Report Trip",
                 "send": "Report the Trip",
                 "notification": {
                     "success": "The trip has been reported successfully",

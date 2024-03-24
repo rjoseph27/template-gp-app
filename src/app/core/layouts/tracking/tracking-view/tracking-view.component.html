@@ -19,6 +19,7 @@
             *ngIf="i < trackingPoints.length - 1" 
             class="transit"
             [class.done]="trackingPoints[i+1].done"
+            [ngStyle]="{ 'width': transitWidth }"
         ></div>
     </ng-container>
 </div>

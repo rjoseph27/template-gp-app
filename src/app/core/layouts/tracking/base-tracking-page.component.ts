@@ -3,6 +3,7 @@ import { ActivatedRoute } from "@angular/router";
 import { map } from "rxjs/operators";
 import { ReportTrip } from "../../../api/requests/requests.type";
 import { SUCCURSALE_BY_COUNTRY } from "../../../misc/constants/countries/countries.type";
+import { CountryUtil } from "../../../misc/util/country.util";
 
 /**
  * @class BaseTrackingPageComponent
@@ -59,19 +60,17 @@ export class BaseTrackingPageComponent {
          * @description An observable for the origin city
          * @type {Observable<string>}
          */
-        protected readonly originCity$ = this.route.data.pipe(map(data => {
-          const regions = SUCCURSALE_BY_COUNTRY.map(x => x.regions).flat(); 
-          const city = regions.find(z => z[1].airport === (<ReportTrip>data['trip']).userAirport)
-          return city[0];
-        }));
+        protected readonly originCity$ = this.route.data.pipe(map(data => CountryUtil.getCityByAirportCode((<ReportTrip>data['trip']).userAirport)));
     
         /**
          * @description An observable for the destination city
          * @type {Observable<string>}
          */
-        protected readonly destinationCity$ = this.route.data.pipe(map(data => {
-          const regions = SUCCURSALE_BY_COUNTRY.map(x => x.regions).flat(); 
-          const city = regions.find(z => z[1].airport === (<ReportTrip>data['trip']).destinationAirport)
-          return city[0];
-        }));
+        protected readonly destinationCity$ = this.route.data.pipe(map(data => CountryUtil.getCityByAirportCode((<ReportTrip>data['trip']).destinationAirport)));
+
+        /**
+         * @description An observable for the layovers
+         * @type {Observable<Layovers[]>}
+         */
+        protected readonly layovers$ = this.route.data.pipe(map(data => (<ReportTrip>data['trip']).layovers));
 }
