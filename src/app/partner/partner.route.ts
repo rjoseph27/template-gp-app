@@ -76,10 +76,4 @@ export class PartnerRoutes {
      * @type {GhRoute}
      */
     static readonly dispatchingView: GhRoute = new GhRoute('dispatching-view', PartnerRoutes.dispatching);
-
-    /**
-     * @description The route for confirming a trip
-     * @type {GhRoute}
-     */
-    static readonly confirmTrip: GhRoute = new GhRoute('confirm-trip', PartnerRoutes.dispatchingView);
 }

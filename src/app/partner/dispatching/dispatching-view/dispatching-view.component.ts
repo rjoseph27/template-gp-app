@@ -1,7 +1,7 @@
 import { Component, inject } from "@angular/core";
 import { BaseTrackingPageComponent } from "../../../core/layouts/tracking/base-tracking-page.component";
 import { PartnerRoutes } from "../../partner.route";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { TripStatus } from "../../../client/orders/base-orders.component";
 import { map } from "rxjs";
 import { ReportTrip } from "../../../api/requests/requests.type";
@@ -15,7 +15,7 @@ import { ReportTrip } from "../../../api/requests/requests.type";
     templateUrl: './dispatching-view.component.html',
     styleUrls: ['./dispatching-view.component.scss']
   })
-  export class PartnerDispatchingViewComponent extends BaseTrackingPageComponent {
+  export class PartnerDispatchingViewComponent {
     /**
     * @description The router service
     * @type {Router}
@@ -23,25 +23,20 @@ import { ReportTrip } from "../../../api/requests/requests.type";
     protected readonly router: Router = inject(Router);
 
     /**
+     * @description The activated route
+     * @type {ActivatedRoute}
+     */
+    protected readonly route: ActivatedRoute = inject(ActivatedRoute);
+
+    /**
      * @description The status of the trip
      * @type {Observable<string>}
      */
-    protected readonly status$ = this.route.data.pipe(map(data => (<ReportTrip>data['trip']).status));
+    protected readonly status$ = this.route.data.pipe(map(data => (<ReportTrip>data['tripDetails']).status));
 
     /**
      * @description The trip status enum
      * @type {TripStatus}
      */
     protected readonly tripStatus = TripStatus;
-    
-    /**
-     * @description The navigate to confirm trip
-     * @returns {void}
-     */
-    protected navigateToConfirmTrip(): void {
-      PartnerRoutes.dispatchingView.currentParams = this.route.snapshot.queryParams;
-      this.router.navigate([PartnerRoutes.confirmTrip.fullPath()], { queryParams: {
-        id: this.route.snapshot.data['trip'].id
-      }})
-    }
   }

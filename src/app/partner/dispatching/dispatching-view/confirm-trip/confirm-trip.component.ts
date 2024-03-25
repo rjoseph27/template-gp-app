@@ -3,11 +3,10 @@ import { CurrentFormService } from "../../../../services/current-form.service";
 import { ModalService } from "../../../../services/modal.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ReportTrip } from "../../../../api/requests/requests.type";
-import { Observable, map, tap } from "rxjs";
+import { Observable, map } from "rxjs";
 import { FormMode } from "../../../../misc/enums/form-mode.enum";
 import { SUCCURSALE_BY_COUNTRY } from "../../../../misc/constants/countries/countries.type";
 import { NotificationService } from "../../../../services/notification.service";
-import { DateUtil } from "../../../../misc/util/date.util";
 import { ClientRequestsService } from "../../../../client/service/requests.service";
 import { NavigationService } from "../../../../services/navigation.service";
 
@@ -152,6 +151,30 @@ import { NavigationService } from "../../../../services/navigation.service";
             }
           });
     }
+
+    /**
+     * @description A method to cancel the trip
+     * @returns {void}
+     */
+    protected cancelTrip(): void {
+        this.modalService.openModal({
+          title: "moduleList.dispatching.view.confirm.cancelModal.title",
+          text: "moduleList.dispatching.view.confirm.cancelModal.content",
+          confirmCaption: "moduleList.dispatching.view.confirm.cancelModal.acceptButton",
+          cancelCaption: "moduleList.dispatching.view.confirm.cancelModal.rejectButton"
+        }).then(async x => {
+          const id = this.route.snapshot.data['tripDetails'].id;
+          if(x) {
+              const isCanceledSucessfully = await this.requestsService.cancelTrip(id);
+              if(isCanceledSucessfully) {
+                  this.notificationService.successNotification('moduleList.dispatching.view.confirm.cancelModal.notification.success');
+                  this.navigationService.goToPreviousPage();
+              } else {
+                  this.notificationService.errorNotification('moduleList.dispatching.view.confirm.cancelModal.notification.error');
+              }
+          }
+        });
+      }
 
     /** @inheritdoc */
     ngAfterContentChecked() {

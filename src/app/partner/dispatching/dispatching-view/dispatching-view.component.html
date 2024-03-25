@@ -1,20 +1,8 @@
 <div class="content">
     <div>
-        <div class="title">
+        <!-- <div class="title">
             <h1>{{ 'moduleList.dispatching.view.title' | translate }}</h1>
-        </div>
-        <gh-tracking 
-            [departureDate]="departureDate$ | async"
-            [arrivalDate]="arrivalDate$ | async"
-            [history]="history$ | async"
-            [originCity]="originCity$ | async"
-            [destinationCity]="destinationCity$ | async"
-            [orderId]="orderId$ | async"
-        ></gh-tracking>
-        <div>
-            <button *ngIf="(status$ | async) === tripStatus.PLANNED" class="gp-button" (click)="navigateToConfirmTrip()">{{ 'moduleList.dispatching.view.confirm.title' | translate }}</button>
-        </div>
+        </div>-->
+        <partner-confirm-trip *ngIf="(status$ | async) === tripStatus.PLANNED"></partner-confirm-trip>
     </div>
 </div>
-
-<!-- CREATE EXECTION -->

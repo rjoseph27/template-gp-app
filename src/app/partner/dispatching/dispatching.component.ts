@@ -30,7 +30,7 @@ import { PartnerRoutes } from "../partner.route";
      */
     protected readonly viewFactory = (row: OrderFilterInfo) => {
         const queryParams = <any>{
-            id: undefined,
+            id: row.orderId,
             deliveryDate: row.departureDate,
             from: row.originAirport,
             to: row.destinationAirport,

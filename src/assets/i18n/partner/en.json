@@ -57,6 +57,7 @@
             "view": {
                 "title": "Manage the Delivery",
                 "confirmButton": "Confirm",
+                "cancelButton": "Cancel",
                 "confirm": {
                     "title": "Confirm the delivery",
                     "layover": "Add Layover",
@@ -68,6 +69,16 @@
                         "notification": {
                             "success": "Delivery has been confirmed successfully",
                             "error": "Failed to confirm delivery"
+                        }
+                    },
+                    "cancelModal": {
+                        "title": "Cancel the Trip",
+                        "content": "Are you sure you want to cancel the trip?",
+                        "acceptButton": "Yes",
+                        "rejectButton": "No",
+                        "notification": {
+                            "success": "The trip has been canceled successfully",
+                            "error": "An error occurred while canceling the trip"
                         }
                     }
                 }
