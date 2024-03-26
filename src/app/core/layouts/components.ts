@@ -32,6 +32,7 @@ import { GhTrackingViewComponent } from "./tracking/tracking-view/tracking-view.
 import { GhTrackingComponent } from "./tracking/tracking.component";
 import { GhTrackingHistoryComponent } from "./tracking/tracking-history/tracking-history.component";
 import { GhCreateLayoverComponent } from "./request/create-layover/create-layover.component";
+import { GhNotFoundComponent } from "./not-found/not-found.component";
 
 /**
  * @constant
@@ -72,5 +73,6 @@ export const LAYOUTS_COMPONENTS = [
     GhTrackingViewComponent,
     GhTrackingComponent,
     GhTrackingHistoryComponent,
-    GhCreateLayoverComponent
+    GhCreateLayoverComponent,
+    GhNotFoundComponent
 ]

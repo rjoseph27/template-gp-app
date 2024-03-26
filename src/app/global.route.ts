@@ -8,11 +8,19 @@ import { GhRoute } from "./misc/classes/route";
 export class GlobalRoutes {
     /**
      * @description The email activation route
+     * @type {GhRoute}
      */
     static readonly emailActivation = new GhRoute('email-activation/:id');
 
     /**
      * @description The reset password route
+     * @type {GhRoute}
      */
     static readonly resetPassword = new GhRoute('reset-password/:id');
+
+    /**
+     * @description The not found route
+     * @type {GhRoute}
+     */
+    static readonly notFound = new GhRoute('not-found');
 }

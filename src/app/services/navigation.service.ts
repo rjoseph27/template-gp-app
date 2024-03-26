@@ -22,20 +22,20 @@ export class NavigationService {
    * @returns {void}
    */
   redirectToMainPage(): void {
-    if(this.router.url.split("/")[1] === ClientRoutes.client.segment)
+    if(this.router.url.split("/")[1] === PartnerRoutes.partner.segment)
     {
-        this.router.navigate([ClientRoutes.client.fullPath()]);
+      this.router.navigate([PartnerRoutes.partner.fullPath()]);
     } else {
-        this.router.navigate([PartnerRoutes.partner.fullPath()]);
+      this.router.navigate([ClientRoutes.client.fullPath()]);
     }
   }
 
   redirectToApplication(): void {
-    if(this.router.url.split("/")[1] === ClientRoutes.client.segment)
+    if(this.router.url.split("/")[1] === PartnerRoutes.partner.segment)
     {
-        this.router.navigate([ClientRoutes.main.fullPath()]);
+      this.router.navigate([PartnerRoutes.main.fullPath()]);
     } else {
-        this.router.navigate([PartnerRoutes.main.fullPath()]);
+      this.router.navigate([ClientRoutes.main.fullPath()]);
     }
   }
 
@@ -61,8 +61,7 @@ export class NavigationService {
    * @returns {boolean}
    */
   hidePreviousIcon(): boolean {
-    return this.currentRoute?.parentRoute === ClientRoutes.client;
-    // TODO ADAPT TO ENTERPRISE
+    return this.currentRoute?.parentRoute === ClientRoutes.client || this.currentRoute?.parentRoute === PartnerRoutes.partner || !this.currentRoute?.parentRoute;
   }
 
   /**

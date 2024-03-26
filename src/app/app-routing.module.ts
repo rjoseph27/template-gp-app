@@ -13,6 +13,7 @@ import { LoggedInGuard } from './misc/guard/logged-in.guard';
 import { LoggedOutGuard } from './misc/guard/logged-out.guard';
 import { PartnerRoutes } from './partner/partner.route';
 import { PartnerLogInComponent } from './partner/log-in/log-in.component';
+import { GhNotFoundComponent } from './core/layouts/not-found/not-found.component';
 
 /**
  * @constant routes
@@ -46,6 +47,8 @@ export const routes: Routes = [
         resolve: {userId: ResetPasswordResolver}, canActivate: [LoggedOutGuard]
     },
     { path: '', redirectTo: `${ClientRoutes.client}`, pathMatch: 'full' },
+    { path: `${GlobalRoutes.notFound}`, component: GhNotFoundComponent, pathMatch: 'full' },
+    { path: '**', redirectTo: `${GlobalRoutes.notFound}` }
 ];
 
 /**

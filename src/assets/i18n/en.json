@@ -354,6 +354,10 @@
             }
         }
     },
+    "notFound": {
+        "message": "Sorry, the page you are trying to access does not exist.",
+        "back": "Back to home"
+    },
     "main": {
         "logOut": {
             "title":"Log Out"
