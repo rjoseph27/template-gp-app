@@ -8,6 +8,8 @@ import { DeliveryExceptionType, TrackingPoint, TrackingPointType } from "../../.
 import { ClientRequestsService } from "../../../../client/service/requests.service";
 import { ModalService } from "../../../../services/modal.service";
 import { NotificationService } from "../../../../services/notification.service";
+import { Router } from "@angular/router";
+import { PartnerRoutes } from "../../../partner.route";
 
 /**
  * @class PartnerManageTrackingComponent
@@ -61,6 +63,12 @@ import { NotificationService } from "../../../../services/notification.service";
     * @type {ModalService}
     */
     private readonly modalService: ModalService = inject(ModalService);
+
+    /**
+    * @description The angular router service.
+    * @type {Router}
+    */
+    private readonly router: Router = inject(Router);
 
     /**
     * @description The notification service
@@ -147,6 +155,7 @@ import { NotificationService } from "../../../../services/notification.service";
               this._lostOrderButtonLoading$.next(false);
               if(addHistorySuccessfully) {
                 this.notificationService.successNotification('deliveryExecption.modal.lostOrder.notification.success');
+                this.reloadPage();
               } else {
                 this.notificationService.errorNotification('deliveryExecption.modal.lostOrder.notification.error');
               }
@@ -154,6 +163,10 @@ import { NotificationService } from "../../../../services/notification.service";
           });
     }
 
+    /**
+     * @description A method to generate a damaged exception
+     * @returns {void}
+     */
     protected async damagedOrderException(): Promise<void> {
         this.modalService.openModal({
             title: "deliveryExecption.modal.damaged.title",
@@ -173,10 +186,22 @@ import { NotificationService } from "../../../../services/notification.service";
               this._damagedOrderButtonLoading$.next(false);
               if(addHistorySuccessfully) {
                 this.notificationService.successNotification('deliveryExecption.modal.damaged.notification.success');
+                this.reloadPage();
               } else {
                 this.notificationService.errorNotification('deliveryExecption.modal.damaged.notification.error');
               }
             }
           });
     }
+
+    /**
+     * @description A method to reload the page
+     * @returns {void}
+     */
+    reloadPage() {
+        // FIND A BETTER SOLUTION
+        this.router.navigate([PartnerRoutes.dispatching.fullPath()]).then(() => {
+            this.router.navigate([PartnerRoutes.dispatchingView.fullPath()], { queryParams: this.route.snapshot.queryParams });
+        })
+      }
   }

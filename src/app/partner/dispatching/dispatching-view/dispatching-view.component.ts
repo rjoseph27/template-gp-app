@@ -1,6 +1,4 @@
 import { Component, inject } from "@angular/core";
-import { BaseTrackingPageComponent } from "../../../core/layouts/tracking/base-tracking-page.component";
-import { PartnerRoutes } from "../../partner.route";
 import { ActivatedRoute, Router } from "@angular/router";
 import { TripStatus } from "../../../client/orders/base-orders.component";
 import { map } from "rxjs";
