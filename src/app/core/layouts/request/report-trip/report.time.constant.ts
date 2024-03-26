@@ -102,10 +102,11 @@ export enum Unit {
         }
         departureDate.setHours(control.get(DEPARTURE_TIME).value.time.hours);
         departureDate.setMinutes(control.get(DEPARTURE_TIME).value.time.minutes);
-        let arrivalDate = control.get(ARRIVAL_DATE).value.date;
+        let arrivalDate = new Date(control.get(ARRIVAL_DATE).value.date.toString());
+
         if(typeof arrivalDate === 'string') {
           arrivalDate = new Date(arrivalDate);
-      }
+        }
         arrivalDate?.setHours(control.get(ARRIVAL_TIME).value.time.hours);
         arrivalDate?.setMinutes(control.get(ARRIVAL_TIME).value.time.minutes);
   
