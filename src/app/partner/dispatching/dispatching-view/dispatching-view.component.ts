@@ -32,7 +32,7 @@ import { ReportTrip } from "../../../api/requests/requests.type";
      * @description The status of the trip
      * @type {Observable<string>}
      */
-    protected readonly status$ = this.route.data.pipe(map(data => (<ReportTrip>data['tripDetails']).status));
+    protected readonly status$ = this.route.data.pipe(map(data => (<ReportTrip>data['trip']).status));
 
     /**
      * @description The trip status enum

@@ -1,8 +1,6 @@
 <div class="content">
     <div>
-        <!-- <div class="title">
-            <h1>{{ 'moduleList.dispatching.view.title' | translate }}</h1>
-        </div>-->
         <partner-confirm-trip *ngIf="(status$ | async) === tripStatus.PLANNED"></partner-confirm-trip>
+        <partner-manage-tracking *ngIf="(status$ | async) !== tripStatus.PLANNED && (status$ | async) !== tripStatus.CANCELED"></partner-manage-tracking>
     </div>
 </div>

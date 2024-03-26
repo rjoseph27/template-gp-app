@@ -11,6 +11,7 @@ import { COUNTRY_INFO_LIST } from "../../../../misc/constants/countries/countrie
 @Component({
     selector: 'gh-tracking-history',
     templateUrl: './tracking-history.component.html',
+    styleUrls: ['./tracking-history.component.scss']
   })
   export class GhTrackingHistoryComponent implements OnInit {
     /**

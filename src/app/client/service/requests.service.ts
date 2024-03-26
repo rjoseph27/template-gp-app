@@ -1,6 +1,6 @@
 import { Injectable, inject } from "@angular/core";
 import { RequestsServiceApi } from "../../api/requests/requests.service.api";
-import { OrderDetailRequest, CancelOrderStatus, ConfirmItemRequest, CreateAlertRequest, CreateAlertStatus, ItemsOrdersStatus, ReportTrip, ReportTripStatus, RequestTableElementRequest, SendItemsStatus, GpAcceptOrderStatus, GetReportTripStatus, GetTripInfoStatus, CancelTripStatus, AlertListStatus, AlertFormType, EditAlertStatus, DeleteAlertStatus, OrderFilterInfo, EditItemInformationRequest, EditItemInformationStatus, UpdateStatus, BillingFilterInfo, BillingStatus, CreateBillStatus, ConfirmTripRequest, ConfirmTripStatus } from "../../api/requests/requests.type";
+import { OrderDetailRequest, CancelOrderStatus, ConfirmItemRequest, CreateAlertRequest, CreateAlertStatus, ItemsOrdersStatus, ReportTrip, ReportTripStatus, RequestTableElementRequest, SendItemsStatus, GpAcceptOrderStatus, GetReportTripStatus, GetTripInfoStatus, CancelTripStatus, AlertListStatus, AlertFormType, EditAlertStatus, DeleteAlertStatus, OrderFilterInfo, EditItemInformationRequest, EditItemInformationStatus, UpdateStatus, BillingFilterInfo, BillingStatus, CreateBillStatus, ConfirmTripRequest, ConfirmTripStatus, AddHistoryStatus } from "../../api/requests/requests.type";
 import { SendItemsRequest } from "./send-items.service";
 import { DateUtil } from "../../misc/util/date.util";
 import { UsersService } from "../../services/users.service";
@@ -9,6 +9,7 @@ import { RequestTableElement } from "../../core/layouts/orders/orders.component"
 import { OrderDetails } from "../../core/layouts/order-details/order-details.component";
 import { AlertTableElement } from "../../core/layouts/alert-table/alert-table.component";
 import { OrderFilter } from "../../core/layouts/filter/order-filter/order-filter.component";
+import { TrackingPoint } from "../../core/layouts/tracking/tracking.type";
 
 /**
  * @class RequestsService
@@ -450,6 +451,21 @@ export class ClientRequestsService {
                 return true;
             }
             return false;
+        });
+    }
+
+    /**
+     * @description Adds a history
+     * @param history The history to add
+     * @returns {Promise<boolean>} A promise that resolves to true if the history was added successfully, false otherwise
+     */
+    addHistory(history: TrackingPoint): Promise<boolean> {
+        return this.requestsServiceApi.addHistory(history).then(msg => {
+            if(msg.message === AddHistoryStatus.HISTORY_ADDED_SUCCESSFULLY)
+            {
+                return true
+            }
+            return false
         });
     }
 }

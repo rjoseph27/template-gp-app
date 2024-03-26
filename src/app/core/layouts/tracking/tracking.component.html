@@ -1,10 +1,10 @@
 <gh-tracking-view 
     [departureDate]="departureDate" 
     [arrivalDate]="arrivalDate"
-    [history]="history"
+    [history]="filteredHistory"
     [originCity]="originCity"
     [destinationCity]="destinationCity"
     [layovers]="layovers"
     [orderId]="orderId"
 ></gh-tracking-view>
-<gh-tracking-history [history]="history"></gh-tracking-history>
+<gh-tracking-history [history]="filteredHistory"></gh-tracking-history>

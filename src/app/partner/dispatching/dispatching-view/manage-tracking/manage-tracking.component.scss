@@ -1,0 +1,20 @@
+.content {
+    display: flex;
+    justify-content: center;
+    padding: 1em;
+
+    .title {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1em;
+    }
+    
+    .button-section {
+        margin:1em 0;
+    }
+
+    button {
+        width: 100%;
+        margin: 0.25em 0;
+    }
+}

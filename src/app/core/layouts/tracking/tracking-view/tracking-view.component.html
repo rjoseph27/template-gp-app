@@ -12,13 +12,17 @@
     <ng-container *ngFor="let point of trackingPoints; let i = index">
         <div 
             class="point" 
-            [class.done]="point.done"
+            [class.done]="point.done && !isCanceledTrip"
+            [class.exception-transit]="isCanceledTrip"
+            [class.exception]="point.done && isCanceledTrip"
             [class.current]="!(trackingPoints[i+1]?.done) && point.done"
         ></div>
         <div 
             *ngIf="i < trackingPoints.length - 1" 
             class="transit"
-            [class.done]="trackingPoints[i+1].done"
+            [class.exception-transit]="isCanceledTrip"
+            [class.done]="trackingPoints[i+1].done && !isCanceledTrip"
+            [class.exception]="trackingPoints[i+1].done && isCanceledTrip"
             [ngStyle]="{ 'width': transitWidth }"
         ></div>
     </ng-container>

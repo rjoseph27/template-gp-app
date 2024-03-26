@@ -497,6 +497,10 @@
                 "ORDER_ACCEPTED": "The order has been accepted",
                 "AT_CHECKPOINT": "The order is at the checkpoint",
                 "WITH_GP": "The order is with the GP"
+            },
+            "exception": {
+                "LOST": "The order has been declared as lost",
+                "ITEM_DAMAGED": "The order has been declared as damaged"
             }
         }
     },
@@ -580,6 +584,34 @@
                 "duplicatedRoute": "Some airports are duplicated in the route",
                 "wrongOrderDate": "The date should be in chronological order",
                 "intersectingDate": "The date should not intersect each others"
+            }
+        }
+    },
+    "deliveryExecption": {
+        "button": {
+            "lostOrder": "Declare the order as lost",
+            "damaged": "Declare the order as damaged"
+        },
+        "modal": {
+            "lostOrder": {
+                "title": "Declare the order as lost",
+                "content": "Are you sure you want to declare the order as lost?",
+                "notification": {
+                    "success": "The order has been declared as lost",
+                    "error": "An error occured while declaring the order as lost"
+                }
+            },
+            "damaged": {
+                "title": "Declare the order as damaged",
+                "content": "Are you sure you want to declare the order as damaged?",
+                "notification": {
+                    "success": "The order has been declared as damaged",
+                    "error": "An error occured while declaring the order as damaged"
+                }
+            },
+            "button": {
+                "cancel": "Cancel",
+                "confirm": "Confirm"
             }
         }
     },

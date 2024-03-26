@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { TrackingPoint, TrackingPointType } from "../tracking.type";
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, tap } from "rxjs";
 import { COUNTRY_INFO_LIST } from "../../../../misc/constants/countries/countries";
 import { BaseTrackingComponent } from "../base-tracking.component";
 import { CountryUtil } from "../../../../misc/util/country.util";
@@ -42,6 +42,14 @@ interface Tracking extends TrackingPoint {
     }
 
     /**
+     * @description A boolean indicating if the trip is canceled
+     * @type {boolean}
+     */
+    protected get isCanceledTrip() {
+        return this.trackingPoints.some(point => point.exception);
+    }
+
+    /**
      * @description The current checkpoint
      * @type {Tracking}
      */
@@ -68,73 +76,81 @@ interface Tracking extends TrackingPoint {
     
     /** @inheritdoc */
     ngOnInit(): void {
-        const withGpDate = this.departureDate;
-        withGpDate.setDate(withGpDate.getDate() - 3)
+        this.filteredHistory$.pipe(
+            tap(history => {
+                const withGpDate = this.departureDate;
+                withGpDate.setDate(withGpDate.getDate() - 3)
 
-        const finalCheckpointDate = this.arrivalDate;
-        finalCheckpointDate.setHours(finalCheckpointDate.getHours() + 3);
+                const finalCheckpointDate = this.arrivalDate;
+                finalCheckpointDate.setHours(finalCheckpointDate.getHours() + 3);
 
-        const layovers = [...(this.layovers || []).map(layover => ([{
-                date: layover.arrivalDate.date,
-                type: TrackingPointType.ARRIVAL,
-                location: CountryUtil.getCityByAirportCode(layover.airport),
-                ordrerId: null,
-                isException: false,
-                done: this.history.some(point => point.type === TrackingPointType.ARRIVAL && point.location === CountryUtil.getCityByAirportCode(layover.airport))
-             },
-             {
-                date: layover.departureDate.date,
-                type: TrackingPointType.DEPARTURE,
-                location: CountryUtil.getCityByAirportCode(layover.airport),
-                ordrerId: null,
-                isException: false,
-                done: this.history.some(point => point.type === TrackingPointType.DEPARTURE && point.location === CountryUtil.getCityByAirportCode(layover.airport))
-             }])).flat()
-        ]
+                const layovers = [...(this.layovers || []).map(layover => ([{
+                    date: layover.arrivalDate.date,
+                    type: TrackingPointType.ARRIVAL,
+                    location: CountryUtil.getCityByAirportCode(layover.airport),
+                    orderId: null,
+                    exception: undefined,
+                    done: history.some(point => point.type === TrackingPointType.ARRIVAL && point.location === CountryUtil.getCityByAirportCode(layover.airport))
+                },
+                {
+                    date: layover.departureDate.date,
+                    type: TrackingPointType.DEPARTURE,
+                    location: CountryUtil.getCityByAirportCode(layover.airport),
+                    orderId: null,
+                    exception: undefined,
+                    done: history.some(point => point.type === TrackingPointType.DEPARTURE && point.location === CountryUtil.getCityByAirportCode(layover.airport))
+                }])).flat()
+            ]
         
-        this._trackingPoints$.next([
-            {
-                date: null,
-                type: TrackingPointType.AT_CHECKPOINT,
-                location: this.originCity,
-                ordrerId: null,
-                isException: false,
-                done: true
-            },
-            {
-                date: withGpDate,
-                type: TrackingPointType.WITH_GP,
-                location: this.originCity,
-                ordrerId: null,
-                isException: false,
-                done: this.history.some(point => point.type === TrackingPointType.WITH_GP)
-            },
-            {
-                date: this.departureDate,
-                type: TrackingPointType.FIRST_DEPARTURE,
-                location: this.originCity,
-                ordrerId: null,
-                isException: false,
-                done: this.history.some(point => point.type === TrackingPointType.FIRST_DEPARTURE)
-            },
-            ...layovers,
-            {
-                date: this.arrivalDate,
-                type: TrackingPointType.LAST_ARRIVAL,
-                location: this.destinationCity,
-                ordrerId: null,
-                isException: false,
-                done: this.history.some(point => point.type === TrackingPointType.LAST_ARRIVAL)
-            },
-            {
-                date: finalCheckpointDate,
-                type: TrackingPointType.FINAL_CHECKPOINT,
-                location: this.destinationCity,
-                ordrerId: null,
-                isException: false,
-                done: this.history.some(point => point.type === TrackingPointType.FINAL_CHECKPOINT)
-            },
-        ])
+            this._trackingPoints$.next([
+                {
+                    date: null,
+                    type: TrackingPointType.AT_CHECKPOINT,
+                    location: this.originCity,
+                    orderId: null,
+                    exception: undefined,
+                    done: true
+                },
+                {
+                    date: this.departureDate,
+                    type: TrackingPointType.FIRST_DEPARTURE,
+                    location: this.originCity,
+                    orderId: null,
+                    exception: undefined,
+                    done: history.some(point => point.type === TrackingPointType.FIRST_DEPARTURE)
+                },
+                ...layovers,
+                {
+                    date: this.arrivalDate,
+                    type: TrackingPointType.LAST_ARRIVAL,
+                    location: this.destinationCity,
+                    orderId: null,
+                    exception: undefined,
+                    done: history.some(point => point.type === TrackingPointType.LAST_ARRIVAL)
+                },
+                {
+                    date: finalCheckpointDate,
+                    type: TrackingPointType.FINAL_CHECKPOINT,
+                    location: this.destinationCity,
+                    orderId: null,
+                    exception: undefined,
+                    done: history.some(point => point.type === TrackingPointType.FINAL_CHECKPOINT)
+                },
+            ])
+
+            if(this.orderId) {
+                const withGP = this._trackingPoints$.value;
+                withGP.splice(1, 0, {
+                    date: withGpDate,
+                    type: TrackingPointType.WITH_GP,
+                    location: this.originCity,
+                    orderId: null,
+                    exception: history.find(point => point.type === TrackingPointType.WITH_GP && point.exception)?.exception,
+                    done: history.some(point => point.type === TrackingPointType.WITH_GP)
+                });
+                this._trackingPoints$.next(withGP);
+            }
+        })).subscribe()
     }
 
     /**

@@ -121,6 +121,12 @@ export interface ReportTrip {
      * @type {Layovers}
      */
     layovers?: Layovers[]
+
+    /**
+     * @description The orders of the trip
+     * @type {OrderDetails[]}
+     */
+    orders?: number[];
   }
 
   /**
@@ -133,6 +139,14 @@ export interface ReportTrip {
      * @type {string}
      */
     TRIP_CONFIRMED_SUCCESSFULLY = "TRIP_CONFIRMED_SUCCESSFULLY"
+  }
+
+  export enum AddHistoryStatus {
+    /**
+     * @description The history was added successfully
+     * @type {string}
+     */
+    HISTORY_ADDED_SUCCESSFULLY = "HISTORY_ADDED_SUCCESSFULLY"
   }
 
   /**

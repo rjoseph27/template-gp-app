@@ -31,8 +31,16 @@
         height: 0.5em;
     }
 
+    .exception-transit {
+        background-color: lighten($error-color, 20%);
+    }
+
     .done {
         background-color: $secondary-color;
+    }
+
+    .exception {
+        background-color: $error-color !important;
     }
 
     .current {

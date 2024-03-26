@@ -43,7 +43,7 @@ const routes: Routes = [
     { path: `${PartnerRoutes.dispatching}`, children: [
         { path: '', component: PartnerDispatchingComponent, pathMatch: 'full', resolve: { userInfo: PartnerApplicationResolver} },
         { path: `${PartnerRoutes.dispatchingView}`, children: [
-            { path: '', component: PartnerDispatchingViewComponent, pathMatch: 'full', resolve: { tripDetails: GhTripInfoResolver, userInfo: PartnerApplicationResolver} },
+            { path: '', component: PartnerDispatchingViewComponent, pathMatch: 'full', resolve: { trip: GhTripInfoResolver, userInfo: PartnerApplicationResolver} },
         ] }
     ]},
 ];

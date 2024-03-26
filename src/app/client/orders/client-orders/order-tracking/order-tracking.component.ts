@@ -1,8 +1,5 @@
-import { Component, inject } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
-import { map, tap } from "rxjs/operators";
-import { ReportTrip } from "../../../../api/requests/requests.type";
-import { SUCCURSALE_BY_COUNTRY } from "../../../../misc/constants/countries/countries.type";
+import { Component } from "@angular/core";
+import { map } from "rxjs/operators";
 import { BaseTrackingPageComponent } from "../../../../core/layouts/tracking/base-tracking-page.component";
 
 /**
@@ -14,4 +11,10 @@ import { BaseTrackingPageComponent } from "../../../../core/layouts/tracking/bas
     templateUrl: './order-tracking.component.html',
     styleUrls: ['./order-tracking.component.scss']
   })
-  export class ClientOrderTrackingComponent extends BaseTrackingPageComponent {}
+  export class ClientOrderTrackingComponent extends BaseTrackingPageComponent {
+    /**
+    * @description An observable for the order id
+    * @type {Observable<string>}
+    */
+    protected readonly orderId$ = this.route.queryParamMap.pipe(map(params => params.get('id')));
+  }

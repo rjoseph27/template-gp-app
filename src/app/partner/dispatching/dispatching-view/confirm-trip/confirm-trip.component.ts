@@ -33,7 +33,7 @@ import { NavigationService } from "../../../../services/navigation.service";
      * @description The details of the trip
      * @type {Observable<ReportTrip>}
      */
-    protected readonly tripDetail$: Observable<ReportTrip> = this.route.data.pipe(map(data => data['tripDetails']));
+    protected readonly tripDetail$: Observable<ReportTrip> = this.route.data.pipe(map(data => data['trip']));
 
     /**
      * @description The departure date of the trip
@@ -138,7 +138,7 @@ import { NavigationService } from "../../../../services/navigation.service";
           }).then(async x => {
             if(x) {
                 const isConfirmed = await this.requestsService.confirmTrip({
-                    tripId: this.route.snapshot.data['tripDetails'].id,
+                    tripId: this.route.snapshot.data['trip'].id,
                     layovers: this.form.get('layover').value
                   })
                 
@@ -163,7 +163,7 @@ import { NavigationService } from "../../../../services/navigation.service";
           confirmCaption: "moduleList.dispatching.view.confirm.cancelModal.acceptButton",
           cancelCaption: "moduleList.dispatching.view.confirm.cancelModal.rejectButton"
         }).then(async x => {
-          const id = this.route.snapshot.data['tripDetails'].id;
+          const id = this.route.snapshot.data['trip'].id;
           if(x) {
               const isCanceledSucessfully = await this.requestsService.cancelTrip(id);
               if(isCanceledSucessfully) {

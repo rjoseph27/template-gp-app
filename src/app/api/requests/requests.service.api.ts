@@ -3,6 +3,7 @@ import { ApiResponse, BaseServiceApi } from "../base.service.api";
 import { firstValue } from "../../misc/function/firstValue";
 import { ReportTrip, SearchTripsRequest, SearchTripsApiResponse, ConfirmItemRequest, SendItemsRequestApiResponse, UpdateImageNameRequest, CreateAlertRequest, ListItemsApiResponse, ItemInformationApiResponse, RequestTableElementRequest, OrderDetailRequest, GetSendItemsRequestApiResponse, GetTripListApiResponse, GetTripInfoApiResponse, CancelTripRequest, AlertListApiResponse, AlertApiResponse, OrderFilterResponse, EditItemInformationRequest, BillingListApiResponse, BillingFilterInfo, ConfirmTripRequest } from "./requests.type";
 import { OrderFilter } from "../../core/layouts/filter/order-filter/order-filter.component";
+import { TrackingPoint } from "../../core/layouts/tracking/tracking.type";
 
 /**
  * @class RequestsServiceApi
@@ -290,5 +291,14 @@ export class RequestsServiceApi extends BaseServiceApi {
      */
     confirmTrip(confirmTripRequest: ConfirmTripRequest): Promise<ApiResponse> {
         return firstValue(this.postRequest<ApiResponse>('confirm-trip', confirmTripRequest));
+    }
+    
+    /**
+     * @description A method to add a history to a trip
+     * @param history The history to add
+     * @returns {Promise<ApiResponse>}
+     */
+    addHistory(history: TrackingPoint): Promise<ApiResponse> {
+        return firstValue(this.postRequest<ApiResponse>('add-history', history));
     }
 }

@@ -2,7 +2,6 @@ import { Directive, inject } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { map } from "rxjs/operators";
 import { ReportTrip } from "../../../api/requests/requests.type";
-import { SUCCURSALE_BY_COUNTRY } from "../../../misc/constants/countries/countries.type";
 import { CountryUtil } from "../../../misc/util/country.util";
 
 /**
@@ -25,12 +24,6 @@ export class BaseTrackingPageComponent {
           x.date = new Date(x.date);
           return x
         })));
-    
-        /**
-         * @description An observable for the order id
-         * @type {Observable<string>}
-         */
-        protected readonly orderId$ = this.route.queryParamMap.pipe(map(params => params.get('id')));
     
         /**
          * @description An observable for the departure date

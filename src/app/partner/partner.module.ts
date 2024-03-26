@@ -27,6 +27,7 @@ import { PartnerGpPickUpViewComponent } from "./gp-pick-up/gp-pick-up-view/gp-pi
 import { PartnerDispatchingComponent } from "./dispatching/dispatching.component";
 import { PartnerDispatchingViewComponent } from "./dispatching/dispatching-view/dispatching-view.component";
 import { PartnerConfirmTripComponent } from "./dispatching/dispatching-view/confirm-trip/confirm-trip.component";
+import { PartnerManageTrackingComponent } from "./dispatching/dispatching-view/manage-tracking/manage-tracking.component";
 
 /**
  * @module PartnerModule
@@ -45,7 +46,8 @@ import { PartnerConfirmTripComponent } from "./dispatching/dispatching-view/conf
         PartnerGpPickUpViewComponent,
         PartnerDispatchingComponent,
         PartnerDispatchingViewComponent,
-        PartnerConfirmTripComponent
+        PartnerConfirmTripComponent,
+        PartnerManageTrackingComponent
     ],
     imports: [
         CommonModule,
