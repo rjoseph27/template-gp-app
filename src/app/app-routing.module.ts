@@ -39,7 +39,7 @@ export const routes: Routes = [
     },
     {
         path: `${GlobalRoutes.emailActivation}`, component: GhEmailActivationComponent, pathMatch: 'full',
-        resolve: {emailActivationStatus: EmailActivationResolver, canActivate: [LoggedOutGuard]}
+        resolve: {emailActivationStatus: EmailActivationResolver}
     },
     { 
         path: `${GlobalRoutes.resetPassword}`, component: GhResetPasswordForgotPasswordComponent, pathMatch: 'full', 

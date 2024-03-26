@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
-import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { NavigationService } from '../../../../services/navigation.service';
+import { LoggedOutGuard } from '../../../../misc/guard/logged-out.guard';
 
 /**
  * @class GhEmailActivationComponent

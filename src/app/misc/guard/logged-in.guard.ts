@@ -1,8 +1,7 @@
-import { CanActivate, Router } from "@angular/router";
+import { CanActivate } from "@angular/router";
 import { UsersService } from "../../services/users.service";
 import { inject } from "@angular/core";
 import { NavigationService } from "../../services/navigation.service";
-import { LoadingService } from "../../services/loading.service";
 
 /**
  * @class LoggedInGuard
