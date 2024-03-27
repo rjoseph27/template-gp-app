@@ -28,6 +28,7 @@ import { PartnerDispatchingComponent } from "./dispatching/dispatching.component
 import { PartnerDispatchingViewComponent } from "./dispatching/dispatching-view/dispatching-view.component";
 import { PartnerConfirmTripComponent } from "./dispatching/dispatching-view/confirm-trip/confirm-trip.component";
 import { PartnerManageTrackingComponent } from "./dispatching/dispatching-view/manage-tracking/manage-tracking.component";
+import { PartnerTripInfoResovler } from "./dispatching/trip-info.resolver";
 
 /**
  * @module PartnerModule
@@ -73,6 +74,7 @@ import { PartnerManageTrackingComponent } from "./dispatching/dispatching-view/m
         PartnerRegisterItemViewResolver,
         PartnerRegisterItemService,
         PartnerRegisterItemEditResolver,
+        PartnerTripInfoResovler,
         NotificationService,
         PartnerBillingResolver
     ]

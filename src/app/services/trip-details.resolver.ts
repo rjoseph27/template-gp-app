@@ -5,6 +5,7 @@ import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from "@a
 import { ReportTrip } from "../api/requests/requests.type";
 import { ClientRoutes } from "../client/client.route";
 import { UsersService } from "./users.service";
+import { NavigationService } from "./navigation.service";
 
 /**
  * @interface TripInfoRequest
@@ -23,7 +24,7 @@ interface TripInfoRequest {
  * @description The resolver for the trip info
  */
 @Injectable()
-export class GhTripInfoResolver implements Resolve<ReportTrip> {
+export abstract class GhTripInfoResolver implements Resolve<ReportTrip> {
   /**
   * @description The loading service
   * @returns {LoadingService}
@@ -34,7 +35,7 @@ export class GhTripInfoResolver implements Resolve<ReportTrip> {
    * @description The requests service
    * @type {ClientRequestsService}
    */
-  private readonly requestsService = inject(ClientRequestsService);
+  protected readonly requestsService = inject(ClientRequestsService);
 
   /**
    * @description The router service
@@ -46,15 +47,27 @@ export class GhTripInfoResolver implements Resolve<ReportTrip> {
   * @description The users service
   * @type {UsersService}
   */
-  private readonly userService: UsersService = inject(UsersService);
+  protected readonly userService: UsersService = inject(UsersService);
+
+  /**
+   * @description The navigation service
+   * @type {NavigationService}
+   */
+  private readonly navigationService: NavigationService = inject(NavigationService);
+
+  /**
+   * @description A function that checks if the user is allowed to see the trip details
+   * @type {(trip: ReportTrip) => Promise<boolean>}
+   */
+  abstract isUserAllowed: (trip :ReportTrip) => Promise<boolean>;
 
 
   /** @inheritdoc */
   async resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<ReportTrip> {
     this.loadingService.startLoading();
     const tripInfo = await this.requestsService.getTripInfo((<TripInfoRequest>route.queryParams).id);
-    if(tripInfo.userId !== this.userService.currentUserId) {
-      this.router.navigate([ClientRoutes.main.fullPath()]);
+    if(!this.isUserAllowed(tripInfo)) {
+      this.navigationService.redirectToMainPage()
       this.loadingService.endLoading();
       return undefined;
     }
