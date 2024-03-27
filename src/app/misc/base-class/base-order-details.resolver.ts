@@ -5,10 +5,10 @@ import { LoadingService } from "../../services/loading.service";
 import { ClientRequestsService } from "../../client/service/requests.service";
 import { UsersService } from "../../services/users.service";
 import { CurrencyService } from "../../services/currency.service";
-import { COUNTRY_INFO_LIST } from "../constants/countries/countries";
 import { RequestTableElementRequest } from "../../api/requests/requests.type";
 import { MoneyUtil } from "../util/money.util";
 import { CurrencyInfo } from "../constants/countries/countries.type";
+import { NavigationService } from "../../services/navigation.service";
 
 /**
  * @class baseOrderDetailsResolver
@@ -26,7 +26,7 @@ export abstract class baseOrderDetailsResolver implements Resolve<OrderDetails> 
    * @description The requests service
    * @type {ClientRequestsService}
    */
-  private readonly requestsService = inject(ClientRequestsService);
+  protected readonly requestsService = inject(ClientRequestsService);
 
   /**
   * @description The users service
@@ -62,12 +62,28 @@ export abstract class baseOrderDetailsResolver implements Resolve<OrderDetails> 
    * @description The get currency function
    * @returns {CurrencyInfo}
    */
-  abstract getCurrency: () => Promise<CurrencyInfo>
+  abstract getCurrency: () => Promise<CurrencyInfo>;
+
+  /**
+   * @description A function that checks if the order is from the user
+   * @param {OrderDetails} orderDetails The order details
+   * @returns {boolean}
+   */
+  abstract isUserOrder: (orderDetails: OrderDetails) => Promise<boolean>;
+
+  /**
+   * @description The navigation service
+   * @type {NavigationService}
+   */
+  private readonly navigationService = inject(NavigationService);
 
   /** @inheritdoc */
   async resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<OrderDetails> {
     this.loadingService.startLoading();
     const order = await this.requestsService.getItemInformation(<RequestTableElementRequest>route.queryParams);
+    if(!(await this.isUserOrder(order))) {    
+      this.navigationService.redirectToMainPage()
+    }
     
     if(order) {
         const userCurrency = await this.getCurrency();

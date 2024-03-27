@@ -104,6 +104,12 @@ export interface OrderDetails {
    * @type {number}
    */
   price?: number;
+
+  /**
+   * @description The user id
+   * @type {string}
+   */
+  userId: string;
 }
 
 /**
