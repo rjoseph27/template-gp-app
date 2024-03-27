@@ -358,7 +358,7 @@ interface DayPoint {
     const daysInMonth = new Date(this.year, this.month + 1, 0).getDate();
 
     if(date > 0 && date <= daysInMonth) {
-      return { day: date, id: this._dataCellList$.value.find((element) => element.day + 1 === date)?.id };
+      return { day: date, id: this._dataCellList$.value.find((element) => element.day === date)?.id };
     }
      return undefined;
    }

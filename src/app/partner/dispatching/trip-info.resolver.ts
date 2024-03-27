@@ -1,3 +1,4 @@
+import { Injectable } from "@angular/core";
 import { ReportTrip } from "../../api/requests/requests.type";
 import { CountryUtil } from "../../misc/util/country.util";
 import { GhTripInfoResolver } from "../../services/trip-details.resolver";
@@ -5,7 +6,9 @@ import { GhTripInfoResolver } from "../../services/trip-details.resolver";
 /**
  * @class PartnerTripInfoResovler
  * @description The resolver for the partner trip info
+ * 
  */
+@Injectable()
 export class PartnerTripInfoResovler extends GhTripInfoResolver {
     /** @inheritdoc */
     override isUserAllowed = async (trip: ReportTrip) => {
