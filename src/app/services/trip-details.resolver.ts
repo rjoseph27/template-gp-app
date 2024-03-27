@@ -4,6 +4,7 @@ import { ClientRequestsService } from "../client/service/requests.service";
 import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from "@angular/router";
 import { ReportTrip } from "../api/requests/requests.type";
 import { ClientRoutes } from "../client/client.route";
+import { UsersService } from "./users.service";
 
 /**
  * @interface TripInfoRequest
@@ -41,11 +42,22 @@ export class GhTripInfoResolver implements Resolve<ReportTrip> {
    */
   private readonly router = inject(Router);
 
+  /**
+  * @description The users service
+  * @type {UsersService}
+  */
+  private readonly userService: UsersService = inject(UsersService);
+
 
   /** @inheritdoc */
   async resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<ReportTrip> {
     this.loadingService.startLoading();
     const tripInfo = await this.requestsService.getTripInfo((<TripInfoRequest>route.queryParams).id);
+    if(tripInfo.userId !== this.userService.currentUserId) {
+      this.router.navigate([ClientRoutes.main.fullPath()]);
+      this.loadingService.endLoading();
+      return undefined;
+    }
     if(tripInfo) {
       this.loadingService.endLoading();
       return tripInfo;
