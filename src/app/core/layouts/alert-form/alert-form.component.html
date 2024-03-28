@@ -17,12 +17,13 @@
             [value]="alertForm.get(toField).value"
             (valueChange)="alertForm.get(toField).setValue($event)"
             [errors]="alertForm.get(toField).errors"
+            [minDate]="minDate"
             [errorCaptions]="toErrorCaptions"
         ></gh-date-field>
     </div>
     <div class="section">
         <gh-number-field
-        [label]="'global.alertForm.maxPrice.title' | translate" 
+        [label]="('global.alertForm.maxPrice.title' | translate) + ' (' + currency.currency + ')'" 
         [name]="maxPriceField"
         [value]="alertForm.get(maxPriceField).value"
         (valueChange)="alertForm.get(maxPriceField).setValue($event)"

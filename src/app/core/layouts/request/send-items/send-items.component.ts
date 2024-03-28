@@ -116,7 +116,7 @@ export class GhSendItemsComponent extends BaseRequestComponent implements OnInit
    */
   protected readonly consigneeFullNameErrorCaptions = new Map<string, string>([
     [REQUIRED_VALIDATION, "sendItems.shippingInformation.consigneeFullName.errors.required"],
-    [INVALID_NAME_VALIDATION, "sendItemsshippingInformation.consigneeFullName.errors.invalid"]
+    [INVALID_NAME_VALIDATION, "sendItems.shippingInformation.consigneeFullName.errors.invalid"]
   ]);
 
   /**
