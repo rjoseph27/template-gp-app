@@ -23,13 +23,14 @@ import { BaseAlertComponent } from "../base-alert.component";
       tap(async (loading) => {
         if(loading) {
           const requests = {...this.currentFormService.currentForm.value, userId: this.usersService.currentUserId, currency: this.currency.currency};
-          this.requestsService.sendItems({ items: <SendItemsRequest>requests, tripId: null }).then(id => {
-            if(id) {
-              requests.id = id;
-              this.requestsService.createAlert({...<CreateAlertRequest>this.currentFormService.currentForm.value, route: {
+          const items = {...requests}
+          delete items.from
+          delete items.to
+          delete items.maxPrice
+          this.requestsService.createAlert({...<CreateAlertRequest>this.currentFormService.currentForm.value, route: {
                 from: requests.userRegion,
                 to: requests.destinationRegion
-              }, items: requests}).then(success => {
+              }, items: items}).then(success => {
                 if(success) {
                   this.notificationService.successNotification('moduleList.client.alerts.createAlert.notification.success');
                   this.router.navigate([ClientRoutes.alertList.fullPath()]);
@@ -37,8 +38,6 @@ import { BaseAlertComponent } from "../base-alert.component";
                   this.notificationService.errorNotification('moduleList.client.alerts.createAlert.notification.error');
                 }
               })
-            }
-        })
       }})
     ).subscribe()
   }

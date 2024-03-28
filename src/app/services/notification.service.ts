@@ -45,20 +45,21 @@ export class NotificationService {
     /**
      * @description Shows an error notification
      * @param message The message of the notification
+     * @param persist Whether the notification should persist
      */
-    errorNotification(message: string) {
+    errorNotification(message: string, persist: boolean = true) {
         const config: MatSnackBarConfig = {
             panelClass: ['error-notification'],
         };
 
-        this.showNotification(message, config);
+        this.showNotification(message, config, persist);
     }
 
     /**
      * @description Shows a success notification
      * @param message The message of the notification
      */
-    successNotification(message: string) {
+    successNotification(message: string, persist: boolean = true) {
         const config: MatSnackBarConfig = {
             panelClass: ['success-notification'],
         };
@@ -70,8 +71,9 @@ export class NotificationService {
      * @description Shows a notification
      * @param message The message of the notification
      * @param config the configuration of the notification
+     * @param persist Whether the notification should persist
      */
-    private showNotification(message: string, config?: MatSnackBarConfig) {
+    private showNotification(message: string, config?: MatSnackBarConfig, persist: boolean = true) {
         const defaultConfig: MatSnackBarConfig = {
           horizontalPosition: 'center', 
           verticalPosition: 'top',
@@ -81,7 +83,7 @@ export class NotificationService {
             tap(m => this.snackBar.open(m, CLOSE_ACTION, {...defaultConfig, ...config}))
         ).subscribe();
 
-        this.navigationService.isNotificationOpen = true;
+        this.navigationService.isNotificationOpen = persist;
       }
 
     /**

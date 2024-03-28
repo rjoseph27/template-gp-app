@@ -117,9 +117,7 @@ export class NavigationService {
   constructor() {
     this.router.events.pipe(tap((e) => {
       if(e instanceof NavigationEnd) {
-            if(this._lastUrl$.value === undefined) {
-                this._lastUrl$.next((<NavigationEnd>e).url);
-            }
+            this._lastUrl$.next((<NavigationEnd>e).url);
         }
     }), takeUntil(this._lastUrl$.asObservable().pipe(skip(1)))).subscribe()
 }
