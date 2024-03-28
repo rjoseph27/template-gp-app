@@ -12,6 +12,7 @@ import { ModalService } from "../../../../services/modal.service";
 import { GhFile } from "../../../elements/input/upload-image/upload-image.component";
 import { ITEM_INFORMATION_IMAGE_FOLDER, ImageUtil } from "../../../../misc/util/image.util";
 import { ItemsStatus } from "../../../../client/orders/base-orders.component";
+import { INTEGER_VALIDATION, integerValidator } from "../../../../misc/validation/integer.validator";
 
 
 /**
@@ -237,6 +238,16 @@ export class GhItemInformationComponent implements OnInit {
   ]);
 
   /**
+   * @description The error messages of the item quantity field
+   * @type {Map<string, string>}
+   */
+  protected readonly itemQuantityErrorCaptions = new Map<string, string>([
+    [REQUIRED_VALIDATION, "global.itemInformation.itemQuantity.errors.required"],
+    [INTEGER_VALIDATION, "global.itemInformation.itemQuantity.errors.integer"],
+    [MIN_VALIDATION, "global.itemInformation.itemQuantity.errors.min"]
+  ]);
+
+  /**
    * @description The item information select options
    * @type {GroupedSelectFieldOption[]}
    */
@@ -304,7 +315,7 @@ export class GhItemInformationComponent implements OnInit {
           itemName: new FormControl(itemInformation?.itemName, [Validators.required]),
           itemCategory: new FormControl(itemInformation?.itemCategory as string, [Validators.required]),
           itemWeight: new FormControl(itemInformation?.itemWeight, [Validators.required, Validators.min(0.0001), Validators.max(MAX_LUGGAGE_WEIGHT)]),
-          itemQuantity: new FormControl(itemInformation?.itemQuantity || 1, [Validators.required, Validators.min(1)]),
+          itemQuantity: new FormControl(itemInformation?.itemQuantity || 1, [Validators.required, Validators.min(1), integerValidator]),
           extraNotes: new FormControl(itemInformation?.extraNotes),
           reasonShipping: new FormControl(itemInformation?.reasonShipping, [Validators.required])
         })

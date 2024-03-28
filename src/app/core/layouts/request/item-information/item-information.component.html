@@ -61,7 +61,7 @@
                [value]="itemInformationForm.itemInformation.get(itemQuantityField).value"
                (valueChange)="itemInformationForm.itemInformation.get(itemQuantityField).setValue($event)"
                [errors]="itemInformationForm.itemInformation.get(itemQuantityField).errors"
-               [errorCaptions]="itemWeightErrorCaptions"
+               [errorCaptions]="itemQuantityErrorCaptions"
                [readonly]="itemInformationForm.formMode === formMode.VIEW"
                [min]="1"
                [step]="1"

@@ -265,7 +265,8 @@
                 "tooltip": "A unit of a item is considered when the item can be divided for multiple shipping. Make sure that the weight and size is considered for the unit of the item.",
                 "errors": {
                     "required": "Please enter the quantity",
-                    "min": "Please enter a quantity more than {{min}}"
+                    "min": "Please enter a quantity more than {{min}}",
+                    "integer": "Please enter a valid quantity"
                 }
             },
             "extraNotes": {
