@@ -76,14 +76,21 @@ export class ClientRequestsService {
         return this.requestsServiceApi.sendItems(confirmItemRequest).then(async msg => {
             if(msg.message === SendItemsStatus.ITEMS_SENT_SUCCESSFULLY)
             {
-                confirmItemRequest.items.itemInformation.forEach(async (item,index) =>{
+                const imgList = confirmItemRequest.items.itemInformation.map(async (item) =>{
                     if(typeof item.image !== 'string')
                     {
                         const formData = new FormData();
                         formData.append('image', item.image);
                         id = msg.newId 
-                        await this.requestsServiceApi.uploadImages(formData).then(async img => await this.requestsServiceApi.updateImageName({id: msg.newId, filename: img, index: index}));
+                        return await this.requestsServiceApi.uploadImages(formData).then(async img => {
+                            return img;
+                        });
                     }
+                    return undefined
+                })
+                
+                Promise.all(imgList).then(async (x) => {
+                    await this.requestsServiceApi.updateImageName({id: msg.newId, filenames: x})
                 });
                 return id
             }
@@ -97,13 +104,23 @@ export class ClientRequestsService {
      * @returns {Promise<boolean>} A promise that resolves to true if the alert was created successfully, false otherwise
      */
     createAlert(createAlertRequest: CreateAlertRequest): Promise<boolean> {
-        return this.requestsServiceApi.createAlert({...createAlertRequest, userId: this.usersService.currentUserId}).then(msg => {
+        return this.requestsServiceApi.createAlert({...createAlertRequest, userId: this.usersService.currentUserId}).then(async msg => {
             if(msg.message === CreateAlertStatus.ALERT_CREATED_SUCCESSFULLY)
             {
-                createAlertRequest.items.itemInformation.forEach(async (item,index) =>{
-                    const formData = new FormData();
-                    formData.append('image', item.image); 
-                    await this.requestsServiceApi.uploadImages(formData).then(async img => await this.requestsServiceApi.updateImageName({id: msg.newId, filename: img, index: index}));
+                const imgList = createAlertRequest.items.itemInformation.map(async (item) =>{
+                    if(typeof item.image !== 'string')
+                    {
+                        const formData = new FormData();
+                        formData.append('image', item.image);
+                        return await this.requestsServiceApi.uploadImages(formData).then(async img => {
+                            return img;
+                        });
+                    }
+                    return undefined
+                })
+                
+                Promise.all(imgList).then(async (x) => {
+                    await this.requestsServiceApi.updateImageName({id: msg.newId, filenames: x})
                 });
                 return true
             }
@@ -285,15 +302,23 @@ export class ClientRequestsService {
      * @returns 
      */
     editAlert(alert: CreateAlertRequest): Promise<boolean> {
-        return this.requestsServiceApi.editAlert(alert).then(msg => {
+        return this.requestsServiceApi.editAlert(alert).then(async msg => {
             if(msg.message === EditAlertStatus.ALERT_EDITED_SUCCESSFULLY)
             {
-                alert.items.itemInformation.forEach(async (item,index) =>{
-                    if(typeof item.image !== 'string' && item.image.type) {
+                const imgList = alert.items.itemInformation.map(async (item) =>{
+                    if(typeof item.image !== 'string')
+                    {
                         const formData = new FormData();
-                        formData.append('image', item.image); 
-                        await this.requestsServiceApi.uploadImages(formData).then(async img => await this.requestsServiceApi.updateImageName({id: alert.itemId, filename: img, index: index}));
+                        formData.append('image', item.image);
+                        return await this.requestsServiceApi.uploadImages(formData).then(async img => {
+                            return img;
+                        });
                     }
+                    return undefined
+                })
+                
+                Promise.all(imgList).then(async (x) => {
+                    await this.requestsServiceApi.updateImageName({id: alert.itemId, filenames: x})
                 });
                 return true
             }

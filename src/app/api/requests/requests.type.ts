@@ -573,13 +573,7 @@ export interface ReportTrip {
      * @description The new filename
      * @type {string}
      */
-    filename: string;
-
-    /**
-     * @description The index of the image
-     * @type {number}
-     */
-    index: number;
+    filenames: string[];
 
     /**
      * @description The id of the request
