@@ -73,8 +73,8 @@ import { BehaviorSubject } from "rxjs/internal/BehaviorSubject";
             }).then(() => {
               if(x) {
                 this._confirmLoading$.next(false);
-                this.notificationService.successNotification('moduleList.registerItem.confirmOrder.modal.notification.success');
                 this.router.navigate([PartnerRoutes.gpPickUp.fullPath()]);
+                this.notificationService.successNotification('moduleList.registerItem.confirmOrder.modal.notification.success');
               } else {
                 this.notificationService.errorNotification('moduleList.registerItem.confirmOrder.modal.notification.error');
               }
@@ -105,8 +105,8 @@ import { BehaviorSubject } from "rxjs/internal/BehaviorSubject";
           }).then(() => {
             if(x) {
               this._cancelLoading$.next(false);
-              this.notificationService.successNotification('moduleList.registerItem.cancelOrder.modal.notification.success');
               this.router.navigate([PartnerRoutes.gpPickUp.fullPath()]);
+              this.notificationService.successNotification('moduleList.registerItem.cancelOrder.modal.notification.success');
             } else {
               this.notificationService.errorNotification('moduleList.registerItem.cancelOrder.modal.notification.error');
             }

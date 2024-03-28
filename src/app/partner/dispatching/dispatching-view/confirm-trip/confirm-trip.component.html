@@ -18,8 +18,17 @@
         ></gh-create-layover>
         <hr class="gp-divider">
         <div class="section">
-            <button [disabled]="!form.valid" class="gp-button" (click)="confirm()">{{ 'moduleList.dispatching.view.confirmButton' | translate }}</button>
-            <button class="attention-button" (click)="cancelTrip()">{{ 'moduleList.dispatching.view.cancelButton' | translate }}</button>
+            <button
+                [buttonLoading]="confirmLoading$ | async" 
+                [disabled]="!form.valid" 
+                class="gp-button" 
+                (click)="confirm()"
+            >{{ 'moduleList.dispatching.view.confirmButton' | translate }}</button>
+            <button 
+                [buttonLoading]="cancelLoading$ | async"
+                class="attention-button" 
+                (click)="cancelTrip()"
+            >{{ 'moduleList.dispatching.view.cancelButton' | translate }}</button>
         </div>
     </div>
 </div>

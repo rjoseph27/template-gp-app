@@ -1,9 +1,9 @@
 import { AfterContentChecked, ChangeDetectorRef, Component, inject } from "@angular/core";
 import { CurrentFormService } from "../../../../services/current-form.service";
 import { ModalService } from "../../../../services/modal.service";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
 import { ReportTrip } from "../../../../api/requests/requests.type";
-import { Observable, map } from "rxjs";
+import { BehaviorSubject, Observable, map } from "rxjs";
 import { FormMode } from "../../../../misc/enums/form-mode.enum";
 import { SUCCURSALE_BY_COUNTRY } from "../../../../misc/constants/countries/countries.type";
 import { NotificationService } from "../../../../services/notification.service";
@@ -22,12 +22,30 @@ import { NavigationService } from "../../../../services/navigation.service";
      * @type {ActivatedRoute}
      */
     protected readonly route: ActivatedRoute = inject(ActivatedRoute);
-    
+
     /**
-     * @description The router service
-     * @type {Router}
+     * @description The backing field for cancel loading
+     * @type {BehaviorSubject<boolean>}
      */
-    private readonly router: Router = inject(Router);
+    private readonly _cancelLoading$ = new BehaviorSubject<boolean>(false);
+
+    /**
+     * @description The loading state of the cancel button
+     * @type {Observable<boolean>}
+     */
+    protected readonly cancelLoading$ = this._cancelLoading$.asObservable();
+
+    /**
+     * @description The backing field for confirm loading
+     * @type {BehaviorSubject<boolean>}
+     */
+    private readonly _confirmLoading$ = new BehaviorSubject<boolean>(false);
+
+    /**
+     * @description The loading state of the confirm button
+     * @type {Observable<boolean>}
+     */
+    protected readonly confirmLoading$ = this._confirmLoading$.asObservable();
     
     /**
      * @description The details of the trip
@@ -136,12 +154,13 @@ import { NavigationService } from "../../../../services/navigation.service";
             confirmCaption: "moduleList.dispatching.view.confirm.modal.confirm",
             cancelCaption: "moduleList.dispatching.view.confirm.modal.cancel"
           }).then(async x => {
+            this._confirmLoading$.next(true);
             if(x) {
                 const isConfirmed = await this.requestsService.confirmTrip({
                     tripId: this.route.snapshot.data['trip'].id,
                     layovers: this.form.get('layover').value
                   })
-                
+                  this._confirmLoading$.next(false);
                 if(isConfirmed) {
                     this.notificationService.successNotification("moduleList.dispatching.view.confirm.modal.notification.success");
                     this.navigationService.goToPreviousPage();
@@ -163,9 +182,11 @@ import { NavigationService } from "../../../../services/navigation.service";
           confirmCaption: "moduleList.dispatching.view.confirm.cancelModal.acceptButton",
           cancelCaption: "moduleList.dispatching.view.confirm.cancelModal.rejectButton"
         }).then(async x => {
+          this._cancelLoading$.next(true);
           const id = this.route.snapshot.data['trip'].id;
           if(x) {
               const isCanceledSucessfully = await this.requestsService.cancelTrip(id);
+              this._cancelLoading$.next(false);
               if(isCanceledSucessfully) {
                   this.notificationService.successNotification('moduleList.dispatching.view.confirm.cancelModal.notification.success');
                   this.navigationService.goToPreviousPage();

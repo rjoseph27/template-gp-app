@@ -4,6 +4,7 @@ import { ClientRoutes } from '../client/client.route';
 import { GlobalRoutes } from '../global.route';
 import { GhRoute } from '../misc/classes/route';
 import { PartnerRoutes } from '../partner/partner.route';
+import { BehaviorSubject, skip, take, takeUntil, tap } from 'rxjs';
 
 /**
  * @class NavigationService
@@ -16,6 +17,40 @@ export class NavigationService {
    * @type {Router}
    */
   private readonly router: Router = inject(Router);
+
+  /**
+   * @description Backing field for the last url
+   * @type {BehaviorSubject<string>}
+   */
+  private readonly _lastUrl$ = new BehaviorSubject<string>(undefined);
+
+  /**
+   * @description The last url
+   * @type {BehaviorSubject<string>}
+  */
+  set lastUrl(value: string) {
+    this._lastUrl$.next(value);
+  }
+  get lastUrl() {
+    return this._lastUrl$.value;
+  }
+
+  /**
+   * @description Backing field for the notification message
+   * @type {BehaviorSubject<string>}
+   */
+  private readonly _isNotificationOpen$ = new BehaviorSubject<boolean>(false);
+
+  /**
+   * @description Determines whether the notification is open
+   * @type {BehaviorSubject<boolean>}
+  */
+  set isNotificationOpen(value: boolean) {
+    this._isNotificationOpen$.next(value);
+  }
+  get isNotificationOpen() {
+    return this._isNotificationOpen$.value;
+  }   
 
   /**
    * @description Redirects to the main page
@@ -75,4 +110,17 @@ export class NavigationService {
       this.router.navigate([this.currentRoute?.parentRoute.fullPath()]);
     }
   }
+
+  /**
+   * @constructor
+  */
+  constructor() {
+    this.router.events.pipe(tap((e) => {
+      if(e instanceof NavigationEnd) {
+            if(this._lastUrl$.value === undefined) {
+                this._lastUrl$.next((<NavigationEnd>e).url);
+            }
+        }
+    }), takeUntil(this._lastUrl$.asObservable().pipe(skip(1)))).subscribe()
+}
 }

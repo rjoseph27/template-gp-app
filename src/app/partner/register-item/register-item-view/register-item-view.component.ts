@@ -85,8 +85,8 @@ import { NotificationService } from "../../../services/notification.service";
           }).then(() => {
             if(x) {
               this._cancelLoading$.next(false);
-              this.notificationService.successNotification('moduleList.registerItem.cancelOrder.modal.notification.success');
               this.router.navigate([PartnerRoutes.registerItem.fullPath()]);
+              this.notificationService.successNotification('moduleList.registerItem.cancelOrder.modal.notification.success');
             } else {
               this.notificationService.errorNotification('moduleList.registerItem.cancelOrder.modal.notification.error');
             }

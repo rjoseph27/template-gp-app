@@ -5,7 +5,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from '../../elements/menu/menu.interface';
 import { APPLICATION_NAME } from '../../../misc/constants/application';
 import { NavigationService } from '../../../services/navigation.service';
-import { LANGUAGE_LOCAL_STORAGE_KEY } from '../../../misc/constants/local-storage';
 import { UsersService } from '../../../services/users.service';
 import { GlobalTranslateService } from '../../../services/global-translate.service';
 

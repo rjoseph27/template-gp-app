@@ -140,12 +140,12 @@ import { EditItemInformationStatus } from "../../../api/requests/requests.type";
           }
 
           this.requestsService.editItemInformation(orderToEdit).then((x) => {
-            this.notificationService.successNotification('moduleList.registerItem.edit.modal.notification.success');
             if(x === EditItemInformationStatus.ITEM_WILL_BE_REVIEWED_BY_GP) {
               this.router.navigate([PartnerRoutes.registerItem.fullPath()]);
             } else {
               this.navigationService.goToPreviousPage();
             }
+            this.notificationService.successNotification('moduleList.registerItem.edit.modal.notification.success');
           })
         }
       });

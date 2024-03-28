@@ -1,7 +1,10 @@
 import { Injectable, inject } from '@angular/core';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { NavigationEnd, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { NavigationService } from './navigation.service';
 
 /**
  * @constant
@@ -16,10 +19,22 @@ const CLOSE_ACTION = 'X';
 @Injectable()
 export class NotificationService {
     /**
+    * @description The navigation service
+    * @type {NavigationService}
+    */
+    private readonly navigationService: NavigationService = inject(NavigationService)
+
+    /**
     * @description The snackbar
     * @type {MatSnackBar}
     */
     private readonly snackBar: MatSnackBar = inject(MatSnackBar);
+
+    /**
+     * @description The router service
+     * @type {Router}
+     */
+    private readonly router: Router = inject(Router);
 
     /**
      * @description The translate service
@@ -65,5 +80,26 @@ export class NotificationService {
         this.translateService.get(message).pipe(
             tap(m => this.snackBar.open(m, CLOSE_ACTION, {...defaultConfig, ...config}))
         ).subscribe();
+
+        this.navigationService.isNotificationOpen = true;
       }
+
+    /**
+     * @constructor
+     */
+    constructor() {
+        this.router.events.subscribe((e) => {
+            if(e instanceof NavigationEnd) {
+                if((<NavigationEnd>e).url !== this.navigationService.lastUrl) {
+                    if(!this.navigationService.isNotificationOpen) {
+                        this.snackBar.dismiss();
+                    }
+                    if(this.navigationService.isNotificationOpen) {
+                        this.navigationService.isNotificationOpen = false;
+                    }
+                    this.navigationService.lastUrl = (<NavigationEnd>e).url
+                }
+            }
+        })
+    }
 }
