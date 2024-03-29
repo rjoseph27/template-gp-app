@@ -65,7 +65,7 @@ interface DayPoint {
     templateUrl: './calendar.component.html',
     styleUrls: ['./calendar.component.scss'],
   })
-  export class GhCalendarComponent {
+  export class GhCalendarComponent implements OnInit {
    /**
     * @description The month
     * @type {number}
@@ -215,7 +215,7 @@ interface DayPoint {
     * @description Backing field for the base date
     * @type {BehaviorSubject<Date>}
     */
-   private readonly _baseDate$ = new BehaviorSubject<Date>(new Date(this.year, this.month, 1));
+   private readonly _baseDate$ = new BehaviorSubject<Date>(undefined);
 
    /**
     * @description An observable for the base date
@@ -245,7 +245,7 @@ interface DayPoint {
     * @description The first day of the month
     * @type {Observable<number>}
     */
-   private readonly _firstDayOfMonth$ = new BehaviorSubject<number>(this._baseDate$.value.getDay());
+   private readonly _firstDayOfMonth$ = new BehaviorSubject<number>(undefined);
 
    /**
    * @description The previous month icon
@@ -312,6 +312,12 @@ interface DayPoint {
     * @type {Date}
     */
    protected readonly minimumMonth = DateUtil.currentBaseDate();
+
+   /** @inheritdoc */
+   ngOnInit(): void {
+    this._baseDate$.next(new Date(this.year, this.month, 1));
+    this._firstDayOfMonth$.next(this._baseDate$.value.getDay() - 1);
+  }
 
    /**
     * @description A method to select a date
@@ -409,8 +415,7 @@ interface DayPoint {
     */
    private changeMonth(month: number): void {
       this._baseDate$.next(new Date(this.year, month, 1));
-      this.month = this._baseDate$.value.getMonth();
-      this.year = this._baseDate$.value.getFullYear();
+      this.month = month;
       this._firstDayOfMonth$.next(this._baseDate$.value.getDay() - 1);
       this.monthYearChange.emit(this._baseDate$.value);
       if(this._selectedDate$.value) {
@@ -425,7 +430,12 @@ interface DayPoint {
     * @returns {void}
     */
    protected goPreviousMonth(): void {
-      this.changeMonth(this.month - 1);
+      let newMonth = +this.month - 1;
+      if(newMonth < 0) {
+        this.year--;
+        newMonth = 11;
+      }
+      this.changeMonth(newMonth);
     }
 
     /**
@@ -433,7 +443,12 @@ interface DayPoint {
     * @returns {void}
     */
    protected goNextMonth(): void {
-    this.changeMonth(this.month + 1);
+    let newMonth = +this.month + 1;
+    if(newMonth > 11) {
+      this.year++;
+      newMonth = 0;
+    }
+    this.changeMonth(newMonth);
    }
 
    /**

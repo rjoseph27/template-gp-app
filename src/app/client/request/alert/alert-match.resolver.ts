@@ -6,6 +6,7 @@ import { ClientRoutes } from "../../client.route";
 import { DateUtil } from "../../../misc/util/date.util";
 import { ClientRequestsService } from "../../service/requests.service";
 import { CurrencyService } from "../../../services/currency.service";
+import { ItemsStatus } from "../../orders/base-orders.component";
 
 /**
  * @class ClientAlertMatchResolver
@@ -47,8 +48,11 @@ export class ClientAlertMatchResolver implements Resolve<any> {
   async resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<any> {
     this.loadingService.startLoading();
     this.sendItemsService.requests = await this.requestsService.getSendItemsInfo((<any>route.queryParams).id)
-    if(this.sendItemsService.requests) {
-            const trips = await this.requestsService.searchTrips(this.sendItemsService.requests);
+    
+    if(this.sendItemsService.requests && this.sendItemsService.requests.itemInformation.some(x => x.status === ItemsStatus.ON_ALERT)) {
+            const month = DateUtil.addDaysFromDate(new Date(),1);
+            month.setMonth((<any>route.queryParams).month)
+            const trips = await this.requestsService.searchTrips(this.sendItemsService.requests, month);
             const currency = await this.currencyService.getCurrency(this.sendItemsService.requests.currency);
             this.loadingService.endLoading();
             return {

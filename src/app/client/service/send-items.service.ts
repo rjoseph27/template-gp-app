@@ -10,6 +10,12 @@ import { Currency } from "../../misc/enums/currency.enum";
  */
 export interface SendItemsRequest {
     /**
+     * @description The id of the request
+     * @type {string}
+     */
+    id?: string;
+
+    /**
      * @description The user id
      * @type {string}
      */

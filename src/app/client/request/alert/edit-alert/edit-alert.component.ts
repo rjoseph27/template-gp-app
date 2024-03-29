@@ -29,12 +29,16 @@ import { ClientRoutes } from "../../../client.route";
         combineLatest([this.request$, this.currentFormService.submitting$]).pipe(
             tap(async ([routeData, loading]) => {
               if(loading) {
+                    const items = {...this.currentFormService.currentForm.value, userId: this.usersService.currentUserId, currency: this.currency.currency}
+                    delete items.from
+                    delete items.to
+                    delete items.maxPrice
                     const request: CreateAlertRequest = {
                         route: {
                             from: this.currentFormService.currentForm.value.userRegion,
                             to: this.currentFormService.currentForm.value.destinationRegion
                         },
-                        items: <SendItemsRequest>this.currentFormService.currentForm.value,
+                        items: items,
                         userId: this.usersService.currentUserId,
                         alertId: routeData.alertId,
                         from: this.currentFormService.currentForm.value.from,
