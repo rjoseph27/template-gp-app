@@ -35,6 +35,7 @@ import { ClientEditAlertResolver } from './request/alert/edit-alert/edit-alert.r
 import { ClientOrderTrackingComponent } from './orders/client-orders/order-tracking/order-tracking.component';
 import { TrackingResolver } from '../services/tracking.resolver';
 import { ClientTripInfoResovler } from './orders/trip-list/trip-info.resolver';
+import { ClientAlertMatchResolver } from './request/alert/alert-match.resolver';
 
 /**
  * @constant routes
@@ -75,7 +76,8 @@ const routes: Routes = [
     { path: `${ClientRoutes.alertList}`, children: [
         { path: '', component: ClientAlertListComponent, pathMatch: 'full', resolve: { userInfo: ClientApplicationResolver, alertList: ClientAlertListResolver}},
         { path: `${ClientRoutes.createAlert}`, component: ClientCreateAlertComponent, pathMatch: 'full', resolve: { userInfo: ClientApplicationResolver }},
-        { path: `${ClientRoutes.editAlert}`, component: ClientEditAlertComponent, pathMatch: 'full', resolve: { userInfo: ClientApplicationResolver, alert: ClientEditAlertResolver }}
+        { path: `${ClientRoutes.editAlert}`, component: ClientEditAlertComponent, pathMatch: 'full', resolve: { userInfo: ClientApplicationResolver, alert: ClientEditAlertResolver }},
+        { path: `${ClientRoutes.alertMatch}`, component: ClientCalendarComponent, pathMatch: 'full', resolve: { userInfo: ClientApplicationResolver, calendarInfo: ClientAlertMatchResolver }},
     ]}
 ];
 

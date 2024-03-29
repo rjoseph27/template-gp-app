@@ -49,6 +49,7 @@ import { ClientEditAlertComponent } from './request/alert/edit-alert/edit-alert.
 import { ClientEditAlertResolver } from './request/alert/edit-alert/edit-alert.resolver';
 import { ClientOrderTrackingComponent } from './orders/client-orders/order-tracking/order-tracking.component';
 import { ClientTripInfoResovler } from './orders/trip-list/trip-info.resolver';
+import { ClientAlertMatchResolver } from './request/alert/alert-match.resolver';
 
 /**
  * @module ClientModule
@@ -118,6 +119,7 @@ import { ClientTripInfoResovler } from './orders/trip-list/trip-info.resolver';
         ClientApplicationService,
         RequestsServiceApi,
         NotificationService,
+        ClientAlertMatchResolver
     ]
 })
 export class ClientModule {

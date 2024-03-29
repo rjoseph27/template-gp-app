@@ -183,4 +183,10 @@ export class ClientRoutes {
      * @type {GhRoute}
      */
     static readonly editAlert: GhRoute = new GhRoute('edit', ClientRoutes.alertList);
+
+    /**
+     * @description The match alert route
+     * @type {GhRoute}
+     */
+    static readonly alertMatch: GhRoute = new GhRoute('match', ClientRoutes.alertList);
 }
