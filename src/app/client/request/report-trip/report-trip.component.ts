@@ -18,18 +18,12 @@ import { FormMode } from "../../../misc/enums/form-mode.enum";
   styleUrls: ['../request.scss'],
   providers: [CurrentFormService]
 })
-export class ClientReportTripComponent extends BaseRequestComponent implements OnInit, AfterContentChecked {
+export class ClientReportTripComponent extends BaseRequestComponent implements OnInit {
   /**
    * @description The currency of the user
    * @type {string}
    */
   protected readonly userCurrency = COUNTRY_INFO_LIST.find(x => x.name === this.userCountry).currency;
-
-  /**
-   * @description The change detector reference
-   * @type {ChangeDetectorRef}
-   */
-  private readonly changeDetectorRef: ChangeDetectorRef = inject(ChangeDetectorRef);
 
   /**
    * @description The requests service
@@ -68,10 +62,5 @@ export class ClientReportTripComponent extends BaseRequestComponent implements O
         }
       })
     ).subscribe()
-  }
-
-  /** @inheritdoc */
-  ngAfterContentChecked() {
-    this.changeDetectorRef.detectChanges();
   }
 }

@@ -90,7 +90,7 @@ export class DateUtil {
         {
             return {
                 date: dateFormat,
-                dateString: dateFormat.toISOString().split('T')[0],
+                dateString: dateFormat.getFullYear()+"/"+(dateFormat.getMonth()+1).toString().padStart(2, '0')+"/"+dateFormat.getDate().toString().padStart(2, '0'),
             };
         }
         return undefined;

@@ -1,9 +1,8 @@
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/router";
-import { AlertFormType, CreateAlertRequest } from "../../../../api/requests/requests.type";
+import { CreateAlertRequest } from "../../../../api/requests/requests.type";
 import { Injectable, inject } from "@angular/core";
 import { LoadingService } from "../../../../services/loading.service";
 import { ClientRequestsService } from "../../../service/requests.service";
-import { AlertTableElement } from "../../../../core/layouts/alert-table/alert-table.component";
 import { DateUtil } from "../../../../misc/util/date.util";
 
 /**

@@ -1,4 +1,4 @@
-import { Directive, inject } from "@angular/core";
+import { AfterContentChecked, ChangeDetectorRef, Directive, inject } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { CurrentFormService } from "../../services/current-form.service";
 import { UsersService } from "../../services/users.service";
@@ -9,7 +9,7 @@ import { COUNTRY_INFO_LIST } from "../../misc/constants/countries/countries";
  * @description The base request component
  */
 @Directive()
-export class BaseRequestComponent {
+export class BaseRequestComponent implements AfterContentChecked {
   /**
    * @description The activated route service
    * @type {ActivatedRoute}
@@ -45,4 +45,15 @@ export class BaseRequestComponent {
    * @type {CurrentFormService}
    */
   protected readonly currentFormService: CurrentFormService = inject(CurrentFormService);
+
+  /**
+   * @description The change detector reference
+   * @type {ChangeDetectorRef}
+  */
+  private readonly changeDetectorRef: ChangeDetectorRef = inject(ChangeDetectorRef);
+
+  /** @inheritdoc */
+  ngAfterContentChecked() {
+    this.changeDetectorRef.detectChanges();
+  }
 }
