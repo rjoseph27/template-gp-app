@@ -305,17 +305,15 @@ export class ClientRequestsService {
         return this.requestsServiceApi.editAlert(alert).then(async msg => {
             if(msg.message === EditAlertStatus.ALERT_EDITED_SUCCESSFULLY)
             {
-                const imgList = alert.items.itemInformation.map(async (item) =>{
-                    if(typeof item.image !== 'string')
-                    {
+                const imgList = alert.items.itemInformation
+                    .filter(item => typeof item.image !== 'string')
+                    .map(async (item) =>{
                         const formData = new FormData();
                         formData.append('image', item.image);
                         return await this.requestsServiceApi.uploadImages(formData).then(async img => {
                             return img;
                         });
-                    }
-                    return undefined
-                })
+                    })
                 
                 Promise.all(imgList).then(async (x) => {
                     await this.requestsServiceApi.updateImageName({id: alert.itemId, filenames: x})
