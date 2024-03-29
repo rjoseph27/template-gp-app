@@ -52,7 +52,6 @@ export class ClientAlertMatchResolver implements Resolve<any> {
             const currency = await this.currencyService.getCurrency(this.sendItemsService.requests.currency);
             this.loadingService.endLoading();
             return {
-                month: DateUtil.addDaysFromDate(new Date(),1).getMonth(),
                 trips: trips,
                 rates: currency
             };

@@ -57,6 +57,7 @@
 <div class="sidebar" *ngIf="filterSelected$ | async">
   <gh-filter-trip
     (closed)="closeFilterView()"
+    [filterValue]="filterValue"
     (filterValueChange)="filterValue = $event"
     [captions]="filterTripCaptions"
     [country]="items?.userCountry"

@@ -1,11 +1,10 @@
-import { Component, ElementRef, EventEmitter, Input, Output, Renderer2, inject } from "@angular/core";
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, inject } from "@angular/core";
 import { NEXT_PAGE_ICON, PREVIOUS_PAGE_ICON } from "../../../../misc/constants/icon";
 import { Month, TripInfo, WeekDays } from "./calendar.enum";
 import { BehaviorSubject, map } from "rxjs";
 import { ReportTrip } from "../../../../api/requests/requests.type";
 import { SendItemsRequest } from "../../../../client/service/send-items.service";
 import { MoneyUtil } from "../../../../misc/util/money.util";
-import { Unit } from "../report-trip/report.time.constant";
 import { DateUtil } from "../../../../misc/util/date.util";
 import { SelectTripCaption } from "./console-view/select-trip/select-trip.component";
 import { FilterTripCaption } from "./console-view/filter-trip/filter-trip.component";
@@ -66,7 +65,7 @@ interface DayPoint {
     templateUrl: './calendar.component.html',
     styleUrls: ['./calendar.component.scss'],
   })
-  export class GhCalendarComponent  {
+  export class GhCalendarComponent {
    /**
     * @description The month
     * @type {number}
@@ -113,10 +112,10 @@ interface DayPoint {
      * @description The filter value
      * @type {number}
      */
-    protected set filterValue(value: number) {
+    @Input() set filterValue(value: number) {
       this._filterValue$.next(value);
     }
-    protected get filterValue() {
+    get filterValue() {
       return this._filterValue$.value;
     }
 

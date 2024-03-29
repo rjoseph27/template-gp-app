@@ -1,6 +1,8 @@
 <gh-calendar 
-    [month]="months" 
-    (monthYearChange)="searchTrips($event)" 
+    [month]="month$ | async" 
+    [year]="year$ | async"
+    (monthYearChange)="searchTrips($event)"
+    [filterValue]="maxPrice$ | async"
     [elements]="shippingList$ | async" 
     [items]="items" 
     [rates]="rates"
