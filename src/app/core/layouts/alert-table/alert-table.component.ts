@@ -110,9 +110,9 @@ export interface AlertTableElement {
 
     /**
      * @description The delete table factory
-     * @type {(element: AlertTableElement) => void}
+     * @type {(element: AlertTableElement) => Promise<boolean>}
      */
-    @Input() deleteTableFactory: (element: AlertTableElement) => void;
+    @Input() deleteTableFactory: (element: AlertTableElement) => Promise<boolean>;
    
     /** @inheritdoc */
     ngOnInit(): void {

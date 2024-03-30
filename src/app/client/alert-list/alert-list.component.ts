@@ -63,10 +63,10 @@ import { ClientRequestsService } from '../service/requests.service';
 
     /**
      * @description The delete table factory
-     * @type {(row: AlertTableElement) => void}
+     * @type {(row: AlertTableElement) => Promise<boolean>}
      */
-    protected readonly deleteTableFactory = (row: AlertTableElement) => {
-      this.modalService.openModal({
+    protected readonly deleteTableFactory = async (row: AlertTableElement) => {
+      return await this.modalService.openModal({
         title: "moduleList.client.alerts.deleteAlert.title",
         text: "moduleList.client.alerts.deleteAlert.content",
         confirmCaption: "moduleList.client.alerts.deleteAlert.acceptButton",
@@ -79,7 +79,9 @@ import { ClientRequestsService } from '../service/requests.service';
           } else {
             this.notificationService.errorNotification('moduleList.client.alerts.deleteAlert.notification.error');
           }
+          return isCanceledSucessfully;
         }
+        return false;
       });
     }
 

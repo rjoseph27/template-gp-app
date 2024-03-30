@@ -199,9 +199,9 @@ export class GhTableComponent implements AfterViewInit {
 
   /**
    * @description The delete factory to delete an element
-   * @type {(element: any) => void}
+   * @type {(element: any) => Promise<boolean>}
    */
-  @Input() deleteFactory: (element: any) => void;
+  @Input() deleteFactory: (element: any) => Promise<boolean>;
 
   /**
    * @description The edit factory to edit an element
@@ -245,10 +245,13 @@ export class GhTableComponent implements AfterViewInit {
    * @param index The index of the element to delete
    * @returns {void}
    */
-  protected deleteElement(element: any): void {
-    this.elements = this.elements.filter((e: any) => e[this.idProperty] !== element[this.idProperty]);
-    this.deleteFactory(element);
-    this.elementsChange.emit(this.elements);
+  protected async deleteElement(element: any): Promise<void> {
+    const isDeleted = await this.deleteFactory(element);
+    console.log(isDeleted)
+    if(isDeleted) {
+      this.elements = this.elements.filter((e: any) => e[this.idProperty] !== element[this.idProperty]);
+      this.elementsChange.emit(this.elements);
+    }
   }
 
   /**

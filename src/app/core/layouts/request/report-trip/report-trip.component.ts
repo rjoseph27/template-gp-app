@@ -182,10 +182,11 @@ export class GhReportTripComponent extends BaseRequestComponent implements OnIni
 
   /**
    * @description The function to delete a specific item in the table.
-   * @returns {(element: SpecificPrice) => void}
+   * @returns {(element: SpecificPrice) => boolean}
    */
-  protected readonly deleteSpecificItemFactory = (element: SpecificPrice) => {
+  protected readonly deleteSpecificItemFactory = async (element: SpecificPrice) => {
     this.specificPriceFormControl.removeAt(element.id);
+    return true
   }
 
   /**
