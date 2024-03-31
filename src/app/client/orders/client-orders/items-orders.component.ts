@@ -73,19 +73,13 @@ import { LoadingService } from '../../../services/loading.service';
           return {
             label: 'moduleList.client.orders.status.canceledByGp',
             icon: 'calendar_month',
-            action: async () => {
-                this.loadingService.startLoading();
-                const order = await this.requestsService.getItemInformation({
-                  id: row.id,
-                  status: row.status,
-                  from: row.route.from,
-                  to: row.route.to,
-                  deliveryDate: row.deliveryDate,
-                });
-                const sendItemsInfo = await this.requestsService.getSendItemsInfo(order.itemGroupId);
-                this.sendItemsService.requests = sendItemsInfo;
-                this.router.navigate([ClientRoutes.calendar.fullPath()])
-              }
+            action: async () => this.router.navigate([ClientRoutes.rescheduleOrder.fullPath()], { queryParams: {
+              id: row.id,
+              status: row.status,
+              from: row.route.from,
+              to: row.route.to,
+              deliveryDate: row.deliveryDate,
+            }})
             }
           case ItemsStatus.WAIT_ON_PAYMENT:
           case ItemsStatus.AT_CHECKPOINT:

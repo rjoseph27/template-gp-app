@@ -113,6 +113,12 @@ export class ClientRoutes {
     static readonly atCheckPoint: GhRoute = new GhRoute('at-check-point', ClientRoutes.clientOrder);
 
     /**
+     * @description The reschedule order route
+     * @type {GhRoute}
+     */
+    static readonly rescheduleOrder: GhRoute = new GhRoute('reschedule-order', ClientRoutes.clientOrder);
+
+    /**
      * @description The item with GP route
      * @type {GhRoute}
      */
