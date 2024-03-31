@@ -69,32 +69,32 @@ export class ClientRequestsService {
     /**
      * @description Sends items
      * @param confirmItemRequest The confirm item request
-     * @returns {Promise<string>}
+     * @returns {Promise<boolean>}
      */
-    sendItems(confirmItemRequest: ConfirmItemRequest): Promise<string> {
+    sendItems(confirmItemRequest: ConfirmItemRequest): Promise<boolean> {
         let id: string;
         return this.requestsServiceApi.sendItems(confirmItemRequest).then(async msg => {
             if(msg.message === SendItemsStatus.ITEMS_SENT_SUCCESSFULLY)
             {
-                const imgList = confirmItemRequest.items.itemInformation.map(async (item) =>{
-                    if(typeof item.image !== 'string')
-                    {
+                const imgList = confirmItemRequest.items.itemInformation
+                    .filter(item => typeof item.image !== 'string')
+                    .map(async (item) => {
                         const formData = new FormData();
                         formData.append('image', item.image);
                         id = msg.newId 
                         return await this.requestsServiceApi.uploadImages(formData).then(async img => {
                             return img;
-                        });
-                    }
-                    return undefined
+                        })
                 })
                 
-                Promise.all(imgList).then(async (x) => {
-                    await this.requestsServiceApi.updateImageName({id: msg.newId, filenames: x})
-                });
-                return id
+                if(imgList.length) {
+                    Promise.all(imgList).then(async (x) => {
+                        await this.requestsServiceApi.updateImageName({id: msg.newId, filenames: x})
+                    });
+                }
+                return true
             }
-            return undefined
+            return false
         });
     }
 
