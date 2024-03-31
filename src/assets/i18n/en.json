@@ -651,6 +651,10 @@
             "October": "October",
             "November": "November",
             "December": "December"
+        },
+        "Unit": {
+            "perItem": "Per item",
+            "perKg": "Per KG"
         }
     },
     "unit": {

@@ -173,6 +173,7 @@ export class GhTableComponent implements AfterViewInit {
    */
   @Input() set elements(value: any) {
     this._elements$.next(value);
+    this.selectedElements = [];
     this.dataSource.data = value;
   } 
   get elements(): any {
@@ -247,7 +248,6 @@ export class GhTableComponent implements AfterViewInit {
    */
   protected async deleteElement(element: any): Promise<void> {
     const isDeleted = await this.deleteFactory(element);
-    console.log(isDeleted)
     if(isDeleted) {
       this.elements = this.elements.filter((e: any) => e[this.idProperty] !== element[this.idProperty]);
       this.elementsChange.emit(this.elements);

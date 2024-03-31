@@ -184,13 +184,13 @@ import { ModalService } from "../../services/modal.service";
             if(x)
             {
                 this._confirmLoading$.next(true);
-                const result = this.requestsService.createBill(this._selectedElements$.value); 
+                const result = await this.requestsService.createBill(this._selectedElements$.value); 
                 this._confirmLoading$.next(false);
                 if(result) {
                     this._elements$.next(this._elements$.value.filter(x => !this._selectedElements$.value.includes(x)));
-                    this._selectedElements$.next([]);
-                    this._currentPrice$.next(0);
                 }
+                this._selectedElements$.next([]);
+                this._currentPrice$.next(0);
             }
         })
     }
