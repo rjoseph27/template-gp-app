@@ -3,7 +3,6 @@ export enum TrackingPointType {
     AT_CHECKPOINT = 'AT_CHECKPOINT',
     ORDER_ACCEPTED = 'ORDER_ACCEPTED',
     WITH_GP = 'WITH_GP',
-    CANCELED_AT_CHECKPOINT = 'CANCELED_AT_CHECKPOINT',
     FIRST_DEPARTURE = 'FIRST_DEPARTURE',
     DEPARTURE = 'DEPARTURE',
     ARRIVAL = 'ARRIVAL',
@@ -58,6 +57,12 @@ export interface TrackingPoint {
  * @description The delivery exception type
  */
 export enum DeliveryExceptionType {
+    /**
+     * @description The order was canceled at checkpoint
+     * @type {string}
+     */
+    CANCELED_AT_CHECKPOINT = 'CANCELED_AT_CHECKPOINT',
+
     /**
      * @description The order was canceled
      * @type {string}

@@ -108,7 +108,7 @@ interface Tracking extends TrackingPoint {
                     type: TrackingPointType.AT_CHECKPOINT,
                     location: this.originCity,
                     orderId: null,
-                    exception: undefined,
+                    exception: history.find(point => point.type === TrackingPointType.AT_CHECKPOINT && point.exception)?.exception,
                     done: true
                 },
                 {
