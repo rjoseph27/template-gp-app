@@ -1,5 +1,6 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
 import { ItemCategory } from "../../../../misc/enums/item-category.enum";
+import { GhDate } from "../../../../misc/classes/gh-date";
 
 /**
  * @enum
@@ -91,26 +92,26 @@ export enum Unit {
    */
   export const flighTimeValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
     if(
-        control.get(DEPARTURE_DATE).value && 
+        control.get(DEPARTURE_DATE).value?.date && 
         control.get(DEPARTURE_TIME).value && 
-        control.get(ARRIVAL_DATE).value && 
+        control.get(ARRIVAL_DATE).value?.date && 
         control.get(ARRIVAL_TIME).value)
     {
-        let departureDate = control.get(DEPARTURE_DATE).value.date;
-        if(typeof departureDate === 'string') {
-            departureDate = new Date(departureDate);
-        }
-        departureDate.setHours(control.get(DEPARTURE_TIME).value.time.hours);
-        departureDate.setMinutes(control.get(DEPARTURE_TIME).value.time.minutes);
-        let arrivalDate = new Date(control.get(ARRIVAL_DATE).value.date.toString());
+        const departureDate = new GhDate(control.get(DEPARTURE_DATE).value.date);
 
-        if(typeof arrivalDate === 'string') {
-          arrivalDate = new Date(arrivalDate);
-        }
-        arrivalDate?.setHours(control.get(ARRIVAL_TIME).value.time.hours);
-        arrivalDate?.setMinutes(control.get(ARRIVAL_TIME).value.time.minutes);
+        departureDate.setTime(
+          control.get(DEPARTURE_TIME).value.time.hours,
+          control.get(DEPARTURE_TIME).value.time.minutes
+        )
+
+        const arrivalDate = new GhDate(control.get(ARRIVAL_DATE).value.date);
+
+        arrivalDate.setTime(
+          control.get(ARRIVAL_TIME).value.time.hours,
+          control.get(ARRIVAL_TIME).value.time.minutes
+        )
   
-       if (arrivalDate < departureDate) {
+       if (arrivalDate.getDate() < departureDate.getDate()) {
          control.get(ARRIVAL_TIME).setErrors({ invalidFlightDate: true });
           control.get(ARRIVAL_DATE).setErrors({ invalidFlightDate: true });
         } else {

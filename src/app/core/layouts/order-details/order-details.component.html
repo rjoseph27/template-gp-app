@@ -3,7 +3,7 @@
 </div>
 <div class="details">
     <div class="section">
-        <div class="label">{{ 'global.orderDetails.orderDate' | translate }}</div><div>{{ orderDetails.orderDate | date: 'dd/MM/yyyy' }}</div>
+        <div class="label">{{ 'global.orderDetails.orderDate' | translate }}</div><div>{{ getDate(orderDetails.orderDate) | date: 'dd/MM/yyyy' }}</div>
     </div>
     <div class="section">
         <div class="label">{{ 'global.orderDetails.shippingOrder' | translate }}</div><div>{{ orderDetails.itemInformation.id }}</div>
@@ -15,10 +15,10 @@
         <div class="label">{{ 'global.orderDetails.to' | translate }}</div><div>{{ orderDetails.destinationRegion }}, {{ orderDetails.destinationCountry }}</div>
     </div>
     <div class="section">
-        <div class="label">{{ 'global.orderDetails.departureTime' | translate }}</div><div>{{ orderDetails.departureDate | date: 'dd/MM/yyyy' }}, {{ orderDetails.departureTime }}</div>
+        <div class="label">{{ 'global.orderDetails.departureTime' | translate }}</div><div>{{ getDate(orderDetails.departureDate) | date: 'dd/MM/yyyy' }}, {{ orderDetails.departureTime }}</div>
     </div>
     <div class="section">
-        <div class="label">{{ 'global.orderDetails.arrivalTime' | translate }}</div><div>{{ orderDetails.arrivalDate | date: 'dd/MM/yyyy' }}, {{ orderDetails.arrivalTime }}</div>
+        <div class="label">{{ 'global.orderDetails.arrivalTime' | translate }}</div><div>{{ getDate(orderDetails.arrivalDate) | date: 'dd/MM/yyyy' }}, {{ orderDetails.arrivalTime }}</div>
     </div>
     <div class="section">
         <div class="label">{{ 'global.orderDetails.totalCost' | translate }}</div><div class="price">{{ orderDetails.price}} {{ currency }}</div>

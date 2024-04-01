@@ -3,6 +3,7 @@ import { ActivatedRoute } from "@angular/router";
 import { map } from "rxjs/operators";
 import { ReportTrip } from "../../../api/requests/requests.type";
 import { CountryUtil } from "../../../misc/util/country.util";
+import { GhDate } from "../../../misc/classes/gh-date";
 
 /**
  * @class BaseTrackingPageComponent
@@ -20,21 +21,16 @@ export class BaseTrackingPageComponent {
          * @description An observable for the trip history
          * @type {Observable<Trip>}
          */
-        protected readonly history$ = this.route.data.pipe(map(data => (<ReportTrip>data['trip']).history.map(x => {
-          x.date = new Date(x.date);
-          return x
-        })));
+        protected readonly history$ = this.route.data.pipe(map(data => (<ReportTrip>data['trip']).history));
     
         /**
          * @description An observable for the departure date
          * @type {Observable<Date>}
          */
         protected readonly departureDate$ = this.route.data.pipe(map(data => {
-          const date = new Date((<ReportTrip>data['trip']).departureDate.dateString);
+          const date = (<ReportTrip>data['trip']).departureDate.date;
           const time = (<ReportTrip>data['trip']).departureTime.time;
-          date.setHours(time.hours);
-          date.setMinutes(time.minutes);
-          return date;
+          return new GhDate({...date, hour: time.hours, minute: time.minutes}).toJson();
         }));
     
         /**
@@ -42,11 +38,9 @@ export class BaseTrackingPageComponent {
          * @type {Observable<Date>}
          */
         protected readonly arrivalDate$ = this.route.data.pipe(map(data => {
-          const date = new Date((<ReportTrip>data['trip']).arrivalDate.dateString);
+          const date = (<ReportTrip>data['trip']).arrivalDate.date;
           const time = (<ReportTrip>data['trip']).arrivalTime.time;
-          date.setHours(time.hours);
-          date.setMinutes(time.minutes);
-          return date;
+          return new GhDate({...date, hour: time.hours, minute: time.minutes}).toJson();
         }));
     
         /**

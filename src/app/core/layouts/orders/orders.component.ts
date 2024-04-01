@@ -3,6 +3,7 @@ import { BehaviorSubject } from "rxjs";
 import { ColumnConfig } from "../../elements/table/table.component";
 import { Status } from "./status/status.component";
 import { FlightRoute } from "../flight-route/flight-route.component";
+import { GhDateProperties } from "../../../misc/classes/gh-date";
 
 /**
  * @interface RequestTableElement
@@ -23,9 +24,9 @@ export interface RequestTableElement {
 
   /**
   * @description The delivery date of the request
-  * @type {Date}
+  * @type {GhDateProperties}
   */
-  deliveryDate: Date;
+  deliveryDate: GhDateProperties;
 
   /**
    * @description The status of the request
@@ -127,5 +128,14 @@ export interface RequestTableElement {
               template: this.statusTemplate,
             },
           ])
+    }
+
+    /**
+     * @description Transforms a GhDateProperties object into a Date object
+     * @param date The date to transform
+     * @returns {Date}
+     */
+    protected getDate(date: GhDateProperties): Date {
+      return new Date(date.year, date.month, date.day);
     }
   }

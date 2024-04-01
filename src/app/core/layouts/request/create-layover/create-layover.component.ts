@@ -5,7 +5,7 @@ import { FormMode } from "../../../../misc/enums/form-mode.enum";
 import { MIN_DATE_VALIDATION, minDateValidator } from "../../../../misc/validation/min-date.validator";
 import { INVALID_DATE_FORMAT_VALIDATION, dateFormatValidator } from "../../../../misc/validation/date-format.validator";
 import { INVALID_TIME_FORMAT_VALIDATION, timeFormatValidator } from "../../../../misc/validation/time-format.validator";
-import { FLIGHT_TIME_INVALID } from "../report-trip/report.time.constant";
+import { FLIGHT_TIME_INVALID } from "../report-trip/report-trip.constant";
 import { REQUIRED_VALIDATION } from "../../../../misc/constants/validations";
 import { MAX_DATE_VALIDATION, maxDateValidator } from "../../../../misc/validation/max-date.validator";
 import { SelectFieldOption } from "../../../elements/input/select-field/select-field.component";
@@ -17,6 +17,7 @@ import { Country } from "../../../../misc/enums/country.enum";
 import { DateFromDatePicker } from "../../../../misc/util/date.util";
 import { TimeFromTimePicker } from "../../../elements/input/time-field/time-field.component";
 import { ArrayUtil } from "../../../../misc/util/array.util";
+import { GhDate } from "../../../../misc/classes/gh-date";
 
 /**
  * @interface Layovers
@@ -282,11 +283,12 @@ export interface Layovers {
    * @type {ValidatorFn}
    */
   private readonly wrongDateOrderValidator: ValidatorFn = (control: AbstractControl) => {
-    const dates: Date[] = [this.minDate,...(<Layovers[]>control.value.layover).map(x => {
-      const date = new Date(x.arrivalDate?.date);
-      date.setHours(x.arrivalTime?.time.hours);
-      date.setMinutes(x.arrivalTime?.time.minutes);
-      return date
+    const dates: Date[] = [this.minDate,...(<Layovers[]>control.value.layover)
+      .filter(x => x.arrivalDate)
+      .map(x => {
+      const date = new GhDate(x.arrivalDate?.date);
+      date.setTime(x.arrivalTime?.time.hours, x.arrivalTime?.time.minutes);
+      return date.getDate()
     }), this.maxDate];
 
     const orderedDates = [...dates].sort((a,b) => a.getTime() - b.getTime());
@@ -344,20 +346,20 @@ export interface Layovers {
         control.get(this.departureDateField)?.value && 
         control.get(this.departureTimeField)?.value)
     {
-        let arrivalDate = new Date(control.get(this.arrivalDateField).value.date.toString());
-        if(typeof arrivalDate === 'string') {
-            arrivalDate = new Date(arrivalDate);
-        }
-        arrivalDate.setHours(control.get(this.arrivalTimeField).value.time.hours);
-        arrivalDate.setMinutes(control.get(this.arrivalTimeField).value.time.minutes);
-        let departureDate = new Date(control.get(this.departureDateField).value.date.toString());
-        if(typeof departureDate === 'string') {
-          departureDate = new Date(departureDate);
-        }
-        departureDate?.setHours(control.get(this.departureTimeField).value.time.hours);
-        departureDate?.setMinutes(control.get(this.departureTimeField).value.time.minutes);
+        const arrivalDate = new GhDate(control.get(this.arrivalDateField).value.date);
 
-       if (departureDate < arrivalDate) {
+        arrivalDate.setTime(
+          control.get(this.arrivalTimeField).value.time.hours,
+          control.get(this.arrivalTimeField).value.time.minutes
+        )
+
+        const departureDate = new GhDate(control.get(this.departureDateField).value.date);
+               
+        departureDate.setTime(
+          control.get(this.departureTimeField).value.time.hours,
+          control.get(this.departureTimeField).value.time.minutes
+        )
+       if (departureDate.getDate() < arrivalDate.getDate()) {
          control.get(this.departureTimeField).setErrors({ invalidFlightDate: true });
           control.get(this.departureDateField).setErrors({ invalidFlightDate: true });
         } else {

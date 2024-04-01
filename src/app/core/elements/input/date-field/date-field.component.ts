@@ -3,6 +3,7 @@ import { BaseInputFieldComponent } from '../base-input-field.component';
 import { CALENDAR_ICON } from '../../../../misc/constants/icon';
 import { DateFromDatePicker, DateUtil, INVALID_DATE } from '../../../../misc/util/date.util';
 import { BehaviorSubject } from 'rxjs';
+import { GhDate } from '../../../../misc/classes/gh-date';
 
 /**
  * @component GhDateFieldComponent
@@ -87,7 +88,11 @@ export class GhDateFieldComponent extends BaseInputFieldComponent<DateFromDatePi
     this.dateValue = new Date((event.target as HTMLInputElement).value).toISOString().split('T')[0].split('-').join('/');
     const decomposedDateValue = this.dateValue.split('/');
     this.valueChange.emit({
-      date: new Date(+decomposedDateValue[0],+decomposedDateValue[1] - 1,+decomposedDateValue[2]),
+      date: {
+        day: parseInt(decomposedDateValue[2]),
+        month: parseInt(decomposedDateValue[1]) - 1,
+        year: parseInt(decomposedDateValue[0])
+      },
       dateString: this.dateValue
     })
     this._isCalendarOpen$.next(false);
@@ -100,7 +105,11 @@ export class GhDateFieldComponent extends BaseInputFieldComponent<DateFromDatePi
   protected emitValue(event: string): void {
     const date = new Date(event);
     this.valueChange.emit({
-      date: date.toString() !== INVALID_DATE ? new Date(event) : undefined,
+      date: date.toString() !== INVALID_DATE ? {
+        day: date.getDate(),
+        month: date.getMonth(),
+        year: date.getFullYear()
+      } : undefined,
       dateString: event
     })
     this._isCalendarOpen$.next(false);

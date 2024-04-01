@@ -4,6 +4,7 @@ import { BehaviorSubject, tap } from "rxjs";
 import { COUNTRY_INFO_LIST } from "../../../../misc/constants/countries/countries";
 import { BaseTrackingComponent } from "../base-tracking.component";
 import { CountryUtil } from "../../../../misc/util/country.util";
+import { GhDate, GhDateProperties } from "../../../../misc/classes/gh-date";
 
 /**
  * @interface Tracking
@@ -78,11 +79,11 @@ interface Tracking extends TrackingPoint {
     ngOnInit(): void {
         this.filteredHistory$.pipe(
             tap(history => {
-                const withGpDate = this.departureDate;
-                withGpDate.setDate(withGpDate.getDate() - 3)
+                const withGpDate = new GhDate(this.departureDate);
+                withGpDate.relativeSetDate(-3)
 
-                const finalCheckpointDate = this.arrivalDate;
-                finalCheckpointDate.setHours(finalCheckpointDate.getHours() + 3);
+                const finalCheckpointDate = new GhDate(this.arrivalDate);
+                finalCheckpointDate.relativeSetTime(3);
 
                 const layovers = [...(this.layovers || []).map(layover => ([{
                     date: layover.arrivalDate.date,
@@ -129,7 +130,7 @@ interface Tracking extends TrackingPoint {
                     done: history.some(point => point.type === TrackingPointType.LAST_ARRIVAL)
                 },
                 {
-                    date: finalCheckpointDate,
+                    date: finalCheckpointDate.toJson(),
                     type: TrackingPointType.FINAL_CHECKPOINT,
                     location: this.destinationCity,
                     orderId: null,
@@ -141,7 +142,7 @@ interface Tracking extends TrackingPoint {
             if(this.orderId) {
                 const withGP = this._trackingPoints$.value;
                 withGP.splice(1, 0, {
-                    date: withGpDate,
+                    date: withGpDate.toJson(),
                     type: TrackingPointType.WITH_GP,
                     location: this.originCity,
                     orderId: null,
@@ -161,4 +162,13 @@ interface Tracking extends TrackingPoint {
     protected getCountry(city: string): string {
         return COUNTRY_INFO_LIST.find(x => x.regions.find(z => z === city))?.name
     }
+
+    /**
+    * @description Transforms a GhDateProperties object into a Date object
+    * @param date The date to transform
+    * @returns {Date}
+    */
+    protected getDate(date: GhDateProperties): Date {
+        return new Date(date.year, date.month, date.day, date.hour, date.minute);
+      }
   }

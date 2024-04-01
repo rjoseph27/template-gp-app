@@ -3,6 +3,7 @@ import { BehaviorSubject } from "rxjs";
 import { ColumnConfig } from "../../elements/table/table.component";
 import { Currency } from "../../../misc/enums/currency.enum";
 import { FlightRoute } from "../flight-route/flight-route.component";
+import { GhDateProperties } from "../../../misc/classes/gh-date";
 
 /**
  * @interface AlertTableElement
@@ -32,8 +33,8 @@ export interface AlertTableElement {
      * @type {Object}
      */
     timeRange: {
-      from?: Date;
-      to?: Date;
+      from?: GhDateProperties;
+      to?: GhDateProperties;
     };
   
     /**
@@ -133,5 +134,14 @@ export interface AlertTableElement {
             template: this.timeRangeTemplate,
         },
         ])
+    }
+
+    /**
+     * @description Transforms a GhDateProperties object into a Date object
+     * @param date The date to transform
+     * @returns {Date}
+     */
+    protected getDate(date: GhDateProperties): Date {
+      return new Date(date.year, date.month, date.day);
     }
   }

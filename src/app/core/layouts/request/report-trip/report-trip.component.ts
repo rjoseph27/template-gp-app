@@ -14,7 +14,7 @@ import { BehaviorSubject } from "rxjs";
 import { GroupedSelectFieldOption, SelectFieldOption } from "../../../elements/input/select-field/select-field.component";
 import { LIST_ITEM_CATEGORY_OPTION } from "../../../../misc/constants/item-category";
 import { EnumUtil } from "../../../../misc/util/enum.util";
-import { ARRIVAL_DATE, ARRIVAL_TIME, DEPARTURE_DATE, DEPARTURE_TIME, EMPTY_TABLE_LOGO, FLIGHT_TIME_INVALID, SpecificPrice, Unit, flighTimeValidator } from "./report.time.constant";
+import { ARRIVAL_DATE, ARRIVAL_TIME, DEPARTURE_DATE, DEPARTURE_TIME, EMPTY_TABLE_LOGO, FLIGHT_TIME_INVALID, SpecificPrice, Unit, flighTimeValidator } from "./report-trip.constant";
 import { FormMode } from "../../../../misc/enums/form-mode.enum";
 import { ReportTrip } from "../../../../api/requests/requests.type";
 

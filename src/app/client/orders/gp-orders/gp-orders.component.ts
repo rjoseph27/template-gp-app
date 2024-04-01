@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { RequestTableElement } from "../../../core/layouts/orders/orders.component";
 import { ItemsStatus, baseOrdersComponent } from "../base-orders.component";
 import { ClientRoutes } from "../../client.route";
+import { GhDate } from "../../../misc/classes/gh-date";
 
 /**
  * @class ClientGpOrdersComponent
@@ -58,7 +59,7 @@ import { ClientRoutes } from "../../client.route";
                 status: row.status,
                 from: row.route.from,
                 to: row.route.to,
-                deliveryDate: row.deliveryDate,
+                deliveryDate: new GhDate(row.deliveryDate).getDate().toISOString(),
               }})
             }
           case ItemsStatus.WAITING_RECEPTION:
@@ -70,7 +71,7 @@ import { ClientRoutes } from "../../client.route";
                 status: row.status,
                 from: row.route.from,
                 to: row.route.to,
-                deliveryDate: row.deliveryDate,
+                deliveryDate: new GhDate(row.deliveryDate).getDate().toISOString(),
               }})
             }
           case ItemsStatus.WAIT_ON_PAYMENT:
@@ -83,7 +84,7 @@ import { ClientRoutes } from "../../client.route";
                 status: row.status,
                 from: row.route.from,
                 to: row.route.to,
-                deliveryDate: row.deliveryDate,
+                deliveryDate: new GhDate(row.deliveryDate).getDate().toISOString(),
               }})
             }
           case ItemsStatus.READY_TO_PICK_UP:
@@ -95,7 +96,7 @@ import { ClientRoutes } from "../../client.route";
                 status: row.status,
                 from: row.route.from,
                 to: row.route.to,
-                deliveryDate: row.deliveryDate,
+                deliveryDate: new GhDate(row.deliveryDate).getDate().toISOString(),
               }})
             }
           case ItemsStatus.WITH_GP:
@@ -107,7 +108,7 @@ import { ClientRoutes } from "../../client.route";
                 status: row.status,
                 from: row.route.from,
                 to: row.route.to,
-                deliveryDate: row.deliveryDate,
+                deliveryDate: new GhDate(row.deliveryDate).getDate().toISOString(),
               }})
             }
           case ItemsStatus.ON_DELIVERY:
@@ -131,7 +132,7 @@ import { ClientRoutes } from "../../client.route";
                 status: row.status,
                 from: row.route.from,
                 to: row.route.to,
-                deliveryDate: row.deliveryDate,
+                deliveryDate: new GhDate(row.deliveryDate).getDate().toISOString(),
               }})
             }
           default:

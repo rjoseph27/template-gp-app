@@ -2,6 +2,7 @@ import { Directive, Input, OnInit } from "@angular/core";
 import { TrackingPoint } from "./tracking.type";
 import { Layovers } from "../request/create-layover/create-layover.component";
 import { BehaviorSubject } from "rxjs";
+import { GhDateProperties } from "../../../misc/classes/gh-date";
 
 /**
  * @class BaseTrackingComponent
@@ -52,15 +53,15 @@ export class BaseTrackingComponent {
 
     /**
      * @description The departure date
-     * @type {Date}
+     * @type {GhDateProperties}
      */
-    @Input() departureDate: Date
+    @Input() departureDate: GhDateProperties
 
     /**
      * @description The arrival date
-     * @type {Date}
+     * @type {GhDateProperties}
      */
-    @Input() arrivalDate: Date
+    @Input() arrivalDate: GhDateProperties
 
     /**
      * @description The origin city

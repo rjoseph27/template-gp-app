@@ -1,4 +1,5 @@
 import { AbstractControl, ValidatorFn, ValidationErrors } from "@angular/forms";
+import { GhDate } from "../classes/gh-date";
 
 /**
  * @constant
@@ -12,17 +13,13 @@ export const MIN_DATE_VALIDATION = 'minDate';
  */
 export const minDateValidator = (minDate: Date): ValidatorFn => {
         return (control: AbstractControl): ValidationErrors | null => {
-            let selectedDate = control.value?.date;
-
-            if(!selectedDate) {
+            if(!control.value?.date) {
                 return null
             }
 
-            if(typeof selectedDate === 'string') {
-                selectedDate = new Date(selectedDate);
-            }
-    
-            if (!isNaN(selectedDate.getTime()) && selectedDate < minDate) {
+            const selectedDate = new GhDate(control.value?.date)
+            
+            if (selectedDate.getDate() < minDate) {
                 return { minDate: minDate };
             }
     

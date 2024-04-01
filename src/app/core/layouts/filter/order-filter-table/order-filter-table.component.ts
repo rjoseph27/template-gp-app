@@ -3,6 +3,7 @@ import { BehaviorSubject } from "rxjs";
 import { ColumnConfig } from "../../../elements/table/table.component";
 import { OrderFilterInfo } from "../../../../api/requests/requests.type";
 import { FlightRoute } from "../../flight-route/flight-route.component";
+import { GhDateProperties } from "../../../../misc/classes/gh-date";
 
 /**
  * @class GhOrderFilterTableComponent
@@ -77,9 +78,18 @@ import { FlightRoute } from "../../flight-route/flight-route.component";
         },
         {
           columnName: 'orderFilter.table.header.deliveryDate',
-          valueAccessor: (row: OrderFilterInfo) => new Date(row.departureDate),
+          valueAccessor: (row: OrderFilterInfo) => row.departureDate,
           template: this.deliveryDateTemplate
         }
       ])
+    }
+
+    /**
+     * @description Transforms a GhDateProperties object into a Date object
+     * @param date The date to transform
+     * @returns {Date}
+     */
+    protected getDate(date: GhDateProperties): Date {
+      return new Date(date.year, date.month, date.day);
     }
   }

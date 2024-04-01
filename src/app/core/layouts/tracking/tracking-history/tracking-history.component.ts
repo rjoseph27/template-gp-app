@@ -3,6 +3,7 @@ import { TrackingPoint } from "../tracking.type";
 import { BehaviorSubject } from "rxjs";
 import { ColumnConfig } from "../../../elements/table/table.component";
 import { COUNTRY_INFO_LIST } from "../../../../misc/constants/countries/countries";
+import { GhDate, GhDateProperties } from "../../../../misc/classes/gh-date";
 
 /**
  * @class GhTrackingHistoryComponent
@@ -49,7 +50,7 @@ import { COUNTRY_INFO_LIST } from "../../../../misc/constants/countries/countrie
             this._columns$.next([          
             {
                 columnName: "tracking.history.table.date",
-                valueAccessor: (row: TrackingPoint) => row.date,
+                valueAccessor: (row: TrackingPoint) => new GhDate(row.date),
                 template: this.dateTemplate
             },
             {
@@ -59,6 +60,15 @@ import { COUNTRY_INFO_LIST } from "../../../../misc/constants/countries/countrie
             },
         ])
     }
+
+    /**
+    * @description Transforms a GhDateProperties object into a Date object
+    * @param date The date to transform
+    * @returns {Date}
+    */
+    protected getDate(date: GhDateProperties): Date {
+        return new Date(date.year, date.month, date.day);
+      }
 
     /**
      * @description Get the country of a city

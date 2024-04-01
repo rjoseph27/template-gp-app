@@ -4,6 +4,7 @@ import { Injectable, inject } from "@angular/core";
 import { LoadingService } from "../../../../services/loading.service";
 import { ClientRequestsService } from "../../../service/requests.service";
 import { DateUtil } from "../../../../misc/util/date.util";
+import { GhDate } from "../../../../misc/classes/gh-date";
 
 /**
  * @interface AlertParams
@@ -43,8 +44,8 @@ async resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promis
     return {
             ...alert, 
             alertId: (<AlertParams>route.queryParams).id,
-            from: DateUtil.formatFromDatePicker(alert.timeRange.from),
-            to: DateUtil.formatFromDatePicker(alert.timeRange.to),
+            from: new GhDate(alert.timeRange.from).formatFromDatePicker(),
+            to: new GhDate(alert.timeRange.to).formatFromDatePicker(),
     }
 }
 }

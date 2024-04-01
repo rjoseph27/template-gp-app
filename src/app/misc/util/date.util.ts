@@ -1,3 +1,5 @@
+import { GhDate, GhDateProperties } from "../classes/gh-date";
+
 /**
  * @interface DateFromDatePicker
  * @description An interface for the date from the date picker
@@ -5,9 +7,9 @@
 export interface DateFromDatePicker {
     /**
      * @description The date
-     * @type {Date}
+     * @type {GhDateProperties}
      */
-    date: Date,
+    date: GhDateProperties,
     
     /**
      * @description The date string
@@ -82,19 +84,12 @@ export class DateUtil {
      * @returns The formatted date
      */
     static formatFromDatePicker(date: Date): DateFromDatePicker {
-        let dateFormat = date
-        if(typeof date === 'string') {
-            dateFormat = new Date(date);
-        }
-        if(dateFormat)
-        {
-            return {
-                date: dateFormat,
-                dateString: dateFormat.getFullYear()+"/"+(dateFormat.getMonth()+1).toString().padStart(2, '0')+"/"+dateFormat.getDate().toString().padStart(2, '0'),
+        const dateFormat = GhDate.fromDate(date);
+        return {
+                date: dateFormat.toJson(),
+                dateString: dateFormat.toString(),
             };
         }
-        return undefined;
-    }
 
     /**
      * @description Gets the current base date

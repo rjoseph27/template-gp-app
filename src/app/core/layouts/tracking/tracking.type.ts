@@ -1,12 +1,62 @@
+import { GhDateProperties } from "../../../misc/classes/gh-date";
+
+/**
+ * @interface TrackingPointType
+ * @description The tracking point type
+ */
 export enum TrackingPointType {
+    /**
+     * @description The trip creation
+     * @type {string}
+     */
     TRIP_CREATION = 'TRIP_CREATION',
+
+    /**
+     * @description The order at checkpoint
+     * @type {string}
+     */
     AT_CHECKPOINT = 'AT_CHECKPOINT',
+
+    /**
+     * @description The order accepted
+     * @type {string}
+     */
     ORDER_ACCEPTED = 'ORDER_ACCEPTED',
+
+    /**
+     * @description The order with gp
+     * @type {string}
+     */
     WITH_GP = 'WITH_GP',
+
+    /**
+     * @description The first departure
+     * @type {string}
+     */
     FIRST_DEPARTURE = 'FIRST_DEPARTURE',
+
+    /**
+     * @description The departure of a layover
+     * @type {string}
+     */
     DEPARTURE = 'DEPARTURE',
+
+    /**
+     * @description The arrival of a layover
+     * @type {string}
+     */
     ARRIVAL = 'ARRIVAL',
+
+    /**
+     * @description The last arrival
+     * @type {string}
+     */
     LAST_ARRIVAL = 'LAST_ARRIVAL',
+
+    /**
+     * @description The final checkpoint
+     * @type {string}
+     */
     FINAL_CHECKPOINT = 'FINAL_CHECKPOINT'
 }
 
@@ -23,9 +73,9 @@ export interface TrackingPoint {
     
     /**
      * @description The planned date
-     * @type {Date}
+     * @type {GhDateProperties}
      */
-    date?: Date;
+    date?: GhDateProperties;
 
     /**
      * @description The type of the tracking point

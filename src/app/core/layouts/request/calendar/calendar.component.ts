@@ -9,6 +9,7 @@ import { DateUtil } from "../../../../misc/util/date.util";
 import { SelectTripCaption } from "./console-view/select-trip/select-trip.component";
 import { FilterTripCaption } from "./console-view/filter-trip/filter-trip.component";
 import { AlertTripCaptions } from "./console-view/alert-trip/alert-trip.component";
+import { GhDate } from "../../../../misc/classes/gh-date";
 
 /**
  * @constant FILTER_ICON
@@ -126,7 +127,7 @@ interface DayPoint {
    @Input() set elements(value: ReportTrip[]) {
       this._elements$.next(value);
       this._dataCellList$.next(value.map((element) => {
-        return { day: new Date(element.departureDate.date).getDate(), id: element.id}
+        return { day: element.departureDate.date.day, id: element.id}
       }));
    }
     get elements() {

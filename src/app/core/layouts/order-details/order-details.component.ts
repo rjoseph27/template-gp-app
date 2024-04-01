@@ -2,7 +2,8 @@ import { Component, Input } from "@angular/core";
 import { Currency } from "../../../misc/enums/currency.enum";
 import { Country } from "../../../misc/enums/country.enum";
 import { ItemInformation } from "../request/item-information/item-information.component";
-import { SpecificPrice } from "../request/report-trip/report.time.constant";
+import { SpecificPrice } from "../request/report-trip/report-trip.constant";
+import { GhDateProperties } from "../../../misc/classes/gh-date";
 
 /**
  * @interface OrderDetails
@@ -11,9 +12,9 @@ import { SpecificPrice } from "../request/report-trip/report.time.constant";
 export interface OrderDetails {
   /**
    * @description The arrival date of the trip
-   * @type {Date}
+   * @type {GhDateProperties}
    */
-  arrivalDate: Date,
+  arrivalDate: GhDateProperties,
 
   /**
    * @description The arrival time of the trip
@@ -29,9 +30,9 @@ export interface OrderDetails {
 
   /**
    * @description The departure date of the trip
-   * @type {Date}
+   * @type {GhDateProperties}
    */
-  departureDate: Date,
+  departureDate: GhDateProperties,
 
   /**
    * @description The departure time of the trip
@@ -71,9 +72,9 @@ export interface OrderDetails {
 
   /**
    * @description The order date
-   * @type {Date}
+   * @type {GhDateProperties}
    */
-  orderDate: Date,
+  orderDate: GhDateProperties,
 
   /**
    * @description The send items id
@@ -133,4 +134,13 @@ export interface OrderDetails {
      * @type {Currency}
      */
     @Input() currency: Currency;
+
+    /**
+     * @description Transforms a GhDateProperties object into a Date object
+     * @param date The date to transform
+     * @returns {Date}
+     */
+    protected getDate(date: GhDateProperties): Date {
+      return new Date(date.year, date.month, date.day);
+    }
   }

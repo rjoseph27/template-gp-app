@@ -5,6 +5,7 @@ import { BehaviorSubject } from "rxjs";
 import { ClientRequestsService } from "../../../../../../client/service/requests.service";
 import { ClientRoutes } from "../../../../../../client/client.route";
 import { Router } from "@angular/router";
+import { GhDateProperties } from "../../../../../../misc/classes/gh-date";
 
 /**
  * @interface SelectTripCaption
@@ -176,5 +177,14 @@ export class GhSelectTripComponent {
    */
   protected seeMyOrders(): void {
     this.router.navigate([ClientRoutes.clientOrder.fullPath()]);
+  }
+
+  /**
+    * @description Transforms a GhDateProperties object into a Date object
+    * @param date The date to transform
+    * @returns {Date}
+  */
+  protected getDate(date: GhDateProperties): Date {
+    return new Date(date.year, date.month, date.day);
   }
 }

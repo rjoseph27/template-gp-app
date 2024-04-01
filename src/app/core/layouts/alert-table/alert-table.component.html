@@ -21,16 +21,16 @@
 
         <ng-template #timeRangeTemplate let-value="value">
             <div *ngIf="value.from && value.to && value.from !== value.to">
-                {{ 'global.alertList.timeRange.to' | translate : { from: value.from | date: 'dd/MM/yyyy', to: value.to | date: 'dd/MM/yyyy' } }}
+                {{ 'global.alertList.timeRange.to' | translate : { from: getDate(value.from) | date: 'dd/MM/yyyy', to: getDate(value.to) | date: 'dd/MM/yyyy' } }}
             </div>
             <div *ngIf="value.from && !value.to">
-                {{ 'global.alertList.timeRange.from' | translate : { from: value.from | date: 'dd/MM/yyyy' } }}
+                {{ 'global.alertList.timeRange.from' | translate : { from: getDate(value.from) | date: 'dd/MM/yyyy' } }}
             </div>
             <div *ngIf="!value.from && value.to">
-                {{ 'global.alertList.timeRange.until' | translate : { until: value.to | date: 'dd/MM/yyyy' } }}
+                {{ 'global.alertList.timeRange.until' | translate : { until: getDate(value.to) | date: 'dd/MM/yyyy' } }}
             </div>
             <div *ngIf="!value.from && !value.to"> - </div>
-            <div *ngIf="value.from && value.to && value.from === value.to"> {{ value.from | date: 'dd/MM/yyyy' }} </div>
+            <div *ngIf="value.from && value.to && value.from === value.to"> {{ getDate(value.from) | date: 'dd/MM/yyyy' }} </div>
         </ng-template>
         
         <ng-template #emptyTemplate>

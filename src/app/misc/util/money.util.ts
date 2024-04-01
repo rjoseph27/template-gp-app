@@ -1,5 +1,5 @@
 import { ItemInformation } from "../../core/layouts/request/item-information/item-information.component";
-import { SpecificPrice, Unit } from "../../core/layouts/request/report-trip/report.time.constant";
+import { SpecificPrice, Unit } from "../../core/layouts/request/report-trip/report-trip.constant";
 import { COUNTRY_INFO_LIST } from "../constants/countries/countries";
 import { CurrencyInfo, SUCCURSALE_BY_COUNTRY } from "../constants/countries/countries.type";
 

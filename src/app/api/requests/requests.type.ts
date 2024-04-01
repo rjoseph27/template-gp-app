@@ -1,6 +1,6 @@
 import { SendItemsRequest } from "../../client/service/send-items.service"
 import { TimeFromTimePicker } from "../../core/elements/input/time-field/time-field.component"
-import { SpecificPrice } from "../../core/layouts/request/report-trip/report.time.constant"
+import { SpecificPrice } from "../../core/layouts/request/report-trip/report-trip.constant"
 import { RequestTableElement } from "../../core/layouts/orders/orders.component"
 import { Country } from "../../misc/enums/country.enum"
 import { Currency } from "../../misc/enums/currency.enum"
@@ -14,6 +14,7 @@ import { AlertTableElement } from "../../core/layouts/alert-table/alert-table.co
 import { ItemInformation } from "../../core/layouts/request/item-information/item-information.component"
 import { TrackingPoint } from "../../core/layouts/tracking/tracking.type"
 import { Layovers } from "../../core/layouts/request/create-layover/create-layover.component"
+import { GhDateProperties } from "../../misc/classes/gh-date"
 
 /**
    * @interface ReportTrip
@@ -1111,9 +1112,9 @@ export interface ReportTrip {
 
     /**
      * @description The departure date
-     * @type {Date}
+     * @type {GhDateProperties}
      */
-    departureDate: Date,
+    departureDate: GhDateProperties,
 
     /**
      * @description The id of the send item request

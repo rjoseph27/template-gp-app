@@ -1,4 +1,5 @@
 import { AbstractControl, ValidatorFn, ValidationErrors } from "@angular/forms";
+import { GhDate } from "../classes/gh-date";
 
 /**
  * @constant
@@ -12,13 +13,13 @@ export const MAX_DATE_VALIDATION = 'maxDate';
  */
 export const maxDateValidator = (maxDate: Date): ValidatorFn => {
         return (control: AbstractControl): ValidationErrors | null => {
-            const selectedDate = control.value?.date;
-
-            if(!selectedDate) {
+            if(!control.value?.date) {
                 return null
             }
+
+            const selectedDate = new GhDate(control.value?.date)
     
-            if (!isNaN(selectedDate.getTime()) && selectedDate > maxDate) {
+            if (selectedDate.getDate().getTime() > maxDate.getTime()) {
                 return { maxDate: maxDate };
             }
     

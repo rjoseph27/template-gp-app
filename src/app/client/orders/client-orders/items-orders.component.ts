@@ -4,6 +4,7 @@ import { RequestTableElement } from '../../../core/layouts/orders/orders.compone
 import { ItemsStatus, baseOrdersComponent } from '../base-orders.component';
 import { ClientSendItemsService } from '../../service/send-items.service';
 import { LoadingService } from '../../../services/loading.service';
+import { GhDate } from '../../../misc/classes/gh-date';
 
 /**
  * @class ClientItemsOrdersComponent
@@ -54,7 +55,7 @@ import { LoadingService } from '../../../services/loading.service';
               status: row.status,
               from: row.route.from,
               to: row.route.to,
-              deliveryDate: row.deliveryDate,
+              deliveryDate: new GhDate(row.deliveryDate).getDate().toISOString(),
             }})
           }
         case ItemsStatus.WAITING_RECEPTION:
@@ -66,7 +67,7 @@ import { LoadingService } from '../../../services/loading.service';
               status: row.status,
               from: row.route.from,
               to: row.route.to,
-              deliveryDate: row.deliveryDate,
+              deliveryDate: new GhDate(row.deliveryDate).getDate().toISOString(),
             }})
           }
         case ItemsStatus.CANCELED_BY_GP:
@@ -78,7 +79,7 @@ import { LoadingService } from '../../../services/loading.service';
               status: row.status,
               from: row.route.from,
               to: row.route.to,
-              deliveryDate: row.deliveryDate,
+              deliveryDate: new GhDate(row.deliveryDate).getDate().toISOString(),
             }})
             }
           case ItemsStatus.WAIT_ON_PAYMENT:
@@ -92,7 +93,7 @@ import { LoadingService } from '../../../services/loading.service';
                 status: row.status,
                 from: row.route.from,
                 to: row.route.to,
-                deliveryDate: row.deliveryDate,
+                deliveryDate: new GhDate(row.deliveryDate).getDate().toISOString(),
               }})
             }
           case ItemsStatus.WITH_GP:
@@ -104,7 +105,7 @@ import { LoadingService } from '../../../services/loading.service';
                 status: row.status,
                 from: row.route.from,
                 to: row.route.to,
-                deliveryDate: row.deliveryDate,
+                deliveryDate: new GhDate(row.deliveryDate).getDate().toISOString(),
               }})
             }
           case ItemsStatus.ON_DELIVERY:
@@ -116,7 +117,7 @@ import { LoadingService } from '../../../services/loading.service';
                 status: row.status,
                 from: row.route.from,
                 to: row.route.to,
-                deliveryDate: row.deliveryDate,
+                deliveryDate: new GhDate(row.deliveryDate).getDate().toISOString(),
               }})
             }
           case ItemsStatus.FINAL_CHECKPOINT:
@@ -128,7 +129,7 @@ import { LoadingService } from '../../../services/loading.service';
                 status: row.status,
                 from: row.route.from,
                 to: row.route.to,
-                deliveryDate: row.deliveryDate,
+                deliveryDate: new GhDate(row.deliveryDate).getDate().toISOString(),
               }})
             }
           case ItemsStatus.DELIVERED:
@@ -140,7 +141,7 @@ import { LoadingService } from '../../../services/loading.service';
                 status: row.status,
                 from: row.route.from,
                 to: row.route.to,
-                deliveryDate: row.deliveryDate,
+                deliveryDate: new GhDate(row.deliveryDate).getDate().toISOString(),
               }})
             }
         case ItemsStatus.EXCEPTION:
@@ -152,7 +153,7 @@ import { LoadingService } from '../../../services/loading.service';
               status: row.status,
               from: row.route.from,
               to: row.route.to,
-              deliveryDate: row.deliveryDate,
+              deliveryDate: new GhDate(row.deliveryDate).getDate().toISOString(),
             }})
           }
         default:

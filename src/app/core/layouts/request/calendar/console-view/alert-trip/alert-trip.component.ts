@@ -10,6 +10,7 @@ import { ClientSendItemsService } from "../../../../../../client/service/send-it
 import { Router } from "@angular/router";
 import { ClientRoutes } from "../../../../../../client/client.route";
 import { CurrentFormService } from "../../../../../../services/current-form.service";
+import { GhDate } from "../../../../../../misc/classes/gh-date";
 
 /**
  * @interface AlertTripCaptions
@@ -92,9 +93,10 @@ export class GhAlertTripComponent {
     * @type {Date}
     */
    @Input() set selectedDate(value: Date) {
+    const date = GhDate.fromDate(value);
     if(value) {
       this.defaultDate = {
-        date: value,
+        date: date.toJson(),
         dateString: DateUtil.formatToDatePicker(value)
       };
     }
