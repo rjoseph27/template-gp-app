@@ -1193,4 +1193,10 @@ export interface ReportTrip {
      * @type {ItemInformation}
      */
     itemInformation: ItemInformation
+
+    /**
+     * @description The trip id
+     * @type {string}
+     */
+    tripId: string
   }

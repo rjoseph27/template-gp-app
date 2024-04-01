@@ -136,7 +136,8 @@ import { EditItemInformationStatus } from "../../../api/requests/requests.type";
         {
           const orderToEdit = {
             id: this.route.snapshot.data['orderDetails'].itemGroupId,
-            itemInformation: {...this.itemInformation[0], id: this.route.snapshot.data['orderDetails'].itemInformation.id}
+            itemInformation: {...this.itemInformation[0], id: this.route.snapshot.data['orderDetails'].itemInformation.id},
+            tripId: this.route.snapshot.data['orderDetails'].tripId
           }
 
           this.requestsService.editItemInformation(orderToEdit).then((x) => {
