@@ -30,7 +30,6 @@ import { ClientConfirmOrdersComponent } from './orders/gp-orders/confirm-orders/
 import { ClientGpOrderDetailsResolver } from './orders/gp-orders/gp-order-details.resolver';
 import { ClientWaitingReceptionComponent } from './orders/client-orders/waiting-reception/waiting-reception.component';
 import { ClientItemAtCheckPointComponent } from './orders/client-orders/item-at-checkpoint/item-at-checkpoint.component';
-import { ClientItemWithGpComponent } from './orders/client-orders/item-with-gp/item-with-gp.component';
 import { ClientItemReadyForPickupComponent } from './orders/client-orders/item-ready-for-pickup/item-ready-for-pickup.component';
 import { ClientItemDeliveredComponent } from './orders/client-orders/item-delivered/item-delivered.component';
 import { ClientItemOnHisWayComponent } from './orders/gp-orders/item-on-his-way/item-on-his-way.component';
@@ -70,7 +69,6 @@ import { ClientRescheduleOrderResolver } from './orders/client-orders/reschedule
         ClientConfirmOrdersComponent,
         ClientWaitingReceptionComponent,
         ClientItemAtCheckPointComponent,
-        ClientItemWithGpComponent,
         ClientItemReadyForPickupComponent,
         ClientItemDeliveredComponent,
         ClientItemOnHisWayComponent,

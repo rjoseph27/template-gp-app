@@ -100,7 +100,7 @@ import { GhDate } from '../../../misc/classes/gh-date';
             return {
               label: 'moduleList.client.orders.status.withGp',
               icon: 'assignment_ind',
-              action: () => this.router.navigate([ClientRoutes.itemWithGp.fullPath()], { queryParams: {
+              action: () => this.router.navigate([ClientRoutes.tracking.fullPath()], { queryParams: {
                 id: row.id,
                 status: row.status,
                 from: row.route.from,

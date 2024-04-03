@@ -119,12 +119,6 @@ export class ClientRoutes {
     static readonly rescheduleOrder: GhRoute = new GhRoute('reschedule-order', ClientRoutes.clientOrder);
 
     /**
-     * @description The item with GP route
-     * @type {GhRoute}
-     */
-    static readonly itemWithGp: GhRoute = new GhRoute('item-with-gp', ClientRoutes.clientOrder);
-
-    /**
      * @description The item on delivery route
      * @type {GhRoute}
      */
