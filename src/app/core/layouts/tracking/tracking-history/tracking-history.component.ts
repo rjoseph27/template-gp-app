@@ -50,7 +50,7 @@ import { GhDate, GhDateProperties } from "../../../../misc/classes/gh-date";
             this._columns$.next([          
             {
                 columnName: "tracking.history.table.date",
-                valueAccessor: (row: TrackingPoint) => new GhDate(row.date),
+                valueAccessor: (row: TrackingPoint) => new GhDate(row.date).getDate(),
                 template: this.dateTemplate
             },
             {
