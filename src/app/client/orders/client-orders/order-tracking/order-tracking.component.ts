@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { map } from "rxjs/operators";
 import { BaseTrackingPageComponent } from "../../../../core/layouts/tracking/base-tracking-page.component";
+import { ModalService } from "../../../../services/modal.service";
 
 /**
  * @class ClientOrderTrackingComponent
@@ -9,7 +10,8 @@ import { BaseTrackingPageComponent } from "../../../../core/layouts/tracking/bas
 @Component({
     selector: 'client-order-tracking',
     templateUrl: './order-tracking.component.html',
-    styleUrls: ['./order-tracking.component.scss']
+    styleUrls: ['./order-tracking.component.scss'],
+    providers: [ModalService]
   })
   export class ClientOrderTrackingComponent extends BaseTrackingPageComponent {
     /**

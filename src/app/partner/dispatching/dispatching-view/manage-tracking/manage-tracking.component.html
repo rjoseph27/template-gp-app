@@ -10,28 +10,11 @@
             [originCity]="originCity$ | async"
             [destinationCity]="destinationCity$ | async"
             [layovers]="layovers$ | async"
-            [orderId]="orderId$ | async"
+            [(orderId)]="orderId"
+            (reloadPage)="reloadPage()"
+            [orderList]="orderList$ | async"
+            [addHistoryResolver]="addHistoryResolver"
+            [gpView]="true"
         ></gh-tracking>
-        <gh-select-field
-            [label]="'moduleList.dispatching.view.manage.orderList.label' | translate" 
-            [placeholder]="'moduleList.dispatching.view.manage.orderList.placeholder' | translate"
-            [value]="orderId"
-            (valueChange)="orderId = $event"
-            [options]="orderList$ | async"
-        ></gh-select-field>
-        <div class="button-section">
-            <button 
-                *ngIf="currentPoint?.type === trackingPointType.WITH_GP && !(currentPoint?.exception)"
-                [buttonLoading]="lostOrderButtonLoading$ | async"
-                class="attention-button" 
-                (click)="lostOrderException()"
-            >{{ 'deliveryExecption.button.lostOrder' | translate }}</button>
-            <button 
-                *ngIf="currentPoint?.type === trackingPointType.WITH_GP && !(currentPoint?.exception)"
-                [buttonLoading]="damagedOrderButtonLoading$ | async"
-                class="attention-button" 
-                (click)="damagedOrderException()"
-            >{{ 'deliveryExecption.button.damaged' | translate }}</button>
-        </div>
     </div>
 </div>

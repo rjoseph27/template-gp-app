@@ -1,4 +1,4 @@
-import { Directive, Input, OnInit } from "@angular/core";
+import { Directive, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { TrackingPoint } from "./tracking.type";
 import { Layovers } from "../request/create-layover/create-layover.component";
 import { BehaviorSubject } from "rxjs";
@@ -86,4 +86,10 @@ export class BaseTrackingComponent {
     get orderId() {
         return this._orderId;
     }
+
+    /**
+     * @description The order id change event
+     * @type {EventEmitter<string>}
+     */
+    @Output() orderIdChange = new EventEmitter<string>();
 }
