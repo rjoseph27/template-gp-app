@@ -103,7 +103,7 @@ import { GhDate } from "../../../misc/classes/gh-date";
             return {
               label: 'moduleList.gp.orders.status.itemWithYou',
               icon: 'approval_delegation',
-              action: () => this.router.navigate([ClientRoutes.itemWithYou.fullPath()], { queryParams: {
+              action: () => this.router.navigate([ClientRoutes.gpTracking.fullPath()], { queryParams: {
                 id: row.id,
                 status: row.status,
                 from: row.route.from,
@@ -115,13 +115,25 @@ import { GhDate } from "../../../misc/classes/gh-date";
             return {
               label: 'moduleList.client.orders.status.onDelivery',
               icon: 'flightsmode',
-              action: () => console.log("wait on dispatch module")
+              action: () => this.router.navigate([ClientRoutes.gpTracking.fullPath()], { queryParams: {
+                id: row.id,
+                status: row.status,
+                from: row.route.from,
+                to: row.route.to,
+                deliveryDate: new GhDate(row.deliveryDate).getDate().toISOString(),
+              }})
             }
           case ItemsStatus.EXCEPTION:
             return {
               label: 'moduleList.client.orders.status.exception',
               icon: 'error',
-              action: () => console.log("wait on dispatch module")
+              action: () => this.router.navigate([ClientRoutes.gpTracking.fullPath()], { queryParams: {
+                id: row.id,
+                status: row.status,
+                from: row.route.from,
+                to: row.route.to,
+                deliveryDate: new GhDate(row.deliveryDate).getDate().toISOString(),
+              }})
             }
           case ItemsStatus.DELIVERED:
             return {

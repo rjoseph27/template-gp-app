@@ -95,12 +95,6 @@ export class ClientRoutes {
     static readonly readyForPickup: GhRoute = new GhRoute('ready-for-pickup', ClientRoutes.gpOrders);
 
     /**
-     * @description The item with you route
-     * @type {GhRoute}
-     */
-    static readonly itemWithYou: GhRoute = new GhRoute('item-with-you', ClientRoutes.gpOrders);
-
-    /**
      * @description The waiting reception route
      * @type {GhRoute}
      */
@@ -141,6 +135,12 @@ export class ClientRoutes {
      * @type {GhRoute}
      */
     static readonly itemDeliveredGp: GhRoute = new GhRoute('item-delivered', ClientRoutes.gpOrders);
+
+    /**
+     * @description The order tracking route
+     * @type {GhRoute}
+     */
+    static readonly gpTracking: GhRoute = new GhRoute('gp-tracking', ClientRoutes.gpOrders);
 
     /**
      * @description The trip list route

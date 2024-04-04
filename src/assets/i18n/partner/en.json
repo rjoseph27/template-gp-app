@@ -82,12 +82,7 @@
                     }
                 },
                 "manage": {
-                    "title": "Manage the Delivery",
-                    "orderList": {
-                        "label": "Order List",
-                        "placeholder": "Search by order number",
-                        "all": "All"
-                    }
+                    "title": "Manage the Delivery"
                 }
             }
         },

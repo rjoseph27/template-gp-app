@@ -105,11 +105,11 @@ import { NotificationService } from "../../../services/notification.service";
      * @type {string}
      */
     protected set selectedOrderId(value: string) {
-        this._selectedOrderId$.next(value === '*' ? null : value)
-        this.orderId = this._selectedOrderId$.value;
-        const history = [...this.history];
-        this._currentPoint$.next(history.reverse().find(x => x.orderId === this.orderId))
-        this.orderIdChange.emit(this.selectedOrderId)
+      this._selectedOrderId$.next(value === '*' ? null : value)
+      this.orderId = this._selectedOrderId$.value;
+      const history = [...this.history];
+      this._currentPoint$.next(history.reverse().find(x => x.orderId === this.orderId))
+      this.orderIdChange.emit(this.selectedOrderId)
     }
     protected get selectedOrderId() {
         return this._selectedOrderId$.value

@@ -1,0 +1,78 @@
+import { Component, inject } from "@angular/core";
+import { map } from "rxjs/operators";
+import { BaseTrackingPageComponent } from "../../../../core/layouts/tracking/base-tracking-page.component";
+import { ModalService } from "../../../../services/modal.service";
+import { ReportTrip } from "../../../../api/requests/requests.type";
+import { SelectFieldOption } from "../../../../core/elements/input/select-field/select-field.component";
+import { Observable } from "rxjs";
+import { TrackingPoint } from "../../../../core/layouts/tracking/tracking.type";
+import { ClientRequestsService } from "../../../service/requests.service";
+import { Router } from "@angular/router";
+import { ClientRoutes } from "../../../client.route";
+
+/**
+ * @class ClientGpTrackingComponent
+ * @description The client gp tracking component
+ */
+@Component({
+    selector: 'client-gp-tracking',
+    templateUrl: './gp-tracking.component.html',
+    styleUrls: ['./gp-tracking.component.scss'],
+    providers: [ModalService]
+  })
+  export class ClientGpTrackingComponent extends BaseTrackingPageComponent {
+    /**
+    * @description An observable for the order id
+    * @type {Observable<string>}
+    */
+    protected readonly orderId$ = this.route.queryParamMap.pipe(map(params => params.get('id')));
+
+    /**
+    * @description The angular router service.
+    * @type {Router}
+    */
+    private readonly router: Router = inject(Router);
+
+    /**
+    * @description The requests service
+    * @type {ClientRequestsService}
+    */
+    private readonly requestsService = inject(ClientRequestsService);
+
+    /**
+     * @description An observable for the order list
+     * @type {Observable<SelectFieldOption[]>}
+     */
+    protected readonly orderList$: Observable<SelectFieldOption[]> = this.route.data.pipe(map(data => {
+      const options: SelectFieldOption[] = (<ReportTrip>data['trip']).orders.map(key => ({
+          value: key.toString(),
+          label: key.toString(),
+      }))
+
+      options.unshift({
+          value: "*",
+          label: 'deliveryExecption.orderList.all'
+      })
+      return options
+   }))
+
+   /**
+     * @description The method to add history
+     * @type {(args: TrackingPoint) => Promise<boolean>}
+     */
+    protected readonly addHistoryResolver = async (args: TrackingPoint) => await this.requestsService.addHistory({
+      ...args,
+      tripId: this.route.snapshot.data['trip'].id
+    })
+
+    /**
+    * @description A method to reload the page
+    * @returns {void}
+    */
+    protected reloadPage(): void {
+      // FIND A BETTER SOLUTION
+      this.router.navigate([ClientRoutes.gpOrders.fullPath()]).then(() => {
+          this.router.navigate([ClientRoutes.gpTracking.fullPath()], { queryParams: this.route.snapshot.queryParams });
+      })
+    }
+  }

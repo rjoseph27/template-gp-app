@@ -38,6 +38,10 @@ import { TrackingPoint } from "../../../../core/layouts/tracking/tracking.type";
         return options
     }))
 
+    /**
+     * @description The method to add history
+     * @type {(args: TrackingPoint) => Promise<boolean>}
+     */
     protected readonly addHistoryResolver = async (args: TrackingPoint) => await this.requestsService.addHistory({
       ...args,
       tripId: this.route.snapshot.data['trip'].id
@@ -82,7 +86,7 @@ import { TrackingPoint } from "../../../../core/layouts/tracking/tracking.type";
     * @description A method to reload the page
     * @returns {void}
     */
-    reloadPage() {
+    protected reloadPage() {
         // FIND A BETTER SOLUTION
         this.router.navigate([PartnerRoutes.dispatching.fullPath()]).then(() => {
             this.router.navigate([PartnerRoutes.dispatchingView.fullPath()], { queryParams: this.route.snapshot.queryParams });

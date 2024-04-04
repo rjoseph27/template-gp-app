@@ -4,6 +4,7 @@ import { OrderFilter } from "../../core/layouts/filter/order-filter/order-filter
 import { ClientRequestsService } from "../../client/service/requests.service";
 import { OrderFilterInfo, RequestTableElementRequest } from "../../api/requests/requests.type";
 import { PartnerRoutes } from "../partner.route";
+import { GhDate } from "../../misc/classes/gh-date";
 
 /**
  * @class PartnerDispatchingComponent
@@ -31,7 +32,7 @@ import { PartnerRoutes } from "../partner.route";
     protected readonly viewFactory = (row: OrderFilterInfo) => {
         const queryParams = <any>{
             id: row.orderId,
-            deliveryDate: row.departureDate,
+            deliveryDate: new GhDate(row.departureDate).getDate().toISOString(),
             from: row.originAirport,
             to: row.destinationAirport,
             userId: row.userId 

@@ -35,7 +35,6 @@ import { ClientItemDeliveredComponent } from './orders/client-orders/item-delive
 import { ClientItemOnHisWayComponent } from './orders/gp-orders/item-on-his-way/item-on-his-way.component';
 import { ClientGpItemAtCheckpointComponent } from './orders/gp-orders/item-at-checkpoint/item-at-checkpoint.component';
 import { ClientReadyForPickupComponent } from './orders/gp-orders/ready-for-pickup/ready-for-pickup.component';
-import { ClientItemWithYouComponent } from './orders/gp-orders/item-with-you/item-with-you.component';
 import { ClientItemDeliveredGpComponent } from './orders/gp-orders/item-delivered/item-delivered.component';
 import { ClientTripListComponent } from './orders/trip-list/trip-list.component';
 import { ClientPlannedTripComponent } from './orders/trip-list/planned-trip/planned-trip.component';
@@ -50,6 +49,7 @@ import { ClientOrderTrackingComponent } from './orders/client-orders/order-track
 import { ClientTripInfoResovler } from './orders/trip-list/trip-info.resolver';
 import { ClientAlertMatchResolver } from './request/alert/alert-match.resolver';
 import { ClientRescheduleOrderResolver } from './orders/client-orders/reschedule-order.resolver';
+import { ClientGpTrackingComponent } from './orders/gp-orders/gp-tracking/gp-tracking.component';
 
 /**
  * @module ClientModule
@@ -74,7 +74,6 @@ import { ClientRescheduleOrderResolver } from './orders/client-orders/reschedule
         ClientItemOnHisWayComponent,
         ClientGpItemAtCheckpointComponent,
         ClientReadyForPickupComponent,
-        ClientItemWithYouComponent,
         ClientItemDeliveredGpComponent,
         ClientTripListComponent,
         ClientPlannedTripComponent,
@@ -83,7 +82,8 @@ import { ClientRescheduleOrderResolver } from './orders/client-orders/reschedule
         ClientAlertListComponent,
         ClientCreateAlertComponent,
         ClientEditAlertComponent,
-        ClientOrderTrackingComponent
+        ClientOrderTrackingComponent,
+        ClientGpTrackingComponent
     ],
     imports: [
         CommonModule,

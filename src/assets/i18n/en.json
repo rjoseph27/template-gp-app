@@ -594,7 +594,13 @@
         }
     },
     "deliveryExecption": {
+        "orderList": {
+            "label": "Order List",
+            "placeholder": "Search by order number",
+            "all": "All"
+        },
         "button": {
+            "onYourWay":"Confirm that your are on your way to the airport",
             "lostOrder": "Declare the order as lost",
             "damaged": "Declare the order as damaged"
         },

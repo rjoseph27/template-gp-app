@@ -1,0 +1,17 @@
+<div class="content">
+    <div>
+        <gh-tracking 
+            [departureDate]="departureDate$ | async"
+            [arrivalDate]="arrivalDate$ | async"
+            [history]="history$ | async"
+            [originCity]="originCity$ | async"
+            [destinationCity]="destinationCity$ | async"
+            [layovers]="layovers$ | async"
+            [orderId]="orderId$ | async"
+            [orderList]="orderList$ | async"
+            [addHistoryResolver]="addHistoryResolver"
+            [gpView]="true"
+            (reloadPage)="reloadPage()"
+        ></gh-tracking>
+    </div>
+</div>
