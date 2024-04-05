@@ -15,6 +15,7 @@ import { ItemInformation } from "../../core/layouts/request/item-information/ite
 import { TrackingPoint } from "../../core/layouts/tracking/tracking.type"
 import { Layovers } from "../../core/layouts/request/create-layover/create-layover.component"
 import { GhDateProperties } from "../../misc/classes/gh-date"
+import { Tasks } from "../../misc/base-class/base-get-tasks.resolver"
 
 /**
    * @interface ReportTrip
@@ -142,12 +143,35 @@ export interface ReportTrip {
     TRIP_CONFIRMED_SUCCESSFULLY = "TRIP_CONFIRMED_SUCCESSFULLY"
   }
 
+  /**
+   * @interface AddHistoryRequest
+   * @description An interface for the add history request
+   */
   export enum AddHistoryStatus {
     /**
      * @description The history was added successfully
      * @type {string}
      */
     HISTORY_ADDED_SUCCESSFULLY = "HISTORY_ADDED_SUCCESSFULLY"
+  }
+
+
+  /**
+   * @interface GetTasksStatus
+   * @description An interface for the get tasks status
+   */
+  export enum GetTasksStatus {
+    /**
+     * @description The tasks were found
+     * @type {string}
+     */
+    TASKS_FOUND = 'TASKS_FOUND',
+
+    /**
+     * @description The tasks were not found
+     * @type {string}
+     */
+    TASKS_NOT_FOUND = 'TASKS_NOT_FOUND'
   }
 
   /**
@@ -887,6 +911,18 @@ export interface ReportTrip {
      * @type {ReportTrip}
      */
     trip: ReportTrip;
+  }
+
+  /**
+   * @interface GetTasksApiResponse
+   * @description An interface for the get tasks api response
+   */
+  export interface GetTasksApiResponse extends ApiResponse {
+    /**
+     * @description The tasks
+     * @type {Tasks[]}
+     */
+    tasks: Tasks[];
   }
 
   /**

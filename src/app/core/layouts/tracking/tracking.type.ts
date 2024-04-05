@@ -33,7 +33,7 @@ export enum TrackingPointType {
      * @description The gp is on the way to the airport
      * @type {string}
      */
-    WAY_TO_AIRPORT = 'WAY_TO_AIRPORT',
+    ON_WAY_TO_AIRPORT = 'ON_WAY_TO_AIRPORT',
 
     /**
      * @description The first departure

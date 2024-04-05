@@ -501,7 +501,8 @@
                 "TRIP_CREATION": "The trip has been created",
                 "ORDER_ACCEPTED": "The order has been accepted",
                 "AT_CHECKPOINT": "The order is at the checkpoint",
-                "WITH_GP": "The order is with the GP"
+                "WITH_GP": "The order is with the GP",
+                "ON_WAY_TO_AIRPORT": "The GP is on his way to the airport"
             },
             "exception": {
                 "LOST": "The order has been declared as lost",
@@ -619,6 +620,14 @@
                 "notification": {
                     "success": "The order has been declared as damaged",
                     "error": "An error occured while declaring the order as damaged"
+                }
+            },
+            "onHisWay": {
+                "title": "Confirm that you are on your way to the airport",
+                "content": "Are you sure you are on your way to the airport?",
+                "notification": {
+                    "success": "The order has been confirmed",
+                    "error": "An error occured while confirming the order"
                 }
             },
             "button": {

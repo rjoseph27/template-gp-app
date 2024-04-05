@@ -6,6 +6,8 @@ import { BehaviorSubject } from "rxjs";
 import { ModalService } from "../../../services/modal.service";
 import { Router } from "@angular/router";
 import { NotificationService } from "../../../services/notification.service";
+import { TaskName, Tasks } from "../../../misc/base-class/base-get-tasks.resolver";
+import { GhDate } from "../../../misc/classes/gh-date";
 
 /**
  * @class GhTrackingComponent
@@ -32,6 +34,18 @@ import { NotificationService } from "../../../services/notification.service";
     protected readonly lostOrderButtonLoading$ = this._lostOrderButtonLoading$.asObservable();
 
     /**
+     * @description The backing field for the on his way button loading
+     * @type {BehaviorSubject<boolean>}
+     */
+    private readonly _onHisWayButtonLoading$ = new BehaviorSubject<boolean>(false);
+
+    /**
+     * @description An observable for the on his way button loading
+     * @type {Observable<boolean>}
+     */
+    protected readonly onHisWayButtonLoading$ = this._onHisWayButtonLoading$.asObservable();
+
+    /**
      * @description The backing field for the damaged order button loading
      * @type {BehaviorSubject<boolean>}
      */
@@ -48,7 +62,6 @@ import { NotificationService } from "../../../services/notification.service";
     * @type {NotificationService}
     */
     private readonly notificationService: NotificationService = inject(NotificationService);
-
 
     /**
     * @description The modal service
@@ -108,7 +121,7 @@ import { NotificationService } from "../../../services/notification.service";
       this._selectedOrderId$.next(value === '*' ? null : value)
       this.orderId = this._selectedOrderId$.value;
       const history = [...this.history];
-      this._currentPoint$.next(history.reverse().find(x => x.orderId === this.orderId))
+      this._currentPoint$.next(history.reverse().find(x => x.orderId === this.orderId || x.orderId === null))
       this.orderIdChange.emit(this.selectedOrderId)
     }
     protected get selectedOrderId() {
@@ -120,6 +133,23 @@ import { NotificationService } from "../../../services/notification.service";
      * @type {(args: TrackingPoint) => Promise<boolean>}
      */
     @Input() addHistoryResolver: (args: TrackingPoint) => Promise<boolean>
+
+    /**
+     * @description The currents tasks of the GP
+     * @type {Tasks[]}
+     */
+    @Input() tasks: Tasks[]
+
+    /**
+     * @description A boolean that indicates if the user can notice that he is on his way to the airport
+     * @type {boolean}
+     */
+    protected get displayOnHisWay(): boolean {
+        const task = this.tasks.find(x => x.name === TaskName.NOTICE_GP_TO_BE_ON_WAY_TO_AIRPORT);
+        const dateNotPassed = (new Date()).getTime() >= (new GhDate(task.date)).getDate().getTime();
+        const taskDone = this.history.find(x => x.type === TrackingPointType.ON_WAY_TO_AIRPORT);
+        return dateNotPassed && !taskDone;
+    }
 
     /**
      * @description A method to generate a lost exception
@@ -149,6 +179,36 @@ import { NotificationService } from "../../../services/notification.service";
             }
           }
         });
+  }
+
+  /**
+   * @description A method to generate an on his way exception
+   * @returns {void}
+   */
+  protected async onHisWayException(): Promise<void> {
+    this.modalService.openModal({
+        title: "deliveryExecption.modal.onHisWay.title",
+        text: "deliveryExecption.modal.onHisWay.content",
+        confirmCaption: "deliveryExecption.modal.button.confirm",
+        cancelCaption: "deliveryExecption.modal.button.cancel"
+      }).then(async x => {
+        if(x) {
+          this._onHisWayButtonLoading$.next(true);
+          const addHistorySuccessfully = await this.addHistoryResolver({
+                type: TrackingPointType.ON_WAY_TO_AIRPORT,
+                location: this.originCity,
+                orderId: null,
+                exception: null,
+            });
+          this._onHisWayButtonLoading$.next(false);
+          if(addHistorySuccessfully) {
+            this.notificationService.successNotification('deliveryExecption.modal.onHisWay.notification.success');
+            this.reloadPage.emit();
+          } else {
+            this.notificationService.errorNotification('deliveryExecption.modal.onHisWay.notification.error');
+          }
+        }
+      });
   }
 
   /**

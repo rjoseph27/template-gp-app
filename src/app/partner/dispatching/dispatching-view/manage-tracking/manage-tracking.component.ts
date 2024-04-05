@@ -9,6 +9,7 @@ import { ModalService } from "../../../../services/modal.service";
 import { Router } from "@angular/router";
 import { PartnerRoutes } from "../../../partner.route";
 import { TrackingPoint } from "../../../../core/layouts/tracking/tracking.type";
+import { Tasks } from "../../../../misc/base-class/base-get-tasks.resolver";
 
 /**
  * @class PartnerManageTrackingComponent
@@ -33,10 +34,16 @@ import { TrackingPoint } from "../../../../core/layouts/tracking/tracking.type";
 
         options.unshift({
             value: "*",
-            label: 'moduleList.dispatching.view.manage.orderList.all'
+            label: 'deliveryExecption.orderList.all'
         })
         return options
     }))
+
+    /**
+     * @description An observable for the tasks
+     * @type {Observable<Tasks[]>}
+     */
+    protected readonly tasks$: Observable<Tasks[]> = this.route.data.pipe(map(data => data['tasks']))
 
     /**
      * @description The method to add history

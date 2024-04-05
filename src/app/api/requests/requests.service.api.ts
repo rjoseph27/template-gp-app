@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { ApiResponse, BaseServiceApi } from "../base.service.api";
 import { firstValue } from "../../misc/function/firstValue";
-import { ReportTrip, SearchTripsRequest, SearchTripsApiResponse, ConfirmItemRequest, SendItemsRequestApiResponse, UpdateImageNameRequest, CreateAlertRequest, ListItemsApiResponse, ItemInformationApiResponse, RequestTableElementRequest, OrderDetailRequest, GetSendItemsRequestApiResponse, GetTripListApiResponse, GetTripInfoApiResponse, CancelTripRequest, AlertListApiResponse, AlertApiResponse, OrderFilterResponse, EditItemInformationRequest, BillingListApiResponse, BillingFilterInfo, ConfirmTripRequest } from "./requests.type";
+import { ReportTrip, SearchTripsRequest, SearchTripsApiResponse, ConfirmItemRequest, SendItemsRequestApiResponse, UpdateImageNameRequest, CreateAlertRequest, ListItemsApiResponse, ItemInformationApiResponse, RequestTableElementRequest, OrderDetailRequest, GetSendItemsRequestApiResponse, GetTripListApiResponse, GetTripInfoApiResponse, CancelTripRequest, AlertListApiResponse, AlertApiResponse, OrderFilterResponse, EditItemInformationRequest, BillingListApiResponse, BillingFilterInfo, ConfirmTripRequest, GetTasksApiResponse } from "./requests.type";
 import { OrderFilter } from "../../core/layouts/filter/order-filter/order-filter.component";
 import { TrackingPoint } from "../../core/layouts/tracking/tracking.type";
 
@@ -300,5 +300,14 @@ export class RequestsServiceApi extends BaseServiceApi {
      */
     addHistory(history: TrackingPoint): Promise<ApiResponse> {
         return firstValue(this.postRequest<ApiResponse>('add-history', history));
+    }
+
+    /**
+     * @description A method to get the tasks
+     * @param tripInfo The trip info with the tasks
+     * @returns {Promise<GetTasksApiResponse>}
+     */
+    getTasks(tripInfo: string): Promise<GetTasksApiResponse> {
+        return firstValue(this.getRequest<GetTasksApiResponse>('get-tasks', tripInfo));
     }
 }

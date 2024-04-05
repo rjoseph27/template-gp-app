@@ -18,8 +18,10 @@
     ></gh-select-field>
     <div class="button-section">
         <button
-            *ngIf="!selectedOrderId" 
+            *ngIf="!selectedOrderId && displayOnHisWay" 
+            [buttonLoading]="onHisWayButtonLoading$ | async"
             class="gp-button" 
+            (click)="onHisWayException()"
         >{{ 'deliveryExecption.button.onYourWay' | translate }}</button>
         <button 
             *ngIf="currentPoint?.type === trackingPointType.WITH_GP && !(currentPoint?.exception)"

@@ -28,7 +28,8 @@ import { PartnerDispatchingComponent } from "./dispatching/dispatching.component
 import { PartnerDispatchingViewComponent } from "./dispatching/dispatching-view/dispatching-view.component";
 import { PartnerConfirmTripComponent } from "./dispatching/dispatching-view/confirm-trip/confirm-trip.component";
 import { PartnerManageTrackingComponent } from "./dispatching/dispatching-view/manage-tracking/manage-tracking.component";
-import { PartnerTripInfoResovler } from "./dispatching/trip-info.resolver";
+import { PartnerTripInfoResolver } from "./dispatching/trip-info.resolver";
+import { PartnerTasksResolver } from "./dispatching/tasks.resolver";
 
 /**
  * @module PartnerModule
@@ -74,9 +75,10 @@ import { PartnerTripInfoResovler } from "./dispatching/trip-info.resolver";
         PartnerRegisterItemViewResolver,
         PartnerRegisterItemService,
         PartnerRegisterItemEditResolver,
-        PartnerTripInfoResovler,
+        PartnerTripInfoResolver,
         NotificationService,
-        PartnerBillingResolver
+        PartnerBillingResolver,
+        PartnerTasksResolver
     ]
 })
 export class PartnerModule {

@@ -1,6 +1,6 @@
 import { Injectable, inject } from "@angular/core";
 import { RequestsServiceApi } from "../../api/requests/requests.service.api";
-import { OrderDetailRequest, CancelOrderStatus, ConfirmItemRequest, CreateAlertRequest, CreateAlertStatus, ItemsOrdersStatus, ReportTrip, ReportTripStatus, RequestTableElementRequest, SendItemsStatus, GpAcceptOrderStatus, GetReportTripStatus, GetTripInfoStatus, CancelTripStatus, AlertListStatus, AlertFormType, EditAlertStatus, DeleteAlertStatus, OrderFilterInfo, EditItemInformationRequest, EditItemInformationStatus, UpdateStatus, BillingFilterInfo, BillingStatus, CreateBillStatus, ConfirmTripRequest, ConfirmTripStatus, AddHistoryStatus } from "../../api/requests/requests.type";
+import { OrderDetailRequest, CancelOrderStatus, ConfirmItemRequest, CreateAlertRequest, CreateAlertStatus, ItemsOrdersStatus, ReportTrip, ReportTripStatus, RequestTableElementRequest, SendItemsStatus, GpAcceptOrderStatus, GetReportTripStatus, GetTripInfoStatus, CancelTripStatus, AlertListStatus, AlertFormType, EditAlertStatus, DeleteAlertStatus, OrderFilterInfo, EditItemInformationRequest, EditItemInformationStatus, UpdateStatus, BillingFilterInfo, BillingStatus, CreateBillStatus, ConfirmTripRequest, ConfirmTripStatus, AddHistoryStatus, GetTasksStatus } from "../../api/requests/requests.type";
 import { SendItemsRequest } from "./send-items.service";
 import { DateUtil } from "../../misc/util/date.util";
 import { UsersService } from "../../services/users.service";
@@ -10,6 +10,7 @@ import { OrderDetails } from "../../core/layouts/order-details/order-details.com
 import { AlertTableElement } from "../../core/layouts/alert-table/alert-table.component";
 import { OrderFilter } from "../../core/layouts/filter/order-filter/order-filter.component";
 import { TrackingPoint } from "../../core/layouts/tracking/tracking.type";
+import { Tasks } from "../../misc/base-class/base-get-tasks.resolver";
 
 /**
  * @class RequestsService
@@ -491,4 +492,19 @@ export class ClientRequestsService {
             return false
         });
     }
+
+    /**
+     * @description Gets the tasks for a trip
+     * @param tripId The id of the trip of the taks
+     * @returns {Promise<Tasks[]>}
+     */
+    getTasks(tripId: string): Promise<Tasks[]> {
+        return this.requestsServiceApi.getTasks(tripId).then(msg => {
+            if(msg.message === GetTasksStatus.TASKS_FOUND)
+            {
+                return msg.tasks
+            }
+            return null
+        })
+    } 
 }

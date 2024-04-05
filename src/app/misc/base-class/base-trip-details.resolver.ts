@@ -1,23 +1,11 @@
 import { Injectable, inject } from "@angular/core";
-import { LoadingService } from "./loading.service";
-import { ClientRequestsService } from "../client/service/requests.service";
+import { LoadingService } from "../../services/loading.service";
+import { ClientRequestsService } from "../../client/service/requests.service";
 import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from "@angular/router";
-import { ReportTrip } from "../api/requests/requests.type";
-import { ClientRoutes } from "../client/client.route";
-import { UsersService } from "./users.service";
-import { NavigationService } from "./navigation.service";
-
-/**
- * @interface TripInfoRequest
- * @description The trip info request
- */
-interface TripInfoRequest {
-    /**
-     * @description The id of the request
-     * @type {string}
-     */
-    id: string;
-}
+import { ReportTrip } from "../../api/requests/requests.type";
+import { ClientRoutes } from "../../client/client.route";
+import { UsersService } from "../../services/users.service";
+import { NavigationService } from "../../services/navigation.service";
 
 /**
  * @class GhTripInfoResolver
@@ -65,7 +53,7 @@ export abstract class GhTripInfoResolver implements Resolve<ReportTrip> {
   /** @inheritdoc */
   async resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<ReportTrip> {
     this.loadingService.startLoading();
-    const tripInfo = await this.requestsService.getTripInfo((<TripInfoRequest>route.queryParams).id);
+    const tripInfo = await this.requestsService.getTripInfo((<any>route.queryParams).id);
     if(!this.isUserAllowed(tripInfo)) {
       this.navigationService.redirectToMainPage()
       this.loadingService.endLoading();
