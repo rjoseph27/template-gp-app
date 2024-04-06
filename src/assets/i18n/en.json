@@ -507,7 +507,8 @@
             "exception": {
                 "LOST": "The order has been declared as lost",
                 "ITEM_DAMAGED": "The order has been declared as damaged",
-                "CANCELED_AT_CHECKPOINT": "Our team had canceled your item, contact the support for more information"
+                "CANCELED_AT_CHECKPOINT": "Our team had canceled your item, contact the support for more information",
+                "TRIP_CANCELED": "The trip has been canceled. You will be contacted soon."
             }
         }
     },
@@ -602,6 +603,7 @@
         },
         "button": {
             "onYourWay":"Confirm that your are on your way to the airport",
+            "cancelTrip": "Cancel the trip",
             "lostOrder": "Declare the order as lost",
             "damaged": "Declare the order as damaged"
         },
@@ -628,6 +630,14 @@
                 "notification": {
                     "success": "The order has been confirmed",
                     "error": "An error occured while confirming the order"
+                }
+            },
+            "cancelTrip": {
+                "title": "Cancel the trip",
+                "content": "Are you sure you want to cancel the trip?",
+                "notification": {
+                    "success": "The trip has been canceled",
+                    "error": "An error occured while canceling the trip"
                 }
             },
             "button": {

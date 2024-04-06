@@ -120,6 +120,12 @@ export enum DeliveryExceptionType {
     CANCELED_AT_CHECKPOINT = 'CANCELED_AT_CHECKPOINT',
 
     /**
+     * @description The trip has been canceled
+     * @type {string}
+     */
+    TRIP_CANCELED = 'TRIP_CANCELED',
+
+    /**
      * @description The order was canceled
      * @type {string}
      */

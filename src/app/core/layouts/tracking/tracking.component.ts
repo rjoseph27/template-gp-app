@@ -19,6 +19,10 @@ import { GhDate } from "../../../misc/classes/gh-date";
     styleUrls: ['./tracking.component.scss']
   })
   export class GhTrackingComponent extends BaseTrackingComponent {
+    /**
+     * @description The list of orders in the select field
+     * @type {SelectFieldOption[]}
+     */
     @Input() orderList: SelectFieldOption[]
 
     /**
@@ -44,6 +48,18 @@ import { GhDate } from "../../../misc/classes/gh-date";
      * @type {Observable<boolean>}
      */
     protected readonly onHisWayButtonLoading$ = this._onHisWayButtonLoading$.asObservable();
+
+    /**
+     * @description The backing field for the cancel trip button loading
+     * @type {BehaviorSubject<boolean>}
+     */
+    private readonly _cancelTripButtonLoading$ = new BehaviorSubject<boolean>(false);
+
+    /**
+     * @description An observable for the cancel trip button loading
+     * @type {Observable<boolean>}
+     */
+    protected readonly cancelTripButtonLoading$ = this._cancelTripButtonLoading$.asObservable();
 
     /**
      * @description The backing field for the damaged order button loading
@@ -179,6 +195,36 @@ import { GhDate } from "../../../misc/classes/gh-date";
             }
           }
         });
+  }
+
+  /**
+   * @description A method to generate a cancel trip exception
+   * @returns {void}
+   */
+  protected async cancelTripException(): Promise<void> {
+    this.modalService.openModal({
+        title: "deliveryExecption.modal.cancelTrip.title",
+        text: "deliveryExecption.modal.cancelTrip.content",
+        confirmCaption: "deliveryExecption.modal.button.confirm",
+        cancelCaption: "deliveryExecption.modal.button.cancel"
+      }).then(async x => {
+        if(x) {
+          this._cancelTripButtonLoading$.next(true);
+          const addHistorySuccessfully = await this.addHistoryResolver({
+              type: this._currentPoint$.value.type === TrackingPointType.TRIP_CREATION ? TrackingPointType.AT_CHECKPOINT : this._currentPoint$.value.type,
+              location: this._currentPoint$.value.location,
+              orderId: this.selectedOrderId,
+              exception: DeliveryExceptionType.TRIP_CANCELED,
+            });
+          this._cancelTripButtonLoading$.next(false);
+          if(addHistorySuccessfully) {
+            this.notificationService.successNotification('deliveryExecption.modal.cancelTrip.notification.success');
+            this.reloadPage.emit();
+          } else {
+            this.notificationService.errorNotification('deliveryExecption.modal.cancelTrip.notification.error');
+          }
+        }
+      });
   }
 
   /**

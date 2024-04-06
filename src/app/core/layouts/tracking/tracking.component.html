@@ -1,3 +1,5 @@
+<div class="content">
+<div>
 <gh-tracking-view 
     [departureDate]="departureDate" 
     [arrivalDate]="arrivalDate"
@@ -12,17 +14,23 @@
     <gh-select-field
         [label]="'deliveryExecption.orderList.label' | translate" 
         [placeholder]="'deliveryExecption.orderList.placeholder' | translate"
-        [value]="selectedOrderId"
+        [value]="selectedOrderId || '*'"
         (valueChange)="selectedOrderId = $event"
         [options]="orderList"
     ></gh-select-field>
     <div class="button-section">
         <button
-            *ngIf="!selectedOrderId && displayOnHisWay" 
+            *ngIf="!selectedOrderId && displayOnHisWay && this.currentPoint?.type === trackingPointType.WITH_GP" 
             [buttonLoading]="onHisWayButtonLoading$ | async"
             class="gp-button" 
             (click)="onHisWayException()"
         >{{ 'deliveryExecption.button.onYourWay' | translate }}</button>
+        <button
+            *ngIf="!selectedOrderId && displayOnHisWay" 
+            [buttonLoading]="cancelTripButtonLoading$ | async"
+            class="attention-button" 
+            (click)="cancelTripException()"
+        >{{ 'deliveryExecption.button.cancelTrip' | translate }}</button>
         <button 
             *ngIf="currentPoint?.type === trackingPointType.WITH_GP && !(currentPoint?.exception)"
             [buttonLoading]="lostOrderButtonLoading$ | async"
@@ -36,3 +44,5 @@
         >{{ 'deliveryExecption.button.damaged' | translate }}</button>
     </div>
 </ng-container>
+</div>
+</div>

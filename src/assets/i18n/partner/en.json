@@ -82,7 +82,8 @@
                     }
                 },
                 "manage": {
-                    "title": "Manage the Delivery"
+                    "title": "Manage the Delivery",
+                    "changeDate": "Change Date"
                 }
             }
         },

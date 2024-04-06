@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { BaseInputFieldComponent } from '../base-input-field.component';
 
-
 /**
  * @interface SelectFieldOption
  * @description An interface for the select field option
@@ -74,6 +73,10 @@ export class GhSelectFieldComponent extends BaseInputFieldComponent<string> {
     this.valueChange.emit(this.value);
   }
 
+  /**
+   * @description This method returns the readonly value of the select field
+   * @returns {string}
+   */
   protected getReadonlyValue(): string {
     if(this.options && this.value)
     {
