@@ -154,7 +154,7 @@ import { GhDate } from "../../../misc/classes/gh-date";
      * @description The currents tasks of the GP
      * @type {Tasks[]}
      */
-    @Input() tasks: Tasks[]
+    @Input() tasks: Tasks[] = []
 
     /** @inheritdoc */
     ngOnInit(): void {

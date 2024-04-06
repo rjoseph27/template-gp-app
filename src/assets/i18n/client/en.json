@@ -161,6 +161,7 @@
                     "planned": "Planned Trip",
                     "confirmed": "Confirmed Trip",
                     "onFlight": "On Flight",
+                    "cancel": "Cancel the Trip",
                     "tripDone": "Trip Completed"
                 },
                 "plannedTrip": {

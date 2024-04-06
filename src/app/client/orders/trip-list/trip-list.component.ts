@@ -23,7 +23,7 @@ import { ClientRoutes } from "../../client.route";
      * @description The completed trips
      * @type {Observable<RequestTableElement[]>}
      */
-    protected readonly completedTrips$ = this.requestsService.getTripList(this.userService.currentUserId).then(x => x.filter(y => y.status === TripStatus.TRIP_DONE));
+    protected readonly completedTrips$ = this.requestsService.getTripList(this.userService.currentUserId).then(x => x.filter(y => y.status === TripStatus.TRIP_DONE || y.status === TripStatus.CANCELED));
 
     /**
      * @description Redirect to the report trip page
@@ -59,6 +59,12 @@ import { ClientRoutes } from "../../client.route";
           return {
             label: 'moduleList.gp.trip.status.onFlight',
             icon: 'flightsmode',
+            action: () => console.log("wait dispatch module")
+          }
+        case TripStatus.CANCELED:
+          return {
+            label: 'moduleList.gp.trip.status.cancel',
+            icon: 'error',
             action: () => console.log("wait dispatch module")
           }
         case TripStatus.TRIP_DONE:
