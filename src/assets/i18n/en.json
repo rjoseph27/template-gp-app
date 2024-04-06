@@ -604,6 +604,7 @@
         "button": {
             "onYourWay":"Confirm that your are on your way to the airport",
             "cancelTrip": "Cancel the trip",
+            "reportDelay":"Report a delay or a reschedule of the trip",
             "lostOrder": "Declare the order as lost",
             "damaged": "Declare the order as damaged"
         },

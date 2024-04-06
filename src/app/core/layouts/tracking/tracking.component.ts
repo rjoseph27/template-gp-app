@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, inject } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output, inject } from "@angular/core";
 import { DeliveryExceptionType, TrackingPoint, TrackingPointType } from "./tracking.type";
 import { BaseTrackingComponent } from "./base-tracking.component";
 import { SelectFieldOption } from "../../elements/input/select-field/select-field.component";
@@ -18,7 +18,7 @@ import { GhDate } from "../../../misc/classes/gh-date";
     templateUrl: './tracking.component.html',
     styleUrls: ['./tracking.component.scss']
   })
-  export class GhTrackingComponent extends BaseTrackingComponent {
+  export class GhTrackingComponent extends BaseTrackingComponent implements OnInit {
     /**
      * @description The list of orders in the select field
      * @type {SelectFieldOption[]}
@@ -156,13 +156,18 @@ import { GhDate } from "../../../misc/classes/gh-date";
      */
     @Input() tasks: Tasks[]
 
+    /** @inheritdoc */
+    ngOnInit(): void {
+      this._currentPoint$.next([...this.history].reverse().find(x => x.orderId === this.orderId || x.orderId === null))
+    }
+
     /**
      * @description A boolean that indicates if the user can notice that he is on his way to the airport
      * @type {boolean}
      */
     protected get displayOnHisWay(): boolean {
         const task = this.tasks.find(x => x.name === TaskName.NOTICE_GP_TO_BE_ON_WAY_TO_AIRPORT);
-        const dateNotPassed = (new Date()).getTime() >= (new GhDate(task.date)).getDate().getTime();
+        const dateNotPassed = task ? (new Date()).getTime() >= (new GhDate(task.date)).getDate().getTime() : true;
         const taskDone = this.history.find(x => x.type === TrackingPointType.ON_WAY_TO_AIRPORT);
         return dateNotPassed && !taskDone;
     }

@@ -20,17 +20,22 @@
     ></gh-select-field>
     <div class="button-section">
         <button
-            *ngIf="!selectedOrderId && displayOnHisWay && this.currentPoint?.type === trackingPointType.WITH_GP" 
+            *ngIf="!selectedOrderId && displayOnHisWay && !(currentPoint?.exception)" 
             [buttonLoading]="onHisWayButtonLoading$ | async"
             class="gp-button" 
             (click)="onHisWayException()"
         >{{ 'deliveryExecption.button.onYourWay' | translate }}</button>
         <button
-            *ngIf="!selectedOrderId && displayOnHisWay" 
+            *ngIf="!selectedOrderId && displayOnHisWay && !(currentPoint?.exception)" 
             [buttonLoading]="cancelTripButtonLoading$ | async"
             class="attention-button" 
             (click)="cancelTripException()"
         >{{ 'deliveryExecption.button.cancelTrip' | translate }}</button>
+        <button
+            *ngIf="!selectedOrderId && displayOnHisWay && !(currentPoint?.exception)" 
+            class="attention-button" 
+            (click)="cancelTripException()"
+        >{{ 'deliveryExecption.button.reportDelay' | translate }}</button>
         <button 
             *ngIf="currentPoint?.type === trackingPointType.WITH_GP && !(currentPoint?.exception)"
             [buttonLoading]="lostOrderButtonLoading$ | async"
