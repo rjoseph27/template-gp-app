@@ -74,6 +74,12 @@ import { GhDate } from "../../../misc/classes/gh-date";
     protected readonly damagedOrderButtonLoading$ = this._damagedOrderButtonLoading$.asObservable();
 
     /**
+     * @description An event emitter to declare when the declare delay button has been clicked
+     * @type {EventEmitter<string>}
+     */
+    @Output() declareDelay = new EventEmitter<void>();
+
+    /**
     * @description The notification service
     * @type {NotificationService}
     */
@@ -130,6 +136,12 @@ import { GhDate } from "../../../misc/classes/gh-date";
     @Input() gpView: boolean = false;
 
     /**
+     * @description A boolean that indicates if the user is in client mode
+     * @type {boolean}
+     */
+    @Input() clientMode: boolean = false;
+
+    /**
      * @description The selected order id
      * @type {string}
      */
@@ -158,7 +170,7 @@ import { GhDate } from "../../../misc/classes/gh-date";
 
     /** @inheritdoc */
     ngOnInit(): void {
-      this._currentPoint$.next([...this.history].reverse().find(x => x.orderId === this.orderId || x.orderId === null))
+      this.selectedOrderId = this.orderId
     }
 
     /**

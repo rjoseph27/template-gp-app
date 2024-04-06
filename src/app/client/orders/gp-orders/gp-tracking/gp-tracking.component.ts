@@ -1,5 +1,5 @@
 import { Component, inject } from "@angular/core";
-import { map } from "rxjs/operators";
+import { map, switchMap, tap } from "rxjs/operators";
 import { BaseTrackingPageComponent } from "../../../../core/layouts/tracking/base-tracking-page.component";
 import { ModalService } from "../../../../services/modal.service";
 import { ReportTrip } from "../../../../api/requests/requests.type";
@@ -9,6 +9,9 @@ import { TrackingPoint } from "../../../../core/layouts/tracking/tracking.type";
 import { ClientRequestsService } from "../../../service/requests.service";
 import { Router } from "@angular/router";
 import { ClientRoutes } from "../../../client.route";
+import { TranslateService } from "@ngx-translate/core";
+import { COUNTRY_INFO_LIST } from "../../../../misc/constants/countries/countries";
+import { CountryUtil } from "../../../../misc/util/country.util";
 
 /**
  * @class ClientGpTrackingComponent
@@ -28,10 +31,22 @@ import { ClientRoutes } from "../../../client.route";
     protected readonly orderId$ = this.route.queryParamMap.pipe(map(params => params.get('id')));
 
     /**
+     * @description The modal service
+     * @type {ModalService}
+     */
+    protected readonly modalService = inject(ModalService);
+
+    /**
     * @description The angular router service.
     * @type {Router}
     */
     private readonly router: Router = inject(Router);
+
+    /**
+     * @description The translate service
+     * @type {TranslateService}
+     */
+    private readonly translateService: TranslateService = inject(TranslateService);
 
     /**
     * @description The requests service
@@ -74,5 +89,23 @@ import { ClientRoutes } from "../../../client.route";
       this.router.navigate([ClientRoutes.gpOrders.fullPath()]).then(() => {
           this.router.navigate([ClientRoutes.gpTracking.fullPath()], { queryParams: this.route.snapshot.queryParams });
       })
+    }
+
+    protected showDelayDialog(): void {
+      this.route.data.pipe(
+        map(data => (<ReportTrip>data['trip'])),
+        switchMap(trip => this.translateService.get(
+          ['moduleList.gp.tracking.delayModal.title', 'moduleList.gp.tracking.delayModal.content'], 
+          { 
+            phone: COUNTRY_INFO_LIST.find(x => x.name === trip.userCountry).succursales.get(CountryUtil.getCityByAirportCode(trip.userAirport)).phone, 
+            email: COUNTRY_INFO_LIST.find(x => x.name === trip.userCountry).succursales.get(CountryUtil.getCityByAirportCode(trip.userAirport)).email
+          })),
+          tap(x => this.modalService.openModal({
+            title: x['moduleList.gp.tracking.delayModal.title'],
+            text: x['moduleList.gp.tracking.delayModal.content'],
+          }))
+      )
+        .subscribe()
+      
     }
   }

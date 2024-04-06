@@ -24,13 +24,13 @@ export interface ModalTemplate {
      * @description The confirm caption of the modal
      * @type {string}
      */
-    confirmCaption: string;
+    confirmCaption?: string;
 
     /**
      * @description The cancel caption of the modal
      * @type {string}
      */
-    cancelCaption: string;
+    cancelCaption?: string;
 }
 
 /**

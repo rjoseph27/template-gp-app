@@ -270,6 +270,12 @@
                     "title": "The item is with you",
                     "content": "You are now in the possession of the item. You can deliver it to the destination checkpoint."
                 }
+            },
+            "tracking": {
+              "delayModal": {
+                "title": "Delay the delivery",
+                "content": "To report a delay, call our team by whatsapp at {{phone}} or by email at {{email}}."
+              }  
             }
         }
     },

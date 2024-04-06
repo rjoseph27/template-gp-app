@@ -11,6 +11,8 @@
             [orderList]="orderList$ | async"
             [addHistoryResolver]="addHistoryResolver"
             [gpView]="true"
+            [clientMode]="true"
+            (declareDelay)="showDelayDialog()"
             (reloadPage)="reloadPage()"
         ></gh-tracking>
     </div>
