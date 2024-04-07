@@ -32,6 +32,12 @@
             (click)="firstDepartureException()"
         >{{ 'deliveryExecption.button.firstDeparture' | translate }}</button>
         <button
+            *ngIf="!selectedOrderId && lastArrivalButton && !(currentPoint?.exception)" 
+            [buttonLoading]="lastArrivalButtonLoading$ | async"
+            class="gp-button" 
+            (click)="lastArrivalException()"
+        >{{ 'deliveryExecption.button.lastArrival' | translate }}</button>
+        <button
             *ngIf="!selectedOrderId && (withGpButton || onWayAirportButton) && !(currentPoint?.exception)" 
             [buttonLoading]="cancelTripButtonLoading$ | async"
             class="attention-button" 

@@ -503,7 +503,8 @@
                 "AT_CHECKPOINT": "The order is at the checkpoint",
                 "WITH_GP": "The order is with the GP",
                 "ON_WAY_TO_AIRPORT": "The GP is on his way to the airport",
-                "FIRST_DEPARTURE": "The GP is on the plane"
+                "FIRST_DEPARTURE": "The GP is on the plane",
+                "LAST_ARRIVAL": "The GP has arrived at the final country"
             },
             "exception": {
                 "LOST": "The order has been declared as lost",
@@ -608,7 +609,8 @@
             "reportDelay":"Report a delay or a reschedule of the trip",
             "lostOrder": "Declare the order as lost",
             "damaged": "Declare the order as damaged",
-            "firstDeparture": "Confirm that your are ready to enter the plane"
+            "firstDeparture": "Confirm that your are ready to enter the plane",
+            "lastArrival": "Confirm that you arrive at the final country"
         },
         "modal": {
             "lostOrder": {
@@ -638,6 +640,14 @@
             "firstDeparture": {
                 "title": "Confirm that you are ready to enter the plane",
                 "content": "Are you sure you are ready to enter the plane?",
+                "notification": {
+                    "success": "The order has been confirmed",
+                    "error": "An error occured while confirming the order"
+                }
+            },
+            "lastArrival": {
+                "title": "Confirm that you arrive at the final country",
+                "content": "Are you sure you arrive at the final country?",
                 "notification": {
                     "success": "The order has been confirmed",
                     "error": "An error occured while confirming the order"

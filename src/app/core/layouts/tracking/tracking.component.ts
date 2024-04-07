@@ -62,6 +62,18 @@ import { GhDate } from "../../../misc/classes/gh-date";
     protected readonly firstDepartureButtonLoading$ = this._firstDepartureButtonLoading$.asObservable();
 
     /**
+     * @description The backing field for the last arrival button loading
+     * @type {BehaviorSubject<boolean>}
+     */
+    private readonly _lastArrivalButtonLoading$ = new BehaviorSubject<boolean>(false);
+
+    /**
+     * @description An observable for the last arrival button loading
+     * @type {Observable<boolean>}
+     */
+    protected readonly lastArrivalButtonLoading$ = this._lastArrivalButtonLoading$.asObservable();
+
+    /**
      * @description The backing field for the cancel trip button loading
      * @type {BehaviorSubject<boolean>}
      */
@@ -193,7 +205,7 @@ import { GhDate } from "../../../misc/classes/gh-date";
         const task = this.tasks.find(x => x.name === TaskName.NOTICE_GP_TO_BE_ON_WAY_TO_AIRPORT);
         const dateNotPassed = task ? (new Date()).getTime() >= (new GhDate(task.date)).getDate().getTime() : true;
         const taskDone = this.history.find(x => x.type === TrackingPointType.ON_WAY_TO_AIRPORT);
-        return dateNotPassed && !taskDone;
+        return dateNotPassed && !taskDone && !!this.history.find(x => x.type === TrackingPointType.WITH_GP);
     }
 
     /**
@@ -204,8 +216,19 @@ import { GhDate } from "../../../misc/classes/gh-date";
       const task = this.tasks.find(x => x.name === TaskName.NOTICE_GP_TO_BE_FIRST_DEPARTURE);
       const dateNotPassed = task ? (new Date()).getTime() >= (new GhDate(task.date)).getDate().getTime() : true;
       const taskDone = this.history.find(x => x.type === TrackingPointType.FIRST_DEPARTURE);
-      return dateNotPassed && !taskDone;
+      return dateNotPassed && !taskDone &&  !!this.history.find(x => x.type === TrackingPointType.ON_WAY_TO_AIRPORT);
    }
+
+   /**
+    * @description A boolean that indicates if the user can see the button when the GP arrived at the final country
+    * @type {boolean}
+    */
+   protected get lastArrivalButton(): boolean {
+    const task = this.tasks.find(x => x.name === TaskName.NOTICE_GP_TO_BE_LAST_ARRIVAL);
+    const dateNotPassed = task ? (new Date()).getTime() >= (new GhDate(task.date)).getDate().getTime() : true;
+    const taskDone = this.history.find(x => x.type === TrackingPointType.LAST_ARRIVAL);
+    return dateNotPassed && !taskDone &&  !!this.history.find(x => x.type === TrackingPointType.FIRST_DEPARTURE);
+ }
 
     /**
      * @description A boolean that indicates if the user can see the button when the gp is on his way to the airport
@@ -333,6 +356,36 @@ import { GhDate } from "../../../misc/classes/gh-date";
             this.reloadPage.emit();
           } else {
             this.notificationService.errorNotification('deliveryExecption.modal.firstDeparture.notification.error');
+          }
+        }
+      });
+  }
+
+  /**
+   * @description A method to generate a last arrival exception
+   * @returns {void}
+   */
+  protected async lastArrivalException(): Promise<void> {
+    this.modalService.openModal({
+        title: "deliveryExecption.modal.lastArrival.title",
+        text: "deliveryExecption.modal.lastArrival.content",
+        confirmCaption: "deliveryExecption.modal.button.confirm",
+        cancelCaption: "deliveryExecption.modal.button.cancel"
+      }).then(async x => {
+        if(x) {
+          this._lastArrivalButtonLoading$.next(true);
+          const addHistorySuccessfully = await this.addHistoryResolver({
+                type: TrackingPointType.LAST_ARRIVAL,
+                location: this.destinationCity,
+                orderId: null,
+                exception: null,
+            });
+          this._lastArrivalButtonLoading$.next(false);
+          if(addHistorySuccessfully) {
+            this.notificationService.successNotification('deliveryExecption.modal.lastArrival.notification.success');
+            this.reloadPage.emit();
+          } else {
+            this.notificationService.errorNotification('deliveryExecption.modal.lastArrival.notification.error');
           }
         }
       });
