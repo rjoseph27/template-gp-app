@@ -115,6 +115,12 @@ export class GhReportTripComponent extends BaseRequestComponent implements OnIni
   @Input() currentFormMode: FormMode;
 
   /**
+   * @description A boolean that indicate if the user is only revising the dates of the trip
+   * @type {boolean}
+   */
+  @Input() reviseDate: boolean = false;
+
+  /**
    * @description The report trip
    * @type {ReportTrip}
    */

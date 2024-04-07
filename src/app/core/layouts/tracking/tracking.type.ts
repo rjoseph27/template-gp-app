@@ -126,7 +126,7 @@ export enum DeliveryExceptionType {
     TRIP_CANCELED = 'TRIP_CANCELED',
 
     /**
-     * @description The order was canceled
+     * @description The trip canceled while delivery
      * @type {string}
      */
     CANCELED = 'CANCELED',
@@ -136,24 +136,6 @@ export enum DeliveryExceptionType {
      * @type {string}
      */
     LOST = 'LOST',
-
-    /**
-     * @description The GP has been denied on boarding
-     * @type {string}
-     */
-    DENIED_ON_BOARDING = 'DENIED_ON_BOARDING',
-
-    /**
-     * @description The GP has been denied on arrival
-     * @type {string}
-     */
-    DENIED_ON_ARRIVAL = 'DENIED_ON_ARRIVAL',
-
-    /**
-     * @description The GP has missed his flight
-     * @type {string}
-     */
-    MISSED_FLIGHT = 'MISSED_FLIGHT',
 
     /**
      * @description The order has been seized by customs

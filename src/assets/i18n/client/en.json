@@ -160,7 +160,7 @@
                 "status": {
                     "planned": "Planned Trip",
                     "confirmed": "Confirmed Trip",
-                    "onFlight": "On Flight",
+                    "onDelivery": "On Delivery",
                     "cancel": "Cancel the Trip",
                     "tripDone": "Trip Completed"
                 },

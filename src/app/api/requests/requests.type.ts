@@ -842,6 +842,24 @@ export interface ReportTrip {
   }
 
   /**
+   * @interface EditItineraryRequest
+   * @description An interface for the edit itinerary request
+   */
+  export enum EditItineraryStatus {
+    /**
+     * @description The itinerary was edited successfully
+     * @type {string}
+     */
+    ITINERARY_EDITED_SUCCESSFULLY = "ITINERARY_EDITED_SUCCESSFULLY",
+
+    /**
+     * @description The itinerary was not found
+     * @type {string}
+     */
+    TRIP_NOT_FOUND = "TRIP_NOT_FOUND"
+  }
+
+  /**
    * @interface GetSendItemsRequestStatus
    * @description The status of the get send items request
    */

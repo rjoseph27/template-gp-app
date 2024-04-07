@@ -108,7 +108,7 @@ export enum TripStatus {
    * @description The trip is in progress
    * @type {string}
    */
-  ON_FLIGHT = 'ON_FLIGHT',
+  ON_DELIVERY = 'ON_DELIVERY',
 
   /**
    * @description The trip is completed

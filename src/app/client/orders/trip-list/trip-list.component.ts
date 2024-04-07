@@ -17,7 +17,7 @@ import { ClientRoutes } from "../../client.route";
      * @description The non completed trips
      * @type {Observable<RequestTableElement[]>}
      */
-    protected readonly nonCompletedTrips$ = this.requestsService.getTripList(this.userService.currentUserId).then(x => x.filter(y => y.status === TripStatus.PLANNED || y.status === TripStatus.CONFIRMED || y.status === TripStatus.ON_FLIGHT));
+    protected readonly nonCompletedTrips$ = this.requestsService.getTripList(this.userService.currentUserId).then(x => x.filter(y => y.status === TripStatus.PLANNED || y.status === TripStatus.CONFIRMED || y.status === TripStatus.ON_DELIVERY));
 
     /**
      * @description The completed trips
@@ -55,9 +55,9 @@ import { ClientRoutes } from "../../client.route";
               id: row.id
             }})
           }
-        case TripStatus.ON_FLIGHT:
+        case TripStatus.ON_DELIVERY:
           return {
-            label: 'moduleList.gp.trip.status.onFlight',
+            label: 'moduleList.gp.trip.status.onDelivery',
             icon: 'flightsmode',
             action: () => console.log("wait dispatch module")
           }

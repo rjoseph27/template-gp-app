@@ -93,10 +93,19 @@ import { Tasks } from "../../../../misc/base-class/base-get-tasks.resolver";
     * @description A method to reload the page
     * @returns {void}
     */
-    protected reloadPage() {
+    protected reloadPage(): void {
         // FIND A BETTER SOLUTION
         this.router.navigate([PartnerRoutes.dispatching.fullPath()]).then(() => {
             this.router.navigate([PartnerRoutes.dispatchingView.fullPath()], { queryParams: this.route.snapshot.queryParams });
         })
       }
+
+    /**
+     * @description A method to navigate to the change date page
+     * @returns {void}
+     */
+    protected changeDate(): void {
+        PartnerRoutes.dispatchingView.currentParams = this.route.snapshot.queryParams
+        this.router.navigate([PartnerRoutes.changeDate.fullPath()], { queryParams: this.route.snapshot.queryParams })
+    }
   }

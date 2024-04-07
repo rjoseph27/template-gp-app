@@ -1,0 +1,28 @@
+<div class="content">
+        <div>
+                <div class="title">
+                        <h1>{{ 'moduleList.dispatching.view.changeDate.title' | translate }}</h1>
+                </div>
+                <gh-report-trip 
+                        [reportTrip]="tripDetails$ | async" 
+                        [userCountry]="country$ | async" 
+                        [currentFormMode]="formMode.EDIT"
+                        [reviseDate]="true">
+                </gh-report-trip>
+                <gh-create-layover
+                        *ngIf="form" 
+                        [currentFormMode]="formMode.EDIT"
+                        [minDate]="departureDate$ | async"
+                        [maxDate]="arrivalDate$ | async"
+                        [originAirport]="originAirport$ | async"
+                        [destinationAirport]="destinationAirport$ | async"
+                        [layovers]="layovers$ | async"
+            ></gh-create-layover>
+            <button 
+                class="gp-button" 
+                [disabled]="!form.valid"
+                [buttonLoading]="loading$ | async"
+                (click)="modifyItinerary()"
+            >{{ 'moduleList.dispatching.view.changeDate.submit' | translate }}</button>
+        </div>
+</div>

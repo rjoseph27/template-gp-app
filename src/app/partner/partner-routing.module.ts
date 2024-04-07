@@ -17,6 +17,7 @@ import { PartnerDispatchingComponent } from "./dispatching/dispatching.component
 import { PartnerDispatchingViewComponent } from "./dispatching/dispatching-view/dispatching-view.component";
 import { PartnerTripInfoResolver } from "./dispatching/trip-info.resolver";
 import { PartnerTasksResolver } from "./dispatching/tasks.resolver";
+import { PartnerChangeDateComponent } from "./dispatching/dispatching-view/change-date/change-date.component";
 
 /**
  * @constant routes
@@ -43,7 +44,8 @@ const routes: Routes = [
         { path: '', component: PartnerDispatchingComponent, pathMatch: 'full', resolve: { userInfo: PartnerApplicationResolver} },
         { path: `${PartnerRoutes.dispatchingView}`, children: [
             { path: '', component: PartnerDispatchingViewComponent, pathMatch: 'full', resolve: { trip: PartnerTripInfoResolver, tasks: PartnerTasksResolver, userInfo: PartnerApplicationResolver } },
-        ] }
+            { path: `${PartnerRoutes.changeDate}`, component: PartnerChangeDateComponent, pathMatch: 'full', resolve: { trip: PartnerTripInfoResolver, tasks: PartnerTasksResolver, userInfo: PartnerApplicationResolver } }
+        ]}
     ]},
 ];
 

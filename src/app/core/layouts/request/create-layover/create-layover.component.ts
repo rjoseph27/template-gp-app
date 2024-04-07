@@ -81,7 +81,7 @@ export interface Layovers {
      * @description The layover field
      * @type {string}
      */
-    private readonly layoverField = 'layover';
+    private readonly layoverField = 'layovers';
 
     /**
      * @description The layout form control
@@ -226,6 +226,12 @@ export interface Layovers {
     @Input() destinationAirport: string
 
     /**
+     * @description The layovers
+     * @type {Layovers[]}
+     */
+    @Input() layovers: Layovers[] = [];
+
+    /**
      * @description The close icon
      * @type {string}
      */
@@ -264,7 +270,7 @@ export interface Layovers {
    * @type {ValidatorFn}
    */
   private readonly duplicateRouteValidator: ValidatorFn = (control: AbstractControl) => {
-    const route = [...(<Layovers[]>control.value.layover).map(x => x.airport), this.originAirport, this.destinationAirport];
+    const route = [...(<Layovers[]>control.value.layovers).map(x => x.airport), this.originAirport, this.destinationAirport];
     const set = new Set(route);
     if(set.size !== route.length) {
       control.get(this.layoverField).setErrors({ duplicateRoute: true });
@@ -283,7 +289,7 @@ export interface Layovers {
    * @type {ValidatorFn}
    */
   private readonly wrongDateOrderValidator: ValidatorFn = (control: AbstractControl) => {
-    const dates: Date[] = [this.minDate,...(<Layovers[]>control.value.layover)
+    const dates: Date[] = [this.minDate,...(<Layovers[]>control.value.layovers)
       .filter(x => x.arrivalDate)
       .map(x => {
       const date = new GhDate(x.arrivalDate?.date);
@@ -310,13 +316,13 @@ export interface Layovers {
    */
   private readonly intersectingDateValidator: ValidatorFn = (control: AbstractControl) => {
     let isDateIntersect = false;
-    <Layovers[]>control.value.layover.forEach((layover: Layovers, index: number) => {
+    <Layovers[]>control.value.layovers.forEach((layover: Layovers, index: number) => {
       if(index > 0) {
         const arrivalDate = new Date(layover.arrivalDate?.date.toString());
         arrivalDate.setHours(layover.arrivalTime?.time.hours, layover.arrivalTime?.time.minutes);
 
-        const lastDepartureDate = new Date(control.value.layover[index - 1].departureDate.date.toString());
-        lastDepartureDate.setHours(control.value.layover[index - 1].departureTime.time.hours, control.value.layover[index - 1].departureTime.time.minutes);
+        const lastDepartureDate = new Date(control.value.layovers[index - 1].departureDate.date.toString());
+        lastDepartureDate.setHours(control.value.layovers[index - 1].departureTime.time.hours, control.value.layovers[index - 1].departureTime.time.minutes);
         if(arrivalDate.getTime() < lastDepartureDate.getTime()) {
           isDateIntersect = true;
         }
@@ -379,18 +385,24 @@ export interface Layovers {
   /** @inheritdoc */
   ngOnInit(): void {
     if(!this.currentFormService.currentForm) {
-      this.currentFormService.currentForm = new FormGroup({ layover: new FormArray([])}, { validators: [this.duplicateRouteValidator, this.wrongDateOrderValidator, this.intersectingDateValidator] })  
+      this.currentFormService.currentForm = new FormGroup({ layovers: new FormArray([])}, { validators: [this.duplicateRouteValidator, this.wrongDateOrderValidator, this.intersectingDateValidator] })  
     } else {
       this.currentFormService.currentForm.addControl(this.layoverField, new FormArray([]));
       this.currentFormService.currentForm.addValidators([this.duplicateRouteValidator, this.wrongDateOrderValidator, this.intersectingDateValidator]);   
     }
+
+    this.layovers.forEach((layover, index) => {
+      this.addLayover(layover)
+      this.updateCountry(layover.country, index)
+      this.layoutFormControl.at(index).get(this.airportField).setValue(this.layovers[index].airport)
+    });
    }
    
    /**
      * @description A method that add a layover
      * @returns void
      */
-   protected addLayover(): void {
+   protected addLayover(layover?: Layovers): void {
     const index = this.layoutFormControl.length;
     const maxDate = new Date(this.maxDate.toString());
     maxDate.setHours(23);
@@ -399,12 +411,12 @@ export interface Layovers {
     minDate.setHours(0);
     minDate.setMinutes(0);
     this.layoutFormControl.push(new FormGroup({}, { validators: [this.flighTimeValidator]}));
-    (this.layoutFormControl.at(index) as FormGroup).addControl(this.countryField, new FormControl(null, [Validators.required]));
-    (this.layoutFormControl.at(index) as FormGroup).addControl(this.airportField, new FormControl(null, [Validators.required]));
-    (this.layoutFormControl.at(index) as FormGroup).addControl(this.arrivalDateField, new FormControl(null, [Validators.required, dateFormatValidator, minDateValidator(minDate), maxDateValidator(maxDate)]));
-    (this.layoutFormControl.at(index) as FormGroup).addControl(this.arrivalTimeField, new FormControl(null, [Validators.required, timeFormatValidator]));
-    (this.layoutFormControl.at(index) as FormGroup).addControl(this.departureDateField, new FormControl(null, [Validators.required, dateFormatValidator, minDateValidator(minDate), maxDateValidator(maxDate)]));
-    (this.layoutFormControl.at(index) as FormGroup).addControl(this.departureTimeField, new FormControl(null, [Validators.required, timeFormatValidator]));
+    (this.layoutFormControl.at(index) as FormGroup).addControl(this.countryField, new FormControl(layover?.country, [Validators.required]));
+    (this.layoutFormControl.at(index) as FormGroup).addControl(this.airportField, new FormControl(layover?.airport, [Validators.required]));
+    (this.layoutFormControl.at(index) as FormGroup).addControl(this.arrivalDateField, new FormControl(layover?.arrivalDate, [Validators.required, dateFormatValidator, minDateValidator(minDate), maxDateValidator(maxDate)]));
+    (this.layoutFormControl.at(index) as FormGroup).addControl(this.arrivalTimeField, new FormControl(layover?.arrivalTime, [Validators.required, timeFormatValidator]));
+    (this.layoutFormControl.at(index) as FormGroup).addControl(this.departureDateField, new FormControl(layover?.departureDate, [Validators.required, dateFormatValidator, minDateValidator(minDate), maxDateValidator(maxDate)]));
+    (this.layoutFormControl.at(index) as FormGroup).addControl(this.departureTimeField, new FormControl(layover?.departureTime, [Validators.required, timeFormatValidator]));
   }
 
   /**

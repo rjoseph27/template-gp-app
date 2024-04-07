@@ -174,14 +174,25 @@ import { GhDate } from "../../../misc/classes/gh-date";
     }
 
     /**
-     * @description A boolean that indicates if the user can notice that he is on his way to the airport
+     * @description A boolean that indicates if the user can see the button when the order is with the GP
      * @type {boolean}
      */
-    protected get displayOnHisWay(): boolean {
+    protected get withGpButton(): boolean {
         const task = this.tasks.find(x => x.name === TaskName.NOTICE_GP_TO_BE_ON_WAY_TO_AIRPORT);
         const dateNotPassed = task ? (new Date()).getTime() >= (new GhDate(task.date)).getDate().getTime() : true;
         const taskDone = this.history.find(x => x.type === TrackingPointType.ON_WAY_TO_AIRPORT);
         return dateNotPassed && !taskDone;
+    }
+
+    /**
+     * @description A boolean that indicates if the user can see the button when the gp is on his way to the airport
+     * @type {boolean}
+     */
+    protected get onWayAirportButton(): boolean {
+      const task = this.tasks.find(x => x.name === TaskName.NOTICE_GP_TO_BE_FIRST_DEPARTURE);
+        const dateNotPassed = task ? (new Date()).getTime() >= (new GhDate(task.date)).getDate().getTime() : true;
+        const taskDone = this.history.find(x => x.type === TrackingPointType.FIRST_DEPARTURE);
+        return dateNotPassed && !taskDone && !!this.history.find(x => x.type === TrackingPointType.ON_WAY_TO_AIRPORT);
     }
 
     /**

@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { BaseInputFieldComponent } from '../base-input-field.component';
 import { TIME_ICON } from '../../../../misc/constants/icon';
 import { BehaviorSubject } from 'rxjs';
@@ -31,7 +31,7 @@ export interface TimeFromTimePicker {
   templateUrl: './time-field.component.html',
   styleUrls: ['./time-field.component.scss', './../base-input-field.component.scss']
 })
-export class GhTimeFieldComponent extends BaseInputFieldComponent<TimeFromTimePicker> {
+export class GhTimeFieldComponent extends BaseInputFieldComponent<TimeFromTimePicker> implements OnInit {
   /**
    * @description Backing field for isTimePickerOpen$
    * @type {BehaviorSubject<boolean>}
@@ -87,6 +87,11 @@ export class GhTimeFieldComponent extends BaseInputFieldComponent<TimeFromTimePi
    * @type {string}
    */
   protected readonly timeIcon = TIME_ICON;
+
+  /** @inheritdoc */
+  ngOnInit(): void {
+    this.timeValue = this.value?.timeString;
+  }
 
   /**
    * @description A method that shows the time picker

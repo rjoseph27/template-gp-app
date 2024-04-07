@@ -83,7 +83,11 @@
                 },
                 "manage": {
                     "title": "Manage the Delivery",
-                    "changeDate": "Change Date"
+                    "changeDate": "Modify the intenary"
+                },
+                "changeDate": {
+                    "title": "Modify the intenary",
+                    "submit": "Modify"
                 }
             }
         },

@@ -91,6 +91,10 @@ import { CountryUtil } from "../../../../misc/util/country.util";
       })
     }
 
+    /**
+     * @description A method to show the delay dialog
+     * @returns {void}
+     */
     protected showDelayDialog(): void {
       this.route.data.pipe(
         map(data => (<ReportTrip>data['trip'])),

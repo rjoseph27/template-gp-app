@@ -310,4 +310,13 @@ export class RequestsServiceApi extends BaseServiceApi {
     getTasks(tripInfo: string): Promise<GetTasksApiResponse> {
         return firstValue(this.getRequest<GetTasksApiResponse>('get-tasks', tripInfo));
     }
+
+    /**
+     * @description A method to edit the trip itinerary
+     * @param newItinerary The new itinerary
+     * @returns {Promise<ApiResponse>}
+     */
+    editTripItinerary(newItinerary: ReportTrip): Promise<ApiResponse> {
+        return firstValue(this.postRequest<ApiResponse>('edit-itinerary', newItinerary));
+    }
 }

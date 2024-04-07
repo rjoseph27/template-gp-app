@@ -76,4 +76,10 @@ export class PartnerRoutes {
      * @type {GhRoute}
      */
     static readonly dispatchingView: GhRoute = new GhRoute('dispatching-view', PartnerRoutes.dispatching);
+
+    /**
+     * @description The route for the change date
+     * @type {GhRoute}
+     */
+    static readonly changeDate: GhRoute = new GhRoute('change-date', PartnerRoutes.dispatchingView);
 }

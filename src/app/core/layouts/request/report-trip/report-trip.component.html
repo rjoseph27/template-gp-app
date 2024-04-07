@@ -11,6 +11,7 @@
                 [errors]="reportTripForm.get(userCountryField).errors"
                 [errorCaptions]="countryErrorCaptions"
                 [options]="userCountryOptions"
+                [disabled]="reviseDate"
                 [readonly]="currentFormMode === formMode.VIEW"
                 ></gh-select-field>
             </div>
@@ -23,6 +24,7 @@
                 [errors]="reportTripForm.get(userAirportField).errors"
                 [errorCaptions]="airportErrorCaptions"
                 [options]="userAirports$ | async"
+                [disabled]="reviseDate"
                 [readonly]="currentFormMode === formMode.VIEW"
                 ></gh-select-field>
             </div>
@@ -66,6 +68,7 @@
                 [errors]="reportTripForm.get(destinationCountryField).errors"
                 [errorCaptions]="countryErrorCaptions"
                 [options]="destinationCountryOptions$ | async"
+                [disabled]="reviseDate"
                 [readonly]="currentFormMode === formMode.VIEW"
                 ></gh-select-field>
             </div>
@@ -78,6 +81,7 @@
                 [errors]="reportTripForm.get(destinationAirportField).errors"
                 [errorCaptions]="airportErrorCaptions"
                 [options]="destinationAirports$ | async"
+                [disabled]="reviseDate"
                 [readonly]="currentFormMode === formMode.VIEW"
                 ></gh-select-field>
             </div>
@@ -110,7 +114,7 @@
         </div>
     </div>
     <hr class="gp-divider">
-    <div class="group">
+    <div class="group" *ngIf="!reviseDate">
         <div class="title">
             {{ 'reportTrip.pricingInformation.title' | translate }}
         </div>
@@ -145,7 +149,7 @@
            ></gh-number-field> 
         </div>
     </div>
-    <div class="group">
+    <div class="group" *ngIf="!reviseDate">
         <gh-table 
             [columns]="specificPriceTableColumns$ | async" 
             [(elements)]="specificPriceElements"

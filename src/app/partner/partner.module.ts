@@ -30,6 +30,7 @@ import { PartnerConfirmTripComponent } from "./dispatching/dispatching-view/conf
 import { PartnerManageTrackingComponent } from "./dispatching/dispatching-view/manage-tracking/manage-tracking.component";
 import { PartnerTripInfoResolver } from "./dispatching/trip-info.resolver";
 import { PartnerTasksResolver } from "./dispatching/tasks.resolver";
+import { PartnerChangeDateComponent } from "./dispatching/dispatching-view/change-date/change-date.component";
 
 /**
  * @module PartnerModule
@@ -49,7 +50,8 @@ import { PartnerTasksResolver } from "./dispatching/tasks.resolver";
         PartnerDispatchingComponent,
         PartnerDispatchingViewComponent,
         PartnerConfirmTripComponent,
-        PartnerManageTrackingComponent
+        PartnerManageTrackingComponent,
+        PartnerChangeDateComponent
     ],
     imports: [
         CommonModule,

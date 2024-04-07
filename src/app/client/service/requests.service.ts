@@ -1,6 +1,6 @@
 import { Injectable, inject } from "@angular/core";
 import { RequestsServiceApi } from "../../api/requests/requests.service.api";
-import { OrderDetailRequest, CancelOrderStatus, ConfirmItemRequest, CreateAlertRequest, CreateAlertStatus, ItemsOrdersStatus, ReportTrip, ReportTripStatus, RequestTableElementRequest, SendItemsStatus, GpAcceptOrderStatus, GetReportTripStatus, GetTripInfoStatus, CancelTripStatus, AlertListStatus, AlertFormType, EditAlertStatus, DeleteAlertStatus, OrderFilterInfo, EditItemInformationRequest, EditItemInformationStatus, UpdateStatus, BillingFilterInfo, BillingStatus, CreateBillStatus, ConfirmTripRequest, ConfirmTripStatus, AddHistoryStatus, GetTasksStatus } from "../../api/requests/requests.type";
+import { OrderDetailRequest, CancelOrderStatus, ConfirmItemRequest, CreateAlertRequest, CreateAlertStatus, ItemsOrdersStatus, ReportTrip, ReportTripStatus, RequestTableElementRequest, SendItemsStatus, GpAcceptOrderStatus, GetReportTripStatus, GetTripInfoStatus, CancelTripStatus, AlertListStatus, AlertFormType, EditAlertStatus, DeleteAlertStatus, OrderFilterInfo, EditItemInformationRequest, EditItemInformationStatus, UpdateStatus, BillingFilterInfo, BillingStatus, CreateBillStatus, ConfirmTripRequest, ConfirmTripStatus, AddHistoryStatus, GetTasksStatus, EditItineraryStatus } from "../../api/requests/requests.type";
 import { SendItemsRequest } from "./send-items.service";
 import { DateUtil } from "../../misc/util/date.util";
 import { UsersService } from "../../services/users.service";
@@ -506,5 +506,20 @@ export class ClientRequestsService {
             }
             return null
         })
-    } 
+    }
+
+    /**
+     * @description Edits the trip itinerary
+     * @param newItinerary The new itinerary
+     * @returns {Promise<boolean>}
+     */
+    editTripItinerary(newItinerary: ReportTrip): Promise<boolean> {
+        return this.requestsServiceApi.editTripItinerary(newItinerary).then(msg => {
+            if(msg.message === EditItineraryStatus.ITINERARY_EDITED_SUCCESSFULLY)
+            {
+                return true
+            }
+            return false
+        })
+    }
 }
