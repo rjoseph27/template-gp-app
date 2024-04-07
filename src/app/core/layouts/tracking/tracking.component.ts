@@ -74,6 +74,18 @@ import { GhDate } from "../../../misc/classes/gh-date";
     protected readonly lastArrivalButtonLoading$ = this._lastArrivalButtonLoading$.asObservable();
 
     /**
+     * @description The backing field for the final checkpoint button loading
+     * @type {BehaviorSubject<boolean>}
+     */
+    private readonly _finalCheckpointButtonLoading$ = new BehaviorSubject<boolean>(false);
+
+    /**
+     * @description An observable for the final checkpoint button loading
+     * @type {Observable<boolean>}
+     */
+    protected readonly finalCheckpointButtonLoading$ = this._finalCheckpointButtonLoading$.asObservable();
+
+    /**
      * @description The backing field for the cancel trip button loading
      * @type {BehaviorSubject<boolean>}
      */
@@ -228,7 +240,18 @@ import { GhDate } from "../../../misc/classes/gh-date";
     const dateNotPassed = task ? (new Date()).getTime() >= (new GhDate(task.date)).getDate().getTime() : true;
     const taskDone = this.history.find(x => x.type === TrackingPointType.LAST_ARRIVAL);
     return dateNotPassed && !taskDone &&  !!this.history.find(x => x.type === TrackingPointType.FIRST_DEPARTURE);
- }
+   }
+
+  /**
+   * @description A boolean that indicates if the user can see the button when the GP is on his way to the final checkpoint
+   * @type {boolean}
+   */
+  protected get finalDestinationButton(): boolean {
+    const task = this.tasks.find(x => x.name === TaskName.NOTICE_GP_TO_BE_ON_WAY_TO_DESTINATION);
+    const dateNotPassed = task ? (new Date()).getTime() >= (new GhDate(task.date)).getDate().getTime() : true;
+    const taskDone = this.history.find(x => x.type === TrackingPointType.FINAL_CHECKPOINT);
+    return dateNotPassed && !taskDone &&  !!this.history.find(x => x.type === TrackingPointType.LAST_ARRIVAL);
+  }
 
     /**
      * @description A boolean that indicates if the user can see the button when the gp is on his way to the airport
@@ -386,6 +409,36 @@ import { GhDate } from "../../../misc/classes/gh-date";
             this.reloadPage.emit();
           } else {
             this.notificationService.errorNotification('deliveryExecption.modal.lastArrival.notification.error');
+          }
+        }
+      });
+  }
+
+  /**
+   * @description A method to generate a final destination exception
+   * @returns {void}
+   */
+  protected async finalDestinationException(): Promise<void> {
+    this.modalService.openModal({
+        title: "deliveryExecption.modal.finalCheckpoint.title",
+        text: "deliveryExecption.modal.finalCheckpoint.content",
+        confirmCaption: "deliveryExecption.modal.button.confirm",
+        cancelCaption: "deliveryExecption.modal.button.cancel"
+      }).then(async x => {
+        if(x) {
+          this._finalCheckpointButtonLoading$.next(true);
+          const addHistorySuccessfully = await this.addHistoryResolver({
+                type: TrackingPointType.FINAL_CHECKPOINT,
+                location: this.destinationCity,
+                orderId: null,
+                exception: null,
+            });
+          this._finalCheckpointButtonLoading$.next(false);
+          if(addHistorySuccessfully) {
+            this.notificationService.successNotification('deliveryExecption.modal.finalCheckpoint.notification.success');
+            this.reloadPage.emit();
+          } else {
+            this.notificationService.errorNotification('deliveryExecption.modal.finalCheckpoint.notification.error');
           }
         }
       });

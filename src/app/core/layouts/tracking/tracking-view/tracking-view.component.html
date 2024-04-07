@@ -1,7 +1,7 @@
 <div>
     <div class="current-information">
-        <div class="title">{{ lastCheckpoint.done ? 'tracking.view.atCheckpoint' : 'tracking.view.inTransit' | translate }}</div>
-        <div>{{ currentCheckpoint.location }}, {{ getCountry(currentCheckpoint.location) }}</div>
+        <div class="title">{{ lastCheckpoint.done ? ('tracking.view.atCheckpoint' | translate) : 'tracking.view.inTransit' | translate }}</div>
+        <div>{{ currentCheckpoint?.location }}, {{ getCountry(currentCheckpoint?.location) }}</div>
     </div>
     <div class="current-information">
         <div class="title">{{ 'tracking.view.scheduledDate' | translate }}</div>
@@ -29,5 +29,5 @@
 </div>
 <div class="detail">
     <div *ngIf="orderId">{{ 'tracking.view.orderId' | translate }} #{{ orderId }}</div>
-    <div>{{ currentCheckpoint.location }}, {{ getCountry(currentCheckpoint.location) }} {{ 'tracking.view.to' | translate }} {{ lastCheckpoint.location }}, {{ getCountry(lastCheckpoint.location) }}</div>
+    <div>{{ trackingPoints[0].location }}, {{ getCountry(trackingPoints[0].location) }} {{ 'tracking.view.to' | translate }} {{ lastCheckpoint.location }}, {{ getCountry(lastCheckpoint.location) }}</div>
 </div>
