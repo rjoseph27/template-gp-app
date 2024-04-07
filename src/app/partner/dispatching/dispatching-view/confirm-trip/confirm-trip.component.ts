@@ -158,7 +158,7 @@ import { NavigationService } from "../../../../services/navigation.service";
             if(x) {
                 const isConfirmed = await this.requestsService.confirmTrip({
                     tripId: this.route.snapshot.data['trip'].id,
-                    layovers: this.form.get('layover').value
+                    layovers: this.form.get('layover')?.value || []
                   })
                   this._confirmLoading$.next(false);
                 if(isConfirmed) {

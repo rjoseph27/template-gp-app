@@ -50,6 +50,18 @@ import { GhDate } from "../../../misc/classes/gh-date";
     protected readonly onHisWayButtonLoading$ = this._onHisWayButtonLoading$.asObservable();
 
     /**
+     * @description The backing field for the first departure button loading
+     * @type {BehaviorSubject<boolean>}
+     */
+    private readonly _firstDepartureButtonLoading$ = new BehaviorSubject<boolean>(false);
+
+    /**
+     * @description An observable for the first departure button loading
+     * @type {Observable<boolean>}
+     */
+    protected readonly firstDepartureButtonLoading$ = this._firstDepartureButtonLoading$.asObservable();
+
+    /**
      * @description The backing field for the cancel trip button loading
      * @type {BehaviorSubject<boolean>}
      */
@@ -185,6 +197,17 @@ import { GhDate } from "../../../misc/classes/gh-date";
     }
 
     /**
+     * @description A boolean that indicates if the user can see the button when the GP is ready to board plane
+     * @type {boolean}
+     */
+    protected get firstDepartureButton(): boolean {
+      const task = this.tasks.find(x => x.name === TaskName.NOTICE_GP_TO_BE_FIRST_DEPARTURE);
+      const dateNotPassed = task ? (new Date()).getTime() >= (new GhDate(task.date)).getDate().getTime() : true;
+      const taskDone = this.history.find(x => x.type === TrackingPointType.FIRST_DEPARTURE);
+      return dateNotPassed && !taskDone;
+   }
+
+    /**
      * @description A boolean that indicates if the user can see the button when the gp is on his way to the airport
      * @type {boolean}
      */
@@ -280,6 +303,36 @@ import { GhDate } from "../../../misc/classes/gh-date";
             this.reloadPage.emit();
           } else {
             this.notificationService.errorNotification('deliveryExecption.modal.onHisWay.notification.error');
+          }
+        }
+      });
+  }
+
+  /**
+   * @description A method to generate a first departure exception
+   * @returns {void}
+   */
+  protected async firstDepartureException(): Promise<void> {
+    this.modalService.openModal({
+        title: "deliveryExecption.modal.firstDeparture.title",
+        text: "deliveryExecption.modal.firstDeparture.content",
+        confirmCaption: "deliveryExecption.modal.button.confirm",
+        cancelCaption: "deliveryExecption.modal.button.cancel"
+      }).then(async x => {
+        if(x) {
+          this._firstDepartureButtonLoading$.next(true);
+          const addHistorySuccessfully = await this.addHistoryResolver({
+                type: TrackingPointType.FIRST_DEPARTURE,
+                location: this.originCity,
+                orderId: null,
+                exception: null,
+            });
+          this._firstDepartureButtonLoading$.next(false);
+          if(addHistorySuccessfully) {
+            this.notificationService.successNotification('deliveryExecption.modal.firstDeparture.notification.success');
+            this.reloadPage.emit();
+          } else {
+            this.notificationService.errorNotification('deliveryExecption.modal.firstDeparture.notification.error');
           }
         }
       });

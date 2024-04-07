@@ -502,7 +502,8 @@
                 "ORDER_ACCEPTED": "The order has been accepted",
                 "AT_CHECKPOINT": "The order is at the checkpoint",
                 "WITH_GP": "The order is with the GP",
-                "ON_WAY_TO_AIRPORT": "The GP is on his way to the airport"
+                "ON_WAY_TO_AIRPORT": "The GP is on his way to the airport",
+                "FIRST_DEPARTURE": "The GP is on the plane"
             },
             "exception": {
                 "LOST": "The order has been declared as lost",
@@ -606,7 +607,8 @@
             "cancelTrip": "Cancel the trip",
             "reportDelay":"Report a delay or a reschedule of the trip",
             "lostOrder": "Declare the order as lost",
-            "damaged": "Declare the order as damaged"
+            "damaged": "Declare the order as damaged",
+            "firstDeparture": "Confirm that your are ready to enter the plane"
         },
         "modal": {
             "lostOrder": {
@@ -628,6 +630,14 @@
             "onHisWay": {
                 "title": "Confirm that you are on your way to the airport",
                 "content": "Are you sure you are on your way to the airport?",
+                "notification": {
+                    "success": "The order has been confirmed",
+                    "error": "An error occured while confirming the order"
+                }
+            },
+            "firstDeparture": {
+                "title": "Confirm that you are ready to enter the plane",
+                "content": "Are you sure you are ready to enter the plane?",
                 "notification": {
                     "success": "The order has been confirmed",
                     "error": "An error occured while confirming the order"
