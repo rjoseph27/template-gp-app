@@ -505,7 +505,8 @@
                 "ON_WAY_TO_AIRPORT": "The GP is on his way to the airport",
                 "FIRST_DEPARTURE": "The GP is on the plane",
                 "LAST_ARRIVAL": "The GP has arrived at the final country",
-                "FINAL_CHECKPOINT": "The GP is on his way to the final checkpoint"
+                "ON_WAY_TO_FINAL_CHECKPOINT": "The GP is on his way to the final checkpoint",
+                "FINAL_CHECKPOINT": "The item is at the final checkpoint. We are going to deliver it soon to the consignee"
             },
             "exception": {
                 "LOST": "The order has been declared as lost",

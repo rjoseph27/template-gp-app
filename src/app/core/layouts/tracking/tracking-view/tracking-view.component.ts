@@ -113,6 +113,14 @@ interface Tracking extends TrackingPoint {
                     done: true
                 },
                 {
+                    date: withGpDate.toJson(),
+                    type: TrackingPointType.WITH_GP,
+                    location: this.originCity,
+                    orderId: null,
+                    exception: history.find(point => point.type === TrackingPointType.WITH_GP && point.exception)?.exception,
+                    done: (this.orderId ? history: this.history).some(point => point.type === TrackingPointType.WITH_GP)
+                },
+                {
                     date: this.departureDate,
                     type: TrackingPointType.FIRST_DEPARTURE,
                     location: this.originCity,
@@ -135,22 +143,9 @@ interface Tracking extends TrackingPoint {
                     location: this.destinationCity,
                     orderId: null,
                     exception: undefined,
-                    done: history.some(point => point.type === TrackingPointType.FINAL_CHECKPOINT)
+                    done: (this.orderId ? history: this.history).some(point => point.type === TrackingPointType.FINAL_CHECKPOINT)
                 },
             ])
-
-            if(this.orderId) {
-                const withGP = this._trackingPoints$.value;
-                withGP.splice(1, 0, {
-                    date: withGpDate.toJson(),
-                    type: TrackingPointType.WITH_GP,
-                    location: this.originCity,
-                    orderId: null,
-                    exception: history.find(point => point.type === TrackingPointType.WITH_GP && point.exception)?.exception,
-                    done: history.some(point => point.type === TrackingPointType.WITH_GP)
-                });
-                this._trackingPoints$.next(withGP);
-            }
         })).subscribe()
     }
 

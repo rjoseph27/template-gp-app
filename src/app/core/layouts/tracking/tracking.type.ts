@@ -63,6 +63,12 @@ export enum TrackingPointType {
      * @description The final checkpoint
      * @type {string}
      */
+    ON_WAY_TO_FINAL_CHECKPOINT = 'ON_WAY_TO_FINAL_CHECKPOINT',
+
+    /**
+     * @description The final checkpoint
+     * @type {string}
+     */
     FINAL_CHECKPOINT = 'FINAL_CHECKPOINT'
 }
 

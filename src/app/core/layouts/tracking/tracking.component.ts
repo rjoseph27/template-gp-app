@@ -178,6 +178,23 @@ import { GhDate } from "../../../misc/classes/gh-date";
     @Input() clientMode: boolean = false;
 
     /**
+     * @description A boolean that indicates if the user can see the lost or damage button
+     * @type {boolean}
+     */
+    protected get lostOrDamageButton(): boolean {
+      const lastHistory = this.history[this.history.length - 1];
+      return  lastHistory.type !== TrackingPointType.FIRST_DEPARTURE;
+    }
+
+    /**
+     * @description A boolean that indicates if the gp is at the final airport
+     * @type {boolean}
+     */
+    protected get arrivedAtFinalCountry(): boolean{
+      return  this.history.find(x => x.type === TrackingPointType.LAST_ARRIVAL) ? true : false;
+    }
+
+    /**
      * @description The selected order id
      * @type {string}
      */
@@ -210,17 +227,6 @@ import { GhDate } from "../../../misc/classes/gh-date";
     }
 
     /**
-     * @description A boolean that indicates if the user can see the button when the order is with the GP
-     * @type {boolean}
-     */
-    protected get withGpButton(): boolean {
-        const task = this.tasks.find(x => x.name === TaskName.NOTICE_GP_TO_BE_ON_WAY_TO_AIRPORT);
-        const dateNotPassed = task ? (new Date()).getTime() >= (new GhDate(task.date)).getDate().getTime() : true;
-        const taskDone = this.history.find(x => x.type === TrackingPointType.ON_WAY_TO_AIRPORT);
-        return dateNotPassed && !taskDone && !!this.history.find(x => x.type === TrackingPointType.WITH_GP);
-    }
-
-    /**
      * @description A boolean that indicates if the user can see the button when the GP is ready to board plane
      * @type {boolean}
      */
@@ -249,7 +255,7 @@ import { GhDate } from "../../../misc/classes/gh-date";
   protected get finalDestinationButton(): boolean {
     const task = this.tasks.find(x => x.name === TaskName.NOTICE_GP_TO_BE_ON_WAY_TO_DESTINATION);
     const dateNotPassed = task ? (new Date()).getTime() >= (new GhDate(task.date)).getDate().getTime() : true;
-    const taskDone = this.history.find(x => x.type === TrackingPointType.FINAL_CHECKPOINT);
+    const taskDone = this.history.find(x => x.type === TrackingPointType.ON_WAY_TO_FINAL_CHECKPOINT);
     return dateNotPassed && !taskDone &&  !!this.history.find(x => x.type === TrackingPointType.LAST_ARRIVAL);
   }
 
@@ -258,10 +264,10 @@ import { GhDate } from "../../../misc/classes/gh-date";
      * @type {boolean}
      */
     protected get onWayAirportButton(): boolean {
-      const task = this.tasks.find(x => x.name === TaskName.NOTICE_GP_TO_BE_FIRST_DEPARTURE);
+        const task = this.tasks.find(x => x.name === TaskName.NOTICE_GP_TO_BE_ON_WAY_TO_AIRPORT);
         const dateNotPassed = task ? (new Date()).getTime() >= (new GhDate(task.date)).getDate().getTime() : true;
-        const taskDone = this.history.find(x => x.type === TrackingPointType.FIRST_DEPARTURE);
-        return dateNotPassed && !taskDone && !!this.history.find(x => x.type === TrackingPointType.ON_WAY_TO_AIRPORT);
+        const taskDone = this.history.find(x => x.type === TrackingPointType.ON_WAY_TO_AIRPORT);
+        return dateNotPassed && !taskDone;
     }
 
     /**
@@ -428,7 +434,7 @@ import { GhDate } from "../../../misc/classes/gh-date";
         if(x) {
           this._finalCheckpointButtonLoading$.next(true);
           const addHistorySuccessfully = await this.addHistoryResolver({
-                type: TrackingPointType.FINAL_CHECKPOINT,
+                type: TrackingPointType.ON_WAY_TO_FINAL_CHECKPOINT,
                 location: this.destinationCity,
                 orderId: null,
                 exception: null,

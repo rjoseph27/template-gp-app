@@ -3,11 +3,11 @@
 <gh-tracking-view 
     [departureDate]="departureDate" 
     [arrivalDate]="arrivalDate"
-    [history]="filteredHistory"
+    [history]="history"
     [originCity]="originCity"
     [destinationCity]="destinationCity"
     [layovers]="layovers"
-    [orderId]="orderId"
+    [orderId]="selectedOrderId"
 ></gh-tracking-view>
 <gh-tracking-history [history]="filteredHistory"></gh-tracking-history>
 <ng-container *ngIf="gpView">
@@ -20,7 +20,7 @@
     ></gh-select-field>
     <div class="button-section">
         <button
-            *ngIf="!selectedOrderId && withGpButton && !(currentPoint?.exception)" 
+            *ngIf="!selectedOrderId && onWayAirportButton && !(currentPoint?.exception)" 
             [buttonLoading]="onHisWayButtonLoading$ | async"
             class="gp-button" 
             (click)="onHisWayException()"
@@ -44,23 +44,23 @@
             (click)="finalDestinationException()"
         >{{ 'deliveryExecption.button.finalCheckpoint' | translate }}</button>
         <button
-            *ngIf="!selectedOrderId && (withGpButton || onWayAirportButton) && !(currentPoint?.exception)" 
+            *ngIf="!selectedOrderId && onWayAirportButton && !(currentPoint?.exception)" 
             [buttonLoading]="cancelTripButtonLoading$ | async"
             class="attention-button" 
             (click)="cancelTripException()"
         >{{ 'deliveryExecption.button.cancelTrip' | translate }}</button>
         <button
-            *ngIf="!selectedOrderId && (withGpButton || onWayAirportButton) && !(currentPoint?.exception) && clientMode" 
+            *ngIf="!selectedOrderId && !arrivedAtFinalCountry && !(currentPoint?.exception) && clientMode" 
             class="attention-button" 
             (click)="declareDelay.emit()"
         >{{ 'deliveryExecption.button.reportDelay' | translate }}</button>
         <button 
-            *ngIf="selectedOrderId && (withGpButton || onWayAirportButton) && !(currentPoint?.exception)"
+            *ngIf="selectedOrderId && lostOrDamageButton && !(currentPoint?.exception)"
             [buttonLoading]="lostOrderButtonLoading$ | async"
             class="attention-button" 
             (click)="lostOrderException()">{{ 'deliveryExecption.button.lostOrder' | translate }}</button>
         <button 
-            *ngIf="selectedOrderId && (withGpButton || onWayAirportButton) && !(currentPoint?.exception)"
+            *ngIf="selectedOrderId && lostOrDamageButton && !(currentPoint?.exception)"
             [buttonLoading]="damagedOrderButtonLoading$ | async"
             class="attention-button" 
             (click)="damagedOrderException()"
