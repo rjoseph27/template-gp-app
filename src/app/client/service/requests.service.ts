@@ -522,4 +522,19 @@ export class ClientRequestsService {
             return false
         })
     }
+
+    /**
+     * @description Receives an item
+     * @param statusUpdateRequest The status update request
+     * @returns {Promise<boolean>}
+     */
+    receiveItem(statusUpdateRequest: OrderDetailRequest): Promise<boolean> {
+        return this.requestsServiceApi.receiveItem(statusUpdateRequest).then(msg => {
+            if(msg.message === UpdateStatus.ORDER_STATUS_UPDATED_SUCCESSFULLY)
+            {
+                return true
+            }
+            return false
+        });
+    }
 }

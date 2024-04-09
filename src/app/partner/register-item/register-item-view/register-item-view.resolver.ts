@@ -24,6 +24,6 @@ export class PartnerRegisterItemViewResolver extends baseOrderDetailsResolver {
   override isUserOrder =  async (orderDetails: OrderDetails): Promise<boolean> => {
     const trip = await this.requestsService.getTripInfo(orderDetails.tripId);
     const succursale = (await this.userService.getPartnerUserInfo(this.userService.currentUserId)).succursale
-    return CountryUtil.getSuccursaleByAirportCode(trip.userAirport) === succursale;
+    return CountryUtil.getSuccursaleByAirportCode(trip.userAirport) === succursale
   };
 }

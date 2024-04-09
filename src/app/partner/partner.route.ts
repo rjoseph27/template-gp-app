@@ -82,4 +82,16 @@ export class PartnerRoutes {
      * @type {GhRoute}
      */
     static readonly changeDate: GhRoute = new GhRoute('change-date', PartnerRoutes.dispatchingView);
+
+    /**
+     * @description The receive item route
+     * @type {GhRoute}
+     */
+    static readonly receiveItem: GhRoute = new GhRoute('receive-item', PartnerRoutes.main);
+
+    /**
+     * @description The view for the receive item route
+     * @type {GhRoute}
+     */
+    static readonly receiveItemView: GhRoute = new GhRoute('receive-item-view', PartnerRoutes.receiveItem);
 }

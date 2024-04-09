@@ -18,6 +18,9 @@ import { PartnerDispatchingViewComponent } from "./dispatching/dispatching-view/
 import { PartnerTripInfoResolver } from "./dispatching/trip-info.resolver";
 import { PartnerTasksResolver } from "./dispatching/tasks.resolver";
 import { PartnerChangeDateComponent } from "./dispatching/dispatching-view/change-date/change-date.component";
+import { PartnerReceiveItemComponent } from "./receive-item/receive-item.component";
+import { PartnerReceiveItemViewComponent } from "./receive-item/receive-item-view/receive-item-view.component";
+import { PartnerReceiveItemViewResolver } from "./receive-item/receive-item.resolver";
 
 /**
  * @constant routes
@@ -46,6 +49,10 @@ const routes: Routes = [
             { path: '', component: PartnerDispatchingViewComponent, pathMatch: 'full', resolve: { trip: PartnerTripInfoResolver, tasks: PartnerTasksResolver, userInfo: PartnerApplicationResolver } },
             { path: `${PartnerRoutes.changeDate}`, component: PartnerChangeDateComponent, pathMatch: 'full', resolve: { trip: PartnerTripInfoResolver, tasks: PartnerTasksResolver, userInfo: PartnerApplicationResolver } }
         ]}
+    ]},
+    { path: `${PartnerRoutes.receiveItem}`, children: [
+        { path: '', component: PartnerReceiveItemComponent, pathMatch: 'full', resolve: { userInfo: PartnerApplicationResolver} },
+        { path: `${PartnerRoutes.receiveItemView}`, component: PartnerReceiveItemViewComponent, pathMatch: 'full', resolve: { userInfo: PartnerApplicationResolver, orderDetails: PartnerReceiveItemViewResolver} }
     ]},
 ];
 

@@ -1,11 +1,10 @@
 import { Component, OnInit, inject } from "@angular/core";
 import { BaseOrderDetailsComponent } from "../../../misc/base-class/base-order-details.component";
-import { map, tap } from "rxjs/operators";
+import { tap } from "rxjs/operators";
 import { ModalService } from "../../../services/modal.service";
 import { PartnerRoutes } from "../../partner.route";
 import { PartnerRegisterItemService } from "../../service/register-item.service";
 import { BehaviorSubject } from "rxjs";
-import { NotificationService } from "../../../services/notification.service";
 
 /**
  * @class PartnerRegisterItemViewComponent

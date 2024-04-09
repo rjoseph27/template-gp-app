@@ -75,7 +75,7 @@ export class PartnerMainComponent {
     {
       label: "moduleList.receivingItem.title",
       icon: RECEIVING_ITEM_ICON,
-      action: () => {}
+      action: () => this.router.navigate([PartnerRoutes.receiveItem.fullPath()])
     },
     {
       label: "moduleList.billing.title",

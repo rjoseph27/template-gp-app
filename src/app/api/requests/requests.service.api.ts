@@ -319,4 +319,13 @@ export class RequestsServiceApi extends BaseServiceApi {
     editTripItinerary(newItinerary: ReportTrip): Promise<ApiResponse> {
         return firstValue(this.postRequest<ApiResponse>('edit-itinerary', newItinerary));
     }
+
+    /**
+     * @description A method to receive an item
+     * @param updateStatusRequest The update status request
+     * @returns {Promise<ApiResponse>}
+     */
+    receiveItem(updateStatusRequest: OrderDetailRequest): Promise<ApiResponse> {
+        return firstValue(this.postRequest<ApiResponse>('receive-item', updateStatusRequest));
+    }
 }

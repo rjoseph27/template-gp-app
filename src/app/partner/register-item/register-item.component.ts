@@ -1,11 +1,11 @@
 import { Component, inject } from "@angular/core";
-import { Router } from "@angular/router";
 import { ClientRequestsService } from "../../client/service/requests.service";
 import { OrderFilter } from "../../core/layouts/filter/order-filter/order-filter.component";
 import { OrderFilterInfo } from "../../api/requests/requests.type";
 import { PartnerRoutes } from "../partner.route";
 import { BasePartnerPageComponent } from "../base-partner-page.component";
 import { GhDate } from "../../misc/classes/gh-date";
+import { ItemsStatus } from "../../client/orders/base-orders.component";
 
 /**
  * @component PartnerRegisterItemComponent
@@ -24,7 +24,10 @@ import { GhDate } from "../../misc/classes/gh-date";
     private readonly requestsService = inject(ClientRequestsService);
 
     /** @inheritdoc */
-    override fetchElements = (orderFilter: OrderFilter) => this.requestsService.orderFilter(orderFilter);
+    override fetchElements = async (orderFilter: OrderFilter) => {
+      const orders = await this.requestsService.orderFilter(orderFilter)
+      return orders.filter(order => order.item.status === ItemsStatus.WAITING_RECEPTION);
+    };
 
     /**
      * @description The view factory

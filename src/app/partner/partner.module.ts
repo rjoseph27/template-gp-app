@@ -31,6 +31,9 @@ import { PartnerManageTrackingComponent } from "./dispatching/dispatching-view/m
 import { PartnerTripInfoResolver } from "./dispatching/trip-info.resolver";
 import { PartnerTasksResolver } from "./dispatching/tasks.resolver";
 import { PartnerChangeDateComponent } from "./dispatching/dispatching-view/change-date/change-date.component";
+import { PartnerReceiveItemComponent } from "./receive-item/receive-item.component";
+import { PartnerReceiveItemViewComponent } from "./receive-item/receive-item-view/receive-item-view.component";
+import { PartnerReceiveItemViewResolver } from "./receive-item/receive-item.resolver";
 
 /**
  * @module PartnerModule
@@ -51,7 +54,9 @@ import { PartnerChangeDateComponent } from "./dispatching/dispatching-view/chang
         PartnerDispatchingViewComponent,
         PartnerConfirmTripComponent,
         PartnerManageTrackingComponent,
-        PartnerChangeDateComponent
+        PartnerChangeDateComponent,
+        PartnerReceiveItemComponent,
+        PartnerReceiveItemViewComponent
     ],
     imports: [
         CommonModule,
@@ -80,7 +85,8 @@ import { PartnerChangeDateComponent } from "./dispatching/dispatching-view/chang
         PartnerTripInfoResolver,
         NotificationService,
         PartnerBillingResolver,
-        PartnerTasksResolver
+        PartnerTasksResolver,
+        PartnerReceiveItemViewResolver
     ]
 })
 export class PartnerModule {

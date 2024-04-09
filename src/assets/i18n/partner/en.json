@@ -92,7 +92,18 @@
             }
         },
         "receivingItem": {
-            "title": "Receiving Item"
+            "title": "Receiving Item",
+            "modal": {
+                "title": "Receiving Item",
+                "content": "Are you sure you want to receive this item?",
+                "confirm": "Confirm",
+                "cancel": "Cancel",
+                "notification": {
+                    "success": "Item has been received successfully",
+                    "error": "Failed to receive item"
+                }
+            },
+            "receiveButton": "Receive"
         },
         "billing": {
             "title": "Billing",
