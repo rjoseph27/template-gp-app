@@ -21,6 +21,7 @@ import { PartnerChangeDateComponent } from "./dispatching/dispatching-view/chang
 import { PartnerReceiveItemComponent } from "./receive-item/receive-item.component";
 import { PartnerReceiveItemViewComponent } from "./receive-item/receive-item-view/receive-item-view.component";
 import { PartnerReceiveItemViewResolver } from "./receive-item/receive-item.resolver";
+import { PartnerPayGpComponent } from "./pay-gp/pay-gp.component";
 
 /**
  * @constant routes
@@ -54,6 +55,10 @@ const routes: Routes = [
         { path: '', component: PartnerReceiveItemComponent, pathMatch: 'full', resolve: { userInfo: PartnerApplicationResolver} },
         { path: `${PartnerRoutes.receiveItemView}`, component: PartnerReceiveItemViewComponent, pathMatch: 'full', resolve: { userInfo: PartnerApplicationResolver, orderDetails: PartnerReceiveItemViewResolver} }
     ]},
+    { path: `${PartnerRoutes.payGp}`, children: [
+        { path: '', component: PartnerPayGpComponent, pathMatch: 'full', resolve: { userInfo: PartnerApplicationResolver, currency: PartnerBillingResolver} },
+        { path: `${PartnerRoutes.billingView}`, component: PartnerBillingViewComponent, pathMatch: 'full', resolve: { userInfo: PartnerApplicationResolver, orderDetails: PartnerRegisterItemViewResolver} }
+    ]}
 ];
 
 /**

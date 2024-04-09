@@ -437,12 +437,40 @@ export class ClientRequestsService {
     }
 
     /**
+     * @description Fetches paysheet by email
+     * @param email The email to search
+     * @returns {Promise<BillingFilterInfo[]>}
+     */
+    findPaysheetByEmail(email: string): Promise<BillingFilterInfo[]> {
+        return this.requestsServiceApi.findPaysheetByEmail(email).then(msg => {
+            if(msg.message === BillingStatus.BILLING_FOUND) {
+                return msg.billings;
+            } 
+            return [];
+        });
+    }
+
+    /**
      * @description Creates a bill
      * @param billing The billing to create
      * @returns {Promise<boolean>} A promise that resolves to true if the bill was created successfully, false otherwise
      */
     createBill(billing: BillingFilterInfo[]): Promise<boolean> {
         return this.requestsServiceApi.createBill(billing).then(msg => {
+            if(msg.message === CreateBillStatus.BILL_CREATED_SUCCESSFULLY) {
+                return true;
+            } 
+            return false;
+        });
+    }
+
+    /**
+     * @description Creates a paysheet
+     * @param billing The billing to create
+     * @returns {Promise<boolean>} A promise that resolves to true if the paysheet was created successfully, false otherwise
+     */
+    createPaysheet(billing: BillingFilterInfo[]): Promise<boolean> {
+        return this.requestsServiceApi.createPaysheet(billing).then(msg => {
             if(msg.message === CreateBillStatus.BILL_CREATED_SUCCESSFULLY) {
                 return true;
             } 

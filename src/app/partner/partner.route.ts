@@ -94,4 +94,10 @@ export class PartnerRoutes {
      * @type {GhRoute}
      */
     static readonly receiveItemView: GhRoute = new GhRoute('receive-item-view', PartnerRoutes.receiveItem);
+
+    /**
+     * @description The route for the pay GP
+     * @type {GhRoute}
+     */
+    static readonly payGp: GhRoute = new GhRoute('pay-gp', PartnerRoutes.main);
 }

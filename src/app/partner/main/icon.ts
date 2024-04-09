@@ -45,3 +45,9 @@ export const DISPATCH_ICON = 'shield_person'
  * @description The icon to be used for the billing module
  */
 export const BILLING_ICON = 'payments'
+
+/**
+ * @constant
+ * @description The icon to be used for the pay GP module
+ */
+export const GP_PAY_BUTTON = 'paid'

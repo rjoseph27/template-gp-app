@@ -276,6 +276,15 @@ export class RequestsServiceApi extends BaseServiceApi {
     }
 
     /**
+     * @description A method to create a paysheet
+     * @param orders the list of orders
+     * @returns {Promise<ApiResponse>}
+     */
+    createPaysheet(orders: BillingFilterInfo[]): Promise<ApiResponse> {
+        return firstValue(this.postRequest<ApiResponse>('create-paysheet', { orders: orders }));
+    }
+
+    /**
      * @description A method to get the item tracking information
      * @param request The request table element
      * @returns {Promise<GetTripInfoApiResponse>}
@@ -327,5 +336,14 @@ export class RequestsServiceApi extends BaseServiceApi {
      */
     receiveItem(updateStatusRequest: OrderDetailRequest): Promise<ApiResponse> {
         return firstValue(this.postRequest<ApiResponse>('receive-item', updateStatusRequest));
+    }
+
+    /**
+     * @description A method to get the paysheet by email
+     * @param email The email to search
+     * @returns {Promise<BillingListApiResponse>}
+     */
+    findPaysheetByEmail(email: string): Promise<BillingListApiResponse> {
+        return firstValue(this.getRequest<BillingListApiResponse>('find-paysheet-by-email', email));
     }
 }

@@ -136,6 +136,22 @@
                     }
                 }
             }
+        },
+        "payGP": {
+            "title": "Pay GP",
+            "confirmPayment": {
+                "title": "Confirm the payment",
+                "modal": {
+                    "title": "Confirm Payment",
+                    "content": "Are you sure you want to confirm this payment?",
+                    "confirm": "Confirm",
+                    "cancel": "Cancel",
+                    "notification": {
+                        "success": "Payment has been confirmed successfully",
+                        "error": "Failed to confirm payment"
+                    }
+                }
+            }
         }
     }
 }

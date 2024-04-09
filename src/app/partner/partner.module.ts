@@ -34,6 +34,7 @@ import { PartnerChangeDateComponent } from "./dispatching/dispatching-view/chang
 import { PartnerReceiveItemComponent } from "./receive-item/receive-item.component";
 import { PartnerReceiveItemViewComponent } from "./receive-item/receive-item-view/receive-item-view.component";
 import { PartnerReceiveItemViewResolver } from "./receive-item/receive-item.resolver";
+import { PartnerPayGpComponent } from "./pay-gp/pay-gp.component";
 
 /**
  * @module PartnerModule
@@ -56,7 +57,8 @@ import { PartnerReceiveItemViewResolver } from "./receive-item/receive-item.reso
         PartnerManageTrackingComponent,
         PartnerChangeDateComponent,
         PartnerReceiveItemComponent,
-        PartnerReceiveItemViewComponent
+        PartnerReceiveItemViewComponent,
+        PartnerPayGpComponent
     ],
     imports: [
         CommonModule,

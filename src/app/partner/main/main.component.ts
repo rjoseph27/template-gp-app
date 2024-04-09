@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs';
 import { GhModule } from '../../core/layouts/main/main.component';
-import { BILLING_ICON, DISPATCH_ICON, GP_PICK_UP_ICON, HELP_ICON, LOG_OUT_ICON, RECEIVING_ITEM_ICON, REGISTER_ITEM_ICON, SETTING_ICON } from './icon';
+import { BILLING_ICON, DISPATCH_ICON, GP_PAY_BUTTON, GP_PICK_UP_ICON, HELP_ICON, LOG_OUT_ICON, RECEIVING_ITEM_ICON, REGISTER_ITEM_ICON, SETTING_ICON } from './icon';
 import { UsersService } from '../../services/users.service';
 import { PartnerRoutes } from '../partner.route';
 
@@ -81,6 +81,11 @@ export class PartnerMainComponent {
       label: "moduleList.billing.title",
       icon: BILLING_ICON,
       action: () => this.router.navigate([PartnerRoutes.billing.fullPath()])
+    },
+    {
+      label: "moduleList.payGP.title",
+      icon: GP_PAY_BUTTON,
+      action: () => this.router.navigate([PartnerRoutes.payGp.fullPath()])
     },
     {
       label: "main.settings.title",

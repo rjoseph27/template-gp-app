@@ -1,0 +1,29 @@
+.content {
+    display: flex;
+    justify-content: center;
+    padding: 1em;
+
+    .title {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1em;
+    }
+
+    .table {
+        margin-top: 3em;
+    }
+
+    .current-price {
+        display: flex;
+        justify-content: space-around;
+        margin: 2em 0;
+
+        .title {
+            font-size: 1.5em;
+        }
+    }
+
+    button {
+        width: 100%;
+    }
+}

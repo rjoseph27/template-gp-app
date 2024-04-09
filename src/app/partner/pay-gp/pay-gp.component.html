@@ -1,0 +1,35 @@
+<div class="content">
+    <div>
+        <div class="title">
+            <h1>{{ 'moduleList.payGP.title' | translate }}</h1>
+        </div>
+        <gh-billing-filter (filterChange)="filter($event)"></gh-billing-filter>
+        <div class="table">
+            <gh-billing-filter-table
+                *ngIf="currency$ | async as currency"
+                [elements]="elements$ | async"
+                [hasBeenFiltered]="hasBeenFiltered$ | async"
+                [currency]="currency"
+                [showFullPrice]="false"
+                [viewFactory]="viewFactory"
+                (selectedElementsChange)="calculateCurrentPrice($event)"
+            ></gh-billing-filter-table>
+        </div>
+        <div class="current-price">
+            <div class="title">
+                {{ 'moduleList.registerItem.edit.currentPrice' | translate }}
+            </div>
+            <div>
+                {{ (currentPrice$ | async) | currency: (currency$ | async) }}
+            </div>           
+        </div>
+        <div>
+            <button
+                class="gp-button"
+                [disabled]="!(selectedElements$ | async).length"
+                [buttonLoading]="confirmLoading$ | async" 
+                (click)="confirmPayment()"
+            >{{ 'moduleList.billing.confirmPayment.title' | translate }}</button>
+        </div>
+    </div>
+</div>

@@ -1,8 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild, inject } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { ColumnConfig } from "../../../elements/table/table.component";
-import { BillingFilterInfo, OrderFilterInfo } from "../../../../api/requests/requests.type";
-import { FlightRoute } from "../../flight-route/flight-route.component";
+import { BillingFilterInfo } from "../../../../api/requests/requests.type";
 import { MoneyUtil } from "../../../../misc/util/money.util";
 import { CurrencyService } from "../../../../services/currency.service";
 import { Currency } from "../../../../misc/enums/currency.enum";
@@ -40,6 +39,12 @@ import { Currency } from "../../../../misc/enums/currency.enum";
      * @type {(row: BillingFilterInfo) => void}
      */
     @Input() viewFactory: (row: BillingFilterInfo) => void;
+
+    /**
+     * @description A boolean indicating if the full price should be shown
+     * @type {boolean}
+     */
+    @Input() showFullPrice: boolean = true;
 
     /**
     * @description The currency service
@@ -102,7 +107,11 @@ import { Currency } from "../../../../misc/enums/currency.enum";
                     specificPrice: row.specificPrice,
                     defaultPrice: row.defaultPrice
                 }, currency[row.currency]));
-                return MoneyUtil.totalPrice(price, currency[row.currency])
+                if(this.showFullPrice) {
+                  return MoneyUtil.totalPrice(price, currency[row.currency])
+                } else {
+                  return price;
+                }
             },
             template: this.priceTemplate
           },
