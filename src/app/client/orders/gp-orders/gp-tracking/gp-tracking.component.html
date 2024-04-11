@@ -13,6 +13,7 @@
             [gpView]="true"
             [clientMode]="true"
             (declareDelay)="showDelayDialog()"
+            [status]="tripStatus$ | async"
             (reloadPage)="reloadPage()"
         ></gh-tracking>
     </div>

@@ -91,7 +91,7 @@ interface Tracking extends TrackingPoint {
                     location: CountryUtil.getCityByAirportCode(layover.airport),
                     orderId: null,
                     exception: undefined,
-                    done: history.some(point => point.type === TrackingPointType.ARRIVAL && point.location === CountryUtil.getCityByAirportCode(layover.airport))
+                    done: history.some(point => point.type === TrackingPointType.ARRIVE_LAYOVER && point.location === CountryUtil.getCityByAirportCode(layover.airport))
                 },
                 {
                     date: layover.departureDate.date,
@@ -99,7 +99,7 @@ interface Tracking extends TrackingPoint {
                     location: CountryUtil.getCityByAirportCode(layover.airport),
                     orderId: null,
                     exception: undefined,
-                    done: history.some(point => point.type === TrackingPointType.DEPARTURE && point.location === CountryUtil.getCityByAirportCode(layover.airport))
+                    done: history.some(point => point.type === TrackingPointType.LEAVING_LAYOVER && point.location === CountryUtil.getCityByAirportCode(layover.airport))
                 }])).flat()
             ]
         

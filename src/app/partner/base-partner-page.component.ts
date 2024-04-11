@@ -46,7 +46,7 @@ export abstract class BasePartnerPageComponent implements AfterContentChecked {
     * @description The activated route service
     * @type {ActivatedRoute}
     */
-    private readonly route: ActivatedRoute = inject(ActivatedRoute);
+    protected readonly route: ActivatedRoute = inject(ActivatedRoute);
         
     /**
     * @description An observable for the user info

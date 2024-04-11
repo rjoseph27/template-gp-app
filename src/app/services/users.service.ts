@@ -76,6 +76,7 @@ export class UsersService {
     localStorage.removeItem(TOKEN_LOCAL_STORAGE_KEY);
     localStorage.removeItem(USER_ID_LOCAL_STORAGE_KEY);
     this._userInfo = null;
+    this._partnerUserInfo = null;
     this.navigationService.redirectToMainPage();
   }
 

@@ -36,6 +36,18 @@ export enum TrackingPointType {
     ON_WAY_TO_AIRPORT = 'ON_WAY_TO_AIRPORT',
 
     /**
+     * @description The gp arrived at the layover
+     * @type {string}
+     */
+    ARRIVE_LAYOVER = 'ARRIVE_LAYOVER',
+
+    /**
+     * @description The gp is leaving the layover
+     * @type {string}
+     */
+    LEAVING_LAYOVER = 'LEAVING_LAYOVER',
+
+    /**
      * @description The first departure
      * @type {string}
      */

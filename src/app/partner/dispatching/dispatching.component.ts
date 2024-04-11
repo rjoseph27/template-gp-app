@@ -5,6 +5,7 @@ import { ClientRequestsService } from "../../client/service/requests.service";
 import { OrderFilterInfo, RequestTableElementRequest } from "../../api/requests/requests.type";
 import { PartnerRoutes } from "../partner.route";
 import { GhDate } from "../../misc/classes/gh-date";
+import { CountryUtil } from "../../misc/util/country.util";
 
 /**
  * @class PartnerDispatchingComponent
@@ -23,7 +24,10 @@ import { GhDate } from "../../misc/classes/gh-date";
     private readonly requestsService = inject(ClientRequestsService);
     
     /** @inheritdoc */
-    override fetchElements = (orderFilter: OrderFilter) => this.requestsService.filterTrip(orderFilter);
+    override fetchElements = async (orderFilter: OrderFilter) => {
+        const orders = await this.requestsService.filterTrip(orderFilter)
+        return orders.filter(x => CountryUtil.getSuccursaleByAirportCode(x.originAirport) === this.route.snapshot.data['userInfo'].succursale)
+    };
 
     /**
      * @description The view factory

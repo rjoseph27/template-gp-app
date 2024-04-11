@@ -3,6 +3,7 @@ import { TrackingPoint } from "./tracking.type";
 import { Layovers } from "../request/create-layover/create-layover.component";
 import { BehaviorSubject } from "rxjs";
 import { GhDateProperties } from "../../../misc/classes/gh-date";
+import { TripStatus } from "../../../client/orders/base-orders.component";
 
 /**
  * @class BaseTrackingComponent
@@ -74,6 +75,12 @@ export class BaseTrackingComponent {
      * @type {string}
      */
     @Input() destinationCity: string
+
+    /**
+     * @description The status of the trip
+     * @type {TripStatus}
+     */
+    @Input() status: TripStatus;
 
     /**
      * @description The order id

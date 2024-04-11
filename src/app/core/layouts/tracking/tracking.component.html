@@ -18,7 +18,7 @@
         (valueChange)="selectedOrderId = $event"
         [options]="orderList"
     ></gh-select-field>
-    <div class="button-section">
+    <div *ngIf="status !== tripDone" class="button-section">
         <button
             *ngIf="!selectedOrderId && onWayAirportButton && !(currentPoint?.exception)" 
             [buttonLoading]="onHisWayButtonLoading$ | async"
@@ -37,6 +37,18 @@
             class="gp-button" 
             (click)="lastArrivalException()"
         >{{ 'deliveryExecption.button.lastArrival' | translate }}</button>
+        <button
+            *ngIf="!selectedOrderId && arriveLayoverButton && !(currentPoint?.exception)" 
+            [buttonLoading]="arriveLayoverButtonLoading$ | async"
+            class="gp-button" 
+            (click)="arriveLayoverException()"
+        >{{ 'deliveryExecption.button.arriveLayover' | translate }}</button>
+        <button
+            *ngIf="!selectedOrderId && departureLayoverButton && !(currentPoint?.exception)" 
+            [buttonLoading]="departureLayoverButtonLoading$ | async"
+            class="gp-button" 
+            (click)="departureLayoverException()"
+        >{{ 'deliveryExecption.button.departureLayover' | translate }}</button>
         <button
             *ngIf="!selectedOrderId && finalDestinationButton && !(currentPoint?.exception)" 
             [buttonLoading]="finalCheckpointButtonLoading$ | async"

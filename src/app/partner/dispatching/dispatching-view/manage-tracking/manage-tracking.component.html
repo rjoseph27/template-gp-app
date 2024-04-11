@@ -15,8 +15,13 @@
             [orderList]="orderList$ | async"
             [addHistoryResolver]="addHistoryResolver"
             [tasks]="tasks$ | async"
+            [status]="tripStatus$ | async"
             [gpView]="true"
         ></gh-tracking>
-        <button class="gp-button" (click)="changeDate()">{{ 'moduleList.dispatching.view.manage.changeDate' | translate }}</button>
+        <button 
+            *ngIf="(tripStatus$ | async) !== tripDone" 
+            class="gp-button" 
+            (click)="changeDate()"
+        >{{ 'moduleList.dispatching.view.manage.changeDate' | translate }}</button>
     </div>
 </div>

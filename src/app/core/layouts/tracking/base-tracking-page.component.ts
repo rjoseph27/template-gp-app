@@ -56,6 +56,12 @@ export class BaseTrackingPageComponent {
         protected readonly destinationCity$ = this.route.data.pipe(map(data => CountryUtil.getCityByAirportCode((<ReportTrip>data['trip']).destinationAirport)));
 
         /**
+         * @description An observable for the trip status
+         * @type {Observable<string>}
+         */
+        protected readonly tripStatus$ = this.route.data.pipe(map(data => (<ReportTrip>data['trip']).status));
+
+        /**
          * @description An observable for the layovers
          * @type {Observable<Layovers[]>}
          */

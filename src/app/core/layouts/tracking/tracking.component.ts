@@ -4,10 +4,11 @@ import { BaseTrackingComponent } from "./base-tracking.component";
 import { SelectFieldOption } from "../../elements/input/select-field/select-field.component";
 import { BehaviorSubject } from "rxjs";
 import { ModalService } from "../../../services/modal.service";
-import { Router } from "@angular/router";
 import { NotificationService } from "../../../services/notification.service";
 import { TaskName, Tasks } from "../../../misc/base-class/base-get-tasks.resolver";
 import { GhDate } from "../../../misc/classes/gh-date";
+import { CountryUtil } from "../../../misc/util/country.util";
+import { TripStatus } from "../../../client/orders/base-orders.component";
 
 /**
  * @class GhTrackingComponent
@@ -74,6 +75,30 @@ import { GhDate } from "../../../misc/classes/gh-date";
     protected readonly lastArrivalButtonLoading$ = this._lastArrivalButtonLoading$.asObservable();
 
     /**
+     * @description The backing field for the arrive layover button loading
+     * @type {BehaviorSubject<boolean>}
+     */
+    private readonly _arriveLayoverButtonLoading$ = new BehaviorSubject<boolean>(false);
+
+    /**
+     * @description An observable for the arrive layover button loading
+     * @type {Observable<boolean>}
+     */
+    protected readonly arriveLayoverButtonLoading$ = this._arriveLayoverButtonLoading$.asObservable();
+
+    /**
+     * @description The backing field for the departure layover button loading
+     * @type {BehaviorSubject<boolean>}
+     */
+    private readonly _departureLayoverButtonLoading$ = new BehaviorSubject<boolean>(false);
+
+    /**
+     * @description An observable for the departure layover button loading
+     * @type {Observable<boolean>}
+     */
+    protected readonly departureLayoverButtonLoading$ = this._departureLayoverButtonLoading$.asObservable();
+
+    /**
      * @description The backing field for the final checkpoint button loading
      * @type {BehaviorSubject<boolean>}
      */
@@ -114,6 +139,12 @@ import { GhDate } from "../../../misc/classes/gh-date";
      * @type {EventEmitter<string>}
      */
     @Output() declareDelay = new EventEmitter<void>();
+
+    /**
+     * @description The status when the trip is done
+     * @type {TripStatus}
+     */
+    protected readonly tripDone = TripStatus.TRIP_DONE
 
     /**
     * @description The notification service
@@ -183,7 +214,7 @@ import { GhDate } from "../../../misc/classes/gh-date";
      */
     protected get lostOrDamageButton(): boolean {
       const lastHistory = this.history[this.history.length - 1];
-      return  lastHistory.type !== TrackingPointType.FIRST_DEPARTURE;
+      return  lastHistory.type !== TrackingPointType.FIRST_DEPARTURE && lastHistory.type !== TrackingPointType.ARRIVE_LAYOVER && lastHistory.type !== TrackingPointType.LEAVING_LAYOVER;
     }
 
     /**
@@ -245,7 +276,39 @@ import { GhDate } from "../../../misc/classes/gh-date";
     const task = this.tasks.find(x => x.name === TaskName.NOTICE_GP_TO_BE_LAST_ARRIVAL);
     const dateNotPassed = task ? (new Date()).getTime() >= (new GhDate(task.date)).getDate().getTime() : true;
     const taskDone = this.history.find(x => x.type === TrackingPointType.LAST_ARRIVAL);
-    return dateNotPassed && !taskDone &&  !!this.history.find(x => x.type === TrackingPointType.FIRST_DEPARTURE);
+    return dateNotPassed && !taskDone && (this.layovers ? this.history.filter(x => x.type === TrackingPointType.LEAVING_LAYOVER).length === this.layovers.length : !!this.history.find(x => x.type === TrackingPointType.FIRST_DEPARTURE));
+   }
+
+   /**
+    * @description A boolean that indicates if the user can see the button when the GP arrived at the layover
+    * @type {boolean}
+    */
+   protected get arriveLayoverButton(): boolean {
+    if(this.history.find(x => x.type === TrackingPointType.ARRIVE_LAYOVER) && this.layovers.length > 1) {
+
+    } else {
+      const task = this.tasks.find(x => x.name === TaskName.NOTICE_GP_TO_BE_LAYOVER_ARRIVAL);
+      const dateNotPassed = task ? (new Date()).getTime() >= (new GhDate(task.date)).getDate().getTime() : true;
+      const taskDone = this.history.find(x => x.type === TrackingPointType.ARRIVE_LAYOVER);
+      return dateNotPassed && !taskDone &&  !!this.history.find(x => x.type === TrackingPointType.FIRST_DEPARTURE);
+    }
+    return false
+   }
+
+  /**
+   * @description A boolean that indicates if the user can see the button when the GP is ready to board plane
+   * @type {boolean}
+   */
+  protected get departureLayoverButton(): boolean {
+    if(this.history.find(x => x.type === TrackingPointType.LEAVING_LAYOVER) && this.layovers.length > 1) {
+
+    } else {
+      const task = this.tasks.find(x => x.name === TaskName.NOTICE_GP_TO_BE_LAYOVER_DEPARTURE);
+      const dateNotPassed = task ? (new Date()).getTime() >= (new GhDate(task.date)).getDate().getTime() : true;
+      const taskDone = this.history.find(x => x.type === TrackingPointType.LEAVING_LAYOVER);
+      return dateNotPassed && !taskDone &&  !!this.history.find(x => x.type === TrackingPointType.ARRIVE_LAYOVER);
+    }
+    return false
    }
 
   /**
@@ -415,6 +478,68 @@ import { GhDate } from "../../../misc/classes/gh-date";
             this.reloadPage.emit();
           } else {
             this.notificationService.errorNotification('deliveryExecption.modal.lastArrival.notification.error');
+          }
+        }
+      });
+  }
+
+  /**
+   * @description A method to generate an arrive layover exception
+   * @returns {void}
+   */
+  protected async arriveLayoverException(): Promise<void> {
+    this.modalService.openModal({
+        title: "deliveryExecption.modal.arriveLayover.title",
+        text: "deliveryExecption.modal.arriveLayover.content",
+        confirmCaption: "deliveryExecption.modal.button.confirm",
+        cancelCaption: "deliveryExecption.modal.button.cancel"
+      }).then(async x => {
+        if(x) {
+          const layoverPassed = this.history.filter(x => x.type === TrackingPointType.ARRIVE_LAYOVER).length;
+          this._arriveLayoverButtonLoading$.next(true);
+          const addHistorySuccessfully = await this.addHistoryResolver({
+                type: TrackingPointType.ARRIVE_LAYOVER,
+                location: CountryUtil.getCityByAirportCode(this.layovers[layoverPassed].airport),
+                orderId: null,
+                exception: null,
+            });
+          this._arriveLayoverButtonLoading$.next(false);
+          if(addHistorySuccessfully) {
+            this.notificationService.successNotification('deliveryExecption.modal.arriveLayover.notification.success');
+            this.reloadPage.emit();
+          } else {
+            this.notificationService.errorNotification('deliveryExecption.modal.arriveLayover.notification.error');
+          }
+        }
+      });
+  }
+
+  /**
+   * @description A method to generate a departure layover exception
+   * @returns {void}
+   */
+  protected async departureLayoverException(): Promise<void> {
+    this.modalService.openModal({
+        title: "deliveryExecption.modal.departureLayover.title",
+        text: "deliveryExecption.modal.departureLayover.content",
+        confirmCaption: "deliveryExecption.modal.button.confirm",
+        cancelCaption: "deliveryExecption.modal.button.cancel"
+      }).then(async x => {
+        if(x) {
+          const layoverPassed = this.history.filter(x => x.type === TrackingPointType.LEAVING_LAYOVER).length;
+          this._departureLayoverButtonLoading$.next(true);
+          const addHistorySuccessfully = await this.addHistoryResolver({
+                type: TrackingPointType.LEAVING_LAYOVER,
+                location: CountryUtil.getCityByAirportCode(this.layovers[layoverPassed].airport),
+                orderId: null,
+                exception: null,
+            });
+          this._departureLayoverButtonLoading$.next(false);
+          if(addHistorySuccessfully) {
+            this.notificationService.successNotification('deliveryExecption.modal.departureLayover.notification.success');
+            this.reloadPage.emit();
+          } else {
+            this.notificationService.errorNotification('deliveryExecption.modal.departureLayover.notification.error');
           }
         }
       });

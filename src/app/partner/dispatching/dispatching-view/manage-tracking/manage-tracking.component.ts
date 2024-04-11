@@ -10,6 +10,7 @@ import { Router } from "@angular/router";
 import { PartnerRoutes } from "../../../partner.route";
 import { TrackingPoint } from "../../../../core/layouts/tracking/tracking.type";
 import { Tasks } from "../../../../misc/base-class/base-get-tasks.resolver";
+import { TripStatus } from "../../../../client/orders/base-orders.component";
 
 /**
  * @class PartnerManageTrackingComponent
@@ -108,4 +109,10 @@ import { Tasks } from "../../../../misc/base-class/base-get-tasks.resolver";
         PartnerRoutes.dispatchingView.currentParams = this.route.snapshot.queryParams
         this.router.navigate([PartnerRoutes.changeDate.fullPath()], { queryParams: this.route.snapshot.queryParams })
     }
+
+    /**
+     * @description The status when the trip is done
+     * @type {TripStatus}
+     */
+    protected readonly tripDone = TripStatus.TRIP_DONE
   }

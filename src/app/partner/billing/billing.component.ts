@@ -7,6 +7,7 @@ import { MoneyUtil } from "../../misc/util/money.util";
 import { ActivatedRoute, Router } from "@angular/router";
 import { PartnerRoutes } from "../partner.route";
 import { ModalService } from "../../services/modal.service";
+import { COUNTRY_INFO_LIST } from "../../misc/constants/countries/countries";
 
 /**
  * @class PartnerBillingComponent
@@ -143,7 +144,7 @@ import { ModalService } from "../../services/modal.service";
         this._selectedElements$.next([])
         this._currentPrice$.next(0);
         const orders = await this.requestsService.findBillingByEmail(email);
-        this._elements$.next(orders);
+        this._elements$.next(orders.filter(order =>  COUNTRY_INFO_LIST.map(x => x.succursales).find(x => x.get(order.route.from)).get(orders[0].route.from).name === this.route.snapshot.data['userInfo'].succursale));
         this._hasBeenFiltered$.next(true);
     }
 

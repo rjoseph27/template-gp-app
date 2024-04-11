@@ -506,7 +506,9 @@
                 "FIRST_DEPARTURE": "The GP is on the plane",
                 "LAST_ARRIVAL": "The GP has arrived at the final country",
                 "ON_WAY_TO_FINAL_CHECKPOINT": "The GP is on his way to the final checkpoint",
-                "FINAL_CHECKPOINT": "The item is at the final checkpoint. We are going to deliver it soon to the consignee"
+                "FINAL_CHECKPOINT": "The item is at the final checkpoint. We are going to deliver it soon to the consignee",
+                "ARRIVE_LAYOVER": "The GP has arrived at the layover",
+                "LEAVING_LAYOVER": "The GP is leaving the layover"
             },
             "exception": {
                 "LOST": "The order has been declared as lost",
@@ -613,7 +615,9 @@
             "damaged": "Declare the order as damaged",
             "firstDeparture": "Confirm that your are ready to enter the plane",
             "lastArrival": "Confirm that you arrive at the final country",
-            "finalCheckpoint": "Confirm that you are on your way to the final checkpoint"
+            "finalCheckpoint": "Confirm that you are on your way to the final checkpoint",
+            "arriveLayover": "Confirm that you arrive at the layover",
+            "departureLayover": "Confirm that you are about to leave the layover"
         },
         "modal": {
             "lostOrder": {
@@ -651,6 +655,22 @@
             "lastArrival": {
                 "title": "Confirm that you arrive at the final country",
                 "content": "Are you sure you arrive at the final country?",
+                "notification": {
+                    "success": "The order has been confirmed",
+                    "error": "An error occured while confirming the order"
+                }
+            },
+            "arriveLayover": {
+                "title": "Confirm that you arrive at the layover",
+                "content": "Are you sure you arrive at the layover?",
+                "notification": {
+                    "success": "The order has been confirmed",
+                    "error": "An error occured while confirming the order"
+                }
+            },
+            "departureLayover": {
+                "title": "Confirm that you are about to leave the layover",
+                "content": "Are you sure you are about to leave the layover?",
                 "notification": {
                     "success": "The order has been confirmed",
                     "error": "An error occured while confirming the order"

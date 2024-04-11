@@ -41,6 +41,18 @@ export enum TaskName {
      * @type {string}
      */
     NOTICE_GP_TO_BE_ON_WAY_TO_DESTINATION = 'NOTICE_GP_TO_BE_ON_WAY_TO_DESTINATION',
+
+    /**
+     * @description The notice for the gp when he arrives at an layover
+     * @type {string}
+     */
+    NOTICE_GP_TO_BE_LAYOVER_ARRIVAL = 'NOTICE_GP_TO_BE_LAYOVER_ARRIVAL',
+    
+    /**
+     * @description The notice for the gp when he leaves a layover
+     * @type {string}
+     */
+    NOTICE_GP_TO_BE_LAYOVER_DEPARTURE = 'NOTICE_GP_TO_BE_LAYOVER_DEPARTURE',
 }
 
 /**
