@@ -1,7 +1,7 @@
 <gh-table 
         [columns]="columns$ | async" 
         [elements]="history"
-        [pageSize]="10"
+        [pageSize]="20"
 >
     <ng-template #dateTemplate let-value="value" let-element="element">
         <div [class.error]="element.exception">

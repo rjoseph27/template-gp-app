@@ -4,6 +4,7 @@ import { map } from "rxjs/operators";
 import { ReportTrip } from "../../../api/requests/requests.type";
 import { CountryUtil } from "../../../misc/util/country.util";
 import { GhDate } from "../../../misc/classes/gh-date";
+import { Observable } from "rxjs";
 
 /**
  * @class BaseTrackingPageComponent
@@ -66,4 +67,10 @@ export class BaseTrackingPageComponent {
          * @type {Observable<Layovers[]>}
          */
         protected readonly layovers$ = this.route.data.pipe(map(data => (<ReportTrip>data['trip']).layovers));
+
+    /**
+     * @description The orders observable
+     * @type {Observable<number[]>}
+     */
+    protected readonly orders$: Observable<number[]> = this.route.data.pipe(map(data => (<ReportTrip>data['trip']).orders));
 }

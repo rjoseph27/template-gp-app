@@ -16,9 +16,9 @@
         [placeholder]="'deliveryExecption.orderList.placeholder' | translate"
         [value]="selectedOrderId || '*'"
         (valueChange)="selectedOrderId = $event"
-        [options]="orderList"
+        [options]="orderList$ | async"
     ></gh-select-field>
-    <div *ngIf="status !== tripDone" class="button-section">
+    <div *ngIf="status !== tripDone || orders.length" class="button-section">
         <button
             *ngIf="!selectedOrderId && onWayAirportButton && !(currentPoint?.exception)" 
             [buttonLoading]="onHisWayButtonLoading$ | async"

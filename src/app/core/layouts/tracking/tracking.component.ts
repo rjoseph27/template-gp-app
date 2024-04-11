@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output, inject } from "@angular
 import { DeliveryExceptionType, TrackingPoint, TrackingPointType } from "./tracking.type";
 import { BaseTrackingComponent } from "./base-tracking.component";
 import { SelectFieldOption } from "../../elements/input/select-field/select-field.component";
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, map } from "rxjs";
 import { ModalService } from "../../../services/modal.service";
 import { NotificationService } from "../../../services/notification.service";
 import { TaskName, Tasks } from "../../../misc/base-class/base-get-tasks.resolver";
@@ -20,11 +20,31 @@ import { TripStatus } from "../../../client/orders/base-orders.component";
     styleUrls: ['./tracking.component.scss']
   })
   export class GhTrackingComponent extends BaseTrackingComponent implements OnInit {
+    private readonly _orders$ = new BehaviorSubject<number[]>([]);
+
     /**
-     * @description The list of orders in the select field
-     * @type {SelectFieldOption[]}
+     * @description The lists of orders of a trip
+     * @type {number[]}
      */
-    @Input() orderList: SelectFieldOption[]
+    @Input() set orders(value: number[]) {
+      this._orders$.next(value);
+    }
+    get orders() {
+      return this._orders$.value;
+    }
+
+    protected readonly orderList$ = this._orders$.asObservable().pipe(map(x => {
+      const options: SelectFieldOption[] = x.map(key => ({
+          value: key.toString(),
+          label: key.toString(),
+      }))
+
+      options.unshift({
+          value: "*",
+          label: 'deliveryExecption.orderList.all'
+      })
+      return options
+   }))
 
     /**
      * @description The backing field for the lost order button loading

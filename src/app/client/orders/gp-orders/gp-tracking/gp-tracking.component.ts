@@ -54,23 +54,6 @@ import { CountryUtil } from "../../../../misc/util/country.util";
     */
     private readonly requestsService = inject(ClientRequestsService);
 
-    /**
-     * @description An observable for the order list
-     * @type {Observable<SelectFieldOption[]>}
-     */
-    protected readonly orderList$: Observable<SelectFieldOption[]> = this.route.data.pipe(map(data => {
-      const options: SelectFieldOption[] = (<ReportTrip>data['trip']).orders.map(key => ({
-          value: key.toString(),
-          label: key.toString(),
-      }))
-
-      options.unshift({
-          value: "*",
-          label: 'deliveryExecption.orderList.all'
-      })
-      return options
-   }))
-
    /**
      * @description The method to add history
      * @type {(args: TrackingPoint) => Promise<boolean>}
