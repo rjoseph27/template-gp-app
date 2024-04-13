@@ -1082,6 +1082,30 @@ export interface ReportTrip {
   }
 
   /**
+   * @interface CreateBill
+   * @description An interface for the create bill
+   */
+  export interface CreateBill {
+    /**
+     * @description The orders
+     * @type {OrderFilterInfo[]}
+     */
+    orders: BillingFilterInfo[];
+
+    /**
+     * @description The country
+     * @type {Country}
+     */
+    country: Country;
+
+    /**
+     * @description The region
+     * @type {any}
+     */
+    region: any;
+  }
+
+  /**
    * @interface BillingFilterInfo
    * @description An interface for the billing filter info
    */

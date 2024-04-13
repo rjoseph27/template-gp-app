@@ -10,9 +10,9 @@
                 [elements]="elements$ | async"
                 [hasBeenFiltered]="hasBeenFiltered$ | async"
                 [currency]="currency"
-                [showFullPrice]="false"
                 [viewFactory]="viewFactory"
                 (selectedElementsChange)="calculateCurrentPrice($event)"
+                [calculatePriceResolver]="calculatePriceResolver"
             ></gh-billing-filter-table>
         </div>
         <div class="current-price">

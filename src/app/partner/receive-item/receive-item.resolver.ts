@@ -4,6 +4,7 @@ import { PartnerRoutes } from "../partner.route";
 import { MoneyUtil } from "../../misc/util/money.util";
 import { CountryUtil } from "../../misc/util/country.util";
 import { OrderDetails } from "../../core/layouts/order-details/order-details.component";
+import { SUCCURSALE_BY_COUNTRY } from "../../misc/constants/countries/countries.type";
 
 /**
  * @class PartnerReceiveItemViewResolver
@@ -25,8 +26,8 @@ export class PartnerReceiveItemViewResolver extends baseOrderDetailsResolver {
 
   /** @inheritdoc */
   override isUserOrder =  async (orderDetails: OrderDetails): Promise<boolean> => {
-    const trip = await this.requestsService.getTripInfo(orderDetails.tripId);
     const succursale = (await this.userService.getPartnerUserInfo(this.userService.currentUserId)).succursale
-    return CountryUtil.getSuccursaleByAirportCode(trip.destinationAirport) === succursale
+    const succursaleCountry = CountryUtil.getCountryBySuccursale(succursale);
+    return orderDetails.destinationCountry === succursaleCountry
   };
 }

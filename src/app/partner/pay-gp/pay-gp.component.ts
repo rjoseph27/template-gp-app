@@ -7,6 +7,8 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { UsersService } from "../../services/users.service";
 import { PartnerRoutes } from "../partner.route";
 import { MoneyUtil } from "../../misc/util/money.util";
+import { CountryUtil } from "../../misc/util/country.util";
+import { Country } from "../../misc/enums/country.enum";
 
 /**
  * @class PartnerPayGpComponent
@@ -122,6 +124,19 @@ import { MoneyUtil } from "../../misc/util/money.util";
     protected readonly modalService: ModalService = inject(ModalService);
 
     /**
+     * @description A method to calculate the price
+     * @returns {(row: BillingFilterInfo) => void}
+     */
+    protected readonly calculatePriceResolver = (row: BillingFilterInfo) => {
+        const rates = this.route.snapshot.data['currency'].rates;
+        const price = Math.round(MoneyUtil.getPrice(row, {
+            specificPrice: row.specificPrice,
+            defaultPrice: row.defaultPrice
+        }, rates[row.currency]));
+        return MoneyUtil.withdrawMoneyAmount(price)
+    }
+
+    /**
      * @description The view factory
      * @type {(row: OrderFilterInfo) => void}
      */
@@ -165,6 +180,7 @@ import { MoneyUtil } from "../../misc/util/money.util";
                 specificPrice: order.specificPrice,
                 defaultPrice: order.defaultPrice
             }, rates[order.currency]));
+            price = MoneyUtil.withdrawMoneyAmount(price);
             return acc + price;
         }, 0));
     }
@@ -183,7 +199,12 @@ import { MoneyUtil } from "../../misc/util/money.util";
             if(x)
             {
                 this._confirmLoading$.next(true);
-                const result = await this.requestsService.createPaysheet(this._selectedElements$.value); 
+                const succursale = (await this.userService.getPartnerUserInfo(this.userService.currentUserId)).succursale
+                const result = await this.requestsService.createPaysheet({
+                    orders: this._selectedElements$.value,
+                    country: CountryUtil.getCountryBySuccursale(succursale) as Country,
+                    region: CountryUtil.getCityBySuccursale(succursale)
+                }); 
                 this._confirmLoading$.next(false);
                 if(result) {
                     this._elements$.next(this._elements$.value.filter(x => !this._selectedElements$.value.includes(x)));

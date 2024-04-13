@@ -8,6 +8,7 @@ import { OrderFilterInfo } from "../../api/requests/requests.type";
 import { ItemsStatus } from "../../client/orders/base-orders.component";
 import { UsersService } from "../../services/users.service";
 import { SUCCURSALE_BY_COUNTRY } from "../../misc/constants/countries/countries.type";
+import { CountryUtil } from "../../misc/util/country.util";
 
 /**
  * @class PartnerReceiveItemComponent
@@ -34,11 +35,10 @@ import { SUCCURSALE_BY_COUNTRY } from "../../misc/constants/countries/countries.
     /** @inheritdoc */
     override fetchElements = async (orderFilter: OrderFilter) => {
         const orders = await this.requestsService.orderFilter(orderFilter);
-        const userInfo = await this.userService.getPartnerUserInfo(this.userService.currentUserId);
-        const userRegion = SUCCURSALE_BY_COUNTRY.find(x => x.regions.some(z => z[1].name === userInfo.succursale))
-            .regions.find(z => z[1].name === userInfo.succursale)
-        return orders.filter(order => order.destinationRegion === userRegion[0])
-            .filter(order => order.item.status === ItemsStatus.ON_DELIVERY);
+        const succursale = (await this.userService.getPartnerUserInfo(this.userService.currentUserId)).succursale
+        const succursaleCountry = CountryUtil.getCountryBySuccursale(succursale);
+        return orders.filter(order => order.item.status === ItemsStatus.ON_DELIVERY)
+                    .filter(order => order.destinationCountry === succursaleCountry);
     };
 
     /**

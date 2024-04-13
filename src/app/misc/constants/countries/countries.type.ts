@@ -136,13 +136,19 @@ export interface SuccursaleInfo {
    * @description The airport of the succursale
    * @type {AirportInfo}
    */
-  airport: string
+  airport?: string
 
   /**
    * @description The email of the succursale
    * @type {string}
    */
-  email: string
+  email: string,
+
+  /**
+   * @description The region of the succursale
+   * @type {any}
+   */
+  region: any;
 }  
 
 /**

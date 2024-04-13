@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild,
 import { BehaviorSubject } from "rxjs";
 import { ColumnConfig } from "../../../elements/table/table.component";
 import { BillingFilterInfo } from "../../../../api/requests/requests.type";
-import { MoneyUtil } from "../../../../misc/util/money.util";
 import { CurrencyService } from "../../../../services/currency.service";
 import { Currency } from "../../../../misc/enums/currency.enum";
 
@@ -41,16 +40,10 @@ import { Currency } from "../../../../misc/enums/currency.enum";
     @Input() viewFactory: (row: BillingFilterInfo) => void;
 
     /**
-     * @description A boolean indicating if the full price should be shown
-     * @type {boolean}
+     * @description The calculate price function
+     * @type {(row: BillingFilterInfo) => void}
      */
-    @Input() showFullPrice: boolean = true;
-
-    /**
-    * @description The currency service
-    * @type {CurrencyService}
-    */
-    private readonly currencyService = inject(CurrencyService);
+    @Input() calculatePriceResolver: (row: BillingFilterInfo) => void;
 
     /**
      * @description Backing field for the columns property
@@ -84,8 +77,6 @@ import { Currency } from "../../../../misc/enums/currency.enum";
 
     /** @inheritdoc */
     async ngOnInit(): Promise<void> {
-        const currency = await this.currencyService.getCurrency(this.currency);
-        
         this._columns$.next([
           {
             columnName: 'orderFilter.table.header.email',
@@ -102,17 +93,7 @@ import { Currency } from "../../../../misc/enums/currency.enum";
           },
           {
             columnName: 'orderFilter.table.header.price',
-            valueAccessor: (row: BillingFilterInfo) => {
-                const price = Math.round(MoneyUtil.getPrice(row, {
-                    specificPrice: row.specificPrice,
-                    defaultPrice: row.defaultPrice
-                }, currency[row.currency]));
-                if(this.showFullPrice) {
-                  return MoneyUtil.totalPrice(price, currency[row.currency])
-                } else {
-                  return price;
-                }
-            },
+            valueAccessor: (row: BillingFilterInfo) => this.calculatePriceResolver(row),
             template: this.priceTemplate
           },
         ])

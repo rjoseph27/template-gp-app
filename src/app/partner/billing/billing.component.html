@@ -12,6 +12,7 @@
                 [currency]="currency"
                 [viewFactory]="viewFactory"
                 (selectedElementsChange)="calculateCurrentPrice($event)"
+                [calculatePriceResolver]="calculatePriceResolver"
             ></gh-billing-filter-table>
         </div>
         <div class="current-price">

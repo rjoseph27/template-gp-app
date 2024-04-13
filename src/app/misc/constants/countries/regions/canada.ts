@@ -81,6 +81,18 @@ export const CANADA_AIRPORTS = [
 ]
 
 /**
+ * @enum
+ * @description The regions of Canada
+ */
+enum CANADA_REGION {
+    /**
+     * @description The Quebec region
+     * @type {string}
+     */
+    QUEBEC = 'Quebec',
+}
+
+/**
  * @constant
  * @description The list of Canada succursales
  */
@@ -91,6 +103,7 @@ export const CANADA_SUCCURSALES = new Map<CanadaRegions, SuccursaleInfo>(
             address: '1234 Rue de la rue, Montreal, QC, H1H 1H1',
             phone: '+1 123 456 7890',
             airport: 'YUL',
+            region: CANADA_REGION.QUEBEC,
             email: 'gphub221@gmx.fr'
         }],
         [CanadaRegions.Quebec, {
@@ -98,13 +111,14 @@ export const CANADA_SUCCURSALES = new Map<CanadaRegions, SuccursaleInfo>(
             address: '1234 Rue de la rue, Quebec, QC, H1H 1H1',
             phone: '+1 123 456 7890',
             airport: 'YQB',
+            region: CANADA_REGION.QUEBEC,
             email: 'gphub221@gmx.fr'
         }],
         [CanadaRegions.Sherbrooke, {
             name: 'CA-QC-SHE-01',
             address: '1234 Rue de la rue, Sherbrooke, QC, H1H 1H1',
             phone: '+1 123 456 7890',
-            airport: 'YQB',
+            region: CANADA_REGION.QUEBEC,
             email: 'gphub221@gmx.fr'
         }]
     ]

@@ -90,6 +90,15 @@ export class MoneyUtil {
           const country = SUCCURSALE_BY_COUNTRY.find(x => x.regions.find(z => z[1].name === succursale)).country
           return COUNTRY_INFO_LIST.find(c => c.name === country).currency;
     }
+    
+    /**
+     * @description A method that calcultes the amount of money to withdraw
+     * @param amount The amount to withdraw
+     * @returns {number}
+     */
+    static withdrawMoneyAmount(amount: number): number {
+        return amount - (amount * GH_HUB_FEE);
+    }
 }
 
 
@@ -97,7 +106,7 @@ export class MoneyUtil {
  * @constant
  * @description The GH hub fee
  */
-const GH_HUB_FEE = MoneyUtil.toPercentage(8);
+const GH_HUB_FEE = MoneyUtil.toPercentage(10);
 
 /**
  * @constant

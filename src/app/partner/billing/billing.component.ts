@@ -8,6 +8,9 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { PartnerRoutes } from "../partner.route";
 import { ModalService } from "../../services/modal.service";
 import { COUNTRY_INFO_LIST } from "../../misc/constants/countries/countries";
+import { CurrencyService } from "../../services/currency.service";
+import { CountryUtil } from "../../misc/util/country.util";
+import { Country } from "../../misc/enums/country.enum";
 
 /**
  * @class PartnerBillingComponent
@@ -123,6 +126,12 @@ import { COUNTRY_INFO_LIST } from "../../misc/constants/countries/countries";
     protected readonly modalService: ModalService = inject(ModalService);
 
     /**
+    * @description The currency service
+    * @type {CurrencyService}
+    */
+    private readonly currencyService = inject(CurrencyService);
+
+    /**
      * @description The view factory
      * @type {(row: OrderFilterInfo) => void}
      */
@@ -151,6 +160,19 @@ import { COUNTRY_INFO_LIST } from "../../misc/constants/countries/countries";
     /** @inheritdoc */
     async ngAfterContentChecked() {
         this.changeDetectorRef.detectChanges();
+    }
+
+    /**
+     * @description A method to calculate the price
+     * @returns {(row: BillingFilterInfo) => void}
+     */
+    protected readonly calculatePriceResolver = async (row: BillingFilterInfo) => {
+        const currency = await this.currencyService.getCurrency(this.route.snapshot.data['currency'].currency);
+        const price = Math.round(MoneyUtil.getPrice(row, {
+            specificPrice: row.specificPrice,
+            defaultPrice: row.defaultPrice
+        }, currency[row.currency]));
+        return MoneyUtil.totalPrice(price, currency[row.currency])
     }
 
     /**
@@ -184,8 +206,13 @@ import { COUNTRY_INFO_LIST } from "../../misc/constants/countries/countries";
         }).then(async x => {
             if(x)
             {
+                const succursale = (await this.userService.getPartnerUserInfo(this.userService.currentUserId)).succursale
                 this._confirmLoading$.next(true);
-                const result = await this.requestsService.createBill(this._selectedElements$.value); 
+                const result = await this.requestsService.createBill({
+                    orders: this._selectedElements$.value,
+                    country: CountryUtil.getCountryBySuccursale(succursale) as Country,
+                    region: CountryUtil.getCityBySuccursale(succursale)
+                }); 
                 this._confirmLoading$.next(false);
                 if(result) {
                     this._elements$.next(this._elements$.value.filter(x => !this._selectedElements$.value.includes(x)));

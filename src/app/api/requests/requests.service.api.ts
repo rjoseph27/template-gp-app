@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { ApiResponse, BaseServiceApi } from "../base.service.api";
 import { firstValue } from "../../misc/function/firstValue";
-import { ReportTrip, SearchTripsRequest, SearchTripsApiResponse, ConfirmItemRequest, SendItemsRequestApiResponse, UpdateImageNameRequest, CreateAlertRequest, ListItemsApiResponse, ItemInformationApiResponse, RequestTableElementRequest, OrderDetailRequest, GetSendItemsRequestApiResponse, GetTripListApiResponse, GetTripInfoApiResponse, CancelTripRequest, AlertListApiResponse, AlertApiResponse, OrderFilterResponse, EditItemInformationRequest, BillingListApiResponse, BillingFilterInfo, ConfirmTripRequest, GetTasksApiResponse } from "./requests.type";
+import { ReportTrip, SearchTripsRequest, SearchTripsApiResponse, ConfirmItemRequest, SendItemsRequestApiResponse, UpdateImageNameRequest, CreateAlertRequest, ListItemsApiResponse, ItemInformationApiResponse, RequestTableElementRequest, OrderDetailRequest, GetSendItemsRequestApiResponse, GetTripListApiResponse, GetTripInfoApiResponse, CancelTripRequest, AlertListApiResponse, AlertApiResponse, OrderFilterResponse, EditItemInformationRequest, BillingListApiResponse, BillingFilterInfo, ConfirmTripRequest, GetTasksApiResponse, CreateBill } from "./requests.type";
 import { OrderFilter } from "../../core/layouts/filter/order-filter/order-filter.component";
 import { TrackingPoint } from "../../core/layouts/tracking/tracking.type";
 
@@ -271,8 +271,8 @@ export class RequestsServiceApi extends BaseServiceApi {
      * @param orders The list of orders
      * @returns {Promise<ApiResponse>}
      */
-    createBill(orders: BillingFilterInfo[]): Promise<ApiResponse> {
-        return firstValue(this.postRequest<ApiResponse>('create-bill', { orders: orders }));
+    createBill(createBill: CreateBill): Promise<ApiResponse> {
+        return firstValue(this.postRequest<ApiResponse>('create-bill', createBill));
     }
 
     /**
@@ -280,8 +280,8 @@ export class RequestsServiceApi extends BaseServiceApi {
      * @param orders the list of orders
      * @returns {Promise<ApiResponse>}
      */
-    createPaysheet(orders: BillingFilterInfo[]): Promise<ApiResponse> {
-        return firstValue(this.postRequest<ApiResponse>('create-paysheet', { orders: orders }));
+    createPaysheet(createBill: CreateBill): Promise<ApiResponse> {
+        return firstValue(this.postRequest<ApiResponse>('create-paysheet', createBill));
     }
 
     /**

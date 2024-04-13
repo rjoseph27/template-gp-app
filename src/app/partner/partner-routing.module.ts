@@ -22,6 +22,7 @@ import { PartnerReceiveItemComponent } from "./receive-item/receive-item.compone
 import { PartnerReceiveItemViewComponent } from "./receive-item/receive-item-view/receive-item-view.component";
 import { PartnerReceiveItemViewResolver } from "./receive-item/receive-item.resolver";
 import { PartnerPayGpComponent } from "./pay-gp/pay-gp.component";
+import { PartnerGpPickUpViewResolver } from "./gp-pick-up/gp-pick-up-view/gp-pick-up.resolver";
 
 /**
  * @constant routes
@@ -42,7 +43,7 @@ const routes: Routes = [
     ]},
     { path: `${PartnerRoutes.gpPickUp}`, children: [
         { path: '', component: PartnerGpPickUpComponent, pathMatch: 'full', resolve: { userInfo: PartnerApplicationResolver} },
-        { path: `${PartnerRoutes.gpPickUpView}`, component: PartnerGpPickUpViewComponent, pathMatch: 'full', resolve: { userInfo: PartnerApplicationResolver, orderDetails: PartnerRegisterItemViewResolver} }
+        { path: `${PartnerRoutes.gpPickUpView}`, component: PartnerGpPickUpViewComponent, pathMatch: 'full', resolve: { userInfo: PartnerApplicationResolver, orderDetails: PartnerGpPickUpViewResolver} }
     ]},
     { path: `${PartnerRoutes.dispatching}`, children: [
         { path: '', component: PartnerDispatchingComponent, pathMatch: 'full', resolve: { userInfo: PartnerApplicationResolver} },

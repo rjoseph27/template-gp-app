@@ -121,20 +121,6 @@ export class GhTableComponent implements AfterViewInit {
    */
   @Input() set columns(value: ColumnConfig[]) {
     this._columns$.next(value);
-    if(this.canSelect) {
-      this._columns$.next([{
-        columnName: 'global.common.select',
-        valueAccessor: () => null,
-        template: this.selectTemplate
-      }, ...(value || [])])
-    }
-    if(this.canDelete || this.canEdit || this.canView) {
-      this._columns$.next([...(this._columns$.value || []), {
-        columnName: 'global.common.action',
-        valueAccessor: () => null,
-        template: this.actionTemplate
-      }])
-    }
   }
   
   /**
@@ -230,6 +216,13 @@ export class GhTableComponent implements AfterViewInit {
 
   /** @inheritdoc */
   ngAfterViewInit(): void {
+    if(this.canSelect && !this._columns$.value.some(x => x.columnName === 'global.common.select')) {
+      this._columns$.next([{
+        columnName: 'global.common.select',
+        valueAccessor: () => null,
+        template: this.selectTemplate
+      }, ...(this._columns$.value || [])])
+    }
     if(this.canDelete || this.canEdit || this.canView) {
       this._columns$.next([...(this._columns$.value || []), {
         columnName: 'global.common.action',
@@ -237,6 +230,7 @@ export class GhTableComponent implements AfterViewInit {
         template: this.actionTemplate
       }])
     }
+    
 
     this.dataSource.paginator = this.paginator;
   }

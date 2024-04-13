@@ -35,6 +35,7 @@ import { PartnerReceiveItemComponent } from "./receive-item/receive-item.compone
 import { PartnerReceiveItemViewComponent } from "./receive-item/receive-item-view/receive-item-view.component";
 import { PartnerReceiveItemViewResolver } from "./receive-item/receive-item.resolver";
 import { PartnerPayGpComponent } from "./pay-gp/pay-gp.component";
+import { PartnerGpPickUpViewResolver } from "./gp-pick-up/gp-pick-up-view/gp-pick-up.resolver";
 
 /**
  * @module PartnerModule
@@ -88,7 +89,8 @@ import { PartnerPayGpComponent } from "./pay-gp/pay-gp.component";
         NotificationService,
         PartnerBillingResolver,
         PartnerTasksResolver,
-        PartnerReceiveItemViewResolver
+        PartnerReceiveItemViewResolver,
+        PartnerGpPickUpViewResolver
     ]
 })
 export class PartnerModule {

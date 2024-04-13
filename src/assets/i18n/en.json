@@ -508,7 +508,8 @@
                 "ON_WAY_TO_FINAL_CHECKPOINT": "The GP is on his way to the final checkpoint",
                 "FINAL_CHECKPOINT": "The item is at the final checkpoint. We are going to deliver it soon to the consignee",
                 "ARRIVE_LAYOVER": "The GP has arrived at the layover",
-                "LEAVING_LAYOVER": "The GP is leaving the layover"
+                "LEAVING_LAYOVER": "The GP is leaving the layover",
+                "TRIP_DONE": "The trip has been completed"
             },
             "exception": {
                 "LOST": "The order has been declared as lost",

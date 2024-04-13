@@ -7,6 +7,7 @@ import { BasePartnerPageComponent } from "../base-partner-page.component";
 import { GhDate } from "../../misc/classes/gh-date";
 import { ItemsStatus } from "../../client/orders/base-orders.component";
 import { CountryUtil } from "../../misc/util/country.util";
+import { COUNTRY_INFO_LIST } from "../../misc/constants/countries/countries";
 
 /**
  * @component PartnerRegisterItemComponent
@@ -27,7 +28,7 @@ import { CountryUtil } from "../../misc/util/country.util";
     /** @inheritdoc */
     override fetchElements = async (orderFilter: OrderFilter) => {
       const orders = await this.requestsService.orderFilter(orderFilter)
-      return orders.filter(order => CountryUtil.getSuccursaleByAirportCode(order.originAirport) === this.route.snapshot.data['userInfo'].succursale && order.item.status === ItemsStatus.WAITING_RECEPTION);
+      return orders.filter(order => CountryUtil.getSuccursaleByCity(order.originRegion) === this.route.snapshot.data['userInfo'].succursale && order.item.status === ItemsStatus.WAITING_RECEPTION);
     };
 
     /**
