@@ -13,7 +13,7 @@ export class CountryUtil {
      */
     static getCityByAirportCode(airportCode: string): string {
         const regions = SUCCURSALE_BY_COUNTRY.map(x => x.regions).flat(); 
-        return regions.find(z => z[1].airport === airportCode)[0]
+        return regions.find(z => z[1].airport?.includes(airportCode))[0]
     }
 
     /**
@@ -23,7 +23,7 @@ export class CountryUtil {
      */
     static getSuccursaleByAirportCode(airportCode: string): any {
         const regions = SUCCURSALE_BY_COUNTRY.map(x => x.regions).flat(); 
-        return regions.find(z => z[1].airport === airportCode)[1].name
+        return regions.find(z => z[1].airport?.includes(airportCode))[1].name
     }
 
     /**

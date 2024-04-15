@@ -706,7 +706,8 @@
         },
         "Country": {
             "Canada": "Canada",
-            "Senegal": "Senegal"
+            "Senegal": "Senegal",
+            "France": "France"
         },
         "WeekDays": {
             "Monday": "Monday",

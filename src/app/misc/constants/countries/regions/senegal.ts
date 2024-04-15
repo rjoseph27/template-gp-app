@@ -74,7 +74,7 @@ export const SENEGAL_SUCCURSALES = new Map<any, SuccursaleInfo>([
         name: 'SN-DK-DK-01',
         address: 'Dakar, Senegal',
         phone: '+221 33 869 53 53',
-        airport: 'DSS',
+        airport: ['DSS'],
         region: SENEGAL_REGION.DAKAR,
         email: 'gphub221@gmx.fr'
     }],
@@ -82,7 +82,7 @@ export const SENEGAL_SUCCURSALES = new Map<any, SuccursaleInfo>([
         name: 'SN-TH-SL-01',
         address: 'Saly, Senegal',
         phone: '+221 33 957 00 00',
-        airport: 'DSS',
+        airport: ['DSS'],
         region: SENEGAL_REGION.DAKAR,
         email: 'gphub221@gmx.fr'
     }],
@@ -90,7 +90,7 @@ export const SENEGAL_SUCCURSALES = new Map<any, SuccursaleInfo>([
         name: 'SN-TH-TH-01',
         address: 'Thies, Senegal',
         phone: '+221 33 951 00 00',
-        airport: 'DSS',
+        airport: ['DSS'],
         region: SENEGAL_REGION.DAKAR,
         email: 'gphub221@gmx.fr'
     }],
@@ -98,7 +98,7 @@ export const SENEGAL_SUCCURSALES = new Map<any, SuccursaleInfo>([
         name: 'SN-TH-DS-01',
         address: 'Diass, Senegal',
         phone: '+221 33 869 53 53',
-        airport: 'DSS',
+        airport: ['DSS'],
         region: SENEGAL_REGION.DAKAR,
         email: 'gphub221@gmx.fr'
     }],

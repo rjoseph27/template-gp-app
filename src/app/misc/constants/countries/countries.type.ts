@@ -136,7 +136,7 @@ export interface SuccursaleInfo {
    * @description The airport of the succursale
    * @type {AirportInfo}
    */
-  airport?: string
+  airport?: string | string[],
 
   /**
    * @description The email of the succursale

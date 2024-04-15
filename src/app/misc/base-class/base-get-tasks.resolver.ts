@@ -34,7 +34,7 @@ export enum TaskName {
      * @description The notice for the gp to be at last arrival
      * @type {string}
      */
-    NOTICE_GP_TO_BE_LAST_ARRIVAL = 'NOTICE_GP_TO_BE_FIRST_DEPARTURE',
+    NOTICE_GP_TO_BE_LAST_ARRIVAL = 'NOTICE_GP_TO_BE_LAST_ARRIVAL',
 
     /**
      * @description The notice for the gp to be on way to destination

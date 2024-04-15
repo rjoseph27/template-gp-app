@@ -20,6 +20,10 @@ import { TripStatus } from "../../../client/orders/base-orders.component";
     styleUrls: ['./tracking.component.scss']
   })
   export class GhTrackingComponent extends BaseTrackingComponent implements OnInit {
+    /**
+     * @description The backing field for the orders
+     * @type {BehaviorSubject<number[]>}
+     */
     private readonly _orders$ = new BehaviorSubject<number[]>([]);
 
     /**
@@ -33,6 +37,10 @@ import { TripStatus } from "../../../client/orders/base-orders.component";
       return this._orders$.value;
     }
 
+    /**
+     * @description The select field option of the order list
+     * @type {Observable<SelectFieldOption[]>}
+     */
     protected readonly orderList$ = this._orders$.asObservable().pipe(map(x => {
       const options: SelectFieldOption[] = x.map(key => ({
           value: key.toString(),
@@ -296,7 +304,7 @@ import { TripStatus } from "../../../client/orders/base-orders.component";
     const task = this.tasks.find(x => x.name === TaskName.NOTICE_GP_TO_BE_LAST_ARRIVAL);
     const dateNotPassed = task ? (new Date()).getTime() >= (new GhDate(task.date)).getDate().getTime() : true;
     const taskDone = this.history.find(x => x.type === TrackingPointType.LAST_ARRIVAL);
-    return dateNotPassed && !taskDone && (this.layovers ? this.history.filter(x => x.type === TrackingPointType.LEAVING_LAYOVER).length === this.layovers.length : !!this.history.find(x => x.type === TrackingPointType.FIRST_DEPARTURE));
+    return dateNotPassed && !taskDone && (this.layovers.length ? this.history.filter(x => x.type === TrackingPointType.LEAVING_LAYOVER).length === this.layovers.length : this.history.some(x => x.type === TrackingPointType.FIRST_DEPARTURE));
    }
 
    /**
@@ -305,14 +313,21 @@ import { TripStatus } from "../../../client/orders/base-orders.component";
     */
    protected get arriveLayoverButton(): boolean {
     if(this.history.find(x => x.type === TrackingPointType.ARRIVE_LAYOVER) && this.layovers.length > 1) {
-
+      const layoverPassed = this.history.filter(x => x.type === TrackingPointType.ARRIVE_LAYOVER).length;
+      if(layoverPassed === this.layovers.length) {
+        return false;
+      }
+      const currentLayover = this.layovers[layoverPassed];
+      const task = this.tasks.find(x => x.name === TaskName.NOTICE_GP_TO_BE_LAYOVER_ARRIVAL && x.args.layoverAirport === currentLayover.airport);
+      const dateNotPassed = task ? (new Date()).getTime() >= (new GhDate(task.date)).getDate().getTime() : true;
+      const taskDone = this.history.filter(x => x.type === TrackingPointType.ARRIVE_LAYOVER).length === this.layovers.length;
+      return dateNotPassed && !taskDone && this.layovers.length && this.history[this.history.length - 1].type === TrackingPointType.LEAVING_LAYOVER;
     } else {
-      const task = this.tasks.find(x => x.name === TaskName.NOTICE_GP_TO_BE_LAYOVER_ARRIVAL);
+      const task = this.tasks.find(x => x.name === TaskName.NOTICE_GP_TO_BE_LAYOVER_ARRIVAL && x.args.layoverAirport === this.layovers[0].airport);
       const dateNotPassed = task ? (new Date()).getTime() >= (new GhDate(task.date)).getDate().getTime() : true;
       const taskDone = this.history.find(x => x.type === TrackingPointType.ARRIVE_LAYOVER);
-      return dateNotPassed && !taskDone &&  !!this.history.find(x => x.type === TrackingPointType.FIRST_DEPARTURE);
+      return dateNotPassed && !taskDone && this.layovers.length && !!this.history.find(x => x.type === TrackingPointType.FIRST_DEPARTURE);
     }
-    return false
    }
 
   /**
@@ -321,14 +336,21 @@ import { TripStatus } from "../../../client/orders/base-orders.component";
    */
   protected get departureLayoverButton(): boolean {
     if(this.history.find(x => x.type === TrackingPointType.LEAVING_LAYOVER) && this.layovers.length > 1) {
-
+      const layoverPassed = this.history.filter(x => x.type === TrackingPointType.LEAVING_LAYOVER).length;
+      if(layoverPassed === this.layovers.length) {
+        return false;
+      }
+      const currentLayover = this.layovers[layoverPassed];
+      const task = this.tasks.find(x => x.name === TaskName.NOTICE_GP_TO_BE_LAYOVER_DEPARTURE && x.args.layoverAirport === currentLayover.airport);
+      const dateNotPassed = task ? (new Date()).getTime() >= (new GhDate(task.date)).getDate().getTime() : true;
+      const taskDone = this.history.filter(x => x.type === TrackingPointType.LEAVING_LAYOVER).length === this.layovers.length;
+      return dateNotPassed && !taskDone && this.layovers.length && this.history[this.history.length - 1].type === TrackingPointType.ARRIVE_LAYOVER;
     } else {
-      const task = this.tasks.find(x => x.name === TaskName.NOTICE_GP_TO_BE_LAYOVER_DEPARTURE);
+      const task = this.tasks.find(x => x.name === TaskName.NOTICE_GP_TO_BE_LAYOVER_DEPARTURE && x.args.layoverAirport === this.layovers[0].airport);
       const dateNotPassed = task ? (new Date()).getTime() >= (new GhDate(task.date)).getDate().getTime() : true;
       const taskDone = this.history.find(x => x.type === TrackingPointType.LEAVING_LAYOVER);
       return dateNotPassed && !taskDone &&  !!this.history.find(x => x.type === TrackingPointType.ARRIVE_LAYOVER);
     }
-    return false
    }
 
   /**

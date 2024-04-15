@@ -126,12 +126,6 @@ import { Country } from "../../misc/enums/country.enum";
     protected readonly modalService: ModalService = inject(ModalService);
 
     /**
-    * @description The currency service
-    * @type {CurrencyService}
-    */
-    private readonly currencyService = inject(CurrencyService);
-
-    /**
      * @description The view factory
      * @type {(row: OrderFilterInfo) => void}
      */
@@ -153,7 +147,7 @@ import { Country } from "../../misc/enums/country.enum";
         this._selectedElements$.next([])
         this._currentPrice$.next(0);
         const orders = await this.requestsService.findBillingByEmail(email);
-        this._elements$.next(orders.filter(order =>  COUNTRY_INFO_LIST.map(x => x.succursales).find(x => x.get(order.route.from)).get(orders[0].route.from).name === this.route.snapshot.data['userInfo'].succursale));
+        this._elements$.next(orders.filter(order =>  COUNTRY_INFO_LIST.map(x => x.succursales).find(x => x.get(order.route.from)).get(order.route.from).name === this.route.snapshot.data['userInfo'].succursale));
         this._hasBeenFiltered$.next(true);
     }
 
@@ -166,13 +160,13 @@ import { Country } from "../../misc/enums/country.enum";
      * @description A method to calculate the price
      * @returns {(row: BillingFilterInfo) => void}
      */
-    protected readonly calculatePriceResolver = async (row: BillingFilterInfo) => {
-        const currency = await this.currencyService.getCurrency(this.route.snapshot.data['currency'].currency);
+    protected readonly calculatePriceResolver = (row: BillingFilterInfo) => {
+        const rates = this.route.snapshot.data['currency'].rates;
         const price = Math.round(MoneyUtil.getPrice(row, {
             specificPrice: row.specificPrice,
             defaultPrice: row.defaultPrice
-        }, currency[row.currency]));
-        return MoneyUtil.totalPrice(price, currency[row.currency])
+        }, rates[row.currency]));
+        return MoneyUtil.totalPrice(price, rates[row.currency])
     }
 
     /**

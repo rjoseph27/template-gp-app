@@ -102,7 +102,7 @@ export const CANADA_SUCCURSALES = new Map<CanadaRegions, SuccursaleInfo>(
             name: 'CA-QC-MTL-01',
             address: '1234 Rue de la rue, Montreal, QC, H1H 1H1',
             phone: '+1 123 456 7890',
-            airport: 'YUL',
+            airport: ['YUL'],
             region: CANADA_REGION.QUEBEC,
             email: 'gphub221@gmx.fr'
         }],
@@ -110,7 +110,7 @@ export const CANADA_SUCCURSALES = new Map<CanadaRegions, SuccursaleInfo>(
             name: 'CA-QC-QC-01',
             address: '1234 Rue de la rue, Quebec, QC, H1H 1H1',
             phone: '+1 123 456 7890',
-            airport: 'YQB',
+            airport: ['YQB'],
             region: CANADA_REGION.QUEBEC,
             email: 'gphub221@gmx.fr'
         }],

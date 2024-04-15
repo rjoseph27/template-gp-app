@@ -5,4 +5,5 @@
 export enum Country {
     CA = 'Canada',
     SN = 'Senegal',
+    FR = 'France',
 }

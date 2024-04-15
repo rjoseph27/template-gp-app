@@ -18,7 +18,7 @@
         (valueChange)="selectedOrderId = $event"
         [options]="orderList$ | async"
     ></gh-select-field>
-    <div *ngIf="status !== tripDone || orders.length" class="button-section">
+    <div *ngIf="status !== tripDone && orders.length" class="button-section">
         <button
             *ngIf="!selectedOrderId && onWayAirportButton && !(currentPoint?.exception)" 
             [buttonLoading]="onHisWayButtonLoading$ | async"
