@@ -55,6 +55,12 @@ export interface OrderFilter {
      * @type {string}
      */
     userRegion: string;
+
+    /**
+     * @description The location to filter
+     * @type {any}
+     */
+    location?: any;
 }
 
 /**

@@ -81,7 +81,13 @@ export enum TrackingPointType {
      * @description The final checkpoint
      * @type {string}
      */
-    FINAL_CHECKPOINT = 'FINAL_CHECKPOINT'
+    FINAL_CHECKPOINT = 'FINAL_CHECKPOINT',
+
+    /**
+     * @description The item is being redirected
+     * @type {string}
+     */
+    REDIRECT = 'REDIRECT',
 }
 
 /**

@@ -152,6 +152,32 @@
                     }
                 }
             }
+        },
+        "redirectItems": {
+            "title": "Redirect items",
+            "view": {
+                "succursaleOption": {
+                    "label": "Where to send?",
+                    "placeholder": "Select a succursale",
+                    "errors": {
+                        "required": "This field is required"
+                    }
+                },
+                "button": "Redirect",
+                "modal": {
+                    "title": "Redirect items",
+                    "content": "Are you sure you want to redirect these items?",
+                    "confirm": "Confirm",
+                    "cancel": "Cancel",
+                    "notification": {
+                        "success": "Items have been redirected successfully",
+                        "error": "Failed to redirect items"
+                    }
+                }
+            }
+        },
+        "commission": {
+            "title": "Commission"
         }
     }
 }

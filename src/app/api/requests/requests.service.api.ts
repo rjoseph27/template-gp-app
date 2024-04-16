@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { ApiResponse, BaseServiceApi } from "../base.service.api";
 import { firstValue } from "../../misc/function/firstValue";
-import { ReportTrip, SearchTripsRequest, SearchTripsApiResponse, ConfirmItemRequest, SendItemsRequestApiResponse, UpdateImageNameRequest, CreateAlertRequest, ListItemsApiResponse, ItemInformationApiResponse, RequestTableElementRequest, OrderDetailRequest, GetSendItemsRequestApiResponse, GetTripListApiResponse, GetTripInfoApiResponse, CancelTripRequest, AlertListApiResponse, AlertApiResponse, OrderFilterResponse, EditItemInformationRequest, BillingListApiResponse, BillingFilterInfo, ConfirmTripRequest, GetTasksApiResponse, CreateBill } from "./requests.type";
+import { ReportTrip, SearchTripsRequest, SearchTripsApiResponse, ConfirmItemRequest, SendItemsRequestApiResponse, UpdateImageNameRequest, CreateAlertRequest, ListItemsApiResponse, ItemInformationApiResponse, RequestTableElementRequest, OrderDetailRequest, GetSendItemsRequestApiResponse, GetTripListApiResponse, GetTripInfoApiResponse, CancelTripRequest, AlertListApiResponse, AlertApiResponse, OrderFilterResponse, EditItemInformationRequest, BillingListApiResponse, ConfirmTripRequest, GetTasksApiResponse, CreateBill } from "./requests.type";
 import { OrderFilter } from "../../core/layouts/filter/order-filter/order-filter.component";
 import { TrackingPoint } from "../../core/layouts/tracking/tracking.type";
 
@@ -345,5 +345,32 @@ export class RequestsServiceApi extends BaseServiceApi {
      */
     findPaysheetByEmail(email: string): Promise<BillingListApiResponse> {
         return firstValue(this.getRequest<BillingListApiResponse>('find-paysheet-by-email', email));
+    }
+
+    /**
+     * @description A method to redirect an item
+     * @param redirectItemsRequest The redirect items request
+     * @returns {Promise<ApiResponse>}
+     */
+    redirectItems(redirectItemsRequest: OrderDetailRequest): Promise<ApiResponse> {
+        return firstValue(this.postRequest<ApiResponse>('redirect-items', redirectItemsRequest));
+    }
+
+    /**
+     * @description A method to get the commission
+     * @param orderFilterRequest The order filter request
+     * @returns {Promise<OrderFilterResponse>}
+     */
+    commission(orderFilterRequest: OrderFilter): Promise<OrderFilterResponse> {
+        return firstValue(this.postRequest<OrderFilterResponse>('commission', orderFilterRequest));
+    }
+
+    /**
+     * @description A method to receive the commission
+     * @param updateStatusRequest The update status request
+     * @returns {Promise<ApiResponse>}
+     */
+    receiveCommission(updateStatusRequest: OrderDetailRequest): Promise<ApiResponse> {
+        return firstValue(this.postRequest<ApiResponse>('receive-commission', updateStatusRequest));
     }
 }

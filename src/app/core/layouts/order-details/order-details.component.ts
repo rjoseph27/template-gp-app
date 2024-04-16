@@ -130,6 +130,12 @@ export interface OrderDetails {
     @Input() orderDetails: OrderDetails;
 
     /**
+     * @description A boolean to show the price
+     * @type {boolean}
+     */
+    @Input() showPrice: boolean = true;
+
+    /**
      * @description The currency of the order
      * @type {Currency}
      */

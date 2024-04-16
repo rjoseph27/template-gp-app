@@ -1,0 +1,19 @@
+<div class="content">
+    <div>
+        <div class="title">
+            <h1>{{ 'moduleList.commission.title' | translate }}</h1>
+        </div>
+        <gh-order-filter 
+            [country]="country$ | async"
+            [label]="'moduleList.registerItem.filterLabel' | translate"
+            (filterChange)="filter($event)"
+        ></gh-order-filter>
+        <div class="table">
+            <gh-order-filter-table 
+                [elements]="elements$ | async"
+                [hasBeenFiltered]="hasBeenFiltered$ | async"
+                [viewFactory]="viewFactory"
+            ></gh-order-filter-table>
+        </div>
+    </div>
+</div>

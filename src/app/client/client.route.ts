@@ -101,12 +101,6 @@ export class ClientRoutes {
     static readonly waitingReception: GhRoute = new GhRoute('waiting-reception', ClientRoutes.clientOrder);
 
     /**
-     * @description The at check point route
-     * @type {GhRoute}
-     */
-    static readonly atCheckPoint: GhRoute = new GhRoute('at-check-point', ClientRoutes.clientOrder);
-
-    /**
      * @description The reschedule order route
      * @type {GhRoute}
      */

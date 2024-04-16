@@ -1,0 +1,29 @@
+<form [formGroup]="form">
+    <div class="content">
+        <div>
+            <gh-order-details 
+                [currency]="currency$ | async" 
+                [orderDetails]="orderDetail$ | async"
+                [showPrice]="false"
+            ></gh-order-details>
+            <gh-select-field
+                [label]="'moduleList.redirectItems.view.succursaleOption.label' | translate" 
+                [placeholder]="'moduleList.redirectItems.view.succursaleOption.placeholder' | translate"
+                [name]="succursaleField"
+                [value]="form.get(succursaleField).value"
+                (valueChange)="form.get(succursaleField).setValue($event)"
+                [errors]="form.get(succursaleField).errors"
+                [errorCaptions]="succursaleErrorCaptions"
+                [options]="succursaleOption$ | async"
+                ></gh-select-field>
+            <div>
+                <button
+                    [buttonLoading]="redirectItemsLoading$ | async"
+                    class="gp-button" 
+                    [disabled]="!form.valid"
+                    (click)="redirectItems()"
+                >{{ 'moduleList.redirectItems.view.button' | translate }}</button>
+            </div>
+        </div>
+    </div>
+</form>

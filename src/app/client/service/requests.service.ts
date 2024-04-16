@@ -565,4 +565,43 @@ export class ClientRequestsService {
             return false
         });
     }
+
+    /**
+     * @description Redirects items
+     * @param redirectItemsRequest The redirect items request
+     * @returns {Promise<boolean>}
+     */
+    redirectItems(redirectItemsRequest: OrderDetailRequest): Promise<boolean> {
+        return this.requestsServiceApi.redirectItems(redirectItemsRequest).then(msg => {
+            if(msg.message === UpdateStatus.ORDER_STATUS_UPDATED_SUCCESSFULLY)
+            {
+                return true
+            }
+            return false
+        });
+    }
+
+    /**
+     * @description Gets the commission
+     * @param orderFilter The order filter
+     * @returns {Promise<OrderFilterInfo[]>}
+     */
+    commission(orderFilter: OrderFilter): Promise<OrderFilterInfo[]> {
+        return this.requestsServiceApi.commission(orderFilter).then(msg => msg.orders);
+    }
+
+    /**
+     * @description Receives a commission
+     * @param statusUpdateRequest the status update request
+     * @returns {Promise<boolean>}
+     */
+    receiveCommission(statusUpdateRequest: OrderDetailRequest): Promise<boolean> {
+        return this.requestsServiceApi.receiveCommission(statusUpdateRequest).then(msg => {
+            if(msg.message === UpdateStatus.ORDER_STATUS_UPDATED_SUCCESSFULLY)
+            {
+                return true
+            }
+            return false
+        });
+    }
 }

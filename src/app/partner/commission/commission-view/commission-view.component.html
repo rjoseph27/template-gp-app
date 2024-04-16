@@ -1,0 +1,16 @@
+<div class="content">
+    <div>
+        <gh-order-details 
+            [currency]="currency$ | async" 
+            [orderDetails]="orderDetail$ | async"
+            [showPrice]="false"
+        ></gh-order-details>
+        <div>
+            <button
+                [buttonLoading]="receiveItemLoading$ | async"
+                class="gp-button" 
+                (click)="receiveItem()"
+            >{{ 'moduleList.receivingItem.receiveButton' | translate }}</button>
+        </div>
+    </div>
+</div>

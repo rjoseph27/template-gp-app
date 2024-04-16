@@ -14,7 +14,6 @@ import { ClientGpOrdersComponent } from './orders/gp-orders/gp-orders.component'
 import { ClientGpOrderDetailsResolver } from './orders/gp-orders/gp-order-details.resolver';
 import { ClientConfirmOrdersComponent } from './orders/gp-orders/confirm-orders/confirm-orders.component';
 import { ClientWaitingReceptionComponent } from './orders/client-orders/waiting-reception/waiting-reception.component';
-import { ClientItemAtCheckPointComponent } from './orders/client-orders/item-at-checkpoint/item-at-checkpoint.component';
 import { ClientItemReadyForPickupComponent } from './orders/client-orders/item-ready-for-pickup/item-ready-for-pickup.component';
 import { ClientItemDeliveredComponent } from './orders/client-orders/item-delivered/item-delivered.component';
 import { ClientItemOnHisWayComponent } from './orders/gp-orders/item-on-his-way/item-on-his-way.component';
@@ -52,7 +51,6 @@ const routes: Routes = [
         { path: '', component: ClientItemsOrdersComponent, pathMatch: 'full', resolve: { userInfo: ClientApplicationResolver} },
         { path: `${ClientRoutes.waitingGpConfirmation}`, component: ClientWaitingGpConfirmationComponent, pathMatch: 'full', resolve: { orderDetails: ClientOrderDetailsResolver, userInfo: ClientApplicationResolver } },
         { path: `${ClientRoutes.waitingReception}`, component: ClientWaitingReceptionComponent, pathMatch: 'full', resolve: { orderDetails: ClientOrderDetailsResolver, userInfo: ClientApplicationResolver } },
-        { path: `${ClientRoutes.atCheckPoint}`, component: ClientItemAtCheckPointComponent, pathMatch: 'full', resolve: { orderDetails: ClientOrderDetailsResolver, userInfo: ClientApplicationResolver } },
         { path: `${ClientRoutes.itemReadyForPickup}`, component: ClientItemReadyForPickupComponent, pathMatch: 'full', resolve: { orderDetails: ClientGpOrderDetailsResolver, userInfo: ClientApplicationResolver }},
         { path: `${ClientRoutes.itemDelivered}`, component: ClientItemDeliveredComponent, pathMatch: 'full', resolve: { orderDetails: ClientGpOrderDetailsResolver, userInfo: ClientApplicationResolver }},
         { path: `${ClientRoutes.tracking}`, component: ClientOrderTrackingComponent, pathMatch: 'full', resolve: { trip: TrackingResolver, userInfo: ClientApplicationResolver }},

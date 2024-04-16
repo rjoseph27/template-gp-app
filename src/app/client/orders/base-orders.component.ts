@@ -85,6 +85,12 @@ export enum ItemsStatus {
      * @type {string}
      */
     DELIVERED = 'DELIVERED',
+
+    /**
+     * @description The item is being redirect
+     * @type {string}
+     */
+    REDIRECT = 'REDIRECT'
   }
 
 /**

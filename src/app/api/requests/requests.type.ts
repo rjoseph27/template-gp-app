@@ -983,6 +983,12 @@ export interface ReportTrip {
      * @type {string}
      */
     tripId: string;
+
+    /**
+     * @description The location
+     * @type {any}
+     */
+    location?: any;
   }
 
   /**

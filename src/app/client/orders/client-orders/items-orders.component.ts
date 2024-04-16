@@ -88,7 +88,7 @@ import { GhDate } from '../../../misc/classes/gh-date';
             return {
               label: 'moduleList.client.orders.status.atCheckpoint',
               icon: 'location_on',
-              action: () => this.router.navigate([ClientRoutes.atCheckPoint.fullPath()], { queryParams: {
+              action: () => this.router.navigate([ClientRoutes.tracking.fullPath()], { queryParams: {
                 id: row.id,
                 status: row.status,
                 from: row.route.from,
@@ -96,6 +96,18 @@ import { GhDate } from '../../../misc/classes/gh-date';
                 deliveryDate: new GhDate(row.deliveryDate).getDate().toISOString(),
               }})
             }
+          case ItemsStatus.REDIRECT:
+              return {
+                label: 'moduleList.client.orders.status.redirect',
+                icon: 'local_shipping',
+                action: () => this.router.navigate([ClientRoutes.tracking.fullPath()], { queryParams: {
+                  id: row.id,
+                  status: row.status,
+                  from: row.route.from,
+                  to: row.route.to,
+                  deliveryDate: new GhDate(row.deliveryDate).getDate().toISOString(),
+                }})
+              }
           case ItemsStatus.WITH_GP:
             return {
               label: 'moduleList.client.orders.status.withGp',

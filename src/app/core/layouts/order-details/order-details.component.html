@@ -20,7 +20,7 @@
     <div class="section">
         <div class="label">{{ 'global.orderDetails.arrivalTime' | translate }}</div><div>{{ getDate(orderDetails.arrivalDate) | date: 'dd/MM/yyyy' }}, {{ orderDetails.arrivalTime }}</div>
     </div>
-    <div class="section">
+    <div *ngIf="showPrice" class="section">
         <div class="label">{{ 'global.orderDetails.totalCost' | translate }}</div><div class="price">{{ orderDetails.price}} {{ currency }}</div>
     </div>
 </div>

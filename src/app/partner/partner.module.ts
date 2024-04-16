@@ -36,6 +36,11 @@ import { PartnerReceiveItemViewComponent } from "./receive-item/receive-item-vie
 import { PartnerReceiveItemViewResolver } from "./receive-item/receive-item.resolver";
 import { PartnerPayGpComponent } from "./pay-gp/pay-gp.component";
 import { PartnerGpPickUpViewResolver } from "./gp-pick-up/gp-pick-up-view/gp-pick-up.resolver";
+import { PartnerRedirectItemsComponent } from "./redirect-items/redirect-items.component";
+import { PartnerRedirectItemsViewComponent } from "./redirect-items/redirect-items-view/redirect-items-view.component";
+import { PartnerCommissionComponent } from "./commission/commission.component";
+import { PartnerCommissionViewComponent } from "./commission/commission-view/commission-view.component";
+import { PartnerCommissionItemViewResolver } from "./commission/commission-view/commission-view.resolver";
 
 /**
  * @module PartnerModule
@@ -59,7 +64,11 @@ import { PartnerGpPickUpViewResolver } from "./gp-pick-up/gp-pick-up-view/gp-pic
         PartnerChangeDateComponent,
         PartnerReceiveItemComponent,
         PartnerReceiveItemViewComponent,
-        PartnerPayGpComponent
+        PartnerPayGpComponent,
+        PartnerRedirectItemsComponent,
+        PartnerRedirectItemsViewComponent,
+        PartnerCommissionComponent,
+        PartnerCommissionViewComponent
     ],
     imports: [
         CommonModule,
@@ -90,7 +99,8 @@ import { PartnerGpPickUpViewResolver } from "./gp-pick-up/gp-pick-up-view/gp-pic
         PartnerBillingResolver,
         PartnerTasksResolver,
         PartnerReceiveItemViewResolver,
-        PartnerGpPickUpViewResolver
+        PartnerGpPickUpViewResolver,
+        PartnerCommissionItemViewResolver
     ]
 })
 export class PartnerModule {

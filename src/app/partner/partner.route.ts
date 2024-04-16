@@ -96,8 +96,32 @@ export class PartnerRoutes {
     static readonly receiveItemView: GhRoute = new GhRoute('receive-item-view', PartnerRoutes.receiveItem);
 
     /**
-     * @description The route for the pay GP
+     * @description The route for the pay GP module
      * @type {GhRoute}
      */
     static readonly payGp: GhRoute = new GhRoute('pay-gp', PartnerRoutes.main);
+
+    /**
+     * @description The route for the redirect items module
+     * @type {GhRoute}
+     */
+    static readonly redirectItems: GhRoute = new GhRoute('redirect-items', PartnerRoutes.main);
+
+    /**
+     * @description The view for the redirect items module
+     * @type {GhRoute}
+     */
+    static readonly redirectItemsView: GhRoute = new GhRoute('redirect-items-view', PartnerRoutes.redirectItems);
+
+    /**
+     * @description The route for the commission module
+     * @type {GhRoute}
+     */
+    static readonly commission: GhRoute = new GhRoute('commission', PartnerRoutes.main);
+
+    /**
+     * @description The view for the commission module
+     * @type {GhRoute}
+     */
+    static readonly commissionView: GhRoute = new GhRoute('commission-view', PartnerRoutes.commission);
 }

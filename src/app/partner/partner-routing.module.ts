@@ -23,6 +23,11 @@ import { PartnerReceiveItemViewComponent } from "./receive-item/receive-item-vie
 import { PartnerReceiveItemViewResolver } from "./receive-item/receive-item.resolver";
 import { PartnerPayGpComponent } from "./pay-gp/pay-gp.component";
 import { PartnerGpPickUpViewResolver } from "./gp-pick-up/gp-pick-up-view/gp-pick-up.resolver";
+import { PartnerRedirectItemsComponent } from "./redirect-items/redirect-items.component";
+import { PartnerRedirectItemsViewComponent } from "./redirect-items/redirect-items-view/redirect-items-view.component";
+import { PartnerCommissionComponent } from "./commission/commission.component";
+import { PartnerCommissionViewComponent } from "./commission/commission-view/commission-view.component";
+import { PartnerCommissionItemViewResolver } from "./commission/commission-view/commission-view.resolver";
 
 /**
  * @constant routes
@@ -59,6 +64,14 @@ const routes: Routes = [
     { path: `${PartnerRoutes.payGp}`, children: [
         { path: '', component: PartnerPayGpComponent, pathMatch: 'full', resolve: { userInfo: PartnerApplicationResolver, currency: PartnerBillingResolver} },
         { path: `${PartnerRoutes.billingView}`, component: PartnerBillingViewComponent, pathMatch: 'full', resolve: { userInfo: PartnerApplicationResolver, orderDetails: PartnerRegisterItemViewResolver} }
+    ]},
+    { path: `${PartnerRoutes.redirectItems}`, children: [
+        { path: '', component: PartnerRedirectItemsComponent, pathMatch: 'full', resolve: { userInfo: PartnerApplicationResolver, currency: PartnerBillingResolver} },
+        { path: `${PartnerRoutes.redirectItemsView}`, component: PartnerRedirectItemsViewComponent, pathMatch: 'full', resolve: { userInfo: PartnerApplicationResolver, orderDetails: PartnerRegisterItemViewResolver} }
+    ]},
+    { path: `${PartnerRoutes.commission}`, children: [
+        { path: '', component: PartnerCommissionComponent, pathMatch: 'full', resolve: { userInfo: PartnerApplicationResolver, currency: PartnerBillingResolver} },
+        { path: `${PartnerRoutes.commissionView}`, component: PartnerCommissionViewComponent, pathMatch: 'full', resolve: { userInfo: PartnerApplicationResolver, orderDetails: PartnerCommissionItemViewResolver} }
     ]}
 ];
 

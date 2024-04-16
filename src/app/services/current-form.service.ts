@@ -10,6 +10,7 @@ import { BehaviorSubject } from 'rxjs';
 export class CurrentFormService {
     /**
      * @description The current form
+     * @type {FormGroup}
      */
     currentForm: FormGroup;
 

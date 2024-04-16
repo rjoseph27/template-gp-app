@@ -50,6 +50,7 @@
                     "waitReception": "Waiting Reception",
                     "canceledByGp": "Select a New Trip",
                     "atCheckpoint": "At Checkpoint",
+                    "redirect": "Item rerouted",
                     "withGp": "Item with GP",
                     "onDelivery": "On Delivery",
                     "finalCheckpoint": "Ready for Pickup",

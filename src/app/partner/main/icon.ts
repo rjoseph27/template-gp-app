@@ -51,3 +51,15 @@ export const BILLING_ICON = 'payments'
  * @description The icon to be used for the pay GP module
  */
 export const GP_PAY_BUTTON = 'paid'
+
+/**
+ * @constant
+ * @description The icon to be used for the redirect items module
+ */
+export const REDIRECT_ITEMS_ICON = 'signpost'
+
+/**
+ * @constant
+ * @description The icon to be used for the commissions module
+ */
+export const COMMISIONS_BUTTON = 'task'
