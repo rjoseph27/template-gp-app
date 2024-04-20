@@ -10,7 +10,6 @@ import { MAX_LUGGAGE_WEIGHT } from "../../../../misc/constants/application";
 import { FormMode } from "../../../../misc/enums/form-mode.enum";
 import { ModalService } from "../../../../services/modal.service";
 import { GhFile } from "../../../elements/input/upload-image/upload-image.component";
-import { ITEM_INFORMATION_IMAGE_FOLDER, ImageUtil } from "../../../../misc/util/image.util";
 import { ItemsStatus } from "../../../../client/orders/base-orders.component";
 import { INTEGER_VALIDATION, integerValidator } from "../../../../misc/validation/integer.validator";
 
@@ -289,6 +288,15 @@ export class GhItemInformationComponent implements OnInit {
     const list = this.itemInformationList.map(x => x.itemInformation.value as ItemInformation);
     this.itemInformationChange.emit(list as ItemInformation[]);
   }
+
+  /**
+   * @description Get the image url of a file
+   * @param filename The file name
+   * @returns {string}
+   */
+  private getImageUrl(filename: string): string {
+    return "https://firebasestorage.googleapis.com/v0/b/gp-hub-test-server.appspot.com/o/items%2F"+filename+"?alt=media&token=1cd71787-e61a-4238-ac6e-e7103397a8e5"
+  }
   
 
   /**
@@ -301,7 +309,7 @@ export class GhItemInformationComponent implements OnInit {
     if(itemInformation?.image) {
       if(typeof itemInformation.image === "string") {
         image = <GhFile>{};
-        image.tempUrl = ImageUtil.getImageLink(ITEM_INFORMATION_IMAGE_FOLDER, itemInformation.image);
+        image.tempUrl = this.getImageUrl(itemInformation.image);
       } else {
         image = itemInformation.image;
       }    

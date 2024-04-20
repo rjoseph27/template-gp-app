@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpEvent } from "@angular/common/http";
 import { inject } from "@angular/core";
 import { Observable } from "rxjs";
 
@@ -27,7 +27,7 @@ export const DEBOUNCE_TIME = 2000;
  * @constant
  * @description The server url
  */
-export const SERVER_URL = 'http://localhost:3000';
+export const SERVER_URL = 'https://app-ry7rf2os6a-uc.a.run.app';
 
 /**
  * @abstract

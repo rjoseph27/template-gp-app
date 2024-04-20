@@ -42,15 +42,6 @@ export class RequestsServiceApi extends BaseServiceApi {
     }
 
     /**
-     * @description A method that uploads images
-     * @param image The image
-     * @returns {Promise<string>}
-     */
-    uploadImages(image: FormData): Promise<string> {
-        return firstValue(this.postRequest<string>('upload-image', image));
-    }
-
-    /**
      * @description A method that updates the image name
      * @param imageUpdateInfo The update image name request 
      * @returns {Promise<ApiResponse>}

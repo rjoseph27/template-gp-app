@@ -11,6 +11,7 @@ import { AlertTableElement } from "../../core/layouts/alert-table/alert-table.co
 import { OrderFilter } from "../../core/layouts/filter/order-filter/order-filter.component";
 import { TrackingPoint } from "../../core/layouts/tracking/tracking.type";
 import { Tasks } from "../../misc/base-class/base-get-tasks.resolver";
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 /**
  * @class RequestsService
@@ -29,6 +30,24 @@ export class ClientRequestsService {
      * @type {UsersService}
      */
     private readonly usersService = inject(UsersService);
+
+    /**
+     * @description The firebase storage
+     * @type {AngularFireStorage}
+     */
+    private readonly fireStorage = inject(AngularFireStorage);
+
+    /**
+     * @description A method to upload image in the firebase storage
+     * @param image The image to upload
+     * @returns {Promise<String>}
+     */
+    private async uploadImage(image: File): Promise<string> {
+        const filename = Date.now()+image.name.split(".").pop();
+        const filePath = `items/${filename}`;
+        const upload = await this.fireStorage.upload(filePath, image);
+        return filename;
+    }
 
     /**
      * @description Reports a trip
@@ -80,17 +99,13 @@ export class ClientRequestsService {
                 const imgList = confirmItemRequest.items.itemInformation
                     .filter(item => typeof item.image !== 'string')
                     .map(async (item) => {
-                        const formData = new FormData();
-                        formData.append('image', item.image);
-                        id = msg.newId 
-                        return await this.requestsServiceApi.uploadImages(formData).then(async img => {
-                            return img;
-                        })
+                        id = msg.newId
+                        return await this.uploadImage(item.image).then(async img => img)
                 })
                 
                 if(imgList.length) {
                     Promise.all(imgList).then(async (x) => {
-                        await this.requestsServiceApi.updateImageName({id: msg.newId, filenames: x})
+                        await this.requestsServiceApi.updateImageName({id: msg.newId, filenames: x })
                     });
                 }
                 return true
@@ -111,11 +126,7 @@ export class ClientRequestsService {
                 const imgList = createAlertRequest.items.itemInformation.map(async (item) =>{
                     if(typeof item.image !== 'string')
                     {
-                        const formData = new FormData();
-                        formData.append('image', item.image);
-                        return await this.requestsServiceApi.uploadImages(formData).then(async img => {
-                            return img;
-                        });
+                        return await this.uploadImage(item.image).then(async img => img);
                     }
                     return undefined
                 })
@@ -311,9 +322,7 @@ export class ClientRequestsService {
                     .map(async (item) =>{
                         const formData = new FormData();
                         formData.append('image', item.image);
-                        return await this.requestsServiceApi.uploadImages(formData).then(async img => {
-                            return img;
-                        });
+                        return await this.uploadImage(item.image).then(async img => img);
                     })
                 
                 Promise.all(imgList).then(async (x) => {

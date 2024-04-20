@@ -8,7 +8,7 @@ import { BehaviorSubject } from 'rxjs';
  * @description The maximum image size
  * @type {number}
  */
-export const MAX_IMAGE_SIZE = 100 * 1024;
+export const MAX_IMAGE_SIZE = 2000 * 100 * 1024;
 
 /**
  * @type FileType

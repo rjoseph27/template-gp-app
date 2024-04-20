@@ -26,6 +26,9 @@ import { CurrencyService } from "./services/currency.service";
 import { CurrencyServiceApi } from "./api/currency/currency.service.api";
 import { PartnerModule } from "./partner/partner.module";
 import { TrackingResolver } from "./services/tracking.resolver";
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { FIREBASE_CONFIG } from "./misc/constants/firebase-config";
 
 /**
  * @module AppModule
@@ -48,6 +51,8 @@ import { TrackingResolver } from "./services/tracking.resolver";
               deps: [HttpClient]
             },
           }),
+        AngularFireModule.initializeApp(FIREBASE_CONFIG),
+        AngularFirestoreModule
     ],
     providers: [
         UsersService, 
