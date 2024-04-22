@@ -20,11 +20,18 @@ export class LoadingService {
     readonly loading$ = this._loading$.asObservable();
 
     /**
+     * @description The amount of ongoing loading
+     * @type {number}
+     */
+    private ongoingLoading = 0;
+
+    /**
      * @description A method that start the loading
      * @returns {void}
      */
     startLoading(): void {
         this._loading$.next(true)
+        this.ongoingLoading++;
     }
 
     /**
@@ -32,6 +39,9 @@ export class LoadingService {
      * @returns {void}
      */
     endLoading(): void {
-        this._loading$.next(false)
+        this.ongoingLoading--;
+        if (this.ongoingLoading <= 0) {
+            this._loading$.next(false)
+        } 
     }
 }

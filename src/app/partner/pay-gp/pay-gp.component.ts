@@ -9,6 +9,7 @@ import { PartnerRoutes } from "../partner.route";
 import { MoneyUtil } from "../../misc/util/money.util";
 import { CountryUtil } from "../../misc/util/country.util";
 import { Country } from "../../misc/enums/country.enum";
+import { GhDate } from "../../misc/classes/gh-date";
 
 /**
  * @class PartnerPayGpComponent
@@ -143,7 +144,10 @@ import { Country } from "../../misc/enums/country.enum";
     protected readonly viewFactory = (row: BillingFilterInfo) => {
         const queryParams = {
             id: row.id,
-            ...row.details
+            deliveryDate: new GhDate(row.details.deliveryDate).getDate().toISOString(),
+            from: row.details.from,
+            to: row.details.to,
+            userId: row.details.userId 
         }
         return this.router.navigate([PartnerRoutes.billingView.fullPath()], { queryParams:  queryParams} )
     }

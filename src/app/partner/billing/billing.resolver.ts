@@ -37,6 +37,7 @@ export class PartnerBillingResolver implements Resolve<any> {
     this.loadingService.startLoading();
     const currency =  await this.userService.getPartnerUserInfo(this.userService.currentUserId).then(user => MoneyUtil.getSuccursaleCurrency(user.succursale).currency)
     const rates = await this.currencyService.getCurrency(currency);
+    this.loadingService.endLoading();
     return { currency, rates }
   }
 }

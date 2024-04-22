@@ -11,6 +11,8 @@ import { COUNTRY_INFO_LIST } from "../../misc/constants/countries/countries";
 import { CurrencyService } from "../../services/currency.service";
 import { CountryUtil } from "../../misc/util/country.util";
 import { Country } from "../../misc/enums/country.enum";
+import { GhDate } from "../../misc/classes/gh-date";
+import { NotificationService } from "../../services/notification.service";
 
 /**
  * @class PartnerBillingComponent
@@ -40,6 +42,12 @@ import { Country } from "../../misc/enums/country.enum";
      * @type {ActivatedRoute}
      */
     private readonly route = inject(ActivatedRoute)
+
+    /**
+    * @description The notification service
+    * @type {NotificationService}
+    */
+    protected readonly notificationService: NotificationService = inject(NotificationService);
 
     /**
     * @description The change detector reference
@@ -132,7 +140,10 @@ import { Country } from "../../misc/enums/country.enum";
     protected readonly viewFactory = (row: BillingFilterInfo) => {
         const queryParams = {
             id: row.id,
-            ...row.details
+            deliveryDate: new GhDate(row.details.deliveryDate).getDate().toISOString(),
+            from: row.details.from,
+            to: row.details.to,
+            userId: row.details.userId 
         }
         return this.router.navigate([PartnerRoutes.billingView.fullPath()], { queryParams:  queryParams} )
     }
@@ -210,6 +221,9 @@ import { Country } from "../../misc/enums/country.enum";
                 this._confirmLoading$.next(false);
                 if(result) {
                     this._elements$.next(this._elements$.value.filter(x => !this._selectedElements$.value.includes(x)));
+                    this.notificationService.successNotification('moduleList.billing.confirmPayment.modal.notification.success');
+                } else {
+                    this.notificationService.errorNotification('moduleList.billing.confirmPayment.modal.notification.error');
                 }
                 this._selectedElements$.next([]);
                 this._currentPrice$.next(0);

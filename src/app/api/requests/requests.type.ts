@@ -1168,7 +1168,7 @@ export interface ReportTrip {
      * @description The departure date
      * @type {Date}
      */
-    deliveryDate: Date,
+    deliveryDate: GhDateProperties,
 
     /**
      * @description The departure airport

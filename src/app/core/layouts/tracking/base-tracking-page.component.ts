@@ -1,6 +1,6 @@
 import { Directive, inject } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { map } from "rxjs/operators";
+import { map, tap } from "rxjs/operators";
 import { ReportTrip } from "../../../api/requests/requests.type";
 import { CountryUtil } from "../../../misc/util/country.util";
 import { GhDate } from "../../../misc/classes/gh-date";
@@ -22,7 +22,10 @@ export class BaseTrackingPageComponent {
          * @description An observable for the trip history
          * @type {Observable<Trip>}
          */
-        protected readonly history$ = this.route.data.pipe(map(data => (<ReportTrip>data['trip']).history));
+        protected readonly history$ = this.route.data.pipe(
+          tap(data => console.log((<ReportTrip>data['trip']))),
+          map(data => (<ReportTrip>data['trip']).history),
+        );
     
         /**
          * @description An observable for the departure date

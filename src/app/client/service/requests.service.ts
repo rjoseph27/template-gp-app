@@ -12,6 +12,7 @@ import { OrderFilter } from "../../core/layouts/filter/order-filter/order-filter
 import { TrackingPoint } from "../../core/layouts/tracking/tracking.type";
 import { Tasks } from "../../misc/base-class/base-get-tasks.resolver";
 import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { GhFile } from "../../core/elements/input/upload-image/upload-image.component";
 
 /**
  * @class RequestsService
@@ -43,9 +44,9 @@ export class ClientRequestsService {
      * @returns {Promise<String>}
      */
     private async uploadImage(image: File): Promise<string> {
-        const filename = Date.now()+image.name.split(".").pop();
+        const filename = Date.now().toString();
         const filePath = `items/${filename}`;
-        const upload = await this.fireStorage.upload(filePath, image);
+        await this.fireStorage.upload(filePath, image);
         return filename;
     }
 
@@ -93,6 +94,13 @@ export class ClientRequestsService {
      */
     sendItems(confirmItemRequest: ConfirmItemRequest): Promise<boolean> {
         let id: string;
+        
+        for(let i = 0; i< confirmItemRequest.items.itemInformation.length; i++) {
+            if((<GhFile>confirmItemRequest.items.itemInformation[0].image).tempUrl) {
+                delete (<GhFile>confirmItemRequest.items.itemInformation[0].image).tempUrl
+            }
+        }
+        
         return this.requestsServiceApi.sendItems(confirmItemRequest).then(async msg => {
             if(msg.message === SendItemsStatus.ITEMS_SENT_SUCCESSFULLY)
             {
