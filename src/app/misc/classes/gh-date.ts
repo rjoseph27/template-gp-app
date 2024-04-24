@@ -93,8 +93,33 @@ export class GhDate {
         this.year = date.year;
         this.hour = date.hour || 0;
         this.minute = date.minute || 0;
-        this.timeZone = this.timeZone || new Date().getTimezoneOffset();
+        this.timeZone = date.timeZone || 0;
     }
+
+    /**
+     * @description Sets the time zone
+     * @param timeZone The time zone
+     * @returns {GhDate}
+     */
+    setTimeZone(timeZone: number): GhDate {
+        const offsetDifference = this.timeZone - timeZone;
+        this.timeZone = timeZone;
+        const currentDate = new Date(
+            this.year,
+            this.month,
+            this.day,
+            this.hour,
+            this.minute,
+        );
+        const newDate = new Date(currentDate.getTime() + offsetDifference * 60000);
+        this.month = newDate.getMonth();
+        this.day = newDate.getDate();
+        this.year = newDate.getFullYear();
+        this.hour = newDate.getHours();
+        this.minute = newDate.getMinutes();
+    
+        return this;
+      }
 
     /**
      * @description Creates a GhDate from a date
