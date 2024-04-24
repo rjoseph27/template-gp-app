@@ -33,6 +33,7 @@ import { GhTrackingComponent } from "./tracking/tracking.component";
 import { GhTrackingHistoryComponent } from "./tracking/tracking-history/tracking-history.component";
 import { GhCreateLayoverComponent } from "./request/create-layover/create-layover.component";
 import { GhNotFoundComponent } from "./not-found/not-found.component";
+import { GhImageModalComponent } from "./image-modal/image-modal.component";
 
 /**
  * @constant
@@ -74,5 +75,6 @@ export const LAYOUTS_COMPONENTS = [
     GhTrackingComponent,
     GhTrackingHistoryComponent,
     GhCreateLayoverComponent,
-    GhNotFoundComponent
+    GhNotFoundComponent,
+    GhImageModalComponent
 ]

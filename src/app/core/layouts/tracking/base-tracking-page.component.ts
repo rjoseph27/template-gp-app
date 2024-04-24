@@ -23,7 +23,6 @@ export class BaseTrackingPageComponent {
          * @type {Observable<Trip>}
          */
         protected readonly history$ = this.route.data.pipe(
-          tap(data => console.log((<ReportTrip>data['trip']))),
           map(data => (<ReportTrip>data['trip']).history),
         );
     

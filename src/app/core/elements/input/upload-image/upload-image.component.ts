@@ -1,7 +1,9 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild, inject } from '@angular/core';
 import { BaseInputFieldComponent } from '../base-input-field.component';
 import { UPLOAD_ICON } from '../../../../misc/constants/icon';
 import { BehaviorSubject } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { GhImageModalComponent } from '../../../layouts/image-modal/image-modal.component';
 
 /**
  * @constant
@@ -39,8 +41,13 @@ export interface GhFile extends File {
 })
 export class GhUploadImageComponent extends BaseInputFieldComponent<GhFile> {
   /**
-   * @description The icon for the upload imageconst formData = new FormData();
-            formData.append('image', item.image);
+   * @description The mat dialog service
+   * @type {MatDialog}
+   */
+  private readonly matDialog: MatDialog = inject(MatDialog);
+
+  /**
+   * @description The icon for the upload image
    * @type {string}
    */
   protected readonly uploadImageIcon = UPLOAD_ICON;
@@ -73,10 +80,18 @@ export class GhUploadImageComponent extends BaseInputFieldComponent<GhFile> {
    * @description Open the file explorer
    * @returns {void}
    */
-  protected openFileExplorer(): void {
+  protected action(): void {
     if(!this.readonly) {
       this.input.nativeElement.click();
       this._inputTouched$.next(true);
+    } else {
+      this.matDialog.open(GhImageModalComponent, {
+        data: { imageUrl: this.value.tempUrl },
+        width: '80vw', // Adjust width as needed
+        maxWidth: '100vw',
+        height: 'auto',
+        maxHeight: '90vh'
+      });
     }
   }
 

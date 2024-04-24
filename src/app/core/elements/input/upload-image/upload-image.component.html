@@ -1,8 +1,8 @@
-<div 
+<div
     class="content" 
     [ngStyle]="{'background-image': 'url(' + value?.tempUrl + ')'}"
     [ngClass]="{'content-with-image': value?.tempUrl, 'error-input': ((errorMessage$ | async) && (inputTouched$ | async))}"
-    (click)="openFileExplorer()"
+    (click)="action()"
 >
         <div *ngIf="!value?.tempUrl">
              <div class="icon">
