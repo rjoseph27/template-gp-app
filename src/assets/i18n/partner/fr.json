@@ -1,0 +1,183 @@
+{
+    "moduleList": {
+        "registerItem": {
+            "title": "Entregistrer un colis",
+            "filterLabel": "Filtrer les commandes",
+            "view": {
+                "edit": "Modifier",
+                "cancel": "Annuler",
+                "confirm": "Confirmer"
+            },
+            "cancelOrder": {
+                "modal": {
+                    "title": "Annuler la commande",
+                    "content": "Confirmez-vous que vous voulez annuler la commande?",
+                    "confirm": "Confirmer",
+                    "cancel": "Annuler",
+                    "notification": {
+                        "success": "La commande a été annulé avec succès",
+                        "error": "Une erreur s'est produite lors de l'annulation de la commande"
+                    }
+                }
+            },
+            "confirmOrder": {
+                "modal": {
+                    "title": "Confirmer la commande",
+                    "content": "Confirmez-vous que vous voulez accepter la commande?",
+                    "confirm": "Confirmer",
+                    "cancel": "Annuler",
+                    "notification": {
+                        "success": "La commande a été accepté avec succès",
+                        "error": "Une erreur s'est produite lors de la confirmation de la commande"
+                    }
+                }
+            },
+            "edit": {
+                "title": "Modifier la commande",
+                "confirm": "Confirmer",
+                "currentPrice": "Prix en cours",
+                "button": {
+                    "return": "Retourner à la page précendente",
+                    "confirm": "Confirmer"
+                },
+                "modal": {
+                    "title": "Modifier la commande",
+                    "content": "Confirmez-vous que vous voulez modifier la commande?",
+                    "confirm": "Confirmer",
+                    "cancel": "Annuler",
+                    "notification": {
+                        "success": "Le colis a été modifié avec succès",
+                        "error": "Une erreur s'est produite lors de la modification de la commande"
+                    }
+                }
+            }
+        },
+        "dispatching": {
+            "title": "Repartition",
+            "view": {
+                "confirmButton": "Confirmer",
+                "cancelButton": "Annuler",
+                "confirm": {
+                    "title": "Confirmer le voyage",
+                    "layover": "Ajouter un escale",
+                    "modal": {
+                        "title": "Confirmer le voyage",
+                        "content": "Confirmez-vous que vous voulez accepter le voyage?",
+                        "confirm": "Confirmer",
+                        "cancel": "Annuler",
+                        "notification": {
+                            "success": "Le voyage a été accepté avec succès",
+                            "error": "Une erreur s'est produite lors de la confirmation du voyage"
+                        }
+                    },
+                    "cancelModal": {
+                        "title": "Annuler le voyage",
+                        "content": "Confirmez-vous que vous voulez annuler le voyage?",
+                        "acceptButton": "Oui",
+                        "rejectButton": "Non",
+                        "notification": {
+                            "success": "Le voyage a été annulé avec succès",
+                            "error": "Une erreur s'est produite lors de l'annulation du voyage"
+                        }
+                    }
+                },
+                "manage": {
+                    "title": "Gérer le voyage",
+                    "changeDate": "Modifier l'intinéraire"
+                },
+                "changeDate": {
+                    "title": "Modifier l'intinéraire",
+                    "submit": "Modifier"
+                }
+            }
+        },
+        "receivingItem": {
+            "title": "Recevoir un colis",
+            "modal": {
+                "title": "Recevoir un colis",
+                "content": "Confirmez-vous que vous avez reçu le colis?",
+                "confirm": "Confirmer",
+                "cancel": "Annuler",
+                "notification": {
+                    "success": "Le colis a été reçu avec succès",
+                    "error": "Une erreur s'est produite lors de la reception de la commande"
+                }
+            },
+            "receiveButton": "Recevoir"
+        },
+        "billing": {
+            "title": "Facturation",
+            "confirmPayment": {
+                "title": "Confirmer le paiement",
+                "modal": {
+                    "title": "Confirmation du paiement",
+                    "content": "Confirmez-vous que vous avez reçu le paiement?",
+                    "confirm": "Confirmer",
+                    "cancel": "Annuler",
+                    "notification": {
+                        "success": "Le paiement a été confirmé avec succès",
+                        "error": "Une erreur s'est produite lors de la confirmation du paiement"
+                    }
+                }
+            }
+        },
+        "gpPickUp": {
+            "title": "Ramassage du GP",
+            "view": {
+                "changeGp": "Changer de GP",
+                "changeGpModal": {
+                    "title": "Changer de GP",
+                    "content": "Confirmez-vous que vous voulez changer de GP?",
+                    "acceptButton": "Oui",
+                    "rejectButton": "Non",
+                    "notification": {
+                        "success": "Le GP a été changé avec succès",
+                        "error": "Une erreur s'est produite lors du changement de GP"
+                    }
+                }
+            }
+        },
+        "payGP": {
+            "title": "Payer un GP",
+            "confirmPayment": {
+                "title": "Confirmer le paiement",
+                "modal": {
+                    "title": "Confirmer le paiement",
+                    "content": "Confirmez-vous que vous avez payé le GP?",
+                    "confirm": "Confirmer",
+                    "cancel": "Annuler",
+                    "notification": {
+                        "success": "Le paiement a été confirmé avec succès",
+                        "error": "Une erreur s'est produit lors de la confirmation du paiement du GP"
+                    }
+                }
+            }
+        },
+        "redirectItems": {
+            "title": "Reacheminer un colis",
+            "view": {
+                "succursaleOption": {
+                    "label": "Où envoyer le colis?",
+                    "placeholder": "Selectionner une succursale",
+                    "errors": {
+                        "required": "Ce champ est obligatoire"
+                    }
+                },
+                "button": "Reacheminer",
+                "modal": {
+                    "title": "Reacheminer le colis",
+                    "content": "Confirmez-vous que vous voulez reacheminer le colis?",
+                    "confirm": "Confirmer",
+                    "cancel": "Annuler",
+                    "notification": {
+                        "success": "Le reacheminement a été effectué avec succès",
+                        "error": "Une erreur s'est produite lors de la reacheminent du colis"
+                    }
+                }
+            }
+        },
+        "commission": {
+            "title": "Commission"
+        }
+    }
+}

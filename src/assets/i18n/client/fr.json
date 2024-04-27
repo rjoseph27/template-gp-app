@@ -1,3 +1,289 @@
 {
-   
+    "userType": {
+        "client": "Client",
+        "gp": "GP"
+    },
+    "moduleList": {
+        "client": {
+            "sendItems": {
+                "title": "Envoyer un colis",
+                "content" : {
+                    "send": "Chercher des GPs",
+                    "calendar": {
+                        "selectTrip": {
+                            "title": "Voyage sélectioné",
+                            "total": "Total",
+                            "departure": "Départ",
+                            "arrival": "Arrivé",
+                            "confirmButton": "Confirmez",
+                            "confirm": {
+                                "title": "Confirmation de la requête",
+                                "content": "Le GP sera informé de votre demande. Vous serez informé une fois que le GP aura confirmé la demande. Vous pouvez voir le statut de la demande dans la page « Mes commandes ».",
+                                "button": "Voir mes commandes"
+                            }
+                        },
+                        "filter": {
+                            "title": "Filtrer",
+                            "filterField": {
+                                "label": "Prix total maximum",
+                                "placeholder": "Entez le prix total maximum"
+                            },
+                            "remove": "Enlever les filtres",
+                            "button": "Filtrer"
+                        },
+                        "alert": {
+                            "title": "Alerte",
+                            "alertSent": {
+                                "content": "Vous serez notifié lorsqu'un un GP créera un voyage qui correspond à votre alerte.",
+                                "button": "Voir mes alertes"
+                            },
+                            "button": "Créer une alerte"
+                        }
+                    }
+                }
+            },
+            "orders": {
+                "title": "Mes commandes",
+                "tableId": "Numéro de commande",
+                "status": {
+                    "waitConfirmation": "Attente de confirmation du GP",
+                    "waitReception": "Attente de réception du colis",
+                    "canceledByGp": "Selectionnez un autre voyage",
+                    "atCheckpoint": "Au point de contrôle",
+                    "redirect": "Colis reacheminé",
+                    "withGp": "Colis avec le GP",
+                    "onDelivery": "En cours d'envoie",
+                    "finalCheckpoint": "Prêt à ramasser",
+                    "delivered": "Livré",
+                    "exception": "Exception"
+                },
+                "emptyView": {
+                    "deliveredRequest": {
+                        "title": "Tu n'as pas encore de commandes livrées encore",
+                        "content": "Quand un colis est livré, vous serez capable de le voir ici."
+                    },
+                    "onGoingRequest": {
+                        "title": "Tu n'as pas de commande en cours",
+                        "content": "Quand un GP accepte un de vos colis, vous serez capable de le voir ici.",
+                        "button": "Créer une requête"
+                    }
+                },
+                "waitConfirmation": {
+                    "title": "En attente de la confirmation du GP",
+                    "content": "Le GP a été notifié de votre commande. On vous signalera lorsqu'il confirme la commande.",
+                    "button": "Revenir à mes commandes",
+                    "cancelButton": "Annuler la commande",
+                    "notification": {
+                        "success": "La commande a été annulé avec succès",
+                        "error": "Une erreur s'est produite lors de l'annulation de la commande"
+                    }
+                },
+                "waitReception": {
+                    "title": "Envoyer votre colis",
+                    "content": "Le GP est prêt pour prendre votre colis à <u>{{address}}</u>. Pour plus d'information, Appellez au <u>{{phone}}</u> pour de l'assistance.",
+                    "button": "Revenir à mes commandes"
+                },
+                "atCheckpoint": {
+                    "title": "La commande est au point de contrôle",
+                    "content": "Le colis est au point de contrôle. Le GP va le livrer bientôt."
+                },
+                "itemWithGp": {
+                    "title": "Le colis est avec le GP",
+                    "content": "The GP a reçu votre colis et il le livrera bientôt."
+                },
+                "readyForPickup": {
+                    "title": "Le colis est prêt pour être ramassé",
+                    "content": "Le colis est prêt pour être ramassé. Le destinataire peut ramassé le colis à <u>{{address}}</u>. Pour plus de détail, appellez <u>{{phone}}</u> pour plus d'assistance."
+                },
+                "itemDelivered": {
+                    "title": "Le colis a été livré avec succès",
+                    "content": "Le colis a été livré au destinataire avec succès."
+                }
+            },
+            "alerts": {
+                "title": "Mes Alertes",
+                "newAlert": "Créer une nouvelle alerte",
+                "deleteAlert": {
+                    "title": "Supprimer l'alerte",
+                    "content": "Confirmez-vous que vous voulez supprimer cette alerte?",
+                    "acceptButton": "Oui",
+                    "rejectButton": "Non",
+                    "notification": {
+                        "success": "L'alerte a été supprimé avec succès",
+                        "error": "Une erreur s'est produite lors de l'annulation de l'alerte"
+                    }
+                },
+                "createAlert": {
+                    "title": "Créer une nouvelle alerte",
+                    "button": "Créer une alerte",
+                    "notification": {
+                        "success": "L'alerte a été créé avec succès",
+                        "error": "Une erreur s'est produite lors de la création de l'alerte"
+                    }
+                },
+                "editAlert": {
+                    "title": "Modifier l'alerte",
+                    "button": "Modifier l'alerte",
+                    "notification": {
+                        "success": "L'alerte a été modifiée avec succès",
+                        "error": "Une erreur s'est produite lors de la modification de l'alerte"
+                    }
+                }
+            }
+        },
+        "gp": {
+            "reportTrip": {
+                "title": "Créer un voyage",
+                "send": "Créer un voyage",
+                "notification": {
+                    "success": "Le voyage a été créé avec succès",
+                    "error": "Une erreur s'est produite lors de la création du voyage"
+                }
+            },
+            "trip": {
+                "title": "Mes voyages",
+                "tableId": "Identifiant du voyage",
+                "uncompleted": {
+                    "title": "Voyages incomplets",
+                    "emptyView": {
+                        "title": "Vous n'avez pas de voyage incomplet pour le moment",
+                        "content": "Quand vous créez un voyage, vous serez capable de le voir ici.",
+                        "button": "Créer un voyage"
+                    }
+                },
+                "completed": {
+                    "title": "Voyages complets",
+                    "emptyView": {
+                        "title": "Vous n'avez pas de voyage complet encore",
+                        "content": "Quand vous complétez un voyage, vous serez capable de le voir ici."
+                    }
+                },
+                "status": {
+                    "planned": "Voyage planifié",
+                    "confirmed": "Voyage confirmé",
+                    "onDelivery": "En cours d'envoie",
+                    "cancel": "Voyage annulé",
+                    "tripDone": "Voyage completé"
+                },
+                "plannedTrip": {
+                    "title": "Voyage planifié",
+                    "button": {
+                        "back": "Retourner à 'Mes voyages'",
+                        "cancel": "Annuler le voyage"
+                    },
+                    "cancelModal": {
+                        "title": "Annuler le voyage",
+                        "content": "Confirmez-vous que vous voulez annuler le voyage?",
+                        "acceptButton": "Oui",
+                        "rejectButton": "Non",
+                        "notification": {
+                            "success": "Le voyage a été annulé avec succès",
+                            "error": "Une erreur s'est produite lors de l'annulation du voyage"
+                        }
+                    }
+                },
+                "confirmedTrip": {
+                    "title": "Voyage confirmé"
+                },
+                "tripDone": {
+                    "title": "Le voyage a été complété avec succès"
+                }
+            },
+            "orders": {
+                "title": "Mes commandes",
+                "tableId":"Numéro de commande",
+                "tableName": {
+                    "newOrders": "Nouvelles commandes",
+                    "onPreparation": {
+                        "title": "En Préparation",
+                        "emptyView": {
+                            "title": "Vous n'avez aucune commande en préparation pour le moment",
+                            "content": "Quand que vous acceptez un colis, vous serez capable de le voir ici."
+                        }
+                    },
+                    "readyForPickup": {
+                        "title": "Prêt au rammassage",
+                        "emptyView": {
+                            "title": "Vous n'avez pas de colis prêt à être ramassé.",
+                            "content": "Quand un colis est prêt à être ramassé, vous serez capable de le voir ici."
+                        }
+                    },
+                    "delivery": {
+                        "title": "En cours d'envoie",
+                        "emptyView": {
+                            "title": "Vous n'avez pas de colis en cours d'envoie pour le moment",
+                            "content": "Quand vous aurez des colis en cours d'envoie, vous serez capable de le voir ici."
+                        }
+                    },
+                    "completed": {
+                        "title": "Commandes complétées",
+                        "emptyView": {
+                            "title": "Vous n'avez pas de commandes complétées pour le moment",
+                            "content": "Quand vous livrez une commande, vous serez capable de le voir ici."
+                        }
+                    }
+                },
+                "status": {
+                    "confirmOrder": "Confirmez la commande",
+                    "itemOnHisWay": "Colis en route",
+                    "itemAtCheckpoint": "Colis au point de contrôle",
+                    "readyForPickup": "Prêt à être ramassé",	
+                    "itemWithYou": "Colis avec vous"
+                },
+                "confirmOrder": {
+                    "title": "Vous avez une nouvelle commande!",
+                    "content": "Vous avez une nouvelle commande. Confirmez la commande pour commencer le processus d'envoie.",
+                    "acceptButton": "Accepter la commande",
+                    "rejectButton": "Refuser la commande",
+                    "return": "Retourner à 'Mes commandes'",
+                    "cancelModal": {
+                        "title": "Annuler la commande",
+                        "content": "Confirmez-vous que vous voulez annuler la commande?",
+                        "acceptButton": "Oui",
+                        "rejectButton": "Non"
+                    },
+                    "cancelNotification": {
+                        "success": "La commande a été annulé avec succès",
+                        "error": "Une erreur s'est produite lors de l'annulation de la commande"
+                    },
+                    "acceptNotification": {
+                        "success": "La commande a été accepté avec succès",
+                        "error": "Une erreur s'est produite lors de la confirmation de la commande"
+                    },
+                    "emptyView": {
+                        "title": "Vous n'avez pas de nouvelles commandes pour le moment",
+                        "content": "Quand un client vous soumet une commande, vous serez capable de le voir ici."
+                    }
+                },
+                "itemOnHisWay": {
+                    "title": "Le colis est en route vers le point de contrôle",
+                    "content": "Nous attendons que le client envoie l'article au point de contrôle. Nous vous informerons une fois que le colis sera prêt à être récupéré."
+                },
+                "itemAtCheckpoint": {
+                    "title": "Le colis est au point de contrôle",
+                    "content": "Le colis est au point de contrôle. Notre équipe inspecte le colis. Nous vous informerons une fois que l'article sera prêt à être récupéré."
+                },
+                "readyForPickup": {
+                    "title": "Le colis est prêt pour être ramassé",
+                    "content": "Le colis est prêt pour être ramassé. Vous pouvez ramassé le colis à <u>{{address}}</u>. Pour plus de détail, appellez <u>{{phone}}</u> pour plus d'assistance."
+                },
+                "itemWithYou": {
+                    "title": "Le colis est avec vous",
+                    "content": "Vous êtes en possession du colis. Vous pouvez le livrer au pays de destination."
+                }
+            },
+            "tracking": {
+              "delayModal": {
+                "title": "Signaler un retard ou changement dans l'itinéraire",
+                "content": "Pour signaler un retard ou changement dans l'itinéraire, appelez notre équipe par whatsapp au {{phone}} ou par courriel au {{email}}."
+              }  
+            }
+        }
+    },
+    "enums": {
+        "Unit": {
+            "perKg": "Par KGs",
+            "perItem": "Par colis"
+        }
+    }
 }

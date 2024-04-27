@@ -4,6 +4,742 @@
             "title":"Langue",
             "en":"English",
             "fr":"Français"
+        },
+        "common": {
+            "save": "Enregistrer",
+            "edit": "Modifier",
+            "delete": "Supprimer",
+            "cancel": "Annuler",
+            "empty": "Vide",
+            "add": "Ajouter",
+            "action": "Action",
+            "select": "Selectionner"
+        },
+        "credentials": {
+            "email": {
+                "label": "Courriel",
+                "placeholder": "Entrez votre courriel"
+            },
+            "password": {
+                "label": "Mot de passe",
+                "placeholder": "Entrez votre mot de passe",
+                "passwordRequirement": {
+                    "title": "Le mot de passe doit contenir:",
+                    "length": "Au moins 8 caractères",
+                    "lowercase": "Au moins une miniscule",
+                    "uppercase": "Au moins une majuscule",
+                    "number": "Au moins un chiffre",
+                    "special": "Au moins un caractère spécial"
+                }
+            },
+            "confirmPassword": {
+                "label": "Confirmez votre mot de passe",
+                "placeholder": "Confirmez votre mot de passe"
+            },
+            "errors": {
+                "email": {
+                    "required": "Entrez votre courriel",
+                    "email": "Ceci est un courriel invalid",
+                    "taken": "Ce courriel est déjà pris"
+                },
+                "password": {
+                    "required": "Entrez votre mot de passe",
+                    "invalid": "Votre mot de passe est invalid"
+                },
+                "confirmPassword": {
+                    "required": "Confirmez votre mot de passe",
+                    "mismatch": "Les mots de passe ne correspondent pas"
+                }
+            }
+        },
+        "login": {
+            "forgot": "Avez vous oublié votre mot de passe?",
+            "login": "Accéder mon Compte",
+            "register": "Créer un nouveau compte",
+            "errors": {
+                "login": {
+                    "wrongCredentials": "Votre courriel ou mot de passe est invalid"
+                }
+            }
+        },
+        "signup": {
+            "credentials": {
+                "title": "Informations d'identification"
+            },
+            "accountDetails": {
+                "title": "Détails du compte",
+                "firstName": {
+                    "label": "Prénom",
+                    "placeholder": "Entrez votre prénom"
+                },
+                "lastName": {
+                    "label": "Nom de famille",
+                    "placeholder": "Entrer votre nom de famille"
+                },
+                "dateOfBirth": {
+                    "label": "Date de naissance",
+                    "placeholder": "Entrez votre date de naissance"
+                },
+                "gender": {
+                    "label": "Genre",
+                    "placeholder": "Selectionnez votre genre",
+                    "options": {
+                        "Male": "Homme",
+                        "Female": "Femme"
+                    }
+                },
+                "country": {
+                    "label": "Pays de résidence",
+                    "placeholder": "Selectionnez votre pays de résidence"
+                },
+                "phoneNumber": {
+                    "label": "Numéro de téléphone",
+                    "placeholder": "Entrez votre numéro de téléphone"
+                },
+                "termsAndConditions": {
+                    "label": "J'accepte les termes et conditions énoncés dans la déclaration de confidentialité",
+                    "highlight": "déclaration de confidentialité"
+                },
+                "errors": {
+                    "firstName": {
+                        "required": "Entrez votre prénom",
+                        "invalid": "Ce n'est pas un prénom valide"
+                    },
+                    "lastName": {
+                        "required": "Entrez votre nom de famille",
+                        "invalid": "Ce n'est pas un nom de famille valide"
+                    },
+                    "dateOfBirth": {
+                        "required": "Entrez votre date de naissance",
+                        "invalid": "Ce n'est pas une date de naissance valide",
+                        "invalidFormat": "La date de naissance doit être du format AAAA/MM/JJ"
+                    },
+                    "gender": {
+                        "required": "Sélectionnez votre genre"
+                    },
+                    "country": {
+                        "required": "Sélectionnez votre pays de résidence"
+                    },
+                    "phoneNumber": {
+                        "required": "Entrez votre numéro de téléphone",
+                        "invalid": "Ce n'est pas un numéro de téléphone valide",
+                        "taken": "Ce numéro de téléphone est déjà pris"
+                    },
+                    "termsAndConditions": {
+                        "required": "Vous devez accepter les termes et conditions"
+                    }
+                }
+            },
+            "alreadyHaveAccount": "Vous avez déjà un compte?",
+            "signup": "Créer un compte",
+            "termsAndConditions": {
+                "title": "Les termes et confitions de GP Hub",
+                "read": "J'ai lu les termes et confitions de GP Hub",
+                "content": {
+                    "descriptions": "Ces termes et conditions (« Conditions ») régissent votre utilisation de la plateforme et des services GP Hub (« Services ») fournis par GP Hub (« Société »). En accédant ou en utilisant les Services, vous acceptez d'être lié par ces Conditions. Si vous n'acceptez pas ces Conditions, vous ne pouvez pas utiliser les Services.",
+                    "platformDescription": {
+                        "title": "Description de la plateforme",
+                        "content": "GP Hub est une plateforme qui facilite le partage de l'espace bagages en connectant les voyageurs (« Expéditeurs ») qui disposent d'un espace supplémentaire dans leurs bagages avec des particuliers ou des entreprises (« Expéditeurs ») qui ont besoin d'articles expédiés vers diverses destinations à travers le monde."
+                    },
+                    "userAccounts": {
+                        "title": "Comptes utilisateur",
+                        "content": "Pour utiliser certaines fonctionnalités des Services, vous devrez peut-être créer un compte. Vous vous engagez à fournir des informations exactes et complètes lors de la création de votre compte et à mettre à jour vos informations rapidement si nécessaire. Vous êtes responsable du maintien de la confidentialité des informations d'identification de votre compte et de toutes les activités qui se produisent sous votre compte."
+                    },
+                    "shipments": {
+                        "title": "Expéditions",
+                        "content": "a. Les expéditeurs peuvent publier des détails sur l'espace disponible pour les bagages, y compris la destination, les dates de voyage et toute restriction ou préférence. b. Les expéditeurs peuvent demander à expédier des articles auprès d’expéditeurs disposant d’un espace disponible correspondant à leurs besoins. c. Les expéditeurs et les expéditeurs sont responsables d'organiser les détails de l'expédition, y compris l'enlèvement, la livraison et tous les frais ou coûts associés à l'expédition. d. La Société ne garantit pas la disponibilité, l'exactitude ou la qualité des Services ou des expéditions organisées via la plateforme."
+                    },
+                    "userResponsibilities": {
+                        "title": "Responsabilités des utilisateurs",
+                        "content": "a. Les expéditeurs et les expéditeurs s'engagent à se conformer à toutes les lois et réglementations applicables lors de l'utilisation des services. b. Les expéditeurs et les expéditeurs sont seuls responsables du contenu de leurs bagages et de leurs expéditions, notamment en veillant à ce que les articles soient conformes à toutes les exigences et restrictions légales. c. Les utilisateurs acceptent de ne pas utiliser les Services à des fins illégales, frauduleuses ou non autorisées, ou d'une manière qui viole les présentes Conditions ou les droits d'autrui."
+                    },
+                    "disclaimers": {
+                        "title": "Avis de non-responsabilité",
+                        "content": "a. La Société fournit les Services « tels quels » et « tels que disponibles », sans garantie d'aucune sorte, expresse ou implicite. b. La Société décline toute responsabilité pour tout dommage ou perte découlant de votre utilisation des Services, y compris, mais sans s'y limiter, les dommages indirects, accessoires, spéciaux ou consécutifs."
+                    },
+                    "indemnification": {
+                        "title": "Indemnité",
+                        "content": "Vous acceptez d'indemniser et de dégager la Société de toute responsabilité concernant toute réclamation, perte, dommage, responsabilité et dépense (y compris les honoraires d'avocat) découlant de ou liés à votre utilisation des Services ou à la violation des présentes Conditions."
+                    },
+                    "modificationOfTerms": {
+                        "title": "Modification des Conditions",
+                        "content": "La Société se réserve le droit de modifier ou de mettre à jour ces Conditions à tout moment et sans préavis. Votre utilisation continue des Services après de telles modifications constitue votre acceptation des Conditions modifiées."
+                    },
+                    "governingLawAndDisputeResolution": {
+                        "title": "Droit applicable et règlement des litiges",
+                        "content": "Les présentes Conditions seront régies et interprétées conformément aux lois de [Juridiction]. Tout litige découlant de ou lié aux présentes Conditions ou aux Services sera résolu exclusivement devant les tribunaux de [Juridiction]."
+                    },
+                    "contactUs": {
+                        "title": " Contactez-nous",
+                        "content": "Si vous avez des questions ou des préoccupations concernant ces Conditions ou les Services, veuillez nous contacter à [adresse e-mail ou adresse de contact]."
+                    }
+                }
+            }
+        },
+        "emailActivation": {
+            "emailActivated": {
+                "title": "Courriel activé",
+                "content": "Votre courriel a été activé avec succès. Vous pouvez maintenant accéder à votre compte."
+            },
+            "emailAlreadyActivated": {
+                "title": "Courriel déjà activé",
+                "content": "Votre courriel a déjà été activé. Vous pouvez maintenant accéder à votre compte."
+            },
+            "error": {
+                "title": "Nous n'avons pas pu traiter votre demande",
+                "content": "Une erreur s'est produite pendant l'activation de votre courriel. Veuillez réessayer plus tard."
+            },
+            "continue": "Continuez vers la page de connexion"
+        },
+        "forgotPassword" : {
+            "title": "Mot de passe oublié?",
+            "content": "Si tu as oublié votre mot passe, veuillez entrer le courriel de votre compte. Un lien de réinitialisation de votre mot de passe vous sera envoyé par courriel.",
+            "send": "Envoyez le lien",
+            "errors": {
+                "notFound": "Ce courriel n'est pas associé à un compte"
+            },
+            "success": {
+                "content": "Un courriel a été envoyé avec un lien pour réinitialiser votre mot de passe.",
+                "note": "Note: Le lien expirera dans 24 heures."
+            }
+        },
+        "resetPassword": {
+            "title": "Reinitialiser votre mot de passe",
+            "content": "Entrez votre nouveau mot de passe",
+            "send": "Envoyer la requête",
+            "success": "Votre mot de passe a été reinitialisé avec succès. Vous pouvez maintenant vous connecter dans votre compte.",
+            "errors": { 
+                "expired": "Le lien de réinitialisation du mot de passe a expiré",
+                "alreadyUsed": "Choisissez un mot de passe que vous n'avez pas utilisé avant"
+            }
+        },
+        "errors": {
+            "serverError": "Une erreur s'est produite, réessayer plus tard",
+            "logAgain": "Connectez-vous à nouveau"
+        },
+        "request": {
+            "onGoingRequest": "Requête en cours",
+            "deliveredRequest": "Completé",
+            "table": {
+                "route": "Route",
+                "deliveryDate": "Date d'envoie",
+                "status": "Status"
+            }
+        },
+        "itemInformation": {
+            "title": "Information du colis",
+            "uploadPhoto": {
+                "label": "Téléversez la photo de votre colis",
+                "errors": {
+                    "required": "Téléversez la photo de votre colis",
+                    "format": "Entrer un fichier du format .jpg, .jpeg ou .png",
+                    "size": "Le fichier doit être moins que {{maxSize}}KB"
+                }
+            },
+            "itemName": {
+                "label": "Nom du colis",
+                "placeholder": "Entrez le nom du colis",
+                "errors": {
+                    "required": "Entrez le nom du colis"
+                }
+            },
+            "itemCategory": {
+                "label": "Catégorie du colis",
+                "placeholder": "Selectionnez la catégorie du colis",
+                "errors": {
+                    "required": "Selectionnez la catégorie du colis"
+                }
+            },
+            "itemWeight": {
+                "label": "Poid du colis (KGs)",
+                "placeholder": "Entrez le poid du colis",
+                "errors": {
+                    "required": "Entrez le poid du colis",
+                    "max": "Entrez un poid moins que {{max}} KGs",
+                    "min": "Entrez un poid plus que {{min}} KGs"
+                }
+            },
+            "itemQuantity": {
+                "label": "Quantité",
+                "placeholder": "Entrez la quantité",
+                "tooltip": "Une unité d’un colis est considérée lorsque le colis peut être divisé pour plusieurs expéditions. Assurez-vous que le poids et la taille sont pris en compte pour l'unité du colis.",
+                "errors": {
+                    "required": "Entrez la quantité",
+                    "min": "Entrez une quanité plus que {{min}}",
+                    "integer": "Entrez une quantité valide"
+                }
+            },
+            "extraNotes": {
+                "label": "Notes additionnels"
+            },
+            "reasonShipping": {
+                "label": "Raison de l'envoie",
+                "errors": {
+                    "required": "Expliquez la raison de l'envoie"
+                }
+            },
+            "modal": {
+                "delete": {
+                    "title": "Confirmez la supression",
+                    "content": "Êtes-vous sur de supprimer ce colis?"
+                },
+                "cancel" : {
+                    "title": "Confirmez l'annulation",
+                    "content": "Tous les modifications non enregistrées seront effacées. Êtes-vous sûr de vouloir annuler?",
+                    "button": {
+                        "stay": "Rester"
+                    }
+                }
+            }
+        },
+        "orderDetails": {
+            "title": "Détails de la commande",
+            "orderDate": "Date de la commande",
+            "shippingOrder": "Numéro de commande",
+            "from": "De",
+            "to": "À",
+            "departureTime": "Départ",
+            "arrivalTime": "Arrivée",
+            "totalCost": "Coût total",
+            "item": "Colis"
+        },
+        "alertList": {
+            "table": {
+                "route": {
+                    "name": "Route"
+                },
+                "maxPrice": {
+                    "name": "Prix total maximum"
+                },
+                "timeRange": {
+                    "name": "Plage horaire"
+                }
+            },
+            "timeRange": {
+                "to": "{{from}} à {{to}}",
+                "from": "À partir de {{from}}",
+                "until": "Jusqu'à {{until}}"
+            },
+            "empty": {
+                "title": "Aucune alerte",
+                "content": "Vous n'avez pas encore d'alerte. Créez une alerte pour être averti lorsqu'un envoi est disponible."
+            }
+        },
+        "alertRequirement": {
+            "title": "Exigence de l'alerte",
+            "from": "De",
+            "to": "À",
+            "maxPrice": "Prix total maximum"
+        },
+        "alertForm": {
+            "from": {
+                "title": "De",
+                "errors": {
+                    "minDate": "Selectionnez une date après aujourd'hui",
+                    "invalidDate": "Entrez une date valide",
+                    "invalidAlertDate": "La date d'arrivée doit être après la date de départ"
+                }
+            },
+            "to": {
+                "title": "À",
+                "errors": {
+                    "invalidDate": "Entrez une date valide",
+                    "invalidAlertDate": "La date d'arrivée doit être après la date de départ"
+                }
+            },
+            "maxPrice": {
+                "title": "Prix Total Maximum",
+                "errors": {
+                    "min": "Entrez un prix suppérieur à {{min}}"
+                }
+            }
         }
+    },
+    "notFound": {
+        "message": "Désole, la page que vous cherchez n'existe pas",
+        "back": "Retour à la page d'accueil"
+    },
+    "main": {
+        "logOut": {
+            "title":"Déconnexion"
+        },
+        "settings":  {
+            "title": "Mes paramètres"
+        },
+        "help": {
+            "title": "Aide"
+        }
+    },
+    "sendItems": {
+        "location": {
+            "from": "De",
+            "to": "À",
+            "country": {
+                "placeholder": "Selectionnez un pays",
+                "errors": {
+                    "required": "Selectionnez un pays"
+                }
+            },
+            "region": {
+                "placeholder": "Selectionnez une région",
+                "errors": {
+                    "required": "Selectionnez une région"
+                }
+            }
+        },
+        "shippingInformation": {
+            "title": "Information sur l'envoie",
+             "consigneeFullName": {
+                "label": "Nom complet du destinataire",
+                "placeholder": "Entrez le nom complet du destinataire",
+                "errors": {
+                    "required": "Entrez le nom complet du destinataire",
+                    "invalid": "Entrez un nom valide"
+                }
+            },
+            "consigneeAddress": {
+                "label": "Addresse du destinataire",
+                "placeholder": "Entrez l'addresse, la ville et le code postal du destinataire",
+                "errors": {
+                    "required": "Entrez l'addresse du destinataire"
+                }
+            },
+            "consigneePhoneNumber": {
+                "label": "Le numéro de téléphone du destinataire",
+                "placeholder": "Entrez le numéro de téléphone du destinataire",
+                "errors": {
+                    "required": "Entrez le numéro de téléphone du destinataire",
+                    "invalid": "Entrez un numéro de téléphone valide"
+                }
+            }
+        }
+    },
+    "orderFilter": {
+        "form": {
+            "email": {
+                "label": "Courriel",
+                "placeholder": "Entrez le courriel de l'utilisateur"
+            },
+            "order": {
+                "label": "Commande",
+                "placeholder": "Entrez le numéro de commande",
+                "errors": {
+                    "invalid": "Entrez un numéro de commande valide"
+                }
+            },
+            "trip": {
+                "label": "Voyage",
+                "placeholder": "Entrez l'identifiant du voyage",
+                "errors": {
+                    "invalid": "Entrez un identifiant de voyage valide"
+                }
+            },
+            "deliveryDate": {
+                "label": "Date d'envoie",
+                "placeholder": "Entrez une date d'envoie",
+                "errors": {
+                    "invalid": "Entrez une date d'envoie valide"
+                }
+            },
+            "country": {
+                "label": "Pays de destination",
+                "placeholder": "Selectionnez le pays de destination"
+            },
+            "region": {
+                "label": "Région de destination",
+                "placeholder": "Selectionnez la région de destination"
+            },
+            "airport": {
+                "label": "Aéroport de destination",
+                "placeholder": "Selectionnez l'aéroport de destination"
+            },
+            "submit": "Filtrer"
+        },
+        "table": {
+            "header": {
+                "email": "Courriel",
+                "orderNumber": "Numéro de commande",
+                "route": "Route",
+                "price": "Prix",
+                "deliveryDate": "Date d'envoie"
+            },
+            "empty": {
+                "title": "Aucune commande",
+                "content": "Il y a aucune commande qui correspond au filtre"
+            },
+            "filterMessage": {
+                "title": "Message de filtre",
+                "content": "Vous pouvez filtrer la commande par email, numéro de commande, date d'envoie et la destination"
+            }
+        }
+    },
+    "billingFilter": {
+        "empty": {
+            "title": "Aucune facture",
+            "content": "Il n'y a aucune facture pour cet utilisateur"
+        },
+        "filterMessage": {
+            "title": "Message de filtre",
+            "content": "Tu peux filtrer la facture par courriel"
+        }
+    },
+    "tracking": {
+        "view": {
+            "inTransit": "En transit",
+            "atCheckpoint": "Au point de contrôle",
+            "scheduledDate": "Date prévue",
+            "to": "À",
+            "orderId": "Numéro de commande"
+        },
+        "history": {
+            "table": {
+                "date": "Date",
+                "message": "Message"
+            },
+            "message": {
+                "location": "{{city}}, {{country}}",
+                "TRIP_CREATION": "Le voyage a été créé",
+                "ORDER_ACCEPTED": "Le colis a été accepté",
+                "AT_CHECKPOINT": "Le colis est dans le point de contrôle",
+                "WITH_GP": "Le colis est avec le GP",
+                "ON_WAY_TO_AIRPORT": "Le GP est en direction de l'aéroport",
+                "FIRST_DEPARTURE": "Le GP est prêt pour le premier départ",
+                "LAST_ARRIVAL": "Le GP est arrivé au dernier pays",
+                "ON_WAY_TO_FINAL_CHECKPOINT": "Le GP est en direction du dernier point de contrôle",
+                "FINAL_CHECKPOINT": "Le colis est dans le dernier point de contrôle. Nous allons le livrer bientôt au destinataire",
+                "ARRIVE_LAYOVER": "Le Gp est arrivé dans l'escale",
+                "LEAVING_LAYOVER": "Le GP est sur le point de quitter l'escale",
+                "TRIP_DONE": "Le voyage est terminé",
+                "REDIRECT": "Le colis est reacheminé vers",
+                "COMMISSION_RECEIVED": "Le colis est arrivé à"
+            },
+            "exception": {
+                "LOST": "Le colis a été perdu",
+                "ITEM_DAMAGED": "Le colis a été endommagé",
+                "CANCELED_AT_CHECKPOINT": "Notre équipe a annulé votre article, contactez le support pour plus d'informations",
+                "TRIP_CANCELED": "Le voyage a été annulé. Vous serez contacté prochainement."
+            }
+        }
+    },
+    "reportTrip": {
+        "title": "Créer un Voyage",
+                "airport": {
+                    "label": "Aéroport",
+                    "placeholder": "Selectionnez un aéroport",
+                    "errors": {
+                        "required": "Selectionnez un aéroport"
+                    }
+                },
+                "date": {
+                    "departure": {
+                        "label": "Date de départ (Temps local)",
+                        "datePlaceholder": "Selectionnez une date de départ",
+                        "timePlaceholder": "Selectionnez une heure de départ",
+                        "errors": {
+                            "required": "Selectionnez une date de départ"
+                        }
+                    },
+                    "arrival": {
+                        "label": "Date d'arrivée (Temps local)",
+                        "datePlaceholder": "Selectionnez une date d'arrivée",
+                        "timePlaceholder": "Selectionnez une heure d'arrivée",
+                        "errors": {
+                            "required": "Selectionnez une date d'arrivée"
+                        }
+                    },
+                    "errors": {
+                        "invalidDate": "Entrez une date valide",
+                        "invalidTime": "Entrez une heure valide",
+                        "invalidFlightTime": "L'heure d'arrivée doit être après l'heure de départ"
+                    }
+                },
+                "pricingInformation": {
+                    "title": "Information sur le prix",
+                    "availableSpace": {
+                        "label": "Espace disponible (KGs)",
+                        "placeholder": "Entrez l'espace disponible",
+                        "errors": {
+                            "required": "Entrez l'espace disponible",
+                            "min": "Entrez un espace qui est plus grand que {{min}} KGs"
+                        }
+                    },
+                    "defaultPrice": {
+                        "label": "Prix du KG par défaut",
+                        "placeholder": "Entrez le prix du KG par défaut",
+                        "errors": {
+                            "required": "Entrez le prix du KG par défaut",
+                            "min": "Entrez le prix du KG par défaut plus grand que {{min}}"
+                        }
+                    },
+                    "specificPrice": {
+                        "label": "Tableau des prix spécifiques",
+                        "table": {
+                            "category": {
+                                "name": "Catégorie"
+                            },
+                            "price": {
+                                "name": "Prix",
+                                "placeholder": "Entrez le prix",
+                                "errors": {
+                                    "required": "Entrez le prix",
+                                    "min": "Entrez un prix suppérieur à {{min}}"
+                                }
+                            },
+                            "unit": {
+                                "name": "Unité"
+                            },
+                            "empty": "Aucun prix spécifique"
+                        }
+                    }
+                }
+    },
+    "createLayover": {
+        "add": "Ajouter un escale",
+        "form": {
+            "layover": "Escale",
+            "errors": {
+                "duplicatedRoute": "Certains aéroports sont dupliqués dans l'itinéraire",
+                "wrongOrderDate": "Les dates doivent être classées par ordre chronologique",
+                "intersectingDate": "Les dates ne doivent pas se croiser"
+            }
+        }
+    },
+    "deliveryExecption": {
+        "orderList": {
+            "label": "Liste des commandes",
+            "placeholder": "Cherchez une commande par numéro",
+            "all": "Tout les commandes"
+        },
+        "button": {
+            "onYourWay":"Confirmez que vous êtes en route vers l'aéroport",
+            "cancelTrip": "Annuler le voyage",
+            "reportDelay":"Signaler un retard ou une reprogrammation du voyage",
+            "lostOrder": "Déclarer la perte du colis",
+            "damaged": "Déclarer que le colis est endommagé",
+            "firstDeparture": "Confirmez que vous êtes prêt à monter dans l'avion",
+            "lastArrival": "Confirmez que vous arrivez dans le pays de destination",
+            "finalCheckpoint": "Confirmez que vous êtes en route vers le point de contrôle final",
+            "arriveLayover": "Confirmez que vous arrivez à l'escale",
+            "departureLayover": "Confirmez que vous êtes sur le point de quitter l'escale"
+        },
+        "modal": {
+            "lostOrder": {
+                "title": "Déclaration de la perte du colis",
+                "content": "Confirmez-vous que le colis est déclaré perdu?",
+                "notification": {
+                    "success": "Le colis a été déclaré perdu avec succès",
+                    "error": "Une erreur s'est produite pendant la déclaration de perte du colis."
+                }
+            },
+            "damaged": {
+                "title": "Déclaration de dommage du colis",
+                "content": "Confirmez-vous que le colis est déclaré endommagé?",
+                "notification": {
+                    "success": "Le colis a été déclaré endommagé avec succès",
+                    "error": "Une erreur s'est produite pendant la déclaration du dommage du colis."
+                }
+            },
+            "onHisWay": {
+                "title": "En route vers l'aéroport",
+                "content": "Confirmez-vous que vous êtes en route vers l'aéroport?",
+                "notification": {
+                    "success": "Votre position a été mise à jour avec succès",
+                    "error": "Une erreur s'est produite lors de la mise à jour de votre position"
+                }
+            },
+            "firstDeparture": {
+                "title": "Embarquement dans l'avion",
+                "content": "Confirmez-vous que vous êtes prêt a embarquer l'avion?",
+                "notification": {
+                    "success": "Votre position a été mise à jour avec succès",
+                    "error": "Une erreur s'est produite lors de la mise à jour de votre position"
+                }
+            },
+            "lastArrival": {
+                "title": "Arrivée dans le pays de destination",
+                "content": "Confirmez-vous que vous êtes arrivées au pays de destination?",
+                "notification": {
+                    "success": "Votre position a été mise à jour avec succès",
+                    "error": "Une erreur s'est produite lors de la mise à jour de votre position"
+                }
+            },
+            "arriveLayover": {
+                "title": "Arrivée à l'escale",
+                "content": "Confirmez-vous que vous êtes arrivées à l'escale?",
+                "notification": {
+                    "success": "Votre position a été mise à jour avec succès",
+                    "error": "Une erreur s'est produite lors de la mise à jour de votre position"
+                }
+            },
+            "departureLayover": {
+                "title": "Partir de l'escale",
+                "content": "Confirmez-vous que vous préparez à partir de l'escale?",
+                "notification": {
+                    "success": "Votre position a été mise à jour avec succès",
+                    "error": "Une erreur s'est produite lors de la mise à jour de votre position"
+                }
+            },
+            "finalCheckpoint": {
+                "title": "En route vers le point de contrôle final",
+                "content": "Confirmez-vous que vous êtes en route vers le point de contrôle finale?",
+                "notification": {
+                    "success": "Votre position a été mise à jour avec succès",
+                    "error": "Une erreur s'est produite lors de la mise à jour de votre position"
+                }
+            },
+            "cancelTrip": {
+                "title": "Annuler le voyage",
+                "content": "Êtes-vous sur vous voulez annuler le voyage?",
+                "notification": {
+                    "success": "Le voyage a été annulé avec succès",
+                    "error": "Une erreur s'est produite lors de l'annulation du voyage"
+                }
+            },
+            "button": {
+                "cancel": "Annuler",
+                "confirm": "Confirmer"
+            }
+        }
+    },
+    "enums": {
+        "Genders": {
+            "Male":"Homme",
+            "Female":"Femme"
+        },
+        "Country": {
+            "Canada": "Canada",
+            "Senegal": "Senegal",
+            "France": "France"
+        },
+        "WeekDays": {
+            "Monday": "Lundi",
+            "Tuesday": "Mardi",
+            "Wednesday": "Mercredi",
+            "Thursday": "Jeudi",
+            "Friday": "Vendredi",
+            "Saturday": "Samedi",
+            "Sunday": "Dimanche"
+        },
+        "Month": {
+            "January": "Janvier",
+            "February": "Févier",
+            "March": "Mars",
+            "April": "Avril",
+            "May": "Mai",
+            "June": "Juin",
+            "July": "Juillet",
+            "August": "Août",
+            "September": "Septembre",
+            "October": "Octobre",
+            "November": "Novembre",
+            "December": "Decembre"
+        },
+        "Unit": {
+            "perItem": "Par colis",
+            "perKg": "Par KG"
+        }
+    },
+    "unit": {
+        "kg": "KGs"
     }
 }
