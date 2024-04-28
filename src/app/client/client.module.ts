@@ -129,7 +129,7 @@ export class ClientModule {
     constructor(globalTranslateService: GlobalTranslateService, translateService: TranslateService){
         globalTranslateService.currentLanguage$.pipe(
             filter(lang => !!lang),
-            tap(lang => translateService.use(lang))
+            tap(lang => translateService.use(lang)),
         ).subscribe()
     
     }

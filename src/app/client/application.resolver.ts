@@ -36,7 +36,7 @@ export class ClientApplicationResolver implements Resolve<UserInfo> {
             const userInfo = await this.userService.getUserInfo(this.userService.currentUserId);
             this.loadingService.endLoading();
             if(userInfo) {
-                this.globalTranslateService.changeLanguage(userInfo.language);
+                this.globalTranslateService.resolveLanguage(userInfo.language);
                 return userInfo;
             }
         }

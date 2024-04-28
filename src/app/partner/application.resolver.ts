@@ -36,7 +36,7 @@ export class PartnerApplicationResolver implements Resolve<PartnerUserInfo> {
             const userInfo = await this.userService.getPartnerUserInfo(this.userService.currentUserId);
             this.loadingService.endLoading();
             if(userInfo) {
-                this.globalTranslateService.changeLanguage(userInfo.language);
+                this.globalTranslateService.resolveLanguage(userInfo.language);
                 return userInfo;
             }
         }

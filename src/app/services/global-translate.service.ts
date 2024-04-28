@@ -2,7 +2,7 @@ import { Injectable, inject } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { Language } from "../misc/enums/language.enum";
 import { LANGUAGE_LOCAL_STORAGE_KEY } from "../misc/constants/local-storage";
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, tap } from "rxjs";
 
 /**
  * @class GlobalTranslateService
@@ -35,6 +35,16 @@ export class GlobalTranslateService {
     localStorage.setItem(LANGUAGE_LOCAL_STORAGE_KEY, language);
     this._currentLanguage$.next(language);
     // NOTE: If the language doen't change in the UI, please update the json files in the assets/i18n folder.
+  }
+
+  /**
+   * @description Resolve the language
+   * @param language The language to resolve
+   */
+  resolveLanguage(language: Language): void {
+    if(!this._currentLanguage$.value) {
+      this.changeLanguage(language); 
+    }
   }
 
   /**
