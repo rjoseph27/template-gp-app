@@ -144,7 +144,7 @@ import { GhDate } from "../../misc/classes/gh-date";
     protected readonly viewFactory = (row: BillingFilterInfo) => {
         const queryParams = {
             id: row.id,
-            deliveryDate: new GhDate(row.details.deliveryDate).getDate().toISOString(),
+            deliveryDate: new GhDate(row.details.deliveryDate).toISOString(),
             from: row.details.from,
             to: row.details.to,
             userId: row.details.userId 

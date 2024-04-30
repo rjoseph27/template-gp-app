@@ -737,6 +737,21 @@
         "Unit": {
             "perItem": "Per item",
             "perKg": "Per KG"
+        },
+        "ItemCategory": {
+            "other": "other",
+            "bluetooth": "bluetooth",
+            "camera": "camera",
+            "computer": "computer",
+            "console": "console",
+            "earphone": "earphone",
+            "document": "document",
+            "wigs": "wigs",
+            "makeup": "makeup",
+            "skincare": "skincare",
+            "haircare": "haircare",
+            "bodycare": "bodycare",
+            "fragrance": "fragrance"
         }
     },
     "unit": {

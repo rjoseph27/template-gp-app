@@ -737,6 +737,21 @@
         "Unit": {
             "perItem": "Par colis",
             "perKg": "Par KG"
+        },
+        "ItemCategory": {
+            "other": "autre",
+            "bluetooth": "bluetooth",
+            "camera": "camera",
+            "computer": "Ordinateur",
+            "console": "console jeu",
+            "earphone": "écouteur",
+            "document": "document",
+            "wigs": "peruque",
+            "makeup": "Maquillage",
+            "skincare": "Soin de la peau",
+            "haircare": "Soin des cheveux",
+            "bodycare": "Soin de corps",
+            "fragrance": "Parfum"
         }
     },
     "unit": {

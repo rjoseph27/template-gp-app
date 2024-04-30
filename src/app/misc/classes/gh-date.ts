@@ -218,4 +218,12 @@ export class GhDate {
     getDate(): Date {
         return new Date(this.year, this.month, this.day, this.hour, this.minute);
     }
+
+    /**
+     * @description Gets the date as a iso string
+     * @returns {string}
+     */
+    toISOString(): string {
+        return this.year+"-"+(this.month+1).toString().padStart(2, '0')+"-"+this.day.toString().padStart(2, '0')+"T00:00:00.000Z";
+    }
   }

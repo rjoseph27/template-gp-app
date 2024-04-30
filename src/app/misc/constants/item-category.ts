@@ -69,6 +69,10 @@ export const LIST_ITEM_CATEGORY_OPTION = LIST_ITEM_CATEGORY.map(category => {
       label: category.name,
       options: Object.values(ItemCategory)
       .filter(x => x[0] === category.prefix)
-      .map((key: string) => ({label: EnumUtil.getKeyByValue(ItemCategory, key), value: key}))
+      .map((key: string) => (
+        {
+            label: "enums.ItemCategory."+EnumUtil.getKeyByValue(ItemCategory, key), 
+            value: key
+        }))
     }
   })

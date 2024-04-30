@@ -3,8 +3,6 @@ import { map, switchMap, tap } from "rxjs/operators";
 import { BaseTrackingPageComponent } from "../../../../core/layouts/tracking/base-tracking-page.component";
 import { ModalService } from "../../../../services/modal.service";
 import { ReportTrip } from "../../../../api/requests/requests.type";
-import { SelectFieldOption } from "../../../../core/elements/input/select-field/select-field.component";
-import { Observable } from "rxjs";
 import { TrackingPoint } from "../../../../core/layouts/tracking/tracking.type";
 import { ClientRequestsService } from "../../../service/requests.service";
 import { Router } from "@angular/router";

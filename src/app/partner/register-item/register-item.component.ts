@@ -38,7 +38,7 @@ import { COUNTRY_INFO_LIST } from "../../misc/constants/countries/countries";
     protected readonly viewFactory = (row: OrderFilterInfo) => {
         const queryParams = {
             id: row.orderId,
-            deliveryDate: new GhDate(row.departureDate).getDate().toISOString(),
+            deliveryDate: new GhDate(row.departureDate).toISOString(),
             from: row.originAirport,
             to: row.destinationAirport,
             userId: row.userId 

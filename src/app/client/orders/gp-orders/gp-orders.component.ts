@@ -59,7 +59,7 @@ import { GhDate } from "../../../misc/classes/gh-date";
                 status: row.status,
                 from: row.route.from,
                 to: row.route.to,
-                deliveryDate: new GhDate(row.deliveryDate).getDate().toISOString(),
+                deliveryDate: new GhDate(row.deliveryDate).toISOString(),
               }})
             }
           case ItemsStatus.WAITING_RECEPTION:
@@ -71,7 +71,7 @@ import { GhDate } from "../../../misc/classes/gh-date";
                 status: row.status,
                 from: row.route.from,
                 to: row.route.to,
-                deliveryDate: new GhDate(row.deliveryDate).getDate().toISOString(),
+                deliveryDate: new GhDate(row.deliveryDate).toISOString(),
               }})
             }
           case ItemsStatus.WAIT_ON_PAYMENT:
@@ -84,7 +84,7 @@ import { GhDate } from "../../../misc/classes/gh-date";
                 status: row.status,
                 from: row.route.from,
                 to: row.route.to,
-                deliveryDate: new GhDate(row.deliveryDate).getDate().toISOString(),
+                deliveryDate: new GhDate(row.deliveryDate).toISOString(),
               }})
             }
           case ItemsStatus.READY_TO_PICK_UP:
@@ -96,7 +96,7 @@ import { GhDate } from "../../../misc/classes/gh-date";
                 status: row.status,
                 from: row.route.from,
                 to: row.route.to,
-                deliveryDate: new GhDate(row.deliveryDate).getDate().toISOString(),
+                deliveryDate: new GhDate(row.deliveryDate).toISOString(),
               }})
             }
           case ItemsStatus.WITH_GP:
@@ -108,7 +108,7 @@ import { GhDate } from "../../../misc/classes/gh-date";
                 status: row.status,
                 from: row.route.from,
                 to: row.route.to,
-                deliveryDate: new GhDate(row.deliveryDate).getDate().toISOString(),
+                deliveryDate: new GhDate(row.deliveryDate).toISOString(),
               }})
             }
           case ItemsStatus.ON_DELIVERY:
@@ -120,7 +120,7 @@ import { GhDate } from "../../../misc/classes/gh-date";
                 status: row.status,
                 from: row.route.from,
                 to: row.route.to,
-                deliveryDate: new GhDate(row.deliveryDate).getDate().toISOString(),
+                deliveryDate: new GhDate(row.deliveryDate).toISOString(),
               }})
             }
           case ItemsStatus.EXCEPTION:
@@ -132,7 +132,7 @@ import { GhDate } from "../../../misc/classes/gh-date";
                 status: row.status,
                 from: row.route.from,
                 to: row.route.to,
-                deliveryDate: new GhDate(row.deliveryDate).getDate().toISOString(),
+                deliveryDate: new GhDate(row.deliveryDate).toISOString(),
               }})
             }
           case ItemsStatus.DELIVERED:
@@ -144,7 +144,7 @@ import { GhDate } from "../../../misc/classes/gh-date";
                 status: row.status,
                 from: row.route.from,
                 to: row.route.to,
-                deliveryDate: new GhDate(row.deliveryDate).getDate().toISOString(),
+                deliveryDate: new GhDate(row.deliveryDate).toISOString(),
               }})
             }
           default:
