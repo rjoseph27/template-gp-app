@@ -10,6 +10,8 @@ import { ClientRoutes } from "../../../client.route";
 import { TranslateService } from "@ngx-translate/core";
 import { COUNTRY_INFO_LIST } from "../../../../misc/constants/countries/countries";
 import { CountryUtil } from "../../../../misc/util/country.util";
+import { Observable } from "rxjs";
+import { Tasks } from "../../../../misc/base-class/base-get-tasks.resolver";
 
 /**
  * @class ClientGpTrackingComponent
@@ -51,6 +53,12 @@ import { CountryUtil } from "../../../../misc/util/country.util";
     * @type {ClientRequestsService}
     */
     private readonly requestsService = inject(ClientRequestsService);
+
+    /**
+     * @description An observable for the tasks
+     * @type {Observable<Tasks[]>}
+     */
+    protected readonly tasks$: Observable<Tasks[]> = this.route.data.pipe(map(data => data['trip'].tasks));
 
    /**
      * @description The method to add history

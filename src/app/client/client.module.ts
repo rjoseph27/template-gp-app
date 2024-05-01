@@ -117,7 +117,7 @@ import { ClientGpTrackingComponent } from './orders/gp-orders/gp-tracking/gp-tra
         RequestsServiceApi,
         NotificationService,
         ClientAlertMatchResolver,
-        ClientRescheduleOrderResolver
+        ClientRescheduleOrderResolver,
     ]
 })
 export class ClientModule {

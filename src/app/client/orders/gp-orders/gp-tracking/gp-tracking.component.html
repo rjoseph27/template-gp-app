@@ -12,6 +12,7 @@
             [addHistoryResolver]="addHistoryResolver"
             [gpView]="true"
             [clientMode]="true"
+            [tasks]="tasks$ | async"
             (declareDelay)="showDelayDialog()"
             [status]="tripStatus$ | async"
             (reloadPage)="reloadPage()"

@@ -44,7 +44,7 @@ import { TripStatus } from "../../../../client/orders/base-orders.component";
      * @description An observable for the tasks
      * @type {Observable<Tasks[]>}
      */
-    protected readonly tasks$: Observable<Tasks[]> = this.route.data.pipe(map(data => data['tasks']))
+    protected readonly tasks$: Observable<Tasks[]> = this.route.data.pipe(map(data => data['tasks']));
 
     /**
      * @description The method to add history
