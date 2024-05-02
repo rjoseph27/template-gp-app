@@ -58,7 +58,7 @@ import { Tasks } from "../../../../misc/base-class/base-get-tasks.resolver";
      * @description An observable for the tasks
      * @type {Observable<Tasks[]>}
      */
-    protected readonly tasks$: Observable<Tasks[]> = this.route.data.pipe(map(data => data['trip'].tasks));
+    protected readonly tasks$: Observable<Tasks[]> = this.route.data.pipe(map(data => data['tasks']),);
 
    /**
      * @description The method to add history

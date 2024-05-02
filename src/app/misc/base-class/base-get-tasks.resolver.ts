@@ -1,5 +1,5 @@
 import { Injectable, inject } from "@angular/core";
-import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from "@angular/router";
+import { ActivatedRoute, ActivatedRouteSnapshot, Params, Resolve, Router, RouterStateSnapshot } from "@angular/router";
 import { GhDateProperties } from "../classes/gh-date";
 import { LoadingService } from "../../services/loading.service";
 import { ClientRequestsService } from "../../client/service/requests.service";
@@ -115,10 +115,16 @@ export abstract class GhTasksResolver implements Resolve<Tasks[]> {
    */
   abstract isUserAllowed: (trip :ReportTrip) => Promise<boolean>;
 
+  /**
+   * @description A function that gets the trip info
+   * @type {() => Promise<ReportTrip>}
+   */
+  abstract getTripInfo: (params: Params) => Promise<ReportTrip>;
+
   /** @inheritdoc */
   async resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<Tasks[]> {
     this.loadingService.startLoading();
-    const tripInfo = await this.requestsService.getTripInfo((<any>route.queryParams).id);
+    const tripInfo = await this.getTripInfo(route.queryParams);
     const tasks = await this.requestsService.getTasks((<any>route.queryParams).id);
     if(!this.isUserAllowed(tripInfo)) {
       this.navigationService.redirectToMainPage()

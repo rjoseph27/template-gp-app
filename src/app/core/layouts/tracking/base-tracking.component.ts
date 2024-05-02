@@ -87,8 +87,9 @@ export class BaseTrackingComponent {
      * @type {string}
      */
     @Input() set orderId(value: string) {
-        this._orderId = value;
-        this.filteredHistory = this.history.filter(point => point.orderId === value || !point.orderId);
+        const trueValue = value && value?.length <= 5 ? value : null;
+        this._orderId = trueValue;
+        this.filteredHistory = this.history.filter(point => point.orderId === trueValue || !point.orderId);
     } 
     get orderId() {
         return this._orderId;

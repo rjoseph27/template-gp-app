@@ -35,6 +35,7 @@ import { ClientTripInfoResovler } from './orders/trip-list/trip-info.resolver';
 import { ClientAlertMatchResolver } from './request/alert/alert-match.resolver';
 import { ClientRescheduleOrderResolver } from './orders/client-orders/reschedule-order.resolver';
 import { ClientGpTrackingComponent } from './orders/gp-orders/gp-tracking/gp-tracking.component';
+import { ClientTasksResolver } from './orders/gp-orders/gp-tracking/tasks.resolver';
 
 /**
  * @constant routes
@@ -63,7 +64,7 @@ const routes: Routes = [
         { path: `${ClientRoutes.itemAtCheckpoint}`, component: ClientGpItemAtCheckpointComponent, pathMatch: 'full', resolve: { orderDetails: ClientGpOrderDetailsResolver, userInfo: ClientApplicationResolver }},
         { path: `${ClientRoutes.readyForPickup}`, component: ClientReadyForPickupComponent, pathMatch: 'full', resolve: { orderDetails: ClientGpOrderDetailsResolver, userInfo: ClientApplicationResolver }},
         { path: `${ClientRoutes.itemDeliveredGp}`, component: ClientItemDeliveredGpComponent, pathMatch: 'full', resolve: { orderDetails: ClientGpOrderDetailsResolver, userInfo: ClientApplicationResolver }},
-        { path: `${ClientRoutes.gpTracking}`, component: ClientGpTrackingComponent, pathMatch: 'full', resolve: { trip: TrackingResolver, userInfo: ClientApplicationResolver }},
+        { path: `${ClientRoutes.gpTracking}`, component: ClientGpTrackingComponent, pathMatch: 'full', resolve: { trip: TrackingResolver, tasks: ClientTasksResolver, userInfo: ClientApplicationResolver }},
     ] },
     { path: `${ClientRoutes.tripList}`, children: [
         { path: '', component: ClientTripListComponent, pathMatch: 'full', resolve: { userInfo: ClientApplicationResolver} },

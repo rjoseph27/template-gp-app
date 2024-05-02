@@ -25,7 +25,9 @@ export class TrackingResolver implements Resolve<ReportTrip> {
   /** @inheritdoc */
   async resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<ReportTrip> {
     this.loadingService.startLoading();
-    const trips = await this.requestsService.getItemTrackingInformation(<RequestTableElementRequest>route.queryParams);
+    const trips = (<any>route.queryParams).status ? 
+      await this.requestsService.getItemTrackingInformation(<RequestTableElementRequest>route.queryParams) : 
+      this.requestsService.getTripInfo((<any>route.queryParams).id);
     this.loadingService.endLoading();
     return trips;
   }

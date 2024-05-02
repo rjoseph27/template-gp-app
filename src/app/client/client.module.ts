@@ -49,6 +49,7 @@ import { ClientTripInfoResovler } from './orders/trip-list/trip-info.resolver';
 import { ClientAlertMatchResolver } from './request/alert/alert-match.resolver';
 import { ClientRescheduleOrderResolver } from './orders/client-orders/reschedule-order.resolver';
 import { ClientGpTrackingComponent } from './orders/gp-orders/gp-tracking/gp-tracking.component';
+import { ClientTasksResolver } from './orders/gp-orders/gp-tracking/tasks.resolver';
 
 /**
  * @module ClientModule
@@ -118,6 +119,7 @@ import { ClientGpTrackingComponent } from './orders/gp-orders/gp-tracking/gp-tra
         NotificationService,
         ClientAlertMatchResolver,
         ClientRescheduleOrderResolver,
+        ClientTasksResolver
     ]
 })
 export class ClientModule {
