@@ -27,7 +27,7 @@ export class TrackingResolver implements Resolve<ReportTrip> {
     this.loadingService.startLoading();
     const trips = (<any>route.queryParams).status ? 
       await this.requestsService.getItemTrackingInformation(<RequestTableElementRequest>route.queryParams) : 
-      this.requestsService.getTripInfo((<any>route.queryParams).id);
+      await this.requestsService.getTripInfo((<any>route.queryParams).id);
     this.loadingService.endLoading();
     return trips;
   }
