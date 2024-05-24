@@ -12,6 +12,8 @@ import { ModalService } from "../../../../services/modal.service";
 import { GhFile } from "../../../elements/input/upload-image/upload-image.component";
 import { ItemsStatus } from "../../../../client/orders/base-orders.component";
 import { INTEGER_VALIDATION, integerValidator } from "../../../../misc/validation/integer.validator";
+import { Vendor } from "../../../../misc/enums/vendor.enum";
+import { VENDOR_IMAGE } from "../../../../misc/constants/vendor-image";
 
 
 /**
@@ -134,6 +136,12 @@ export class GhItemInformationComponent implements OnInit {
    * @type {ItemInformationBody[]}
    */
   protected readonly itemInformationList: ItemInformationBody[] = [];
+
+  /**
+   * @description The vendor
+   * @type {Vendor}
+   */
+  @Input() vendor: Vendor = Vendor.GP_HUB
 
   /**
    * @description The modal service
@@ -295,7 +303,7 @@ export class GhItemInformationComponent implements OnInit {
    * @returns {string}
    */
   private getImageUrl(filename: string): string {
-    return "https://firebasestorage.googleapis.com/v0/b/gp-hub-test-server.appspot.com/o/items%2F"+filename+"?alt=media&token=1cd71787-e61a-4238-ac6e-e7103397a8e5"
+    return VENDOR_IMAGE[this.vendor](filename);
   }
   
 

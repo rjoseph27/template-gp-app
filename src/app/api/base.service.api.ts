@@ -2,6 +2,10 @@ import { HttpClient, HttpEvent } from "@angular/common/http";
 import { inject } from "@angular/core";
 import { Observable } from "rxjs";
 
+/**
+ * @interface ApiResponse
+ * @description The response of the api
+ */
 export interface ApiResponse {
     /**
      * @description The message of the response

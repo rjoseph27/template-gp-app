@@ -3,6 +3,7 @@ import { BehaviorSubject } from "rxjs";
 import { Country } from "../../misc/enums/country.enum";
 import { ItemInformation } from "../../core/layouts/request/item-information/item-information.component";
 import { Currency } from "../../misc/enums/currency.enum";
+import { Vendor } from "../../misc/enums/vendor.enum";
 
 /**
  * @interface SendItemsRequest
@@ -20,6 +21,18 @@ export interface SendItemsRequest {
      * @type {string}
      */
     userId: string;
+
+    /**
+     * @description The vendor
+     * @type {Vendor}
+     */
+    vendor: Vendor;
+
+    /**
+     * @description The secondary key for the vendor
+     * @type {string}
+     */
+    vendorOrder?: string; 
 
     /**
      * @description The currency
@@ -93,6 +106,9 @@ export class ClientSendItemsService {
      * @type {SendItemsRequest}
      */
     set requests(value: SendItemsRequest) {
+        if(value) {
+            value.vendor = Vendor.GP_HUB;
+        }
         this._requests$.next(value);
     }
     get requests(): SendItemsRequest {

@@ -1,7 +1,5 @@
 import { SelectFieldOption } from "../../core/elements/input/select-field/select-field.component";
 
-
-
 /**
  * @class EnumUtil
  * @description A utility class for enums

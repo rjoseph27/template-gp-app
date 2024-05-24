@@ -91,7 +91,7 @@ export abstract class baseOrderDetailsResolver implements Resolve<OrderDetails> 
         order.price = Math.round(MoneyUtil.getPrice(order.itemInformation, {
             specificPrice: order.specificPrice,
             defaultPrice: order.defaultPrice
-        }, currency[order.currency]));
+        }, currency[order.currency], [order.itemInformation]));
         if(this.showTotalPrice) {
            order.price = MoneyUtil.totalPrice(order.price, currency[order.currency])
         }

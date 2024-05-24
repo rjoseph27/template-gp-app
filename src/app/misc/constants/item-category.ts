@@ -51,13 +51,23 @@ export const BEAUTY_ITEM_CATEGORY: ItemCategoryInterface = {
 
 /**
  * @constant
+ * @description The prefix for the health item category.
+ */
+export const HEALTH_ITEM_CATEGORY: ItemCategoryInterface = {
+    prefix: '4',
+    name: 'health'
+};
+
+/**
+ * @constant
  * @description The list of all the item categories
  */
 export const LIST_ITEM_CATEGORY: ItemCategoryInterface[] = [
     NON_CLASSIFIED_ITEM_CATEGORY, 
     ELECTRONICAL_ITEM_CATEGORY, 
     DOCUMENT_ITEM_CATEGORY, 
-    BEAUTY_ITEM_CATEGORY
+    BEAUTY_ITEM_CATEGORY,
+    HEALTH_ITEM_CATEGORY
 ]; 
 
 /**

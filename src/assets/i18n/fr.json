@@ -751,7 +751,8 @@
             "skincare": "Soin de la peau",
             "haircare": "Soin des cheveux",
             "bodycare": "Soin de corps",
-            "fragrance": "Parfum"
+            "fragrance": "Parfum",
+            "supplement": "Supplement"
         }
     },
     "unit": {

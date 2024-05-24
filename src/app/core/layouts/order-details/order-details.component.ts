@@ -4,6 +4,7 @@ import { Country } from "../../../misc/enums/country.enum";
 import { ItemInformation } from "../request/item-information/item-information.component";
 import { SpecificPrice } from "../request/report-trip/report-trip.constant";
 import { GhDateProperties } from "../../../misc/classes/gh-date";
+import { Vendor } from "../../../misc/enums/vendor.enum";
 
 /**
  * @interface OrderDetails
@@ -63,6 +64,12 @@ export interface OrderDetails {
    * @type {any}
    */
   originRegion: any,
+
+  /**
+   * @description The vendor of the item
+   * @type {Vendor}
+   */
+  vendor: Vendor,
 
   /**
    * @description The item information

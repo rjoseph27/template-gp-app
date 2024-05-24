@@ -20,9 +20,6 @@
     <div class="section">
         <div class="label">{{ 'global.orderDetails.arrivalTime' | translate }}</div><div>{{ getDate(orderDetails.arrivalDate) | date: 'dd/MM/yyyy' }}, {{ orderDetails.arrivalTime }}</div>
     </div>
-    <div *ngIf="showPrice" class="section">
-        <div class="label">{{ 'global.orderDetails.totalCost' | translate }}</div><div class="price">{{ orderDetails.price}} {{ currency }}</div>
-    </div>
 </div>
 <hr class="gp-divider">
 <div class="information">
@@ -31,6 +28,7 @@
         <gh-item-information 
             [itemInformation]="[orderDetails.itemInformation]"
             [isEditable]="false"
+            [vendor]="orderDetails.vendor"
         ></gh-item-information>
     </div>
 </div>

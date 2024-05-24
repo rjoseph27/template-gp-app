@@ -107,7 +107,7 @@ import { EditItemInformationStatus } from "../../../api/requests/requests.type";
             let price = Math.round(MoneyUtil.getPrice(x[0], {
             specificPrice: this.route.snapshot.data['orderDetails'].specificPrice,
             defaultPrice: this.route.snapshot.data['orderDetails'].defaultPrice
-          }, currency[this.currency]));
+          }, currency[this.currency], x));
           this._currentPrice$.next(MoneyUtil.totalPrice(price, currency[this.currency]));
         })
       ).subscribe();

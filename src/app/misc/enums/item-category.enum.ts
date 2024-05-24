@@ -16,4 +16,5 @@ export enum ItemCategory {
     haircare = "3004",
     bodycare = "3005",
     fragrance = "3006",
+    supplement = "4001",
 }

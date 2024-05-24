@@ -395,7 +395,7 @@ interface DayPoint {
         let price = 0;
         this.items.itemInformation.forEach(element => {
           const currentRate = this.rates[this.items.currency];
-          price += MoneyUtil.getPrice(element, trip, currentRate);
+          price += MoneyUtil.getPrice(element, trip, currentRate, this.items.itemInformation);
         });
         
         return {

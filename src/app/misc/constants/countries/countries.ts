@@ -46,7 +46,7 @@ export const COUNTRY_INFO_LIST: CountryInfo[] = [
         },
         regions: Object.keys(FranceRegions).map((key) => FranceRegions[key as keyof typeof FranceRegions]),
         airports: FRANCE_AIRPORTS,
-        currency: {currency: Currency.CAD, step: 20 },
+        currency: {currency: Currency.EUR, step: 20 },
         succursales: FRANCE_SUCCURSALES
     }
 ]

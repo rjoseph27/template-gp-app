@@ -176,7 +176,7 @@ import { NotificationService } from "../../services/notification.service";
         const price = Math.round(MoneyUtil.getPrice(row, {
             specificPrice: row.specificPrice,
             defaultPrice: row.defaultPrice
-        }, rates[row.currency]));
+        }, rates[row.currency], [row]));
         return MoneyUtil.totalPrice(price, rates[row.currency])
     }
 
@@ -192,7 +192,7 @@ import { NotificationService } from "../../services/notification.service";
             let price = Math.round(MoneyUtil.getPrice(order, {
                 specificPrice: order.specificPrice,
                 defaultPrice: order.defaultPrice
-            }, rates[order.currency]));
+            }, rates[order.currency], orders));
             price = MoneyUtil.totalPrice(price, rates[order.currency]);
             return acc + price;
         }, 0));
