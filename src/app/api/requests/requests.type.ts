@@ -1150,7 +1150,13 @@ export interface ReportTrip {
      * @description The details of the billing
      * @type {BillingDetails}
      */
-    details: BillingDetails
+    details: BillingDetails,
+
+    /**
+     * @description The id of the request
+     * @type {string}
+     */
+    itemId: string
   }
 
   /**
