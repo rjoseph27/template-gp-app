@@ -103,6 +103,9 @@ import { ClientTasksResolver } from './orders/gp-orders/gp-tracking/tasks.resolv
               }
         })
     ],
+    exports: [
+        ClientOrderTrackingComponent
+    ],
     providers: [
         ClientApplicationResolver,
         ClientOrderDetailsResolver,

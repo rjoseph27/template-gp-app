@@ -23,4 +23,10 @@ export class GlobalRoutes {
      * @type {GhRoute}
      */
     static readonly notFound = new GhRoute('not-found');
+
+    /**
+     * @description The tracking route
+     * @type {GhRoute}
+     */
+    static readonly tracking = new GhRoute('tracking');
 }
