@@ -26,19 +26,7 @@ import { GhDate } from '../../../misc/classes/gh-date';
      * @description The delivered items orders
      * @type {Observable<RequestTableElement[]>}
      */
-    protected readonly getDeliveredOrders$ = this.requestsService.getItemsOrders(this.userService.currentUserId).then(x => x.filter(y => y.status === ItemsStatus.DELIVERED || y.status === ItemsStatus.EXCEPTION));
-
-   /**
-   * @description The send items service
-   * @type {ClientSendItemsService}
-   */
-   private readonly sendItemsService = inject(ClientSendItemsService);
-
-   /**
-    * @description The loading service
-    * @type {LoadingService}
-    */
-   private readonly loadingService = inject(LoadingService);
+    protected readonly getDeliveredOrders$ = this.requestsService.getItemsOrders(this.userService.currentUserId).then(x => x.filter(y => y.status === ItemsStatus.DELIVERED || y.status === ItemsStatus.FINALIZED || y.status === ItemsStatus.EXCEPTION));
 
     /**
      * @description The items orders
@@ -144,6 +132,7 @@ import { GhDate } from '../../../misc/classes/gh-date';
                 deliveryDate: new GhDate(row.deliveryDate).toISOString(),
               }})
             }
+          case ItemsStatus.FINALIZED:
           case ItemsStatus.DELIVERED:
             return {
               label: 'moduleList.client.orders.status.delivered',

@@ -87,6 +87,12 @@ export enum ItemsStatus {
     DELIVERED = 'DELIVERED',
 
     /**
+     * @description The items has been finalized
+     * @type {string}
+     */
+    FINALIZED = 'FINALIZED',
+
+    /**
      * @description The item is being redirect
      * @type {string}
      */

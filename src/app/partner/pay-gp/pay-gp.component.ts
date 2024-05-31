@@ -133,7 +133,7 @@ import { GhDate } from "../../misc/classes/gh-date";
         const price = Math.round(MoneyUtil.getPrice(row, {
             specificPrice: row.specificPrice,
             defaultPrice: row.defaultPrice
-        }, rates[row.currency], [row]));
+        }, rates[row.currency], this._elements$.value.filter(x => x.itemId === row.itemId)));
         return MoneyUtil.withdrawMoneyAmount(price)
     }
 
@@ -183,7 +183,7 @@ import { GhDate } from "../../misc/classes/gh-date";
             let price = Math.round(MoneyUtil.getPrice(order, {
                 specificPrice: order.specificPrice,
                 defaultPrice: order.defaultPrice
-            }, rates[order.currency], orders));
+            }, rates[order.currency], this._elements$.value.filter(x => x.itemId === order.itemId)));
             price = MoneyUtil.withdrawMoneyAmount(price);
             return acc + price;
         }, 0));
