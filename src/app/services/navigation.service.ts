@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, NavigationCancel } from '@angular/router';
 import { ClientRoutes } from '../client/client.route';
 import { GlobalRoutes } from '../global.route';
 import { GhRoute } from '../misc/classes/route';
@@ -42,6 +42,12 @@ export class NavigationService {
   private readonly _isNotificationOpen$ = new BehaviorSubject<boolean>(false);
 
   /**
+   * @description Backing field for the redirect url
+   * @type {BehaviorSubject<string>}
+   */
+  private readonly _redirectUrl$ = new BehaviorSubject<string>(undefined);
+
+  /**
    * @description Determines whether the notification is open
    * @type {BehaviorSubject<boolean>}
   */
@@ -65,12 +71,21 @@ export class NavigationService {
     }
   }
 
+  /**
+   * @description Redirects to the application
+   * @returns {void}
+   */
   redirectToApplication(): void {
-    if(this.router.url.split("/")[1] === PartnerRoutes.partner.segment)
-    {
-      this.router.navigate([PartnerRoutes.main.fullPath()]);
+    if(this._redirectUrl$.value) {
+      this.router.navigateByUrl(this._redirectUrl$.value);
+      this._redirectUrl$.next(undefined);
     } else {
-      this.router.navigate([ClientRoutes.main.fullPath()]);
+      if(this.router.url.split("/")[1] === PartnerRoutes.partner.segment)
+        {
+          this.router.navigate([PartnerRoutes.main.fullPath()]);
+        } else {
+          this.router.navigate([ClientRoutes.main.fullPath()]);
+        }
     }
   }
 
@@ -116,6 +131,10 @@ export class NavigationService {
   */
   constructor() {
     this.router.events.pipe(tap((e) => {
+      if((<NavigationCancel>e).id === 1 && (<NavigationCancel>e).reason) {
+        this._redirectUrl$.next((<NavigationCancel>e).url);
+      }
+
       if(e instanceof NavigationEnd) {
             this._lastUrl$.next((<NavigationEnd>e).url);
         }
