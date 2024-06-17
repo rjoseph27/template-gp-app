@@ -51,7 +51,7 @@ export class MoneyUtil {
      * @param rate The conversion rate
      * @returns {number}
      */
-    static getPrice(order: ItemInformation, priceInfo: PriceInfo, rate: number, allOrders: ItemInformation[]) {
+    static getPrice(order: ItemInformation, priceInfo: PriceInfo, rate: number, allOrders?: ItemInformation[]) {
         let price = 0;
         const category = priceInfo.specificPrice.find(x => x.category === order.itemCategory) 
         if(category) {
@@ -64,9 +64,12 @@ export class MoneyUtil {
             price = priceInfo.defaultPrice * order.itemWeight * order.itemQuantity;
         }
 
-        const totalWeight = allOrders.reduce((acc, curr) => acc + curr.itemWeight, 0);
-        if(totalWeight < 1) {
-            price = priceInfo.defaultPrice;
+        if(allOrders)
+        {
+            const totalWeight = allOrders.reduce((acc, curr) => acc + curr.itemWeight, 0);
+            if(totalWeight < 1) {
+                price = priceInfo.defaultPrice;
+            }
         }
         
         return price / rate;

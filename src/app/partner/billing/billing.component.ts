@@ -145,7 +145,9 @@ import { NotificationService } from "../../services/notification.service";
             to: row.details.to,
             userId: row.details.userId 
         }
-        return this.router.navigate([PartnerRoutes.billingView.fullPath()], { queryParams:  queryParams} )
+        
+        const url = this.router.serializeUrl(this.router.createUrlTree([PartnerRoutes.billingView.fullPath()], { queryParams: queryParams }));
+        return window.open(url, '_blank');
     }
     
     /**

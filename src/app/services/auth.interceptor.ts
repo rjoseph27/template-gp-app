@@ -49,7 +49,7 @@ export class AuthInterceptor implements HttpInterceptor {
         if(TokenError[event.body?.message as keyof typeof TokenError]) {
         this.userService.logout()
         this.notificationService.errorNotification('global.errors.logAgain');
-        this.loadingService.endLoading();
+        this.loadingService.forceEndLoading();
       }
     }
     }));

@@ -20,7 +20,7 @@
                 {{ 'moduleList.registerItem.edit.currentPrice' | translate }}
             </div>
             <div>
-                {{ (currentPrice$ | async) | currency: (currency$ | async) }}
+                {{ (currentPrice$ | async).toFixed(2) | currency: (currency$ | async) }}
             </div>           
         </div>
         <div>

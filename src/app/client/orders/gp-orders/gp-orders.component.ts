@@ -42,7 +42,7 @@ import { GhDate } from "../../../misc/classes/gh-date";
      * @description The orders completed
      * @type {Observable<RequestTableElement[]>}
      */
-    protected readonly orderCompleted$ = this.requestsService.getItemsOrdersForGp(this.userService.currentUserId).then(x => x.filter(y => y.status === ItemsStatus.DELIVERED || y.status === ItemsStatus.EXCEPTION));
+    protected readonly orderCompleted$ = this.requestsService.getItemsOrdersForGp(this.userService.currentUserId).then(x => x.filter(y => y.status === ItemsStatus.DELIVERED || y.status === ItemsStatus.FINALIZED || y.status === ItemsStatus.EXCEPTION));
 
     /**
      * @description The items orders
@@ -136,6 +136,7 @@ import { GhDate } from "../../../misc/classes/gh-date";
               }})
             }
           case ItemsStatus.DELIVERED:
+          case ItemsStatus.FINALIZED:
             return {
               label: 'moduleList.client.orders.status.delivered',
               icon: 'done',

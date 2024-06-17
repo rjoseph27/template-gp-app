@@ -7,6 +7,7 @@ export enum ItemCategory {
     bluetooth = '1001',
     camera = '1002',
     computer = '1003',
+    phone = '1004',
     console = '1004',
     earphone = '1005',
     document = '2001',

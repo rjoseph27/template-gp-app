@@ -44,4 +44,12 @@ export class LoadingService {
             this._loading$.next(false)
         } 
     }
+
+    /**
+     * @description A method that force end the loading
+     * @returns {void}
+     */
+    forceEndLoading(): void {
+        this._loading$.next(false);
+    }
 }

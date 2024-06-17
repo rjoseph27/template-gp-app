@@ -707,7 +707,6 @@
             "Female":"Female"
         },
         "Country": {
-            "Canada": "Canada",
             "Senegal": "Senegal",
             "France": "France"
         },
@@ -743,6 +742,7 @@
             "bluetooth": "bluetooth",
             "camera": "camera",
             "computer": "computer",
+            "phone": "phone",
             "console": "console",
             "earphone": "earphone",
             "document": "document",

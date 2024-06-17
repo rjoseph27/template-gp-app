@@ -130,11 +130,11 @@ import { GhDate } from "../../misc/classes/gh-date";
      */
     protected readonly calculatePriceResolver = (row: BillingFilterInfo) => {
         const rates = this.route.snapshot.data['currency'].rates;
-        const price = Math.round(MoneyUtil.getPrice(row, {
+        const price = MoneyUtil.getPrice(row, {
             specificPrice: row.specificPrice,
             defaultPrice: row.defaultPrice
-        }, rates[row.currency], this._elements$.value.filter(x => x.itemId === row.itemId)));
-        return MoneyUtil.withdrawMoneyAmount(price)
+        }, rates[row.currency]);
+        return MoneyUtil.withdrawMoneyAmount(price).toFixed(2)
     }
 
     /**
@@ -149,7 +149,9 @@ import { GhDate } from "../../misc/classes/gh-date";
             to: row.details.to,
             userId: row.details.userId 
         }
-        return this.router.navigate([PartnerRoutes.billingView.fullPath()], { queryParams:  queryParams} )
+
+        const url = this.router.serializeUrl(this.router.createUrlTree([PartnerRoutes.gpPickUpView.fullPath()], { queryParams: queryParams }));
+        return window.open(url, '_blank');
     }
     
     /**
@@ -180,10 +182,10 @@ import { GhDate } from "../../misc/classes/gh-date";
         this._selectedElements$.next(orders);
         const rates = this.route.snapshot.data['currency'].rates;
         this._currentPrice$.next(orders.reduce((acc, order) => {
-            let price = Math.round(MoneyUtil.getPrice(order, {
+            let price = MoneyUtil.getPrice(order, {
                 specificPrice: order.specificPrice,
                 defaultPrice: order.defaultPrice
-            }, rates[order.currency], this._elements$.value.filter(x => x.itemId === order.itemId)));
+            }, rates[order.currency]);
             price = MoneyUtil.withdrawMoneyAmount(price);
             return acc + price;
         }, 0));
