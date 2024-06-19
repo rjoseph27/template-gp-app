@@ -39,24 +39,62 @@ export const DOCUMENT_ITEM_CATEGORY: ItemCategoryInterface = {
     name: 'Documents'
 };
 
+
 /**
  * @constant
- * @description The prefix for the fashion item category.
+ * @description The prefix for the wigs item category.
  * @type {ItemCategory}
  */
-export const BEAUTY_ITEM_CATEGORY: ItemCategoryInterface = {
+export const WIGS_ITEM_CATEGORY: ItemCategoryInterface = {
     prefix: '3',
-    name: 'Beauty'
+    name: 'Wigs'
 };
 
 /**
  * @constant
- * @description The prefix for the health item category.
+ * @description The prefix for the jewelry item category.
+ * @type {ItemCategory}
  */
-export const HEALTH_ITEM_CATEGORY: ItemCategoryInterface = {
+export const JEWELRY_ITEM_CATEGORY: ItemCategoryInterface = {
     prefix: '4',
-    name: 'health'
+    name: 'Jewelry'
 };
+
+/**
+ * @constant
+ * @description The prefix for the cosmetics item category.
+ * @type {ItemCategory}
+ */
+export const COSMETICS_ITEM_CATEGORY: ItemCategoryInterface = {
+    prefix: '5',
+    name: 'Cosmetics'
+};
+
+/**
+ * @constant
+ * @description The prefix for the medications item category.
+ * @type {ItemCategory}
+ */
+export const MEDICATIONS_ITEM_CATEGORY: ItemCategoryInterface = {
+    prefix: '6',
+    name: 'Medications'
+};
+
+/**
+ * @constant
+ * @description The prefix for the spiritual item category.
+ * @type {ItemCategory}
+ */
+export const SPIRITUAL_ITEM_CATEGORY: ItemCategoryInterface = {
+    prefix: '7',
+    name: 'Spiritual'
+};
+
+export const CLOTHING_ITEM_CATEGORY: ItemCategoryInterface = {
+    prefix: '8',
+    name: 'Clothing'
+};
+
 
 /**
  * @constant
@@ -66,8 +104,12 @@ export const LIST_ITEM_CATEGORY: ItemCategoryInterface[] = [
     NON_CLASSIFIED_ITEM_CATEGORY, 
     ELECTRONICAL_ITEM_CATEGORY, 
     DOCUMENT_ITEM_CATEGORY, 
-    BEAUTY_ITEM_CATEGORY,
-    HEALTH_ITEM_CATEGORY
+    WIGS_ITEM_CATEGORY,
+    JEWELRY_ITEM_CATEGORY,
+    COSMETICS_ITEM_CATEGORY,
+    MEDICATIONS_ITEM_CATEGORY,
+    SPIRITUAL_ITEM_CATEGORY,
+    CLOTHING_ITEM_CATEGORY
 ]; 
 
 /**

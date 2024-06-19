@@ -50,6 +50,7 @@ export class LoadingService {
      * @returns {void}
      */
     forceEndLoading(): void {
+        this.ongoingLoading = 0;
         this._loading$.next(false);
     }
 }
