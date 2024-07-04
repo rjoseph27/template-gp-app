@@ -17,6 +17,7 @@
         type="text" 
         [ngModel]="defaultValue || formattedValue"
         [placeholder]="placeholder"
+        [readonly]="true"
         [ngClass]="{'error-input': ((errorMessage$ | async) && textField.inputTouchedAndDirty)}"
         readonly
     >
