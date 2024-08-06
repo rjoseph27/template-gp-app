@@ -708,7 +708,8 @@
         },
         "Country": {
             "Senegal": "Senegal",
-            "France": "France"
+            "France": "France",
+            "CoteIvoire": "Côte d'Ivoire"
         },
         "WeekDays": {
             "Monday": "Lundi",

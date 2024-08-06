@@ -43,7 +43,7 @@ export const SENEGAL_SUCCURSALES = new Map<any, SuccursaleInfo>([
     [SenegalRegions.Dakar, {
         name: 'SN-DK-DK-01',
         address: 'Yoff Apecsy 1 au centre aéré de la BCEAO',
-        phone: '+221 33 869 53 53',
+        phone: '+221 78 926 05 53',
         airport: ['DSS'],
         region: SENEGAL_REGION.DAKAR,
         email: 'gphub221@gmx.fr'

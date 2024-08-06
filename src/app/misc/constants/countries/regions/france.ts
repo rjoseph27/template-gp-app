@@ -44,8 +44,8 @@ export const FRANCE_SUCCURSALES = new Map<FranceRegions, SuccursaleInfo>(
     [
         [FranceRegions.Paris, {
             name: 'FR-IDF-PR-01',
-            address: '6 Rue Affre 75018',
-            phone: '+33 6 18 11 50 55',
+            address: ' - ',
+            phone: '+221 78 926 05 53',
             airport: ['CDG', 'ORY'],
             region: FRANCE_REGION.IDF,
             email: 'gphub221@gmx.fr'

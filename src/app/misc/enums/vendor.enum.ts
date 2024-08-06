@@ -14,4 +14,10 @@ export enum Vendor {
      * @type {string}
      */
     SUNUZON_FR = 'SUNUZON_FR',
+
+    /**
+     * @description The vendor is YOMB NA
+     * @type {string}
+     */
+    YOMB_NA = 'YOMB_NA'
 }
