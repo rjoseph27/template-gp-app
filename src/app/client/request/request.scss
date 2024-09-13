@@ -11,3 +11,9 @@
         max-width: 500px;
     }
 }
+
+@media (min-width: 768px) {
+    .content {
+        display: block;
+    }
+}

@@ -9,13 +9,17 @@
     display: flex;
 }
 
+.section, .sub-section-item-information {
+    margin-bottom: 0.5em;
+}
+
 .sub-section-item-information {
     padding-left: 1em;
     width: 100%;
-}
 
-.section, .sub-section-item-information {
-    margin-bottom: 0.5em;
+    * {
+        margin-bottom: 1em;
+    }
 }
 
 button {

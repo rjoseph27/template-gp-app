@@ -22,7 +22,7 @@
             [errorCaptions]="itemNameErrorCaptions"
             [readonly]="itemInformationForm.formMode === formMode.VIEW"
             ></gh-text-field>
-            <gh-select-field
+            <gh-selection-tree 
                 [label]="'global.itemInformation.itemCategory.label' | translate" 
                 [placeholder]="'global.itemInformation.itemCategory.placeholder' | translate"
                 [name]="itemCategoryField+itemInformationForm.id"
@@ -30,9 +30,7 @@
                 (valueChange)="itemInformationForm.itemInformation.get(itemCategoryField).setValue($event)"
                 [errors]="itemInformationForm.itemInformation.get(itemCategoryField).errors"
                 [errorCaptions]="itemCategoryErrorCaptions"
-                [groupedOptions]="itemInformationSelectOptions"
-                [readonly]="itemInformationForm.formMode === formMode.VIEW"
-                ></gh-select-field>
+                [readonly]="itemInformationForm.formMode === formMode.VIEW"></gh-selection-tree>
         </div>
     </div>
     <div>
@@ -65,6 +63,23 @@
                [min]="1"
                [step]="1"
               ></gh-number-field>
+          </div>
+          <!--------------------------------------------------------------------------------------->
+          <div class="section">
+            <gh-number-field
+               [label]="'global.itemInformation.itemValue.label' | translate: { currency: currency }" 
+               [placeholder]="'global.itemInformation.itemValue.placeholder' | translate"
+               [name]="itemValueField+itemInformationForm.id"
+               [tooltip]="'global.itemInformation.itemValue.tooltip' | translate"
+               [value]="itemInformationForm.itemInformation.get(itemValueField).value"
+               (valueChange)="itemInformationForm.itemInformation.get(itemValueField).setValue($event)"
+               [errors]="itemInformationForm.itemInformation.get(itemValueField).errors"
+               [errorCaptions]="itemValueErrorCaptions"
+               [readonly]="itemInformationForm.formMode === formMode.VIEW"
+               [min]="1"
+               [step]="1"
+              ></gh-number-field>
+              <!--------------------------------------------------------------------------------------->
           </div>
           <div class="section">
             <gh-text-area

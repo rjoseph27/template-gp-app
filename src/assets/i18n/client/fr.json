@@ -8,7 +8,7 @@
             "sendItems": {
                 "title": "Envoyer un colis",
                 "content" : {
-                    "send": "Chercher des GPs",
+                    "send": "Chercher des frets",
                     "calendar": {
                         "selectTrip": {
                             "title": "Voyage sélectioné",
@@ -18,7 +18,7 @@
                             "confirmButton": "Confirmez",
                             "confirm": {
                                 "title": "Confirmation de la requête",
-                                "content": "Le GP sera informé de votre demande. Vous serez informé une fois que le GP aura confirmé la demande. Vous pouvez voir le statut de la demande dans la page « Mes commandes ».",
+                                "content": "Le transitaire sera informé de votre demande. Vous serez informé une fois que le transitaire aura confirmé la demande. Vous pouvez voir le statut de la demande dans la page « Mes commandes ».",
                                 "button": "Voir mes commandes"
                             }
                         },
@@ -34,7 +34,7 @@
                         "alert": {
                             "title": "Alerte",
                             "alertSent": {
-                                "content": "Vous serez notifié lorsqu'un un GP créera un voyage qui correspond à votre alerte.",
+                                "content": "Vous serez notifié lorsqu'un un transitaire créera un voyage qui correspond à votre alerte.",
                                 "button": "Voir mes alertes"
                             },
                             "button": "Créer une alerte"
@@ -46,12 +46,12 @@
                 "title": "Mes commandes",
                 "tableId": "Numéro de commande",
                 "status": {
-                    "waitConfirmation": "Attente de confirmation du GP",
+                    "waitConfirmation": "Attente de confirmation du transitaire",
                     "waitReception": "Attente de réception du colis",
                     "canceledByGp": "Selectionnez un autre voyage",
                     "atCheckpoint": "Au point de contrôle",
                     "redirect": "Colis reacheminé",
-                    "withGp": "Colis avec le GP",
+                    "withGp": "Colis avec le transitaire",
                     "onDelivery": "En cours d'envoie",
                     "finalCheckpoint": "Prêt à ramasser",
                     "delivered": "Livré",
@@ -64,13 +64,13 @@
                     },
                     "onGoingRequest": {
                         "title": "Tu n'as pas de commande en cours",
-                        "content": "Quand un GP accepte un de vos colis, vous serez capable de le voir ici.",
+                        "content": "Quand un transitaire accepte un de vos colis, vous serez capable de le voir ici.",
                         "button": "Créer une requête"
                     }
                 },
                 "waitConfirmation": {
-                    "title": "En attente de la confirmation du GP",
-                    "content": "Le GP a été notifié de votre commande. On vous signalera lorsqu'il confirme la commande.",
+                    "title": "En attente de la confirmation du transitaire",
+                    "content": "Le transitaire a été notifié de votre commande. On vous signalera lorsqu'il confirme la commande.",
                     "button": "Revenir à mes commandes",
                     "cancelButton": "Annuler la commande",
                     "notification": {
@@ -80,16 +80,16 @@
                 },
                 "waitReception": {
                     "title": "Envoyer votre colis",
-                    "content": "Le GP est prêt pour prendre votre colis à <u>{{address}}</u>. Pour plus d'information, Appellez au <u>{{phone}}</u> pour de l'assistance.",
+                    "content": "Le transitaire est prêt pour prendre votre colis à <u>{{address}}</u>. Pour plus d'information, Appellez au <u>{{phone}}</u> pour de l'assistance.",
                     "button": "Revenir à mes commandes"
                 },
                 "atCheckpoint": {
                     "title": "La commande est au point de contrôle",
-                    "content": "Le colis est au point de contrôle. Le GP va le livrer bientôt."
+                    "content": "Le colis est au point de contrôle. Le transitaire va le livrer bientôt."
                 },
                 "itemWithGp": {
-                    "title": "Le colis est avec le GP",
-                    "content": "The GP a reçu votre colis et il le livrera bientôt."
+                    "title": "Le colis est avec le transitaire",
+                    "content": "Le transitaire a reçu votre colis et il le livrera bientôt."
                 },
                 "readyForPickup": {
                     "title": "Le colis est prêt pour être ramassé",

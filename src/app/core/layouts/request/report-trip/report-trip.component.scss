@@ -3,7 +3,10 @@
 }
 
 .section {
-    margin-bottom: 0.5em;
+    margin-bottom: 1em;
+    .sub-section {
+        margin-bottom: 1em;
+    }
 }
 
 .title {
@@ -42,5 +45,21 @@ button {
 gh-table {
     ::ng-deep .error-message {
         display: none;
+    }
+}
+
+@media (min-width: 768px) {
+    form {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .gp-divider {
+        display: none;
+    }
+
+    .group {
+        width: 100%;
+        padding:0em 2em;
     }
 }

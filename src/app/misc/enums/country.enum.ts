@@ -5,5 +5,7 @@
 export enum Country {
     SN = 'Senegal',
     FR = 'France',
-    CI = 'CoteIvoire'
+    CI = 'CoteIvoire',
+    CA = 'Canada',
+    US = 'UnitedStates',
 }

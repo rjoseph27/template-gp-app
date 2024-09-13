@@ -8,7 +8,7 @@
             "sendItems": {
                 "title": "Send items",
                 "content" : {
-                    "send": "Check for GPs",
+                    "send": "Check for freights",
                     "calendar": {
                         "selectTrip": {
                             "title": "Selected Trip",
@@ -18,7 +18,7 @@
                             "confirmButton": "Confirm",
                             "confirm": {
                                 "title": "Request Confirmation",
-                                "content": "The GP will be notified about your request. You will be notified once the GP confirms the request. You can see the status of the request in the 'My orders page'.",
+                                "content": "The forwarding agent will be notified about your request. You will be notified once the forwarding agent confirms the request. You can see the status of the request in the 'My orders page'.",
                                 "button": "See my Orders"
                             }
                         },
@@ -34,7 +34,7 @@
                         "alert": {
                             "title": "Alert",
                             "alertSent": {
-                                "content": "You will be notified once a GP creates a trip that matches your alert.",
+                                "content": "You will be notified once a forwarding agent creates a trip that matches your alert.",
                                 "button": "See my Alerts"
                             },
                             "button": "Create Alert"
@@ -46,12 +46,12 @@
                 "title": "My Orders",
                 "tableId": "Order Number",
                 "status": {
-                    "waitConfirmation": "Waiting GP Confirmation",
+                    "waitConfirmation": "Waiting the forwarding agent Confirmation",
                     "waitReception": "Waiting Reception",
                     "canceledByGp": "Select a New Trip",
                     "atCheckpoint": "At Checkpoint",
                     "redirect": "Item rerouted",
-                    "withGp": "Item with GP",
+                    "withGp": "Item with the forwarding agent",
                     "onDelivery": "On Delivery",
                     "finalCheckpoint": "Ready for Pickup",
                     "delivered": "Delivered",
@@ -64,13 +64,13 @@
                     },
                     "onGoingRequest": {
                         "title": "You have no on going requests yet",
-                        "content": "When a GP will confirm your request, you will be able to see it here.",
+                        "content": "When a forwarding agent will confirm your request, you will be able to see it here.",
                         "button": "Create a Request"
                     }
                 },
                 "waitConfirmation": {
-                    "title": "Waiting GP Confirmation",
-                    "content": "The GP has been notified about your request. You will be notified once the GP confirms the request.",
+                    "title": "Waiting the forwarding agent Confirmation",
+                    "content": "The forwarding agent has been notified about your request. You will be notified once the forwarding agent confirms the request.",
                     "button": "Go Back to my Orders",
                     "cancelButton": "Cancel the Request",
                     "notification": {
@@ -80,16 +80,16 @@
                 },
                 "waitReception": {
                     "title": "Send your Item",
-                    "content": "The GP is ready to take your items at <u>{{address}}</u>. For more details, please call <u>{{phone}}</u> for assistance.",
+                    "content": "The forwarding agent is ready to take your items at <u>{{address}}</u>. For more details, please call <u>{{phone}}</u> for assistance.",
                     "button": "Go Back to my Orders"
                 },
                 "atCheckpoint": {
                     "title": "The order is at the checkpoint",
-                    "content": "Your item is at the checkpoint. The GP will deliver them to the consignee soon."
+                    "content": "Your item is at the checkpoint. The forwarding agent will deliver them to the consignee soon."
                 },
                 "itemWithGp": {
-                    "title": "The item is with the GP",
-                    "content": "The GP has received your item and will deliver it to the consignee soon."
+                    "title": "The item is with the forwarding agent",
+                    "content": "The forwarding agent has received your item and will deliver it to the consignee soon."
                 },
                 "readyForPickup": {
                     "title": "The item is ready for pickup",

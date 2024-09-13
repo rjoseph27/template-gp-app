@@ -1,0 +1,50 @@
+<div class="header">
+    <input
+        #input="ngModel"
+        [(ngModel)]="searchValue"
+        class="input"
+        type="text" 
+        [placeholder]="'global.hsCode.placeholder' | translate"
+        (keydown.enter)="search()"
+    >
+</div>
+<h1>{{ 'global.hsCode.title' | translate }}</h1>
+<p>{{ 'global.hsCode.note' | translate }}</p>
+<mat-accordion>
+    <mat-expansion-panel 
+        *ngFor="let level1Item of accordionData; index as i" 
+        (opened)="pannelOpenState[i] = true"
+        (closed)="pannelOpenState[i] = false"
+        [expanded]="pannelOpenState[i]"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <span>{{ level1Item.name }}</span> <mat-icon fontIcon="keyboard_arrow_down"></mat-icon>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+  
+      <mat-accordion *ngIf="pannelOpenState[i]">
+        <mat-expansion-panel 
+            *ngFor="let level2Item of level1Item.children; index as i2" 
+            [expanded]="subPannelOpenState[i][i2]"
+            class="nested" 
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+                <span>{{ level2Item.name }}</span> <mat-icon fontIcon="keyboard_arrow_down"></mat-icon>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+  
+          <button 
+            *ngFor="let code of level2Item.content"
+            class="hs-code"
+            [id]="'btn-'+code.value"
+            (click)="selectCode(code.value)"
+            >
+                <span>{{ code.label }}</span> <mat-icon fontIcon="arrow_forward"></mat-icon>
+            </button>
+        </mat-expansion-panel>
+      </mat-accordion>
+  
+    </mat-expansion-panel>
+  </mat-accordion>

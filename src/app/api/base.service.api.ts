@@ -1,6 +1,7 @@
 import { HttpClient, HttpEvent } from "@angular/common/http";
 import { inject } from "@angular/core";
 import { Observable } from "rxjs";
+import { environment } from "../../environments/environment";
 
 /**
  * @interface ApiResponse
@@ -31,7 +32,7 @@ export const DEBOUNCE_TIME = 2000;
  * @constant
  * @description The server url
  */
-export const SERVER_URL = 'https://app-ry7rf2os6a-uc.a.run.app';
+export const SERVER_URL = environment.apiUrl;
 
 /**
  * @abstract

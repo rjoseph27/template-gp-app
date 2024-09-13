@@ -6,6 +6,7 @@
         #input="ngModel"
         [id]="name"
         class="input"
+        [rows]="rows"
         [ngClass]="{'error-input': ((errorMessage$ | async) && (input.dirty || input.touched))}" 
         [placeholder]="placeholder" 
         [ngModel]="value"

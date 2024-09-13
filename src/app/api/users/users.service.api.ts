@@ -111,6 +111,7 @@ export class UsersServiceApi extends BaseServiceApi {
      * @returns {Promise<ConnectResponse>}
      */
     connectAsPartner(credentials: Credentials): Promise<ConnectResponse> {
+        console.log(credentials);
         return firstValue(this.postRequest<ConnectResponse>('login-partner', credentials));
     }
 

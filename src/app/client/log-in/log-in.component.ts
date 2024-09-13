@@ -8,7 +8,7 @@ import { ClientRoutes } from '../client.route';
  * @constant
  * @description The title of the log in page
  */
-const ACCOUNT_PAGE_TITLE = 'account';
+const ACCOUNT_PAGE_TITLE = 'global.login.title';
 
 /**
  * @title Log In Component

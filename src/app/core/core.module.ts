@@ -14,6 +14,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { SelectionTreeModule } from './elements/selection-tree/selection-tree.module';
 
 /**
  * @constant
@@ -42,7 +43,8 @@ const lists = [...LAYOUTS_COMPONENTS, ...ELEMENTS_COMPONENTS]
     TranslateModule,
     MatTooltipModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    SelectionTreeModule
   ],
   exports: [...lists]
 })

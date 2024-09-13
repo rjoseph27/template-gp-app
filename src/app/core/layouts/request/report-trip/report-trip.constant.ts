@@ -1,5 +1,4 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
-import { ItemCategory } from "../../../../misc/enums/item-category.enum";
 import { GhDate } from "../../../../misc/classes/gh-date";
 
 /**
@@ -33,9 +32,9 @@ export enum Unit {
   
     /**
      * @description The category of the item
-     * @type {ItemCategory}
+     * @type {string}
      */
-    category: ItemCategory,
+    category: string,
   
     /**
      * @description The price of the item

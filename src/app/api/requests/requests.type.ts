@@ -4,7 +4,6 @@ import { SpecificPrice } from "../../core/layouts/request/report-trip/report-tri
 import { RequestTableElement } from "../../core/layouts/orders/orders.component"
 import { Country } from "../../misc/enums/country.enum"
 import { Currency } from "../../misc/enums/currency.enum"
-import { ItemCategory } from "../../misc/enums/item-category.enum"
 import { DateFromDatePicker } from "../../misc/util/date.util"
 import { ApiResponse, StringKeys } from "../base.service.api"
 import { OrderDetails } from "../../core/layouts/order-details/order-details.component"
@@ -299,11 +298,7 @@ export interface ReportTrip {
    * @description An interface for the item information request
    */
   interface itemInformationRequest {
-    /**
-     * @description The category of the item
-     * @type {ItemCategory}
-     */
-    itemCategory: ItemCategory,
+    itemCategory: string,
 
     /**
      * @description The weight of the item

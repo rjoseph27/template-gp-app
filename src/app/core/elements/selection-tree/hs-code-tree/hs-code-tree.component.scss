@@ -1,0 +1,70 @@
+@import '../../../../../styles/variables';
+
+.header {
+    background-color: $primary-color;
+    display: flex;
+    margin-bottom: 0.5rem;
+    padding:1rem;
+}
+
+h1, p {
+    text-align: center;
+}
+
+p {
+    font-size: 0.75em;
+    color: gray;
+}
+
+mat-panel-title {
+    font-size: 0.75em;
+    color: #fff;
+
+    span {
+        width: 90%;
+    }
+}
+
+mat-expansion-panel {
+    background-color: $primary-color;
+    margin: 10px 0;
+
+    .mat-expansion-panel-header {
+        display: block;
+    }
+}
+
+::ng-deep .mat-expansion-indicator {
+    display: none;
+}
+
+::ng-deep .mat-expansion-panel:not(.mat-expanded) .mat-expansion-panel-header:not([aria-disabled=true]):hover {
+    background-color: darken($primary-color, 10%) !important;
+}
+
+.nested {
+    color: #000;
+    mat-panel-title {
+        color: #000;
+    }
+    background-color: #fff;
+}
+
+.hs-code {
+    background-color: transparent;
+    width: 100%;
+    text-align: left;
+    border: none;
+    font-size: 0.75em;
+    cursor: pointer;
+    padding: 0.5em 0em;
+    margin: 0em;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 0.3s ease;
+    display: flex;
+
+    span {
+        width: 90%;
+    }
+}
+

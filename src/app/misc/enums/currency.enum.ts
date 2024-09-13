@@ -19,5 +19,11 @@ export enum Currency {
      * @description Euro
      * @type {string}
      */
-    EUR = 'EUR'
+    EUR = 'EUR',
+
+    /**
+     * @description United States Dollar
+     * @type {string}
+     */
+    USD = 'USD'
 }

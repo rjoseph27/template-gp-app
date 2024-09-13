@@ -11,4 +11,9 @@ import { BaseInputFieldComponent } from '../base-input-field.component';
   styleUrls: ['./../base-input-field.component.scss']
 })
 export class GhTextAreaComponent extends BaseInputFieldComponent<string> {
+  /**
+   * @description The number of rows for the text area
+   * @type {number}
+   */
+  @Input() rows: number = 1;
 }

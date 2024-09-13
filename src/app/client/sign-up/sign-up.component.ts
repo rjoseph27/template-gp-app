@@ -12,7 +12,7 @@ import { CreateUser } from '../../api/users/users.type';
  * @constant
  * @description The title of the SIGN UP page
  */
-const NEW_ACCOUNT_PAGE_TITLE = 'new account';
+const NEW_ACCOUNT_PAGE_TITLE = 'global.signup.title';
 
 /**
  * @class ClientSignUpComponent

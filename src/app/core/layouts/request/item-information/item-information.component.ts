@@ -3,9 +3,6 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { IMAGE_FORMAT_VALIDATION, imageFormatValidator } from "../../../../misc/validation/image-format.validator";
 import { IMAGE_SIZE_VALIDATION, imageSizeValidator } from "../../../../misc/validation/image-size.validator";
 import { MAX_VALIDATION, MIN_VALIDATION, REQUIRED_VALIDATION } from "../../../../misc/constants/validations";
-import { GroupedSelectFieldOption } from "../../../elements/input/select-field/select-field.component";
-import { LIST_ITEM_CATEGORY_OPTION } from "../../../../misc/constants/item-category";
-import { ItemCategory } from "../../../../misc/enums/item-category.enum";
 import { MAX_LUGGAGE_WEIGHT } from "../../../../misc/constants/application";
 import { FormMode } from "../../../../misc/enums/form-mode.enum";
 import { ModalService } from "../../../../services/modal.service";
@@ -14,6 +11,7 @@ import { ItemsStatus } from "../../../../client/orders/base-orders.component";
 import { INTEGER_VALIDATION, integerValidator } from "../../../../misc/validation/integer.validator";
 import { Vendor } from "../../../../misc/enums/vendor.enum";
 import { VENDOR_IMAGE } from "../../../../misc/constants/vendor-image";
+import { Currency } from "../../../../misc/enums/currency.enum";
 
 
 /**
@@ -41,9 +39,9 @@ export interface ItemInformation {
 
   /**
    * @description The category of the item
-   * @type {ItemCategory}
+   * @type {string}
    */
-  itemCategory: ItemCategory;
+  itemCategory: string;
 
   /**
    * @description The status of the item
@@ -62,6 +60,12 @@ export interface ItemInformation {
    * @type {ItemSize}
    */
   itemQuantity: number;
+
+  /**
+   * @description The value of the item
+   * @type {number}
+   */
+  itemValue: number;
 
   /**
    * @description The extra notes of the item
@@ -86,6 +90,7 @@ type ItemInformationForm = FormGroup<
     itemCategory: FormControl<string>; 
     itemWeight: FormControl<number>; 
     itemQuantity: FormControl<number>;
+    itemValue: FormControl<number>;
     extraNotes: FormControl<string>; 
     reasonShipping: FormControl<string>;
   }>;
@@ -144,6 +149,12 @@ export class GhItemInformationComponent implements OnInit {
   @Input() vendor: Vendor = Vendor.GP_HUB
 
   /**
+   * @description The currency
+   * @type {Currency}
+   */
+  @Input() currency: Currency = Currency.USD;
+
+  /**
    * @description The modal service
    * @type {ModalService}
    */
@@ -184,6 +195,12 @@ export class GhItemInformationComponent implements OnInit {
    * @type {string}
    */
   protected readonly itemQuantityField = "itemQuantity"
+
+  /**
+   * @description The name of the item value field
+   * @type {string}
+   */
+  protected readonly itemValueField = "itemValue"
 
   /**
    * @description The name of the extra notes field
@@ -255,10 +272,14 @@ export class GhItemInformationComponent implements OnInit {
   ]);
 
   /**
-   * @description The item information select options
-   * @type {GroupedSelectFieldOption[]}
+   * @description The error messages of the item value field
+   * @type {Map<string, string>}
    */
-  protected itemInformationSelectOptions: GroupedSelectFieldOption[] = LIST_ITEM_CATEGORY_OPTION
+  protected readonly itemValueErrorCaptions = new Map<string, string>([
+    [REQUIRED_VALIDATION, "global.itemInformation.itemQuantity.errors.required"],
+    [INTEGER_VALIDATION, "global.itemInformation.itemQuantity.errors.integer"],
+    [MIN_VALIDATION, "global.itemInformation.itemQuantity.errors.min"]
+  ]);
 
   /**
    * @description The event emitter for the item information change
@@ -332,6 +353,7 @@ export class GhItemInformationComponent implements OnInit {
           itemCategory: new FormControl(itemInformation?.itemCategory as string, [Validators.required]),
           itemWeight: new FormControl(itemInformation?.itemWeight, [Validators.required, Validators.min(0.0001), Validators.max(MAX_LUGGAGE_WEIGHT)]),
           itemQuantity: new FormControl(itemInformation?.itemQuantity || 1, [Validators.required, Validators.min(1), integerValidator]),
+          itemValue: new FormControl(itemInformation?.itemValue || 0, [Validators.required, Validators.min(0), integerValidator]),
           extraNotes: new FormControl(itemInformation?.extraNotes),
           reasonShipping: new FormControl(itemInformation?.reasonShipping, [Validators.required])
         })

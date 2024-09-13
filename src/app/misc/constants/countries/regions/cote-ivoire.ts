@@ -41,7 +41,7 @@ enum COTE_IVOIRE_REGION {
  */
 export const COTE_IVOIRE_SUCCURSALES = new Map<any, SuccursaleInfo>([
     [CoteIvoireRegions.Abidjan, {
-        name: 'SN-DK-DK-01',
+        name: 'SN-ABJ-ABJ-01',
         address: ' - ',
         phone: '+221 78 926 05 53',
         airport: ['ABJ'],

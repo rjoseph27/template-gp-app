@@ -19,6 +19,7 @@
     @include button-mixin;
     background-color: $primary-button-color;
     margin: 0.5em 0em;
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.3);
 }
 
 .attention-button {

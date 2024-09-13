@@ -1,6 +1,7 @@
 import { Country } from "../../enums/country.enum";
 import { Currency } from "../../enums/currency.enum";
 import { CountryInfo } from "./countries.type";
+import { CANADA_AIRPORTS, CANADA_SUCCURSALES, CanadaRegions } from "./regions/canada";
 import { COTE_IVOIRE_AIRPORTS, COTE_IVOIRE_SUCCURSALES, CoteIvoireRegions } from "./regions/cote-ivoire";
 import { FRANCE_AIRPORTS, FRANCE_SUCCURSALES, FranceRegions } from "./regions/france";
 import { SENEGAL_AIRPORTS, SENEGAL_SUCCURSALES, SenegalRegions } from "./regions/senegal";
@@ -48,6 +49,32 @@ export const COUNTRY_INFO_LIST: CountryInfo[] = [
         airports: COTE_IVOIRE_AIRPORTS,
         currency: {currency: Currency.XOF, step: 1000 },
         succursales: COTE_IVOIRE_SUCCURSALES
+    },
+    {
+        name: Country.CA,
+        flag: '🇨🇦',
+        phone: {
+            code: '+1',
+            length: 10,
+            phoneFormat: '(___) ___-____'
+        },
+        regions: Object.keys(CanadaRegions).map((key) => CanadaRegions[key as keyof typeof CanadaRegions]),
+        airports: CANADA_AIRPORTS,
+        currency: {currency: Currency.CAD, step: 20 },
+        succursales: CANADA_SUCCURSALES
+    },
+    {
+        name: Country.US,
+        flag: '🇺🇸',
+        phone: {
+            code: '+1',
+            length: 10,
+            phoneFormat: '(___) ___-____'
+        },
+        regions: Object.keys(CanadaRegions).map((key) => CanadaRegions[key as keyof typeof CanadaRegions]),
+        airports: CANADA_AIRPORTS,
+        currency: {currency: Currency.CAD, step: 20 },
+        succursales: CANADA_SUCCURSALES
     }
 ]
 

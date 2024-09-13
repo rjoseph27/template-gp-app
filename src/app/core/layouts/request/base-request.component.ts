@@ -1,4 +1,4 @@
-import { Directive, Input, inject } from "@angular/core";
+import { AfterContentChecked, ChangeDetectorRef, Directive, Input, inject } from "@angular/core";
 import { CurrentFormService } from "../../../services/current-form.service";
 import { Country } from "../../../misc/enums/country.enum";
 import { BehaviorSubject, Observable, map } from "rxjs";
@@ -11,7 +11,7 @@ import { REQUIRED_VALIDATION } from "../../../misc/constants/validations";
  * @description The base request component
  */
 @Directive() 
-export class BaseRequestComponent  {
+export class BaseRequestComponent implements AfterContentChecked {
    /**
    * @description The current form service
    * @type {CurrentFormService}
@@ -89,6 +89,17 @@ export class BaseRequestComponent  {
    * @type {SelectFieldOption[]}
    */
   protected readonly userCountryOptions: SelectFieldOption[] = COUNTRY_SELECTION_OPTIONS;
+
+  /**
+    * @description The change detector reference
+    * @type {ChangeDetectorRef}
+    */
+  private readonly changeDetectorRef: ChangeDetectorRef = inject(ChangeDetectorRef);
+
+  /** @inheritdoc */
+  ngAfterContentChecked() {
+    this.changeDetectorRef.detectChanges();
+}
 
   /**
    * @description The error messages for the country field

@@ -4,7 +4,8 @@
     <div class="title">
         <gh-title [title]="title"></gh-title>
     </div>
-    <div>
+    <div class="desktop-view">
+    <div class="desktop-section">
         <div class="sub-title">{{ 'global.signup.credentials.title' | translate }}</div>
         <div class="section">
             <gh-text-field
@@ -41,7 +42,7 @@
         ></gh-password-field>
         </div>
     </div>
-    <div>
+    <div class="desktop-section">
         <div class="sub-title">{{ 'global.signup.accountDetails.title' | translate }}</div>
         <div class="section">
             <gh-text-field
@@ -114,6 +115,7 @@
             [phoneInfo]="currentCountryInfo(signupForm.get(countryField).value)?.phone"
             ></gh-phone-field>
         </div>
+    </div>
     </div>
     <hr class="gp-divider">
     <gh-checkbox 

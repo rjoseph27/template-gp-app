@@ -3,16 +3,14 @@ import { FormArray, FormControl, FormGroup, Validators } from "@angular/forms";
 import { Country } from "../../../../misc/enums/country.enum";
 import { BaseRequestComponent } from "../base-request.component";
 import { COUNTRY_INFO_LIST } from "../../../../misc/constants/countries/countries";
-import { map, tap } from "rxjs/operators";
+import { map } from "rxjs/operators";
 import { MIN_VALIDATION, REQUIRED_VALIDATION } from "../../../../misc/constants/validations";
 import { INVALID_DATE_FORMAT_VALIDATION, dateFormatValidator } from "../../../../misc/validation/date-format.validator";
-import { DateUtil } from "../../../../misc/util/date.util";
 import { MIN_DATE_VALIDATION, minDateValidator } from "../../../../misc/validation/min-date.validator";
 import { INVALID_TIME_FORMAT_VALIDATION, timeFormatValidator } from "../../../../misc/validation/time-format.validator";
 import { ColumnConfig } from "../../../elements/table/table.component";
 import { BehaviorSubject } from "rxjs";
-import { GroupedSelectFieldOption, SelectFieldOption } from "../../../elements/input/select-field/select-field.component";
-import { LIST_ITEM_CATEGORY_OPTION } from "../../../../misc/constants/item-category";
+import { SelectFieldOption } from "../../../elements/input/select-field/select-field.component";
 import { EnumUtil } from "../../../../misc/util/enum.util";
 import { ARRIVAL_DATE, ARRIVAL_TIME, DEPARTURE_DATE, DEPARTURE_TIME, EMPTY_TABLE_LOGO, FLIGHT_TIME_INVALID, SpecificPrice, Unit, flighTimeValidator } from "./report-trip.constant";
 import { FormMode } from "../../../../misc/enums/form-mode.enum";
@@ -264,7 +262,7 @@ export class GhReportTripComponent extends BaseRequestComponent implements OnIni
    * @description The item category select options
    * @type {GroupedSelectFieldOption[]}
    */
-  protected readonly itemCategorySelectOptions: GroupedSelectFieldOption[] = LIST_ITEM_CATEGORY_OPTION
+  //protected readonly itemCategorySelectOptions: GroupedSelectFieldOption[] = LIST_ITEM_CATEGORY_OPTION
 
   /**
    * @description The error messages of the item category field

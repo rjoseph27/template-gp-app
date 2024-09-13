@@ -5,6 +5,10 @@
 }
 
 .section {
+    margin-bottom: 1em;
+}
+
+.sub-section {
     margin-bottom: 0.5em;
 }
 
@@ -17,5 +21,30 @@
 .send-request {
     button {
         width: 100%;
+    }
+}
+
+@media (min-width: 768px) {
+    form {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .gp-divider {
+        display: none;
+    }
+
+    .group {
+        width: 100%;
+        padding:0em 2em;
+    }
+
+    .send-request {
+        display: flex;
+        justify-content: center;
+        button {
+            margin-bottom: 2em;
+            width: 50%
+        }
     }
 }

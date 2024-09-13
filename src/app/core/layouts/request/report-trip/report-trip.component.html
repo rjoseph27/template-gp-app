@@ -55,8 +55,6 @@
                 ></gh-time-field>
             </div>
         </div>
-    </div>
-    <div class="group">
         <div class="section">
             <div class="sub-section">
                 <gh-select-field
@@ -148,9 +146,8 @@
             [suffix]="(userCurrency$ | async)?.currency"
            ></gh-number-field> 
         </div>
-    </div>
-    <div class="group" *ngIf="!reviseDate">
-        <gh-table 
+        <gh-table
+            *ngIf="!reviseDate"
             [columns]="specificPriceTableColumns$ | async" 
             [(elements)]="specificPriceElements"
             [canAdd]="currentFormMode === formMode.CREATE" 
@@ -161,16 +158,16 @@
             [deleteFactory]="deleteSpecificItemFactory"
             ></gh-table>
     </div>
-    <div>
-        <button
-            *ngIf="currentFormMode === formMode.CREATE"
-            [buttonLoading]="loading$ | async" 
-            type="submit" 
-            class="gp-button" 
-            [disabled]="!reportTripForm.valid"
-        >{{ 'moduleList.gp.reportTrip.send' | translate }}</button>
-    </div>
 </form>
+<div>
+    <button
+        *ngIf="currentFormMode === formMode.CREATE"
+        [buttonLoading]="loading$ | async" 
+        type="submit" 
+        class="gp-button" 
+        [disabled]="!reportTripForm.valid"
+    >{{ 'moduleList.gp.reportTrip.send' | translate }}</button>
+</div>
 <ng-template #emptyTemplate let-value="value">
     <div class="empty-view">
         <div class="empty-content">
@@ -181,7 +178,7 @@
 </ng-template>
 
 <ng-template #categoryTemplate let-element="element">
-    <gh-select-field
+    <!--<gh-select-field
         [placeholder]="'global.itemInformation.itemCategory.placeholder' | translate"
         [name]="element.id"
         [value]="specificPriceFormControl.at(element.id).get('category').value"
@@ -190,7 +187,7 @@
         [errorCaptions]="itemCategoryErrorCaptions"
         [groupedOptions]="itemCategorySelectOptions"
         [readonly]="currentFormMode === formMode.VIEW"
-    ></gh-select-field>
+    ></gh-select-field>-->
 </ng-template>
 
 <ng-template #priceTemplate let-element="element">

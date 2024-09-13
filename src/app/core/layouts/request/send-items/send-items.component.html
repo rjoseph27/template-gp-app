@@ -1,6 +1,9 @@
 <form [formGroup]="sendItemsForm" (ngSubmit)="sendItems()">
     <div class="group">
         <div class="section">
+            <div class="title">
+                {{ 'sendItems.shippingInformation.title' | translate }}
+            </div>
             <div class="sub-section">
                 <gh-select-field
                 [label]="'sendItems.location.from' | translate" 
@@ -50,12 +53,6 @@
                 [disabled]="!sendItemsForm.get(destinationCountryField).value"
                 ></gh-select-field>
             </div>
-        </div>
-    </div>
-    <hr class="gp-divider">
-    <div class="group">
-        <div class="title">
-            {{ 'sendItems.shippingInformation.title' | translate }}
         </div>
         <div class="section">
             <div class="section">
@@ -118,12 +115,12 @@
             ></gh-alert-form>    
         </div>
     </ng-container>
-    <div class="send-request">
-        <button
-            [buttonLoading]="loading$ | async" 
-            type="submit" 
-            class="gp-button" 
-            [disabled]="!sendItemsForm.valid"
-        >{{ submitCapiton }}</button>
-    </div>
 </form>
+<div class="send-request">
+    <button
+        [buttonLoading]="loading$ | async" 
+        type="submit" 
+        class="gp-button" 
+        [disabled]="!sendItemsForm.valid"
+    >{{ submitCapiton }}</button>
+</div>

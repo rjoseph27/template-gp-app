@@ -46,5 +46,5 @@ export const ELEMENTS_COMPONENTS = [
     GhValueComponent,
     GhTimeFieldComponent,
     GhTableComponent,
-    TableLoadingComponent
+    TableLoadingComponent,
 ]

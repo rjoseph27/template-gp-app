@@ -1,0 +1,19 @@
+<div class="section">
+    <label [for]="name">{{ label }}</label>
+</div>
+<div class="section">
+    <input
+        #input="ngModel"
+        class="input"
+        type="text" 
+        [ngModel]="value"
+        [placeholder]="placeholder"
+        [readonly]="true"
+        [ngClass]="{'error-input': ((errorMessage$ | async) && (input.dirty || input.touched))}"
+        (click)="openModal()"
+    >
+    <div 
+        *ngIf="(errorMessage$ | async) && (input.dirty || input.touched)"
+        class="error-message">{{ (errorMessage$ | async) | translate }}
+    </div>
+</div>

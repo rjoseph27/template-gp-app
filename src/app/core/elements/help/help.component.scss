@@ -19,6 +19,10 @@ button {
     padding: 0;
 }
 
+::ng-deep .mat-mdc-raised-button{
+    background-color: transparent !important;
+}
+
 button:hover {
     background-color: #fff;
     box-shadow: none;
