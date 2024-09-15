@@ -110,16 +110,12 @@ interface AccordionItem {
         const value = this.searchValue.toLowerCase().split(" ");
         const hsCode = this.accordionData.map(x => x.children.map(y => y.content)).flat(2);
         const filtered = hsCode.filter(x => value.every(y => x.label.toLowerCase().includes(y)));
-        filtered.forEach((x,i) => {
-            const chapter = x.value.substring(0,2);
+            const chapter = filtered[0].value.substring(0,2);
             const chapterIndex = this.accordionData.findIndex(y => y.name.substring(0,2) === chapter);
             this.pannelOpenState[chapterIndex] = true;
-            const heading = x.value.substring(0,4);
+            const heading = filtered[0].value.substring(0,4);
             const headingIndex = this.accordionData[chapterIndex].children.findIndex(y => y.name.substring(0,4) === heading);
             this.subPannelOpenState[chapterIndex][headingIndex] = true;
-            if(i === 0) {
-                setTimeout(() => document.getElementById("btn-"+x.value.substring(0,6)).focus(),100);
-            }
-        });
+            setTimeout(() => document.getElementById("btn-"+filtered[0].value.substring(0,6)).focus(),100);
       }
   }

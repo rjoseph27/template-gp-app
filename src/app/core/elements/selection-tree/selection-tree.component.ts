@@ -33,6 +33,7 @@ export class GhSelectionTreeComponent extends BaseInputFieldComponent<string> {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.value = result; 
+        this.valueChange.emit(result);
       }
     });
   }

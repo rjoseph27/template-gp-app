@@ -178,16 +178,16 @@
 </ng-template>
 
 <ng-template #categoryTemplate let-element="element">
-    <!--<gh-select-field
+    <gh-selection-tree 
         [placeholder]="'global.itemInformation.itemCategory.placeholder' | translate"
         [name]="element.id"
         [value]="specificPriceFormControl.at(element.id).get('category').value"
         (valueChange)="specificPriceFormControl.at(element.id).get('category').setValue($event)"
         [errors]="specificPriceFormControl.at(element.id).get('category').errors"
         [errorCaptions]="itemCategoryErrorCaptions"
-        [groupedOptions]="itemCategorySelectOptions"
         [readonly]="currentFormMode === formMode.VIEW"
-    ></gh-select-field>-->
+    ></gh-selection-tree>
+
 </ng-template>
 
 <ng-template #priceTemplate let-element="element">

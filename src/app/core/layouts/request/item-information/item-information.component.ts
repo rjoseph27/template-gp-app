@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, inject } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { IMAGE_FORMAT_VALIDATION, imageFormatValidator } from "../../../../misc/validation/image-format.validator";
 import { IMAGE_SIZE_VALIDATION, imageSizeValidator } from "../../../../misc/validation/image-size.validator";
 import { MAX_VALIDATION, MIN_VALIDATION, REQUIRED_VALIDATION } from "../../../../misc/constants/validations";
@@ -68,6 +68,12 @@ export interface ItemInformation {
   itemValue: number;
 
   /**
+   * @description The size of the item
+   * @type {ItemSize}
+    */
+  itemSize: ItemSize;
+
+  /**
    * @description The extra notes of the item
    * @type {string}
    */
@@ -81,6 +87,30 @@ export interface ItemInformation {
 }
 
 /**
+ * @interface ItemSize
+ * @description The type of the item size
+ */
+interface ItemSize {
+  /**
+   * @description The length of the item
+   * @type {number}
+   */
+  itemLength: number;
+
+  /**
+   * @description The width of the item
+   * @type {number}
+   */
+  itemWidth: number;
+
+  /**
+   * @description The height of the item
+   * @type {number}
+   */
+  itemHeight: number;
+}
+
+/**
  * @type ItemInformationForm
  * @description The type of the item information form
  */
@@ -90,6 +120,7 @@ type ItemInformationForm = FormGroup<
     itemCategory: FormControl<string>; 
     itemWeight: FormControl<number>; 
     itemQuantity: FormControl<number>;
+    itemSize: FormGroup<{ itemLength: FormControl<number>; itemWidth: FormControl<number>; itemHeight: FormControl<number> }>;
     itemValue: FormControl<number>;
     extraNotes: FormControl<string>; 
     reasonShipping: FormControl<string>;
@@ -197,6 +228,30 @@ export class GhItemInformationComponent implements OnInit {
   protected readonly itemQuantityField = "itemQuantity"
 
   /**
+   * @description The name of the item size field
+   * @type {string}
+   */
+  protected readonly itemSizeField = "itemSize"
+
+  /**
+   * @description The name of the item length field
+   * @type {string}
+   */
+  protected readonly itemLengthField = "itemLength"
+
+  /**
+   * @description The name of the item width field
+   * @type {string}
+   */
+  protected readonly itemWidthField = "itemWidth"
+
+  /**
+   * @description The name of the item height field
+   * @type {string}
+   */
+  protected readonly itemHeightField = "itemHeight"
+
+  /**
    * @description The name of the item value field
    * @type {string}
    */
@@ -269,6 +324,33 @@ export class GhItemInformationComponent implements OnInit {
     [REQUIRED_VALIDATION, "global.itemInformation.itemQuantity.errors.required"],
     [INTEGER_VALIDATION, "global.itemInformation.itemQuantity.errors.integer"],
     [MIN_VALIDATION, "global.itemInformation.itemQuantity.errors.min"]
+  ]);
+
+  /**
+   * @description The error messages of the item length field
+   * @type {Map<string, string>}  
+   **/
+  protected readonly itemWidthErrorCaptions = new Map<string, string>([
+    [REQUIRED_VALIDATION, "global.itemInformation.itemSize.width.errors.required"],
+    [MIN_VALIDATION, "global.itemInformation.itemSize.width.errors.min"]
+  ]);
+
+  /**
+   * @description The error messages of the item height field
+   * @type {Map<string, string>}
+   */
+  protected readonly itemHeightErrorCaptions = new Map<string, string>([
+    [REQUIRED_VALIDATION, "global.itemInformation.itemSize.height.errors.required"],
+    [MIN_VALIDATION, "global.itemInformation.itemSize.height.errors.min"]
+  ]);
+
+  /**
+   * @description The error messages of the item length field
+   * @type {Map<string, string>}
+   */
+  protected readonly itemLengthErrorCaptions = new Map<string, string>([
+    [REQUIRED_VALIDATION, "global.itemInformation.itemSize.length.errors.required"],
+    [MIN_VALIDATION, "global.itemInformation.itemSize.length.errors.min"]
   ]);
 
   /**
@@ -350,10 +432,15 @@ export class GhItemInformationComponent implements OnInit {
       itemInformation: new FormGroup({
           image: new FormControl(image || <GhFile>{}, [Validators.required, imageFormatValidator, imageSizeValidator]),
           itemName: new FormControl(itemInformation?.itemName, [Validators.required]),
-          itemCategory: new FormControl(itemInformation?.itemCategory as string, [Validators.required]),
+          itemCategory: new FormControl(itemInformation?.itemCategory, [Validators.required]),
           itemWeight: new FormControl(itemInformation?.itemWeight, [Validators.required, Validators.min(0.0001), Validators.max(MAX_LUGGAGE_WEIGHT)]),
+          itemSize: new FormBuilder().group({
+            itemLength: new FormControl(itemInformation?.itemSize?.itemLength || 0.01, [Validators.required, Validators.min(0)]),
+            itemWidth: new FormControl(itemInformation?.itemSize?.itemWidth, [Validators.required, Validators.min(0)]),
+            itemHeight: new FormControl(itemInformation?.itemSize?.itemHeight, [Validators.required, Validators.min(0)])
+          }),
           itemQuantity: new FormControl(itemInformation?.itemQuantity || 1, [Validators.required, Validators.min(1), integerValidator]),
-          itemValue: new FormControl(itemInformation?.itemValue || 0, [Validators.required, Validators.min(0), integerValidator]),
+          itemValue: new FormControl(itemInformation?.itemValue || 0, [Validators.required, Validators.min(0)]),
           extraNotes: new FormControl(itemInformation?.extraNotes),
           reasonShipping: new FormControl(itemInformation?.reasonShipping, [Validators.required])
         })

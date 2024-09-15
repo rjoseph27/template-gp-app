@@ -271,6 +271,36 @@
                     "integer": "Please enter a valid quantity"
                 }
             },
+            "itemSize": {
+                "label": "Size of the item (cm)",
+                "width": {
+                    "label": "Width",
+                    "placeholder": "0",
+                    "errors": {
+                        "required": "Please enter the width",
+                        "min": "Please enter a width more than {{min}}",
+                        "integer": "Please enter a valid width"
+                    }
+                },
+                "height": {
+                    "label": "Height",
+                    "placeholder": "0",
+                    "errors": {
+                        "required": "Please enter the height",
+                        "min": "Please enter a height more than {{min}}",
+                        "integer": "Please enter a valid height"
+                    }
+                },
+                "length": {
+                    "label": "Length",
+                    "placeholder": "0",
+                    "errors": {
+                        "required": "Please enter the length",
+                        "min": "Please enter a length more than {{min}}",
+                        "integer": "Please enter a valid length"
+                    }
+                }
+            },
             "itemValue": {
                 "label": "Value of the item ({{currency}})",
                 "placeholder": "Enter the value",

@@ -267,8 +267,35 @@
                 "tooltip": "Une unité d’un colis est considérée lorsque le colis peut être divisé pour plusieurs expéditions. Assurez-vous que le poids et la taille sont pris en compte pour l'unité du colis.",
                 "errors": {
                     "required": "Entrez la quantité",
-                    "min": "Entrez une quanité plus que {{min}}",
+                    "min": "Entrez une quantité plus que {{min}}",
                     "integer": "Entrez une quantité valide"
+                }
+            },
+            "itemSize": {
+                "label": "Dimension de l'article (cm)",
+                "width": {
+                    "label": "Largeur",
+                    "placeholder": "0",
+                    "errors": {
+                        "required": "Entrez la largeur de l'article",
+                        "min": "Entrez une largeur de plus que {{min}}"
+                    }
+                },
+                "height": {
+                    "label": "Hauteur",
+                    "placeholder": "0",
+                    "errors": {
+                        "required": "Entrez la hauteur de l'article",
+                        "min": "Entrez une hauteur de plus que {{min}}"
+                    }
+                },
+                "length": {
+                    "label": "Longueur",
+                    "placeholder": "0",
+                    "errors": {
+                        "required": "Entrez la longueur de l'article",
+                        "min": "Entrez une longueur de plus que {{min}}"
+                    }
                 }
             },
             "itemValue": {
