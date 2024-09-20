@@ -166,6 +166,7 @@
         type="submit" 
         class="gp-button" 
         [disabled]="!reportTripForm.valid"
+        (click)="submitForm()"
     >{{ 'moduleList.gp.reportTrip.send' | translate }}</button>
 </div>
 <ng-template #emptyTemplate let-value="value">

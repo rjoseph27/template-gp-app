@@ -1,9 +1,13 @@
 {
     "userType": {
         "client": "Client",
-        "gp": "GP"
+        "gp": "Forwarding Agent"
     },
     "moduleList": {
+        "global": {
+            "greeting": "Hi, {{name}}",
+            "tracking": "Tracking"
+        },
         "client": {
             "sendItems": {
                 "title": "Send items",

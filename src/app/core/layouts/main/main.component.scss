@@ -9,13 +9,23 @@
     padding-top: 0 !important;
 }
 
+.page {
+    display: flex;
+}
+
+.content {
+    background-color: $primary-color;
+    height: auto;    
+}
+
 .module {
     padding: 0.5em 1em 1em 1em;
     font-size: 1.5em;
+    cursor: pointer;
 
     .icon {
         ::ng-deep .gh-icon-content {
-            color: $secondary-color;
+            color: #fff;
             font-size: 1.5em;
         }
     }
@@ -28,7 +38,8 @@
 
     .module-name {
         margin-top: 0.25em;
-        color: rgb(58, 58, 58);
+        color: #fff;
+        text-wrap: nowrap;
     }
 
     .title {
@@ -38,49 +49,36 @@
     }
 }
 
-@media (min-width: 768px) {
+.main-body-style {
+    padding: 1.5rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    min-height: 70vh;
+}
+
+
+@media (max-width: 768px) {
     .content {
-        display: flex;
-        flex-wrap: wrap;
+        position: absolute;
+        z-index: 1000;
+        background-color: white;
+        width: 100%;
     }
 
     .module {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-width: 250px;
-        min-height:250px;
-        margin: 1em;
-        background-color: $primary-color;
-        border-width: 0;
-        cursor: pointer;
-        color: white;
-
-        .module-content {
-            width: 100%;
-            display: block;
-        }
-
-        .title {
-            .icon {
-                display: flex;
-                justify-content: center;
-                ::ng-deep .gh-icon-content {
-                    font-size: 5em;
-                    color: #fff;
-                }
+        .icon {
+            ::ng-deep .gh-icon-content {
+                color: $secondary-color;
             }
         }
 
         .module-name {
-            text-align: center;
-            font-size: 1.5em;
-            margin-top: 1em;
-            color: #fff;
-        }
-
-        .next-button{
-            display: none;
+            color: #000;
         }
     }
-  }
+
+    .hide-body {
+        display: none;
+    }
+}

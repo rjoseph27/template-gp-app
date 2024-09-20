@@ -1,4 +1,5 @@
-<gh-main [modules]="modules$ | async">
+<gh-main [modules]="modules$ | async" [displayBody]="displayBody">
+    <div header>
     <div class="header-content">
         <div>
             {{ userFullName$ | async }}
@@ -9,5 +10,9 @@
                 (valueChange)="switchMode($event)" 
                 [value]="toggleValue"></gh-toggle>
         </div>
+    </div>
+    </div>
+    <div body>
+        <ng-content></ng-content>
     </div>
 </gh-main>

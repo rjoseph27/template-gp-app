@@ -15,7 +15,7 @@ import { FormMode } from "../../../misc/enums/form-mode.enum";
 @Component({
   selector: 'client-report-trip',
   templateUrl: './report-trip.component.html',
-  styleUrls: ['../request.scss'],
+  styleUrls: ['../request.scss', './report-trip.component.scss'],
   providers: [CurrentFormService]
 })
 export class ClientReportTripComponent extends BaseRequestComponent implements OnInit {

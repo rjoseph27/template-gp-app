@@ -1,17 +1,22 @@
 <div class="header">
-    <ng-content></ng-content>
+    <ng-content select="[header]"></ng-content>
 </div>
-<div class="content">
+<div class="page">
+<div class="content" [ngClass]="{'hide-body': displayBody }">
     <div class="module" *ngFor="let module of modules;" (click)="module.action()">
         <div class="module-content">
-        <div class="title">
-            <div class="icon">
-                <gh-icon [name]="module.icon"></gh-icon>
+            <div class="title">
+                <div class="icon">
+                    <gh-icon [name]="module.icon"></gh-icon>
+                </div>
+            </div>
+            <div class="module-name">
+                {{ module.label | translate }}
             </div>
         </div>
-        <div class="module-name">
-            {{ module.label | translate }}
-        </div>
     </div>
-    </div>
+</div>
+<div class="main-body-style" [ngClass]="{'hide-body': !displayBody }">
+    <ng-content select="[body]"></ng-content>
+</div>
 </div>

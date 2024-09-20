@@ -1,5 +1,10 @@
 $toggle-color: #a66908;
 
+.toggle {
+  display: flex;
+  justify-content: right;
+}
+
 .switch {
     position: relative;
     display: inline-block;

@@ -46,4 +46,10 @@ export class GhMainComponent {
    * @type {GhModule[]}
    */
   @Input() modules: GhModule[] = [];
+
+  /**
+   * @description A boolean value that determines if the body of the main component should be displayed or not
+   * @type {boolean}
+   */
+  @Input() displayBody = true;
 }

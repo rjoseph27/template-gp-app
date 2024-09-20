@@ -2,8 +2,9 @@ import { Component, OnInit, inject } from "@angular/core";
 import { CurrentFormService } from "../../../services/current-form.service";
 import { BaseRequestComponent } from "../base-request.component";
 import { ClientSendItemsService, SendItemsRequest } from "../../service/send-items.service";
-import { tap } from "rxjs/operators";
+import { map, tap } from "rxjs/operators";
 import { ClientRoutes } from "../../client.route";
+import { COUNTRY_INFO_LIST } from "../../../misc/constants/countries/countries";
 
 /**
  * @class ClientSendItemsComponent

@@ -1,5 +1,6 @@
 <gh-main [modules]="modules">
-    <div class="header-content">
+    <ng-container header>
+     <div class="header-content">
         <div>
             {{ userFullName$ | async }}
         </div>
@@ -7,4 +8,7 @@
             {{ succursale$ | async }}
          </div>
     </div>
+    </ng-container>
+
+    <ng-container body>ok</ng-container >
 </gh-main>

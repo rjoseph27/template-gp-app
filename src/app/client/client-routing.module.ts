@@ -36,13 +36,16 @@ import { ClientAlertMatchResolver } from './request/alert/alert-match.resolver';
 import { ClientRescheduleOrderResolver } from './orders/client-orders/reschedule-order.resolver';
 import { ClientGpTrackingComponent } from './orders/gp-orders/gp-tracking/gp-tracking.component';
 import { ClientTasksResolver } from './orders/gp-orders/gp-tracking/tasks.resolver';
+import { ClientDashboardComponent } from './dashboard/dashboard.component';
+import { ClientDashboardClientResolver } from './dashboard/client-dashboard.resolver';
+import { ClientDashboardGpResolver } from './dashboard/gp-dashboard.resolver';
 
 /**
  * @constant routes
  * @description The routes for the client module
  */
 const routes: Routes = [
-    { path: '', component: ClientMainComponent, pathMatch: 'full', resolve: { userInfo: ClientApplicationResolver} },
+    { path: '', component: ClientDashboardComponent, pathMatch: 'full', resolve: { userInfo: ClientApplicationResolver, clientOrders: ClientDashboardClientResolver, gpOrders: ClientDashboardGpResolver } },
     { path: `${ClientRoutes.sendItems}`, children: [
         { path: '', component: ClientSendItemsComponent, pathMatch: 'full', resolve: { userInfo: ClientApplicationResolver} },
         { path: `${ClientRoutes.calendar}`, component: ClientCalendarComponent, pathMatch: 'full', resolve: { calendarInfo: ClientCalendarResolver} }

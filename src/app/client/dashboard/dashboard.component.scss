@@ -1,0 +1,37 @@
+@import '../../../styles/variables';
+
+::ng-deep .main-body-style {
+    display: block !important;
+} 
+
+::ng-deep .gh-icon-content {
+    font-size: 2em;
+    padding: 0.25em;
+}
+
+.table {
+    .table-header {
+        background-color: $gray-color;
+        font-weight: $semi-bold;
+        padding: 0.5em;
+        font-size: 1em;
+    }
+
+    .table-body {
+        display: flex;
+
+        .td {
+            width: 50%;
+            border: 1px solid lighten($gray-color, 20%);
+            display: flex;
+
+            .count {
+                font-size: 1.25em;
+            }
+
+            .label{
+                font-weight: $semi-bold;
+            }
+        }
+    }
+}

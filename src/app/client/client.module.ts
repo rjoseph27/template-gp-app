@@ -50,6 +50,9 @@ import { ClientAlertMatchResolver } from './request/alert/alert-match.resolver';
 import { ClientRescheduleOrderResolver } from './orders/client-orders/reschedule-order.resolver';
 import { ClientGpTrackingComponent } from './orders/gp-orders/gp-tracking/gp-tracking.component';
 import { ClientTasksResolver } from './orders/gp-orders/gp-tracking/tasks.resolver';
+import { ClientDashboardComponent } from './dashboard/dashboard.component';
+import { ClientDashboardClientResolver } from './dashboard/client-dashboard.resolver';
+import { ClientDashboardGpResolver } from './dashboard/gp-dashboard.resolver';
 
 /**
  * @module ClientModule
@@ -82,7 +85,8 @@ import { ClientTasksResolver } from './orders/gp-orders/gp-tracking/tasks.resolv
         ClientCreateAlertComponent,
         ClientEditAlertComponent,
         ClientOrderTrackingComponent,
-        ClientGpTrackingComponent
+        ClientGpTrackingComponent,
+        ClientDashboardComponent
     ],
     imports: [
         CommonModule,
@@ -122,7 +126,9 @@ import { ClientTasksResolver } from './orders/gp-orders/gp-tracking/tasks.resolv
         NotificationService,
         ClientAlertMatchResolver,
         ClientRescheduleOrderResolver,
-        ClientTasksResolver
+        ClientTasksResolver,
+        ClientDashboardClientResolver,
+        ClientDashboardGpResolver
     ]
 })
 export class ClientModule {

@@ -2,6 +2,7 @@
     <div class="label">
         {{ label | translate }}
     </div>
+    <div class="toggle">
     <label class="switch">
         <input
         #input="ngModel" 
@@ -10,5 +11,6 @@
         (ngModelChange)="valueChange.emit($event)">        
         <span class="slider round"></span>
     </label>
+    </div>
 </div>
   

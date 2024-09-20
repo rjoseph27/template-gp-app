@@ -1,10 +1,14 @@
-<div class="title">
-     <h1> {{ 'moduleList.client.sendItems.title' | translate }}</h1>
-</div>
-<div class="content">
-     <gh-send-items 
-          [userCountry]="userCountry" 
-          [request]="request"
-          [submitCapiton]="'moduleList.client.sendItems.content.send' | translate"
-     ></gh-send-items>
-</div>
+<client-main>
+     <div class="title">
+          <h1> {{ 'moduleList.client.sendItems.title' | translate }}</h1>
+     </div>
+     <div class="content">
+          <gh-send-items 
+               [userCountry]="userCountry" 
+               [request]="request"
+               [submitCapiton]="'moduleList.client.sendItems.content.send' | translate"
+          ></gh-send-items>
+     </div>
+</client-main>
+
+ 

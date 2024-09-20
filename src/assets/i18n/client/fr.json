@@ -1,9 +1,13 @@
 {
     "userType": {
         "client": "Client",
-        "gp": "GP"
+        "gp": "Transitaire"
     },
     "moduleList": {
+        "global": {
+            "greeting": "Salut, {{name}}",
+            "tracking": "Suivie"
+        },
         "client": {
             "sendItems": {
                 "title": "Envoyer un colis",

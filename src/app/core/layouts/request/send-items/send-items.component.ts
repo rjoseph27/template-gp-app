@@ -137,6 +137,12 @@ export class GhSendItemsComponent extends BaseRequestComponent implements OnInit
   ]);
 
   /**
+   * @description The currency of the request
+   * @type {Observable<Currency>}
+   */
+  protected readonly currency$ = this._userCountry$.pipe(map(country => COUNTRY_INFO_LIST.find(x => x.name === country).currency));
+
+  /**
    * @description A mode used for alert management
    * @type {boolean}
    */

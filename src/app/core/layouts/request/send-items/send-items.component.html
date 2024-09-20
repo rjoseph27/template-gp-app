@@ -98,8 +98,9 @@
         <gh-item-information 
             [itemInformation]="sendItemsForm.get(itemInformationField).value"
             (itemInformationChange)="sendItemsForm.get(itemInformationField).setValue($event)"
+            [currency]="(currency$ | async)?.currency"
         ></gh-item-information>
-    </div>
+    
     <ng-container *ngIf="alertMode">
         <hr class="gp-divider">
         <div class="group">
@@ -112,6 +113,7 @@
             ></gh-alert-form>    
         </div>
     </ng-container>
+    </div>
 </form>
 <div class="send-request">
     <button

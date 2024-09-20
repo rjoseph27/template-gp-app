@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs';
 import { UserType } from '../user-type.enum';
@@ -24,6 +24,12 @@ export class ClientMainComponent implements OnInit {
    * @type {ClientSendItemsService}
    */
   private readonly sendItemsService = inject(ClientSendItemsService);
+
+  /**
+   * @description A boolean value that determines if the body of the main component should be displayed or not
+   * @type {boolean}
+   */
+  @Input() displayBody = true;
   
   /**
    * @description The application service
@@ -158,6 +164,7 @@ export class ClientMainComponent implements OnInit {
    * @returns {void}
    */
   protected switchMode(value: boolean): void {
+    this.router.navigate([ClientRoutes.main.fullPath()]);
     if(!value) {
       this.applicationService.userMode = UserType.Client;
     } else {
