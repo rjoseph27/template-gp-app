@@ -1,14 +1,10 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild, inject } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { EMAIL_VALIDATION, REQUIRED_VALIDATION } from '../../../../misc/constants/validations';
 import { CurrentFormService } from '../../../../services/current-form.service';
 import { PASSWORD_MISMATCH_VALIDATION, passwordMatchValidator } from '../../../../misc/validation/confirm-password.validation';
 import { INVALID_PASSWORD_ERROR_MESSAGES, passwordValidator } from '../../../../misc/validation/password.validator';
 import { INVALID_NAME_VALIDATION, nameValidator } from '../../../../misc/validation/name.validator';
-import { DateUtil } from '../../../../misc/util/date.util';
-import { LEGAL_AGE } from '../../../../misc/constants/application';
-import { INVALID_DATE_FORMAT_VALIDATION, dateFormatValidator } from '../../../../misc/validation/date-format.validator';
-import { Genders } from '../../../../misc/enums/genders.enum';
 import { EnumUtil } from '../../../../misc/util/enum.util';
 import { COUNTRY_INFO_LIST } from '../../../../misc/constants/countries/countries';
 import { INVALID_PHONE_NUMBER_VALIDATION, phoneNumberValidator } from '../../../../misc/validation/phone.validation';
@@ -19,7 +15,7 @@ import { EMAIL_TAKEN_VALIDATOR, EmailTakenValidator } from '../../../../misc/val
 import { PHONE_NUMBER_TAKEN_VALIDATOR, PhoneNumberTakenValidator } from '../../../../misc/validation/phone-number-taken.validator';
 import { COUNTRY_SELECTION_OPTIONS, CountryInfo } from '../../../../misc/constants/countries/countries.type';
 import { SelectFieldOption } from '../../../elements/input/select-field/select-field.component';
-import { MAX_DATE_VALIDATION, maxDateValidator } from '../../../../misc/validation/max-date.validator';
+import { SectorOfActivities } from '../../../../misc/enums/sector-of-activities';
 
 /**
  * @title Sign Up Component
@@ -75,22 +71,34 @@ export class GhSignUpComponent implements OnInit{
   protected readonly lastNameField: string = 'lastName';
 
   /**
-   * @description The name of the date of birth field
+   * @description The name of the business name field
    * @type {string}
    */
-  protected readonly dateOfBirthField: string = 'dateOfBirth';
+  protected readonly businessNameField: string = 'businessName';
 
   /**
-   * @description The name of the gender field
+   * @description The name of the address field
    * @type {string}
    */
-  protected readonly genderField: string = 'gender';
+  protected readonly addressField: string = 'address';
+
+  /**
+   * @description The name of the sector of activity field
+   * @type {string}
+   */
+  protected readonly sectorOfActivityField: string = 'sectorOfActivity';
 
   /**
    * @description The name of the country field
    * @type {string}
    */
   protected readonly countryField: string = 'country';
+
+  /**
+   * @description The name of the business key field
+   * @type {string}
+   */
+  protected readonly businessKeyField: string = 'businessKey';
 
   /**
    * @description The name for the phone number field
@@ -134,8 +142,28 @@ export class GhSignUpComponent implements OnInit{
    * @type {Map<string, string>}
    */
   protected readonly firstNameErrorCaptions = new Map<string, string>([
-    [REQUIRED_VALIDATION, "global.signup.accountDetails.errors.firstName.required"],
-    [INVALID_NAME_VALIDATION, "global.signup.accountDetails.errors.firstName.invalid"]
+    [REQUIRED_VALIDATION, "global.signup.representativeDetails.lastName.errors.required"],
+    [INVALID_NAME_VALIDATION, "global.signup.representativeDetails.lastName.errors.invalid"]
+  ]);
+
+  /**
+   * @description The error messages of the business name field
+   * @type {Map<string, string>}
+   */
+  protected readonly businessNameErrorCaptions = new Map<string, string>([
+    [REQUIRED_VALIDATION, "global.signup.businessDetails.businessName.errors.required"],
+  ]);
+
+  protected readonly addressErrorCaptions = new Map<string, string>([
+    [REQUIRED_VALIDATION, "global.signup.businessDetails.address.errors.required"],
+  ]);
+
+  /**
+   * @description The error messages of the business key field
+   * @type {Map<string, string>}
+   */
+  protected readonly businessKeyErrorCaptions = new Map<string, string>([
+    [REQUIRED_VALIDATION, "global.signup.businessDetails.businessKey.errors.required"],
   ]);
 
   /**
@@ -143,26 +171,8 @@ export class GhSignUpComponent implements OnInit{
    * @type {Map<string, string>}
    */
   protected readonly lastNameErrorCaptions = new Map<string, string>([
-    [REQUIRED_VALIDATION, "global.signup.accountDetails.errors.lastName.required"],
-    [INVALID_NAME_VALIDATION, "global.signup.accountDetails.errors.lastName.invalid"]
-  ]);
-
-  /**
-   * @description The error messages of the date of birth field
-   * @type {Map<string, string>}
-   */
-  protected readonly dateOfBirthErrorCaptions = new Map<string, string>([
-    [REQUIRED_VALIDATION, "global.signup.accountDetails.errors.dateOfBirth.required"],
-    [MAX_DATE_VALIDATION, "global.signup.accountDetails.errors.dateOfBirth.invalid"],
-    [INVALID_DATE_FORMAT_VALIDATION, "global.signup.accountDetails.errors.dateOfBirth.invalidFormat"]
-  ]);
-
-  /**
-   * @description The error messages for the gender field
-   * @type {Map<string, string>}
-   */
-  protected readonly genderErrorCaptions = new Map<string, string>([
-    [REQUIRED_VALIDATION, "global.signup.accountDetails.errors.gender.required"],
+    [REQUIRED_VALIDATION, "global.signup.representativeDetails.lastName.errors.required"],
+    [INVALID_NAME_VALIDATION, "global.signup.representativeDetails.lastName.errors.invalid"]
   ]);
 
   /**
@@ -170,7 +180,16 @@ export class GhSignUpComponent implements OnInit{
    * @type {Map<string, string>}
    */
   protected readonly countryErrorCaptions = new Map<string, string>([
-    [REQUIRED_VALIDATION, "global.signup.accountDetails.errors.country.required"],
+    [REQUIRED_VALIDATION, "global.signup.businessDetails.country.errors.required"],
+  ]);
+
+
+  /**
+   * @description The error messages for the country field
+   * @type {Map<string, string>}
+   */
+  protected readonly sectorOfActivityErrorCaptions = new Map<string, string>([
+    [REQUIRED_VALIDATION, "global.signup.businessDetails.sectorOfActivity.errors.required"],
   ]);
 
   /**
@@ -178,9 +197,9 @@ export class GhSignUpComponent implements OnInit{
    * @type {Map<string, string>}
    */
   protected readonly phoneNumberErrorCaptions = new Map<string, string>([
-    [REQUIRED_VALIDATION, "global.signup.accountDetails.errors.phoneNumber.required"],
-    [INVALID_PHONE_NUMBER_VALIDATION, 'global.signup.accountDetails.errors.phoneNumber.invalid'],
-    [PHONE_NUMBER_TAKEN_VALIDATOR, "global.signup.accountDetails.errors.phoneNumber.taken"]
+    [REQUIRED_VALIDATION, "global.signup.representativeDetails.phoneNumber.errors.required"],
+    [INVALID_PHONE_NUMBER_VALIDATION, 'global.signup.representativeDetails.phoneNumber.errors.invalid'],
+    [PHONE_NUMBER_TAKEN_VALIDATOR, "global.signup.representativeDetails.phoneNumber.errors.taken"]
   ]);
 
   /**
@@ -188,7 +207,7 @@ export class GhSignUpComponent implements OnInit{
    * @type {Map<string, string>}
    */
   protected readonly termsAndConditionsErrorCaptions = new Map<string, string>([
-    [REQUIRED_VALIDATION, "global.signup.accountDetails.errors.termsAndConditions.required"]
+    [REQUIRED_VALIDATION, "global.signup.termsAndConditions.errors.required"]
   ]);
 
   /**
@@ -204,22 +223,16 @@ export class GhSignUpComponent implements OnInit{
   private readonly currentFormService: CurrentFormService = inject(CurrentFormService);
 
   /**
-   * @description The minimum date for the date of birth field
-   * @type {Date}
-   */
-  protected readonly maxDate = DateUtil.subtractYearsFromDate(DateUtil.today(), LEGAL_AGE);
-
-  /**
-   * @description The options of gender
-   * @type {SelectFieldOption[]}
-   */
-  protected readonly genderOptions: SelectFieldOption[] = EnumUtil.enumToSelectOptions(Genders,"Genders");
-
-  /**
    * @description The options of the country
    * @type {SelectFieldOption[]}
    */
   protected readonly countryOptions: SelectFieldOption[] = COUNTRY_SELECTION_OPTIONS
+
+  /**
+   * @description The options of the sector of activity
+   * @type {SelectFieldOption[]}
+   */
+  protected readonly sectorOfActivityOptions: SelectFieldOption[] = EnumUtil.enumToSelectOptions(SectorOfActivities,'SectorOfActivities')
 
   /**
    * @description The sign up form
@@ -265,10 +278,12 @@ export class GhSignUpComponent implements OnInit{
       email: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, [Validators.required, passwordValidator]),
       confirmPassword: new FormControl(null, [Validators.required]),
+      businessName: new FormControl(null, [Validators.required]),
+      sectorOfActivity: new FormControl(null, [Validators.required]),
+      businessKey: new FormControl(null, [Validators.required]),
+      address: new FormControl(null, [Validators.required]),
       firstName: new FormControl(null, [Validators.required, nameValidator]),
       lastName: new FormControl(null, [Validators.required, nameValidator]),
-      dateOfBirth: new FormControl(null, [Validators.required, maxDateValidator(this.maxDate), dateFormatValidator]),
-      gender: new FormControl(null, [Validators.required]),
       country: new FormControl(null, [Validators.required]),
       phoneNumber: new FormControl(null, [Validators.required, phoneNumberValidator]),
       termsAndConditions: new FormControl(null, [Validators.requiredTrue]),

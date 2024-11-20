@@ -43,57 +43,34 @@
         </div>
     </div>
     <div class="desktop-section">
-        <div class="sub-title">{{ 'global.signup.accountDetails.title' | translate }}</div>
+        <div class="sub-title">{{ 'global.signup.businessDetails.title' | translate }}</div>
         <div class="section">
             <gh-text-field
-            [label]="'global.signup.accountDetails.firstName.label' | translate" 
-            [placeholder]="'global.signup.accountDetails.firstName.placeholder' | translate"
-            [name]="firstNameField"
-            [value]="signupForm.get(firstNameField).value"
-            (valueChange)="signupForm.get(firstNameField).setValue($event)"
-            [errors]="signupForm.get(firstNameField).errors"
-            [errorCaptions]="firstNameErrorCaptions"
+            [label]="'global.signup.businessDetails.businessName.label' | translate" 
+            [placeholder]="'global.signup.businessDetails.businessName.placeholder' | translate"
+            [name]="businessNameField"
+            [value]="signupForm.get(businessNameField).value"
+            (valueChange)="signupForm.get(businessNameField).setValue($event)"
+            [errors]="signupForm.get(businessNameField).errors"
+            [errorCaptions]="businessNameErrorCaptions"
             ></gh-text-field>
-        </div>
-        <div class="section">
-            <gh-text-field
-            [label]="'global.signup.accountDetails.lastName.label' | translate" 
-            [placeholder]="'global.signup.accountDetails.lastName.placeholder' | translate"
-            [name]="lastNameField"
-            [value]="signupForm.get(lastNameField).value"
-            (valueChange)="signupForm.get(lastNameField).setValue($event)"
-            [errors]="signupForm.get(lastNameField).errors"
-            [errorCaptions]="lastNameErrorCaptions"
-            ></gh-text-field>
-        </div>
-        <div class="section">
-            <gh-date-field
-            [label]="'global.signup.accountDetails.dateOfBirth.label' | translate" 
-            [placeholder]="'global.signup.accountDetails.dateOfBirth.placeholder' | translate"
-            [name]="dateOfBirthField"
-            [value]="signupForm.get(dateOfBirthField).value"
-            (valueChange)="signupForm.get(dateOfBirthField).setValue($event)"
-            [errors]="signupForm.get(dateOfBirthField).errors"
-            [maxDate]="maxDate"
-            [errorCaptions]="dateOfBirthErrorCaptions"
-            ></gh-date-field>
         </div>
         <div class="section">
             <gh-select-field
-            [label]="'global.signup.accountDetails.gender.label' | translate" 
-            [placeholder]="'global.signup.accountDetails.gender.placeholder' | translate"
-            [name]="genderField"
-            [value]="signupForm.get(genderField).value"
-            (valueChange)="signupForm.get(genderField).setValue($event)"
-            [errors]="signupForm.get(genderField).errors"
-            [errorCaptions]="genderErrorCaptions"
-            [options]="genderOptions"
+            [label]="'global.signup.businessDetails.sectorOfActivity.label' | translate" 
+            [placeholder]="'global.signup.businessDetails.sectorOfActivity.placeholder' | translate"
+            [name]="sectorOfActivityField"
+            [value]="signupForm.get(sectorOfActivityField).value"
+            (valueChange)="signupForm.get(sectorOfActivityField).setValue($event)"
+            [errors]="signupForm.get(sectorOfActivityField).errors"
+            [errorCaptions]="sectorOfActivityErrorCaptions"
+            [options]="sectorOfActivityOptions"
             ></gh-select-field>
         </div>
         <div class="section">
             <gh-select-field
-            [label]="'global.signup.accountDetails.country.label' | translate" 
-            [placeholder]="'global.signup.accountDetails.country.placeholder' | translate"
+            [label]="'global.signup.businessDetails.country.label' | translate" 
+            [placeholder]="'global.signup.businessDetails.country.placeholder' | translate"
             [name]="countryField"
             [value]="signupForm.get(countryField).value"
             (valueChange)="signupForm.get(countryField).setValue($event)"
@@ -103,9 +80,57 @@
             ></gh-select-field>
         </div>
         <div class="section">
+            <gh-text-field
+            [label]="'global.signup.businessDetails.address.label' | translate" 
+            [placeholder]="'global.signup.businessDetails.address.placeholder' | translate"
+            [name]="addressField"
+            [value]="signupForm.get(addressField).value"
+            (valueChange)="signupForm.get(addressField).setValue($event)"
+            [errors]="signupForm.get(addressField).errors"
+            [errorCaptions]="addressErrorCaptions"
+            ></gh-text-field>
+        </div>
+        <div class="section">
+            <gh-text-field
+            *ngIf="signupForm.get(countryField).value"
+            [label]="'global.signup.businessDetails.businessKey.label' | translate: { businessKey: 'enums.businessKey.'+currentCountryInfo(signupForm.get(countryField).value)?.businessKey | translate }" 
+            [placeholder]="'global.signup.businessDetails.businessKey.placeholder' | translate: { businessKey: 'enums.businessKey.'+currentCountryInfo(signupForm.get(countryField).value)?.businessKey | translate }"
+            [name]="businessKeyField"
+            [value]="signupForm.get(businessKeyField).value"
+            (valueChange)="signupForm.get(businessKeyField).setValue($event)"
+            [errors]="signupForm.get(businessKeyField).errors"
+            [errorCaptions]="businessKeyErrorCaptions"
+            ></gh-text-field>
+        </div>
+    </div>
+    <div class="desktop-section">
+        <div class="sub-title">{{ 'global.signup.representativeDetails.title' | translate }}</div>
+        <div class="section">
+            <gh-text-field
+            [label]="'global.signup.representativeDetails.firstName.label' | translate" 
+            [placeholder]="'global.signup.representativeDetails.firstName.placeholder' | translate"
+            [name]="firstNameField"
+            [value]="signupForm.get(firstNameField).value"
+            (valueChange)="signupForm.get(firstNameField).setValue($event)"
+            [errors]="signupForm.get(firstNameField).errors"
+            [errorCaptions]="firstNameErrorCaptions"
+            ></gh-text-field>
+        </div>
+        <div class="section">
+            <gh-text-field
+            [label]="'global.signup.representativeDetails.lastName.label' | translate" 
+            [placeholder]="'global.signup.representativeDetails.lastName.placeholder' | translate"
+            [name]="lastNameField"
+            [value]="signupForm.get(lastNameField).value"
+            (valueChange)="signupForm.get(lastNameField).setValue($event)"
+            [errors]="signupForm.get(lastNameField).errors"
+            [errorCaptions]="lastNameErrorCaptions"
+            ></gh-text-field>
+        </div>
+        <div class="section">
             <gh-phone-field
-            [label]="'global.signup.accountDetails.phoneNumber.label' | translate" 
-            [placeholder]="'global.signup.accountDetails.phoneNumber.placeholder' | translate"
+            [label]="'global.signup.representativeDetails.phoneNumber.label' | translate" 
+            [placeholder]="'global.signup.representativeDetails.phoneNumber.label' | translate"
             [name]="phoneNumberField"
             (formattedValueChange)="signupForm.get(phoneNumberField).setValue($event)"
             [maxLength]="currentCountryInfo(signupForm.get(countryField).value)?.phone.length"

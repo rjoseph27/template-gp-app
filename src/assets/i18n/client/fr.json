@@ -1,7 +1,7 @@
 {
     "userType": {
         "client": "Client",
-        "gp": "Transitaire"
+        "gp": "Transporteur"
     },
     "moduleList": {
         "global": {
@@ -22,7 +22,7 @@
                             "confirmButton": "Confirmez",
                             "confirm": {
                                 "title": "Confirmation de la requête",
-                                "content": "Le transitaire sera informé de votre demande. Vous serez informé une fois que le transitaire aura confirmé la demande. Vous pouvez voir le statut de la demande dans la page « Mes commandes ».",
+                                "content": "Le transporteur sera informé de votre demande. Vous serez informé une fois que le transporteur aura confirmé la demande. Vous pouvez voir le statut de la demande dans la page « Mes commandes ».",
                                 "button": "Voir mes commandes"
                             }
                         },
@@ -38,7 +38,7 @@
                         "alert": {
                             "title": "Alerte",
                             "alertSent": {
-                                "content": "Vous serez notifié lorsqu'un un transitaire créera un voyage qui correspond à votre alerte.",
+                                "content": "Vous serez notifié lorsqu'un transporteur créera un voyage qui correspond à votre alerte.",
                                 "button": "Voir mes alertes"
                             },
                             "button": "Créer une alerte"
@@ -50,12 +50,12 @@
                 "title": "Mes commandes",
                 "tableId": "Numéro de commande",
                 "status": {
-                    "waitConfirmation": "Attente de confirmation du transitaire",
+                    "waitConfirmation": "Attente de confirmation du transporteur",
                     "waitReception": "Attente de réception du colis",
                     "canceledByGp": "Selectionnez un autre voyage",
                     "atCheckpoint": "Au point de contrôle",
                     "redirect": "Colis reacheminé",
-                    "withGp": "Colis avec le transitaire",
+                    "withGp": "Colis avec le transporteur",
                     "onDelivery": "En cours d'envoie",
                     "finalCheckpoint": "Prêt à ramasser",
                     "delivered": "Livré",
@@ -68,13 +68,13 @@
                     },
                     "onGoingRequest": {
                         "title": "Tu n'as pas de commande en cours",
-                        "content": "Quand un transitaire accepte un de vos colis, vous serez capable de le voir ici.",
+                        "content": "Quand un transporteur accepte un de vos colis, vous serez capable de le voir ici.",
                         "button": "Créer une requête"
                     }
                 },
                 "waitConfirmation": {
-                    "title": "En attente de la confirmation du transitaire",
-                    "content": "Le transitaire a été notifié de votre commande. On vous signalera lorsqu'il confirme la commande.",
+                    "title": "En attente de la confirmation du transporteur",
+                    "content": "Le transporteur a été notifié de votre commande. On vous signalera lorsqu'il confirme la commande.",
                     "button": "Revenir à mes commandes",
                     "cancelButton": "Annuler la commande",
                     "notification": {
@@ -84,16 +84,16 @@
                 },
                 "waitReception": {
                     "title": "Envoyer votre colis",
-                    "content": "Le transitaire est prêt pour prendre votre colis à <u>{{address}}</u>. Pour plus d'information, Appellez au <u>{{phone}}</u> pour de l'assistance.",
+                    "content": "Le transporteur est prêt pour prendre votre colis à <u>{{address}}</u>. Pour plus d'information, Appellez au <u>{{phone}}</u> pour de l'assistance.",
                     "button": "Revenir à mes commandes"
                 },
                 "atCheckpoint": {
                     "title": "La commande est au point de contrôle",
-                    "content": "Le colis est au point de contrôle. Le transitaire va le livrer bientôt."
+                    "content": "Le colis est au point de contrôle. Le transporteur va le livrer bientôt."
                 },
                 "itemWithGp": {
-                    "title": "Le colis est avec le transitaire",
-                    "content": "Le transitaire a reçu votre colis et il le livrera bientôt."
+                    "title": "Le colis est avec le transporteur",
+                    "content": "Le transporteur a reçu votre colis et il le livrera bientôt."
                 },
                 "readyForPickup": {
                     "title": "Le colis est prêt pour être ramassé",

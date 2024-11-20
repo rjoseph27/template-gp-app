@@ -68,75 +68,81 @@
             "credentials": {
                 "title": "Informations d'identification"
             },
-            "accountDetails": {
-                "title": "Détails du compte",
-                "firstName": {
-                    "label": "Prénom",
-                    "placeholder": "Entrez votre prénom"
-                },
-                "lastName": {
-                    "label": "Nom de famille",
-                    "placeholder": "Entrer votre nom de famille"
-                },
-                "dateOfBirth": {
-                    "label": "Date de naissance",
-                    "placeholder": "Entrez votre date de naissance"
-                },
-                "gender": {
-                    "label": "Genre",
-                    "placeholder": "Selectionnez votre genre",
-                    "options": {
-                        "Male": "Homme",
-                        "Female": "Femme"
+            "businessDetails": {
+                "title": "Détails de l'entreprise",
+                "businessName": {
+                    "label": "Nom de l'entreprise",
+                    "placeholder": "Entrez le nom de votre entreprise",
+                    "errors": {
+                        "required": "Entrez le nom de votre entreprise"
                     }
                 },
                 "country": {
-                    "label": "Pays de résidence",
-                    "placeholder": "Selectionnez votre pays de résidence"
+                    "label": "Pays",
+                    "placeholder": "Sélectionnez le pays dont l'entreprise est basée",
+                    "errors": {
+                        "required": "Sélectionnez un pays"
+                    }
+                },
+                "sectorOfActivity": {
+                    "label": "Secteur d'activité",
+                    "placeholder": "Sélectionnez votre secteur d'activité",
+                    "errors": {
+                        "required": "Sélectionnez votre secteur d'activité"
+                    }
+                },
+                "address": {
+                    "label": "Siège social",
+                    "placeholder": "Entrez l'adresse du siège social de votre entreprise",
+                    "errors": {
+                        "required": "Entrez une adresse"
+                    }
+                },
+                "businessKey": {
+                    "label": "{{businessKey}}",
+                    "placeholder": "{{businessKey}} de l'entreprise",
+                    "errors": {
+                        "required": "Remplissez ce champ"
+                    }
+                }
+            },
+            "representativeDetails": {
+                "title": "Coordonnées du représentant",
+                "firstName": {
+                    "label": "Prénom du représentant",
+                    "placeholder": "Entrez votre prénom",
+                    "errors": {
+                        "required": "Entrez votre prénom",
+                        "invalid": "Entrez un prénom valide"
+                    }
+                },
+                "lastName": {
+                    "label": "Nom du représentant",
+                    "placeholder": "Entrez votre nom",
+                    "errors": {
+                        "required": "Entrez votre nom",
+                        "invalid": "Entrez un nom valide"
+                    }
                 },
                 "phoneNumber": {
-                    "label": "Numéro de téléphone",
-                    "placeholder": "Entrez votre numéro de téléphone"
-                },
-                "termsAndConditions": {
-                    "label": "J'accepte les termes et conditions énoncés dans la déclaration de confidentialité",
-                    "highlight": "déclaration de confidentialité"
-                },
-                "errors": {
-                    "firstName": {
-                        "required": "Entrez votre prénom",
-                        "invalid": "Ce n'est pas un prénom valide"
-                    },
-                    "lastName": {
-                        "required": "Entrez votre nom de famille",
-                        "invalid": "Ce n'est pas un nom de famille valide"
-                    },
-                    "dateOfBirth": {
-                        "required": "Entrez votre date de naissance",
-                        "invalid": "Ce n'est pas une date de naissance valide",
-                        "invalidFormat": "La date de naissance doit être du format AAAA/MM/JJ"
-                    },
-                    "gender": {
-                        "required": "Sélectionnez votre genre"
-                    },
-                    "country": {
-                        "required": "Sélectionnez votre pays de résidence"
-                    },
-                    "phoneNumber": {
+                    "label": "Numéro de téléphone du représentant",
+                    "placeholder": "Entrez votre numéro de téléphone",
+                    "errors": {
                         "required": "Entrez votre numéro de téléphone",
-                        "invalid": "Ce n'est pas un numéro de téléphone valide",
-                        "taken": "Ce numéro de téléphone est déjà pris"
-                    },
-                    "termsAndConditions": {
-                        "required": "Vous devez accepter les termes et conditions"
+                        "invalid": "Entrez un numéro de téléphone valide"
                     }
                 }
             },
             "alreadyHaveAccount": "Vous avez déjà un compte?",
             "signup": "Créer un compte",
             "termsAndConditions": {
+                "label": "J'accepte les termes et conditions énoncés dans la déclaration de confidentialité",
+                "highlight": "déclaration de confidentialité",
                 "title": "Les termes et confitions de GP Hub",
                 "read": "J'ai lu les termes et confitions de GP Hub",
+                "errors": {
+                    "required": "Vous devez accepter les termes et conditions"
+                },
                 "content": {
                     "descriptions": "Ces termes et conditions (« Conditions ») régissent votre utilisation de la plateforme et des services GP Hub (« Services ») fournis par GP Hub (« Société »). En accédant ou en utilisant les Services, vous acceptez d'être lié par ces Conditions. Si vous n'acceptez pas ces Conditions, vous ne pouvez pas utiliser les Services.",
                     "platformDescription": {
@@ -545,7 +551,7 @@
                 "TRIP_CREATION": "Le voyage a été créé",
                 "ORDER_ACCEPTED": "Le colis a été accepté",
                 "AT_CHECKPOINT": "Le colis est dans le point de contrôle",
-                "WITH_GP": "Le colis est avec le transitaire",
+                "WITH_GP": "Le colis est avec le transporteur",
                 "ON_WAY_TO_AIRPORT": "Le fret est en direction de l'aéroport",
                 "FIRST_DEPARTURE": "Le fret est prêt pour le premier départ",
                 "LAST_ARRIVAL": "Le fret est arrivé au dernier pays",
@@ -756,6 +762,39 @@
             "CoteIvoire": "Côte d'Ivoire",
             "UnitedStates": "États-Unis",
             "Canada": "Canada"
+        },
+        "SectorOfActivities": {
+            "construction": "Construction",
+            "transport": "Transport",
+            "education": "Éducation",
+            "agricultureAndFishing": "Agriculture and Pêche",
+            "mining": "Exploitation minière",
+            "realEstate": "Immobilier",
+            "entertainmentAndRecreation": "Divertissement et loisirs",
+            "healthCare": "Soins de santé",
+            "manufacturing": "Manufacture",
+            "utilities": "Utilités",
+            "industry": "Industrie",
+            "informationAndCommunicationsTechnology": "Technologies de l'information et des communications",
+            "WholesaleTrade": "Commerce de gros",
+            "administrativeAndSupportAndWasteManagement": "Administratif et de soutien et gestion des déchets",
+            "industrials": "Industriels",
+            "consumerDiscretionary": "Biens de consommation discrétionnaires",
+            "it": "TI",
+            "primarySector": "Secteur primaire",
+            "financeAndInsurance": "Finances et assurances",
+            "accommodationAndFoodServices": "Hébergement et services de restauration",
+            "professionalScientificAndTechnicalServices": "Services professionnels, scientifiques et techniques",
+            "retailTrade": "Commerce de détail",
+            "financialActivities": "Activités financières",
+            "otherServices": "Autres services"
+        },
+        "businessKey": {
+            "corporationNumber": "Numéro de Société",
+            "ninea": "NINEA",
+            "ein": "EIN",
+            "nif": "NIF",
+            "siren": "SIREN"
         },
         "WeekDays": {
             "Monday": "Lundi",

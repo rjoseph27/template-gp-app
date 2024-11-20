@@ -61,8 +61,8 @@ export class ClientSignUpComponent implements OnInit {
    * @type {Observable<string>}
    */
   protected readonly termsAndConditionsCaption$ = combineLatest([
-    this.translateService.get('global.signup.accountDetails.termsAndConditions.label'),
-    this.translateService.get('global.signup.accountDetails.termsAndConditions.highlight')
+    this.translateService.get('global.signup.termsAndConditions.label'),
+    this.translateService.get('global.signup.termsAndConditions.highlight')
   ]).pipe(
     map(([text,keyword]) => StringUtil.highlightText(text,keyword))
   );
@@ -74,9 +74,7 @@ export class ClientSignUpComponent implements OnInit {
         if(loading) {
           const createUser: CreateUser = this.currentFormService.currentForm.value;
           createUser.language = Language[this.translateService.currentLang as keyof typeof Language];
-          this.usersService.create(createUser).then(() => {
-            this.currentFormService.submitting = false;
-          });
+          this.usersService.create(createUser).finally(() => this.currentFormService.submitting = false);
         }
 
       })

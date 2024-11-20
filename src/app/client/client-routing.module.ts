@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ClientMainComponent } from './main/main.component';
 import { ClientApplicationResolver } from './application.resolver';
 import { ClientSendItemsComponent } from './request/send-items/send-items.component';
 import { ClientRoutes } from './client.route';
@@ -48,7 +47,7 @@ const routes: Routes = [
     { path: '', component: ClientDashboardComponent, pathMatch: 'full', resolve: { userInfo: ClientApplicationResolver, clientOrders: ClientDashboardClientResolver, gpOrders: ClientDashboardGpResolver } },
     { path: `${ClientRoutes.sendItems}`, children: [
         { path: '', component: ClientSendItemsComponent, pathMatch: 'full', resolve: { userInfo: ClientApplicationResolver} },
-        { path: `${ClientRoutes.calendar}`, component: ClientCalendarComponent, pathMatch: 'full', resolve: { calendarInfo: ClientCalendarResolver} }
+        { path: `${ClientRoutes.calendar}`, component: ClientCalendarComponent, pathMatch: 'full', resolve: { calendarInfo: ClientCalendarResolver, userInfo: ClientApplicationResolver } }
     ] },
     { path: `${ClientRoutes.reportTrip}`, component: ClientReportTripComponent, pathMatch: 'full', resolve: { userInfo: ClientApplicationResolver} },
     { path: `${ClientRoutes.clientOrder}`, children: [

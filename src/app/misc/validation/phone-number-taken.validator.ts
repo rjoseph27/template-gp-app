@@ -28,9 +28,10 @@ private readonly userService: UsersService = inject(UsersService);
  */
 validate(control: AbstractControl): Promise<ValidationErrors | null> {
     const phoneNumber = control.get('phoneNumber');
+    const currentErrors = phoneNumber.errors;
 
      this.userService.isPhoneNumberTaken(phoneNumber.value).then(response => {
-            phoneNumber.setErrors(!response ? null : { phoneNumberTaken: true });
+            phoneNumber.setErrors(!response ? currentErrors : { phoneNumberTaken: true });
         }),
         catchError((error) => {
             // Handle server error

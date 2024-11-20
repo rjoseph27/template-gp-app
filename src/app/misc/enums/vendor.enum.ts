@@ -10,12 +10,6 @@ export enum Vendor {
     GP_HUB = 'GP_HUB',
 
     /**
-     * @description The vendor is SUNUZON France
-     * @type {string}
-     */
-    SUNUZON_FR = 'SUNUZON_FR',
-
-    /**
      * @description The vendor is YOMB NA
      * @type {string}
      */

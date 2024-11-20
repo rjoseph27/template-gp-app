@@ -1,3 +1,4 @@
+import { BusinessKey } from "../../enums/business-id";
 import { Country } from "../../enums/country.enum";
 import { Currency } from "../../enums/currency.enum";
 import { EnumUtil } from "../../util/enum.util";
@@ -48,6 +49,12 @@ export interface CountryInfo {
      * @type {Map<any, SuccursaleInfo>}
      */
     succursales: Map<any, SuccursaleInfo>;
+
+    /**
+     * @description The business key of the country
+     * @type {BusinessKey}
+     */
+    businessKey: BusinessKey
 }
 
 /**

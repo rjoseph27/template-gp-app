@@ -68,75 +68,81 @@
             "credentials": {
                 "title": "Credentials"
             },
-            "accountDetails": {
-                "title": "Account details",
-                "firstName": {
-                    "label": "First name",
-                    "placeholder": "Enter your first name"
-                },
-                "lastName": {
-                    "label": "Last name",
-                    "placeholder": "Enter your last name"
-                },
-                "dateOfBirth": {
-                    "label": "Date of birth",
-                    "placeholder": "Enter your date of birth"
-                },
-                "gender": {
-                    "label": "Gender",
-                    "placeholder": "Select your gender",
-                    "options": {
-                        "Male": "Male",
-                        "Female": "Female"
+            "businessDetails": {
+                "title": "Business Details",
+                "businessName": {
+                    "label": "Business name",
+                    "placeholder": "Enter your business name",
+                    "errors": {
+                        "required": "Please Enter your business name"
                     }
                 },
                 "country": {
-                    "label": "Country of residency",
-                    "placeholder": "Select your country"
+                    "label": "Country",
+                    "placeholder": "Select your country",
+                    "errors": {
+                        "required": "Please select your country"
+                    }
+                },
+                "sectorOfActivity": {
+                    "label": "Sector of activity",
+                    "placeholder": "Select your sector of activity",
+                    "errors": {
+                        "required": "Please select your sector of activity"
+                    }
+                },
+                "address": {
+                    "label": "Headquarters address",
+                    "placeholder": "Enter your Headquarters Address",
+                    "errors": {
+                        "required": "Please Enter your Headquarters Address"
+                    }
+                },
+                "businessKey": {
+                    "label": "{{businessKey}}",
+                    "placeholder": "Enter your {{businessKey}}",
+                    "errors": {
+                        "required": "Please Enter your {{businessKey}}"
+                    }
+                }
+            },
+            "representativeDetails": {
+                "title": "Representative Details",
+                "firstName": {
+                    "label": "First name of the representative",
+                    "placeholder": "Enter your first name",
+                    "errors": {
+                        "required": "Please Enter your first name",
+                        "invalid": "Please Enter a valid first name"
+                    }
+                },
+                "lastName": {
+                    "label": "Last name of the representative",
+                    "placeholder": "Enter your last name",
+                    "errors": {
+                        "required": "Please Enter your last name",
+                        "invalid": "Please Enter a valid last name"
+                    }
                 },
                 "phoneNumber": {
-                    "label": "Phone number",
-                    "placeholder": "Enter your phone number"
-                },
-                "termsAndConditions": {
-                    "label": "I accept the terms and conditions set it out in the privacy statement",
-                    "highlight": "privacy statement"
-                },
-                "errors": {
-                    "firstName": {
-                        "required": "Enter your first name",
-                        "invalid": "This is not a valid first name"
-                    },
-                    "lastName": {
-                        "required": "Enter your last name",
-                        "invalid": "This is not a valid last name"
-                    },
-                    "dateOfBirth": {
-                        "required": "Enter your date of birth",
-                        "invalid": "This is not a valid date of birth",
-                        "invalidFormat": "The date of birth must be in the format YYYY/MM/DD"
-                    },
-                    "gender": {
-                        "required": "Select your gender"
-                    },
-                    "country": {
-                        "required": "Select your country of residency"
-                    },
-                    "phoneNumber": {
-                        "required": "Enter your phone number",
-                        "invalid": "This is not a valid phone number",
-                        "taken": "This phone number is already taken"
-                    },
-                    "termsAndConditions": {
-                        "required": "You must accept the terms and conditions"
+                    "label": "Phone number of the representative",
+                    "placeholder": "Enter your phone number",
+                    "errors": {
+                        "required": "Please Enter your phone number",
+                        "invalid": "Please Enter a valid phone number"
                     }
                 }
             },
             "alreadyHaveAccount": "Already have an account?",
             "signup": "Create my account",
             "termsAndConditions": {
+                "label": "I accept the terms and conditions set it out in the privacy statement",
+                "highlight": "privacy statement",
                 "title": "GP Hub Conditions and Terms",
                 "read": "I have read the terms and conditions",
+                "errors": {
+                    "required": "You need to accept the terms and conditions"
+                },
                 "content": {
                     "descriptions": "These terms and conditions (\"Terms\") govern your use of the GP Hub platform and services (\"Services\") provided by GP Hub (\"Company\"). By accessing or using the Services, you agree to be bound by these Terms. If you do not agree to these Terms, you may not use the Services.",
                     "platformDescription": {
@@ -548,7 +554,7 @@
                 "TRIP_CREATION": "The trip has been created",
                 "ORDER_ACCEPTED": "The order has been accepted",
                 "AT_CHECKPOINT": "The order is at the checkpoint",
-                "WITH_GP": "The order is with the forwarding agent",
+                "WITH_GP": "The order is with the carrier",
                 "ON_WAY_TO_AIRPORT": "The freight is on his way to the airport",
                 "FIRST_DEPARTURE": "The freight is on the plane",
                 "LAST_ARRIVAL": "The freight has arrived at the final country",
@@ -749,16 +755,45 @@
         }
     },
     "enums": {
-        "Genders": {
-            "Male":"Male",
-            "Female":"Female"
-        },
         "Country": {
             "Senegal": "Senegal",
             "France": "France",
             "CoteIvoire": "Ivory Coast",
             "UnitedStates": "United States",
             "Canada": "Canada"
+        },
+        "SectorOfActivities": {
+            "construction": "Construction",
+            "transport": "Transport",
+            "education": "Education",
+            "agricultureAndFishing": "Agriculture and Fishing",
+            "mining": "Mining",
+            "realEstate": "Real Estate",
+            "entertainmentAndRecreation": "Entertainment and Recreation",
+            "healthCare": "Health Care",
+            "manufacturing": "Manufacturing",
+            "utilities": "Utilities",
+            "industry": "Industry",
+            "informationAndCommunicationsTechnology": "Information and Communications Technology",
+            "WholesaleTrade": "Wholesale Trade",
+            "administrativeAndSupportAndWasteManagement": "Administrative and Support and Waste Management",
+            "industrials": "Industrials",
+            "consumerDiscretionary": "Consumer Discretionary",
+            "it": "IT",
+            "primarySector": "Primary Sector",
+            "financeAndInsurance": "Finance and Insurance",
+            "accommodationAndFoodServices": "Accommodation and Food Services",
+            "professionalScientificAndTechnicalServices": "Professional, Scientific and Technical Services",
+            "retailTrade": "Retail Trade",
+            "financialActivities": "Financial Activities",
+            "otherServices": "Other Services"
+        },
+        "businessKey": {
+            "corporationNumber": "Corporation Number",
+            "ninea": "NINEA",
+            "ein": "EIN",
+            "nif": "NIF",
+            "siren": "SIREN"
         },
         "WeekDays": {
             "Monday": "Monday",
@@ -792,3 +827,4 @@
         "kg": "KGs"
     }
 }
+     

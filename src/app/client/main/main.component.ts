@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map } from 'rxjs';
+import { map, tap } from 'rxjs';
 import { UserType } from '../user-type.enum';
 import { GhModule } from '../../core/layouts/main/main.component';
 import { ALERTS_ICON, HELP_ICON, LOG_OUT_ICON, REPORT_TRIP_ICON, SEND_ITEMS_ICON, ORDERS_ICON, REQUESTS_ICON, SETTING_ICON } from './icon';
@@ -36,18 +36,6 @@ export class ClientMainComponent implements OnInit {
    * @type {ClientApplicationService}
    */
   private readonly applicationService: ClientApplicationService = inject(ClientApplicationService);
-  
-  /**
-   * @description An observable of the current user type translation key
-   * @type {Observable<string>}
-   */
-  protected readonly currentUserTypeTranslationKey$ = this.applicationService.userMode$.pipe(map(userType => 'userType.' + userType));
-
-  /**
-   * @description The value of the toggle.
-   * @type {boolean}
-   */
-  protected readonly toggleValue = this.applicationService.userMode === UserType.GP ? true : false;
 
   /**
    * @description The activated route service
@@ -71,7 +59,9 @@ export class ClientMainComponent implements OnInit {
    * @description An observable for the user full name
    * @type {Observable<string>}
    */
-  protected readonly userFullName$ = this.userInfo$.pipe(map(userInfo => userInfo.firstName + ' ' + userInfo.lastName));
+  protected readonly userFullName$ = this.userInfo$.pipe(
+    map(userInfo => userInfo.firstName + ' ' + userInfo.lastName)
+  );
 
   /**
    * @description The angular router service.
@@ -156,19 +146,5 @@ export class ClientMainComponent implements OnInit {
   /** @inheritdoc */
   ngOnInit(): void {
     this.sendItemsService.requests = undefined;
-  }
-
-  /**
-   * @description A method that switch the user mode
-   * @param value A boolean that is indicating the user mode is GP or not
-   * @returns {void}
-   */
-  protected switchMode(value: boolean): void {
-    this.router.navigate([ClientRoutes.main.fullPath()]);
-    if(!value) {
-      this.applicationService.userMode = UserType.Client;
-    } else {
-      this.applicationService.userMode = UserType.GP;
-    }
   }
 }

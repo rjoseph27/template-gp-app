@@ -1,3 +1,4 @@
+import { BusinessKey } from "../../enums/business-id";
 import { Country } from "../../enums/country.enum";
 import { Currency } from "../../enums/currency.enum";
 import { CountryInfo } from "./countries.type";
@@ -22,7 +23,8 @@ export const COUNTRY_INFO_LIST: CountryInfo[] = [
         regions: Object.keys(SenegalRegions).map((key) => SenegalRegions[key as keyof typeof SenegalRegions]),
         airports: SENEGAL_AIRPORTS,
         currency: {currency: Currency.XOF, step: 1000 },
-        succursales: SENEGAL_SUCCURSALES
+        succursales: SENEGAL_SUCCURSALES,
+        businessKey: BusinessKey.NINEA
     },
     {
         name: Country.FR,
@@ -35,7 +37,8 @@ export const COUNTRY_INFO_LIST: CountryInfo[] = [
         regions: Object.keys(FranceRegions).map((key) => FranceRegions[key as keyof typeof FranceRegions]),
         airports: FRANCE_AIRPORTS,
         currency: {currency: Currency.EUR, step: 20 },
-        succursales: FRANCE_SUCCURSALES
+        succursales: FRANCE_SUCCURSALES,
+        businessKey: BusinessKey.SIREN
     },
     {
         name: Country.CI,
@@ -48,7 +51,8 @@ export const COUNTRY_INFO_LIST: CountryInfo[] = [
         regions: Object.keys(CoteIvoireRegions).map((key) => CoteIvoireRegions[key as keyof typeof CoteIvoireRegions]),
         airports: COTE_IVOIRE_AIRPORTS,
         currency: {currency: Currency.XOF, step: 1000 },
-        succursales: COTE_IVOIRE_SUCCURSALES
+        succursales: COTE_IVOIRE_SUCCURSALES,
+        businessKey: BusinessKey.NIF
     },
     {
         name: Country.CA,
@@ -61,7 +65,8 @@ export const COUNTRY_INFO_LIST: CountryInfo[] = [
         regions: Object.keys(CanadaRegions).map((key) => CanadaRegions[key as keyof typeof CanadaRegions]),
         airports: CANADA_AIRPORTS,
         currency: {currency: Currency.CAD, step: 20 },
-        succursales: CANADA_SUCCURSALES
+        succursales: CANADA_SUCCURSALES,
+        businessKey: BusinessKey.CORPORATION_NUMBER
     },
     {
         name: Country.US,
@@ -74,7 +79,8 @@ export const COUNTRY_INFO_LIST: CountryInfo[] = [
         regions: Object.keys(CanadaRegions).map((key) => CanadaRegions[key as keyof typeof CanadaRegions]),
         airports: CANADA_AIRPORTS,
         currency: {currency: Currency.CAD, step: 20 },
-        succursales: CANADA_SUCCURSALES
+        succursales: CANADA_SUCCURSALES,
+        businessKey: BusinessKey.EIN
     }
 ]
 

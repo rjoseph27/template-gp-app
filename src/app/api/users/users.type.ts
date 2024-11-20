@@ -1,5 +1,4 @@
 import { Country } from "../../misc/enums/country.enum";
-import { Genders } from "../../misc/enums/genders.enum";
 import { ApiResponse, StringKeys } from "../base.service.api";
 import { Language } from "../../misc/enums/language.enum";
 
@@ -63,21 +62,34 @@ export interface CreateUser {
     firstName: string,
 
     /**
+     * @description The business name of the user
+     * @type {string}
+     */
+    businessName: string,
+
+    /**
+     * @description The sector of activity of the user
+     * @type {string}
+     */
+    sectorOfActivity: string,
+
+    /**
+     * @description The business key of the user
+     * @type {string}
+     */
+    businessKey: string,
+
+    /**
+     * @description The business address of the user
+     * @type {string}
+     */
+    address: string,
+
+    /**
      * @description The last name of the user
      * @type {string}
      */
     lastName: string,
-
-    /**
-     * @description The date of birth of the user
-     * @type {Date}
-     */
-    dateOfBirth: Date,
-
-    /**
-     * @description The gender of the user
-     */
-    gender: Genders,
 
     /**
      * @description The country of the user

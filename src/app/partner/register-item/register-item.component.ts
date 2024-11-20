@@ -7,7 +7,6 @@ import { BasePartnerPageComponent } from "../base-partner-page.component";
 import { GhDate } from "../../misc/classes/gh-date";
 import { ItemsStatus } from "../../client/orders/base-orders.component";
 import { CountryUtil } from "../../misc/util/country.util";
-import { COUNTRY_INFO_LIST } from "../../misc/constants/countries/countries";
 
 /**
  * @component PartnerRegisterItemComponent
