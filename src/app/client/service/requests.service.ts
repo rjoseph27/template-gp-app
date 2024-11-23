@@ -51,21 +51,6 @@ export class ClientRequestsService {
     }
 
     /**
-     * @description Reports a trip
-     * @param reportTrip The report trip request
-     * @returns {Promise<boolean>} A promise that resolves to true if the trip was reported successfully, false otherwise
-     */
-    reportTrip(reportTrip: ReportTrip): Promise<boolean> {
-        return this.requestsServiceApi.reportTrip(reportTrip).then(msg => {
-            if(msg.message === ReportTripStatus.TRIP_REPORTED_SUCCESSFULLY)
-            {
-                return true
-            }
-            return false
-        });
-    }
-
-    /**
      * @description Searches trips
      * @param searchTrips The search trips request
      * @returns {Promise<ReportTrip>} A promise that resolves to the trips found
@@ -80,7 +65,7 @@ export class ClientRequestsService {
             itemInformation: searchTrips.itemInformation.map(item => ({
                 id: item.id?.toString(),
                 status: item.status,
-                itemCategory: item.itemCategory, 
+                itemCategory: "0000", 
                 itemWeight: item.itemWeight, 
                 itemQuantity: item.itemQuantity})),
             month: month !== undefined ? month : DateUtil.addDaysFromDate(new Date(),1),
@@ -243,20 +228,6 @@ export class ClientRequestsService {
                 return msg.sendItemRequest;
             }
             return undefined;
-        })        
-    }
-
-    /**
-     * @description Gets the trip list
-     * @param userId The id of the user
-     * @returns {Promise<ReportTrip[]>} A promise that resolves to the trip list
-     */
-    getTripList(userId: string): Promise<RequestTableElement[]> {
-        return this.requestsServiceApi.getTripList(userId).then(msg => {
-            if(msg.message === GetReportTripStatus.TRIPS_FOUND) {
-                return msg.trips;
-            }
-            return [];
         })        
     }
 

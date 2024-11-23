@@ -5,6 +5,7 @@ import { GlobalRoutes } from '../global.route';
 import { GhRoute } from '../misc/classes/route';
 import { PartnerRoutes } from '../partner/partner.route';
 import { BehaviorSubject, skip, take, takeUntil, tap } from 'rxjs';
+import { CarrierRoutes } from '../carrier/carrier.route';
 
 /**
  * @class NavigationService
@@ -27,7 +28,7 @@ export class NavigationService {
   /**
    * @description The last url
    * @type {BehaviorSubject<string>}
-  */
+   */
   set lastUrl(value: string) {
     this._lastUrl$.next(value);
   }
@@ -50,22 +51,24 @@ export class NavigationService {
   /**
    * @description Determines whether the notification is open
    * @type {BehaviorSubject<boolean>}
-  */
+   */
   set isNotificationOpen(value: boolean) {
     this._isNotificationOpen$.next(value);
   }
   get isNotificationOpen() {
     return this._isNotificationOpen$.value;
-  }   
+  }
 
   /**
    * @description Redirects to the main page
    * @returns {void}
    */
   redirectToMainPage(): void {
-    if(this.router.url.split("/")[1] === PartnerRoutes.partner.segment)
-    {
+    if (this.router.url.split('/')[1] === PartnerRoutes.partner.segment) {
       this.router.navigate([PartnerRoutes.partner.fullPath()]);
+    }
+    if (this.router.url.split('/')[1] === CarrierRoutes.carrier.segment) {
+      this.router.navigate([CarrierRoutes.carrier.fullPath()]);
     } else {
       this.router.navigate([ClientRoutes.client.fullPath()]);
     }
@@ -76,16 +79,18 @@ export class NavigationService {
    * @returns {void}
    */
   redirectToApplication(): void {
-    if(this._redirectUrl$.value) {
+    if (this._redirectUrl$.value) {
       this.router.navigateByUrl(this._redirectUrl$.value);
       this._redirectUrl$.next(undefined);
     } else {
-      if(this.router.url.split("/")[1] === PartnerRoutes.partner.segment)
-        {
-          this.router.navigate([PartnerRoutes.main.fullPath()]);
-        } else {
-          this.router.navigate([ClientRoutes.main.fullPath()]);
-        }
+      if (this.router.url.split('/')[1] === PartnerRoutes.partner.segment) {
+        this.router.navigate([PartnerRoutes.main.fullPath()]);
+      }
+      if (this.router.url.split('/')[1] === CarrierRoutes.carrier.segment) {
+        this.router.navigate([CarrierRoutes.main.fullPath()]);
+      } else {
+        this.router.navigate([ClientRoutes.main.fullPath()]);
+      }
     }
   }
 
@@ -97,13 +102,14 @@ export class NavigationService {
     const urlAsArray = this.router.url.split('?')[0].split('/');
     const currentPage = urlAsArray.pop();
     let routingArray;
-    if(urlAsArray[1] === ClientRoutes.client.segment)
-    {
-        routingArray = Object.values(ClientRoutes);
+    if (urlAsArray[1] === ClientRoutes.client.segment) {
+      routingArray = Object.values(ClientRoutes);
     } else {
-        routingArray = Object.values(PartnerRoutes);
+      routingArray = Object.values(PartnerRoutes);
     }
-    return [...routingArray, ...Object.values(GlobalRoutes)].find((route) => route.segment === currentPage)
+    return [...routingArray, ...Object.values(GlobalRoutes)].find(
+      (route) => route.segment === currentPage
+    );
   }
 
   /**
@@ -111,7 +117,11 @@ export class NavigationService {
    * @returns {boolean}
    */
   hidePreviousIcon(): boolean {
-    return this.currentRoute?.parentRoute === ClientRoutes.client || this.currentRoute?.parentRoute === PartnerRoutes.partner || !this.currentRoute?.parentRoute;
+    return (
+      this.currentRoute?.parentRoute === ClientRoutes.client ||
+      this.currentRoute?.parentRoute === PartnerRoutes.partner ||
+      !this.currentRoute?.parentRoute
+    );
   }
 
   /**
@@ -119,8 +129,10 @@ export class NavigationService {
    * @returns {void}
    */
   goToPreviousPage(): void {
-    if(this.currentRoute?.parentRoute.currentParams) {
-      this.router.navigate([this.currentRoute?.parentRoute.fullPath()], { queryParams: this.currentRoute?.parentRoute.currentParams });
+    if (this.currentRoute?.parentRoute.currentParams) {
+      this.router.navigate([this.currentRoute?.parentRoute.fullPath()], {
+        queryParams: this.currentRoute?.parentRoute.currentParams,
+      });
     } else {
       this.router.navigate([this.currentRoute?.parentRoute.fullPath()]);
     }
@@ -128,16 +140,21 @@ export class NavigationService {
 
   /**
    * @constructor
-  */
+   */
   constructor() {
-    this.router.events.pipe(tap((e) => {
-      if((<NavigationCancel>e).id === 1 && (<NavigationCancel>e).reason) {
-        this._redirectUrl$.next((<NavigationCancel>e).url);
-      }
+    this.router.events
+      .pipe(
+        tap((e) => {
+          if ((<NavigationCancel>e).id === 1 && (<NavigationCancel>e).reason) {
+            this._redirectUrl$.next((<NavigationCancel>e).url);
+          }
 
-      if(e instanceof NavigationEnd) {
+          if (e instanceof NavigationEnd) {
             this._lastUrl$.next((<NavigationEnd>e).url);
-        }
-    }), takeUntil(this._lastUrl$.asObservable().pipe(skip(1)))).subscribe()
-}
+          }
+        }),
+        takeUntil(this._lastUrl$.asObservable().pipe(skip(1)))
+      )
+      .subscribe();
+  }
 }

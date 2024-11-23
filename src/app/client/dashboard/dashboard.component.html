@@ -1,6 +1,6 @@
 <client-main [displayBody]="false">
     <h1>{{ 'moduleList.global.greeting' | translate: { name: (userFullName$ | async) } }}</h1>
-    <div class="table" *ngIf="(userMode$ | async) === 'client'">
+    <div class="table">
         <div class="table-header">{{ 'moduleList.global.tracking' | translate }}</div>
         <ng-container *ngFor="let order of (clientOrderResolver$ | async) as clientOrderType; let i = index">
             <div *ngIf="i % 2 === 0" class="table-body">
@@ -20,32 +20,6 @@
                     <div>
                         <div class="count">{{ clientOrderType[i+1].count }}</div>
                         <div class="label">{{ clientOrderType[i+1].label | translate }}</div>
-                    </div>
-                </div>
-            </div>
-        </ng-container>
-    </div>
-
-    <div class="table" *ngIf="(userMode$ | async) === 'gp'">
-        <div class="table-header">{{ 'moduleList.global.tracking' | translate }}</div>
-        <ng-container *ngFor="let order of (gpOrderResolver$ | async) as gpOrderResolver; let i = index">
-            <div *ngIf="i % 2 === 0" class="table-body">
-                <div class="td">
-                    <div [ngStyle]="{color: order.color}">
-                        <gh-icon [name]="order.icon"></gh-icon>
-                    </div>
-                    <div>
-                        <div class="count">{{ order.count }}</div>
-                        <div class="label">{{ order.label | translate }}</div>
-                    </div>
-                </div>
-                <div class="td">
-                    <div [ngStyle]="{color: gpOrderResolver[i+1].color}">
-                        <gh-icon [name]="gpOrderResolver[i+1].icon"></gh-icon>
-                    </div>
-                    <div>
-                        <div class="count">{{ gpOrderResolver[i+1].count }}</div>
-                        <div class="label">{{ gpOrderResolver[i+1].label | translate }}</div>
                     </div>
                 </div>
             </div>

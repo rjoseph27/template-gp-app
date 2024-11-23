@@ -6,7 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { StringUtil } from '../../misc/util/string.util';
 import { ClientRoutes } from '../client.route';
 import { Language } from '../../misc/enums/language.enum';
-import { CreateUser } from '../../api/users/users.type';
+import { AccountType, CreateUser } from '../../api/users/users.type';
 
 /**
  * @constant
@@ -74,6 +74,7 @@ export class ClientSignUpComponent implements OnInit {
         if(loading) {
           const createUser: CreateUser = this.currentFormService.currentForm.value;
           createUser.language = Language[this.translateService.currentLang as keyof typeof Language];
+          createUser.type = AccountType.USER;
           this.usersService.create(createUser).finally(() => this.currentFormService.submitting = false);
         }
 

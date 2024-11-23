@@ -57,6 +57,7 @@
         </div>
         <div class="section">
             <gh-select-field
+            *ngIf="showSectorOfActivity"
             [label]="'global.signup.businessDetails.sectorOfActivity.label' | translate" 
             [placeholder]="'global.signup.businessDetails.sectorOfActivity.placeholder' | translate"
             [name]="sectorOfActivityField"

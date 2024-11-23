@@ -22,5 +22,6 @@ export enum SectorOfActivities {
     PROFESSIONAL_SCIENTIFIC_AND_TECHNICAL_SERVICES = 'professionalScientificAndTechnicalServices',
     RETAIL_TRADE = 'retailTrade',
     FINANCIAL_ACTIVITIES = 'financialActivities',
+    IMPORT_EXPORT = 'importExport',
     OTHER_SERVICES = 'otherServices'
 }

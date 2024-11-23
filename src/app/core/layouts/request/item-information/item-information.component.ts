@@ -1,18 +1,42 @@
-import { Component, EventEmitter, Input, OnInit, Output, inject } from "@angular/core";
-import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
-import { IMAGE_FORMAT_VALIDATION, imageFormatValidator } from "../../../../misc/validation/image-format.validator";
-import { IMAGE_SIZE_VALIDATION, imageSizeValidator } from "../../../../misc/validation/image-size.validator";
-import { MAX_VALIDATION, MIN_VALIDATION, REQUIRED_VALIDATION } from "../../../../misc/constants/validations";
-import { MAX_LUGGAGE_WEIGHT } from "../../../../misc/constants/application";
-import { FormMode } from "../../../../misc/enums/form-mode.enum";
-import { ModalService } from "../../../../services/modal.service";
-import { GhFile } from "../../../elements/input/upload-image/upload-image.component";
-import { ItemsStatus } from "../../../../client/orders/base-orders.component";
-import { INTEGER_VALIDATION, integerValidator } from "../../../../misc/validation/integer.validator";
-import { Vendor } from "../../../../misc/enums/vendor.enum";
-import { VENDOR_IMAGE } from "../../../../misc/constants/vendor-image";
-import { Currency } from "../../../../misc/enums/currency.enum";
-
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  inject,
+} from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import {
+  IMAGE_FORMAT_VALIDATION,
+  imageFormatValidator,
+} from '../../../../misc/validation/image-format.validator';
+import {
+  IMAGE_SIZE_VALIDATION,
+  imageSizeValidator,
+} from '../../../../misc/validation/image-size.validator';
+import {
+  MAX_VALIDATION,
+  MIN_VALIDATION,
+  REQUIRED_VALIDATION,
+} from '../../../../misc/constants/validations';
+import { MAX_LUGGAGE_WEIGHT } from '../../../../misc/constants/application';
+import { FormMode } from '../../../../misc/enums/form-mode.enum';
+import { ModalService } from '../../../../services/modal.service';
+import { GhFile } from '../../../elements/input/upload-image/upload-image.component';
+import { ItemsStatus } from '../../../../client/orders/base-orders.component';
+import {
+  INTEGER_VALIDATION,
+  integerValidator,
+} from '../../../../misc/validation/integer.validator';
+import { Vendor } from '../../../../misc/enums/vendor.enum';
+import { VENDOR_IMAGE } from '../../../../misc/constants/vendor-image';
+import { Currency } from '../../../../misc/enums/currency.enum';
 
 /**
  * @interface ItemInformation
@@ -70,7 +94,7 @@ export interface ItemInformation {
   /**
    * @description The size of the item
    * @type {ItemSize}
-    */
+   */
   itemSize: ItemSize;
 
   /**
@@ -114,22 +138,26 @@ interface ItemSize {
  * @type ItemInformationForm
  * @description The type of the item information form
  */
-type ItemInformationForm = FormGroup<
-  { image: FormControl<GhFile>; 
-    itemName: FormControl<string>; 
-    itemCategory: FormControl<string>; 
-    itemWeight: FormControl<number>; 
-    itemQuantity: FormControl<number>;
-    itemSize: FormGroup<{ itemLength: FormControl<number>; itemWidth: FormControl<number>; itemHeight: FormControl<number> }>;
-    itemValue: FormControl<number>;
-    extraNotes: FormControl<string>; 
-    reasonShipping: FormControl<string>;
+type ItemInformationForm = FormGroup<{
+  image: FormControl<GhFile>;
+  itemName: FormControl<string>;
+  itemCategory: FormControl<string>;
+  itemWeight: FormControl<number>;
+  itemQuantity: FormControl<number>;
+  itemSize: FormGroup<{
+    itemLength: FormControl<number>;
+    itemWidth: FormControl<number>;
+    itemHeight: FormControl<number>;
   }>;
+  itemValue: FormControl<number>;
+  extraNotes: FormControl<string>;
+  reasonShipping: FormControl<string>;
+}>;
 
 /**
-  * @interface ItemInformationBody
-  * @description The type of the item information body 
-  */
+ * @interface ItemInformationBody
+ * @description The type of the item information body
+ */
 interface ItemInformationBody {
   /**
    * @description The id of the item information
@@ -164,7 +192,7 @@ interface ItemInformationBody {
   selector: 'gh-item-information',
   templateUrl: './item-information.component.html',
   styleUrl: './item-information.component.scss',
-  providers: [ModalService]
+  providers: [ModalService],
 })
 export class GhItemInformationComponent implements OnInit {
   /**
@@ -177,7 +205,7 @@ export class GhItemInformationComponent implements OnInit {
    * @description The vendor
    * @type {Vendor}
    */
-  @Input() vendor: Vendor = Vendor.GP_HUB
+  @Input() vendor: Vendor = Vendor.GP_HUB;
 
   /**
    * @description The currency
@@ -201,73 +229,67 @@ export class GhItemInformationComponent implements OnInit {
    * @description The name of the upload image field
    * @type {string}
    */
-  protected readonly imageField = "image";
+  protected readonly imageField = 'image';
 
   /**
    * @description The name of the item name field
    * @type {string}
    */
-  protected readonly itemNameField = "itemName"
-
-  /**
-   * @description The name of the item category field
-   * @type {string}
-   */
-  protected readonly itemCategoryField = "itemCategory";
+  protected readonly itemNameField = 'itemName';
 
   /**
    * @description The name of the item weight field
    * @type {string}
    */
-  protected readonly itemWeightField = "itemWeight"
+  protected readonly itemWeightField = 'itemWeight';
 
   /**
    * @description The name of the item quantity field
    * @type {string}
    */
-  protected readonly itemQuantityField = "itemQuantity"
+  protected readonly itemQuantityField = 'itemQuantity';
 
   /**
    * @description The name of the item size field
    * @type {string}
    */
-  protected readonly itemSizeField = "itemSize"
+  protected readonly itemSizeField = 'itemSize';
 
   /**
    * @description The name of the item length field
    * @type {string}
    */
-  protected readonly itemLengthField = "itemLength"
+  protected readonly itemLengthField = 'itemLength';
 
   /**
    * @description The name of the item width field
    * @type {string}
    */
-  protected readonly itemWidthField = "itemWidth"
+  protected readonly itemWidthField = 'itemWidth';
 
   /**
    * @description The name of the item height field
    * @type {string}
    */
-  protected readonly itemHeightField = "itemHeight"
+  protected readonly itemHeightField = 'itemHeight';
 
   /**
    * @description The name of the item value field
    * @type {string}
    */
-  protected readonly itemValueField = "itemValue"
+  protected readonly itemValueField = 'itemValue';
 
   /**
    * @description The name of the extra notes field
    * @type {string}
    */
-  protected readonly extraNotesField = "extraNotes";
+  protected readonly extraNotesField = 'extraNotes';
 
   /**
    * @description The name of the reason shipping field
    * @type {string}
    */
-  protected readonly reasonShippingField = "reasonShipping";
+  protected readonly reasonShippingField = 'reasonShipping';
 
   /**
    * @description The maximum luggage weight
@@ -285,9 +307,12 @@ export class GhItemInformationComponent implements OnInit {
    * @description The error messages of the upload image field
    */
   protected readonly imageErrorCaptions = new Map<string, string>([
-    [REQUIRED_VALIDATION, "global.itemInformation.uploadPhoto.errors.required"],
-    [IMAGE_FORMAT_VALIDATION, "global.itemInformation.uploadPhoto.errors.format"],
-    [IMAGE_SIZE_VALIDATION, "global.itemInformation.uploadPhoto.errors.size"]
+    [REQUIRED_VALIDATION, 'global.itemInformation.uploadPhoto.errors.required'],
+    [
+      IMAGE_FORMAT_VALIDATION,
+      'global.itemInformation.uploadPhoto.errors.format',
+    ],
+    [IMAGE_SIZE_VALIDATION, 'global.itemInformation.uploadPhoto.errors.size'],
   ]);
 
   /**
@@ -295,15 +320,7 @@ export class GhItemInformationComponent implements OnInit {
    * @type {Map<string, string>}
    */
   protected readonly itemNameErrorCaptions = new Map<string, string>([
-    [REQUIRED_VALIDATION, "global.itemInformation.itemName.errors.required"]
-  ]);
-
-  /**
-   * @description The error messages of the item category field
-   * @type {Map<string, string>}
-   */
-  protected readonly itemCategoryErrorCaptions = new Map<string, string>([
-    [REQUIRED_VALIDATION, "global.itemInformation.itemCategory.errors.required"]
+    [REQUIRED_VALIDATION, 'global.itemInformation.itemName.errors.required'],
   ]);
 
   /**
@@ -311,9 +328,9 @@ export class GhItemInformationComponent implements OnInit {
    * @type {Map<string, string>}
    */
   protected readonly itemWeightErrorCaptions = new Map<string, string>([
-    [REQUIRED_VALIDATION, "global.itemInformation.itemWeight.errors.required"],
-    [MAX_VALIDATION, "global.itemInformation.itemWeight.errors.max"],
-    [MIN_VALIDATION, "global.itemInformation.itemWeight.errors.min"]
+    [REQUIRED_VALIDATION, 'global.itemInformation.itemWeight.errors.required'],
+    [MAX_VALIDATION, 'global.itemInformation.itemWeight.errors.max'],
+    [MIN_VALIDATION, 'global.itemInformation.itemWeight.errors.min'],
   ]);
 
   /**
@@ -321,18 +338,24 @@ export class GhItemInformationComponent implements OnInit {
    * @type {Map<string, string>}
    */
   protected readonly itemQuantityErrorCaptions = new Map<string, string>([
-    [REQUIRED_VALIDATION, "global.itemInformation.itemQuantity.errors.required"],
-    [INTEGER_VALIDATION, "global.itemInformation.itemQuantity.errors.integer"],
-    [MIN_VALIDATION, "global.itemInformation.itemQuantity.errors.min"]
+    [
+      REQUIRED_VALIDATION,
+      'global.itemInformation.itemQuantity.errors.required',
+    ],
+    [INTEGER_VALIDATION, 'global.itemInformation.itemQuantity.errors.integer'],
+    [MIN_VALIDATION, 'global.itemInformation.itemQuantity.errors.min'],
   ]);
 
   /**
    * @description The error messages of the item length field
-   * @type {Map<string, string>}  
+   * @type {Map<string, string>}
    **/
   protected readonly itemWidthErrorCaptions = new Map<string, string>([
-    [REQUIRED_VALIDATION, "global.itemInformation.itemSize.width.errors.required"],
-    [MIN_VALIDATION, "global.itemInformation.itemSize.width.errors.min"]
+    [
+      REQUIRED_VALIDATION,
+      'global.itemInformation.itemSize.width.errors.required',
+    ],
+    [MIN_VALIDATION, 'global.itemInformation.itemSize.width.errors.min'],
   ]);
 
   /**
@@ -340,8 +363,11 @@ export class GhItemInformationComponent implements OnInit {
    * @type {Map<string, string>}
    */
   protected readonly itemHeightErrorCaptions = new Map<string, string>([
-    [REQUIRED_VALIDATION, "global.itemInformation.itemSize.height.errors.required"],
-    [MIN_VALIDATION, "global.itemInformation.itemSize.height.errors.min"]
+    [
+      REQUIRED_VALIDATION,
+      'global.itemInformation.itemSize.height.errors.required',
+    ],
+    [MIN_VALIDATION, 'global.itemInformation.itemSize.height.errors.min'],
   ]);
 
   /**
@@ -349,8 +375,11 @@ export class GhItemInformationComponent implements OnInit {
    * @type {Map<string, string>}
    */
   protected readonly itemLengthErrorCaptions = new Map<string, string>([
-    [REQUIRED_VALIDATION, "global.itemInformation.itemSize.length.errors.required"],
-    [MIN_VALIDATION, "global.itemInformation.itemSize.length.errors.min"]
+    [
+      REQUIRED_VALIDATION,
+      'global.itemInformation.itemSize.length.errors.required',
+    ],
+    [MIN_VALIDATION, 'global.itemInformation.itemSize.length.errors.min'],
   ]);
 
   /**
@@ -358,9 +387,12 @@ export class GhItemInformationComponent implements OnInit {
    * @type {Map<string, string>}
    */
   protected readonly itemValueErrorCaptions = new Map<string, string>([
-    [REQUIRED_VALIDATION, "global.itemInformation.itemQuantity.errors.required"],
-    [INTEGER_VALIDATION, "global.itemInformation.itemQuantity.errors.integer"],
-    [MIN_VALIDATION, "global.itemInformation.itemQuantity.errors.min"]
+    [
+      REQUIRED_VALIDATION,
+      'global.itemInformation.itemQuantity.errors.required',
+    ],
+    [INTEGER_VALIDATION, 'global.itemInformation.itemQuantity.errors.integer'],
+    [MIN_VALIDATION, 'global.itemInformation.itemQuantity.errors.min'],
   ]);
 
   /**
@@ -380,15 +412,15 @@ export class GhItemInformationComponent implements OnInit {
    * @type {boolean}
    */
   @Input() canAddOrDelete: boolean = true;
-  
+
   /** @inheritdoc */
   ngOnInit(): void {
-    if(this.itemInformation) {
-      this.itemInformation.forEach(x => this.addNewItemInformation(x));
+    if (this.itemInformation) {
+      this.itemInformation.forEach((x) => this.addNewItemInformation(x));
     }
-    if(this.isEditable && this.canAddOrDelete) {
+    if (this.isEditable && this.canAddOrDelete) {
       this.addNewItemInformation();
-    } 
+    }
   }
 
   /**
@@ -396,7 +428,9 @@ export class GhItemInformationComponent implements OnInit {
    * @returns void
    */
   private updateItemInformation() {
-    const list = this.itemInformationList.map(x => x.itemInformation.value as ItemInformation);
+    const list = this.itemInformationList.map(
+      (x) => x.itemInformation.value as ItemInformation
+    );
     this.itemInformationChange.emit(list as ItemInformation[]);
   }
 
@@ -408,7 +442,6 @@ export class GhItemInformationComponent implements OnInit {
   private getImageUrl(filename: string): string {
     return VENDOR_IMAGE[this.vendor](filename);
   }
-  
 
   /**
    * @description The method that adds a new item information
@@ -417,36 +450,64 @@ export class GhItemInformationComponent implements OnInit {
    */
   private addNewItemInformation(itemInformation?: ItemInformation) {
     let image;
-    if(itemInformation?.image) {
-      if(typeof itemInformation.image === "string") {
+    if (itemInformation?.image) {
+      if (typeof itemInformation.image === 'string') {
         image = <GhFile>{};
         image.tempUrl = this.getImageUrl(itemInformation.image);
       } else {
         image = itemInformation.image;
-      }    
+      }
     }
 
     const newItem: ItemInformationBody = {
       id: this.itemInformationList.length,
       formMode: itemInformation ? FormMode.VIEW : FormMode.CREATE,
       itemInformation: new FormGroup({
-          image: new FormControl(image || <GhFile>{}, [Validators.required, imageFormatValidator, imageSizeValidator]),
-          itemName: new FormControl(itemInformation?.itemName, [Validators.required]),
-          itemCategory: new FormControl(itemInformation?.itemCategory, [Validators.required]),
-          itemWeight: new FormControl(itemInformation?.itemWeight, [Validators.required, Validators.min(0.0001), Validators.max(MAX_LUGGAGE_WEIGHT)]),
-          itemSize: new FormBuilder().group({
-            itemLength: new FormControl(itemInformation?.itemSize?.itemLength || 0.01, [Validators.required, Validators.min(0)]),
-            itemWidth: new FormControl(itemInformation?.itemSize?.itemWidth, [Validators.required, Validators.min(0)]),
-            itemHeight: new FormControl(itemInformation?.itemSize?.itemHeight, [Validators.required, Validators.min(0)])
-          }),
-          itemQuantity: new FormControl(itemInformation?.itemQuantity || 1, [Validators.required, Validators.min(1), integerValidator]),
-          itemValue: new FormControl(itemInformation?.itemValue || 0, [Validators.required, Validators.min(0)]),
-          extraNotes: new FormControl(itemInformation?.extraNotes),
-          reasonShipping: new FormControl(itemInformation?.reasonShipping, [Validators.required])
-        })
+        image: new FormControl(image || <GhFile>{}, [
+          Validators.required,
+          imageFormatValidator,
+          imageSizeValidator,
+        ]),
+        itemName: new FormControl(itemInformation?.itemName, [
+          Validators.required,
+        ]),
+        itemCategory: new FormControl(itemInformation?.itemCategory),
+        itemWeight: new FormControl(itemInformation?.itemWeight, [
+          Validators.required,
+          Validators.min(0.0001),
+          Validators.max(MAX_LUGGAGE_WEIGHT),
+        ]),
+        itemSize: new FormBuilder().group({
+          itemLength: new FormControl(
+            itemInformation?.itemSize?.itemLength || 0.01,
+            [Validators.required, Validators.min(0)]
+          ),
+          itemWidth: new FormControl(itemInformation?.itemSize?.itemWidth, [
+            Validators.required,
+            Validators.min(0),
+          ]),
+          itemHeight: new FormControl(itemInformation?.itemSize?.itemHeight, [
+            Validators.required,
+            Validators.min(0),
+          ]),
+        }),
+        itemQuantity: new FormControl(itemInformation?.itemQuantity || 1, [
+          Validators.required,
+          Validators.min(1),
+          integerValidator,
+        ]),
+        itemValue: new FormControl(itemInformation?.itemValue || 0, [
+          Validators.required,
+          Validators.min(0),
+        ]),
+        extraNotes: new FormControl(itemInformation?.extraNotes),
+        reasonShipping: new FormControl(itemInformation?.reasonShipping, [
+          Validators.required,
+        ]),
+      }),
     };
 
-    this.itemInformationList.push(newItem)
+    this.itemInformationList.push(newItem);
   }
 
   /**
@@ -479,7 +540,7 @@ export class GhItemInformationComponent implements OnInit {
     itemInformation.formMode = FormMode.VIEW;
     this.itemInformationList[itemInformation.id] = itemInformation;
     itemInformation.cache = undefined;
-    this.updateItemInformation()
+    this.updateItemInformation();
   }
 
   /**
@@ -488,19 +549,21 @@ export class GhItemInformationComponent implements OnInit {
    * @returns void
    */
   protected cancelEditItemInformation(itemInformation: ItemInformationBody) {
-    this.modalService.openModal({
-      title: "global.itemInformation.modal.cancel.title",
-      text: "global.itemInformation.modal.cancel.content",
-      confirmCaption: "global.common.cancel",
-      cancelCaption: "global.itemInformation.modal.cancel.button.stay"
-    }).then(x => {
-      if(x) {
-        itemInformation.itemInformation = itemInformation.cache;
-        itemInformation.formMode = FormMode.VIEW;
-        itemInformation.cache = undefined;
-        this.updateItemInformation();
-      }
-    });
+    this.modalService
+      .openModal({
+        title: 'global.itemInformation.modal.cancel.title',
+        text: 'global.itemInformation.modal.cancel.content',
+        confirmCaption: 'global.common.cancel',
+        cancelCaption: 'global.itemInformation.modal.cancel.button.stay',
+      })
+      .then((x) => {
+        if (x) {
+          itemInformation.itemInformation = itemInformation.cache;
+          itemInformation.formMode = FormMode.VIEW;
+          itemInformation.cache = undefined;
+          this.updateItemInformation();
+        }
+      });
   }
 
   /**
@@ -509,17 +572,21 @@ export class GhItemInformationComponent implements OnInit {
    * @returns void
    */
   protected deleteItemInformation(itemInformation: ItemInformationBody) {
-    this.modalService.openModal({
-      title: "global.itemInformation.modal.delete.title",
-      text: "global.itemInformation.modal.delete.content",
-      confirmCaption: "global.common.delete",
-      cancelCaption: "global.common.cancel"
-    }).then(x => {
-      if(x) {
-        const index = this.itemInformationList.findIndex(x => x.id === itemInformation.id);
-        this.itemInformationList.splice(index, 1);
-        this.updateItemInformation();
-      }
-    });
+    this.modalService
+      .openModal({
+        title: 'global.itemInformation.modal.delete.title',
+        text: 'global.itemInformation.modal.delete.content',
+        confirmCaption: 'global.common.delete',
+        cancelCaption: 'global.common.cancel',
+      })
+      .then((x) => {
+        if (x) {
+          const index = this.itemInformationList.findIndex(
+            (x) => x.id === itemInformation.id
+          );
+          this.itemInformationList.splice(index, 1);
+          this.updateItemInformation();
+        }
+      });
   }
 }

@@ -8,7 +8,7 @@ import { tap } from 'rxjs/operators';
  * @description The title of the page
  * @type {string}
  */
-const PAGE_TITLE = 'Partnership';
+const PAGE_TITLE = 'global.login.partnerTitle';
 
 /**
  * @class PartnerLogInComponent
@@ -31,6 +31,12 @@ export class PartnerLogInComponent implements OnInit {
    * @type {CurrentFormService}
    */
   private readonly currentFormService: CurrentFormService = inject(CurrentFormService);
+
+  /**
+   * @description The url of the image
+   * @type {string}
+   */
+  protected readonly imageUrl = '../../../../../assets/img/partner-home-image.jpg';
 
   /**
    * @description The users service

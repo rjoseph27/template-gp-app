@@ -22,15 +22,6 @@
             [errorCaptions]="itemNameErrorCaptions"
             [readonly]="itemInformationForm.formMode === formMode.VIEW"
             ></gh-text-field>
-            <gh-selection-tree 
-                [label]="'global.itemInformation.itemCategory.label' | translate" 
-                [placeholder]="'global.itemInformation.itemCategory.placeholder' | translate"
-                [name]="itemCategoryField+itemInformationForm.id"
-                [value]="itemInformationForm.itemInformation.get(itemCategoryField).value"
-                (valueChange)="itemInformationForm.itemInformation.get(itemCategoryField).setValue($event)"
-                [errors]="itemInformationForm.itemInformation.get(itemCategoryField).errors"
-                [errorCaptions]="itemCategoryErrorCaptions"
-                [readonly]="itemInformationForm.formMode === formMode.VIEW"></gh-selection-tree>
         </div>
     </div>
     <div>

@@ -1,0 +1,19 @@
+.title {
+    text-align: center;
+}
+
+.content {
+    padding: 0 1em;
+    display: flex;
+    justify-content: center;
+    * {
+        width: 100%;
+        max-width: 500px;
+    }
+}
+
+@media (min-width: 768px) {
+    .content {
+        display: block;
+    }
+}

@@ -53,7 +53,9 @@
             }
         },
         "login": {
-            "title": "La première plateforme qui connecte les fret aériens et les expéditeurs vers l'Afrique",
+            "clientTitle": "La première plateforme qui connecte les fret aériens et les expéditeurs vers l'Afrique",
+            "carrierTitle": "Gérer vos voyages et les colis de vos clients",
+            "partnerTitle": "panneau de contrôle du partenaire",
             "forgot": "Avez vous oublié votre mot de passe?",
             "login": "Accéder mon Compte",
             "register": "Créer un nouveau compte",
@@ -787,6 +789,7 @@
             "professionalScientificAndTechnicalServices": "Services professionnels, scientifiques et techniques",
             "retailTrade": "Commerce de détail",
             "financialActivities": "Activités financières",
+            "importExport": "Importation et exportation",
             "otherServices": "Autres services"
         },
         "businessKey": {

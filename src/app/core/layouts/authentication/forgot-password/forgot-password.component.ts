@@ -1,11 +1,15 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CurrentFormService } from '../../../../services/current-form.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { EMAIL_VALIDATION, REQUIRED_VALIDATION } from '../../../../misc/constants/validations';
+import {
+  EMAIL_VALIDATION,
+  REQUIRED_VALIDATION,
+} from '../../../../misc/constants/validations';
 import { UsersService } from '../../../../services/users.service';
-import { ForgotPasswordRequestResponse } from '../../../../api/users/users.type';
+import { AccountType, ForgotPasswordRequestResponse } from '../../../../api/users/users.type';
 import { NotificationService } from '../../../../services/notification.service';
 import { BehaviorSubject } from 'rxjs';
+import { Router } from '@angular/router';
 
 /**
  * @class GhForgotPasswordComponent
@@ -15,20 +19,22 @@ import { BehaviorSubject } from 'rxjs';
   selector: 'gh-forgot-password',
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.scss'],
-  providers: [CurrentFormService]
+  providers: [CurrentFormService],
 })
-export class GhForgotPasswordComponent implements OnInit{
+export class GhForgotPasswordComponent implements OnInit {
   /**
    * @description The current form service
    * @type {CurrentFormService}
    */
-  private readonly currentFormService: CurrentFormService = inject(CurrentFormService);
+  private readonly currentFormService: CurrentFormService =
+    inject(CurrentFormService);
 
   /**
    * @description backing field for the request state
    * @type {BehaviorSubject<ForgotPasswordRequestResponse>}
    */
-  private readonly _requestState$ = new BehaviorSubject<ForgotPasswordRequestResponse>(undefined);
+  private readonly _requestState$ =
+    new BehaviorSubject<ForgotPasswordRequestResponse>(undefined);
 
   /**
    * @description An observable of the request state
@@ -37,10 +43,17 @@ export class GhForgotPasswordComponent implements OnInit{
   protected readonly requestState$ = this._requestState$.asObservable();
 
   /**
+   * @description The router
+   * @type {Router}
+   */
+  protected readonly router = inject(Router);
+
+  /**
    * @description The notification service
    * @type {NotificationService}
    */
-  private readonly notificationService: NotificationService = inject(NotificationService);
+  private readonly notificationService: NotificationService =
+    inject(NotificationService);
 
   /**
    * @description The users service
@@ -68,20 +81,20 @@ export class GhForgotPasswordComponent implements OnInit{
     return this.currentFormService.currentForm;
   }
 
-    /**
+  /**
    * @description An observable of the loading state
    * @type {Observable<boolean>}
    */
-    protected readonly loading$ = this.currentFormService.submitting$;
+  protected readonly loading$ = this.currentFormService.submitting$;
 
-    /**
-     * @description The error messages of the email field
-     * @type {Map<string, string>}
-     */
-    protected readonly emailErrorCaptions = new Map<string, string>([
-      [EMAIL_VALIDATION, "global.credentials.errors.email.email"],
-      [REQUIRED_VALIDATION, "global.credentials.errors.email.required"]
-    ]);
+  /**
+   * @description The error messages of the email field
+   * @type {Map<string, string>}
+   */
+  protected readonly emailErrorCaptions = new Map<string, string>([
+    [EMAIL_VALIDATION, 'global.credentials.errors.email.email'],
+    [REQUIRED_VALIDATION, 'global.credentials.errors.email.required'],
+  ]);
 
   /**
    * @description The email field control
@@ -89,16 +102,27 @@ export class GhForgotPasswordComponent implements OnInit{
    */
   protected sendReinitializationLink(): void {
     this.currentFormService.submitting = true;
-    this.usersService.forgotPasswordRequest(this.forgotPasswordForm.get(this.emailField).value).then(res => {
-      if(res === ForgotPasswordRequestResponse.MAIL_SERVER_ERROR) {
-        this.notificationService.errorNotification('global.errors.serverError');
-      } else if(res === ForgotPasswordRequestResponse.EMAIL_NOT_FOUND) {
-        this.notificationService.errorNotification('global.forgotPassword.errors.notFound');
-      } else {
-        this._requestState$.next(res);
-      }
-      this.currentFormService.submitting = false;
-    })
+    const module = this.router.url.split('/')[1];
+    const type = module === 'client' ? AccountType.USER : AccountType.CARRIER;
+    this.usersService
+      .forgotPasswordRequest({
+        email: this.forgotPasswordForm.get(this.emailField).value,
+        type: type
+      })
+      .then((res) => {
+        if (res === ForgotPasswordRequestResponse.MAIL_SERVER_ERROR) {
+          this.notificationService.errorNotification(
+            'global.errors.serverError'
+          );
+        } else if (res === ForgotPasswordRequestResponse.EMAIL_NOT_FOUND) {
+          this.notificationService.errorNotification(
+            'global.forgotPassword.errors.notFound'
+          );
+        } else {
+          this._requestState$.next(res);
+        }
+        this.currentFormService.submitting = false;
+      });
   }
 
   /** @inheritdoc */

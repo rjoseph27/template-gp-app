@@ -1,0 +1,26 @@
+<carrier-main>
+  <div class="content">
+    <div>
+      <div class="section">
+        <h1>{{ "moduleList.gp.orders.readyForPickup.title" | translate }}</h1>
+      </div>
+      <div class="section">
+        <p [innerHTML]="contentText$ | async"></p>
+      </div>
+      <div class="section">
+        <gh-order-details
+          [currency]="userCurrency.currency"
+          [orderDetails]="orderDetail$ | async"
+        ></gh-order-details>
+      </div>
+      <div class="section">
+        <button class="gp-button" (click)="navigateToMyOrders()">
+          {{ "moduleList.gp.orders.confirmOrder.return" | translate }}
+        </button>
+        <button class="attention-button" (click)="cancelOrder()">
+          {{ "moduleList.gp.orders.confirmOrder.rejectButton" | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</carrier-main>

@@ -25,10 +25,22 @@ export class GhLoginComponent implements OnInit{
   @Input() title: string;
 
   /**
+   * @description The url of the image
+   * @type {string}
+   */
+  @Input() imageUrl: string;
+
+  /**
    * @description The url of the sign up page
    * @type {string}
    */
   @Input() signUpUrl: string;
+
+  /**
+   * @description The url of the forgot password page
+   * @type {string}
+   */
+  @Input() forgotPasswordUrl: string;
 
   /**
    * @description The current form service
@@ -125,7 +137,7 @@ export class GhLoginComponent implements OnInit{
    * @returns {void}
    */
   protected redirectToForgotPassword(): void {
-    this.router.navigate([ClientRoutes.forgotPassword.fullPath()]);
+    this.router.navigate([this.forgotPasswordUrl]);
   }
 
   /**

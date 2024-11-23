@@ -2,5 +2,6 @@
  * The file contents for the current environment will overwrite these during build.
  */
 export const environment = {
-  apiUrl: 'http://localhost:3000',
+  apiUrl: 'https://app-ry7rf2os6a-uc.a.run.app',
+  // apiUrl: 'http://localhost:3000',
 };

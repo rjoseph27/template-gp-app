@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { firstValue } from '../../misc/function/firstValue';
 import { ApiResponse, BaseServiceApi, DEBOUNCE_TIME } from '../base.service.api'; 
-import { ConnectResponse, CreateUser, Credentials, PartnerUserInfoApiResponse, ResetPassword, ResetPasswordGetRequestApiResponse, UpdateLanguage, UserInfo, UserInfoApiResponse } from './users.type';
+import { ConnectResponse, CreateUser, Credentials, CheckEmail, PartnerUserInfoApiResponse, PhoneNumberTaken, ResetPassword, ResetPasswordGetRequestApiResponse, UpdateLanguage, UserInfo, UserInfoApiResponse } from './users.type';
 import { debounceTime } from 'rxjs';
 
 
@@ -37,8 +37,8 @@ export class UsersServiceApi extends BaseServiceApi {
      * @param email The email to check
      * @returns {Promise<ApiResponse>}
      */
-    isEmailTaken(email: string): Promise<ApiResponse> {
-        return firstValue(this.postRequest<ApiResponse>('email-taken', { email: email }).pipe(debounceTime(DEBOUNCE_TIME)));
+    isEmailTaken(email: CheckEmail): Promise<ApiResponse> {
+        return firstValue(this.postRequest<ApiResponse>('email-taken', email).pipe(debounceTime(DEBOUNCE_TIME)));
     }
 
     /**
@@ -46,8 +46,8 @@ export class UsersServiceApi extends BaseServiceApi {
      * @param phoneNumber The phone number to check
      * @returns {Promise<ApiResponse>}
      */
-    isPhoneNumberTaken(phoneNumber: string): Promise<ApiResponse> {
-        return firstValue(this.postRequest<ApiResponse>('phone-number-taken', { phoneNumber: phoneNumber }).pipe(debounceTime(DEBOUNCE_TIME)));
+    isPhoneNumberTaken(phoneNumber: PhoneNumberTaken): Promise<ApiResponse> {
+        return firstValue(this.postRequest<ApiResponse>('phone-number-taken', phoneNumber).pipe(debounceTime(DEBOUNCE_TIME)));
     }
 
     /**
@@ -65,8 +65,8 @@ export class UsersServiceApi extends BaseServiceApi {
      * @param email The email of the user
      * @returns {Promise<ApiResponse>}
      */
-    forgotPasswordRequest(email: string): Promise<ApiResponse> {
-        return firstValue(this.postRequest<ApiResponse>('forgot-password', { email: email }))
+    forgotPasswordRequest(email: CheckEmail): Promise<ApiResponse> {
+        return firstValue(this.postRequest<ApiResponse>('forgot-password', email))
     }
 
     /**

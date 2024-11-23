@@ -1,6 +1,6 @@
 <form [formGroup]="loginForm" (ngSubmit)="login()">
 <div class="content">
-    <div class="desktop-image">
+    <div class="desktop-image" [ngStyle]="{'background-image': 'url('+imageUrl+')'}">
     </div>
     <div class="log-in-content">
     <div class="title">

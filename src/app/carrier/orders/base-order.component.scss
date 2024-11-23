@@ -1,0 +1,23 @@
+.title {
+    display: flex;
+    justify-content: center;
+}
+
+.empty {
+    margin:1em;
+
+    ::ng-deep .gh-icon-content {
+        font-size: 5em;
+        border: 1px solid #000;
+        border-radius: 50%;;
+        padding:0.25em
+    }
+
+    .section {
+        margin-bottom: 1em;
+    }
+
+    .section-title {
+        font-size: 1.5em;
+    }
+}

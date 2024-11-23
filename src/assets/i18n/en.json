@@ -53,7 +53,9 @@
             }
         },
         "login": {
-            "title": "The first platform that connects air frets and senders to Africa",
+            "clientTitle": "The first platform that connects air frets and senders to Africa",
+            "carrierTitle": "Manages your trips and your orders",
+            "partnerTitle": "Administration panel",
             "forgot": "Forgot your password?",
             "login": "Access my Account",
             "register": "Create a new account",
@@ -786,6 +788,7 @@
             "professionalScientificAndTechnicalServices": "Professional, Scientific and Technical Services",
             "retailTrade": "Retail Trade",
             "financialActivities": "Financial Activities",
+            "importExport": "Import/Export",
             "otherServices": "Other Services"
         },
         "businessKey": {

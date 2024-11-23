@@ -1,0 +1,106 @@
+<carrier-main>
+<div class="content">
+    <div class="title">
+        <h1>{{ 'moduleList.gp.orders.title' | translate }}</h1>
+    </div>
+    <gh-orders 
+    [requests]="newOrders$ | async"
+    [idColumn]="'moduleList.gp.orders.tableId'"
+    [getStatusInfo]="getStatusInfo"
+    [emptyTemplate]="newOrderEmptyTemplate"
+    [label]="'moduleList.gp.orders.tableName.newOrders' | translate"
+>
+    <ng-template #newOrderEmptyTemplate>
+        <div class="empty">
+            <div class="section section-title">
+                {{ 'moduleList.gp.orders.confirmOrder.emptyView.title' | translate }}
+            </div>
+            <div class="section">
+                <gh-icon name="feature_search"></gh-icon>
+            </div>
+            <div class="section">{{ 'moduleList.gp.orders.confirmOrder.emptyView.content' | translate }}</div>
+        </div>
+    </ng-template>
+</gh-orders>
+
+    <gh-orders 
+    [requests]="ordersOnPreparation$ | async"
+    [idColumn]="'moduleList.gp.orders.tableId'"
+    [getStatusInfo]="getStatusInfo"
+    [emptyTemplate]="onPreparationEmptyTemplate"
+    [label]="'moduleList.gp.orders.tableName.onPreparation.title' | translate"
+>
+    <ng-template #onPreparationEmptyTemplate>
+        <div class="empty">
+            <div class="section section-title">
+                {{ 'moduleList.gp.orders.tableName.onPreparation.emptyView.title' | translate }}
+            </div>
+            <div class="section">
+                <gh-icon name="feature_search"></gh-icon>
+            </div>
+            <div class="section">{{ 'moduleList.gp.orders.tableName.onPreparation.emptyView.content' | translate }}</div>
+        </div>
+    </ng-template>
+</gh-orders>
+
+<gh-orders 
+    [requests]="ordersReadyForPickup$ | async"
+    [idColumn]="'moduleList.gp.orders.tableId'"
+    [getStatusInfo]="getStatusInfo"
+    [emptyTemplate]="readyForPickupEmptyTemplate"
+    [label]="'moduleList.gp.orders.tableName.readyForPickup.title' | translate"
+>
+    <ng-template #readyForPickupEmptyTemplate>
+        <div class="empty">
+            <div class="section section-title">
+                {{ 'moduleList.gp.orders.tableName.readyForPickup.emptyView.title' | translate }}
+            </div>
+            <div class="section">
+                <gh-icon name="feature_search"></gh-icon>
+            </div>
+            <div class="section">{{ 'moduleList.gp.orders.tableName.readyForPickup.emptyView.content' | translate }}</div>
+        </div>
+    </ng-template>
+</gh-orders>
+
+<gh-orders 
+    [requests]="ordersOnDelivery$ | async"
+    [idColumn]="'moduleList.gp.orders.tableId'"
+    [getStatusInfo]="getStatusInfo"
+    [emptyTemplate]="deliveryEmptyTemplate"
+    [label]="'moduleList.gp.orders.tableName.delivery.title' | translate"
+>
+    <ng-template #deliveryEmptyTemplate>
+        <div class="empty">
+            <div class="section section-title">
+                {{ 'moduleList.gp.orders.tableName.delivery.emptyView.title' | translate }}
+            </div>
+            <div class="section">
+                <gh-icon name="feature_search"></gh-icon>
+            </div>
+            <div class="section">{{ 'moduleList.gp.orders.tableName.delivery.emptyView.content' | translate }}</div>
+        </div>
+    </ng-template>
+</gh-orders>
+
+<gh-orders 
+    [requests]="orderCompleted$ | async"
+    [idColumn]="'moduleList.gp.orders.tableId'"
+    [getStatusInfo]="getStatusInfo"
+    [emptyTemplate]="deliveryEmptyTemplate"
+    [label]="'moduleList.gp.orders.tableName.completed.title' | translate"
+>
+    <ng-template #deliveryEmptyTemplate>
+        <div class="empty">
+            <div class="section section-title">
+                {{ 'moduleList.gp.orders.tableName.completed.emptyView.title' | translate }}
+            </div>
+            <div class="section">
+                <gh-icon name="feature_search"></gh-icon>
+            </div>
+            <div class="section">{{ 'moduleList.gp.orders.tableName.completed.emptyView.content' | translate }}</div>
+        </div>
+    </ng-template>
+</gh-orders>
+</div>
+</carrier-main>

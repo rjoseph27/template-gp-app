@@ -10,8 +10,8 @@ export enum UserType {
     Client = 'client',
 
     /**
-     * @description The GP user type
+     * @description The carrier user type
      * @type {string}
      */
-    GP = 'gp',
+    CARRIER = 'carrier',
 }

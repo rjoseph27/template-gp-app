@@ -6,6 +6,7 @@ import { ReportTrip } from "../../api/requests/requests.type";
 import { ClientRoutes } from "../../client/client.route";
 import { UsersService } from "../../services/users.service";
 import { NavigationService } from "../../services/navigation.service";
+import { CarrierRoutes } from "../../carrier/carrier.route";
 
 /**
  * @class GhTripInfoResolver
@@ -63,7 +64,7 @@ export abstract class GhTripInfoResolver implements Resolve<ReportTrip> {
       this.loadingService.endLoading();
       return tripInfo;
     } else {
-      this.router.navigate([ClientRoutes.tripList.fullPath()]); 
+      this.router.navigate([CarrierRoutes.tripList.fullPath()]); 
       this.loadingService.endLoading();
       return undefined;
     }

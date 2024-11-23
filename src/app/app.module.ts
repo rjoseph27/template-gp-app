@@ -29,6 +29,7 @@ import { TrackingResolver } from "./services/tracking.resolver";
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { FIREBASE_CONFIG } from "./misc/constants/firebase-config";
+import { CarrierModule } from "./carrier/carrier.module";
 
 /**
  * @module AppModule
@@ -43,6 +44,7 @@ import { FIREBASE_CONFIG } from "./misc/constants/firebase-config";
         HttpClientModule,
         CoreModule,
         ClientModule,
+        CarrierModule,
         PartnerModule,
         TranslateModule.forRoot({
             loader: {

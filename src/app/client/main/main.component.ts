@@ -30,12 +30,6 @@ export class ClientMainComponent implements OnInit {
    * @type {boolean}
    */
   @Input() displayBody = true;
-  
-  /**
-   * @description The application service
-   * @type {ClientApplicationService}
-   */
-  private readonly applicationService: ClientApplicationService = inject(ClientApplicationService);
 
   /**
    * @description The activated route service
@@ -48,12 +42,6 @@ export class ClientMainComponent implements OnInit {
    * @type {Observable<string>}
    */
   private readonly userInfo$ = this.route.data.pipe(map(data => data['userInfo']));
-
-  /**
-   * @description An observable for the modules
-   * @type {Observable<GhModule[]>}
-   */
-  protected readonly modules$ = this.applicationService.userMode$.pipe(map(userType => userType === UserType.Client ? this.clientModules : this.gpModules));
 
   /**
    * @description An observable for the user full name
@@ -101,7 +89,7 @@ export class ClientMainComponent implements OnInit {
    * @description The client modules for the application
    * @type {GhModule[]}
    */
-  private readonly clientModules: GhModule[] = [
+  protected readonly modules: GhModule[] = [
     {
       label: "moduleList.client.sendItems.title",
       icon: SEND_ITEMS_ICON,
@@ -116,29 +104,6 @@ export class ClientMainComponent implements OnInit {
       label: "moduleList.client.alerts.title",
       icon: ALERTS_ICON,
       action: () => this.router.navigate([ClientRoutes.alertList.fullPath()])
-    },
-    ...this.commonModules
-  ]
-
-  /**
-   * @description The GP modules for the application
-   * @type {GhModule[]}
-   */
-  private readonly gpModules: GhModule[] = [
-    {
-      label: "moduleList.gp.reportTrip.title",
-      icon: REPORT_TRIP_ICON,
-      action: () => this.router.navigate([ClientRoutes.reportTrip.fullPath()])
-    },
-    {
-      label: "moduleList.gp.orders.title",
-      icon: ORDERS_ICON,
-      action: () => this.router.navigate([ClientRoutes.gpOrders.fullPath()])
-    },
-    {
-      label: "moduleList.gp.trip.title",
-      icon: REQUESTS_ICON,
-      action: () => this.router.navigate([ClientRoutes.tripList.fullPath()])
     },
     ...this.commonModules
   ]

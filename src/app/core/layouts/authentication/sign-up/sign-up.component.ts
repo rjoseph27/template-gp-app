@@ -1,33 +1,57 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { EMAIL_VALIDATION, REQUIRED_VALIDATION } from '../../../../misc/constants/validations';
+import {
+  EMAIL_VALIDATION,
+  REQUIRED_VALIDATION,
+} from '../../../../misc/constants/validations';
 import { CurrentFormService } from '../../../../services/current-form.service';
-import { PASSWORD_MISMATCH_VALIDATION, passwordMatchValidator } from '../../../../misc/validation/confirm-password.validation';
-import { INVALID_PASSWORD_ERROR_MESSAGES, passwordValidator } from '../../../../misc/validation/password.validator';
-import { INVALID_NAME_VALIDATION, nameValidator } from '../../../../misc/validation/name.validator';
+import {
+  PASSWORD_MISMATCH_VALIDATION,
+  passwordMatchValidator,
+} from '../../../../misc/validation/confirm-password.validation';
+import {
+  INVALID_PASSWORD_ERROR_MESSAGES,
+  passwordValidator,
+} from '../../../../misc/validation/password.validator';
+import {
+  INVALID_NAME_VALIDATION,
+  nameValidator,
+} from '../../../../misc/validation/name.validator';
 import { EnumUtil } from '../../../../misc/util/enum.util';
 import { COUNTRY_INFO_LIST } from '../../../../misc/constants/countries/countries';
-import { INVALID_PHONE_NUMBER_VALIDATION, phoneNumberValidator } from '../../../../misc/validation/phone.validation';
+import {
+  INVALID_PHONE_NUMBER_VALIDATION,
+  phoneNumberValidator,
+} from '../../../../misc/validation/phone.validation';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { GhTermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
-import { EMAIL_TAKEN_VALIDATOR, EmailTakenValidator } from '../../../../misc/validation/email-taken.validation';
-import { PHONE_NUMBER_TAKEN_VALIDATOR, PhoneNumberTakenValidator } from '../../../../misc/validation/phone-number-taken.validator';
-import { COUNTRY_SELECTION_OPTIONS, CountryInfo } from '../../../../misc/constants/countries/countries.type';
+import {
+  EMAIL_TAKEN_VALIDATOR,
+  EmailTakenValidator,
+} from '../../../../misc/validation/email-taken.validation';
+import {
+  PHONE_NUMBER_TAKEN_VALIDATOR,
+  PhoneNumberTakenValidator,
+} from '../../../../misc/validation/phone-number-taken.validator';
+import {
+  COUNTRY_SELECTION_OPTIONS,
+  CountryInfo,
+} from '../../../../misc/constants/countries/countries.type';
 import { SelectFieldOption } from '../../../elements/input/select-field/select-field.component';
 import { SectorOfActivities } from '../../../../misc/enums/sector-of-activities';
 
 /**
  * @title Sign Up Component
- * @component GhSignUpComponent 
+ * @component GhSignUpComponent
  * @description The base sign up component for the application
  */
 @Component({
   selector: 'gh-sign-up',
   templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.scss']
+  styleUrls: ['./sign-up.component.scss'],
 })
-export class GhSignUpComponent implements OnInit{
+export class GhSignUpComponent implements OnInit {
   /**
    * @description The title of the login component
    * @type {string}
@@ -39,6 +63,12 @@ export class GhSignUpComponent implements OnInit{
    * @type {string}
    */
   @Input() logInUrl: string;
+
+  /**
+   * @description The url of the sign up page
+   * @type {string}
+   */
+  @Input() showSectorOfActivity: boolean = true;
 
   /**
    * @description The name of the email field
@@ -123,9 +153,9 @@ export class GhSignUpComponent implements OnInit{
    * @type {Map<string, string>}
    */
   protected readonly emailErrorCaptions = new Map<string, string>([
-    [EMAIL_VALIDATION, "global.credentials.errors.email.email"],
-    [REQUIRED_VALIDATION, "global.credentials.errors.email.required"],
-    [EMAIL_TAKEN_VALIDATOR, "global.credentials.errors.email.taken"]
+    [EMAIL_VALIDATION, 'global.credentials.errors.email.email'],
+    [REQUIRED_VALIDATION, 'global.credentials.errors.email.required'],
+    [EMAIL_TAKEN_VALIDATOR, 'global.credentials.errors.email.taken'],
   ]);
 
   /**
@@ -133,8 +163,11 @@ export class GhSignUpComponent implements OnInit{
    * @type {Map<string, string>}
    */
   protected readonly confirmPasswordErrorCaptions = new Map<string, string>([
-    [REQUIRED_VALIDATION, "global.credentials.errors.confirmPassword.required"],
-    [PASSWORD_MISMATCH_VALIDATION, "global.credentials.errors.confirmPassword.mismatch"]
+    [REQUIRED_VALIDATION, 'global.credentials.errors.confirmPassword.required'],
+    [
+      PASSWORD_MISMATCH_VALIDATION,
+      'global.credentials.errors.confirmPassword.mismatch',
+    ],
   ]);
 
   /**
@@ -142,8 +175,14 @@ export class GhSignUpComponent implements OnInit{
    * @type {Map<string, string>}
    */
   protected readonly firstNameErrorCaptions = new Map<string, string>([
-    [REQUIRED_VALIDATION, "global.signup.representativeDetails.lastName.errors.required"],
-    [INVALID_NAME_VALIDATION, "global.signup.representativeDetails.lastName.errors.invalid"]
+    [
+      REQUIRED_VALIDATION,
+      'global.signup.representativeDetails.lastName.errors.required',
+    ],
+    [
+      INVALID_NAME_VALIDATION,
+      'global.signup.representativeDetails.lastName.errors.invalid',
+    ],
   ]);
 
   /**
@@ -151,11 +190,17 @@ export class GhSignUpComponent implements OnInit{
    * @type {Map<string, string>}
    */
   protected readonly businessNameErrorCaptions = new Map<string, string>([
-    [REQUIRED_VALIDATION, "global.signup.businessDetails.businessName.errors.required"],
+    [
+      REQUIRED_VALIDATION,
+      'global.signup.businessDetails.businessName.errors.required',
+    ],
   ]);
 
   protected readonly addressErrorCaptions = new Map<string, string>([
-    [REQUIRED_VALIDATION, "global.signup.businessDetails.address.errors.required"],
+    [
+      REQUIRED_VALIDATION,
+      'global.signup.businessDetails.address.errors.required',
+    ],
   ]);
 
   /**
@@ -163,7 +208,10 @@ export class GhSignUpComponent implements OnInit{
    * @type {Map<string, string>}
    */
   protected readonly businessKeyErrorCaptions = new Map<string, string>([
-    [REQUIRED_VALIDATION, "global.signup.businessDetails.businessKey.errors.required"],
+    [
+      REQUIRED_VALIDATION,
+      'global.signup.businessDetails.businessKey.errors.required',
+    ],
   ]);
 
   /**
@@ -171,8 +219,14 @@ export class GhSignUpComponent implements OnInit{
    * @type {Map<string, string>}
    */
   protected readonly lastNameErrorCaptions = new Map<string, string>([
-    [REQUIRED_VALIDATION, "global.signup.representativeDetails.lastName.errors.required"],
-    [INVALID_NAME_VALIDATION, "global.signup.representativeDetails.lastName.errors.invalid"]
+    [
+      REQUIRED_VALIDATION,
+      'global.signup.representativeDetails.lastName.errors.required',
+    ],
+    [
+      INVALID_NAME_VALIDATION,
+      'global.signup.representativeDetails.lastName.errors.invalid',
+    ],
   ]);
 
   /**
@@ -180,16 +234,21 @@ export class GhSignUpComponent implements OnInit{
    * @type {Map<string, string>}
    */
   protected readonly countryErrorCaptions = new Map<string, string>([
-    [REQUIRED_VALIDATION, "global.signup.businessDetails.country.errors.required"],
+    [
+      REQUIRED_VALIDATION,
+      'global.signup.businessDetails.country.errors.required',
+    ],
   ]);
-
 
   /**
    * @description The error messages for the country field
    * @type {Map<string, string>}
    */
   protected readonly sectorOfActivityErrorCaptions = new Map<string, string>([
-    [REQUIRED_VALIDATION, "global.signup.businessDetails.sectorOfActivity.errors.required"],
+    [
+      REQUIRED_VALIDATION,
+      'global.signup.businessDetails.sectorOfActivity.errors.required',
+    ],
   ]);
 
   /**
@@ -197,9 +256,18 @@ export class GhSignUpComponent implements OnInit{
    * @type {Map<string, string>}
    */
   protected readonly phoneNumberErrorCaptions = new Map<string, string>([
-    [REQUIRED_VALIDATION, "global.signup.representativeDetails.phoneNumber.errors.required"],
-    [INVALID_PHONE_NUMBER_VALIDATION, 'global.signup.representativeDetails.phoneNumber.errors.invalid'],
-    [PHONE_NUMBER_TAKEN_VALIDATOR, "global.signup.representativeDetails.phoneNumber.errors.taken"]
+    [
+      REQUIRED_VALIDATION,
+      'global.signup.representativeDetails.phoneNumber.errors.required',
+    ],
+    [
+      INVALID_PHONE_NUMBER_VALIDATION,
+      'global.signup.representativeDetails.phoneNumber.errors.invalid',
+    ],
+    [
+      PHONE_NUMBER_TAKEN_VALIDATOR,
+      'global.signup.representativeDetails.phoneNumber.errors.taken',
+    ],
   ]);
 
   /**
@@ -207,7 +275,7 @@ export class GhSignUpComponent implements OnInit{
    * @type {Map<string, string>}
    */
   protected readonly termsAndConditionsErrorCaptions = new Map<string, string>([
-    [REQUIRED_VALIDATION, "global.signup.termsAndConditions.errors.required"]
+    [REQUIRED_VALIDATION, 'global.signup.termsAndConditions.errors.required'],
   ]);
 
   /**
@@ -220,19 +288,25 @@ export class GhSignUpComponent implements OnInit{
    * @description The current form service
    * @type {CurrentFormService}
    */
-  private readonly currentFormService: CurrentFormService = inject(CurrentFormService);
+  private readonly currentFormService: CurrentFormService =
+    inject(CurrentFormService);
 
   /**
    * @description The options of the country
    * @type {SelectFieldOption[]}
    */
-  protected readonly countryOptions: SelectFieldOption[] = COUNTRY_SELECTION_OPTIONS
+  protected readonly countryOptions: SelectFieldOption[] =
+    COUNTRY_SELECTION_OPTIONS;
 
   /**
    * @description The options of the sector of activity
    * @type {SelectFieldOption[]}
    */
-  protected readonly sectorOfActivityOptions: SelectFieldOption[] = EnumUtil.enumToSelectOptions(SectorOfActivities,'SectorOfActivities')
+  protected readonly sectorOfActivityOptions: SelectFieldOption[] =
+    EnumUtil.enumToSelectOptions(
+      SectorOfActivities,
+      'SectorOfActivities'
+    ).filter((option) => option.value !== SectorOfActivities.IMPORT_EXPORT);
 
   /**
    * @description The sign up form
@@ -264,34 +338,52 @@ export class GhSignUpComponent implements OnInit{
    * @description The email taken validator
    * @type {EmailTakenValidator}
    */
-  private readonly emailTakenValidator = inject(EmailTakenValidator)
+  private readonly emailTakenValidator = inject(EmailTakenValidator);
 
   /**
    * @description The phone number taken validator
    * @type {PhoneNumberTakenValidator}
    */
-  private readonly phoneNumberTakenValidator = inject(PhoneNumberTakenValidator)
-  
+  private readonly phoneNumberTakenValidator = inject(
+    PhoneNumberTakenValidator
+  );
+
   /** @inheritdoc */
   ngOnInit(): void {
-    this.currentFormService.currentForm = new FormGroup({
-      email: new FormControl(null, [Validators.required, Validators.email]),
-      password: new FormControl(null, [Validators.required, passwordValidator]),
-      confirmPassword: new FormControl(null, [Validators.required]),
-      businessName: new FormControl(null, [Validators.required]),
-      sectorOfActivity: new FormControl(null, [Validators.required]),
-      businessKey: new FormControl(null, [Validators.required]),
-      address: new FormControl(null, [Validators.required]),
-      firstName: new FormControl(null, [Validators.required, nameValidator]),
-      lastName: new FormControl(null, [Validators.required, nameValidator]),
-      country: new FormControl(null, [Validators.required]),
-      phoneNumber: new FormControl(null, [Validators.required, phoneNumberValidator]),
-      termsAndConditions: new FormControl(null, [Validators.requiredTrue]),
-    }, { validators: [
-        passwordMatchValidator, 
-        this.emailTakenValidator.validate.bind(this.emailTakenValidator),
-        this.phoneNumberTakenValidator.validate.bind(this.phoneNumberTakenValidator)
-      ] });
+    this.currentFormService.currentForm = new FormGroup(
+      {
+        email: new FormControl(null, [Validators.required, Validators.email]),
+        password: new FormControl(null, [
+          Validators.required,
+          passwordValidator,
+        ]),
+        confirmPassword: new FormControl(null, [Validators.required]),
+        businessName: new FormControl(null, [Validators.required]),
+        sectorOfActivity: new FormControl(
+          this.showSectorOfActivity ? null : SectorOfActivities.IMPORT_EXPORT,
+          [Validators.required]
+        ),
+        businessKey: new FormControl(null, [Validators.required]),
+        address: new FormControl(null, [Validators.required]),
+        firstName: new FormControl(null, [Validators.required, nameValidator]),
+        lastName: new FormControl(null, [Validators.required, nameValidator]),
+        country: new FormControl(null, [Validators.required]),
+        phoneNumber: new FormControl(null, [
+          Validators.required,
+          phoneNumberValidator,
+        ]),
+        termsAndConditions: new FormControl(null, [Validators.requiredTrue]),
+      },
+      {
+        validators: [
+          passwordMatchValidator,
+          this.emailTakenValidator.validate.bind(this.emailTakenValidator),
+          this.phoneNumberTakenValidator.validate.bind(
+            this.phoneNumberTakenValidator
+          ),
+        ],
+      }
+    );
   }
 
   /**

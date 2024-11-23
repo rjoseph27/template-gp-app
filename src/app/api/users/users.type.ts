@@ -3,6 +3,24 @@ import { ApiResponse, StringKeys } from "../base.service.api";
 import { Language } from "../../misc/enums/language.enum";
 
 /**
+ * @enum The account type
+ * @description The type of the account
+ */
+export enum AccountType {
+    /**
+     * @description The user account type
+     * @type {string}
+     */
+    USER = 'USER',
+
+    /**
+     * @description The carrier account type
+     * @type {string}
+     */
+    CARRIER = 'CARRIER'
+}
+
+/**
  * @interface
  * @description The credentials of the user
  */
@@ -18,6 +36,12 @@ export interface Credentials {
      * @type {string}
      */
     password: string;
+
+    /**
+     * @description The type of the account
+     * @type {AccountType}
+     */
+    type: AccountType
 }
 
 /**
@@ -36,6 +60,42 @@ export interface ConnectResponse extends ApiResponse {
      * @type {string}
      */
     userId: string;
+}
+
+/**
+ * @interface
+ * @description The structure to check an email 
+ */
+export interface CheckEmail {
+    /**
+     * @description The email
+     * @type {UniqueValue}
+     */
+    email: string
+
+    /**
+     * @description The type of the account
+     * @type {AccountType}
+     */
+    type: AccountType
+}
+
+/**
+ * @interface
+ * @description The structure to check if a phone number is taken
+ */
+export interface PhoneNumberTaken {
+    /**
+     * @description The phone number
+     * @type {UniqueValue}
+     */
+    phoneNumber: string
+
+    /**
+     * @description The type of the account
+     * @type {AccountType}
+     */
+    type: AccountType
 }
 
 /**
@@ -108,6 +168,12 @@ export interface CreateUser {
      * @type {Language}
      */
     language: Language
+
+    /**
+     * @description The type of the account
+     * @type {AccountType}
+     */
+    type: AccountType
 }
 
 /**

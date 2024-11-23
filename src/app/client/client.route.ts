@@ -46,11 +46,6 @@ export class ClientRoutes {
      */
     static readonly calendar: GhRoute = new GhRoute('calendar', ClientRoutes.sendItems);
 
-    /**
-     * @description The send report trip route
-     * @type {GhRoute}
-     */
-    static readonly reportTrip: GhRoute = new GhRoute('report-trip', ClientRoutes.main);
 
     /**
      * @description The client order route
@@ -63,36 +58,6 @@ export class ClientRoutes {
      * @type {GhRoute}
      */
     static readonly waitingGpConfirmation: GhRoute = new GhRoute('waiting-gp-confirmation', ClientRoutes.clientOrder);
-
-    /**
-     * @description The GP orders route
-     * @type {GhRoute}
-     */
-    static readonly gpOrders: GhRoute = new GhRoute('gp-orders', ClientRoutes.main);
-
-    /**
-     * @description The confirm orders route
-     * @type {GhRoute}
-     */
-    static readonly confirmOrders: GhRoute = new GhRoute('confirm-orders', ClientRoutes.gpOrders);
-
-    /**
-     * @description The item on his way route
-     * @type {GhRoute}
-     */
-    static readonly itemOnHisWay: GhRoute = new GhRoute('item-on-his-way', ClientRoutes.gpOrders);
-
-    /**
-     * @description The item at checkpoint route
-     * @type {GhRoute}
-     */
-    static readonly itemAtCheckpoint: GhRoute = new GhRoute('item-at-checkpoint', ClientRoutes.gpOrders);
-
-    /**
-     * @description The ready for pickup route
-     * @type {GhRoute}
-     */
-    static readonly readyForPickup: GhRoute = new GhRoute('ready-for-pickup', ClientRoutes.gpOrders);
 
     /**
      * @description The waiting reception route
@@ -123,43 +88,7 @@ export class ClientRoutes {
      * @type {GhRoute}
      */
     static readonly itemDelivered: GhRoute = new GhRoute('item-delivered', ClientRoutes.clientOrder);
-
-    /**
-     * @description The item delivered route
-     * @type {GhRoute}
-     */
-    static readonly itemDeliveredGp: GhRoute = new GhRoute('item-delivered', ClientRoutes.gpOrders);
-
-    /**
-     * @description The order tracking route
-     * @type {GhRoute}
-     */
-    static readonly gpTracking: GhRoute = new GhRoute('gp-tracking', ClientRoutes.gpOrders);
-
-    /**
-     * @description The trip list route
-     * @type {GhRoute}
-     */
-    static readonly tripList: GhRoute = new GhRoute('trip-list', ClientRoutes.main);
-
-    /**
-     * @description The planned trip route
-     * @type {GhRoute}
-     */
-    static readonly plannedTrip: GhRoute = new GhRoute('planned-trip', ClientRoutes.tripList);
-
-    /**
-     * @description The confirmed trip route
-     * @type {GhRoute}
-     */
-    static readonly confirmedTrip: GhRoute = new GhRoute('confirmed-trip', ClientRoutes.tripList);
-
-    /**
-     * @description The trip details route
-     * @type {GhRoute}
-     */
-    static readonly tripDone: GhRoute = new GhRoute('trip-done', ClientRoutes.tripList);
-
+    
     /**
      * @description The alert list route
      * @type {GhRoute}

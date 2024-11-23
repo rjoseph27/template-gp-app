@@ -1,24 +1,25 @@
-import { Component, OnInit, inject, } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { UsersService } from '../../services/users.service';
 import { CurrentFormService } from '../../services/current-form.service';
 import { tap } from 'rxjs/operators';
 import { ClientRoutes } from '../client.route';
+import { AccountType } from '../../api/users/users.type';
 
 /**
  * @constant
  * @description The title of the log in page
  */
-const ACCOUNT_PAGE_TITLE = 'global.login.title';
+const ACCOUNT_PAGE_TITLE = 'global.login.clientTitle';
 
 /**
  * @title Log In Component
- * @component GpHubIconComponent 
+ * @component GpHubIconComponent
  * @description The log in page for the users of the application.
  */
 @Component({
   selector: 'client-log-in',
   templateUrl: './log-in.component.html',
-  providers: [CurrentFormService]
+  providers: [CurrentFormService],
 })
 export class ClientLogInComponent implements OnInit {
   /**
@@ -28,10 +29,24 @@ export class ClientLogInComponent implements OnInit {
   protected readonly pageTitle = ACCOUNT_PAGE_TITLE;
 
   /**
+   * @description The url of the image
+   * @type {string}
+   */
+  protected readonly imageUrl =
+    '../../../../../assets/img/client-home-image.jpg';
+
+  /**
+   * @description The url of the forgot password page
+   * @type {string}
+   */
+  protected readonly forgotPasswordUrl = ClientRoutes.forgotPassword.fullPath()
+
+  /**
    * @description The current form service
    * @type {CurrentFormService}
    */
-  private readonly currentFormService: CurrentFormService = inject(CurrentFormService);
+  private readonly currentFormService: CurrentFormService =
+    inject(CurrentFormService);
 
   /**
    * @description The url of the sign up page
@@ -49,15 +64,21 @@ export class ClientLogInComponent implements OnInit {
 
   /** @inheritdoc */
   ngOnInit(): void {
-    this.currentFormService.submitting$.pipe(
-      tap((loading) => {
-        if(loading) {
-          this.usersService.login(this.currentFormService.currentForm.value).then(() => {
-            this.currentFormService.submitting = false;
-          });
-        }
-
-      })
-    ).subscribe()
+    this.currentFormService.submitting$
+      .pipe(
+        tap((loading) => {
+          if (loading) {
+            this.usersService
+              .login({
+                ...this.currentFormService.currentForm.value,
+                type: AccountType.USER,
+              })
+              .then(() => {
+                this.currentFormService.submitting = false;
+              });
+          }
+        })
+      )
+      .subscribe();
   }
 }

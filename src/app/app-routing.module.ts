@@ -16,6 +16,11 @@ import { PartnerLogInComponent } from './partner/log-in/log-in.component';
 import { GhNotFoundComponent } from './core/layouts/not-found/not-found.component';
 import { TrackingResolver } from './services/tracking.resolver';
 import { ClientOrderTrackingComponent } from './client/orders/client-orders/order-tracking/order-tracking.component';
+import { CarrierRoutes } from './carrier/carrier.route';
+import { CarrierLogInComponent } from './carrier/log-in/log-in.component';
+import { CarrierSignUpComponent } from './carrier/sign-up/sign-up.component';
+import { ClientModuleResolver } from './services/client-module.resolver';
+import { CarrierModuleResolver } from './services/carrier-module.resolver';
 
 /**
  * @constant routes
@@ -23,13 +28,23 @@ import { ClientOrderTrackingComponent } from './client/orders/client-orders/orde
  */
 export const routes: Routes = [
     {
-        path: `${ClientRoutes.client}`,
+        path: `${ClientRoutes.client}`, resolve: { boot: ClientModuleResolver },
         children: [
             { path: '', redirectTo: `${ClientRoutes.login}`, pathMatch: 'full' },
             { path: `${ClientRoutes.login}`, component: ClientLogInComponent, pathMatch: 'full', canActivate: [LoggedOutGuard]},
             { path: `${ClientRoutes.signup}`, component: ClientSignUpComponent, pathMatch: 'full', canActivate: [LoggedOutGuard]},
             { path: `${ClientRoutes.forgotPassword}`, component: GhForgotPasswordComponent, pathMatch: 'full', canActivate: [LoggedOutGuard] },
             { path: `${ClientRoutes.main}`, loadChildren: () => import('./client/client.module').then(m => m.ClientModule), canActivate: [LoggedInGuard] }       
+        ],
+    },
+    {
+        path: `${CarrierRoutes.carrier}` , resolve: { boot: CarrierModuleResolver },
+        children: [
+            { path: '', redirectTo: `${CarrierRoutes.login}`, pathMatch: 'full' },
+            { path: `${CarrierRoutes.login}`, component: CarrierLogInComponent, pathMatch: 'full', canActivate: [LoggedOutGuard]},
+            { path: `${CarrierRoutes.signup}`, component: CarrierSignUpComponent, pathMatch: 'full', canActivate: [LoggedOutGuard]},
+            { path: `${CarrierRoutes.forgotPassword}`, component: GhForgotPasswordComponent, pathMatch: 'full', canActivate: [LoggedOutGuard] },
+            { path: `${CarrierRoutes.main}`, loadChildren: () => import('./carrier/carrier.module').then(m => m.CarrierModule), canActivate: [LoggedInGuard] }       
         ],
     },
     {

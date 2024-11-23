@@ -1,0 +1,27 @@
+<carrier-main>
+  <div class="content">
+    <div>
+      <div class="section">
+        <h1>
+          {{ "moduleList.client.orders.itemDelivered.title" | translate }}
+        </h1>
+      </div>
+      <div class="section">
+        <p>
+          {{ "moduleList.client.orders.itemDelivered.content" | translate }}
+        </p>
+      </div>
+      <div class="section">
+        <gh-order-details
+          [currency]="userCurrency.currency"
+          [orderDetails]="orderDetail$ | async"
+        ></gh-order-details>
+      </div>
+      <div class="section">
+        <button class="gp-button" (click)="navigateToMyOrders()">
+          {{ "moduleList.client.orders.waitConfirmation.button" | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</carrier-main>
